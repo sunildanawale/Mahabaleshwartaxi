@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Lost in the Hills | Mahabaleshwar Taxi Service</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Poppins:wght@600;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #18B6C4;
+            --primary-light: #48cfdb;
+            --secondary: #1e5faf;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --accent: #6A2FE0;
+            --gradient: linear-gradient(135deg, #18B6C4 0%, #1e5faf 100%);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 600px;
+            padding: 3rem;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+            border: 1px solid #edf7f3;
+        }
+
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(6rem, 15vw, 8.5rem);
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0;
+            line-height: 1;
+        }
+
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            margin: 10px 0;
+            color: var(--dark);
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: var(--dark);
+            opacity: 0.8;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 15px -3px rgba(45, 106, 79, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 25px -5px rgba(45, 106, 79, 0.4);
+            background: var(--primary-dark);
+        }
+
+        .bg-decoration {
+            position: absolute;
+            z-index: -1;
+            opacity: 0.05;
+            font-size: 20rem;
+            color: var(--primary);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-decoration" style="top: -5%; left: -5%;">🚕</div>
+    <div class="bg-decoration" style="bottom: -5%; right: -5%;">🏔️</div>
+
+    <div class="container" style="position: relative; z-index: 1;">
+        <h1>404</h1>
+        <h2>Oops! Lost in the Hills?</h2>
+        <p>The page you are looking for has taken a scenic detour. Let's get your trip back on track.</p>
+        <a href="index.html" class="btn">
+            Return to Home Road
+        </a>
+    </div>
+</body>
+
+</html>
