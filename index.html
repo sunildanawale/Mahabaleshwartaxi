@@ -1059,7 +1059,7 @@
                     </div>
 
                     <div style="margin-top: 15px;">
-                        <a href="https://mahabaleshwartaxi.infinityfreeapp.com/" target="_blank" rel="noopener" class="btn btn-wa"
+                        <a href="https://mahabaleshwartaxi.infinityfreeapp.com/#booking" onclick="goToBookingEngine(); return false;" target="_blank" rel="noopener" class="btn btn-wa"
                             style="width: 100%; border-radius: 12px; font-size: 1.05rem; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 800; background: linear-gradient(135deg, #0284c7 0%, #0f172a 100%); color: #ffffff; padding: 15px; box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4);">
                             <i class="fa-solid fa-lock"></i> Calculate Exact Fare &amp; Book Online &rarr;
                         </a>
@@ -2109,6 +2109,17 @@
         });
 
         // Set route from intent buttons
+                // Dynamic Route Passthrough to Booking Engine
+        function goToBookingEngine() {
+            var sel = document.getElementById('routeSelect');
+            var tour = sel ? sel.value : '';
+            var url = 'https://mahabaleshwartaxi.infinityfreeapp.com/#booking';
+            if (tour) {
+                url = 'https://mahabaleshwartaxi.infinityfreeapp.com/?tour=' + encodeURIComponent(tour) + '#booking';
+            }
+            window.open(url, '_blank', 'noopener');
+        }
+
         function setRoute(routeName) {
             const select = document.getElementById('routeSelect');
             if (select) {
