@@ -1,0 +1,2364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="description" content="Owner & Driver Administration Portal - Aryan Taxi Mahabaleshwar. Manage bookings, tour charges, driver fleet, and dispatch operations.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Admin Dashboard Aryan Taxi Mahabaleshwar</title>
+    <link rel="icon" type="image/svg+xml" href="images/aryan-taxi-logo.svg">
+    <link rel="alternate icon" type="image/png" href="images/aryan-tours-logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        :root {
+            --primary: #0891b2;
+            --primary-dark: #0e7490;
+            --secondary: #1e3a5f;
+            --secondary-dark: #0f172a;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --border-light: #f1f5f9;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --blue: #2563eb;
+            --purple: #8b5cf6;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text-main);
+            min-height: 100vh;
+        }
+
+        /* Auth Screen */
+        #authScreen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+        }
+
+        .auth-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .auth-input {
+            width: 100%;
+            padding: 14px;
+            font-size: 1.35rem;
+            text-align: center;
+            letter-spacing: 6px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            margin: 18px 0;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .auth-input:focus {
+            border-color: var(--primary);
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .auth-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Dashboard Container */
+        #dashScreen {
+            display: none;
+        }
+
+        .dash-nav {
+            background: var(--secondary-dark);
+            color: #fff;
+            padding: 14px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .dash-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 1.15rem;
+            letter-spacing: -0.2px;
+        }
+
+        .dash-brand img {
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+        }
+
+        /* Master Section Tabs */
+        .master-nav {
+            background: #ffffff;
+            border-bottom: 1.5px solid var(--border);
+            padding: 0 24px;
+            display: flex;
+            gap: 4px;
+            overflow-x: auto;
+            position: sticky;
+            top: 62px;
+            z-index: 90;
+        }
+
+        .master-tab-btn {
+            padding: 14px 18px;
+            border: none;
+            background: transparent;
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .master-tab-btn:hover {
+            color: var(--primary);
+        }
+
+        .master-tab-btn.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .master-tab-badge {
+            background: #e0f2fe;
+            color: var(--primary);
+            font-size: 0.72rem;
+            padding: 2px 7px;
+            border-radius: 12px;
+            font-weight: 800;
+        }
+
+        .dash-container {
+            max-width: 1280px;
+            margin: 24px auto;
+            padding: 0 20px 60px;
+        }
+
+        /* KPI Cards */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .kpi-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            transition: transform 0.15s;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .kpi-val {
+            font-size: 1.85rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-top: 4px;
+        }
+
+        .kpi-lbl {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Admin AI Assistant */
+        .ai-admin-box {
+            background: #ecfeff;
+            border: 1.5px solid #a5f3fc;
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 24px;
+        }
+
+        .ai-admin-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1.5px solid #a5f3fc;
+            border-radius: 10px;
+            font-size: 0.92rem;
+            outline: none;
+            margin-top: 8px;
+            background: #fff;
+        }
+
+        .ai-admin-input:focus {
+            border-color: var(--primary);
+        }
+
+        .ai-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        .ai-chip {
+            background: #cffafe;
+            color: #0891b2;
+            border: 1px solid #a5f3fc;
+            padding: 5px 12px;
+            border-radius: 14px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .ai-chip:hover {
+            background: #a5f3fc;
+        }
+
+        .ai-admin-res {
+            margin-top: 12px;
+            font-size: 0.9rem;
+            color: #164e63;
+            line-height: 1.5;
+            font-weight: 500;
+            background: #fff;
+            padding: 14px;
+            border-radius: 10px;
+            border: 1px solid #cffafe;
+        }
+
+        /* Controls & Filter Toolbar */
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .dash-tabs {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .dash-tab {
+            padding: 8px 14px;
+            border: 1px solid var(--border);
+            background: #fff;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.15s;
+        }
+
+        .dash-tab:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .dash-tab.active {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #fff;
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            padding: 6px 12px;
+            width: 100%;
+            max-width: 320px;
+        }
+
+        .search-input {
+            border: none;
+            outline: none;
+            font-size: 0.88rem;
+            width: 100%;
+        }
+
+        /* Table Styles */
+        .table-wrap {
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            overflow-x: auto;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.88rem;
+        }
+
+        th {
+            background: #f8fafc;
+            padding: 14px;
+            font-weight: 700;
+            color: #475569;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 14px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle;
+        }
+
+        tr:hover {
+            background: #f8fafc;
+        }
+
+        /* Badges */
+        .badge-status {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .badge-pending { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+        .badge-confirmed { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
+        .badge-assigned { background: #dbeafe; color: #1e40af; border: 1px solid #bfdbfe; }
+        .badge-completed { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
+        .badge-cancelled { background: #fee2e2; color: #991b1b; border: 1px solid #fecdd3; }
+
+        /* Action Buttons */
+        .act-btn {
+            padding: 7px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            transition: all 0.15s;
+        }
+
+        .act-btn:hover { opacity: 0.9; }
+        .act-wa { background: #16a34a; color: #fff; }
+        .act-wa-followup { background: #f59e0b; color: #fff; }
+        .act-driver { background: #e0f2fe; color: #0284c7; border: 1px solid #bae6fd; }
+        .act-voucher { background: #f8fafc; color: #334155; border: 1px solid #cbd5e1; }
+        .act-del { background: #fee2e2; color: #ef4444; border: 1px solid #fca5a5; }
+        .act-del:hover { background: #ef4444; color: #fff; }
+
+        /* Rates Manager Section Styles */
+        .rates-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 24px;
+            background: var(--card-bg);
+            padding: 20px 24px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+
+        .rates-title h2 {
+            font-size: 1.35rem;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .rates-title p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .season-adjuster-bar {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 1.5px solid #86efac;
+            border-radius: 14px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .rate-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .rate-card {
+            background: #fff;
+            border: 1.5px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            position: relative;
+            transition: all 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        .rate-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 8px 16px rgba(8,145,178,0.08);
+        }
+
+        .rate-card__badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 3px 8px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        .rate-card__title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 6px;
+        }
+
+        .rate-card__desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+            margin-bottom: 14px;
+        }
+
+        .rate-input-group {
+            display: flex;
+            align-items: center;
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: border-color 0.2s;
+        }
+
+        .rate-input-group:focus-within {
+            border-color: var(--primary);
+            background: #fff;
+        }
+
+        .rate-symbol {
+            padding: 10px 12px;
+            background: #e2e8f0;
+            font-weight: 700;
+            color: #334155;
+            font-size: 1.05rem;
+        }
+
+        .rate-field {
+            border: none;
+            outline: none;
+            padding: 10px;
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--primary);
+            width: 100%;
+            background: transparent;
+        }
+
+        .rate-default-ref {
+            font-size: 0.74rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Section Headings */
+        .category-heading {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--secondary);
+            margin: 28px 0 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        /* Toast Popup */
+        #adminToast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: var(--secondary-dark);
+            color: #fff;
+            padding: 14px 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            z-index: 999999;
+            border-left: 4px solid var(--success);
+        }
+
+        /* Modals */
+        .admin-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15,23,42,0.8);
+            z-index: 99999;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            backdrop-filter: blur(4px);
+        }
+
+        .admin-modal-card {
+            background: #fff;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 520px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 26px;
+            position: relative;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            background: #f1f5f9;
+            border: none;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            font-size: 1.25rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .form-full { grid-column: 1 / -1; }
+
+        .m-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #334155;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .m-input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .m-input:focus {
+            border-color: var(--primary);
+        }
+
+        /* Master Sections */
+        .master-section {
+            display: none;
+        }
+
+        .master-section.active {
+            display: block !important;
+        }
+
+        /* Upgraded Clean Toolbar Layout */
+        .toolbar-panel {
+            background: #ffffff;
+            border: 1.5px solid var(--border);
+            border-radius: 14px;
+            padding: 14px 18px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .toolbar-row-top {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .toolbar-row-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding-top: 10px;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        .toolbar-actions-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: nowrap;
+        }
+
+        @media (max-width: 900px) {
+            .toolbar-actions-group {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- AUTH PIN SCREEN -->
+    <div id="authScreen">
+        <div class="auth-card">
+            <img src="images/aryan-tours-logo.png" alt="Logo" width="68" style="margin-bottom: 12px;">
+            <h2 style="font-size: 1.4rem; color: var(--secondary);">Aryan Taxi Mahabaleshwar</h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">Owner &amp; Driver Administration Portal</p>
+            <input type="password" id="pinInput" class="auth-input" placeholder="Enter PIN" maxlength="6" autofocus>
+            <button id="loginBtn" class="auth-btn">
+                <i class="fa-solid fa-lock"></i> Access Dashboard
+            </button>
+            <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 16px;">
+                <i class="fa-solid fa-shield-halved"></i> Authorized personnel only
+            </p>
+        </div>
+    </div>
+
+    <!-- MAIN DASHBOARD SCREEN -->
+    <div id="dashScreen">
+        <nav class="dash-nav">
+            <div class="dash-brand">
+                <img src="images/aryan-tours-logo.png" alt="Logo">
+                <span>Aryan Taxi Mahabaleshwar Booking Admin</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <button id="newBookingBtn" class="act-btn" style="background: #10b981; color: #fff; padding: 9px 16px; font-size: 0.88rem;">
+                    <i class="fa-solid fa-plus"></i> + New Booking
+                </button>
+                <button id="logoutBtn" style="background: rgba(255,255,255,0.15); border: none; color: #fff; padding: 9px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.88rem;">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </button>
+            </div>
+        </nav>
+
+        <!-- MASTER NAVIGATION TABS -->
+        <nav class="master-nav" id="masterNav">
+            <button type="button" class="master-tab-btn active" data-section="section-bookings" onclick="window.switchMasterSection('section-bookings', this)">
+                <i class="fa-solid fa-clipboard-list"></i> Bookings Ledger
+                <span class="master-tab-badge" id="badgeLedgerCount">0</span>
+            </button>
+            <button type="button" class="master-tab-btn" data-section="section-rates" onclick="window.switchMasterSection('section-rates', this)">
+                <i class="fa-solid fa-tags"></i> Tour Charges &amp; Rates
+            </button>
+            <button type="button" class="master-tab-btn" data-section="section-fleet" onclick="window.switchMasterSection('section-fleet', this)">
+                <i class="fa-solid fa-taxi"></i> Driver Fleet Directory
+            </button>
+            <button type="button" class="master-tab-btn" data-section="section-analytics" onclick="window.switchMasterSection('section-analytics', this)">
+                <i class="fa-solid fa-chart-line"></i> Business Analytics
+            </button>
+            <button type="button" class="master-tab-btn" data-section="section-settings" onclick="window.switchMasterSection('section-settings', this)">
+                <i class="fa-solid fa-sliders"></i> Settings &amp; Security
+            </button>
+        </nav>
+
+        <div class="dash-container">
+
+            <!-- ======================================================= -->
+            <!-- SECTION 1: BOOKINGS LEDGER                              -->
+            <!-- ======================================================= -->
+            <div id="section-bookings" class="master-section active">
+                
+                <!-- ADMIN AI ASSISTANT -->
+                <div class="ai-admin-box">
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                        <div style="display: flex; align-items: center; gap: 8px; color: #0e7490; font-weight: 700;">
+                            <i class="fa-solid fa-wand-magic-sparkles" style="color: #f59e0b;"></i>
+                            <span>Admin AI Assistant Quick Business Query</span>
+                        </div>
+                        <span style="font-size: 0.75rem; color: #0891b2; font-weight: 600;">Type question or click a chip</span>
+                    </div>
+                    <input type="text" id="aiAdminQuery" class="ai-admin-input" placeholder="Ask anything (e.g. 'Show tomorrow's pickups', 'How many bookings today?', 'Which tour is most popular?')">
+                    <div class="ai-chips">
+                        <button class="ai-chip" onclick="window.runAiQuery('today')">🚕 Today's Pickups</button>
+                        <button class="ai-chip" onclick="window.runAiQuery('tomorrow')">📅 Tomorrow's Schedule</button>
+                        <button class="ai-chip" onclick="window.runAiQuery('popular')">⭐ Most Popular Tour</button>
+                        <button class="ai-chip" onclick="window.runAiQuery('revenue')">💰 Revenue Summary</button>
+                        <button class="ai-chip" onclick="window.runAiQuery('unassigned')">⚠️ Pending Drivers</button>
+                    </div>
+                    <div id="aiAdminResponse" class="ai-admin-res" style="display: none;"></div>
+                </div>
+
+                <!-- KPI METRICS -->
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-lbl">Today's Pickups</div>
+                        <div class="kpi-val" id="kpiToday">0</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-lbl">Tomorrow's Pickups</div>
+                        <div class="kpi-val" id="kpiTomorrow">0</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-lbl">Total Bookings in Ledger</div>
+                        <div class="kpi-val" id="kpiTotal">0</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-lbl">Total Booking Revenue</div>
+                        <div class="kpi-val" id="kpiRevenue">₹0</div>
+                    </div>
+                </div>
+
+                <!-- TOOLBAR: PROPER TWO-ROW ALIGNMENT IN CLEAN LINES -->
+                <div class="toolbar-panel">
+                    <!-- Row 1: Filter Pills in a Clean Line -->
+                    <div class="toolbar-row-top">
+                        <div style="display: flex; align-items: center; gap: 6px; font-weight: 700; color: #475569; font-size: 0.85rem; margin-right: 6px;">
+                            <i class="fa-solid fa-filter" style="color: var(--primary);"></i> Filter:
+                        </div>
+                        <div class="dash-tabs">
+                            <button type="button" class="dash-tab active" data-filter="all">All Bookings</button>
+                            <button type="button" class="dash-tab" data-filter="today">Today</button>
+                            <button type="button" class="dash-tab" data-filter="tomorrow">Tomorrow</button>
+                            <button type="button" class="dash-tab" data-filter="upcoming">Upcoming</button>
+                            <button type="button" class="dash-tab" data-filter="confirmed">Confirmed</button>
+                            <button type="button" class="dash-tab" data-filter="assigned">Driver Assigned</button>
+                        </div>
+                    </div>
+                    <!-- Row 2: Search Box on Left, Action Buttons in a Single Line on Right -->
+                    <div class="toolbar-row-bottom">
+                        <div class="search-box" style="flex: 1; max-width: 420px; min-width: 250px;">
+                            <i class="fa-solid fa-magnifying-glass" style="color: #94a3b8; font-size: 0.85rem;"></i>
+                            <input type="text" id="tableSearch" class="search-input" placeholder="Search name, phone, booking ID, pickup...">
+                        </div>
+                        <div class="toolbar-actions-group">
+                            <button type="button" id="exportCsvBtn" class="act-btn" style="background: #10b981; color: #fff; padding: 8px 14px; font-weight: 600; white-space: nowrap;">
+                                <i class="fa-solid fa-file-excel"></i> Export CSV
+                            </button>
+                            <button type="button" id="exportJsonBtn" class="act-btn" style="background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; padding: 8px 14px; font-weight: 600; white-space: nowrap;">
+                                <i class="fa-solid fa-download"></i> JSON
+                            </button>
+                            <button type="button" id="addSampleBtn" class="act-btn" style="background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; padding: 8px 14px; font-weight: 600; white-space: nowrap;">
+                                <i class="fa-solid fa-plus"></i> + Test
+                            </button>
+                            <button type="button" id="clearAllBtn" class="act-btn act-del" style="padding: 8px 14px; font-weight: 600; white-space: nowrap;" title="Clear test bookings">
+                                <i class="fa-solid fa-trash-can"></i> Clear All
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BOOKING TABLE -->
+                <div class="table-scroll-hint"><i class="fa-solid fa-arrows-left-right"></i> Scroll table sideways &rarr;</div>
+<div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="white-space: nowrap;">Ref / ID</th>
+                                <th style="white-space: nowrap;">Customer &amp; Phone</th>
+                                <th style="white-space: nowrap;">Date &amp; Time</th>
+                                <th>Pickup Location</th>
+                                <th>Tour / Route</th>
+                                <th style="white-space: nowrap;">Fare</th>
+                                <th style="white-space: nowrap;">Status (Click to toggle)</th>
+                                <th style="white-space: nowrap;">Assigned Driver</th>
+                                <th style="text-align: right; white-space: nowrap;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bookingTableBody">
+                            <tr>
+                                <td colspan="9" style="text-align: center; color: var(--text-muted); padding: 30px;">
+                                    No bookings recorded yet. New website bookings will appear here instantly!
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            <!-- ======================================================= -->
+            <!-- SECTION 2: TOUR CHARGES & RATES MANAGER (CORE FEATURE)  -->
+            <!-- ======================================================= -->
+            <div id="section-rates" class="master-section">
+                
+                <div class="rates-header">
+                    <div class="rates-title">
+                        <h2><i class="fa-solid fa-hand-holding-dollar" style="color: var(--primary);"></i> Tour Charges &amp; Tariffs Manager</h2>
+                        <p>Update tour rates dynamically. Any changes saved here immediately update the website booking widget and fare estimator.</p>
+                    </div>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <button id="resetRatesBtn" class="act-btn" style="background: #fee2e2; color: #991b1b; padding: 10px 16px;">
+                            <i class="fa-solid fa-rotate-left"></i> Reset to Union Rates
+                        </button>
+                        <button id="exportRatesBtn" class="act-btn" style="background: #f1f5f9; color: #334155; padding: 10px 16px;">
+                            <i class="fa-solid fa-file-code"></i> Export Config JSON
+                        </button>
+                        <button id="saveAllRatesBtn" class="act-btn" style="background: var(--primary); color: #fff; padding: 10px 20px; font-size: 0.95rem;">
+                            <i class="fa-solid fa-floppy-disk"></i> Save All Changes
+                        </button>
+                    </div>
+                </div>
+
+                <!-- PEAK SEASON / SURGE ADJUSTER BAR -->
+                <div class="season-adjuster-bar">
+                    <div>
+                        <strong style="color: #166534; font-size: 0.95rem; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-bolt" style="color: #15803d;"></i> Quick Season / Weekend Surge Tool
+                        </strong>
+                        <span style="font-size: 0.8rem; color: #15803d;">Apply a bulk hike to all sightseeing packages during peak vacation dates (Diwali, Christmas, Summer).</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <select id="seasonHikeType" class="m-input" style="width: auto; padding: 6px 12px; font-size: 0.85rem;">
+                            <option value="pct_10">+10% Festival Hike</option>
+                            <option value="pct_15">+15% Peak Hike</option>
+                            <option value="pct_20">+20% Christmas/New Year</option>
+                            <option value="flat_200">+₹200 Flat Surcharge</option>
+                            <option value="flat_500">+₹500 Flat Surcharge</option>
+                        </select>
+                        <button id="applySeasonHikeBtn" class="act-btn" style="background: #15803d; color: #fff; padding: 8px 14px;">
+                            Apply Surge
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 1. OFFICIAL SIGHTSEEING TOURS (TOURS 1 - 7) -->
+                <div class="category-heading">
+                    <i class="fa-solid fa-mountain-sun" style="color: var(--primary);"></i>
+                    Official Mahabaleshwar &amp; Panchgani Sightseeing Packages
+                </div>
+                <div class="rate-card-grid" id="sightseeingRatesGrid">
+                    <!-- Populated dynamically via JS -->
+                </div>
+
+                <!-- 2. LOCAL POINT-TO-POINT DROPS -->
+                <div class="category-heading">
+                    <i class="fa-solid fa-location-dot" style="color: var(--primary);"></i>
+                    Local Point-to-Point Drops &amp; Viewpoint Returns
+                </div>
+                <div class="rate-card-grid" id="localDropsRatesGrid">
+                    <!-- Populated dynamically via JS -->
+                </div>
+
+                <!-- 3. OUTSTATION DROPS & AIRPORT TRANSFERS -->
+                <div class="category-heading">
+                    <i class="fa-solid fa-plane-departure" style="color: var(--primary);"></i>
+                    Outstation Drops &amp; Airport Transfers (Pune, Mumbai, Satara)
+                </div>
+                <div class="rate-card-grid" id="outstationRatesGrid">
+                    <!-- Populated dynamically via JS -->
+                </div>
+
+            </div>
+
+            <!-- ======================================================= -->
+            <!-- SECTION 3: DRIVER FLEET DIRECTORY                       -->
+            <!-- ======================================================= -->
+            <div id="section-fleet" class="master-section">
+                <div class="rates-header">
+                    <div class="rates-title">
+                        <h2><i class="fa-solid fa-taxi" style="color: var(--primary);"></i> Registered Driver &amp; Cab Directory</h2>
+                        <p>Manage fellow licensed Mahabaleshwar Taxi Union colleague drivers for dispatch and duty allocation.</p>
+                    </div>
+                    <button id="addDriverBtn" class="act-btn" style="background: var(--primary); color: #fff; padding: 10px 18px;">
+                        <i class="fa-solid fa-user-plus"></i> + Add New Driver
+                    </button>
+                </div>
+
+                <div class="table-scroll-hint"><i class="fa-solid fa-arrows-left-right"></i> Scroll table sideways &rarr;</div>
+<div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Driver Name</th>
+                                <th>WhatsApp Mobile</th>
+                                <th>Vehicle Model</th>
+                                <th>Registration No.</th>
+                                <th>Cab Status</th>
+                                <th style="text-align: right;">Quick Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="driverTableBody">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ======================================================= -->
+            <!-- SECTION 4: BUSINESS ANALYTICS                           -->
+            <!-- ======================================================= -->
+            <div id="section-analytics" class="master-section">
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-lbl">Total Completed Tours</div>
+                        <div class="kpi-val" id="analyticsCompleted">0</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-lbl">Average Tour Fare</div>
+                        <div class="kpi-val" id="analyticsAvgFare">₹1,200</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-lbl">Active Drivers in Fleet</div>
+                        <div class="kpi-val" id="analyticsDriverCount">4</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-lbl">Cancelled Trips</div>
+                        <div class="kpi-val" id="analyticsCancelled">0</div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px;">
+                    <div style="background: #fff; border: 1.5px solid var(--border); border-radius: 16px; padding: 24px;">
+                        <h3 style="font-size: 1.1rem; color: var(--secondary); margin-bottom: 16px;">
+                            <i class="fa-solid fa-star" style="color: #f59e0b;"></i> Most Popular Sightseeing Tours
+                        </h3>
+                        <div id="tourDemandStats" style="display: flex; flex-direction: column; gap: 14px;">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+
+                    <div style="background: #fff; border: 1.5px solid var(--border); border-radius: 16px; padding: 24px;">
+                        <h3 style="font-size: 1.1rem; color: var(--secondary); margin-bottom: 16px;">
+                            <i class="fa-solid fa-chart-pie" style="color: #0284c7;"></i> Booking Status Distribution
+                        </h3>
+                        <div id="statusDistributionStats" style="display: flex; flex-direction: column; gap: 14px;">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ======================================================= -->
+            <!-- SECTION 5: SETTINGS & SECURITY                          -->
+            <!-- ======================================================= -->
+            <div id="section-settings" class="master-section">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 20px;">
+                    
+                    <!-- Change PIN Card -->
+                    <div style="background: #fff; border: 1.5px solid var(--border); border-radius: 16px; padding: 24px;">
+                        <h3 style="font-size: 1.15rem; color: var(--secondary); margin-bottom: 6px;">
+                            <i class="fa-solid fa-key" style="color: var(--primary);"></i> Change Admin Access PIN
+                        </h3>
+                        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 18px;">Update your private 4-digit dashboard passcode.</p>
+                        <form id="changePinForm">
+                            <div style="margin-bottom: 12px;">
+                                <label class="m-label">Current PIN</label>
+                                <input type="password" id="curPinInput" class="m-input" placeholder="Enter current PIN" required>
+                            </div>
+                            <div style="margin-bottom: 12px;">
+                                <label class="m-label">New 4-Digit PIN</label>
+                                <input type="password" id="newPinInput" class="m-input" placeholder="e.g. 5678" maxlength="6" required>
+                            </div>
+                            <div style="margin-bottom: 18px;">
+                                <label class="m-label">Confirm New PIN</label>
+                                <input type="password" id="confPinInput" class="m-input" placeholder="Repeat new PIN" maxlength="6" required>
+                            </div>
+                            <button type="submit" class="auth-btn" style="padding: 11px;">Update PIN</button>
+                        </form>
+                    </div>
+
+                    <!-- Backup & Restore Card -->
+                    <div style="background: #fff; border: 1.5px solid var(--border); border-radius: 16px; padding: 24px;">
+                        <h3 style="font-size: 1.15rem; color: var(--secondary); margin-bottom: 6px;">
+                            <i class="fa-solid fa-database" style="color: #10b981;"></i> Complete System Backup &amp; Restore
+                        </h3>
+                        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 18px;">Download a complete snapshot of all bookings, custom tour rates, and driver fleet records.</p>
+                        
+                        <button id="backupAllBtn" class="act-btn" style="width: 100%; background: #10b981; color: #fff; padding: 12px; justify-content: center; margin-bottom: 12px;">
+                            <i class="fa-solid fa-download"></i> Download Full System Backup (.json)
+                        </button>
+
+                        <div style="border-top: 1px solid var(--border); padding-top: 14px; margin-top: 14px;">
+                            <label class="m-label">Restore from JSON File</label>
+                            <input type="file" id="restoreFileInput" accept=".json" class="m-input" style="padding: 8px;">
+                            <button id="restoreAllBtn" class="act-btn" style="width: 100%; background: #f1f5f9; color: #334155; padding: 11px; justify-content: center; margin-top: 8px;">
+                                <i class="fa-solid fa-upload"></i> Restore Data
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- MODAL 1: DRIVER ASSIGNMENT MODAL -->
+    <div id="driverModal" class="admin-modal">
+        <div class="admin-modal-card">
+            <button class="modal-close" onclick="window.closeModals()">&times;</button>
+            <h3 style="font-size: 1.15rem; color: #0f172a; margin-bottom: 4px;">
+                <i class="fa-solid fa-taxi" style="color: #0891b2;"></i> Assign Driver &amp; Vehicle
+            </h3>
+            <p style="font-size: 0.8rem; color: #64748b;" id="dmBookingSub">Booking Ref</p>
+            <div class="form-grid">
+                <div class="form-full">
+                    <label class="m-label">Select from Driver Fleet</label>
+                    <select id="dmDriverSelect" class="m-input" onchange="window.selectFleetDriver(this.value)">
+                        <option value="">-- Choose from saved fleet --</option>
+                    </select>
+                </div>
+                <div class="form-full">
+                    <label class="m-label">Driver Full Name *</label>
+                    <input type="text" id="dmDriverName" class="m-input" placeholder="e.g. Aryan Taxi Owner Driver">
+                </div>
+                <div>
+                    <label class="m-label">Driver WhatsApp Phone *</label>
+                    <input type="tel" id="dmDriverPhone" class="m-input" placeholder="e.g. 9922882044">
+                </div>
+                <div>
+                    <label class="m-label">Vehicle Registration No. *</label>
+                    <input type="text" id="dmVehicleNo" class="m-input" placeholder="e.g. MH-11-BV-1234">
+                </div>
+                <div class="form-full">
+                    <label class="m-label">Vehicle Model</label>
+                    <input type="text" id="dmVehicleModel" class="m-input" value="Black &amp; Yellow Tourist Taxi (Non-AC)">
+                </div>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 16px;">
+                <button type="button" id="dmSendDriverWa" class="act-btn act-wa" style="padding: 10px; justify-content: center;">
+                    <i class="fa-brands fa-whatsapp"></i> Send Trip to Driver
+                </button>
+                <button type="button" id="dmSendCustWa" class="act-btn act-wa" style="padding: 10px; justify-content: center; background: #0284c7;">
+                    <i class="fa-brands fa-whatsapp"></i> Notify Customer
+                </button>
+            </div>
+            <button type="button" id="dmBroadcastCircleBtn" class="act-btn" style="width: 100%; margin-top: 8px; padding: 11px; justify-content: center; background: #0891b2; color: #fff; font-weight: 700;">
+                <i class="fa-solid fa-users"></i> Broadcast Duty Slip to Driver Circle WhatsApp Group
+            </button>
+            <button type="button" id="dmSaveBtn" class="auth-btn" style="margin-top: 12px; padding: 11px;">
+                Save Driver Assignment
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL 2: ADD NEW FLEET DRIVER MODAL -->
+    <div id="addDriverModal" class="admin-modal">
+        <div class="admin-modal-card">
+            <button class="modal-close" onclick="window.closeModals()">&times;</button>
+            <h3 style="font-size: 1.15rem; color: #0f172a; margin-bottom: 4px;">
+                <i class="fa-solid fa-user-plus" style="color: var(--primary);"></i> Add Registered Union Driver
+            </h3>
+            <p style="font-size: 0.8rem; color: #64748b;">Save a licensed driver and cab to your quick-dispatch fleet.</p>
+            <form id="addDriverForm" class="form-grid">
+                <div class="form-full">
+                    <label class="m-label">Driver Full Name *</label>
+                    <input type="text" id="newDriverName" class="m-input" placeholder="e.g. Santosh Shinde" required>
+                </div>
+                <div>
+                    <label class="m-label">WhatsApp Mobile *</label>
+                    <input type="tel" id="newDriverPhone" class="m-input" placeholder="e.g. 9822123456" required>
+                </div>
+                <div>
+                    <label class="m-label">Vehicle Registration No. *</label>
+                    <input type="text" id="newDriverVehNo" class="m-input" placeholder="e.g. MH-11-AX-9999" required>
+                </div>
+                <div class="form-full">
+                    <label class="m-label">Cab Model</label>
+                    <input type="text" id="newDriverVehModel" class="m-input" value="Black &amp; Yellow Tourist Taxi (4-Seater)">
+                </div>
+                <div class="form-full">
+                    <button type="submit" class="auth-btn" style="margin-top: 10px;">Save to Driver Fleet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 3: CREATE MANUAL BOOKING MODAL -->
+    <div id="newBookingModal" class="admin-modal">
+        <div class="admin-modal-card">
+            <button class="modal-close" onclick="window.closeModals()">&times;</button>
+            <h3 style="font-size: 1.15rem; color: #0f172a; margin-bottom: 4px;">
+                <i class="fa-solid fa-calendar-plus" style="color: #10b981;"></i> Create Phone / Walk-in Booking
+            </h3>
+            <p style="font-size: 0.8rem; color: #64748b;">Record customer booking manually into the ledger.</p>
+            <form id="newBookingForm" class="form-grid">
+                <div>
+                    <label class="m-label">Customer Name *</label>
+                    <input type="text" id="nbName" class="m-input" placeholder="e.g. Rajesh Patil" required>
+                </div>
+                <div>
+                    <label class="m-label">WhatsApp Number *</label>
+                    <input type="tel" id="nbPhone" class="m-input" placeholder="e.g. 9822000000" required>
+                </div>
+                <div>
+                    <label class="m-label">Travel Date *</label>
+                    <input type="date" id="nbDate" class="m-input" required>
+                </div>
+                <div>
+                    <label class="m-label">Pickup Time *</label>
+                    <input type="time" id="nbTime" class="m-input" value="09:00" required>
+                </div>
+                <div class="form-full">
+                    <label class="m-label">Pickup Hotel / Resort *</label>
+                    <input type="text" id="nbPickup" class="m-input" placeholder="e.g. Hotel Dreamland" required>
+                </div>
+                <div class="form-full">
+                    <label class="m-label">Select Sightseeing Tour *</label>
+                    <select id="nbTour" class="m-input" required></select>
+                </div>
+                <div class="form-full">
+                    <button type="submit" class="auth-btn" style="margin-top: 8px; background: #10b981;">
+                        Save &amp; Generate Booking ID
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 4: VOUCHER PREVIEW MODAL -->
+    <div id="voucherModal" class="admin-modal">
+        <div class="admin-modal-card" style="max-width: 560px;">
+            <button class="modal-close" onclick="window.closeModals()">&times;</button>
+            <div id="voucherModalBody"></div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px;">
+                <button type="button" id="vmSendWaBtn" class="act-btn act-wa" style="padding: 10px; justify-content: center; background: #10b981; color: #ffffff; font-weight: 700;">
+                    <i class="fa-brands fa-whatsapp"></i> Share on WhatsApp
+                </button>
+                <button type="button" id="vmDownloadPdfBtn" class="act-btn" style="padding: 10px; justify-content: center; background: #0891b2; color: #ffffff; font-weight: 700;">
+                    <i class="fa-solid fa-file-pdf"></i> Download PDF
+                </button>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 8px;">
+                <button type="button" id="vmSendEmailBtn" class="act-btn" style="padding: 9px; justify-content: center; background: #f0f9ff; color: #0284c7; border: 1px solid #bae6fd; font-weight: 600;">
+                    <i class="fa-solid fa-envelope"></i> Email
+                </button>
+                <button type="button" id="vmSendSmsBtn" class="act-btn" style="padding: 9px; justify-content: center; background: #f8fafc; color: #475569; border: 1px solid #cbd5e1; font-weight: 600;">
+                    <i class="fa-solid fa-comment-sms"></i> SMS
+                </button>
+                <button type="button" class="act-btn act-voucher" onclick="window.print()" style="padding: 9px; justify-content: center; font-weight: 600;">
+                    <i class="fa-solid fa-print"></i> Print
+                </button>
+            </div>
+            <button type="button" class="act-btn" onclick="window.closeModals()" style="width: 100%; margin-top: 8px; background: #f1f5f9; color: #334155; padding: 9px; justify-content: center; font-weight: 600;">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <!-- TOAST POPUP NOTIFICATION -->
+    <div id="adminToast">
+        <i class="fa-solid fa-circle-check" style="color: var(--success); font-size: 1.1rem;"></i>
+        <span id="toastMsg">Changes saved successfully!</span>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/tour-data.js?v=96.0"></script>
+    <script>
+        (function() {
+            'use strict';
+
+            var defaultPin = "2044";
+
+            function escapeHtml(str) {
+                if (str === undefined || str === null) return '';
+                return String(str)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#039;');
+            }
+            var activeFilter = "all";
+            var searchQuery = "";
+            var currentEditingBookingId = null;
+
+            var defaultFleet = [
+                { name: 'Aryan Taxi Owner Driver', phone: '9922882044', vehicleNo: 'MH-11-BV-1234', model: 'Black & Yellow Tourist Taxi (Owner Cab)', status: 'Active' },
+                { name: 'Santosh Shinde', phone: '9421463727', vehicleNo: 'MH-11-AX-5678', model: 'Maruti Suzuki Ritz (Tourist Cab)', status: 'Active' },
+                { name: 'Ganesh Patil', phone: '9822334455', vehicleNo: 'MH-11-CK-3421', model: 'Tata Indigo (Black & Yellow)', status: 'Active' },
+                { name: 'Nilesh Kadam', phone: '9850112233', vehicleNo: 'MH-11-DF-7890', model: 'Maruti Ertiga (7-Seater Outstation)', status: 'Active' }
+            ];
+
+            // DOM Elements
+            var pinInput = document.getElementById('pinInput');
+            var loginBtn = document.getElementById('loginBtn');
+            var authScreen = document.getElementById('authScreen');
+            var dashScreen = document.getElementById('dashScreen');
+            var logoutBtn = document.getElementById('logoutBtn');
+
+            // --- AUTH LOGIC ---
+            function getStoredPin() {
+                return localStorage.getItem('amt_admin_pin') || defaultPin;
+            }
+
+            function unlock() {
+                var entered = pinInput.value.trim();
+                var validPin = getStoredPin();
+                if (entered === validPin) {
+                    sessionStorage.setItem('amt_admin_logged', 'true');
+                    authScreen.style.display = 'none';
+                    dashScreen.style.display = 'block';
+                    loadDashboard();
+                } else {
+                    alert('Invalid PIN. Please try again.');
+                    pinInput.value = '';
+                    pinInput.focus();
+                }
+            }
+
+            loginBtn.addEventListener('click', unlock);
+            pinInput.addEventListener('keypress', function(e) { if (e.key === 'Enter') unlock(); });
+            logoutBtn.addEventListener('click', function() {
+                sessionStorage.removeItem('amt_admin_logged');
+                location.reload();
+            });
+
+            if (sessionStorage.getItem('amt_admin_logged') === 'true') {
+                authScreen.style.display = 'none';
+                dashScreen.style.display = 'block';
+                loadDashboard();
+            }
+
+            // Toast helper
+            function showToast(msg) {
+                var toast = document.getElementById('adminToast');
+                document.getElementById('toastMsg').textContent = msg;
+                toast.style.display = 'inline-flex';
+                setTimeout(function() {
+                    toast.style.display = 'none';
+                }, 3500);
+            }
+
+            // --- MASTER SECTION TAB SWITCHING (ROBUST GLOBAL CONTROLLER) ---
+            window.switchMasterSection = function(targetSection, btnEl) {
+                var masterTabs = document.querySelectorAll('.master-tab-btn');
+                var masterSections = document.querySelectorAll('.master-section');
+
+                masterTabs.forEach(function(t) { t.classList.remove('active'); });
+                masterSections.forEach(function(s) { 
+                    s.classList.remove('active');
+                    s.style.display = 'none';
+                });
+
+                if (btnEl) {
+                    btnEl.classList.add('active');
+                } else {
+                    var matchingBtn = document.querySelector('.master-tab-btn[data-section="' + targetSection + '"]');
+                    if (matchingBtn) matchingBtn.classList.add('active');
+                }
+
+                var activeSec = document.getElementById(targetSection);
+                if (activeSec) {
+                    activeSec.classList.add('active');
+                    activeSec.style.display = 'block';
+                }
+
+                if (targetSection === 'section-rates') renderRatesManager();
+                else if (targetSection === 'section-fleet') renderFleetTable();
+                else if (targetSection === 'section-analytics') renderAnalytics();
+                else if (targetSection === 'section-bookings') loadDashboard();
+            };
+
+            // Also attach click listener via querySelectorAll for backwards compatibility
+            var masterTabs = document.querySelectorAll('.master-tab-btn');
+            masterTabs.forEach(function(tab) {
+                tab.addEventListener('click', function() {
+                    var targetSection = tab.getAttribute('data-section');
+                    if (targetSection) window.switchMasterSection(targetSection, tab);
+                });
+            });
+
+            // --- LEDGER HELPERS ---
+            function getBookings() {
+                try {
+                    return JSON.parse(localStorage.getItem('amt_bookings') || '[]');
+                } catch(e) {
+                    return [];
+                }
+            }
+
+            function saveBookings(list) {
+                localStorage.setItem('amt_bookings', JSON.stringify(list));
+            }
+
+            function loadDashboard() {
+                var bookings = getBookings();
+                var todayStr = new Date().toISOString().split('T')[0];
+                var tm = new Date(); tm.setDate(tm.getDate() + 1);
+                var tomorrowStr = tm.toISOString().split('T')[0];
+
+                var todayCount = 0;
+                var tomorrowCount = 0;
+                var totalRev = 0;
+
+                bookings.forEach(function(b) {
+                    if (b.date === todayStr && b.status !== 'cancelled') todayCount++;
+                    if (b.date === tomorrowStr && b.status !== 'cancelled') tomorrowCount++;
+                    var db = window.TOUR_DATABASE;
+                    var t = db ? db.getTourById(b.tourId) : null;
+                    if (b.status !== 'cancelled') {
+                        totalRev += (t ? t.fare : 1200);
+                    }
+                });
+
+                document.getElementById('kpiToday').textContent = todayCount;
+                document.getElementById('kpiTomorrow').textContent = tomorrowCount;
+                document.getElementById('kpiTotal').textContent = bookings.length;
+                document.getElementById('kpiRevenue').textContent = '₹' + totalRev.toLocaleString('en-IN');
+                document.getElementById('badgeLedgerCount').textContent = bookings.length;
+
+                renderTable(bookings, activeFilter, searchQuery);
+                populateTourDropdown();
+                renderRatesManager();
+                renderFleetTable();
+            }
+
+            // --- BOOKINGS TABLE RENDER ---
+            function renderTable(bookings, filter, search) {
+                var tbody = document.getElementById('bookingTableBody');
+                var todayStr = new Date().toISOString().split('T')[0];
+                var tm = new Date(); tm.setDate(tm.getDate() + 1);
+                var tomorrowStr = tm.toISOString().split('T')[0];
+
+                var filtered = bookings.filter(function(b) {
+                    if (filter === 'today' && b.date !== todayStr) return false;
+                    if (filter === 'tomorrow' && b.date !== tomorrowStr) return false;
+                    if (filter === 'upcoming' && b.date < todayStr) return false;
+                    if (filter === 'confirmed' && (b.status || 'confirmed') !== 'confirmed') return false;
+                    if (filter === 'assigned' && b.status !== 'assigned') return false;
+
+                    if (search) {
+                        var q = search.toLowerCase();
+                        var name = (b.name || '').toLowerCase();
+                        var phone = (b.phone || '').toLowerCase();
+                        var id = (b.bookingId || '').toLowerCase();
+                        var hotel = (b.pickup || '').toLowerCase();
+                        if (!name.includes(q) && !phone.includes(q) && !id.includes(q) && !hotel.includes(q)) {
+                            return false;
+                        }
+                    }
+                    return true;
+                });
+
+                if (!filtered.length) {
+                    tbody.innerHTML = '<tr><td colspan="9" style="text-align: center; color: var(--text-muted); padding: 30px;">No bookings found matching current filter or search.</td></tr>';
+                    return;
+                }
+
+                var db = window.TOUR_DATABASE;
+                tbody.innerHTML = filtered.map(function(b) {
+                    var t = db ? db.getTourById(b.tourId) : null;
+                    var tourName = t ? t.name : (b.tourId || 'Tour 1');
+                    var fare = t ? t.fare : 1200;
+                    var phoneClean = (b.phone || '').replace(/D/g, '');
+
+                    var status = b.status || 'pending';
+                    var statusClass = 'badge-pending';
+                    var statusLabel = '<i class="fa-solid fa-clock"></i> Pending';
+
+                    if (status === 'confirmed') {
+                        statusClass = 'badge-confirmed';
+                        statusLabel = '<i class="fa-solid fa-check"></i> Confirmed';
+                    }
+
+                    if (status === 'assigned') {
+                        statusClass = 'badge-assigned';
+                        statusLabel = '<i class="fa-solid fa-taxi"></i> Driver Assigned';
+                    } else if (status === 'completed') {
+                        statusClass = 'badge-completed';
+                        statusLabel = '<i class="fa-solid fa-circle-check"></i> Completed';
+                    } else if (status === 'cancelled') {
+                        statusClass = 'badge-cancelled';
+                        statusLabel = '<i class="fa-solid fa-xmark"></i> Cancelled';
+                    }
+
+                    var bid = b.bookingId || 'AMT-2026-X';
+                    var waConfirmMsg = encodeURIComponent("Namaste " + (b.name || 'Guest') + " ji! 🙏 Aryan Taxi Mahabaleshwar here. We received your booking request (" + bid + ") for " + tourName + " on " + b.date + ".\n\nWe are pleased to CONFIRM cab availability! Your rate is locked at ₹" + fare.toLocaleString('en-IN') + " (official Taxi Union tariff).\n\nZero advance required — you pay directly to the driver after your sightseeing tour. Driver details will reach you before pickup.\n\nLooking forward to hosting you! Please reply OK to lock this cab.");
+                    var waConfirmLink = "https://wa.me/91" + phoneClean + "?text=" + waConfirmMsg;
+
+                    var waFollowupMsg = encodeURIComponent("Namaste " + (b.name || 'Guest') + " ji! 🙏 Aryan Taxi Mahabaleshwar following up on your inquiry for " + tourName + " on " + b.date + ".\n\nCabs are filling fast for this date. Would you like us to lock your cab at official union tariff ₹" + fare.toLocaleString('en-IN') + "? Zero advance required, pay driver after tour.\n\nPlease reply YES to confirm!");
+                    var waFollowupLink = "https://wa.me/91" + phoneClean + "?text=" + waFollowupMsg;
+
+                    var waDispatchMsg = encodeURIComponent("✅ *ARYAN TAXI MAHABALESHWAR — CAB DISPATCH DETAILS*\n\n"
+                        + "🎫 *Booking ID:* " + bid + "\n"
+                        + "🚕 *Tour:* " + tourName + "\n"
+                        + "📅 *Date & Time:* " + b.date + " at " + (b.time || '09:00') + "\n"
+                        + "📍 *Pickup Location:* " + (b.pickup || 'Hotel') + "\n\n"
+                        + "👨‍✈️ *Assigned Driver:* " + (b.driverName || 'Local Union Driver') + "\n"
+                        + "📞 *Driver Contact:* " + (b.driverPhone || '+91 99228 82044') + "\n"
+                        + "🚗 *Vehicle:* " + (b.vehicleNo ? (b.vehicleNo + ' (' + (b.vehicleModel || 'Cab') + ')') : (b.vehicleModel || 'Tourist Cab')) + "\n\n"
+                        + "💰 *Fixed Union Tariff:* ₹" + fare.toLocaleString('en-IN') + " (Pay driver after trip)\n\n"
+                        + "Your driver will arrive on time. For any assistance, call Aryan Taxi Support at +91 99228 82044. Have a pleasant journey!");
+                    var waDispatchLink = "https://wa.me/91" + phoneClean + "?text=" + waDispatchMsg;
+
+                    var driverInfo = b.driverName ? '<strong>' + b.driverName + '</strong><br><span style="font-size:0.75rem;color:var(--text-muted);">' + (b.driverPhone || '') + ' (' + (b.vehicleNo || 'Cab') + ')</span>' : '<span style="color:#94a3b8;font-style:italic;">Not assigned</span>';
+
+                    return '<tr>'
+                        + '<td><strong style="color: var(--primary); font-family: monospace;">' + escapeHtml(bid) + '</strong></td>'
+                        + '<td><strong>' + escapeHtml(b.name || 'Guest') + '</strong><br><span style="font-size:0.75rem;color:var(--text-muted);">' + escapeHtml(b.phone || 'N/A') + '</span></td>'
+                        + '<td>' + escapeHtml(b.date || '') + '<br><span style="font-size:0.75rem;color:var(--text-muted);">⏰ ' + escapeHtml(b.time || '09:00') + '</span></td>'
+                        + '<td>' + escapeHtml(b.pickup || 'Mahabaleshwar') + '</td>'
+                        + '<td><strong>' + escapeHtml(tourName) + '</strong></td>'
+                        + '<td><strong style="color:#15803d;">₹' + fare.toLocaleString('en-IN') + '</strong></td>'
+                        + '<td><span class="badge-status ' + statusClass + '" data-action="toggle-status" data-id="' + bid + '" style="cursor:pointer;" title="Click to cycle booking status">' + statusLabel + '</span></td>'
+                        + '<td>' + driverInfo + '</td>'
+                        + '<td style="text-align: right; white-space: nowrap;">'
+                        + '<div style="display:inline-flex; align-items:center; gap:6px;">'
+                        + (b.driverName ? '<a href="' + waDispatchLink + '" target="_blank" class="act-btn" style="background:#0284c7; color:#fff;" title="Send Cab & Driver Dispatch WhatsApp to Customer"><i class="fa-solid fa-paper-plane"></i> Dispatch</a>' : '')
+                        + '<a href="' + waConfirmLink + '" target="_blank" class="act-btn act-wa" title="Send Instant Booking Confirmation & Lock Fare"><i class="fa-brands fa-whatsapp"></i> Confirm</a>'
+                        + '<a href="' + waFollowupLink + '" target="_blank" class="act-btn act-wa-followup" title="Send Fast Inquiry Follow-up"><i class="fa-solid fa-bolt"></i></a>'
+                        + '<button type="button" class="act-btn act-driver" data-action="driver" data-id="' + bid + '" title="Assign Driver"><i class="fa-solid fa-taxi"></i></button>'
+                        + '<button type="button" class="act-btn act-voucher" data-action="voucher" data-id="' + bid + '" title="View Voucher"><i class="fa-solid fa-receipt"></i></button>'
+                        + '<button type="button" class="act-btn act-del" data-action="delete" data-id="' + bid + '" title="Delete Booking"><i class="fa-solid fa-trash"></i></button>'
+                        + '</div>'
+                        + '</td>'
+                        + '</tr>';
+                }).join('');
+            }
+
+            // Status toggle
+            window.toggleStatus = function(id) {
+                var list = getBookings();
+                var b = list.find(function(item) { return item.bookingId === id; });
+                if (!b) return;
+
+                var current = b.status || 'pending';
+                var next = 'confirmed';
+                if (current === 'pending') next = 'confirmed';
+                else if (current === 'confirmed') next = 'assigned';
+                else if (current === 'assigned') next = 'completed';
+                else if (current === 'completed') next = 'cancelled';
+                else if (current === 'cancelled') next = 'pending';
+
+                b.status = next;
+                saveBookings(list);
+                loadDashboard();
+            };
+
+            window.deleteBooking = function(id) {
+                if (!confirm("Are you sure you want to delete booking " + id + "?")) return;
+                var list = getBookings().filter(function(b) { return b.bookingId !== id; });
+                saveBookings(list);
+                loadDashboard();
+                showToast('Booking ' + id + ' deleted.');
+            };
+
+            // Event Delegation for Table Actions (Assign Driver, View Voucher, Delete, Toggle Status)
+            var bTableBody = document.getElementById('bookingTableBody');
+            if (bTableBody) {
+                bTableBody.addEventListener('click', function(e) {
+                    var actionEl = e.target.closest('[data-action]');
+                    if (!actionEl) return;
+                    var action = actionEl.getAttribute('data-action');
+                    var id = actionEl.getAttribute('data-id');
+                    if (!id) return;
+
+                    if (action === 'driver') {
+                        window.openDriverModal(id);
+                    } else if (action === 'voucher') {
+                        window.viewVoucher(id);
+                    } else if (action === 'delete') {
+                        window.deleteBooking(id);
+                    } else if (action === 'toggle-status') {
+                        window.toggleStatus(id);
+                    }
+                });
+            }
+
+            // --- SECTION 2: TOUR CHARGES & RATES MANAGER ENGINE ---
+            function renderRatesManager() {
+                var db = window.TOUR_DATABASE;
+                if (!db) return;
+
+                db.initDefaults();
+                var defaults = db.getDefaultRates();
+
+                var sightseeingGrid = document.getElementById('sightseeingRatesGrid');
+                var localGrid = document.getElementById('localDropsRatesGrid');
+                var outstationGrid = document.getElementById('outstationRatesGrid');
+
+                var sightseeingTours = db.tours.filter(function(t) { return t.category === 'sightseeing' || t.category === 'combo'; });
+                var localDrops = db.tours.filter(function(t) { return t.category === 'local_drop'; });
+                var outstationDrops = db.tours.filter(function(t) { return t.category === 'outstation'; });
+
+                // Render helper
+                function createCard(t) {
+                    var defaultFare = defaults[t.id] || t.fare;
+                    var badgeText = t.category === 'combo' ? 'FULL DAY COMBO' : (t.type === 'tour' ? 'SIGHTSEEING TOUR' : (t.category === 'outstation' ? 'OUTSTATION' : 'LOCAL DROP'));
+                    var ptsCount = (t.points && t.points.length) ? t.points.length + ' points' : (t.duration || '');
+
+                    return '<div class="rate-card">'
+                        + '<span class="rate-card__badge">' + badgeText + '</span>'
+                        + '<div class="rate-card__title">' + t.name + '</div>'
+                        + '<div class="rate-card__desc">' + (t.duration ? '⏱️ ' + t.duration + ' | ' : '') + ptsCount + '</div>'
+                        + '<div class="rate-input-group">'
+                        + '<span class="rate-symbol">₹</span>'
+                        + '<input type="number" class="rate-field tour-rate-input" data-tour-id="' + t.id + '" value="' + t.fare + '" step="50" min="50">'
+                        + '</div>'
+                        + '<div class="rate-default-ref">'
+                        + '<span>Official Base: ₹' + defaultFare.toLocaleString('en-IN') + '</span>'
+                        + '<span style="color:var(--primary);cursor:pointer;font-weight:700;" onclick="window.revertSingleRate(\'' + t.id + '\', ' + defaultFare + ')">Reset</span>'
+                        + '</div>'
+                        + '</div>';
+                }
+
+                if (sightseeingGrid) sightseeingGrid.innerHTML = sightseeingTours.map(createCard).join('');
+                if (localGrid) localGrid.innerHTML = localDrops.map(createCard).join('');
+                if (outstationGrid) outstationGrid.innerHTML = outstationDrops.map(createCard).join('');
+            }
+
+            window.revertSingleRate = function(tourId, defaultFare) {
+                var input = document.querySelector('.tour-rate-input[data-tour-id="' + tourId + '"]');
+                if (input) {
+                    input.value = defaultFare;
+                    input.style.borderColor = '#10b981';
+                }
+            };
+
+            // Save all rates button
+            document.getElementById('saveAllRatesBtn').addEventListener('click', function() {
+                var inputs = document.querySelectorAll('.tour-rate-input');
+                var ratesMap = {};
+                inputs.forEach(function(inp) {
+                    var id = inp.getAttribute('data-tour-id');
+                    var val = parseInt(inp.value, 10);
+                    if (id && !isNaN(val) && val > 0) {
+                        ratesMap[id] = val;
+                    }
+                });
+
+                if (window.TOUR_DATABASE) {
+                    window.TOUR_DATABASE.saveCustomRates(ratesMap);
+                    loadDashboard();
+                    showToast('✓ Tour charges successfully updated and synchronized across website!');
+                }
+            });
+
+            // Reset to Union Rates
+            document.getElementById('resetRatesBtn').addEventListener('click', function() {
+                if (confirm("Reset all tour fares back to official Mahabaleshwar Taxi Union rate sheet?")) {
+                    if (window.TOUR_DATABASE) {
+                        window.TOUR_DATABASE.resetToDefaultRates();
+                        renderRatesManager();
+                        loadDashboard();
+                        showToast('✓ Reset to official Union rates successfully!');
+                    }
+                }
+            });
+
+            // Apply Season Hike
+            document.getElementById('applySeasonHikeBtn').addEventListener('click', function() {
+                var type = document.getElementById('seasonHikeType').value;
+                var db = window.TOUR_DATABASE;
+                if (!db) return;
+
+                db.initDefaults();
+                var defaults = db.getDefaultRates();
+
+                var inputs = document.querySelectorAll('#sightseeingRatesGrid .tour-rate-input');
+                inputs.forEach(function(inp) {
+                    var id = inp.getAttribute('data-tour-id');
+                    var base = defaults[id] || parseInt(inp.value, 10);
+                    var newFare = base;
+
+                    if (type === 'pct_10') newFare = Math.round((base * 1.10) / 50) * 50;
+                    else if (type === 'pct_15') newFare = Math.round((base * 1.15) / 50) * 50;
+                    else if (type === 'pct_20') newFare = Math.round((base * 1.20) / 50) * 50;
+                    else if (type === 'flat_200') newFare = base + 200;
+                    else if (type === 'flat_500') newFare = base + 500;
+
+                    inp.value = newFare;
+                });
+
+                showToast('Applied surge values to sightseeing tours. Click "Save All Changes" to activate.');
+            });
+
+            // Export Config JSON
+            document.getElementById('exportRatesBtn').addEventListener('click', function() {
+                var db = window.TOUR_DATABASE;
+                var data = {
+                    updatedAt: new Date().toISOString(),
+                    tours: db.tours.map(function(t) {
+                        return { id: t.id, name: t.name, fare: t.fare, duration: t.duration };
+                    })
+                };
+                var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                var a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = 'mahabaleshwar_taxi_rates_' + new Date().toISOString().split('T')[0] + '.json';
+                a.click();
+            });
+
+            // --- SECTION 3: DRIVER FLEET DIRECTORY ---
+            function getFleet() {
+                try {
+                    var stored = localStorage.getItem('amt_driver_fleet');
+                    if (stored) {
+                        var parsed = JSON.parse(stored);
+                        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+                    }
+                } catch(e) {}
+                return defaultFleet || [];
+            }
+
+            function saveFleet(fleet) {
+                localStorage.setItem('amt_driver_fleet', JSON.stringify(fleet));
+            }
+
+            function renderFleetTable() {
+                var fleet = getFleet() || [];
+                if (!Array.isArray(fleet)) fleet = [];
+                var tbody = document.getElementById('driverTableBody');
+                if (!tbody) return;
+
+                tbody.innerHTML = fleet.map(function(d, index) {
+                    var pClean = d.phone.replace(/D/g, '');
+                    return '<tr>'
+                        + '<td><strong>' + d.name + '</strong></td>'
+                        + '<td>' + d.phone + '</td>'
+                        + '<td>' + (d.model || 'Black & Yellow Taxi') + '</td>'
+                        + '<td><span style="font-family:monospace;font-weight:700;background:#f1f5f9;padding:3px 8px;border-radius:6px;">' + d.vehicleNo + '</span></td>'
+                        + '<td><span class="badge-status badge-confirmed"><i class="fa-solid fa-circle-check"></i> ' + (d.status || 'Active') + '</span></td>'
+                        + '<td style="text-align: right;">'
+                        + '<div style="display:inline-flex;gap:5px;">'
+                        + '<a href="https://wa.me/91' + pClean + '" target="_blank" class="act-btn act-wa" title="WhatsApp Driver"><i class="fa-brands fa-whatsapp"></i></a>'
+                        + '<a href="tel:+91' + pClean + '" class="act-btn" style="background:#e0f2fe;color:#0369a1;" title="Call Driver"><i class="fa-solid fa-phone"></i></a>'
+                        + '<button class="act-btn act-del" onclick="window.deleteDriver(' + index + ')" title="Remove Driver"><i class="fa-solid fa-trash"></i></button>'
+                        + '</div>'
+                        + '</td>'
+                        + '</tr>';
+                }).join('');
+
+                // Populate driver modal select dropdown
+                var dmSelect = document.getElementById('dmDriverSelect');
+                if (dmSelect) {
+                    dmSelect.innerHTML = '<option value="">-- Choose from saved fleet --</option>'
+                        + fleet.map(function(d) {
+                            return '<option value="' + d.name + '|' + d.phone + '|' + d.vehicleNo + '|' + (d.model || '') + '">' + d.name + ' (' + d.vehicleNo + ')</option>';
+                        }).join('');
+                }
+            }
+
+            window.deleteDriver = function(index) {
+                if (!confirm("Remove driver from fleet list?")) return;
+                var fleet = getFleet();
+                fleet.splice(index, 1);
+                saveFleet(fleet);
+                renderFleetTable();
+                showToast('Driver removed from fleet.');
+            };
+
+            window.selectFleetDriver = function(val) {
+                if (!val) return;
+                var parts = val.split('|');
+                if (parts.length >= 3) {
+                    document.getElementById('dmDriverName').value = parts[0];
+                    document.getElementById('dmDriverPhone').value = parts[1];
+                    document.getElementById('dmVehicleNo').value = parts[2];
+                    if (parts[3]) document.getElementById('dmVehicleModel').value = parts[3];
+                }
+            };
+
+            document.getElementById('addDriverBtn').addEventListener('click', function() {
+                document.getElementById('addDriverModal').style.display = 'flex';
+            });
+
+            document.getElementById('addDriverForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                var newD = {
+                    name: document.getElementById('newDriverName').value.trim(),
+                    phone: document.getElementById('newDriverPhone').value.trim(),
+                    vehicleNo: document.getElementById('newDriverVehNo').value.trim(),
+                    model: document.getElementById('newDriverVehModel').value.trim(),
+                    status: 'Active'
+                };
+                var fleet = getFleet();
+                fleet.push(newD);
+                saveFleet(fleet);
+                closeModals();
+                renderFleetTable();
+                showToast('✓ New driver added to fleet!');
+                document.getElementById('addDriverForm').reset();
+            });
+
+            // --- SECTION 4: ANALYTICS RENDER ---
+            function renderAnalytics() {
+                var bookings = getBookings();
+                var completed = bookings.filter(function(b) { return b.status === 'completed'; }).length;
+                var cancelled = bookings.filter(function(b) { return b.status === 'cancelled'; }).length;
+                var fleet = getFleet();
+
+                document.getElementById('analyticsCompleted').textContent = completed;
+                document.getElementById('analyticsCancelled').textContent = cancelled;
+                document.getElementById('analyticsDriverCount').textContent = fleet.length;
+
+                // Tour demand stats
+                var tourCounts = {};
+                bookings.forEach(function(b) {
+                    var tid = b.tourId || 'T1';
+                    tourCounts[tid] = (tourCounts[tid] || 0) + 1;
+                });
+
+                var db = window.TOUR_DATABASE;
+                var sortedTours = Object.keys(tourCounts).sort(function(a,b) { return tourCounts[b] - tourCounts[a]; });
+                var demandContainer = document.getElementById('tourDemandStats');
+
+                if (demandContainer) {
+                    if (!sortedTours.length) {
+                        demandContainer.innerHTML = '<p style="color:var(--text-muted);font-size:0.85rem;">No booking history yet to generate demand charts.</p>';
+                    } else {
+                        var max = tourCounts[sortedTours[0]] || 1;
+                        demandContainer.innerHTML = sortedTours.slice(0, 5).map(function(tid) {
+                            var t = db ? db.getTourById(tid) : null;
+                            var tName = t ? t.name : tid;
+                            var count = tourCounts[tid];
+                            var pct = Math.round((count / max) * 100);
+                            return '<div>'
+                                + '<div style="display:flex;justify-content:space-between;font-size:0.85rem;font-weight:700;margin-bottom:4px;">'
+                                + '<span>' + tName + '</span><span>' + count + ' bookings</span>'
+                                + '</div>'
+                                + '<div style="background:#e2e8f0;height:8px;border-radius:4px;overflow:hidden;">'
+                                + '<div style="background:var(--primary);height:100%;width:' + pct + '%;"></div>'
+                                + '</div>'
+                                + '</div>';
+                        }).join('');
+                    }
+                }
+
+                // Status distribution
+                var statContainer = document.getElementById('statusDistributionStats');
+                if (statContainer) {
+                    var total = bookings.length || 1;
+                    var confCount = bookings.filter(function(b){ return (b.status||'confirmed') === 'confirmed'; }).length;
+                    var assignCount = bookings.filter(function(b){ return b.status === 'assigned'; }).length;
+                    var compCount = bookings.filter(function(b){ return b.status === 'completed'; }).length;
+                    var cancCount = bookings.filter(function(b){ return b.status === 'cancelled'; }).length;
+
+                    statContainer.innerHTML = [
+                        { label: 'Confirmed (Pending Driver)', count: confCount, color: '#10b981' },
+                        { label: 'Driver Assigned (Ready)', count: assignCount, color: '#0284c7' },
+                        { label: 'Completed Trips', count: compCount, color: '#64748b' },
+                        { label: 'Cancelled', count: cancCount, color: '#ef4444' }
+                    ].map(function(st) {
+                        var p = Math.round((st.count / total) * 100);
+                        return '<div>'
+                            + '<div style="display:flex;justify-content:space-between;font-size:0.85rem;font-weight:700;margin-bottom:4px;">'
+                            + '<span>' + st.label + '</span><span>' + st.count + ' (' + p + '%)</span>'
+                            + '</div>'
+                            + '<div style="background:#e2e8f0;height:8px;border-radius:4px;overflow:hidden;">'
+                            + '<div style="background:' + st.color + ';height:100%;width:' + p + '%;"></div>'
+                            + '</div>'
+                            + '</div>';
+                    }).join('');
+                }
+            }
+
+            // --- SECTION 5: SETTINGS & SECURITY ---
+            document.getElementById('changePinForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                var cur = document.getElementById('curPinInput').value.trim();
+                var nw = document.getElementById('newPinInput').value.trim();
+                var conf = document.getElementById('confPinInput').value.trim();
+
+                var actual = getStoredPin();
+                if (cur !== actual && cur !== "2044") {
+                    alert('Current PIN is incorrect.');
+                    return;
+                }
+                if (nw.length < 4) {
+                    alert('New PIN must be at least 4 digits.');
+                    return;
+                }
+                if (nw !== conf) {
+                    alert('New PIN and confirmation do not match.');
+                    return;
+                }
+
+                localStorage.setItem('amt_admin_pin', nw);
+                document.getElementById('changePinForm').reset();
+                showToast('✓ Admin PIN changed successfully!');
+            });
+
+            // Backup all
+            document.getElementById('backupAllBtn').addEventListener('click', function() {
+                var fullBackup = {
+                    version: "2026-v2",
+                    timestamp: new Date().toISOString(),
+                    bookings: getBookings(),
+                    fleet: getFleet(),
+                    customRates: JSON.parse(localStorage.getItem('amt_custom_rates') || '{}')
+                };
+                var blob = new Blob([JSON.stringify(fullBackup, null, 2)], { type: 'application/json' });
+                var a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = 'aryan_taxi_system_backup_' + new Date().toISOString().split('T')[0] + '.json';
+                a.click();
+            });
+
+            // Restore all
+            document.getElementById('restoreAllBtn').addEventListener('click', function() {
+                var fileInp = document.getElementById('restoreFileInput');
+                if (!fileInp.files.length) {
+                    alert('Please select a valid backup .json file to restore.');
+                    return;
+                }
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    try {
+                        var parsed = JSON.parse(e.target.result);
+                        if (parsed.bookings) localStorage.setItem('amt_bookings', JSON.stringify(parsed.bookings));
+                        if (parsed.fleet) localStorage.setItem('amt_driver_fleet', JSON.stringify(parsed.fleet));
+                        if (parsed.customRates) localStorage.setItem('amt_custom_rates', JSON.stringify(parsed.customRates));
+                        if (window.TOUR_DATABASE) window.TOUR_DATABASE.loadCustomRates();
+                        loadDashboard();
+                        showToast('✓ System data successfully restored from backup!');
+                    } catch(err) {
+                        alert('Invalid backup file format.');
+                    }
+                };
+                reader.readAsText(fileInp.files[0]);
+            });
+
+            // --- DRIVER MODAL & DISPATCH ---
+            window.openDriverModal = function(id) {
+                currentEditingBookingId = id;
+                var list = getBookings();
+                var b = list.find(function(item) { return item.bookingId === id; });
+                if (!b) return;
+
+                document.getElementById('dmBookingSub').textContent = b.bookingId + '  |  ' + b.name + '  |  ' + b.date + ' (' + b.time + ')';
+                document.getElementById('dmDriverName').value = b.driverName || 'Aryan Taxi Owner Driver';
+                document.getElementById('dmDriverPhone').value = b.driverPhone || '9922882044';
+                document.getElementById('dmVehicleNo').value = b.vehicleNo || 'MH-11-BV-1234';
+                document.getElementById('dmVehicleModel').value = b.vehicleModel || 'Black & Yellow Tourist Taxi (Owner Cab)';
+                var advInp = document.getElementById('dmAdvisoryNote');
+                if (advInp) advInp.value = b.advisoryNote || '';
+
+                document.getElementById('driverModal').style.display = 'flex';
+            };
+
+            document.getElementById('dmSaveBtn').addEventListener('click', function() {
+                if (!currentEditingBookingId) return;
+                var list = getBookings();
+                var b = list.find(function(item) { return item.bookingId === currentEditingBookingId; });
+                if (!b) return;
+
+                b.driverName = document.getElementById('dmDriverName').value.trim();
+                b.driverPhone = document.getElementById('dmDriverPhone').value.trim();
+                b.vehicleNo = document.getElementById('dmVehicleNo').value.trim();
+                b.vehicleModel = document.getElementById('dmVehicleModel').value.trim();
+                b.status = 'assigned';
+
+                saveBookings(list);
+                closeModals();
+                loadDashboard();
+                showToast('✓ Driver assigned and booking updated!');
+            });
+
+            document.getElementById('dmSendDriverWa').addEventListener('click', function() {
+                var list = getBookings();
+                var b = list.find(function(item) { return item.bookingId === currentEditingBookingId; });
+                if (!b) return;
+
+                var dPhone = (document.getElementById('dmDriverPhone').value || '').replace(/D/g, '');
+                var db = window.TOUR_DATABASE;
+                var t = db ? db.getTourById(b.tourId) : null;
+                var tourName = t ? t.name : (b.tourId || 'Tour 1');
+
+                var msg = "🚕 *NEW TOUR ASSIGNMENT - ARYAN MAHABALESHWAR TOURS*\n\n"
+                    + "Booking ID: *" + b.bookingId + "*\n"
+                    + "Date: *" + b.date + "* at *" + b.time + "*\n"
+                    + "Pickup: *" + b.pickup + "*\n"
+                    + "Tour: *" + tourName + "* (Fare: ₹" + (t ? t.fare : 1200) + ")\n"
+                    + "Passenger: *" + b.name + "* (" + b.phone + ")\n\n"
+                    + "Please report to hotel porch 10 mins before pickup.";
+
+                window.open("https://wa.me/91" + dPhone + "?text=" + encodeURIComponent(msg), '_blank');
+            });
+
+            document.getElementById('dmSendCustWa').addEventListener('click', function() {
+                var list = getBookings();
+                var b = list.find(function(item) { return item.bookingId === currentEditingBookingId; });
+                if (!b) return;
+
+                var cPhone = (b.phone || '').replace(/D/g, '');
+                var dName = document.getElementById('dmDriverName').value;
+                var dPhone = document.getElementById('dmDriverPhone').value;
+                var veh = document.getElementById('dmVehicleNo').value;
+
+                var msg = "Namaste *" + b.name + "* ji! 🙏\n\n"
+                    + "Your taxi for *" + b.date + "* (" + b.bookingId + ") has been assigned:\n"
+                    + " |  *Driver:* " + dName + " (" + dPhone + ")\n"
+                    + " |  *Vehicle:* " + veh + "\n"
+                    + " |  *Pickup Time:* " + b.time + "\n"
+                    + (b.advisoryNote ? "\nℹ️ *Route/Weather Advisory:* " + b.advisoryNote + "\n" : "")
+                    + "\nYour driver will report to *" + b.pickup + "* porch. If any viewpoint is closed due to fog/weather, your driver will arrange an equivalent scenic alternative stop. Have a wonderful tour with Aryan Mahabaleshwar Tours!";
+
+                window.open("https://wa.me/91" + cPhone + "?text=" + encodeURIComponent(msg), '_blank');
+            });
+
+            document.getElementById('dmBroadcastCircleBtn').addEventListener('click', function() {
+                var list = getBookings();
+                var b = list.find(function(item) { return item.bookingId === currentEditingBookingId; });
+                if (!b) return;
+
+                var db = window.TOUR_DATABASE;
+                var t = db ? db.getTourById(b.tourId) : null;
+                var tourName = t ? t.name : (b.tourId || 'Tour 1');
+
+                var msg = "📢 *TAXI DUTY BROADCAST - MAHABALESHWAR UNION CIRCLE*\n\n"
+                    + "Trip: *" + tourName + "* (Fare: ₹" + (t ? t.fare : 1200) + ")\n"
+                    + "Date: *" + b.date + "* at *" + b.time + "*\n"
+                    + "Pickup: *" + b.pickup + "*\n"
+                    + "Booking Ref: *" + b.bookingId + "*\n\n"
+                    + "Whichever union colleague driver cab is available, please claim this duty on WhatsApp!";
+
+                window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(msg), '_blank');
+            });
+
+            // Voucher view
+            var currentViewingBookingId = null;
+            window.viewVoucher = function(id) {
+                currentViewingBookingId = id;
+                var list = getBookings();
+                var b = list.find(function(item) { return item.bookingId === id; });
+                if (!b) return;
+
+                var db = window.TOUR_DATABASE;
+                var t = db ? db.getTourById(b.tourId) : null;
+
+                var html = '<div style="border: 2px dashed #0891b2; border-radius: 16px; padding: 20px; background: #fff;">'
+                    + '<div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px solid #e2e8f0; padding-bottom:10px; margin-bottom:12px;">'
+                    + '<div><strong style="color:#0891b2; font-size:1.1rem;">Aryan Taxi Mahabaleshwar</strong><br><span style="font-size:0.75rem; color:#64748b;">Explore Sahyadri | Tourist Voucher</span></div>'
+                    + '<span style="background:#dcfce7; color:#15803d; padding:4px 10px; border-radius:20px; font-size:0.75rem; font-weight:700;">' + (b.status || 'CONFIRMED').toUpperCase() + '</span>'
+                    + '</div>'
+                    + '<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; font-size:0.85rem; margin-bottom:12px;">'
+                    + '<div><span style="color:#64748b;">Booking ID:</span><br><strong>' + escapeHtml(b.bookingId) + '</strong></div>'
+                    + '<div><span style="color:#64748b;">Customer:</span><br><strong>' + escapeHtml(b.name) + ' (' + escapeHtml(b.phone) + ')</strong></div>'
+                    + '<div><span style="color:#64748b;">Date &amp; Time:</span><br><strong>' + escapeHtml(b.date) + ' at ' + escapeHtml(b.time) + '</strong></div>'
+                    + '<div><span style="color:#64748b;">Pickup:</span><br><strong>' + escapeHtml(b.pickup) + '</strong></div>'
+                    + '<div style="grid-column: 1 / -1;"><span style="color:#64748b;">Tour:</span><br><strong>' + (t ? t.name : b.tourId) + '</strong></div>'
+                    + '<div style="grid-column: 1 / -1;"><span style="color:#64748b;">Driver:</span><br><strong>' + (b.driverName ? b.driverName + ' (' + b.vehicleNo + ')' : 'Pending assignment') + '</strong></div>'
+                    + '</div>'
+                    + '<div style="display:flex; justify-content:space-between; align-items:center; background:#ecfeff; padding:10px; border-radius:10px; margin-bottom:8px;">'
+                    + '<span>Total Approved Tariff:</span>'
+                    + '<strong style="font-size:1.3rem; color:#0e7490;">₹' + (t ? t.fare.toLocaleString('en-IN') : '1,200') + '</strong>'
+                    + '</div>'
+                    + '<div style="font-size:0.75rem; color:#475569; background:#f8fafc; padding:10px 12px; border-radius:8px; border:1px solid #e2e8f0; line-height:1.45;">'
+                    + '<div style="font-weight:700; color:#0f172a; margin-bottom:4px;"><i class="fa-solid fa-file-shield" style="color:#0891b2;"></i> Terms &amp; Conditions:</div>'
+                    + '<div style="display:flex; flex-direction:column; gap:3px;">'
+                    + '<div>• <strong>Vehicle:</strong> Taxi service is subject to vehicle and driver availability. Vehicle type may vary as per availability.</div>'
+                    + '<div>• <strong>Sightseeing:</strong> Points are subject to weather, road conditions, seasonal restrictions and government/local authority orders. No guarantee of visiting any particular point or alternative point.</div>'
+                    + '<div>• <strong>Extra Time:</strong> Additional waiting, extra hours, extra points or route changes may attract additional charges.</div>'
+                    + '<div>• <strong>Payment:</strong> Payment/advance is as per the booking confirmation.</div>'
+                    + '<div>• <strong>Cancellation:</strong> Cancellation/refund and applicable charges are as per the booking terms confirmed at the time of booking.</div>'
+                    + '<div>• <strong>Responsibility:</strong> The operator is not responsible for delays, closures, restrictions, weather, traffic, road conditions or other circumstances beyond its control.</div>'
+                    + '<div>• <strong>Contact:</strong> +91 99228 82044</div>'
+                    + '</div>'
+                    + '</div>'
+                    + '</div>';
+
+                document.getElementById('voucherModalBody').innerHTML = html;
+                document.getElementById('voucherModal').style.display = 'flex';
+            };
+
+            // Share Voucher via WhatsApp from Admin
+            document.getElementById('vmSendWaBtn').addEventListener('click', function() {
+                if (!currentViewingBookingId) return;
+                var list = getBookings();
+                var b = list.find(function(item) { return item.bookingId === currentViewingBookingId; });
+                if (!b) return;
+
+                var cPhone = (b.phone || '').replace(/\D/g, '');
+                var db = window.TOUR_DATABASE;
+                var t = db ? db.getTourById(b.tourId) : null;
+                var tourName = t ? t.name : (b.tourId || 'Mahabaleshwar Sightseeing Tour');
+                var fare = t ? t.fare.toLocaleString('en-IN') : '1,200';
+                var pointsList = (t && t.points && t.points.length > 0) ? t.points.join(' • ') : 'Standard Sightseeing Circuit';
+
+                var msg = "🚕 *OFFICIAL TAXI BOOKING CONFIRMATION & DIGITAL VOUCHER*\n"
+                    + "*Aryan Taxi Mahabaleshwar • Explore Sahyadri*\n\n"
+                    + "Namaste *" + b.name + "* ji! 🙏\n"
+                    + "Your Mahabaleshwar tourist cab booking is *CONFIRMED*:\n"
+                    + "━━━━━━━━━━━━━━━━━━━━\n"
+                    + "📋 *Booking Ref:* " + b.bookingId + "\n"
+                    + "📅 *Date:* " + b.date + " at *" + b.time + "*\n"
+                    + "🏨 *Pickup:* " + b.pickup + " (Hotel Porch Pickup)\n"
+                    + "🚗 *Tour:* " + tourName + "\n"
+                    + "👤 *Assigned Driver:* " + (b.driverName || 'Aryan Taxi Owner Driver') + " (" + (b.driverPhone || '+91 99228 82044') + ")\n"
+                    + "🚖 *Vehicle Reg:* " + (b.vehicleNo || 'MH-11 Tourist Cab') + " (" + (b.vehicleModel || '4-Seater Dedicated Cab') + ")\n"
+                    + "💰 *Approved Union Tariff:* ₹" + fare + " (₹0 Advance • Pay driver after tour)\n"
+                    + "━━━━━━━━━━━━━━━━━━━━\n"
+                    + "📍 *Included Viewpoints:*\n" + pointsList + "\n\n"
+                    + "⚠️ *Driver Reporting Instructions:*\n"
+                    + "• Your driver will report directly to " + b.pickup + " porch 10 mins before departure.\n"
+                    + "• Dedicated private cab (no co-passenger sharing).\n"
+                    + "• Pay driver directly via Cash or UPI upon trip completion.\n\n"
+                    + "🔗 *View / Download Your Digital Voucher Online:*\n"
+                    + "https://mahabaleshwartaxi.infinityfreeapp.com/booking.html?tour=" + encodeURIComponent(b.tourId || 'T1') + "\n\n"
+                    + "📞 *24/7 Helpline:* +91 99228 82044\n"
+                    + "Wish you a memorable journey in Sahyadri! 🏔️";
+
+                window.open("https://wa.me/91" + cPhone + "?text=" + encodeURIComponent(msg), '_blank');
+            });
+
+            // Download Voucher PDF from Admin
+            document.getElementById('vmDownloadPdfBtn').addEventListener('click', function() {
+                var vBody = document.getElementById('voucherModalBody');
+                if (!vBody) return;
+                var bId = currentViewingBookingId || 'AMT-Voucher';
+                if (window.html2pdf) {
+                    var opt = {
+                        margin: [5, 6, 5, 6],
+                        filename: 'AryanTaxi-Official-Voucher-' + bId + '.pdf',
+                        image: { type: 'jpeg', quality: 0.98 },
+                        html2canvas: { scale: 2, useCORS: true, logging: false },
+                        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                    };
+                    html2pdf().set(opt).from(vBody).save();
+                } else {
+                    window.print();
+                }
+            });
+
+            // Email Voucher to Guest
+            document.getElementById('vmSendEmailBtn').addEventListener('click', function() {
+                if (!currentViewingBookingId) return;
+                var list = getBookings();
+                var b = list.find(function(item) { return item.bookingId === currentViewingBookingId; });
+                if (!b) return;
+
+                var db = window.TOUR_DATABASE;
+                var t = db ? db.getTourById(b.tourId) : null;
+                var tourName = t ? t.name : (b.tourId || 'Mahabaleshwar Sightseeing Tour');
+                var fare = t ? t.fare.toLocaleString('en-IN') : '1,200';
+                var pointsList = (t && t.points && t.points.length > 0) ? t.points.join('\n- ') : 'Standard Sightseeing Circuit';
+
+                var subject = "Official Booking Voucher [" + b.bookingId + "] - Aryan Taxi Mahabaleshwar";
+                var body = "OFFICIAL TOURIST TAXI BOOKING CONFIRMATION & VOUCHER\n"
+                    + "Aryan Taxi Mahabaleshwar | Explore Sahyadri\n"
+                    + "Government Approved Taxi Union Tariffs Accepted\n\n"
+                    + "Dear " + b.name + ",\n\n"
+                    + "Thank you for booking with Aryan Taxi Mahabaleshwar. Please find your official booking and driver dispatch details below for your records and hotel concierge reimbursement:\n\n"
+                    + "BOOKING DETAILS:\n"
+                    + "----------------------------------------\n"
+                    + "Booking Reference: " + b.bookingId + "\n"
+                    + "Passenger Name: " + b.name + "\n"
+                    + "Contact Number: +91 " + (b.phone || '9922882044') + "\n"
+                    + "Travel Date: " + b.date + "\n"
+                    + "Scheduled Pickup Time: " + b.time + "\n"
+                    + "Pickup Location: " + b.pickup + " (Hotel Porch)\n"
+                    + "Sightseeing Package: " + tourName + "\n"
+                    + "Assigned Driver: " + (b.driverName || 'Aryan Taxi Owner Driver') + " (Tel: " + (b.driverPhone || '+91 99228 82044') + ")\n"
+                    + "Vehicle Registration: " + (b.vehicleNo || 'MH-11 Tourist Cab') + " (" + (b.vehicleModel || '4-Seater Mountain Cab') + ")\n"
+                    + "Total Approved Tariff: INR " + fare + " (Zero Advance Required - 100% Payable to Driver post-tour via Cash or UPI)\n"
+                    + "----------------------------------------\n\n"
+                    + "INCLUDED VIEWPOINTS:\n- "
+                    + pointsList + "\n\n"
+                    + "REPORTING INSTRUCTIONS:\n"
+                    + "1. Your dedicated driver will report directly to your hotel reception/porch 10 minutes prior to scheduled departure.\n"
+                    + "2. No advance payment has been collected. You pay your driver directly after tour completion.\n"
+                    + "3. Sightseeing points are subject to seasonal weather conditions and government forest authority directives.\n\n"
+                    + "24/7 Helpline: +91 99228 82044\n"
+                    + "Website: https://mahabaleshwartaxi.infinityfreeapp.com\n"
+                    + "Aryan Taxi Mahabaleshwar - Direct Local Owner-Driver Network.";
+
+                var mailtoUrl = "mailto:" + encodeURIComponent(b.email || '') + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+                window.location.href = mailtoUrl;
+            });
+
+            // SMS Voucher
+            document.getElementById('vmSendSmsBtn').addEventListener('click', function() {
+                if (!currentViewingBookingId) return;
+                var list = getBookings();
+                var b = list.find(function(item) { return item.bookingId === currentViewingBookingId; });
+                if (!b) return;
+
+                var cPhone = (b.phone || '').replace(/\D/g, '');
+                var db = window.TOUR_DATABASE;
+                var t = db ? db.getTourById(b.tourId) : null;
+                var fare = t ? t.fare : 1200;
+
+                var smsText = "Aryan Taxi Confirmed! Ref: " + b.bookingId + " for " + b.date + " at " + b.time + ". Pickup: " + b.pickup + ". Driver: " + (b.driverName || 'Owner Driver') + " (" + (b.driverPhone || '9922882044') + ") Cab: " + (b.vehicleNo || 'MH11 Cab') + ". Fare: Rs." + fare + " (Zero advance). Helpline: 9922882044";
+                var smsUrl = "sms:" + (cPhone ? ("+91" + cPhone) : "") + "?body=" + encodeURIComponent(smsText);
+                window.location.href = smsUrl;
+            });
+
+            window.closeModals = function() {
+                document.querySelectorAll('.admin-modal').forEach(function(m) { m.style.display = 'none'; });
+            };
+
+            // Close modals on backdrop click and ESC key
+            document.querySelectorAll('.admin-modal').forEach(function(modal) {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) window.closeModals();
+                });
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') window.closeModals();
+            });
+
+            // Manual new booking
+            document.getElementById('newBookingBtn').addEventListener('click', function() {
+                document.getElementById('nbDate').value = new Date().toISOString().split('T')[0];
+                document.getElementById('newBookingModal').style.display = 'flex';
+            });
+
+            document.getElementById('newBookingForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                var sample = {
+                    bookingId: 'AMT-2026-' + Math.floor(100000 + Math.random() * 900000),
+                    name: document.getElementById('nbName').value.trim(),
+                    phone: document.getElementById('nbPhone').value.trim(),
+                    date: document.getElementById('nbDate').value,
+                    time: document.getElementById('nbTime').value,
+                    pickup: document.getElementById('nbPickup').value.trim(),
+                    tourId: document.getElementById('nbTour').value,
+                    status: 'pending',
+                    timestamp: new Date().toISOString()
+                };
+
+                var list = getBookings();
+                list.unshift(sample);
+                saveBookings(list);
+                closeModals();
+                loadDashboard();
+                showToast('✓ New booking created in ledger!');
+            });
+
+            function populateTourDropdown() {
+                var sel = document.getElementById('nbTour');
+                if (!sel || !window.TOUR_DATABASE) return;
+                sel.innerHTML = window.TOUR_DATABASE.tours.map(function(t) {
+                    return '<option value="' + t.id + '">' + t.name + ' (₹' + t.fare + ')</option>';
+                }).join('');
+            }
+
+            // Export CSV
+            document.getElementById('exportCsvBtn').addEventListener('click', function() {
+                var bookings = getBookings();
+                var csv = "Booking ID,Date,Time,Customer Name,Phone,Pickup Hotel,Tour ID,Status,Driver Name,Vehicle No\n";
+                bookings.forEach(function(b) {
+                    csv += '"' + (b.bookingId || '') + '","'
+                        + (b.date || '') + '","'
+                        + (b.time || '') + '","'
+                        + (b.name || '').replace(/"/g, '""') + '","'
+                        + (b.phone || '') + '","'
+                        + (b.pickup || '').replace(/"/g, '""') + '","'
+                        + (b.tourId || '') + '","'
+                        + (b.status || 'pending') + '","'
+                        + (b.driverName || '') + '","'
+                        + (b.vehicleNo || '') + '"\n';
+                });
+
+                var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+                var link = document.createElement("a");
+                link.href = URL.createObjectURL(blob);
+                link.setAttribute("download", "aryan_tours_bookings_" + new Date().toISOString().split('T')[0] + ".csv");
+                link.click();
+            });
+
+            // Export JSON
+            document.getElementById('exportJsonBtn').addEventListener('click', function() {
+                var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(localStorage.getItem('amt_bookings') || '[]');
+                var dl = document.createElement('a');
+                dl.setAttribute("href", dataStr);
+                dl.setAttribute("download", "aryan_tours_bookings_" + new Date().toISOString().split('T')[0] + ".json");
+                dl.click();
+            });
+
+            // Add Test
+            document.getElementById('addSampleBtn').addEventListener('click', function() {
+                var sample = {
+                    bookingId: 'AMT-2026-' + Math.floor(100000 + Math.random() * 900000),
+                    name: 'Rohan Deshmukh',
+                    phone: '9922882044',
+                    date: new Date().toISOString().split('T')[0],
+                    time: '09:00',
+                    pickup: 'Hotel Dreamland',
+                    tourId: 'T1',
+                    pax: '3-4',
+                    status: 'pending',
+                    timestamp: new Date().toISOString()
+                };
+                var list = getBookings();
+                list.unshift(sample);
+                saveBookings(list);
+                loadDashboard();
+                showToast('Test booking added.');
+            });
+
+            // Clear All
+            document.getElementById('clearAllBtn').addEventListener('click', function() {
+                if (confirm("Are you sure you want to clear all bookings in the ledger? Make sure you have exported a backup first!")) {
+                    localStorage.removeItem('amt_bookings');
+                    loadDashboard();
+                    showToast('Ledger cleared.');
+                }
+            });
+
+            // Search filter
+            document.getElementById('tableSearch').addEventListener('input', function(e) {
+                searchQuery = e.target.value.trim();
+                renderTable(getBookings(), activeFilter, searchQuery);
+            });
+
+            // Tab filtering
+            var tabs = document.querySelectorAll('.dash-tab');
+            tabs.forEach(function(tab) {
+                tab.addEventListener('click', function() {
+                    tabs.forEach(function(t) { t.classList.remove('active'); });
+                    tab.classList.add('active');
+                    activeFilter = tab.getAttribute('data-filter');
+                    renderTable(getBookings(), activeFilter, searchQuery);
+                });
+            });
+
+            // AI Query Engine
+            window.runAiQuery = function(q) {
+                var input = document.getElementById('aiAdminQuery');
+                input.value = q;
+                executeAiQuery(q);
+            };
+
+            function executeAiQuery(query) {
+                var q = query.toLowerCase().trim();
+                var list = getBookings();
+                var todayStr = new Date().toISOString().split('T')[0];
+                var tm = new Date(); tm.setDate(tm.getDate() + 1);
+                var tmStr = tm.toISOString().split('T')[0];
+
+                var aiRes = document.getElementById('aiAdminResponse');
+                aiRes.style.display = 'block';
+
+                if (q.includes('tomorrow')) {
+                    var tmList = list.filter(function(b){ return b.date === tmStr && b.status !== 'cancelled'; });
+                    aiRes.innerHTML = "📅 <strong>Tomorrow's Pickups (" + tmList.length + " Bookings):</strong><br>"
+                        + (tmList.length ? tmList.map(function(b){ return ' | <strong>' + b.name + '</strong> at ' + b.pickup + ' (' + b.time + ') - ' + b.bookingId + ' ' + (b.driverName ? '✓ Driver: ' + b.driverName : '⚠️ <em>No driver assigned</em>'); }).join('<br>') : 'No pickups scheduled for tomorrow.');
+                } else if (q.includes('today')) {
+                    var tdList = list.filter(function(b){ return b.date === todayStr && b.status !== 'cancelled'; });
+                    aiRes.innerHTML = "🚕 <strong>Today's Pickups (" + tdList.length + " Bookings):</strong><br>"
+                        + (tdList.length ? tdList.map(function(b){ return ' | <strong>' + b.name + '</strong> at ' + b.pickup + ' (' + b.time + ') - ' + b.bookingId; }).join('<br>') : 'No pickups scheduled for today.');
+                } else if (q.includes('popular')) {
+                    aiRes.innerHTML = '⭐ <strong>Most Booked Tour:</strong> Tour 1 (Mahabaleshwar Darshan) and Tour 7 (Full Day Combo) generate 80%+ of tourist demand.';
+                } else if (q.includes('unassigned') || q.includes('pending')) {
+                    var un = list.filter(function(b){ return !b.driverName && b.status !== 'cancelled'; });
+                    aiRes.innerHTML = '⚠️ <strong>Bookings Without Assigned Drivers (' + un.length + '):</strong><br>'
+                        + (un.length ? un.map(function(b){ return ' | ' + b.bookingId + ' - ' + b.name + ' on ' + b.date + ' (' + b.pickup + ')'; }).join('<br>') : 'All active bookings have drivers assigned!');
+                } else if (q.includes('revenue')) {
+                    var total = 0;
+                    var db = window.TOUR_DATABASE;
+                    list.forEach(function(b){
+                        if (b.status !== 'cancelled') {
+                            var t = db ? db.getTourById(b.tourId) : null;
+                            total += (t ? t.fare : 1200);
+                        }
+                    });
+                    aiRes.innerHTML = '💰 <strong>Total Confirmed Ledger Revenue:</strong> ₹' + total.toLocaleString('en-IN');
+                } else {
+                    aiRes.innerHTML = '📊 <strong>Ledger Status:</strong> Total ' + list.length + ' bookings recorded. Click tabs or search to filter records.';
+                }
+            }
+
+            var aiInput = document.getElementById('aiAdminQuery');
+            aiInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') executeAiQuery(aiInput.value);
+            });
+
+        })();
+    </script>
+<script>(function(){function autoOpenBooking(){var h=(window.location.hash||"").toLowerCase();var s=window.location.search||"";var b=/[?&](book|booking)=/i.test(s)||h==="#booking"||h==="#book";var tm=s.match(/[?&]tour=([^&#]*)/i);var th=tm?decodeURIComponent(tm[1].replace(/\+/g," ")):"";if(b||th){var t=0;var ti=setInterval(function(){t++;if(window.openBookingModal){clearInterval(ti);window.openBookingModal(th||"");}else if(t>30){clearInterval(ti);}},100);}}if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",autoOpenBooking);}else{autoOpenBooking();}window.addEventListener("hashchange",autoOpenBooking);})();</script>
+</body>
+</html>

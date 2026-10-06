@@ -1,0 +1,1730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WHLEE16BK7"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-WHLEE16BK7');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="images/aryan-taxi-logo.svg">
+    <title>Online Cab Booking &amp; Tariff Calculator | Aryan Taxi Mahabaleshwar</title>
+    <meta name="description" content="Direct tourist cab booking &amp; fare calculator by Aryan Taxi Mahabaleshwar. Taxi Union tariff rates accepted, zero advance payment. Direct local driver cab service. Call +91 99228 82044.">
+    <meta name="keywords" content="Mahabaleshwar taxi booking online, calculate Mahabaleshwar taxi fare, Mahabaleshwar cab booking, book Mahabaleshwar sightseeing cab, Aryan Taxi Mahabaleshwar booking portal">
+    <link rel="canonical" href="https://mahabaleshwartaxi.infinityfreeapp.com/booking.html">
+    <meta name="robots" content="index, follow">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/advanced-features.min.css?v=96.0">
+    <link rel="stylesheet" href="css/style.min.css?v=96.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TaxiService",
+      "@id": "https://mahabaleshwartaxi.infinityfreeapp.com/booking.html#service",
+      "name": "Aryan Taxi Mahabaleshwar Online Cab Booking",
+      "description": "Book Mahabaleshwar sightseeing taxis, outstation drops to Pune/Mumbai, and local pickups online with Aryan Taxi Mahabaleshwar. Official union rates from ₹1200, zero advance payment.",
+      "url": "https://mahabaleshwartaxi.infinityfreeapp.com/booking.html",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "Aryan Taxi Mahabaleshwar",
+        "telephone": "+919922882044",
+        "priceRange": "₹1200 - ₹5500",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Mahabaleshwar Taxi Stand, Main Market",
+          "addressLocality": "Mahabaleshwar",
+          "addressRegion": "Maharashtra",
+          "postalCode": "412806",
+          "addressCountry": "IN"
+        }
+      },
+      "serviceArea": {
+        "@type": "AdministrativeArea",
+        "name": "Mahabaleshwar"
+      }
+    }
+    </script>
+
+    <style>
+        body.booking-portal-page {
+            background: linear-gradient(180deg, #090e1a 0%, #0f172a 100%) !important;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            color: #f8fafc;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+        .portal-header {
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        .portal-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #ffffff;
+            min-width: 0;
+        }
+        .portal-brand img {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            flex-shrink: 0;
+        }
+        .portal-brand-text {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+        .portal-brand-title {
+            font-size: 1rem;
+            font-weight: 800;
+            line-height: 1.2;
+            color: #f8fafc;
+        }
+        .portal-brand-sub {
+            font-size: 0.7rem;
+            color: #38bdf8;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+        .portal-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+        .portal-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 12px;
+            border-radius: 9px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .portal-btn-home {
+            background: rgba(255, 255, 255, 0.08);
+            color: #cbd5e1;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        .portal-btn-home:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+        }
+        .portal-btn-call {
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+        }
+        .portal-btn-call:hover {
+            opacity: 0.95;
+        }
+        .portal-hero-strip {
+            text-align: center;
+            padding: 20px 16px 14px;
+            max-width: 540px;
+            margin: 0 auto;
+        }
+        .portal-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(14, 165, 233, 0.15);
+            border: 1px solid rgba(14, 165, 233, 0.35);
+            color: #38bdf8;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.74rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            margin-bottom: 8px;
+        }
+        .portal-hero-strip h1 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin: 0 0 6px;
+            line-height: 1.3;
+        }
+        .portal-hero-strip p {
+            font-size: 0.82rem;
+            color: #94a3b8;
+            margin: 0;
+            line-height: 1.45;
+        }
+        .portal-booking-container {
+            max-width: 580px;
+            margin: 0 auto 28px;
+            padding: 0 16px;
+        }
+        @media (min-width: 768px) {
+            .portal-booking-container {
+                max-width: 620px;
+            }
+            .portal-hero-strip {
+                max-width: 640px;
+            }
+        }
+        .portal-card {
+            background: #ffffff;
+            border-radius: 18px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.12);
+            overflow: hidden;
+            color: #0f172a;
+        }
+        .portal-card-header {
+            background: linear-gradient(135deg, #0891b2 0%, #1e3a5f 100%);
+            color: #ffffff;
+            padding: 16px 18px 14px;
+        }
+        .portal-card-body {
+            padding: 18px 16px;
+        }
+        .portal-trust-section {
+            max-width: 480px;
+            margin: 16px auto 30px;
+            padding: 0 14px;
+        }
+        .portal-trust-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+        .portal-trust-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 12px 14px;
+        }
+        .portal-trust-item i {
+            font-size: 1.2rem;
+            color: #38bdf8;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+        .portal-trust-item h4 {
+            font-size: 0.86rem;
+            font-weight: 700;
+            color: #f8fafc;
+            margin: 0 0 3px;
+        }
+        .portal-trust-item p {
+            font-size: 0.76rem;
+            color: #94a3b8;
+            margin: 0;
+            line-height: 1.4;
+        }
+        .portal-footer {
+            text-align: center;
+            padding: 20px 16px 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 0.75rem;
+            color: #64748b;
+        }
+        .portal-footer a {
+            color: #38bdf8;
+            text-decoration: none;
+            margin: 0 6px;
+        }
+        .portal-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Service Category Grid & Buttons (Base) */
+        .amt-service-grid {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+            gap: 8px !important;
+            margin-bottom: 12px !important;
+        }
+        .amt-service-btn {
+            padding: 11px 9px !important;
+            border: 2px solid #e2e8f0 !important;
+            background: #f8fafc !important;
+            border-radius: 12px !important;
+            cursor: pointer !important;
+            text-align: left !important;
+            transition: all 0.2s ease !important;
+            box-sizing: border-box !important;
+            user-select: none !important;
+            -webkit-tap-highlight-color: transparent !important;
+        }
+        .amt-service-btn:hover {
+            border-color: #0891b2 !important;
+            background: #f0f9ff !important;
+        }
+        .amt-service-btn.active {
+            border-color: #0891b2 !important;
+            background: #ecfeff !important;
+            box-shadow: 0 0 0 2px rgba(8, 145, 178, 0.25) !important;
+        }
+        .amt-service-btn strong {
+            display: block !important;
+            font-size: 0.84rem !important;
+            color: #0f172a !important;
+            line-height: 1.25 !important;
+        }
+        .amt-service-btn span {
+            display: block !important;
+            font-size: 0.72rem !important;
+            color: #64748b !important;
+            line-height: 1.2 !important;
+            margin-top: 2px !important;
+        }
+        .amt-service-btn.active strong {
+            color: #0e7490 !important;
+        }
+        .amt-service-btn.active span {
+            color: #0891b2 !important;
+        }
+        .amt-grid2 {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+            gap: 10px !important;
+            margin-bottom: 12px !important;
+        }
+        .amt-btn-row {
+            display: flex !important;
+            gap: 8px !important;
+            margin-top: 14px !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+        }
+        .amt-btn-next {
+            flex: 1 1 auto !important;
+            min-width: 0 !important;
+            padding: 12px 16px !important;
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+            color: #ffffff !important;
+            border: none !important;
+            border-radius: 11px !important;
+            font-weight: 800 !important;
+            font-size: 0.94rem !important;
+            cursor: pointer !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 8px !important;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3) !important;
+            text-decoration: none !important;
+            box-sizing: border-box !important;
+        }
+        .amt-btn-back {
+            flex: 0 0 auto !important;
+            min-width: 80px !important;
+            padding: 12px 14px !important;
+            border: 1.5px solid #cbd5e1 !important;
+            background: #ffffff !important;
+            color: #475569 !important;
+            border-radius: 11px !important;
+            font-weight: 700 !important;
+            cursor: pointer !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 6px !important;
+            font-size: 0.86rem !important;
+            box-sizing: border-box !important;
+        }
+
+        /* Mobile View Clean Alignment */
+        @media (max-width: 640px) {
+            .portal-header {
+                padding: 10px 12px;
+            }
+            .portal-brand {
+                gap: 8px;
+            }
+            .portal-brand img {
+                width: 32px;
+                height: 32px;
+            }
+            .portal-brand-title {
+                font-size: 0.88rem;
+                line-height: 1.15;
+            }
+            .portal-brand-sub {
+                font-size: 0.64rem;
+                line-height: 1.1;
+            }
+            .portal-actions {
+                gap: 6px;
+            }
+            .portal-btn {
+                padding: 6px 9px;
+                font-size: 0.76rem;
+                border-radius: 8px;
+            }
+            .portal-btn-home span {
+                display: none;
+            }
+            .portal-btn-call span {
+                font-size: 0.76rem;
+            }
+            .portal-hero-strip {
+                padding: 16px 12px 10px;
+            }
+            .portal-hero-strip h1 {
+                font-size: 1.15rem;
+                margin-bottom: 4px;
+            }
+            .portal-hero-strip p {
+                font-size: 0.78rem;
+                line-height: 1.4;
+            }
+            .portal-badge {
+                font-size: 0.68rem;
+                padding: 3px 10px;
+                margin-bottom: 6px;
+            }
+            .portal-booking-container {
+                padding: 0 8px;
+                margin-bottom: 18px;
+            }
+            .portal-card {
+                border-radius: 16px;
+            }
+            .portal-card-header {
+                padding: 14px 14px 10px;
+            }
+            .portal-card-body {
+                padding: 14px 12px;
+            }
+            .amt-service-grid {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
+                gap: 6px !important;
+                margin-bottom: 12px !important;
+                width: 100% !important;
+            }
+            .amt-service-btn {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                justify-content: center !important;
+                padding: 9px 8px !important;
+                min-width: 0 !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+                border-radius: 10px !important;
+                min-height: 52px !important;
+            }
+            .amt-service-btn strong {
+                font-size: 0.78rem !important;
+                line-height: 1.25 !important;
+                white-space: normal !important;
+                word-break: break-word !important;
+            }
+            .amt-service-btn span {
+                font-size: 0.66rem !important;
+                line-height: 1.2 !important;
+                color: #64748b !important;
+                margin-top: 2px !important;
+                white-space: normal !important;
+                word-break: break-word !important;
+            }
+
+            /* Step 1 Visual Tour Cards Header & Badges Mobile Alignment */
+            .amt-vt-card {
+                padding: 10px 10px !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+            }
+            .amt-vt-header {
+                flex-wrap: wrap !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                gap: 4px !important;
+                width: 100% !important;
+            }
+            .amt-vt-title-wrap {
+                width: 100% !important;
+                flex: 1 1 100% !important;
+                min-width: 0 !important;
+                display: flex !important;
+                align-items: center !important;
+                gap: 6px !important;
+            }
+            .amt-vt-title {
+                font-size: 0.84rem !important;
+                line-height: 1.3 !important;
+                word-break: break-word !important;
+            }
+            .amt-vt-badges {
+                width: 100% !important;
+                display: flex !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+                padding-left: 22px !important;
+                box-sizing: border-box !important;
+                margin-top: 3px !important;
+            }
+            .amt-vt-dur {
+                font-size: 0.68rem !important;
+                padding: 2px 6px !important;
+                border-radius: 4px !important;
+            }
+            .amt-vt-fare {
+                font-size: 0.92rem !important;
+                font-weight: 900 !important;
+                color: #0e7490 !important;
+                margin-left: auto !important;
+            }
+            .amt-vt-desc {
+                padding-left: 22px !important;
+                font-size: 0.73rem !important;
+                line-height: 1.35 !important;
+                margin: 4px 0 6px !important;
+            }
+            .amt-vt-actions {
+                padding-left: 22px !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+            }
+            .amt-add-tour-btn {
+                font-size: 0.78rem !important;
+                padding: 9px 8px !important;
+                white-space: normal !important;
+                word-break: break-word !important;
+                text-align: center !important;
+                width: 100% !important;
+            }
+
+            /* Step 1 Time Pills & Schedule Grid */
+            .amt-time-pills {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
+                gap: 6px !important;
+                width: 100% !important;
+            }
+            .amt-time-pill {
+                width: 100% !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                text-align: center !important;
+                padding: 7px 4px !important;
+                font-size: 0.72rem !important;
+                gap: 4px !important;
+                min-height: 42px !important;
+                box-sizing: border-box !important;
+                white-space: nowrap !important;
+            }
+            .amt-pill-tag {
+                font-size: 0.6rem !important;
+                padding: 1px 4px !important;
+            }
+            .amt-grid2 {
+                grid-template-columns: 1fr !important;
+                gap: 10px !important;
+                margin-bottom: 10px !important;
+                width: 100% !important;
+            }
+
+            /* Mobile AI Advisories (Step 2 Review & Step 3 Voucher) */
+            .amt-rev-ai-advisory,
+            .amt-v-ai-advisory {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 5px !important;
+                padding: 8px 10px !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+                border-radius: 8px !important;
+            }
+            .amt-rev-ai-advisory .amt-v-ai-badge,
+            .amt-v-ai-advisory .amt-v-ai-badge {
+                align-self: flex-start !important;
+                margin-bottom: 2px !important;
+                font-size: 0.65rem !important;
+                padding: 2.5px 7px !important;
+                white-space: nowrap !important;
+                flex-shrink: 0 !important;
+            }
+            .amt-rev-ai-advisory .amt-v-ai-text,
+            .amt-v-ai-advisory .amt-v-ai-text {
+                font-size: 0.74rem !important;
+                line-height: 1.4 !important;
+                color: #065f46 !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+                word-break: break-word !important;
+            }
+
+            /* Stepper on Mobile */
+            .amt-stepper {
+                padding: 0 2px !important;
+                margin: 8px 0 6px !important;
+            }
+            .amt-step-name {
+                font-size: 0.65rem !important;
+                letter-spacing: 0 !important;
+            }
+            .amt-step-divider {
+                margin: 0 4px 14px !important;
+            }
+
+            .amt-btn-row {
+                flex-direction: column-reverse !important;
+                gap: 8px !important;
+            }
+            .amt-btn-row .amt-btn-back,
+            .amt-btn-row .amt-btn-next {
+                width: 100% !important;
+                min-height: 46px !important;
+                justify-content: center !important;
+            }
+            #amtWaBtn {
+                font-size: 0.85rem !important;
+                line-height: 1.3 !important;
+                text-align: center !important;
+                padding: 11px 8px !important;
+            }
+            #amtWaBtn div {
+                justify-content: center !important;
+                flex-wrap: wrap !important;
+            }
+            .amt-label {
+                font-size: 0.78rem !important;
+                margin-bottom: 3px !important;
+            }
+            .amt-input, select.amt-input, .amt-card select { min-width: 0 !important; max-width: 100% !important; 
+                font-size: 16px !important;
+                padding: 10px 10px !important;
+                min-height: 44px !important;
+                border-radius: 10px !important;
+                box-sizing: border-box !important;
+            }
+            .amt-policy-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 6px;
+                font-size: 0.74rem;
+            }
+            .portal-btn, #amtPrintBtn, #amtCallBtn, #amtNewBookingBtn {
+                min-height: 44px !important;
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                box-sizing: border-box !important;
+            }
+            .amt-btn-next {
+                padding: 13px 14px !important;
+                font-size: 0.92rem !important;
+                min-height: 46px !important;
+                border-radius: 10px !important;
+            }
+            .amt-btn-back {
+                padding: 13px 14px !important;
+                font-size: 0.86rem !important;
+                min-height: 46px !important;
+                border-radius: 10px !important;
+            }
+            .portal-trust-section {
+                padding: 0 10px;
+                margin: 14px auto 22px;
+            }
+            .portal-trust-item {
+                padding: 10px 12px;
+                gap: 10px;
+                border-radius: 10px;
+            }
+            .portal-trust-item i {
+                font-size: 1.1rem;
+            }
+            .portal-trust-item h4 {
+                font-size: 0.82rem;
+            }
+            .portal-trust-item p {
+                font-size: 0.73rem;
+                line-height: 1.35;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .amt-policy-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .portal-header {
+                padding: 8px 10px !important;
+            }
+            .portal-brand-title {
+                font-size: 0.80rem !important;
+            }
+            .portal-brand-sub {
+                font-size: 0.58rem !important;
+            }
+            .portal-btn {
+                padding: 5px 8px !important;
+                font-size: 0.72rem !important;
+                gap: 4px !important;
+            }
+            .portal-btn-call span {
+                font-size: 0.72rem !important;
+            }
+        }
+
+                        /* ── VOUCHER SCREEN & PRINT STYLES ── */
+        .amt-voucher {
+            background: #ffffff;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 14px 16px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+                        .amt-add-tour-btn { background:#f0fdf4; border:1.5px dashed #16a34a; color:#15803d; border-radius:10px; padding:9px 12px; font-size:0.82rem; font-weight:700; cursor:pointer; width:100%; margin-bottom:10px; display:flex; align-items:center; justify-content:center; gap:6px; transition:all 0.15s ease; box-sizing:border-box; min-height:44px; }
+        .amt-add-tour-btn:hover { background:#dcfce7; border-color:#15803d; }
+        .amt-remove-tour-btn { background:#fee2e2; color:#ef4444; border:1px solid #fca5a5; border-radius:8px; min-width:44px; min-height:44px; width:44px; height:44px; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; transition:background 0.15s ease; box-sizing:border-box; }
+        .amt-remove-tour-btn:hover { background:#fecaca; }
+        .amt-extra-tour-row { display:flex; align-items:flex-end; gap:8px; margin-bottom:10px; background:#f8fafc; padding:8px 10px; border:1px solid #e2e8f0; border-radius:10px; box-sizing:border-box; }
+        .amt-multi-tour-summary-banner { background:#f0f9ff; border:1.5px solid #bae6fd; border-radius:10px; padding:8px 12px; font-size:0.8rem; color:#0369a1; margin-bottom:12px; display:none; align-items:center; justify-content:space-between; font-weight:700; box-sizing:border-box; }
+        .amt-multi-day-box { margin-top:10px; margin-bottom:12px; padding:10px 12px; background:#f8fafc; border:1.5px solid #cbd5e1; border-radius:10px; box-sizing:border-box; }
+        .amt-multi-day-row { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px; padding-top:8px; border-top:1px dashed #cbd5e1; align-items:center; box-sizing:border-box; }
+        .amt-v-logo { width:38px; height:38px; object-fit:contain; flex-shrink:0; }
+                /* Review Card 9-Part Header & Ref Box */
+        .amt-rev-header-bar { display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:8px; padding-bottom:8px; border-bottom:1.5px solid #e2e8f0; }
+        .amt-rev-service-badge { display:inline-flex; align-items:center; gap:6px; padding:3px 10px; border-radius:8px; font-size:0.74rem; font-weight:800; text-transform:uppercase; letter-spacing:0.3px; border:1px solid; white-space:nowrap; }
+        .amt-v-ref-box { display:inline-flex; align-items:center; gap:6px; font-size:0.74rem; color:#475569; white-space:nowrap !important; background:#f1f5f9; padding:3px 8px; border-radius:6px; border:1px solid #e2e8f0; }
+        .amt-v-ref-lbl { font-weight:700; color:#64748b; white-space:nowrap !important; }
+        .amt-v-ref-val { color:#0284c7; font-family:monospace, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size:0.85rem; font-weight:800; white-space:nowrap !important; letter-spacing:0.5px; }
+        /* Review Card Dynamic Policy Box */
+        .amt-rev-policy-card { background:#fffbeb; border:1.5px solid #fde68a; border-radius:10px; padding:10px 12px; margin:10px 0; font-size:0.77rem; color:#92400e; line-height:1.45; }
+        .amt-rev-policy-title { font-weight:800; font-size:0.8rem; margin-bottom:6px; display:flex; align-items:center; gap:6px; color:#b45309; }
+        .amt-policy-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px; font-size:0.74rem; }
+        .amt-policy-item { display:flex; align-items:flex-start; gap:6px; background:rgba(254,243,199,0.4); padding:5px 7px; border-radius:6px; }
+        .amt-policy-icon { color:#b45309; font-size:0.82rem; margin-top:1px; flex-shrink:0; }
+        .amt-policy-text-box { display:flex; flex-direction:column; }
+        .amt-policy-item-title { font-weight:700; color:#78350f; font-size:0.73rem; }
+        .amt-policy-item-text { font-size:0.69rem; color:#92400e; line-height:1.25; }
+        .amt-policy-note { margin-top:6px; padding-top:6px; border-top:1px dashed #fcd34d; font-size:0.72rem; color:#78350f; font-weight:600; }
+        /* Dark Theme Overrides for Ref Box & Policy Card */
+        [data-theme="dark"] #amtBookingModal .amt-rev-header-bar { border-bottom-color:#334155 !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-ref-box { background:#0f172a !important; border-color:#334155 !important; color:#94a3b8 !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-ref-lbl { color:#94a3b8 !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-ref-val { color:#38bdf8 !important; }
+        [data-theme="dark"] #amtBookingModal .amt-rev-policy-card { background:rgba(217,119,6,0.15) !important; border-color:rgba(217,119,6,0.35) !important; color:#fde68a !important; }
+        [data-theme="dark"] #amtBookingModal .amt-rev-policy-title { color:#f59e0b !important; }
+        [data-theme="dark"] #amtBookingModal .amt-policy-item { background:rgba(15,23,42,0.6) !important; }
+        [data-theme="dark"] #amtBookingModal .amt-policy-icon { color:#fbbf24 !important; }
+        [data-theme="dark"] #amtBookingModal .amt-policy-item-title { color:#fef08a !important; }
+        [data-theme="dark"] #amtBookingModal .amt-policy-item-text { color:#cbd5e1 !important; }
+        [data-theme="dark"] #amtBookingModal .amt-policy-note { border-top-color:rgba(217,119,6,0.3) !important; color:#fde68a !important; }
+        .amt-v-card-streamlined { background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; box-sizing: border-box; width: 100%; text-align: left; }
+        .amt-v-hdr { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 6px; gap: 8px; }
+        .amt-v-hdr-left { display: flex; align-items: center; gap: 10px; }
+        .amt-v-brand { font-size: 0.98rem; font-weight: 800; color: #0f2b48; letter-spacing: 0.4px; line-height: 1.2;  white-space: nowrap !important;  }
+        .amt-v-sub { font-size: 0.72rem; color: #0284c7; font-weight: 700; margin-top: 1px; }
+        .amt-v-hdr-right { text-align: right; flex-shrink: 0; }
+        .amt-v-badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 0.68rem; font-weight: 800; border: 1px solid; text-transform: uppercase; }
+        .amt-v-ref { font-size: 0.73rem; color: #64748b; margin-top: 2px; }
+        .amt-v-ref strong { color: #0284c7; font-family: monospace; font-size: 0.84rem; }
+        .amt-v-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 10px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 8px 10px; box-sizing: border-box; }
+        .amt-v-cell { display: flex; flex-direction: column; font-size: 0.76rem; line-height: 1.25; }
+        .amt-v-lbl { font-size: 0.63rem; color: #64748b; text-transform: uppercase; font-weight: 700; letter-spacing: 0.3px; margin-bottom: 1px; }
+        .amt-v-val { color: #0f172a; word-break: break-word; }
+        .amt-v-vehicle-cell { grid-column: 1 / -1; border-top: 1px dashed #cbd5e1; padding-top: 5px; margin-top: 2px; }
+        .amt-v-vehicle-wrap { font-size: 0.76rem; color: #0f2b48; display: flex; align-items: center; flex-wrap: wrap; gap: 5px; line-height: 1.35; }
+        .amt-v-vehicle-lbl { font-size: 0.67rem; color: #64748b; text-transform: uppercase; font-weight: 700; letter-spacing: 0.3px; }
+        .amt-v-vehicle-val { color: #0f2b48; font-weight: 700; }
+        .amt-v-notes-chip { background: #eff6ff; border: 1px dashed #93c5fd; border-radius: 6px; padding: 5px 8px; font-size: 0.73rem; color: #1e40af; line-height: 1.3; }
+        .amt-v-tour-strip { background: #ffffff; border: 1.5px solid #0284c7; border-left: 3.5px solid #0284c7; border-radius: 8px; padding: 7px 10px; box-sizing: border-box; }
+        .amt-v-tour-hdr { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; gap: 6px; }
+        .amt-v-tour-name { font-size: 0.85rem; font-weight: 800; color: #0f2b48; }
+        .amt-v-tour-dur { font-size: 0.72rem; color: #0284c7; font-weight: 700; background: #e0f2fe; padding: 2px 7px; border-radius: 10px; white-space: nowrap; }
+        .amt-v-tour-meta { font-size: 0.74rem; color: #0f2b48; display: flex; justify-content: space-between; align-items: center; margin-top: 2px; }
+        .amt-v-tour-rate { font-size: 0.7rem; color: #16a34a; font-weight: 700; }
+        .amt-v-points-box { margin-top: 3px; }
+        .amt-v-points-head { font-size: 0.68rem; font-weight: 700; color: #475569; text-transform: uppercase; margin-bottom: 3px; }
+        .amt-v-chips-wrap { display: flex; flex-wrap: wrap; gap: 3.5px; }
+        .amt-v-chip { background: #f1f5f9; color: #334155; font-size: 0.69rem; font-weight: 600; padding: 2px 7px; border-radius: 4px; border: 1px solid #e2e8f0; }
+        .amt-v-route-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; font-size: 0.73rem; font-weight: 600; color: #1e293b; margin-top: 3px; }
+        .amt-v-route-step { background: #f8fafc; border: 1px solid #cbd5e1; padding: 2px 6px; border-radius: 4px; }
+        .amt-v-route-arrow { color: #0284c7; font-weight: 800; }
+        .amt-v-ai-advisory { background: linear-gradient(135deg, #f0fdf4 0%, #ecfeff 100%); border: 1px solid #a7f3d0; border-left: 3.5px solid #10b981; border-radius: 6px; padding: 5px 9px; display: flex; align-items: flex-start; gap: 7px; box-sizing: border-box; }
+        .amt-v-ai-badge { display: inline-flex; align-items: center; background: #059669; color: #ffffff; font-size: 0.62rem; font-weight: 800; letter-spacing: 0.4px; text-transform: uppercase; padding: 2px 6px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; }
+        .amt-v-ai-text { font-size: 0.71rem; color: #065f46; line-height: 1.35; flex: 1; }
+        .amt-v-fare-bar { display: flex; justify-content: space-between; align-items: center; background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 7px 10px; box-sizing: border-box; }
+        .amt-v-fare-left { display: flex; flex-direction: column; }
+        .amt-v-fare-lbl { font-size: 0.63rem; color: #64748b; font-weight: 800; letter-spacing: 0.3px; }
+        .amt-v-fare-amt { font-size: 1.3rem; font-weight: 900; color: #0e7490; line-height: 1.1; }
+        .amt-v-fare-breakdown { font-size: 0.65rem; color: #64748b; }
+        .amt-v-fare-right { text-align: right; display: flex; flex-direction: column; }
+        .amt-v-pay-badge { font-size: 0.78rem; font-weight: 800; }
+        .amt-v-pay-note { font-size: 0.66rem; color: #64748b; }
+        .amt-v-terms-title { font-size: 0.68rem; font-weight: 800; color: #0f2b48; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 2px; }
+        .amt-v-terms-compact { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 6px 9px; font-size: 0.67rem; color: #475569; line-height: 1.38; display: flex; flex-direction: column; gap: 3px; box-sizing: border-box; }
+        .amt-v-terms-list { list-style-type: disc; padding-left: 16px; margin: 0; display: flex; flex-direction: column; gap: 3.5px; }
+        .amt-v-terms-list li { font-size: 0.68rem; line-height: 1.38; color: #475569; text-align: left; }
+        .amt-v-terms-list li strong { color: #0f2b48; font-weight: 700; }
+        .amt-v-ftr { display: flex; justify-content: space-between; font-size: 0.63rem; color: #64748b; border-top: 1px dashed #cbd5e1; padding-top: 4px; line-height: 1.35; }
+
+        /* Dark Mode Voucher On-Screen Overrides */
+        [data-theme="dark"] #amtBookingModal .amt-v-card-streamlined { background: #1e293b !important; border: 1.5px solid #334155 !important; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-hdr { border-bottom-color: #334155 !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-brand { color: #ffffff !important;  white-space: nowrap !important;  }
+        [data-theme="dark"] #amtBookingModal .amt-v-sub { color: #38bdf8 !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-ref { color: #94a3b8 !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-ref strong { color: #38bdf8 !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-grid { background: #0f172a !important; border-color: #334155 !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-lbl { color: #94a3b8 !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-val { color: #f8fafc !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-val strong { color: #ffffff !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-vehicle-cell { border-top-color: #334155 !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-vehicle-wrap { color: #f8fafc !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-vehicle-lbl { color: #94a3b8 !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-vehicle-val { color: #f8fafc !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-notes-chip { background: rgba(8, 145, 178, 0.18) !important; border-color: rgba(8, 145, 178, 0.4) !important; color: #67e8f9 !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-tour-strip { background: #0f172a !important; border-color: #0284c7 !important; border-left-color: #38bdf8 !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-tour-name { color: #ffffff !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-tour-dur { background: rgba(8, 145, 178, 0.25) !important; color: #38bdf8 !important; border: 1px solid rgba(8, 145, 178, 0.4) !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-tour-meta { color: #cbd5e1 !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-tour-meta strong { color: #f8fafc !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-tour-rate { color: #4ade80 !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-ai-advisory { background: rgba(16, 185, 129, 0.12) !important; border-color: rgba(16, 185, 129, 0.3) !important; border-left-color: #10b981 !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-ai-badge { background: #059669 !important; color: #ffffff !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-ai-text { color: #a7f3d0 !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-ai-text strong { color: #34d399 !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-fare-bar { background: #0f172a !important; border-color: #334155 !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-fare-lbl { color: #94a3b8 !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-fare-amt { color: #22d3ee !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-fare-breakdown { color: #94a3b8 !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-pay-badge { color: #4ade80 !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-pay-note { color: #94a3b8 !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-terms-compact { background: #0f172a !important; border-color: #334155 !important; color: #cbd5e1 !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-terms-title { color: #38bdf8 !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-terms-list li { color: #cbd5e1 !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-terms-list li strong { color: #ffffff !important; }
+        [data-theme="dark"] #amtBookingModal .amt-v-ftr { color: #94a3b8 !important; border-top-color: #334155 !important; }
+
+        @media (max-width: 640px) {
+            .amt-voucher, #amtVoucherContent {
+                padding: 0 !important;
+                border: none !important;
+                box-shadow: none !important;
+                background: transparent !important;
+                margin: 0 !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+            }
+            .amt-v-card-streamlined {
+                padding: 10px 10px !important;
+                gap: 7px !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+                overflow: hidden !important;
+                border-radius: 10px !important;
+                margin: 0 !important;
+            }
+            .amt-v-hdr { flex-direction: column; gap: 6px; align-items: stretch; }
+            .amt-v-hdr-left { width: 100%; }
+            .amt-v-hdr-right { text-align: left; display: flex !important; flex-direction: column !important; align-items: stretch !important; gap: 5px !important; width: 100% !important; border-top: 1px dashed #e2e8f0 !important; padding-top: 6px !important; }
+            .amt-v-hdr-right .amt-v-badge { align-self: flex-start !important; margin-bottom: 2px !important; }
+            .amt-v-hdr-right .amt-v-ref-box, .amt-rev-header-bar .amt-v-ref-box { width: 100% !important; box-sizing: border-box !important; display: flex !important; justify-content: space-between !important; align-items: center !important; padding: 4px 8px !important; }
+            [data-theme="dark"] #amtBookingModal .amt-v-hdr-right { border-top-color: #334155 !important; }
+            .amt-v-grid { grid-template-columns: 1fr; gap: 6px; padding: 7px 9px; }
+            .amt-v-tour-hdr { display: flex !important; flex-direction: column !important; align-items: flex-start !important; gap: 4px !important; }
+            .amt-v-tour-name { width: 100% !important; font-size: 0.88rem !important; line-height: 1.35 !important; word-break: break-word !important; }
+            .amt-v-tour-dur { align-self: flex-start !important; margin-top: 2px !important; display: inline-flex !important; align-items: center !important; gap: 4px !important; white-space: normal !important; font-size: 0.72rem !important; }
+            .amt-v-tour-meta { flex-wrap: wrap !important; gap: 4px !important; }
+            .amt-rev-tour-card { padding: 9px 10px !important; width: 100% !important; box-sizing: border-box !important; }
+            .amt-rev-tour-hdr { flex-direction: column !important; align-items: flex-start !important; gap: 4px !important; }
+            .amt-rev-tour-title { width: 100% !important; word-break: break-word !important; display: block !important; }
+            .amt-rev-tour-dur { display: inline-block !important; margin-top: 3px !important; }
+            .amt-rev-tour-rate-col { text-align: left !important; display: flex !important; align-items: baseline !important; gap: 6px !important; margin-top: 2px !important; }
+            .amt-rev-meta-grid { grid-template-columns: 1fr !important; gap: 6px !important; }
+            .amt-rev-tariff-card { padding: 9px 10px !important; width: 100% !important; box-sizing: border-box !important; }
+            .amt-rev-tariff-hdr { flex-direction: column !important; align-items: flex-start !important; gap: 4px !important; }
+            .amt-rev-tariff-amt-col { text-align: left !important; }
+            .portal-booking-container { padding: 0 6px !important; width: 100% !important; box-sizing: border-box !important; overflow-x: hidden !important; }
+            .portal-card-body, .amt-card-body, body.booking-portal-page .amt-card-body { padding: 12px 8px !important; box-sizing: border-box !important; overflow-x: hidden !important; }
+            #amtReviewCard { padding: 8px !important; width: 100% !important; box-sizing: border-box !important; }
+            .amt-v-fare-bar { flex-direction: column; align-items: flex-start; gap: 6px; padding: 8px 10px; }
+            .amt-v-fare-right { text-align: left; width: 100%; border-top: 1px dashed #e2e8f0; padding-top: 5px; }
+            [data-theme="dark"] #amtBookingModal .amt-v-fare-right { border-top-color: #334155 !important; }
+            .amt-v-ftr { flex-direction: column; gap: 3px; text-align: center; }
+            .amt-voucher-actions { width: 100% !important; box-sizing: border-box !important; }
+            #amtWaBtn { font-size: 0.85rem !important; padding: 10px 8px !important; }
+        }
+
+                /* ── SINGLE-PAGE A4 PRINT OPTIMIZATION ── */
+        @page {
+            size: A4 portrait;
+            margin: 6mm 8mm;
+        }
+        @media print {
+            *, *::before, *::after {
+                box-shadow: none !important;
+                -webkit-box-shadow: none !important;
+                text-shadow: none !important;
+                filter: none !important;
+            }
+            html, body, body.booking-portal-page {
+                background: #ffffff !important;
+                color: #0f172a !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                width: 100% !important;
+                height: auto !important;
+                min-height: 0 !important;
+                max-height: none !important;
+                position: static !important;
+                overflow: visible !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+            body > *:not(.portal-booking-container):not(#amtBookingModal):not(.amt-modal-overlay) {
+                display: none !important;
+                visibility: hidden !important;
+                height: 0 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                overflow: hidden !important;
+            }
+            header, footer, nav, aside,
+            .portal-header, .portal-hero-strip, .portal-trust-section, .portal-footer, .portal-actions,
+            .amt-card-header, .amt-close-btn, .amt-progress,
+            #amtStep1, #amtStep2, #amtStep3, #amtStep4, #amtAdvisoryBox,
+            .amt-voucher-screen-notice, .amt-voucher-actions, .amt-voucher-question,
+            #amtWaBtn, #amtPrintBtn, #amtCallBtn, #amtNewBookingBtn, .amt-btn-row, .aai-float-btn, #aiChatModal,
+            [class*="whatsapp"], [class*="chat"], .portal-trust-item, script, style, link, meta, iframe {
+                display: none !important;
+                visibility: hidden !important;
+                height: 0 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            .portal-booking-container, #amtBookingModal, .amt-modal-overlay, body.booking-portal-page .amt-modal-overlay,
+            .amt-card, body.booking-portal-page .amt-card, #amtBookingModal .amt-card, .portal-card, body.booking-portal-page .portal-card,
+            .amt-card-body, body.booking-portal-page .amt-card-body, .portal-card-body, #amtStepVoucher {
+                display: block !important;
+                position: static !important;
+                inset: auto !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                background: transparent !important;
+                border: none !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+                -webkit-box-shadow: none !important;
+                overflow: visible !important;
+            }
+            .amt-voucher, #amtVoucherContent {
+                display: block !important;
+                width: 100% !important;
+                max-width: 190mm !important;
+                margin: 0 auto !important;
+                padding: 0 !important;
+                background: transparent !important;
+                border: none !important;
+                border-radius: 0 !important;
+                box-sizing: border-box !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+            .amt-v-card-streamlined {
+                display: flex !important;
+                flex-direction: column !important;
+                border: 2px solid #0f2b48 !important;
+                border-radius: 8px !important;
+                padding: 5mm 7mm !important;
+                gap: 2.2mm !important;
+                box-sizing: border-box !important;
+                background: #ffffff !important;
+                color: #0f172a !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                max-height: 275mm !important;
+            }
+            .amt-v-hdr {
+                border-bottom: 2px solid #0f2b48 !important;
+                padding-bottom: 2mm !important;
+                display: flex !important;
+                justify-content: space-between !important;
+                align-items: flex-start !important;
+                flex-direction: row !important;
+            }
+            .amt-v-hdr-left {
+                display: flex !important;
+                align-items: center !important;
+                gap: 2.5mm !important;
+            }
+            .amt-v-brand {
+                font-size: 13.5pt !important;
+                color: #0f2b48 !important;
+                font-weight: 800 !important;
+                letter-spacing: 0.3px !important;
+                line-height: 1.15 !important;
+             white-space: nowrap !important;  }
+            .amt-v-sub {
+                font-size: 8pt !important;
+                color: #0284c7 !important;
+                font-weight: 700 !important;
+                margin-top: 0.5mm !important;
+            }
+            .amt-v-hdr-right {
+                text-align: right !important;
+                display: block !important;
+                border-top: none !important;
+                padding-top: 0 !important;
+                width: auto !important;
+            }
+            .amt-v-badge {
+                font-size: 7.5pt !important;
+                border: 1.5px solid #16a34a !important;
+                color: #15803d !important;
+                background: #f0fdf4 !important;
+                padding: 1mm 3mm !important;
+                display: inline-block !important;
+                font-weight: 800 !important;
+                border-radius: 4px !important;
+                text-transform: uppercase !important;
+            }
+            .amt-v-ref {
+                font-size: 7.5pt !important;
+                color: #64748b !important;
+                margin-top: 1mm !important;
+            }
+            .amt-v-ref strong {
+                font-size: 9.5pt !important;
+                color: #0284c7 !important;
+                font-family: monospace !important;
+            }
+            .amt-v-grid {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
+                gap: 1.5mm 3.5mm !important;
+                padding: 2mm 3mm !important;
+                background: #f8fafc !important;
+                border: 1.2px solid #cbd5e1 !important;
+                border-radius: 6px !important;
+                box-sizing: border-box !important;
+            }
+            .amt-v-cell {
+                display: flex !important;
+                flex-direction: column !important;
+                line-height: 1.2 !important;
+            }
+            .amt-v-lbl {
+                font-size: 6.5pt !important;
+                color: #475569 !important;
+                text-transform: uppercase !important;
+                font-weight: 700 !important;
+                letter-spacing: 0.2px !important;
+                margin-bottom: 0.5mm !important;
+            }
+            .amt-v-val {
+                font-size: 8.2pt !important;
+                color: #0f172a !important;
+                word-break: break-word !important;
+            }
+            .amt-v-val strong {
+                color: #0f172a !important;
+            }
+            .amt-v-vehicle-cell {
+                grid-column: 1 / -1 !important;
+                border-top: 1px dashed #cbd5e1 !important;
+                padding-top: 1mm !important;
+                margin-top: 0.5mm !important;
+            }
+            .amt-v-vehicle-wrap {
+                font-size: 7.5pt !important;
+                color: #0f2b48 !important;
+                display: flex !important;
+                align-items: center !important;
+                gap: 1.5mm !important;
+            }
+            .amt-v-vehicle-lbl {
+                font-size: 6.5pt !important;
+                color: #475569 !important;
+                text-transform: uppercase !important;
+                font-weight: 700 !important;
+            }
+            .amt-v-vehicle-val {
+                color: #0f2b48 !important;
+                font-weight: 700 !important;
+            }
+            .amt-v-notes-chip {
+                font-size: 7.5pt !important;
+                padding: 1.5mm 2.5mm !important;
+                background: #eff6ff !important;
+                border: 1px dashed #93c5fd !important;
+                border-radius: 4px !important;
+                color: #1e40af !important;
+            }
+            .amt-v-tour-strip {
+                padding: 2mm 3mm !important;
+                border: 1.5px solid #0284c7 !important;
+                border-left: 3.5px solid #0284c7 !important;
+                border-radius: 6px !important;
+                background: #ffffff !important;
+                box-sizing: border-box !important;
+            }
+            .amt-v-tour-hdr {
+                display: flex !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+                margin-bottom: 1.5mm !important;
+            }
+            .amt-v-tour-name {
+                font-size: 9.5pt !important;
+                font-weight: 800 !important;
+                color: #0f172a !important;
+            }
+            .amt-v-tour-dur {
+                font-size: 7.5pt !important;
+                color: #0284c7 !important;
+                font-weight: 700 !important;
+                background: #e0f2fe !important;
+                padding: 1mm 2.5mm !important;
+                border-radius: 4px !important;
+            }
+            .amt-v-tour-meta {
+                font-size: 7.5pt !important;
+                color: #0f2b48 !important;
+                display: flex !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+                margin-top: 0.5mm !important;
+            }
+            .amt-v-tour-rate {
+                font-size: 7.5pt !important;
+                color: #15803d !important;
+                font-weight: 700 !important;
+            }
+            .amt-v-points-box {
+                margin-top: 1mm !important;
+            }
+            .amt-v-points-head {
+                font-size: 6.8pt !important;
+                font-weight: 700 !important;
+                color: #475569 !important;
+                text-transform: uppercase !important;
+                margin-bottom: 1mm !important;
+            }
+            .amt-v-chips-wrap {
+                display: flex !important;
+                flex-wrap: wrap !important;
+                gap: 1.2mm !important;
+            }
+            .amt-v-chip {
+                font-size: 7pt !important;
+                padding: 0.8mm 2mm !important;
+                background: #f1f5f9 !important;
+                border: 1px solid #e2e8f0 !important;
+                border-radius: 3px !important;
+                color: #334155 !important;
+                font-weight: 600 !important;
+            }
+            .amt-v-route-strip {
+                display: flex !important;
+                flex-wrap: wrap !important;
+                align-items: center !important;
+                gap: 1.5mm !important;
+                font-size: 7.5pt !important;
+                font-weight: 600 !important;
+            }
+            .amt-v-route-step {
+                background: #f8fafc !important;
+                border: 1px solid #cbd5e1 !important;
+                padding: 1mm 2mm !important;
+                border-radius: 3px !important;
+            }
+            .amt-v-ai-advisory {
+                display: flex !important;
+                align-items: flex-start !important;
+                gap: 1.5mm !important;
+                padding: 1mm 2mm !important;
+                background: #f0fdf4 !important;
+                border: 1px solid #a7f3d0 !important;
+                border-left: 2.5mm solid #10b981 !important;
+                border-radius: 4px !important;
+                box-sizing: border-box !important;
+            }
+            .amt-v-ai-badge {
+                display: inline-flex !important;
+                align-items: center !important;
+                font-size: 6pt !important;
+                font-weight: 800 !important;
+                background: #059669 !important;
+                color: #ffffff !important;
+                padding: 0.5mm 1.5mm !important;
+                border-radius: 2px !important;
+                text-transform: uppercase !important;
+                white-space: nowrap !important;
+                flex-shrink: 0 !important;
+            }
+            .amt-v-ai-text {
+                font-size: 6.8pt !important;
+                line-height: 1.25 !important;
+                color: #065f46 !important;
+                flex: 1 !important;
+            }
+            .amt-v-ai-text strong {
+                color: #065f46 !important;
+                font-weight: 700 !important;
+            }
+            .amt-v-fare-bar {
+                display: flex !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+                padding: 2mm 3mm !important;
+                border: 1.5px solid #cbd5e1 !important;
+                border-radius: 6px !important;
+                background: #f8fafc !important;
+                box-sizing: border-box !important;
+                flex-direction: row !important;
+            }
+            .amt-v-fare-left {
+                display: flex !important;
+                flex-direction: column !important;
+            }
+            .amt-v-fare-lbl {
+                font-size: 6.8pt !important;
+                color: #64748b !important;
+                font-weight: 800 !important;
+            }
+            .amt-v-fare-amt {
+                font-size: 14pt !important;
+                color: #0e7490 !important;
+                font-weight: 900 !important;
+                line-height: 1 !important;
+            }
+            .amt-v-fare-breakdown {
+                font-size: 6.5pt !important;
+                color: #64748b !important;
+            }
+            .amt-v-fare-right {
+                text-align: right !important;
+                display: flex !important;
+                flex-direction: column !important;
+                border-top: none !important;
+                padding-top: 0 !important;
+                width: auto !important;
+            }
+            .amt-v-pay-badge {
+                font-size: 8.5pt !important;
+                font-weight: 800 !important;
+                color: #15803d !important;
+            }
+            .amt-v-pay-note {
+                font-size: 6.8pt !important;
+                color: #64748b !important;
+            }
+            .amt-v-terms-compact {
+                font-size: 6.6pt !important;
+                padding: 2mm 3mm !important;
+                line-height: 1.25 !important;
+                border: 1px solid #cbd5e1 !important;
+                border-radius: 6px !important;
+                background: #f8fafc !important;
+                color: #475569 !important;
+            }
+            .amt-v-terms-title {
+                font-size: 7.2pt !important;
+                font-weight: 800 !important;
+                color: #0f2b48 !important;
+                text-transform: uppercase !important;
+                margin-bottom: 1mm !important;
+            }
+            .amt-v-terms-list {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
+                gap: 1.2mm 3.5mm !important;
+                padding-left: 14px !important;
+                margin: 0 !important;
+                list-style-type: disc !important;
+            }
+            .amt-v-terms-list li {
+                font-size: 6.5pt !important;
+                line-height: 1.22 !important;
+                color: #475569 !important;
+                text-align: left !important;
+            }
+            .amt-v-terms-list li strong {
+                color: #0f2b48 !important;
+                font-weight: 700 !important;
+            }
+            .amt-v-ftr {
+                font-size: 6.5pt !important;
+                color: #64748b !important;
+                border-top: 1px dashed #cbd5e1 !important;
+                padding-top: 1.5mm !important;
+                display: flex !important;
+                justify-content: space-between !important;
+                flex-direction: row !important;
+            }
+            .amt-desktop-qr-card {
+                display: none !important;
+            }
+            .amt-v-print-slip {
+                display: block !important;
+                margin-top: 3mm !important;
+                border: 1.2px dashed #0f2b48 !important;
+                border-radius: 5px !important;
+                padding: 2.5mm 3.5mm !important;
+                background: #f8fafc !important;
+                box-sizing: border-box !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+            .amt-v-slip-hdr {
+                display: flex !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+                border-bottom: 1px solid #cbd5e1 !important;
+                padding-bottom: 1.2mm !important;
+                font-size: 7pt !important;
+                font-weight: 800 !important;
+                color: #0f2b48 !important;
+                text-transform: uppercase !important;
+            }
+            .amt-v-slip-auth {
+                color: #15803d !important;
+                font-size: 6.5pt !important;
+            }
+            .amt-v-slip-grid {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
+                gap: 1.5mm 4mm !important;
+                margin-top: 1.8mm !important;
+                font-size: 6.8pt !important;
+            }
+            .amt-v-slip-cell {
+                display: flex !important;
+                align-items: center !important;
+                gap: 1.5mm !important;
+            }
+            .amt-v-slip-lbl {
+                font-weight: 700 !important;
+                color: #475569 !important;
+            }
+            .amt-v-slip-line {
+                color: #0f172a !important;
+                font-weight: 600 !important;
+            }
+            .amt-v-slip-ftr {
+                display: flex !important;
+                justify-content: space-between !important;
+                font-size: 6pt !important;
+                color: #64748b !important;
+                border-top: 1px dotted #cbd5e1 !important;
+                margin-top: 1.8mm !important;
+                padding-top: 1mm !important;
+            }
+        }
+        @media (max-width: 640px) {
+            .amt-desktop-qr-card {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="booking-portal-page">
+
+    <!-- Top Navigation Header -->
+    <header class="portal-header">
+        <a href="index.html" class="portal-brand">
+            <img src="images/aryan-taxi-logo.svg" alt="Aryan Taxi Mahabaleshwar Logo" width="36" height="36">
+            <div class="portal-brand-text">
+                <div class="portal-brand-title">Aryan Taxi Mahabaleshwar</div>
+                <div class="portal-brand-sub">Direct Cab Booking Portal</div>
+            </div>
+        </a>
+        <div class="portal-actions">
+            <a href="index.html" class="portal-btn portal-btn-home" title="Return to Main Website">
+                <i class="fa-solid fa-house"></i> <span>Website</span>
+            </a>
+            <a href="tel:+919922882044" class="portal-btn portal-btn-call" title="Call Cab Operator">
+                <i class="fa-solid fa-phone"></i> <span>Call Operator</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Introduction -->
+    <div class="portal-hero-strip">
+        <div class="portal-badge">
+            <i class="fa-solid fa-shield-halved"></i> Standard Union Tariff Accepted • Zero Advance
+        </div>
+        <h1>Direct Taxi Booking &amp; Fare Engine</h1>
+        <p>Confirm your Mahabaleshwar sightseeing cab or outstation transfer directly with local driver. Zero advance payment — pay driver after trip.</p>
+    </div>
+
+    <!-- Main Booking Engine Card -->
+    <div class="portal-booking-container">
+        <div id="amtBookingModal" class="amt-modal-overlay" style="display: flex !important; position: relative !important; inset: auto !important; width: 100% !important; height: auto !important; min-height: auto !important; background: transparent !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; padding: 0 !important; z-index: 10 !important; overflow: visible !important;">
+            <div class="amt-card portal-card" style="width: 100% !important; max-width: 100% !important; max-height: none !important; overflow: visible !important; margin: 0 auto !important;">
+                
+                <!-- Card Header -->
+                <div class="amt-card-header portal-card-header">
+                    <button class="amt-close-btn" id="amtCloseBtn" style="display:none;" aria-label="Close">&times;</button>
+                    <div class="amt-header-brand">Aryan Taxi Mahabaleshwar</div>
+                    <div class="amt-header-title">Select Tour &amp; Confirm Booking</div>
+                    <div class="amt-stepper" id="amtStepper">
+                        <div class="amt-step-item active" data-step="1">
+                            <div class="amt-step-bubble"><span class="amt-step-num">1</span><span class="amt-step-check">&#10003;</span></div>
+                            <span class="amt-step-name">Tour &amp; Time</span>
+                        </div>
+                        <div class="amt-step-divider" id="amtStepDiv1"></div>
+                        <div class="amt-step-item" data-step="2">
+                            <div class="amt-step-bubble"><span class="amt-step-num">2</span><span class="amt-step-check">&#10003;</span></div>
+                            <span class="amt-step-name">Pickup &amp; Contact</span>
+                        </div>
+                        <div class="amt-step-divider" id="amtStepDiv2"></div>
+                        <div class="amt-step-item" data-step="3">
+                            <div class="amt-step-bubble"><span class="amt-step-num">3</span><span class="amt-step-check">&#10003;</span></div>
+                            <span class="amt-step-name">Voucher</span>
+                        </div>
+                    </div>
+                    <div class="amt-header-step-row" style="display:none;">
+                        <span id="amtStepLabel" class="amt-header-step-label">Step 1 of 3</span>
+                        <div class="amt-header-track">
+                            <div id="amtProgressFill" class="amt-header-fill" style="width:33.33%; background:#fbbf24;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Body -->
+                <div class="amt-card-body portal-card-body">
+                    
+                    <!-- STEP 1: SERVICE, TOUR & SCHEDULE -->
+                    <div id="amtStep1">
+                        <div id="amtDraftBanner" class="amt-draft-banner" style="display:none;">
+                            <span><i class="fa-solid fa-clock-rotate-left"></i> Restored your previous trip selections</span>
+                            <button type="button" id="amtClearDraftBtn" class="amt-draft-btn-clear">Start Fresh</button>
+                        </div>
+                        <h3 class="amt-step-title" style="font-size:1.05rem; font-weight:800; color:#0f172a; margin:0 0 4px;">1. Select Tour Package &amp; Schedule</h3>
+                        <p class="amt-step-sub" style="font-size:0.8rem; color:#64748b; margin:0 0 12px;">Choose your tour category, sightseeing package, travel date, and preferred departure time.</p>
+                        
+                        <div class="amt-service-grid" role="radiogroup" aria-label="Service Category">
+                            <div class="amt-service-btn active" role="radio" aria-checked="true" tabindex="0" data-service="sightseeing">
+                                <strong>🚕 Sightseeing</strong>
+                                <span>Tour 1 to 6</span>
+                            </div>
+                            <div class="amt-service-btn" role="radio" aria-checked="false" tabindex="0" data-service="combo">
+                                <strong>⭐ Full Day Combo</strong>
+                                <span>Tour 7 (Maha + Panchgani)</span>
+                            </div>
+                            <div class="amt-service-btn" role="radio" aria-checked="false" tabindex="0" data-service="outstation">
+                                <strong>✈️ Outstation Drop</strong>
+                                <span>Pune / Mumbai / Satara</span>
+                            </div>
+                            <div class="amt-service-btn" role="radio" aria-checked="false" tabindex="0" data-service="local_drop">
+                                <strong>📍 Local Point Drop</strong>
+                                <span>Mapro / Panchgani / Market</span>
+                            </div>
+                        </div>
+
+                        <!-- Visual Tour Selection Cards Grid -->
+                        <div class="amt-visual-tour-cards" id="amtVisualTourCards"></div>
+
+                        <!-- Dropdown Selector (Synced with cards) -->
+                        <div class="amt-form-group" style="margin-bottom:10px;">
+                            <label class="amt-label" for="amtTourSelect" style="font-size:0.8rem; font-weight:700; color:#334155; display:block; margin-bottom:4px;">Selected Tour Package / Route</label>
+                            <select id="amtTourSelect" class="amt-select" style="width:100%; padding:10px 10px; border:1.5px solid #cbd5e1; border-radius:10px; font-size:16px; min-height:44px;">
+                                <option value="">-- Choose a Tour Package --</option>
+                            </select>
+                        </div>
+
+                        <div id="amtExtraToursContainer"></div>
+                        <button type="button" id="amtAddTourBtn" class="amt-add-tour-btn" style="background:#f0fdf4; border:1.5px dashed #16a34a; color:#15803d; border-radius:10px; padding:9px 12px; font-size:0.82rem; font-weight:700; cursor:pointer; width:100%; margin-bottom:10px; display:flex; align-items:center; justify-content:center; gap:6px; min-height:44px; box-sizing:border-box;"><i class="fa-solid fa-plus-circle"></i> + Add Another Tour (Multi-Tour Package)</button>
+                        <div id="amtMultiTourSummary" class="amt-multi-tour-summary-banner" style="display:none; background:#f0f9ff; border:1.5px solid #bae6fd; border-radius:10px; padding:8px 12px; font-size:0.8rem; color:#0369a1; margin-bottom:12px; align-items:center; justify-content:space-between; font-weight:700; box-sizing:border-box;"></div>
+                        <div id="amtTourInsight" style="display:none; margin-bottom:12px; padding:8px 12px; border-radius:10px; font-size:0.77rem; background:#f0f9ff; border:1px solid #bae6fd; color:#0369a1; line-height:1.4;"></div>
+
+                        <!-- Date & Pickup Time Section -->
+                        <div style="background:#f8fafc; border:1.5px solid #e2e8f0; border-radius:12px; padding:12px; margin:12px 0 10px;">
+                            <div style="font-size:0.82rem; font-weight:800; color:#0f172a; margin-bottom:8px; display:flex; align-items:center; gap:6px;">
+                                <i class="fa-solid fa-calendar-day" style="color:#0284c7;"></i> Travel Schedule &amp; Departure
+                            </div>
+                            <div class="amt-quick-time-section" style="margin-bottom:10px;">
+                                <div class="amt-quick-time-lbl" style="font-size:0.74rem; font-weight:700; color:#64748b; margin-bottom:5px;"><i class="fa-solid fa-bolt" style="color:#0284c7;"></i> Quick Departure Options:</div>
+                                <div class="amt-time-pills">
+                                    <button type="button" class="amt-time-pill" data-time="06:00"><i class="fa-solid fa-sun" style="color:#f59e0b;"></i> 06:00 AM <span class="amt-pill-tag">Sunrise</span></button>
+                                    <button type="button" class="amt-time-pill active" data-time="09:00"><i class="fa-solid fa-cloud-sun" style="color:#0284c7;"></i> 09:00 AM <span class="amt-pill-tag">Recommended</span></button>
+                                    <button type="button" class="amt-time-pill" data-time="10:30"><i class="fa-solid fa-sun-plant-wilt" style="color:#10b981;"></i> 10:30 AM <span class="amt-pill-tag">Mid-Morning</span></button>
+                                    <button type="button" class="amt-time-pill" data-time="14:00"><i class="fa-solid fa-mountain-sun" style="color:#8b5cf6;"></i> 02:00 PM <span class="amt-pill-tag">Sunset Circuit</span></button>
+                                </div>
+                            </div>
+                            <div class="amt-grid2">
+                                <div>
+                                    <label class="amt-label" for="amtDate" style="font-size:0.8rem; font-weight:700; color:#334155; display:block; margin-bottom:4px;">Travel Date *</label>
+                                    <input type="date" id="amtDate" class="amt-input" style="width:100%; padding:10px 10px; border:1.5px solid #cbd5e1; border-radius:10px; font-size:16px; min-height:44px;" required>
+                                </div>
+                                <div>
+                                    <label class="amt-label" for="amtTime" style="font-size:0.8rem; font-weight:700; color:#334155; display:block; margin-bottom:4px;">Pickup Time *</label>
+                                    <input type="time" id="amtTime" class="amt-input" value="09:00" style="width:100%; padding:10px 10px; border:1.5px solid #cbd5e1; border-radius:10px; font-size:16px; min-height:44px;" required>
+                                    <div id="amtSmartTimeBox" style="margin-top:5px; font-size:0.74rem; color:#0369a1; display:flex; align-items:center; flex-wrap:wrap; gap:5px;">
+                                        <span>💡 <strong>AI Suggested:</strong> <button type="button" id="amtSmartTimeBtn" style="background:#e0f2fe; color:#0284c7; border:1px solid #bae6fd; border-radius:6px; padding:2px 8px; font-weight:700; font-size:0.73rem; cursor:pointer;">09:00 AM</button></span>
+                                        <span id="amtSmartTimeReason" style="color:#64748b; font-size:0.71rem;"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="amtMultiDayToggleBox" class="amt-multi-day-box" style="display:none; margin-top:10px; margin-bottom:6px; padding:10px 12px; background:#ffffff; border:1.5px solid #cbd5e1; border-radius:10px; box-sizing:border-box;">
+                                <label style="display:flex; align-items:center; gap:8px; font-size:0.8rem; font-weight:700; color:#0f2b48; cursor:pointer;">
+                                    <input type="checkbox" id="amtDiffScheduleCheckbox" style="width:18px; height:18px; accent-color:#0284c7; cursor:pointer;">
+                                    <span>Schedule tours on different dates or times (Multi-Day Circuit)</span>
+                                </label>
+                                <div id="amtMultiDayList" style="display:none; margin-top:10px; display:flex; flex-direction:column; gap:8px;"></div>
+                            </div>
+                            <div id="amtAdvisoryBox" style="display:none; margin-top:10px; padding:10px 12px; border-radius:10px; font-size:0.78rem;"></div>
+                        </div>
+
+                        <div class="amt-btn-row" style="margin-top:14px;">
+                            <button type="button" class="amt-btn-next" id="amtToStep2" style="width:100%; padding:13px 20px; background:linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color:#ffffff; border:none; border-radius:11px; font-weight:800; font-size:0.96rem; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 4px 12px rgba(2,132,199,0.35);">
+                                Next: Pickup &amp; Contact Details <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: PICKUP HOTEL & GUEST DETAILS -->
+                    <div id="amtStep2" style="display:none;">
+                        <h3 class="amt-step-title" style="font-size:1.05rem; font-weight:800; color:#0f172a; margin:0 0 4px;">2. Pickup Hotel &amp; Guest Details</h3>
+                        <p class="amt-step-sub" style="font-size:0.8rem; color:#64748b; margin:0 0 12px;">Enter your pickup hotel, passenger contact, and review your guaranteed fixed tariff.</p>
+                        
+                        <div id="amtGuestRestored" style="display:none; padding:6px 10px; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; font-size:0.74rem; color:#166534; margin-bottom:10px;"><i class="fa-solid fa-clock-rotate-left"></i> Details pre-filled from your previous visit</div>
+
+                        <!-- Official Mountain Union Vehicle Specs -->
+                        <div class="amt-vehicle-spec-card">
+                            <div class="amt-vspec-hdr">
+                                <div class="amt-vspec-avatar"><i class="fa-solid fa-taxi"></i></div>
+                                <div>
+                                    <div class="amt-vspec-title">Mahabaleshwar Taxi Union Vehicle Specs</div>
+                                    <div class="amt-vspec-sub">Tourist Cab &bull; Private Ride &bull; Hotel Pickup</div>
+                                </div>
+                            </div>
+                            <div class="amt-vspec-grid">
+                                <div class="amt-vspec-cell">
+                                    <i class="fa-solid fa-users" style="color:#0284c7;"></i>
+                                    <div><strong>Max 4 Guests</strong><span>Union Limit</span></div>
+                                </div>
+                                <div class="amt-vspec-cell">
+                                    <i class="fa-solid fa-shield-halved" style="color:#10b981;"></i>
+                                    <div><strong>Private Ride</strong><span>Zero Co-passenger Sharing</span></div>
+                                </div>
+                                <div class="amt-vspec-cell">
+                                    <i class="fa-solid fa-hotel" style="color:#f59e0b;"></i>
+                                    <div><strong>Porch Pickup</strong><span>Direct Resort Reception</span></div>
+                                </div>
+                                <div class="amt-vspec-cell">
+                                    <i class="fa-solid fa-receipt" style="color:#8b5cf6;"></i>
+                                    <div><strong>Fixed Tariff</strong><span>Pay Driver After Trip</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pickup Location with Autocomplete & 1-Tap Pills -->
+                        <div style="position:relative; margin-bottom:8px;">
+                            <label class="amt-label" for="amtPickup" style="font-size:0.8rem; font-weight:700; color:#334155; display:block; margin-bottom:4px;">Hotel / Resort / Landmark in Mahabaleshwar / Panchgani *</label>
+                            <div style="position:relative;">
+                                <input type="text" id="amtPickup" class="amt-input" placeholder="Type hotel name (e.g. Dreamland, Le Méridien, Club Mahindra...)" autocomplete="off" style="width:100%; padding:10px 10px; border:1.5px solid #cbd5e1; border-radius:10px; font-size:16px; min-height:44px;" required>
+                                <span id="amtPickupClear" style="display:none; position:absolute; right:10px; top:50%; transform:translateY(-50%); cursor:pointer; color:#94a3b8; font-size:1.1rem; padding:4px;">&times;</span>
+                            </div>
+                            <div id="amtAutocompleteList" class="amt-autocomplete-dropdown" style="display:none;"></div>
+                        </div>
+
+
+                        <div id="amtZoneNotice" style="display:none; margin-bottom:10px; padding:7px 10px; border-radius:8px; font-size:0.76rem;"></div>
+                        <div id="amtAvailabilityBox" style="display:none; margin-bottom:10px; padding:7px 10px; border-radius:8px; font-size:0.76rem;"></div>
+
+                        <!-- Guests Selection -->
+                        <div style="margin-bottom:12px;">
+                            <label class="amt-label" for="amtPax" style="font-size:0.8rem; font-weight:700; color:#334155; display:block; margin-bottom:4px;">Total Passengers (Adults + Kids)</label>
+                            <select id="amtPax" class="amt-select" style="width:100%; padding:10px 10px; border:1.5px solid #cbd5e1; border-radius:10px; font-size:16px; min-height:44px;">
+                                <option value="1-2">1 to 2 Guests (1 Tourist Cab)</option>
+                                <option value="3-4" selected>3 to 4 Guests (1 Tourist Cab - Union Limit)</option>
+                                <option value="5+">5+ Guests (Requires 2+ Cabs under Union Rules)</option>
+                            </select>
+                            <div id="amtLargeGroupNotice" style="display:none; margin-top:6px; padding:8px 10px; background:#fffbeb; border:1px solid #fde68a; border-radius:8px; font-size:0.75rem; color:#92400e;">
+                                <i class="fa-solid fa-triangle-exclamation"></i> Official mountain rule: Standard taxi allows max 4 passengers. Groups of 5+ require multiple taxis traveling in convoy.
+                                <div style="margin-top:6px; display:flex; align-items:center; gap:8px;">
+                                    <label for="amtTaxiCount" style="font-weight:700; font-size:0.78rem;">Number of Cabs Needed:</label>
+                                    <select id="amtTaxiCount" style="padding:4px 8px; border-radius:6px; border:1px solid #cbd5e1; font-weight:700;">
+                                        <option value="2" selected>2 Cabs (Up to 8 Guests)</option>
+                                        <option value="3">3 Cabs (Up to 12 Guests)</option>
+                                        <option value="4">4 Cabs (Up to 16 Guests)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Passenger Name & WhatsApp Number -->
+                        <div class="amt-grid2">
+                            <div>
+                                <label class="amt-label" for="amtName" style="font-size:0.8rem; font-weight:700; color:#334155; display:block; margin-bottom:4px;">Your Full Name *</label>
+                                <input type="text" id="amtName" class="amt-input" placeholder="e.g. Rahul Sharma" style="width:100%; padding:10px 10px; border:1.5px solid #cbd5e1; border-radius:10px; font-size:16px; min-height:44px;" required>
+                            </div>
+                            <div>
+                                <label class="amt-label" for="amtPhone" style="font-size:0.8rem; font-weight:700; color:#334155; display:block; margin-bottom:4px;">WhatsApp Number *</label>
+                                <input type="tel" id="amtPhone" class="amt-input" placeholder="e.g. 9876543210" style="width:100%; padding:10px 10px; border:1.5px solid #cbd5e1; border-radius:10px; font-size:16px; min-height:44px;" required>
+                            </div>
+                        </div>
+                        <div style="margin:10px 0 6px;">
+                            <label class="amt-label" for="amtNotes" style="font-size:0.8rem; font-weight:700; color:#334155; display:block; margin-bottom:4px;">Special Notes / Vehicle Request <span style="font-weight:400; color:#64748b; font-size:0.72rem;">(Optional)</span></label>
+                            <input type="text" id="amtNotes" class="amt-input" placeholder="Outstation only: Need an AC Sedan or 6-Seater SUV (Ertiga/Innova)? Mention here..." maxlength="120" style="width:100%; padding:10px 10px; border:1.5px solid #cbd5e1; border-radius:10px; font-size:16px; min-height:44px;">
+                        </div>
+
+                        <!-- Live Tour & Tariff Review Card -->
+                        <div id="amtReviewCard" class="amt-tour-summary-card" style="background:#f8fafc; border:1.5px solid #e2e8f0; border-radius:12px; padding:12px; margin:10px 0;"></div>
+                        <div id="amtStep4PolicyBox"></div>
+
+                        <div class="amt-btn-row" style="display:flex; gap:8px; margin-top:14px;">
+                            <button type="button" class="amt-btn-back" id="amtBackTo1" style="padding:11px 16px; border:1.5px solid #cbd5e1; background:#ffffff; color:#475569; border-radius:10px; font-weight:700; cursor:pointer;"><i class="fa-solid fa-arrow-left"></i> Change Tour</button>
+                            <button type="button" class="amt-btn-next amt-btn-confirm" id="amtConfirmBtn" style="flex:1; padding:11px 16px; background:linear-gradient(135deg, #10b981 0%, #059669 100%); color:#ffffff; border:none; border-radius:10px; font-weight:800; font-size:0.9rem; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; box-shadow:0 4px 14px rgba(16,185,129,0.35); min-height:48px; text-align:center; flex-wrap:wrap; line-height:1.2;">
+                                <i class="fa-solid fa-lock"></i> GENERATE VOUCHER &amp; OPEN WHATSAPP <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3: DIGITAL CONFIRMED VOUCHER -->
+                    <div id="amtStepVoucher" style="display:none;">
+                        <div class="amt-voucher-screen-notice" style="background:#fffbeb; border:1px solid #fde68a; border-radius:10px; padding:8px 12px; margin-bottom:10px; text-align:left; box-sizing:border-box;">
+                            <div style="display:flex; align-items:center; gap:6px; color:#92400e; font-size:0.82rem; font-weight:800; margin-bottom:2px;"><i class="fa-solid fa-clock"></i> Opening WhatsApp... &bull; Action Required</div>
+                            <p id="amtVoucherNoticeSub" style="margin:0; font-size:0.76rem; color:#b45309; line-height:1.35; font-weight:500;">⚠️ Cab dispatch is confirmed ONLY after final WhatsApp/phone reconfirmation before departure to prevent driver no-show disputes.</p>
+                        </div>
+                        <div id="amtVoucherContent" class="amt-voucher"></div>
+                        <div id="amtDesktopQrContainer"></div>
+                        <div class="amt-voucher-actions">
+                            <button type="button" id="amtWaBtn" class="amt-btn-next amt-btn-confirm" style="width:100%; margin-top:8px; padding:12px; font-size:0.92rem; font-weight:800; border-radius:11px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; box-shadow:0 4px 14px rgba(16,185,129,0.35); background:#10b981; color:#ffffff; border:none; cursor:pointer;">
+                                <div style="display:flex; align-items:center; gap:8px;"><i class="fa-brands fa-whatsapp" style="font-size:1.3rem;"></i> RECONFIRM MY TRIP &amp; DISPATCH CAB ON WHATSAPP</div>
+                                <span id="amtWaBtnSubtext" style="font-size:0.7rem; font-weight:600; opacity:0.92;">Send travel details on WhatsApp to lock driver dispatch</span>
+                            </button>
+                            <div class="amt-voucher-question" style="text-align:center; margin-top:6px; font-size:0.75rem; color:#64748b;">Have a question before confirming? <a href="https://api.whatsapp.com/send?phone=919922882044&text=Hello%20Aryan%20Taxi%2C%20I%20have%20a%20question%20about%20my%20taxi%20booking%20inquiry." target="_blank" style="color:#0284c7; font-weight:700; text-decoration:underline;">Chat with Dispatcher</a></div>
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px;">
+                                <button type="button" id="amtDownloadPdfBtn" class="amt-btn-back amt-btn-pdf" style="padding:9px; border:1.5px solid #0891b2; background:#f0fdf4; color:#0e7490; border-radius:9px; font-weight:700; cursor:pointer; font-size:0.82rem; display:flex; align-items:center; justify-content:center; gap:6px;"><i class="fa-solid fa-file-arrow-down" style="color:#0891b2;"></i> Download Voucher PDF</button>
+                                <button type="button" id="amtPrintBtn" class="amt-btn-back" style="padding:9px; border:1.5px solid #cbd5e1; background:#ffffff; border-radius:9px; font-weight:700; cursor:pointer; font-size:0.82rem; display:flex; align-items:center; justify-content:center; gap:6px;"><i class="fa-solid fa-print"></i> Print Voucher</button>
+                            </div>
+                            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; margin-top:8px;">
+                                <button type="button" id="amtEmailVoucherBtn" class="amt-v-link-btn" style="padding:8px 4px; border:1px solid #cbd5e1; background:#f8fafc; color:#0284c7; border-radius:8px; font-size:0.75rem; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:4px;"><i class="fa-solid fa-envelope"></i> Email Copy</button>
+                                <button type="button" id="amtShareFamilyBtn" class="amt-v-link-btn" style="padding:8px 4px; border:1px solid #cbd5e1; background:#f8fafc; color:#10b981; border-radius:8px; font-size:0.75rem; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:4px;"><i class="fa-solid fa-share-nodes"></i> Share Trip</button>
+                                <a id="amtCallBtn" href="tel:+919922882044" style="padding:8px 4px; border:1px solid #0284c7; background:#f0f9ff; color:#0369a1; font-size:0.75rem; font-weight:700; border-radius:8px; text-align:center; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:4px;"><i class="fa-solid fa-phone"></i> Call</a>
+                            </div>
+                            <button type="button" id="amtEditTripBtn" class="amt-btn-back" style="width:100%; margin-top:8px; padding:9px; font-size:0.82rem; border:1.5px solid #cbd5e1; background:#ffffff; color:#334155; border-radius:9px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px;"><i class="fa-solid fa-arrow-left"></i> Edit Trip Details / Change Tour</button>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trust & Transparency Features -->
+    <div class="portal-trust-section">
+        <div class="portal-trust-grid">
+            <div class="portal-trust-item">
+                <i class="fa-solid fa-handshake-simple" style="color: #10b981;"></i>
+                <div>
+                    <h4>Zero Advance Payment for Sightseeing</h4>
+                    <p>No card or bank details needed. 100% of the tour fare is payable directly to your assigned local driver via Cash or UPI upon trip completion.</p>
+                </div>
+            </div>
+            <div class="portal-trust-item">
+                <i class="fa-solid fa-scale-balanced" style="color: #38bdf8;"></i>
+                <div>
+                    <h4>Standard Taxi Union Tariffs Accepted</h4>
+                    <p>All rates follow Mahabaleshwar Taxi Union tariffs. Zero hidden surge fees, holiday markups, or middleman commission.</p>
+                </div>
+            </div>
+            <div class="portal-trust-item">
+                <i class="fa-solid fa-taxi" style="color: #f59e0b;"></i>
+                <div>
+                    <h4>Mountain-Experienced Local Drivers</h4>
+                    <p>Licensed hill drivers native to Sahyadri ghats. Prompt doorstep hotel pickup, clean tourist cabs, and safe ghat driving.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portal Minimal Footer -->
+    <footer class="portal-footer">
+        <p>&copy; 2026 Mahabaleshwar Taxi by Aryan Taxi Mahabaleshwar. Direct Local Owner-Driver Cab Service.</p>
+        <p>
+            <a href="index.html">Home</a> &bull;
+            <a href="mahabaleshwar-taxi-rate-card.html">Taxi Union Rate Card</a> &bull;
+            <a href="travel-guide.html">Travel Guide</a> &bull;
+            <a href="contact.html">Contact Us</a>
+        </p>
+        <p style="margin-top: 6px; color: #475569;">
+            <i class="fa-solid fa-phone"></i> 24/7 Helpline: +91 99228 82044 &bull; Direct Local Owner-Driver Network
+        </p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/tour-data.js?v=96.0"></script>
+    <script src="js/booking-widget.min.js?v=96.0"></script>
+    <script>
+    (function() {
+        var search = window.location.search || '';
+        var tm = search.match(/[?&]tour=([^&#]*)/i);
+        var tourHint = tm ? decodeURIComponent(tm[1].replace(/\+/g, ' ')) : '';
+
+        function syncTourHint() {
+            if (!tourHint) return;
+            var hint = tourHint.toLowerCase();
+            var isCombo = hint.includes('full day') || hint.includes('combo') || hint.includes('tour 7');
+            var isOutstation = hint.includes('pune') || hint.includes('mumbai') || hint.includes('satara') || hint.includes('airport') || hint.includes('transfer');
+            var isLocalDrop = hint.includes('drop') || hint.includes('mapro') || hint.includes('wilson');
+            var targetService = isCombo ? 'combo' : (isOutstation ? 'outstation' : (isLocalDrop ? 'local_drop' : 'sightseeing'));
+
+            var serviceBtns = document.querySelectorAll('.amt-service-btn');
+            serviceBtns.forEach(function(b) {
+                b.classList.toggle('active', b.getAttribute('data-service') === targetService);
+            });
+
+            // Note: openBookingModal is invoked automatically by booking-widget.js init()
+        }
+
+        // Set today's date
+        var dateInp = document.getElementById('amtDate');
+        if (dateInp) {
+            var now = new Date();
+            var yyyy = now.getFullYear();
+            var mm = String(now.getMonth() + 1).padStart(2, '0');
+            var dd = String(now.getDate()).padStart(2, '0');
+            var today = yyyy + '-' + mm + '-' + dd;
+            dateInp.min = today;
+            if (!dateInp.value) dateInp.value = today;
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', syncTourHint);
+        } else {
+            syncTourHint();
+        }
+    })();
+    </script>
+</body>
+</html>

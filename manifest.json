@@ -1,0 +1,16 @@
+{
+  "name": "Mahabaleshwar Taxi Service",
+  "short_name": "Maha Taxi",
+  "description": "Official Mahabaleshwar Taxi & Sightseeing tours.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0369a1",
+  "icons": [
+    {
+      "src": "images/aryan-tours-logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

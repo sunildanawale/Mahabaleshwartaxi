@@ -1,6 +1,6 @@
 # Mahabaleshwar Taxi Service Website
 
-This is the improved, conversion-optimized website for **Aryan Tours & Travels**, offering Mahabaleshwar sightseeing, outstation cabs, and local drops.
+This is the improved, conversion-optimized website for **Aryan Taxi Mahabaleshwar**, offering Mahabaleshwar sightseeing, outstation cabs, and local drops.
 
 ## 🚀 Key Features Added
 - **Full-Day Sightseeing Package:** A new comprehensive tour covering Mahabaleshwar & Panchgani for ₹3000.
@@ -21,7 +21,7 @@ This is the improved, conversion-optimized website for **Aryan Tours & Travels**
 2. Go to **Settings** > **Pages** in your GitHub repository.
 3. Select `main` branch and `/root` folder.
 4. Click **Save**.
-5. Your site will be live at: `https://sunildanawale.github.io/Mahabaleshwartaxi/`
+5. Your site will be live at: `https://mahabaleshwartaxi.infinityfreeapp.com/`
 
 ## 📱 Mobile & Performance
 - The site is fully responsive and mobile-first.
@@ -29,5 +29,5 @@ This is the improved, conversion-optimized website for **Aryan Tours & Travels**
 - Schema markup is implemented for "TaxiService" and "LocalBusiness" to appear in Google Rich Results.
 
 ## 📞 Contact
-Aryan Tours & Travels  
+Aryan Taxi Mahabaleshwar  
 +91 99228 82044
