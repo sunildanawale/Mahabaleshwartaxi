@@ -1,0 +1,325 @@
+/* ============================================================
+   ADVANCED CRO & PREMIUM FEATURES CSS
+   ============================================================ */
+
+/* 1. Sticky Mobile Booking Bar */
+.mobile-sticky-bar {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    z-index: 9998; /* Just below modal */
+    padding: 10px 15px;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--gray-200, #e2e8f0);
+}
+
+.mobile-sticky-bar .btn {
+    flex: 1;
+    margin: 0 5px;
+    padding: 12px 0;
+    font-size: 14px;
+    border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+    .mobile-sticky-bar {
+        display: flex;
+    }
+    body {
+        padding-bottom: 70px; /* Make room for the bar */
+    }
+}
+
+/* 2. Social Proof Notification */
+.social-proof-toast {
+    position: fixed;
+    bottom: -100px; /* Hidden initially */
+    left: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    padding: 12px 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 9990;
+    transition: bottom 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    max-width: 320px;
+    border-left: 4px solid var(--success, #22c55e);
+}
+
+.social-proof-toast.show {
+    bottom: 20px;
+}
+@media (max-width: 768px) {
+    .social-proof-toast.show {
+        bottom: 90px; /* Above sticky bar */
+    }
+}
+
+.social-proof-icon {
+    width: 40px;
+    height: 40px;
+    background: #e0f2fe;
+    color: var(--primary, #0891b2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.social-proof-text {
+    font-size: 0.85rem;
+    color: var(--secondary, #f59e0b);
+    line-height: 1.3;
+}
+.social-proof-text strong {
+    color: #0f172a;
+    display: block;
+}
+.social-proof-time {
+    font-size: 0.7rem;
+    color: var(--gray-500, #64748b);
+    margin-top: 2px;
+}
+
+/* 3. Exit Intent Popup */
+.exit-intent-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.85);
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+}
+
+.exit-intent-modal {
+    background: white;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    padding: 40px 30px;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    transform: scale(0.9);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+.exit-intent-overlay.active {
+    display: flex;
+}
+.exit-intent-overlay.active .exit-intent-modal {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.exit-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: var(--gray-400, #94a3b8);
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.exit-close:hover { color: var(--secondary, #f59e0b); }
+
+.exit-icon {
+    font-size: 3rem;
+    color: var(--accent, #f97316);
+    margin-bottom: 15px;
+}
+.exit-intent-modal h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: var(--secondary, #f59e0b);
+}
+.exit-intent-modal p {
+    color: var(--gray-600, #475569);
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+}
+
+/* 4. Weather Widget */
+.weather-widget {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: var(--secondary, #f59e0b);
+    background: var(--primary-50, #ecfeff);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+    border: 1px solid var(--primary-100, #cffafe);
+}
+.weather-widget i {
+    color: var(--accent, #f97316);
+    font-size: 1.1rem;
+}
+@media (max-width: 968px) {
+    .weather-widget {
+        display: none; /* Hide on mobile navbar to save space */
+    }
+}
+
+
+/* ============================================================
+   DARK MODE CRO & ADVANCED FEATURES ENHANCEMENTS
+   ============================================================ */
+[data-theme="dark"] .mobile-sticky-bar {
+    background: var(--bg-primary) !important;
+    border-top-color: var(--border-color) !important;
+}
+[data-theme="dark"] .social-proof-toast {
+    background: var(--bg-primary) !important;
+    border: 1px solid var(--border-color) !important;
+    border-left: 4px solid var(--success) !important;
+}
+[data-theme="dark"] .social-proof-icon {
+    background: rgba(8, 145, 178, 0.2) !important;
+    color: #38bdf8 !important;
+}
+[data-theme="dark"] .social-proof-text {
+    color: var(--text-secondary) !important;
+}
+[data-theme="dark"] .social-proof-text strong {
+    color: var(--text-primary) !important;
+}
+[data-theme="dark"] .exit-intent-modal {
+    background: var(--bg-primary) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+[data-theme="dark"] .exit-intent-modal h3 {
+    color: var(--text-primary) !important;
+}
+[data-theme="dark"] .exit-intent-modal p {
+    color: var(--text-secondary) !important;
+}
+[data-theme="dark"] .weather-widget {
+    background: var(--bg-secondary) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+
+/* -------------------------------------------------------------
+   PREMIUM MOBILE BOTTOM ACTION BAR & UPGRADE STYLES
+   ------------------------------------------------------------- */
+.mobile-sticky-bar {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.25);
+    z-index: 9998;
+    padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 0px));
+    gap: 8px;
+    align-items: center;
+    justify-content: space-around;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.mobile-bar-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    padding: 8px 4px;
+    border-radius: 10px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.15s ease, filter 0.15s ease;
+    color: #ffffff;
+}
+
+.mobile-bar-btn i {
+    font-size: 1.1rem;
+}
+
+.mobile-bar-btn:active {
+    transform: scale(0.95);
+}
+
+.mobile-bar-call {
+    background: linear-gradient(135deg, #0284c7, #0369a1);
+}
+
+.mobile-bar-wa {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+.mobile-bar-book {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+@media (max-width: 768px) {
+    .mobile-sticky-bar {
+        display: flex;
+    }
+    body {
+        padding-bottom: 68px !important;
+    }
+}
+
+/* Language Switcher */
+.lang-switcher {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 20px;
+    padding: 2px;
+    gap: 2px;
+    margin-left: 10px;
+}
+
+.lang-btn {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.lang-btn.active, .lang-btn:hover {
+    background: #f59e0b;
+    color: #0f172a;
+}
+
+.top-bar .lang-btn {
+    color: #e2e8f0;
+}
+.top-bar .lang-btn.active {
+    background: #f59e0b;
+    color: #0f172a;
+}
