@@ -88,21 +88,34 @@
             var webhookUrl = window.AMT_LEAD_WEBHOOK_URL || (typeof localStorage !== 'undefined' ? localStorage.getItem('amt_lead_webhook_url') : '') || DEFAULT_WEBHOOK_URL;
             if (!webhookUrl) return;
 
+            var bId = bookingData.bookingId || bookingData.id || ('AMT-' + Date.now().toString().slice(-6));
+            var bName = bookingData.name || 'Guest';
+            var bPhone = bookingData.phone || '';
+            var bDate = bookingData.date || '';
+            var bTime = bookingData.time || '';
+            var bPickup = bookingData.pickup || '';
+            var bTour = bookingData.tour || bookingData.tourId || '';
+            var bFare = bookingData.fare || bookingData.totalFare || 0;
+            var bPax = bookingData.pax || '1-4';
+            var bNotes = bookingData.notes || '';
+            var bStatus = bookingData.status || 'pending';
+
             var payload = JSON.stringify({
-                bookingId: bookingData.bookingId || bookingData.id || ('AMT-' + Date.now().toString().slice(-6)),
-                name: bookingData.name || 'Guest',
-                phone: bookingData.phone || '',
-                date: bookingData.date || '',
-                time: bookingData.time || '',
-                pickup: bookingData.pickup || '',
-                tour: bookingData.tour || bookingData.tourId || '',
-                fare: bookingData.fare || bookingData.totalFare || 0,
-                pax: bookingData.pax || '1-4',
-                notes: bookingData.notes || '',
-                status: bookingData.status || 'pending',
+                bookingId: bId,
+                name: bName,
+                phone: bPhone,
+                date: bDate,
+                time: bTime,
+                pickup: bPickup,
+                tour: bTour,
+                fare: bFare,
+                pax: bPax,
+                notes: bNotes,
+                status: bStatus,
                 timestamp: new Date().toISOString()
             });
 
+            // Method 1: Fetch with keepalive
             if (typeof fetch !== 'undefined') {
                 fetch(webhookUrl, {
                     method: 'POST',
@@ -110,13 +123,55 @@
                     keepalive: true,
                     headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
                     body: payload
-                }).catch(function (err) {
-                    console.warn('Webhook transmission issue:', err);
-                });
-            } else if (navigator.sendBeacon) {
-                var blob = new Blob([payload], { type: 'text/plain;charset=UTF-8' });
-                navigator.sendBeacon(webhookUrl, blob);
+                }).catch(function () {});
             }
+
+            // Method 2: Hidden iframe form post (guaranteed browser form submit to Google Apps Script)
+            try {
+                var iframeName = 'amt_post_iframe_' + Date.now();
+                var iframe = document.createElement('iframe');
+                iframe.name = iframeName;
+                iframe.style.display = 'none';
+                document.body.appendChild(iframe);
+
+                var form = document.createElement('form');
+                form.method = 'POST';
+                form.action = webhookUrl;
+                form.target = iframeName;
+                form.style.display = 'none';
+
+                var fields = {
+                    bookingId: bId,
+                    name: bName,
+                    phone: bPhone,
+                    date: bDate,
+                    time: bTime,
+                    pickup: bPickup,
+                    tour: bTour,
+                    fare: bFare,
+                    pax: bPax,
+                    notes: bNotes,
+                    status: bStatus
+                };
+
+                for (var key in fields) {
+                    if (fields.hasOwnProperty(key)) {
+                        var input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = key;
+                        input.value = fields[key];
+                        form.appendChild(input);
+                    }
+                }
+
+                document.body.appendChild(form);
+                form.submit();
+
+                setTimeout(function () {
+                    try { document.body.removeChild(form); } catch (e) {}
+                    try { document.body.removeChild(iframe); } catch (e) {}
+                }, 4000);
+            } catch (eForm) {}
         } catch (e) {
             console.warn('Could not dispatch booking remotely:', e);
         }
