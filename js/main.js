@@ -646,6 +646,29 @@
         if (message) text += `*Message:* ${message}\n`;
         text += "\nPlease confirm availability.";
 
+        try {
+            const webhookUrl = window.AMT_LEAD_WEBHOOK_URL || (typeof localStorage !== 'undefined' ? localStorage.getItem('amt_lead_webhook_url') : '') || 'https://script.google.com/macros/s/AKfycbyqsWM2u-X-dqLIkac9REiWQoA3KWyMnteZtHjlI3sNEQgdQk8JeT5-p7CW0T_TLA2s/exec';
+            if (webhookUrl && typeof fetch !== 'undefined') {
+                const payload = JSON.stringify({
+                    bookingId: 'AMT-INQ-' + Date.now().toString().slice(-6),
+                    name: name || 'Guest',
+                    phone: phone || '',
+                    date: date || '',
+                    pickup: 'Website Inquiry',
+                    tour: trip || 'General Inquiry',
+                    notes: message || '',
+                    status: 'pending',
+                    timestamp: new Date().toISOString()
+                });
+                fetch(webhookUrl, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+                    body: payload
+                }).catch(() => {});
+            }
+        } catch (err) {}
+
         const waUrl = `https://api.whatsapp.com/send?phone=919922882044&text=${encodeURIComponent(text)}`;
         const win = window.open(waUrl, '_blank', 'noopener');
         if (!win || win.closed || typeof win.closed === 'undefined') {

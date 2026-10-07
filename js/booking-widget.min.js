@@ -81,9 +81,11 @@
         return 'AMT-' + y + '-' + num;
     }
 
+    var DEFAULT_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbyqsWM2u-X-dqLIkac9REiWQoA3KWyMnteZtHjlI3sNEQgdQk8JeT5-p7CW0T_TLA2s/exec';
+
     function dispatchBookingRemote(bookingData) {
         try {
-            var webhookUrl = window.AMT_LEAD_WEBHOOK_URL || (typeof localStorage !== 'undefined' ? localStorage.getItem('amt_lead_webhook_url') : '');
+            var webhookUrl = window.AMT_LEAD_WEBHOOK_URL || (typeof localStorage !== 'undefined' ? localStorage.getItem('amt_lead_webhook_url') : '') || DEFAULT_WEBHOOK_URL;
             if (!webhookUrl) return;
 
             var payload = JSON.stringify({
@@ -102,13 +104,13 @@
             });
 
             if (navigator.sendBeacon) {
-                var blob = new Blob([payload], { type: 'application/json' });
+                var blob = new Blob([payload], { type: 'text/plain;charset=UTF-8' });
                 navigator.sendBeacon(webhookUrl, blob);
             } else if (typeof fetch !== 'undefined') {
                 fetch(webhookUrl, {
                     method: 'POST',
                     mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
                     body: payload
                 }).catch(function (err) {
                     console.warn('Webhook transmission issue:', err);
