@@ -40,10 +40,7 @@
     }
 
     function getWhatsAppUrl(encodedText) {
-        var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        return isMobile
-            ? 'https://api.whatsapp.com/send?phone=919922882044&text=' + encodedText
-            : 'https://web.whatsapp.com/send?phone=919922882044&text=' + encodedText;
+        return 'https://api.whatsapp.com/send?phone=919922882044&text=' + encodedText;
     }
 
     function formatPickupTime(timeStr) {
@@ -84,6 +81,44 @@
         return 'AMT-' + y + '-' + num;
     }
 
+    function dispatchBookingRemote(bookingData) {
+        try {
+            var webhookUrl = window.AMT_LEAD_WEBHOOK_URL || (typeof localStorage !== 'undefined' ? localStorage.getItem('amt_lead_webhook_url') : '');
+            if (!webhookUrl) return;
+
+            var payload = JSON.stringify({
+                bookingId: bookingData.bookingId || ('AMT-' + Date.now().toString().slice(-6)),
+                name: bookingData.name || 'Guest',
+                phone: bookingData.phone || '',
+                date: bookingData.date || '',
+                time: bookingData.time || '',
+                pickup: bookingData.pickup || '',
+                tour: bookingData.tour || bookingData.tourId || '',
+                fare: bookingData.fare || bookingData.totalFare || 0,
+                pax: bookingData.pax || '1-4',
+                notes: bookingData.notes || '',
+                status: bookingData.status || 'pending',
+                timestamp: new Date().toISOString()
+            });
+
+            if (navigator.sendBeacon) {
+                var blob = new Blob([payload], { type: 'application/json' });
+                navigator.sendBeacon(webhookUrl, blob);
+            } else if (typeof fetch !== 'undefined') {
+                fetch(webhookUrl, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: payload
+                }).catch(function (err) {
+                    console.warn('Webhook transmission issue:', err);
+                });
+            }
+        } catch (e) {
+            console.warn('Could not dispatch booking remotely:', e);
+        }
+    }
+
     function saveBookingToLedger(booking) {
         if (booking && !booking.status) booking.status = 'pending';
         try {
@@ -95,6 +130,7 @@
         } catch (e) {
             console.warn('Could not save booking to localStorage', e);
         }
+        dispatchBookingRemote(booking);
     }
 
     // ── 2. WhatsApp Message Generator ────────────────────────────────
@@ -1817,7 +1853,10 @@
                                 if (isMobile) {
                                     window.location.href = url;
                                 } else {
-                                    window.open(url, '_blank') || (window.location.href = url);
+                                    var win = window.open(url, '_blank');
+                                    if (!win || win.closed || typeof win.closed === 'undefined') {
+                                        window.location.href = url;
+                                    }
                                 }
                             } catch (waErr) {
                                 console.error('Error auto-opening WhatsApp', waErr);
@@ -2134,7 +2173,10 @@
                         window.location.href = "whatsapp://send?text=" + encodeURIComponent(shareMsg);
                         setTimeout(function () { window.location.href = waUrl; }, 600);
                     } else {
-                        window.open("https://web.whatsapp.com/send?text=" + encodeURIComponent(shareMsg), '_blank', 'noopener,noreferrer');
+                        var win = window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(shareMsg), '_blank', 'noopener,noreferrer');
+                        if (!win || win.closed || typeof win.closed === 'undefined') {
+                            window.location.href = "https://api.whatsapp.com/send?text=" + encodeURIComponent(shareMsg);
+                        }
                     }
                     showShareSuccess();
                 }
@@ -2168,7 +2210,10 @@
                 if (isMobile) {
                     window.location.href = url;
                 } else {
-                    window.open(url, '_blank', 'noopener,noreferrer');
+                    var win = window.open(url, '_blank', 'noopener,noreferrer');
+                    if (!win || win.closed || typeof win.closed === 'undefined') {
+                        window.location.href = url;
+                    }
                 }
             });
         }

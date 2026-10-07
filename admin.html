@@ -1078,6 +1078,25 @@
                         </div>
                     </div>
 
+                    <!-- Live Cloud / Google Sheets Sync Card -->
+                    <div style="background: #fff; border: 1.5px solid var(--border); border-radius: 16px; padding: 24px;">
+                        <h3 style="font-size: 1.15rem; color: var(--secondary); margin-bottom: 6px;">
+                            <i class="fa-solid fa-cloud-arrow-up" style="color: #0284c7;"></i> Google Sheets &amp; Cloud Lead Sync
+                        </h3>
+                        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 18px;">Paste your Google Apps Script / Webhook URL to automatically receive all website bookings live in your Google Sheet &amp; Admin Dashboard.</p>
+                        
+                        <div style="margin-bottom: 12px;">
+                            <label class="m-label">Google Apps Script Webhook URL</label>
+                            <input type="url" id="webhookUrlInput" class="m-input" placeholder="https://script.google.com/macros/s/.../exec">
+                        </div>
+
+                        <button id="saveWebhookBtn" onclick="window.saveWebhookConfig()" class="act-btn" style="width: 100%; background: #0891b2; color: #fff; padding: 11px; justify-content: center; margin-bottom: 10px;">
+                            <i class="fa-solid fa-floppy-disk"></i> Save Webhook URL
+                        </button>
+                        
+                        <div id="webhookStatusMsg" style="font-size: 0.8rem; color: #166534; font-weight: 600; display: none;">✓ Webhook URL saved successfully!</div>
+                    </div>
+
                 </div>
             </div>
 
@@ -1361,6 +1380,29 @@
             });
 
             // --- LEDGER HELPERS ---
+            window.saveWebhookConfig = function() {
+                var input = document.getElementById('webhookUrlInput');
+                var msg = document.getElementById('webhookStatusMsg');
+                if (input) {
+                    var val = input.value.trim();
+                    localStorage.setItem('amt_lead_webhook_url', val);
+                    window.AMT_LEAD_WEBHOOK_URL = val;
+                    if (msg) {
+                        msg.style.display = 'block';
+                        setTimeout(function() { msg.style.display = 'none'; }, 3000);
+                    }
+                }
+            };
+
+            function initWebhookConfigUI() {
+                var input = document.getElementById('webhookUrlInput');
+                if (input) {
+                    var saved = localStorage.getItem('amt_lead_webhook_url') || '';
+                    input.value = saved;
+                }
+            }
+            setTimeout(initWebhookConfigUI, 200);
+
             function getBookings() {
                 try {
                     return JSON.parse(localStorage.getItem('amt_bookings') || '[]');

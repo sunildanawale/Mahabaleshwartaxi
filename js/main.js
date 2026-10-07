@@ -646,7 +646,11 @@
         if (message) text += `*Message:* ${message}\n`;
         text += "\nPlease confirm availability.";
 
-        window.open(`https://wa.me/919922882044?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
+        const waUrl = `https://api.whatsapp.com/send?phone=919922882044&text=${encodeURIComponent(text)}`;
+        const win = window.open(waUrl, '_blank', 'noopener');
+        if (!win || win.closed || typeof win.closed === 'undefined') {
+            window.location.href = waUrl;
+        }
     };
 
     /* ============================================================
