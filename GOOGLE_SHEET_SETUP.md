@@ -26,11 +26,16 @@ Once configured, **every website inquiry and booking will instantly save to your
 function doPost(e) {
   try {
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    var data = JSON.parse(e.postData.contents);
+    var data = {};
+    if (e.postData && e.postData.contents) {
+      try { data = JSON.parse(e.postData.contents); } catch(err) { data = e.parameter || {}; }
+    } else {
+      data = e.parameter || {};
+    }
     
     sheet.appendRow([
       new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
-      data.bookingId || '',
+      data.bookingId || data.id || '',
       data.name || '',
       data.phone || '',
       data.date || '',
