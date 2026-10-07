@@ -89,7 +89,7 @@
             if (!webhookUrl) return;
 
             var payload = JSON.stringify({
-                bookingId: bookingData.bookingId || ('AMT-' + Date.now().toString().slice(-6)),
+                bookingId: bookingData.bookingId || bookingData.id || ('AMT-' + Date.now().toString().slice(-6)),
                 name: bookingData.name || 'Guest',
                 phone: bookingData.phone || '',
                 date: bookingData.date || '',
@@ -103,18 +103,19 @@
                 timestamp: new Date().toISOString()
             });
 
-            if (navigator.sendBeacon) {
-                var blob = new Blob([payload], { type: 'text/plain;charset=UTF-8' });
-                navigator.sendBeacon(webhookUrl, blob);
-            } else if (typeof fetch !== 'undefined') {
+            if (typeof fetch !== 'undefined') {
                 fetch(webhookUrl, {
                     method: 'POST',
                     mode: 'no-cors',
+                    keepalive: true,
                     headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
                     body: payload
                 }).catch(function (err) {
                     console.warn('Webhook transmission issue:', err);
                 });
+            } else if (navigator.sendBeacon) {
+                var blob = new Blob([payload], { type: 'text/plain;charset=UTF-8' });
+                navigator.sendBeacon(webhookUrl, blob);
             }
         } catch (e) {
             console.warn('Could not dispatch booking remotely:', e);
@@ -1453,12 +1454,15 @@
                 var t = window.TOUR_DATABASE.getTourById(state.tourId);
                 if (t) tourTitle = t.name;
             }
+            var calculatedFare = state.totalFare || state.fare || (t ? t.fare : 0);
             var entry = {
                 id: state.bookingId || ('AMT-' + Date.now().toString().slice(-6)),
+                bookingId: state.bookingId || ('AMT-' + Date.now().toString().slice(-6)),
                 name: state.name || '',
                 phone: state.phone || '',
                 service: state.service || 'sightseeing',
                 tour: tourTitle || 'Mahabaleshwar Sightseeing',
+                fare: calculatedFare,
                 pickup: state.pickup || '',
                 date: state.date || '',
                 time: state.time || '',
