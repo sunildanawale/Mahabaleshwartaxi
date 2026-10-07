@@ -1470,6 +1470,7 @@
             list.unshift(entry);
             if (list.length > 50) list = list.slice(0, 50);
             localStorage.setItem('amt_bookings', JSON.stringify(list));
+            dispatchBookingRemote(entry);
         } catch (e) {}
     }
 
