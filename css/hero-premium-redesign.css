@@ -6,7 +6,7 @@
    • Mobile-first responsive
    • Dark mode support
    • Premium animations
-*/
+ */
 
 /* ── 1. HERO SECTION CONTAINER ── */
 .hero-premium {
@@ -26,7 +26,8 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="1200" height="800" fill="url(%23dots)"/></svg>');
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r="1.2" fill="rgba(255,255,255,0.25)"/></pattern></defs><rect width="1200" height="800" fill="transparent"/><rect width="1200" height="800" fill="url(%23dots)"/></svg>');
+    background-size: cover;
     opacity: 0.4;
     z-index: 0;
     animation: floatBg 20s ease-in-out infinite;
@@ -632,12 +633,24 @@
         flex: 1;
         min-width: 140px;
     }
+
+    .hero-booking-card {
+        position: relative !important;
+        top: 0 !important;
+        overflow: visible !important;
+        max-height: none !important;
+    }
+
+    .hero-premium {
+        overflow: visible;
+    }
 }
 
 @media (max-width: 768px) {
     .hero-premium {
         padding: 30px 16px;
         min-height: auto;
+        overflow: visible;
     }
 
     .hero-premium-content {
@@ -668,6 +681,9 @@
 
     .hero-booking-card {
         border-radius: 16px;
+        position: relative !important;
+        top: 0 !important;
+        overflow: visible !important;
     }
 
     .booking-card-header {
