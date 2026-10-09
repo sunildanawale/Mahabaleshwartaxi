@@ -6690,3 +6690,540 @@ body.modal-open {
 }
 
 
+
+
+/* ============================================================
+   2026 HIGH-CONVERSION UPGRADE STYLES (CRO & COMPETITOR ADVANTAGE)
+   ============================================================ */
+
+/* 1. Hero Booking Card & Interactive Fare Calculator */
+.hero-booking-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 22px 20px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    position: relative;
+    color: #0f172a;
+    box-sizing: border-box;
+}
+
+[data-theme="dark"] .hero-booking-card {
+    background: #111827;
+    border-color: #374151;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
+    color: #f8fafc;
+}
+
+.hero-booking-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1.5px solid #e2e8f0;
+}
+
+[data-theme="dark"] .hero-booking-header {
+    border-bottom-color: #1f2937;
+}
+
+.hero-booking-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.76rem;
+    font-weight: 800;
+    color: #0284c7;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.hero-booking-title {
+    font-size: 1.22rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 2px 0 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+[data-theme="dark"] .hero-booking-title {
+    color: #f8fafc;
+}
+
+/* Vehicle Selection Chips */
+.hero-veh-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #334155;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+[data-theme="dark"] .hero-veh-label {
+    color: #cbd5e1;
+}
+
+.hero-veh-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.hero-veh-btn {
+    padding: 8px 6px;
+    border: 1.5px solid #cbd5e1;
+    background: #f8fafc;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+[data-theme="dark"] .hero-veh-btn {
+    background: #1f2937;
+    border-color: #374151;
+}
+
+.hero-veh-btn:hover {
+    border-color: #0891b2;
+    background: #f0f9ff;
+}
+
+.hero-veh-btn.active {
+    border-color: #0891b2;
+    background: #ecfeff;
+    box-shadow: 0 0 0 2px rgba(8, 145, 178, 0.25);
+}
+
+[data-theme="dark"] .hero-veh-btn.active {
+    background: #083344;
+    border-color: #38bdf8;
+}
+
+.hero-veh-name {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+[data-theme="dark"] .hero-veh-name {
+    color: #f8fafc;
+}
+
+.hero-veh-cap {
+    font-size: 0.68rem;
+    color: #64748b;
+    font-weight: 600;
+}
+
+.hero-veh-btn.active .hero-veh-name {
+    color: #0e7490;
+}
+
+[data-theme="dark"] .hero-veh-btn.active .hero-veh-name {
+    color: #38bdf8;
+}
+
+/* Dynamic Live Tariff Box */
+.hero-live-tariff-box {
+    background: linear-gradient(135deg, #f0fdf4 0%, #ecfeff 100%);
+    border: 1.5px solid #86efac;
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.25s ease;
+}
+
+[data-theme="dark"] .hero-live-tariff-box {
+    background: linear-gradient(135deg, #064e3b 0%, #083344 100%);
+    border-color: #10b981;
+}
+
+.hero-tariff-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-tariff-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: #166534;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+[data-theme="dark"] .hero-tariff-label {
+    color: #86efac;
+}
+
+.hero-tariff-val {
+    font-size: 1.45rem;
+    font-weight: 900;
+    color: #15803d;
+    line-height: 1.2;
+}
+
+[data-theme="dark"] .hero-tariff-val {
+    color: #4ade80;
+}
+
+.hero-tariff-meta {
+    font-size: 0.72rem;
+    color: #475569;
+    font-weight: 600;
+    margin-top: 1px;
+}
+
+[data-theme="dark"] .hero-tariff-meta {
+    color: #cbd5e1;
+}
+
+.hero-tariff-right {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.hero-tariff-badge {
+    background: #22c55e;
+    color: #ffffff;
+    font-size: 0.68rem;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.hero-tariff-sub {
+    font-size: 0.7rem;
+    color: #15803d;
+    font-weight: 700;
+    margin-top: 4px;
+}
+
+[data-theme="dark"] .hero-tariff-sub {
+    color: #86efac;
+}
+
+/* Primary Hero Booking CTA */
+.hero-wa-book-btn {
+    width: 100%;
+    min-height: 50px;
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: #ffffff !important;
+    font-weight: 800;
+    font-size: 0.96rem;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+    transition: all 0.2s ease;
+    text-decoration: none;
+    box-sizing: border-box;
+    letter-spacing: 0.3px;
+}
+
+.hero-wa-book-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.55);
+    background: linear-gradient(135deg, #22c55e 0%, #0f766e 100%);
+}
+
+.hero-sub-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.hero-call-sub-btn {
+    background: #0284c7;
+    color: #ffffff !important;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 9px 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.hero-call-sub-btn:hover {
+    background: #0369a1;
+}
+
+.hero-voucher-sub-btn {
+    background: #f1f5f9;
+    color: #334155 !important;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 9px 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border: 1px solid #cbd5e1;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+[data-theme="dark"] .hero-voucher-sub-btn {
+    background: #1f2937;
+    color: #cbd5e1 !important;
+    border-color: #374151;
+}
+
+.hero-voucher-sub-btn:hover {
+    background: #e2e8f0;
+}
+
+/* ============================================================
+   2. COMPETITOR COMPARISON MATRIX (ARYAN TAXI VS OLA/UBER/HOTELS)
+   ============================================================ */
+.comp-matrix-wrapper {
+    max-width: 1040px;
+    margin: 0 auto;
+    overflow-x: auto;
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
+    border: 1.5px solid var(--border-color);
+    background: var(--bg-primary);
+}
+
+.comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 680px;
+    text-align: left;
+}
+
+.comp-table th, .comp-table td {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+}
+
+.comp-table th {
+    font-size: 0.86rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: var(--bg-secondary);
+}
+
+.comp-col-aryan {
+    background: rgba(8, 145, 178, 0.06);
+    border-left: 2px solid #0891b2;
+    border-right: 2px solid #0891b2;
+}
+
+.comp-col-aryan-header {
+    background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%) !important;
+    color: #ffffff !important;
+    border-left: 2px solid #0891b2;
+    border-right: 2px solid #0891b2;
+    text-align: center;
+}
+
+.comp-highlight-badge {
+    background: #fbbf24;
+    color: #0f172a;
+    font-size: 0.68rem;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 10px;
+    display: inline-block;
+    margin-bottom: 4px;
+}
+
+.comp-check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+[data-theme="dark"] .comp-check-item {
+    color: #f8fafc;
+}
+
+.comp-check-item i {
+    color: #16a34a;
+    font-size: 1rem;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.comp-cross-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.84rem;
+    color: #64748b;
+}
+
+.comp-cross-item i {
+    color: #ef4444;
+    font-size: 0.95rem;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+/* ============================================================
+   3. VERIFIED CUSTOMER REVIEWS & 5-STAR TESTIMONIALS
+   ============================================================ */
+.reviews-hero-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--bg-primary);
+    border: 1.5px solid var(--border-color);
+    border-radius: 50px;
+    padding: 8px 20px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 24px;
+}
+
+.reviews-score {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: #f59e0b;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.reviews-meta {
+    text-align: left;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    line-height: 1.3;
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1100px;
+    margin: 0 auto 30px;
+}
+
+.review-card {
+    background: var(--bg-primary);
+    border-radius: 16px;
+    padding: 20px;
+    border: 1.5px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.review-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    border-color: #0891b2;
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.review-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0284c7 0%, #0891b2 100%);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.review-author-name {
+    font-size: 0.92rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 0 0 2px;
+}
+
+.review-author-meta {
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+}
+
+.review-stars {
+    color: #f59e0b;
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+}
+
+.review-text {
+    font-size: 0.86rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+    margin: 0 0 14px;
+    font-style: italic;
+}
+
+.review-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: #f0fdf4;
+    color: #15803d;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    border: 1px solid #bbf7d0;
+}
+
+[data-theme="dark"] .review-badge {
+    background: #064e3b;
+    color: #86efac;
+    border-color: #059669;
+}

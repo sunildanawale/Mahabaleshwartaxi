@@ -1,0 +1,845 @@
+/* ============================================================
+   PREMIUM HERO SECTION REDESIGN - SCROLL FIX
+   ============================================================
+   • Conversion-focused design
+   • Advanced visual hierarchy
+   • Mobile-first responsive
+   • Dark mode support
+   • Premium animations
+ */
+
+/* ── 1. HERO SECTION CONTAINER ── */
+.hero-premium {
+    position: relative;
+    overflow: visible;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0e7490 100%);
+    min-height: auto;
+    height: auto;
+    padding: 60px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+/* Animated Background Gradients */
+.hero-premium::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r="1.2" fill="rgba(255,255,255,0.25)"/></pattern></defs><rect width="1200" height="800" fill="transparent"/><rect width="1200" height="800" fill="url(%23dots)"/></svg>');
+    background-size: cover;
+    opacity: 0.4;
+    z-index: 0;
+    animation: floatBg 20s ease-in-out infinite;
+}
+
+/* Animated Background Orbs */
+.hero-premium::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(2, 132, 199, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: orb1 25s ease-in-out infinite;
+    z-index: 0;
+}
+
+/* Additional Floating Orb */
+.hero-premium-orb-2 {
+    position: absolute;
+    bottom: -20%;
+    left: -5%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(34, 211, 238, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: orb2 30s ease-in-out infinite;
+    z-index: 0;
+}
+
+@keyframes orb1 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(50px, -50px); }
+}
+
+@keyframes orb2 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-40px, 60px); }
+}
+
+@keyframes floatBg {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.6; }
+}
+
+/* ── 2. HERO CONTENT WRAPPER ── */
+.hero-premium-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1400px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 50px;
+    align-items: flex-start;
+}
+
+@media (max-width: 1024px) {
+    .hero-premium-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .hero-premium {
+        padding: 40px 20px;
+    }
+}
+
+/* ── 3. HERO TEXT SECTION ── */
+.hero-text-section {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    animation: slideInLeft 0.8s ease-out 0.1s both;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Trust Badge Row */
+.hero-trust-badges {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #38bdf8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    backdrop-filter: blur(10px);
+    animation: fadeInUp 0.6s ease-out 0.2s both;
+}
+
+.hero-badge i {
+    font-size: 0.9rem;
+}
+
+.hero-badge:nth-child(2) { animation-delay: 0.3s; }
+.hero-badge:nth-child(3) { animation-delay: 0.4s; }
+
+/* Main Heading */
+.hero-title {
+    font-size: 3.2rem;
+    font-weight: 900;
+    line-height: 1.15;
+    color: #ffffff;
+    letter-spacing: -1.5px;
+    margin: 0;
+    animation: fadeInUp 0.7s ease-out 0.3s both;
+}
+
+.hero-title span {
+    background: linear-gradient(135deg, #38bdf8 0%, #fbbf24 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: block;
+}
+
+/* Subtitle */
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: #cbd5e1;
+    line-height: 1.6;
+    margin: 0;
+    max-width: 500px;
+    animation: fadeInUp 0.7s ease-out 0.4s both;
+}
+
+/* Benefits Grid */
+.hero-benefits {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    animation: fadeInUp 0.7s ease-out 0.5s both;
+}
+
+.hero-benefit {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px 14px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.hero-benefit:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(56, 189, 248, 0.3);
+    transform: translateY(-2px);
+}
+
+.hero-benefit i {
+    font-size: 1.3rem;
+    color: #4ade80;
+    flex-shrink: 0;
+}
+
+.hero-benefit-text {
+    font-size: 0.9rem;
+    color: #e2e8f0;
+    font-weight: 600;
+}
+
+/* CTA Buttons Group */
+.hero-cta-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+    animation: fadeInUp 0.7s ease-out 0.6s both;
+}
+
+.hero-cta-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 32px;
+    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 8px 20px rgba(2, 132, 199, 0.3);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.hero-cta-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(2, 132, 199, 0.4);
+}
+
+.hero-cta-primary:active {
+    transform: translateY(0);
+}
+
+.hero-cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 28px;
+    background: transparent;
+    color: #ffffff;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.hero-cta-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #38bdf8;
+    color: #38bdf8;
+    transform: translateY(-2px);
+}
+
+/* ── 4. HERO BOOKING CARD (Premium Design) ── */
+.hero-booking-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    animation: slideInRight 0.8s ease-out 0.2s both;
+    z-index: 3;
+    max-height: fit-content;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Booking Card Header */
+.booking-card-header {
+    background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+    color: #ffffff;
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.booking-card-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    margin-bottom: 4px;
+}
+
+.booking-card-title i {
+    font-size: 1.3rem;
+}
+
+.booking-card-title h2 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin: 0;
+}
+
+.booking-card-subtitle {
+    font-size: 0.8rem;
+    color: #ecfeff;
+    margin: 0;
+    font-weight: 600;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+/* Live Weather Widget */
+.booking-weather-widget {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 6px 12px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.booking-weather-widget i {
+    font-size: 1.2rem;
+}
+
+.booking-weather-temp {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.booking-weather-temp strong {
+    display: block;
+    font-size: 0.9rem;
+}
+
+.booking-weather-temp small {
+    display: block;
+    font-size: 0.7rem;
+    opacity: 0.9;
+}
+
+/* Booking Card Body */
+.booking-card-body {
+    padding: 24px;
+}
+
+/* Form Group */
+.booking-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.booking-form-row.full {
+    grid-template-columns: 1fr;
+}
+
+.booking-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.booking-form-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: #0891b2;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.booking-form-label i {
+    font-size: 0.95rem;
+}
+
+.booking-form-input,
+.booking-form-select {
+    padding: 12px 14px;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #0f172a;
+    transition: all 0.2s ease;
+    outline: none;
+    font-family: inherit;
+}
+
+.booking-form-input:focus,
+.booking-form-select:focus {
+    border-color: #0891b2;
+    background-color: #f0f9ff;
+    box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.1);
+}
+
+.booking-form-input::placeholder {
+    color: #94a3b8;
+}
+
+/* Tour Selection Card */
+.booking-tour-selector {
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 16px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.booking-tour-selector:hover {
+    border-color: #0891b2;
+    background: #f0f9ff;
+}
+
+.booking-tour-selector.active {
+    border-color: #0891b2;
+    background: #ecfeff;
+    box-shadow: 0 0 0 2px rgba(8, 145, 178, 0.15);
+}
+
+.booking-tour-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.booking-tour-radio {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #cbd5e1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.booking-tour-selector.active .booking-tour-radio {
+    border-color: #0891b2;
+    background: #0891b2;
+}
+
+.booking-tour-radio-dot {
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 50%;
+    display: none;
+}
+
+.booking-tour-selector.active .booking-tour-radio-dot {
+    display: block;
+}
+
+.booking-tour-name {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #0f172a;
+    flex: 1;
+}
+
+.booking-tour-price {
+    font-size: 1rem;
+    font-weight: 900;
+    color: #0e7490;
+    white-space: nowrap;
+}
+
+.booking-tour-duration {
+    font-size: 0.75rem;
+    color: #64748b;
+    margin-left: 28px;
+    margin-top: 4px;
+    font-weight: 600;
+}
+
+/* Booking Benefits Row */
+.booking-benefits-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 18px;
+    padding: 12px;
+    background: #f0fdf4;
+    border: 1.5px solid #bbf7d0;
+    border-radius: 10px;
+}
+
+.booking-benefit-chip {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #15803d;
+}
+
+.booking-benefit-chip i {
+    font-size: 0.9rem;
+}
+
+/* CTA Button */
+.booking-cta-btn {
+    width: 100%;
+    padding: 14px 16px;
+    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 8px 20px rgba(2, 132, 199, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.booking-cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(2, 132, 199, 0.4);
+}
+
+.booking-cta-btn:active {
+    transform: translateY(0);
+}
+
+.booking-cta-btn i {
+    font-size: 1.1rem;
+}
+
+/* Secondary CTA */
+.booking-ai-help-btn {
+    width: 100%;
+    padding: 12px 16px;
+    background: #fef3c7;
+    color: #92400e;
+    border: 2px solid #fcd34d;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.booking-ai-help-btn:hover {
+    background: #fbbf24;
+    border-color: #f59e0b;
+    transform: translateY(-1px);
+}
+
+/* Trust Footer */
+.booking-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 0;
+    border-top: 1px solid #e2e8f0;
+    margin-top: 16px;
+    font-size: 0.75rem;
+    color: #64748b;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+.booking-card-footer i {
+    color: #10b981;
+    font-size: 0.9rem;
+}
+
+/* ── 5. RESPONSIVE DESIGN ── */
+@media (max-width: 1024px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .hero-cta-group {
+        width: 100%;
+    }
+
+    .hero-cta-primary,
+    .hero-cta-secondary {
+        flex: 1;
+        min-width: 140px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-premium {
+        padding: 30px 16px;
+        overflow: visible;
+    }
+
+    .hero-premium-content {
+        gap: 30px;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+
+    .hero-subtitle {
+        font-size: 0.95rem;
+    }
+
+    .hero-benefits {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-cta-group {
+        flex-direction: column;
+    }
+
+    .hero-cta-primary,
+    .hero-cta-secondary {
+        width: 100%;
+    }
+
+    .hero-booking-card {
+        border-radius: 16px;
+    }
+
+    .booking-card-header {
+        padding: 16px 18px;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .booking-card-body {
+        padding: 18px;
+    }
+
+    .booking-form-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .booking-tour-name {
+        font-size: 0.9rem;
+    }
+
+    .booking-tour-price {
+        font-size: 0.95rem;
+    }
+
+    .booking-weather-widget {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-premium::after,
+    .hero-premium-orb-2 {
+        display: none;
+    }
+
+    .hero-title {
+        font-size: 1.6rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .hero-trust-badges {
+        gap: 6px;
+    }
+
+    .hero-badge {
+        padding: 4px 10px;
+        font-size: 0.7rem;
+    }
+
+    .hero-benefit-text {
+        font-size: 0.8rem;
+    }
+
+    .booking-form-row {
+        gap: 10px;
+    }
+
+    .booking-form-input,
+    .booking-form-select {
+        padding: 10px 12px;
+        font-size: 16px;
+    }
+
+    .booking-cta-btn {
+        padding: 12px 14px;
+        font-size: 0.95rem;
+    }
+}
+
+/* ── 6. DARK MODE SUPPORT ── */
+[data-theme="dark"] .hero-premium {
+    background: linear-gradient(135deg, #0f172a 0%, #1a1f35 50%, #0e3a4e 100%);
+}
+
+[data-theme="dark"] .hero-text-section {
+    color: #f8fafc;
+}
+
+[data-theme="dark"] .hero-subtitle {
+    color: #cbd5e1;
+}
+
+[data-theme="dark"] .hero-booking-card {
+    background: #1e293b;
+}
+
+[data-theme="dark"] .booking-card-header {
+    background: linear-gradient(135deg, #0369a1 0%, #0c4a6e 100%);
+}
+
+[data-theme="dark"] .booking-form-input,
+[data-theme="dark"] .booking-form-select {
+    background: #0f172a;
+    color: #f8fafc;
+    border-color: #334155;
+}
+
+[data-theme="dark"] .booking-form-input:focus,
+[data-theme="dark"] .booking-form-select:focus {
+    background: #1e293b;
+    border-color: #38bdf8;
+}
+
+[data-theme="dark"] .booking-tour-selector {
+    background: #1e293b;
+    border-color: #334155;
+    color: #f8fafc;
+}
+
+[data-theme="dark"] .booking-tour-selector:hover {
+    background: #0f172a;
+    border-color: #38bdf8;
+}
+
+[data-theme="dark"] .booking-tour-selector.active {
+    background: rgba(2, 132, 199, 0.15);
+    border-color: #38bdf8;
+}
+
+[data-theme="dark"] .booking-tour-name {
+    color: #ffffff;
+}
+
+[data-theme="dark"] .booking-benefits-row {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.3);
+}
+
+[data-theme="dark"] .booking-card-footer {
+    border-top-color: #334155;
+    color: #94a3b8;
+}
+
+/* ── 7. ANIMATION UTILITIES ── */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Pulse effect for important CTAs */
+.hero-cta-primary {
+    animation: subtle-pulse 3s ease-in-out infinite;
+}
+
+@keyframes subtle-pulse {
+    0%, 100% {
+        box-shadow: 0 8px 20px rgba(2, 132, 199, 0.3);
+    }
+    50% {
+        box-shadow: 0 8px 30px rgba(2, 132, 199, 0.5);
+    }
+}

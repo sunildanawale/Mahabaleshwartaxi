@@ -1,10 +1,10 @@
-(function(){function purgeStale(){var bad=document.querySelectorAll('.mobile-sticky-bar,[class*="mobile-bar"],[aria-label*="Driver"],[href*="Driver"]');for(var i=0;i<bad.length;i++){bad[i].remove();}}purgeStale();if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',purgeStale);}window.addEventListener('load',purgeStale);})();
+(function () { function purgeStale() { var bad = document.querySelectorAll('.mobile-sticky-bar,[class*="mobile-bar"],[aria-label*="Driver"],[href*="Driver"]'); for (var i = 0; i < bad.length; i++) { bad[i].remove(); } } purgeStale(); if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', purgeStale); } window.addEventListener('load', purgeStale); })();
 /* ============================================================
    ADVANCED CRO & PREMIUM FEATURES JAVASCRIPT
    Aryan Taxi Mahabaleshwar — World-Class Customer Experience
    ============================================================ */
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     'use strict';
 
     // 1. Mobile sticky bar handled natively by .mobile-cta in HTML/CSS with zero name disclosure
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var temp = 20;
         var cond = "Pleasant";
         var icon = "fa-cloud-sun";
-        
+
         if (month >= 2 && month <= 5) { temp = 26; cond = "Clear Breeze"; icon = "fa-sun"; }
         else if (month >= 6 && month <= 9) { temp = 19; cond = "Rain / Mist"; icon = "fa-cloud-showers-heavy"; }
         else { temp = 16; cond = "Crisp & Cool"; icon = "fa-snowflake"; }
@@ -89,7 +89,7 @@ function renderSeasonAdvisory() {
         + '</div>'
         + '</div>'
         + '<div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;">'
-        + data.badges.map(function(b){ return '<span style="background:#ffffff;padding:4px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;color:#0f172a;border:1px solid rgba(0,0,0,0.08);box-shadow:0 1px 3px rgba(0,0,0,0.05);">' + b + '</span>'; }).join('')
+        + data.badges.map(function (b) { return '<span style="background:#ffffff;padding:4px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;color:#0f172a;border:1px solid rgba(0,0,0,0.08);box-shadow:0 1px 3px rgba(0,0,0,0.05);">' + b + '</span>'; }).join('')
         + '</div>'
         + '</div>'
         + '<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(0,0,0,0.06);font-size:0.8rem;color:#475569;display:flex;align-items:center;gap:6px;">'
@@ -98,9 +98,9 @@ function renderSeasonAdvisory() {
 }
 
 // Language Switcher Controller
-window.switchLanguage = function(lang, btnEl) {
+window.switchLanguage = function (lang, btnEl) {
     var buttons = document.querySelectorAll('.lang-btn');
-    buttons.forEach(function(b) {
+    buttons.forEach(function (b) {
         if (b.getAttribute('data-lang') === lang) b.classList.add('active');
         else b.classList.remove('active');
     });
@@ -112,15 +112,15 @@ window.switchLanguage = function(lang, btnEl) {
     } else {
         document.cookie = "googtrans=/en/" + lang + "; path=/;";
         document.cookie = "googtrans=/en/" + lang + "; path=/; domain=" + window.location.hostname;
-        
+
         // Load Google Translate script if not present
         if (!window.google || !window.google.translate) {
             var s = document.createElement('script');
             s.src = '//translate.google.com/translate_a/element.js?cb=initGTranslate';
             document.body.appendChild(s);
-            window.initGTranslate = function() {
-                new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,mr,hi', autoDisplay: false}, 'google_translate_element');
-                setTimeout(function() {
+            window.initGTranslate = function () {
+                new google.translate.TranslateElement({ pageLanguage: 'en', includedLanguages: 'en,mr,hi', autoDisplay: false }, 'google_translate_element');
+                setTimeout(function () {
                     var sl = document.querySelector('.goog-te-combo');
                     if (sl) {
                         sl.value = lang;

@@ -1,4 +1,4 @@
-(function(){function purgeStale(){var bad=document.querySelectorAll('.mobile-sticky-bar,[class*="mobile-bar"],[aria-label*="Driver"],[href*="Driver"]');for(var i=0;i<bad.length;i++){bad[i].remove();}}purgeStale();if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',purgeStale);}window.addEventListener('load',purgeStale);})();
+(function () { function purgeStale() { var bad = document.querySelectorAll('.mobile-sticky-bar,[class*="mobile-bar"],[aria-label*="Driver"],[href*="Driver"]'); for (var i = 0; i < bad.length; i++) { bad[i].remove(); } } purgeStale(); if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', purgeStale); } window.addEventListener('load', purgeStale); })();
 /* ============================================================
    MAHABALESHWAR SIGHTSEEING TAXI — Core JavaScript
    Version: 3.0 | 2026
@@ -116,7 +116,7 @@
 
 
 
-    
+
     /* ============================================================
        13. HERO ANIMATED TRUST ROTATOR
        ============================================================ */
@@ -665,9 +665,9 @@
                     mode: 'no-cors',
                     headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
                     body: payload
-                }).catch(() => {});
+                }).catch(() => { });
             }
-        } catch (err) {}
+        } catch (err) { }
 
         const waUrl = `https://api.whatsapp.com/send?phone=919922882044&text=${encodeURIComponent(text)}`;
         const win = window.open(waUrl, '_blank', 'noopener');
@@ -758,7 +758,7 @@
         // Register Low-Signal Offline Service Worker
         if ('serviceWorker' in navigator && window.location.protocol.indexOf('http') === 0) {
             window.addEventListener('load', function () {
-                navigator.serviceWorker.register('sw.js').catch(function () {});
+                navigator.serviceWorker.register('sw.js').catch(function () { });
             });
         }
     }
@@ -770,4 +770,18 @@
     }
 
 })();
+
+window.addEventListener('load', function () {
+    navigator.serviceWorker.register('sw.js').catch(function () { });
+});
+        }
+    }
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAll);
+} else {
+    initAll();
+}
+
+}) ();
 

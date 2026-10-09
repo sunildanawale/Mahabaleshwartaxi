@@ -134,6 +134,357 @@
       ]
     }
     </script>
+
+    <style>
+        /* ===== Hero Section World-Class Responsive Layout & Animations ===== */
+        .hero--world-class {
+            min-height: 100vh !important;
+            padding-top: 105px !important;
+            padding-bottom: 60px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            position: relative !important;
+            overflow: hidden !important;
+            box-sizing: border-box !important;
+        }
+
+        .hero--world-class, .hero--world-class * {
+            box-sizing: border-box !important;
+        }
+
+        /* Cinematic Background Ken Burns Motion */
+        .hero__bg {
+            animation: heroKenBurns 26s ease-in-out infinite alternate !important;
+            transform-origin: center center;
+            will-change: transform;
+        }
+        @keyframes heroKenBurns {
+            0% { transform: scale(1) translate(0, 0); }
+            50% { transform: scale(1.05) translate(-1%, -0.5%); }
+            100% { transform: scale(1.08) translate(1%, 0.5%); }
+        }
+
+        /* Desktop Grid container (default > 991px) */
+        .hero__content-custom {
+            display: grid !important;
+            grid-template-columns: minmax(0, 1.24fr) minmax(0, 0.76fr) !important;
+            gap: 40px !important;
+            align-items: center !important;
+            width: 100% !important;
+            max-width: 1200px !important;
+            margin: 0 auto !important;
+            padding: 0 24px !important;
+            position: relative !important;
+            z-index: 2 !important;
+        }
+
+        .hero__content-custom > div {
+            min-width: 0 !important;
+        }
+
+        /* Staggered Smooth Fade-Up Entrance */
+        @keyframes heroFadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(22px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-animated-trust {
+            animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s backwards !important;
+        }
+        .hero__content-custom .hero__title {
+            font-size: clamp(2rem, 3.4vw, 3.2rem) !important;
+            font-weight: 800 !important;
+            line-height: 1.14 !important;
+            letter-spacing: -0.02em !important;
+            color: #ffffff !important;
+            margin-bottom: 16px !important;
+            word-break: break-word !important;
+            overflow-wrap: break-word !important;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.5) !important;
+            animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s backwards !important;
+        }
+
+        /* Shifting Aurora Gradient on Title */
+        .hero-gradient-text {
+            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 35%, #c084fc 70%, #38bdf8 100%) !important;
+            background-size: 250% auto !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            animation: gradientShift 6s linear infinite !important;
+            display: inline-block;
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero__content-custom .hero__subtitle {
+            font-size: clamp(0.92rem, 1.15vw, 1.1rem) !important;
+            font-weight: 400 !important;
+            line-height: 1.55 !important;
+            color: #e2e8f0 !important;
+            max-width: 540px !important;
+            margin-bottom: 24px !important;
+            animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s backwards !important;
+        }
+
+        .hero__trust {
+            animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s backwards !important;
+        }
+
+        /* Trust pillars micro-interaction hover */
+        .hero__trust > div {
+            transition: transform 0.25s ease, color 0.25s ease !important;
+            cursor: default;
+        }
+        .hero__trust > div:hover {
+            transform: translateY(-2px);
+            color: #ffffff !important;
+        }
+        .hero__trust > div > div {
+            transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+        }
+        .hero__trust > div:hover > div {
+            transform: scale(1.12);
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.4) !important;
+        }
+
+        .hero__actions {
+            animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s backwards !important;
+        }
+
+        /* CTA buttons micro-interaction */
+        .hero__actions .btn {
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease !important;
+        }
+        .hero__actions .btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 14px 28px -4px rgba(245, 158, 11, 0.5) !important;
+        }
+        .hero__actions .btn:nth-child(2):hover {
+            box-shadow: 0 14px 28px -4px rgba(34, 197, 94, 0.5) !important;
+        }
+        .hero__actions .btn:active {
+            transform: translateY(-1px) scale(0.99);
+        }
+
+        /* Right column & Booking Card Entrance */
+        .hero__booking-col {
+            width: 100% !important;
+            max-width: 400px !important;
+            margin: 0 0 0 auto !important;
+            justify-self: end !important;
+            position: relative !important;
+            animation: heroFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.35s backwards !important;
+        }
+
+        /* Luxury Dark Glassmorphism with Soft Ambient Glow */
+        .booking-box {
+            background: rgba(15, 23, 42, 0.72) !important;
+            backdrop-filter: blur(24px) !important;
+            -webkit-backdrop-filter: blur(24px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            border-radius: 20px !important;
+            padding: 16px 20px !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+            animation: cardAmbientGlow 6s ease-in-out infinite alternate !important;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease !important;
+        }
+        @keyframes cardAmbientGlow {
+            0% {
+                box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.12), 0 0 20px -5px rgba(56, 189, 248, 0.12) !important;
+            }
+            100% {
+                box-shadow: 0 25px 55px -10px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(56, 189, 248, 0.3), 0 0 32px 0px rgba(99, 102, 241, 0.22) !important;
+            }
+        }
+        .booking-box:hover {
+            border-color: rgba(56, 189, 248, 0.3) !important;
+        }
+
+        /* Live weather widget subtle micro-interaction */
+        #live-weather-widget {
+            transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease !important;
+        }
+        #live-weather-widget:hover {
+            transform: translateY(-1px);
+            background: rgba(255, 255, 255, 0.14) !important;
+            border-color: rgba(56, 189, 248, 0.35) !important;
+        }
+        #live-weather-widget i {
+            animation: weatherSunBob 4s ease-in-out infinite alternate;
+        }
+        @keyframes weatherSunBob {
+            0% { transform: rotate(0deg) scale(1); }
+            100% { transform: rotate(15deg) scale(1.1); }
+        }
+
+        /* Route Select dropdown options styling (100% visible in both light & dark themes) */
+        #routeSelect {
+            color: #ffffff !important;
+            background-color: rgba(15, 23, 42, 0.6) !important;
+        }
+        #routeSelect option {
+            background-color: #1e293b !important;
+            color: #f8fafc !important;
+            padding: 10px 14px !important;
+            font-size: 0.9rem !important;
+        }
+        #routeSelect option:hover, #routeSelect option:checked {
+            background-color: #2563eb !important;
+            color: #ffffff !important;
+        }
+        #routeSelect optgroup {
+            background-color: #0f172a !important;
+            color: #38bdf8 !important;
+            font-weight: 800 !important;
+            padding: 8px 10px !important;
+            font-size: 0.85rem !important;
+        }
+
+        /* Tablet & Mobile Stack (<= 991px) */
+        @media (max-width: 991px) {
+            .hero--world-class {
+                min-height: auto !important;
+                padding-top: 95px !important;
+                padding-bottom: 50px !important;
+            }
+            .hero__content-custom {
+                grid-template-columns: 1fr !important;
+                gap: 32px !important;
+                padding: 0 20px !important;
+                text-align: center !important;
+            }
+            .hero__content-custom > div:first-child {
+                align-items: center !important;
+                display: flex !important;
+                flex-direction: column !important;
+            }
+            .hero-animated-trust {
+                margin: 0 auto 20px auto !important;
+                justify-content: center !important;
+            }
+            .hero__content-custom .hero__title {
+                font-size: clamp(1.85rem, 5vw, 2.6rem) !important;
+                text-align: center !important;
+            }
+            .hero__content-custom .hero__subtitle {
+                text-align: center !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+                margin-bottom: 24px !important;
+            }
+            .hero__trust {
+                justify-content: center !important;
+                gap: 16px 20px !important;
+                margin-bottom: 28px !important;
+            }
+            .hero__actions {
+                justify-content: center !important;
+                margin-bottom: 8px !important;
+            }
+            .hero__booking-col {
+                max-width: 420px !important;
+                margin: 0 auto !important;
+                justify-self: center !important;
+            }
+            .booking-box {
+                padding: 20px 18px !important;
+                border-radius: 20px !important;
+            }
+        }
+
+        /* Mobile Phones (<= 480px) */
+        @media (max-width: 480px) {
+            .hero--world-class {
+                padding-top: 85px !important;
+                padding-bottom: 35px !important;
+            }
+            .hero__content-custom {
+                padding: 0 14px !important;
+                gap: 24px !important;
+            }
+            .hero__content-custom .hero__title {
+                font-size: clamp(1.6rem, 7vw, 2rem) !important;
+                line-height: 1.2 !important;
+            }
+            .hero__actions {
+                flex-direction: column !important;
+                width: 100% !important;
+            }
+            .hero__actions .btn {
+                width: 100% !important;
+                justify-content: center !important;
+            }
+            .booking-box {
+                padding: 16px 14px !important;
+                border-radius: 16px !important;
+            }
+            .booking-box__grid {
+                grid-template-columns: 1fr !important;
+                gap: 8px !important;
+            }
+            .hero-primary-btn {
+                height: 44px !important;
+                font-size: 0.9rem !important;
+            }
+        }
+
+        /* Interactive Focus & Button States */
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(52, 211, 153, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+        }
+        .hero--world-class .form-input:focus, .hero--world-class .form-select:focus, .hero-dark-input:focus {
+            outline: none;
+            border-color: #38bdf8 !important;
+            background: rgba(15, 23, 42, 0.85) !important;
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.22) !important;
+        }
+        .hero-dark-input::placeholder { color: #64748b; }
+        .hero-primary-btn {
+            transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+        }
+        .hero-primary-btn:hover {
+            transform: translateY(-2px) scale(1.01) !important;
+            box-shadow: 0 12px 28px -2px rgba(37, 99, 235, 0.6), 0 0 18px rgba(56, 189, 248, 0.35) !important;
+        }
+        .hero-primary-btn:active {
+            transform: translateY(0) scale(0.99) !important;
+        }
+        #heroAiBtn {
+            transition: all 0.25s ease !important;
+        }
+        #heroAiBtn:hover {
+            background: rgba(255, 255, 255, 0.12) !important;
+            border-color: rgba(56, 189, 248, 0.35) !important;
+            color: #ffffff !important;
+            transform: translateY(-1px) !important;
+        }
+        @keyframes shimmer {
+            0% { left: -100%; }
+            20% { left: 200%; }
+            100% { left: 200%; }
+        }
+
+        /* Respect Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            .hero__bg, .hero-gradient-text, .booking-box, .hero-animated-trust, .hero__title, .hero__subtitle, .hero__trust, .hero__actions, .hero__booking-col, #live-weather-widget i, .btn-shimmer {
+                animation: none !important;
+                transform: none !important;
+            }
+        }
+    </style>
 </head>
     <body>
         <a href="#main-content" class="skip-link">Skip to main content</a> <!-- Top Bar --> <div class="top-bar" role="banner">
@@ -217,139 +568,172 @@
 </button>
 </div>
 </nav>
-<main id="main-content"> <!-- ============================================================ HERO SECTION ============================================================ --> <section class="hero" style="min-height: 90vh; padding-top: 110px; padding-bottom: 50px; display: flex; align-items: center; justify-content: center; position: relative;" aria-label="Mahabaleshwar Taxi by Aryan Taxi Mahabaleshwar — Explore Sahyadri">
-    <img class="hero__bg" src="images/mahabaleshwar-hero-hd.jpg" alt="Breathtaking panoramic view of Mahabaleshwar Sahyadri mountain valley and winding ghat road" width="1920" height="1080" fetchpriority="high" decoding="async">
-    <div class="hero__overlay" style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(15, 23, 42, 0.88) 0%, rgba(15, 23, 42, 0.62) 50%, rgba(15, 23, 42, 0.18) 100%); z-index: 1;" aria-hidden="true">
-    </div>
-    <div class="hero__content" style="display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; max-width: 1240px; margin: 0 auto; padding: 0 20px; width: 100%; position: relative; z-index: 2;"> <!-- Left Column: Content & Value Propositions --> <div style="display: flex; flex-direction: column; align-items: flex-start;">
-        <div class="hero__badges-row">
-            <div class="hero-animated-trust" aria-label="Why Choose Aryan Taxi Mahabaleshwar">
-                <div class="hero-animated-trust__badge">
-                    <span class="hero-animated-trust__dot" aria-hidden="true"></span>
-                    <span class="hero-animated-trust__label">LOCAL PROMISE:</span>
-                    <span id="heroTrustRotator" class="hero-animated-trust__text" aria-live="polite">
-                        <i class="fa-solid fa-shield-check" style="color: #4ade80;"></i> Safe &amp; Reliable Service
+<main id="main-content"> <!-- ============================================================ HERO SECTION ============================================================ --> <section class="hero hero--world-class" style="min-height: 100vh; padding-top: 105px; padding-bottom: 60px; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; box-sizing: border-box;" aria-label="Mahabaleshwar Taxi by Aryan Taxi Mahabaleshwar">
+    <img class="hero__bg" src="images/mahabaleshwar-hero-hd.jpg" alt="Breathtaking panoramic view of Mahabaleshwar Sahyadri mountain valley" width="1920" height="1080" fetchpriority="high" decoding="async" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
+    
+    <div class="hero__overlay" style="position: absolute; inset: 0; background: linear-gradient(105deg, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.8) 45%, rgba(15, 23, 42, 0.2) 100%); z-index: 1;" aria-hidden="true"></div>
+    
+    <div class="hero__content-custom">
+        
+        <!-- Left Column --> 
+        <div style="display: flex; flex-direction: column; align-items: flex-start;">
+            
+            <div class="hero-animated-trust" style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(12px); border-radius: 999px; padding: 5px 14px; margin-bottom: 18px; display: inline-flex; align-items: center; gap: 8px;">
+                <span class="hero-animated-trust__dot" style="width: 8px; height: 8px; background-color: #34d399; border-radius: 50%; box-shadow: 0 0 10px #34d399; animation: pulseGlow 2s infinite;"></span>
+                <span class="hero-animated-trust__label" style="font-size: 0.75rem; font-weight: 700; color: #94a3b8; letter-spacing: 1px; text-transform: uppercase;">LOCAL PROMISE:</span>
+                <span id="heroTrustRotator" class="hero-animated-trust__text" style="font-size: 0.85rem; font-weight: 600; color: #fff; transition: opacity 0.3s ease, transform 0.3s ease;">
+                    <i class="fa-solid fa-shield-check" style="color: #4ade80;"></i> Safe &amp; Reliable Service
+                </span>
+            </div>
+
+            <h1 class="hero__title" style="font-weight: 800; line-height: 1.12; letter-spacing: -0.02em; color: #ffffff; margin-bottom: 20px; text-shadow: 0 4px 20px rgba(0,0,0,0.5); word-break: break-word;">
+                Mahabaleshwar &amp; Panchgani <br/>
+                <span class="hero-gradient-text">Sightseeing Taxi</span>
+            </h1>
+            
+            <p class="hero__subtitle" style="font-weight: 400; line-height: 1.6; color: #e2e8f0; max-width: 560px; margin-bottom: 30px;">
+                Book an official Mahabaleshwar taxi for local sightseeing, outstation drops, and convenient transfers. Clear union fares, easy booking, and verified local drivers.
+            </p> 
+
+            <!-- Trust Pillars --> 
+            <div class="hero__trust" style="display: flex; gap: 18px 22px; margin-bottom: 28px; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center; gap: 8px; color: #f8fafc; font-size: 0.95rem; font-weight: 600;">
+                    <div style="width: 24px; height: 24px; border-radius: 50%; background: rgba(74, 222, 128, 0.15); display: flex; align-items: center; justify-content: center;"><i class="fa-solid fa-check" style="color: #4ade80; font-size: 0.75rem;"></i></div>
+                    Union-Approved Fares
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; color: #f8fafc; font-size: 0.95rem; font-weight: 600;">
+                    <div style="width: 24px; height: 24px; border-radius: 50%; background: rgba(251, 191, 36, 0.15); display: flex; align-items: center; justify-content: center;"><i class="fa-solid fa-taxi" style="color: #fbbf24; font-size: 0.75rem;"></i></div>
+                    Black &amp; Yellow Taxi
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; color: #f8fafc; font-size: 0.95rem; font-weight: 600;">
+                    <div style="width: 24px; height: 24px; border-radius: 50%; background: rgba(56, 189, 248, 0.15); display: flex; align-items: center; justify-content: center;"><i class="fa-solid fa-star" style="color: #38bdf8; font-size: 0.75rem;"></i></div>
+                    Zero Advance Booking
+                </div>
+            </div> 
+
+            <!-- CTA Actions --> 
+            <div class="hero__actions" style="display: flex; gap: 16px; flex-wrap: wrap;">
+                <a href="tel:+919922882044" class="btn" style="background: #f59e0b; color: #fff; border-radius: 99px; font-weight: 700; padding: 12px 24px; font-size: 0.95rem; box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.4); display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease; text-decoration: none;">
+                    <i class="fa-solid fa-phone"></i> Call +91 99228 82044
+                </a>
+                <a href="https://api.whatsapp.com/send?phone=919922882044&text=Hello%20Aryan%20Taxi..." target="_blank" rel="noopener" class="btn" style="background: #22c55e; color: #fff; border-radius: 99px; font-weight: 700; padding: 12px 24px; font-size: 0.95rem; box-shadow: 0 10px 25px -5px rgba(34, 197, 94, 0.4); display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease; text-decoration: none;">
+                    <i class="fa-brands fa-whatsapp" style="font-size: 1.2rem;"></i> WhatsApp Us
+                </a>
+            </div>
+        </div> 
+        
+        
+        <!-- Right Column: Unified World-Class Booking Card --> 
+        <div class="hero__booking-col" style="width: 100%; max-width: 400px; margin: 0 0 0 auto; position: relative; justify-self: end;">
+            
+            <div class="booking-box" aria-labelledby="booking-heading" style="background: rgba(15, 23, 42, 0.72); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 20px; padding: 16px 20px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255,255,255,0.1); width: 100%; box-sizing: border-box;">
+                
+                <!-- Top Header: Single Line, No Wrap --> 
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 11px;">
+                    <div>
+                        <div id="booking-heading" style="font-size: 1.15rem; font-weight: 800; color: #ffffff; letter-spacing: -0.01em; line-height: 1.2;">
+                            Secure Your Taxi 
+                        </div>
+                        <div style="font-size: 0.7rem; color: #94a3b8; font-weight: 600;">Zero Advance &bull; Official Union Tariffs</div>
+                    </div> 
+                    <!-- Compact Weather Badge --> 
+                    <div id="live-weather-widget" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.08); padding: 4px 8px; border-radius: 8px; display: inline-flex; align-items: center; gap: 5px; flex-shrink: 0;">
+                        <i class="fa-solid fa-cloud-sun" style="color: #38bdf8; font-size: 0.95rem;"></i>
+                        <span id="live-temp" style="font-weight: 800; color: #ffffff; font-size: 0.82rem;">19&deg;C</span>
+                        <span id="live-sunrise" style="display: none;">06:27</span>
+                    </div>
+                </div> 
+
+                <!-- Form Grid 1: Name & WhatsApp --> 
+                <div class="booking-box__grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px;">
+                    <div class="form-group" style="margin-bottom: 0; position: relative;">
+                        <label class="form-label" for="userName" style="font-size: 0.63rem; font-weight: 700; color: #94a3b8; margin-bottom: 3px; display: block; letter-spacing: 0.05em; text-transform: uppercase;"> Your Name </label>
+                        <div style="position: relative;">
+                            <i class="fa-solid fa-user" style="position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: #64748b; font-size: 0.75rem;"></i>
+                            <input type="text" id="userName" class="form-input hero-dark-input" placeholder="John Doe" style="width: 100%; height: 35px; padding: 6px 10px 6px 30px; background: rgba(15, 23, 42, 0.45); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; font-size: 0.84rem; font-weight: 600; color: #ffffff; transition: all 0.3s ease; box-sizing: border-box; outline: none;">
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0; position: relative;">
+                        <label class="form-label" for="userPhone" style="font-size: 0.63rem; font-weight: 700; color: #94a3b8; margin-bottom: 3px; display: block; letter-spacing: 0.05em; text-transform: uppercase;"> WhatsApp * </label>
+                        <div style="position: relative;">
+                            <i class="fa-brands fa-whatsapp" style="position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: #22c55e; font-size: 0.85rem;"></i>
+                            <input type="tel" id="userPhone" class="form-input hero-dark-input" placeholder="9876543210" style="width: 100%; height: 35px; padding: 6px 10px 6px 30px; background: rgba(15, 23, 42, 0.45); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; font-size: 0.84rem; font-weight: 600; color: #ffffff; transition: all 0.3s ease; box-sizing: border-box; outline: none;">
+                        </div>
+                    </div>
+                </div> 
+                
+                <!-- Form Grid 2: Date & Time --> 
+                <div class="booking-box__grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px;">
+                    <div class="form-group" style="margin-bottom: 0; position: relative;">
+                        <label class="form-label" for="travelDate" style="font-size: 0.63rem; font-weight: 700; color: #94a3b8; margin-bottom: 3px; display: block; letter-spacing: 0.05em; text-transform: uppercase;"> Travel Date </label>
+                        <div style="position: relative;">
+                            <input type="date" id="travelDate" class="form-input hero-dark-input" style="width: 100%; height: 35px; padding: 6px 8px; background: rgba(15, 23, 42, 0.45); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; font-size: 0.84rem; font-weight: 600; color: #ffffff; transition: all 0.3s ease; box-sizing: border-box; outline: none; color-scheme: dark;">
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0; position: relative;">
+                        <label class="form-label" for="pickupTime" style="font-size: 0.63rem; font-weight: 700; color: #94a3b8; margin-bottom: 3px; display: block; letter-spacing: 0.05em; text-transform: uppercase;"> Pickup Time </label>
+                        <div style="position: relative;">
+                            <input type="time" id="pickupTime" class="form-input hero-dark-input" value="09:00" style="width: 100%; height: 35px; padding: 6px 8px; background: rgba(15, 23, 42, 0.45); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; font-size: 0.84rem; font-weight: 600; color: #ffffff; transition: all 0.3s ease; box-sizing: border-box; outline: none; color-scheme: dark;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Row 3: Tour Select with clean option colors --> 
+                <div class="form-group" style="margin-bottom: 11px; position: relative;">
+                    <label class="form-label" for="routeSelect" style="font-size: 0.63rem; font-weight: 700; color: #94a3b8; margin-bottom: 3px; display: block; letter-spacing: 0.05em; text-transform: uppercase;"> Select Tour / Route </label>
+                    <div style="position: relative;">
+                        <i class="fa-solid fa-map-location-dot" style="position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: #64748b; font-size: 0.8rem; pointer-events: none;"></i>
+                        <select id="routeSelect" class="form-select hero-dark-input" style="width: 100%; height: 35px; padding: 6px 26px 6px 30px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; font-size: 0.84rem; font-weight: 700; color: #ffffff; transition: all 0.3s ease; appearance: none; background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2394a3b8%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right 10px top 50%; background-size: 9px auto; box-sizing: border-box; outline: none; cursor: pointer;">
+                            <optgroup label="Official Sightseeing Tours (4-Seater Taxi)">
+                                <option value="Tour 1: Mahabaleshwar Darshan (₹1200, 3.30 Hrs)">Tour 1: Mahabaleshwar Darshan (₹1,200 - 17 Points)</option>
+                                <option value="Tour 2: Waterfall & Sunset Circuit (₹1200, 3.30 Hrs)">Tour 2: Waterfall &amp; Sunset Circuit (₹1,200 - 8 Points)</option>
+                                <option value="Tour 3: Pratapgadh Darshan (₹1600, 3.30 Hrs)">Tour 3: Pratapgadh Fort (₹1,600 - 7 Points)</option>
+                                <option value="Tour 4: Panchgani Darshan (₹1200, 3.00 Hrs)">Tour 4: Panchgani Darshan (₹1,200 - 5 Points)</option>
+                                <option value="Tour 5: Wai Darshan & Dhom Dam (₹2500, 6.00 Hrs)">Tour 5: Wai &amp; Dhom Dam (₹2,500 - 6.00 Hrs)</option>
+                                <option value="Tour 6: Tapola Mini Kashmir (₹1450, 3.30 Hrs)">Tour 6: Tapola Mini Kashmir (₹1,450 - 3.30 Hrs)</option>
+                                <option value="Tour 7: Full Day Mahabaleshwar & Panchgani Combo (₹3000)" selected>Tour 7: Full Day Combo (₹3,000 - Best Value)</option>
+                            </optgroup>
+                            <optgroup label="Outstation Airport & Station Drops (+ Toll)">
+                                <option value="Pune Airport Drop (₹4000 + Toll)">Pune Airport Drop (₹4,000 + Toll)</option>
+                                <option value="Pune Railway Station (₹3500 + Toll)">Pune Railway Station (₹3,500 + Toll)</option>
+                                <option value="Mumbai Airport CSMIA (₹8000 + Toll)">Mumbai Airport Drop (₹8,000 + Toll)</option>
+                                <option value="Mumbai City Vashi/Dadar (₹7000 + Toll)">Mumbai City Drop (₹7,000 + Toll)</option>
+                                <option value="Satara Railway Station / Bus Stand">Satara Station / Bus Stand</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div> 
+
+                <!-- Action Button 1: Get Exact Fare --> 
+                <button onclick="bridgeHomeForm()" type="button" class="btn hero-primary-btn" style="width: 100%; height: 42px; background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: #ffffff; font-weight: 800; font-size: 0.92rem; letter-spacing: 0.4px; border-radius: 11px; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 6px 18px -3px rgba(37, 99, 235, 0.4), inset 0 1px 1px rgba(255,255,255,0.2); transition: all 0.25s ease; position: relative; overflow: hidden;">
+                    <span style="position: relative; z-index: 2; display: flex; align-items: center; gap: 7px;">
+                        <i class="fa-solid fa-bolt"></i> GET EXACT FARE &amp; BOOK NOW 
                     </span>
+                    <div class="btn-shimmer" style="position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent); transform: skewX(-20deg); animation: shimmer 3s infinite; z-index: 1;"></div>
+                </button>
+                
+                <!-- Action Button 2: Plan with Aryan AI --> 
+                <button onclick="window.AryanAI.open()" type="button" class="btn" id="heroAiBtn" style="width: 100%; height: 34px; margin-top: 8px; background: rgba(255, 255, 255, 0.06); color: #e2e8f0; font-weight: 700; font-size: 0.8rem; border-radius: 9px; border: 1px solid rgba(255,255,255,0.12); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.25s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    <i class="fa-solid fa-wand-magic-sparkles" style="color: #fbbf24; font-size: 0.85rem;"></i> Need Help? Plan Trip with Aryan AI 
+                </button>
+
+                <!-- Trust Footer --> 
+                <div style="display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 9px; font-size: 0.7rem; color: #94a3b8; font-weight: 700; text-align: center;">
+                    <i class="fa-solid fa-shield-halved" style="color: #34d399;"></i> 256-bit SSL Secured &bull; Free 2-Hr Cancel
                 </div>
             </div>
         </div>
-<h1 class="hero__title"> Mahabaleshwar &amp; Panchgani <span style="background: linear-gradient(135deg, #38bdf8 0%, #fbbf24 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Sightseeing Taxi</span>
-</h1>
-<p class="hero__subtitle">Book a Mahabaleshwar taxi for local sightseeing, Panchgani tours, outstation travel and convenient taxi transfers. Clear fares, easy booking and reliable local service.</p> <!-- Trust Pillars --> <div class="hero__trust">
-<div class="hero__trust-item">
-    <i class="fa-solid fa-circle-check" style="color: #4ade80;">
-</i>
-<span>Union-Approved Fares</span>
-</div>
-<div class="hero__trust-item">
-    <i class="fa-solid fa-taxi" style="color: #fbbf24;">
-</i>
-<span>Black &amp; Yellow Taxi</span>
-</div>
-<div class="hero__trust-item">
-    <i class="fa-solid fa-calendar-check" style="color: #38bdf8;">
-</i>
-<span>Easy Booking</span>
-</div>
-</div> <!-- CTA Actions --> <div class="hero__actions">
-<a href="tel:+919922882044" class="btn btn--accent" style="border-radius: 30px; font-weight: 700; padding: 10px 16px; font-size: 0.85rem; box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4); display: inline-flex; align-items: center; gap: 6px;">
-<i class="fa-solid fa-phone">
-</i> Call +91 99228 82044 </a>
-<a href="https://api.whatsapp.com/send?phone=919922882044&text=Hello%20Aryan%20Taxi%20Mahabaleshwar%20%F0%9F%91%8B%0AExplore%20Sahyadri%20%E2%80%A2%20Taxi%20Booking%20Request%0A%0A%E2%80%A2%20Tour%3A%20Mahabaleshwar%20Sightseeing%20Taxi%0A%E2%80%A2%20Date%3A%20%5BPlease%20enter%20travel%20date%5D%0A%E2%80%A2%20Pickup%20Hotel%3A%20%5BPlease%20enter%20hotel%20name%5D%0A%E2%80%A2%20Total%20Guests%3A%20%5BPlease%20enter%20passenger%20count%5D%0A%0A%E2%9C%85%20Official%20Union%20Rate%20accepted.%20Pay%20driver%20directly%20after%20trip.%0A%F0%9F%91%89%20Please%20confirm%20cab%20availability." onclick="if(window.openBookingModal){window.openBookingModal('');return false;}" target="_blank" rel="noopener" class="btn btn--whatsapp" style="border-radius: 30px; font-weight: 700; padding: 10px 16px; font-size: 0.85rem; box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35); display: inline-flex; align-items: center; gap: 6px;">
-<i class="fa-brands fa-whatsapp" style="font-size: 1.1rem;">
-</i> WhatsApp Us</a>
-<a href="tour-packages.html" class="btn btn--ghost" style="border-radius: 30px; font-weight: 600; padding: 10px 16px; font-size: 0.85rem; background: rgba(255,255,255,0.15); border: 1.5px solid rgba(255,255,255,0.4); color: #ffffff; backdrop-filter: blur(8px); display: inline-flex; align-items: center; gap: 6px;">
-<i class="fa-solid fa-map-location-dot">
-</i> View Tours </a>
-</div>
-</div> <!-- Right Column: Unified World-Class Booking Card with Integrated Live Weather --> <div class="hero__booking-col" style="width: 100%; max-width: 470px; margin: 0 auto; position: relative;">
-<div class="booking-box" aria-labelledby="booking-heading"> <!-- Top Header: Secure Badge & Integrated Live Weather --> <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color);">
-    <div>
-        <div id="booking-heading" style="font-size: 1.15rem; font-weight: 800; display: flex; align-items: center; gap: 6px;">
-            <i class="fa-solid fa-shield-check" style="color: #10b981;">
-        </i> Secure Your Taxi </div>
-        <div style="font-size: 0.76rem; color: #475569; font-weight: 700; margin-top: 2px;">Zero Advance &bull; Registered Union Tariffs</div>
-    </div> <!-- Integrated Compact Weather Pill --> <div id="live-weather-widget">
-    <i class="fa-solid fa-cloud-sun" style="color: #0284c7; font-size: 1.25rem;">
-</i>
-<div style="text-align: right;">
-    <div id="live-temp">17.4°C</div>
-    <div id="live-sunrise">Sunrise: 06:21 AM</div>
-</div>
-</div>
-</div> <!-- Form Grid --> <div class="booking-box__grid">
-<div class="form-group" style="margin-bottom: 0;">
-    <label class="form-label" for="userName">
-    <i class="fa-regular fa-user" style="color: #0891b2;">
-</i> Your Name </label>
-<input type="text" id="userName" class="form-input" placeholder="Enter your full name">
-</div>
-<div class="form-group" style="margin-bottom: 0;">
-    <label class="form-label" for="userPhone">
-    <i class="fa-brands fa-whatsapp" style="color: #25D366;">
-</i> WhatsApp Number * </label>
-<input type="tel" id="userPhone" class="form-input" placeholder="e.g. 9876543210">
-</div>
-</div>
-<div class="booking-box__grid">
-    <div class="form-group" style="margin-bottom: 0;">
-        <label class="form-label" for="travelDate">
-        <i class="fa-regular fa-calendar" style="color: #0891b2;">
-    </i> Travel Date </label>
-    <input type="date" id="travelDate" class="form-input">
-</div>
-<div class="form-group" style="margin-bottom: 0;">
-    <label class="form-label" for="pickupTime">
-    <i class="fa-regular fa-clock" style="color: #0891b2;">
-</i> Pickup Time </label>
-<input type="time" id="pickupTime" class="form-input" value="09:00">
-</div>
-</div>
-<div class="form-group" style="margin-bottom: 12px;">
-    <label class="form-label" for="routeSelect">
-    <i class="fa-solid fa-map-location-dot" style="color: #0891b2;">
-</i> Select Sightseeing Tour / Route </label>
-<select id="routeSelect" class="form-select">
-    <optgroup label="Official Sightseeing Tours (4-Seater Taxi)">
-        <option value="Tour 1: Mahabaleshwar Darshan (₹1200, 3.30 Hrs)">Tour 1: Mahabaleshwar Darshan (₹1,200 - 17 Points)</option>
-        <option value="Tour 2: Waterfall & Sunset Circuit (₹1200, 3.30 Hrs)">Tour 2: Waterfall &amp; Sunset Circuit (₹1,200 - 8 Points)</option>
-        <option value="Tour 3: Pratapgadh Darshan (₹1600, 3.30 Hrs)">Tour 3: Pratapgadh Fort (₹1,600 - 7 Points)</option>
-        <option value="Tour 4: Panchgani Darshan (₹1200, 3.00 Hrs)">Tour 4: Panchgani Darshan (₹1,200 - 5 Points)</option>
-        <option value="Tour 5: Wai Darshan & Dhom Dam (₹2500, 6.00 Hrs)">Tour 5: Wai &amp; Dhom Dam (₹2,500 - 6.00 Hrs)</option>
-        <option value="Tour 6: Tapola Mini Kashmir (₹1450, 3.30 Hrs)">Tour 6: Tapola Mini Kashmir (₹1,450 - 3.30 Hrs)</option>
-        <option value="Tour 7: Full Day Mahabaleshwar & Panchgani Combo (₹3000)" selected>Tour 7: Full Day Combo (₹3,000 - Best Value)</option>
-    </optgroup>
-    <optgroup label="Outstation Airport & Station Drops (+ Toll)">
-        <option value="Pune Airport Drop (₹4000 + Toll)">Pune Airport Drop (₹4,000 + Toll)</option>
-        <option value="Pune Railway Station (₹3500 + Toll)">Pune Railway Station (₹3,500 + Toll)</option>
-        <option value="Mumbai Airport CSMIA (₹8000 + Toll)">Mumbai Airport Drop (₹8,000 + Toll)</option>
-        <option value="Mumbai City Vashi/Dadar (₹7000 + Toll)">Mumbai City Drop (₹7,000 + Toll)</option>
-        <option value="Satara Railway Station / Bus Stand">Satara Station / Bus Stand</option>
-    </optgroup>
-    <optgroup label="Local Drops">
-        <option value="Mapro Garden Drop (₹600)">Mapro Garden Drop (₹600)</option>
-        <option value="Panchgani Town Drop (₹800)">Panchgani Town Drop (₹800)</option>
-        <option value="Old Mahabaleshwar Temple (₹400)">Old Mahabaleshwar Temple (₹400)</option>
-        <option value="Wilson Point Sunrise Trip (₹400)">Wilson Point Sunrise (₹400)</option>
-        <option value="Bombay Point Sunset Trip (₹400)">Bombay Point Sunset (₹400)</option>
-    </optgroup>
-</select>
-</div> <!-- Action Buttons Group (Pixel-Perfect Alignment) --> <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 6px;">
-<button onclick="bridgeHomeForm()" type="button" class="btn" style="width: 100%; height: 48px; background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%); color: #ffffff; font-weight: 800; font-size: 0.92rem; letter-spacing: 0.3px; border-radius: 12px; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 14px rgba(8, 145, 178, 0.35); box-sizing: border-box;">
-    <i class="fa-solid fa-calculator">
-</i> GET EXACT FARE &amp; BOOK NOW </button>
-<button onclick="window.AryanAI.open()" type="button" class="btn" id="heroAiBtn">
-    <i class="fa-solid fa-wand-magic-sparkles" style="color: #d97706; font-size: 1rem;">
-</i> Need Help? Plan Trip with Aryan AI </button>
-</div>
-<div style="display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 12px; font-size: 0.78rem; color: #334155; font-weight: 700; text-align: center; flex-wrap: wrap;">
-    <i class="fa-solid fa-circle-check" style="color: #10b981;">
-</i>
-<span>Zero Advance &bull; Pay Driver After Tour &bull; Free 2-Hr Cancel</span>
-</div>
-</div>
-</div>
-</div> <!-- Weather Script --> <script> document.addEventListener("DOMContentLoaded", function() { fetch("https://api.open-meteo.com/v1/forecast?latitude=17.9237&longitude=73.6586&current_weather=true&daily=sunrise,sunset&timezone=Asia%2FKolkata") .then(res => res.json()) .then(data => { if (data.current_weather && document.getElementById("live-temp")) { document.getElementById("live-temp").innerText = data.current_weather.temperature + "°C"; } if (data.daily && data.daily.sunrise && document.getElementById("live-sunrise")) { const sr = new Date(data.daily.sunrise[0]); document.getElementById("live-sunrise").innerText = "Sunrise: " + sr.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}); } }) .catch(err => console.error("Weather fetch failed", err)); }); </script> <!-- Hero Animated Trust Rotator Script (No Ghosting, Single-Element Slide) --> <script> (function() { function initHeroRotator() { var el = document.getElementById('heroTrustRotator'); if (!el || el.dataset.rotatorActive) return; el.dataset.rotatorActive = 'true'; var items = [ '<i class="fa-solid fa-shield-check" style="color: #4ade80;"></i> Safe &amp; Reliable Cabs', '<i class="fa-solid fa-circle-check" style="color: #38bdf8;"></i> Union-Approved Fares', '<i class="fa-solid fa-hand-holding-dollar" style="color: #fbbf24;"></i> Zero Advance Booking', '<i class="fa-solid fa-taxi" style="color: #f43f5e;"></i> Official Tourist Taxi', '<i class="fa-solid fa-mountain-sun" style="color: #34d399;"></i> Expert Local Drivers' ]; var currentIndex = 0; setInterval(function() { el.style.opacity = '0'; el.style.transform = 'translateY(-8px)'; setTimeout(function() { currentIndex = (currentIndex + 1) % items.length; el.innerHTML = items[currentIndex]; el.style.transform = 'translateY(8px)'; void el.offsetHeight; el.style.opacity = '1'; el.style.transform = 'translateY(0)'; }, 280); }, 2600); } if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initHeroRotator); } else { initHeroRotator(); } })(); </script> </section> <!-- Hero Layout & Alignment Styles --> <style> /* Hero Animated Trust Ticker & Badges Row */ .hero__badges-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; max-width: 100%; } .hero-animated-trust { display: inline-flex; align-items: center; position: relative; z-index: 3; max-width: 100%; } .hero-animated-trust__badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(15, 23, 42, 0.85); border: 1.5px solid rgba(56, 189, 248, 0.6); box-shadow: 0 4px 18px rgba(56, 189, 248, 0.28), inset 0 1px 1px rgba(255, 255, 255, 0.2); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); padding: 7px 16px; border-radius: 30px; height: 38px; box-sizing: border-box; max-width: 100%; min-width: 0; } .hero-animated-trust__dot { width: 9px; height: 9px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 10px #22c55e, 0 0 18px #22c55e; animation: livePulseDot 1.8s infinite; flex-shrink: 0; } .hero-animated-trust__label { font-size: 0.74rem; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: #94a3b8; white-space: nowrap; user-select: none; flex-shrink: 0; } .hero-animated-trust__text { display: inline-flex; align-items: center; gap: 6px; font-size: 0.92rem; font-weight: 800; color: #ffffff; white-space: nowrap; transition: opacity 0.28s ease, transform 0.28s cubic-bezier(0.16, 1, 0.3, 1); min-width: 0; } @keyframes livePulseDot { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); } 70% { transform: scale(1.1); box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); } } @media (max-width: 768px) { .hero-animated-trust__badge { height: 36px !important; padding: 6px 14px !important; gap: 8px !important; } .hero-animated-trust__label { font-size: 0.70rem !important; } .hero-animated-trust__text { font-size: 0.85rem !important; } } @media (max-width: 480px) { .hero__badges-row { justify-content: center !important; gap: 8px !important; margin-left: auto !important; margin-right: auto !important; width: 100% !important; } .hero-animated-trust { width: 100% !important; justify-content: center !important; } .hero-animated-trust__badge { height: auto !important; min-height: 34px !important; padding: 5px 12px !important; gap: 7px !important; border-radius: 20px !important; max-width: 100% !important; } .hero-animated-trust__dot { width: 8px !important; height: 8px !important; } .hero-animated-trust__label { font-size: 0.68rem !important; letter-spacing: 0.4px !important; } .hero-animated-trust__text { font-size: 0.78rem !important; gap: 5px !important; } } @media (max-width: 390px) { .hero-animated-trust__badge { padding: 4px 10px !important; gap: 6px !important; } .hero-animated-trust__label { font-size: 0.64rem !important; letter-spacing: 0.2px !important; } .hero-animated-trust__text { font-size: 0.74rem !important; } } @media (max-width: 340px) { .hero-animated-trust__badge { padding: 4px 8px !important; gap: 5px !important; } .hero-animated-trust__label { font-size: 0.60rem !important; } .hero-animated-trust__text { font-size: 0.68rem !important; gap: 4px !important; } .hero-animated-trust__dot { width: 7px !important; height: 7px !important; } } @media (max-width: 968px) { .hero__badges-row { justify-content: center !important; gap: 10px !important; margin-left: auto !important; margin-right: auto !important; } } @media (prefers-reduced-motion: reduce) { .hero-animated-trust__item { transition: opacity 0.3s ease !important; transform: none !important; } .hero-animated-trust__item.exit { transform: none !important; } .hero-animated-trust__dot { animation: none !important; } } @media (min-width: 969px) { .hero__actions { display: flex !important; flex-wrap: nowrap !important; gap: 10px !important; align-items: center !important; } .hero__trust { display: flex !important; flex-wrap: nowrap !important; gap: 8px !important; } } @media (max-width: 968px) { .hero { padding-top: 85px !important; min-height: auto !important; } .hero__content { grid-template-columns: 1fr !important; text-align: center; gap: 24px !important; padding: 20px 14px !important; } .hero__content > div:first-child { align-items: center !important; } .hero__title { font-size: clamp(1.45rem, 5.5vw, 2.1rem) !important; word-break: break-word !important; } .hero__subtitle { margin-left: auto; margin-right: auto; } .hero__trust { justify-content: center !important; flex-wrap: wrap !important; } .hero__actions { justify-content: center !important; flex-wrap: wrap !important; } .hero__badge { margin-left: auto !important; margin-right: auto !important; } .hero-animated-trust { margin-left: auto !important; margin-right: auto !important; } .booking-box { max-width: 100% !important; padding: 18px 14px !important; } } </style> <!-- ============================================================ ABOUT / TRUST INTRO ============================================================ --> <!-- ============================================================ ABOUT / TRUST INTRO — ARYAN TAXI MAHABALESHWAR ============================================================ --> <section class="section section--bg" id="about">
+    </div>
+
+    <!-- Weather Script --> 
+    <script> document.addEventListener("DOMContentLoaded", function() { fetch("https://api.open-meteo.com/v1/forecast?latitude=17.9237&longitude=73.6586&current_weather=true&daily=sunrise,sunset&timezone=Asia%2FKolkata") .then(res => res.json()) .then(data => { if (data.current_weather && document.getElementById("live-temp")) { document.getElementById("live-temp").innerText = Math.round(data.current_weather.temperature) + "C"; } if (data.daily && data.daily.sunrise && document.getElementById("live-sunrise")) { const sr = new Date(data.daily.sunrise[0]); document.getElementById("live-sunrise").innerText = "Sunrise: " + sr.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}); } }) .catch(err => console.error("Weather fetch failed", err)); }); </script> 
+    
+    <!-- Hero Animated Trust Rotator Script --> 
+    <script> (function() { function initHeroRotator() { var el = document.getElementById('heroTrustRotator'); if (!el || el.dataset.rotatorActive) return; el.dataset.rotatorActive = 'true'; var items = [ '<i class="fa-solid fa-shield-check" style="color: #4ade80;"></i> Safe &amp; Reliable Cabs', '<i class="fa-solid fa-circle-check" style="color: #38bdf8;"></i> Union-Approved Fares', '<i class="fa-solid fa-hand-holding-dollar" style="color: #fbbf24;"></i> Zero Advance Booking', '<i class="fa-solid fa-taxi" style="color: #f43f5e;"></i> Official Tourist Taxi', '<i class="fa-solid fa-mountain-sun" style="color: #34d399;"></i> Expert Local Drivers' ]; var currentIndex = 0; setInterval(function() { el.style.opacity = '0'; el.style.transform = 'translateY(-5px)'; setTimeout(function() { currentIndex = (currentIndex + 1) % items.length; el.innerHTML = items[currentIndex]; el.style.transform = 'translateY(5px)'; void el.offsetHeight; el.style.opacity = '1'; el.style.transform = 'translateY(0)'; }, 300); }, 3000); } if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initHeroRotator); } else { initHeroRotator(); } })(); </script> 
+    
+    
+</section>
+ <!-- Hero Layout & Alignment Styles -->  <!-- ============================================================ ABOUT / TRUST INTRO ============================================================ --> <!-- ============================================================ ABOUT / TRUST INTRO — ARYAN TAXI MAHABALESHWAR ============================================================ --> <section class="section section--bg" id="about">
 <div class="container text-center">
     <span class="section-label">Our Story Aryan Taxi Mahabaleshwar</span>
     <h2 class="section-title">Your Trusted Mahabaleshwar Taxi Partner</h2>

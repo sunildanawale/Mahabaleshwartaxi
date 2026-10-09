@@ -123,7 +123,7 @@
                     keepalive: true,
                     headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
                     body: payload
-                }).catch(function () {});
+                }).catch(function () { });
             }
 
             // Method 2: Hidden iframe form post (guaranteed browser form submit to Google Apps Script)
@@ -168,10 +168,10 @@
                 form.submit();
 
                 setTimeout(function () {
-                    try { document.body.removeChild(form); } catch (e) {}
-                    try { document.body.removeChild(iframe); } catch (e) {}
+                    try { document.body.removeChild(form); } catch (e) { }
+                    try { document.body.removeChild(iframe); } catch (e) { }
                 }, 4000);
-            } catch (eForm) {}
+            } catch (eForm) { }
         } catch (e) {
             console.warn('Could not dispatch booking remotely:', e);
         }
@@ -214,11 +214,11 @@
 
         var isMultiSightseeing = (serviceType === 'sightseeing' || !serviceType) && tours.length > 1;
         var key = 'sightseeing';
-        if (serviceType === 'outstation' || tours.some(function(it){ return it.tour && (it.tour.category === 'outstation' || it.tour.type === 'transfer'); })) {
+        if (serviceType === 'outstation' || tours.some(function (it) { return it.tour && (it.tour.category === 'outstation' || it.tour.type === 'transfer'); })) {
             key = 'outstation';
-        } else if (serviceType === 'local_drop' || tours.some(function(it){ return it.tour && (it.tour.category === 'local_drop' || it.tour.type === 'local'); })) {
+        } else if (serviceType === 'local_drop' || tours.some(function (it) { return it.tour && (it.tour.category === 'local_drop' || it.tour.type === 'local'); })) {
             key = 'local_drop';
-        } else if (serviceType === 'combo' || tours.some(function(it){ return it.tour && (it.tour.category === 'combo' || (it.tour.id && it.tour.id.toLowerCase() === 't7')); })) {
+        } else if (serviceType === 'combo' || tours.some(function (it) { return it.tour && (it.tour.category === 'combo' || (it.tour.id && it.tour.id.toLowerCase() === 't7')); })) {
             key = 'combo';
         }
 
@@ -250,7 +250,7 @@
                 tariffLabel: 'LOCKED OUTSTATION TARIFF',
                 advanceNote: 'Nominal Fuel Advance • Balance to Driver upon Drop',
                 paymentSettlement: 'Nominal fuel lock advance via link; balance to driver upon drop',
-                vehicleDesc: isLarge 
+                vehicleDesc: isLarge
                     ? (taxiCount + 'x Tourist Cabs (AC Sedan / SUV, arranged as per availability)')
                     : 'Tourist Cab (AC Sedan / SUV, arranged as per availability)',
                 dispatchNotice: isSameDayAfternoon
@@ -273,7 +273,7 @@
                     { icon: 'fa-rotate-left', title: 'Free Cancellation', text: 'Notify up to 2 hours prior to trip' }
                 ],
                 policyNote: 'Please confirm drop destination and route halts with the taxi driver before departure.',
-                whatsappTariffNote: function(fare) {
+                whatsappTariffNote: function (fare) {
                     return '💰 *Outstation Tariff:* ₹' + fare + ' (+ Tolls at actuals)\n_Nominal fuel advance • Balance payable to driver upon drop_\nℹ️ _Outstation Transit: AC Sedan / 6-Seater SUV arranged as per vehicle availability._\n\n';
                 },
                 whatsappReadiness: 'I confirm this is a genuine outstation travel inquiry. Please confirm vehicle availability and driver dispatch with me.'
@@ -314,7 +314,7 @@
                     { icon: 'fa-rotate-left', title: 'Free Cancellation', text: 'Notify up to 2 hours prior to trip' }
                 ],
                 policyNote: 'Please confirm destination drop point with the taxi driver before departure.',
-                whatsappTariffNote: function(fare) {
+                whatsappTariffNote: function (fare) {
                     return '💰 *Local Drop Tariff:* ₹' + fare + ' (Official Union Rate)\n_Zero advance required • Pay driver directly after drop_\nℹ️ _Direct point-to-point transfer from hotel porch to destination._\n\n';
                 },
                 whatsappReadiness: 'I confirm this is a genuine local drop inquiry. Please confirm cab availability and driver dispatch with me.'
@@ -334,7 +334,7 @@
                 tariffLabel: isLarge ? 'ESTIMATED GROUP COMBO TARIFF' : 'LOCKED UNION COMBO TARIFF',
                 advanceNote: 'Zero Advance Required (Approved Union Combo)',
                 paymentSettlement: '100% Cash / UPI to Driver directly after tour completion',
-                vehicleDesc: isLarge 
+                vehicleDesc: isLarge
                     ? (taxiCount + 'x 4-Seater Tourist Cabs, arranged as per availability')
                     : '4-Seater Tourist Cab, arranged as per availability.',
                 dispatchNotice: isSameDayAfternoon
@@ -357,7 +357,7 @@
                     { icon: 'fa-rotate-left', title: 'Free Cancellation', text: 'Notify up to 2 hours prior to trip' }
                 ],
                 policyNote: 'Please confirm combined tour itinerary with the taxi driver before starting your tour.',
-                whatsappTariffNote: function(fare) {
+                whatsappTariffNote: function (fare) {
                     return '💰 *Combo Tariff:* ₹' + fare + ' (Official Union Rate' + (isLarge ? ' • ' + taxiCount + ' Cabs' : '') + ')\n_Zero advance required • Pay driver after completing the combined tour_\nℹ️ _Full Day Combo: Continuous sightseeing itinerary (~7-9 hrs)._\n\n';
                 },
                 whatsappReadiness: 'I confirm this is a genuine full day combo inquiry. Please confirm cab availability and driver dispatch with me.'
@@ -368,8 +368,8 @@
         return {
             key: 'sightseeing',
             serviceTitle: isMultiSightseeing ? 'Combined Sightseeing Packages' : 'Local Sightseeing',
-            badgeText: isMultiSightseeing 
-                ? (isSameDayAfternoon ? 'MULTI-TOUR INQUIRY (AVAILABILITY CONFIRMATION REQUIRED)' : 'MULTI-TOUR INQUIRY (CONFIRMATION PENDING)') 
+            badgeText: isMultiSightseeing
+                ? (isSameDayAfternoon ? 'MULTI-TOUR INQUIRY (AVAILABILITY CONFIRMATION REQUIRED)' : 'MULTI-TOUR INQUIRY (CONFIRMATION PENDING)')
                 : (isSameDayAfternoon ? 'SIGHTSEEING INQUIRY (AVAILABILITY CONFIRMATION REQUIRED)' : 'SIGHTSEEING INQUIRY (CONFIRMATION PENDING)'),
             badgeBg: '#fef3c7',
             badgeColor: '#92400e',
@@ -379,7 +379,7 @@
             tariffLabel: isLarge ? 'ESTIMATED GROUP SIGHTSEEING TARIFF' : (isMultiSightseeing ? 'LOCKED UNION TARIFF (COMBINED)' : 'LOCKED UNION TARIFF'),
             advanceNote: 'Zero Advance Required (Standard Local Sightseeing)',
             paymentSettlement: '100% Cash / UPI to Driver directly after tour completion',
-            vehicleDesc: isLarge 
+            vehicleDesc: isLarge
                 ? (taxiCount + 'x 4-Seater Tourist Cabs, arranged as per availability')
                 : '4-Seater Tourist Cab, arranged as per availability.',
             dispatchNotice: isSameDayAfternoon
@@ -406,7 +406,7 @@
                 { icon: 'fa-rotate-left', title: 'Free Cancellation', text: 'Notify up to 2 hours prior to trip' }
             ],
             policyNote: 'Please confirm all tour details with the taxi driver before starting sightseeing.',
-            whatsappTariffNote: function(fare) {
+            whatsappTariffNote: function (fare) {
                 return '💰 *Approved Tariff:* ₹' + fare + ' (Locked Union Rate' + (isLarge ? ' • ' + taxiCount + ' Cabs' : '') + ')\n_Zero advance required for Mahabaleshwar pickup • Pay driver after tour_\nℹ️ _Union Rule: Local sightseeing is strictly 4-seater tourist cabs._\n\n';
             },
             whatsappReadiness: 'I confirm this is a genuine sightseeing inquiry. Please confirm cab availability and driver dispatch with me.'
@@ -535,7 +535,7 @@
     }
 
     // ── 3. Style Injection (Mobile-First Design) ───────────────────────
-            function injectStyles() {
+    function injectStyles() {
         if (document.getElementById('amtWidgetStyles')) return;
         var s = document.createElement('style');
         s.id = 'amtWidgetStyles';
@@ -1420,7 +1420,7 @@
 
         var startStr = formatMinutes(startTotal);
         var endStr = formatMinutes(endTotal);
-        var durStr = tours.map(function(t) { return t.duration; }).join(' + ');
+        var durStr = tours.map(function (t) { return t.duration; }).join(' + ');
 
         return '<div class="amt-timeline-box" style="margin-top:8px;padding:8px 12px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;font-size:0.75rem;color:#334155;">'
             + '<div style="font-weight:700;color:#0f2b48;margin-bottom:3px;display:flex;align-items:center;gap:6px;">'
@@ -1443,7 +1443,7 @@
             var endTotal = startTotal + totalMin;
             var startStr = formatMinutes(startTotal);
             var endStr = formatMinutes(endTotal);
-            var durStr = tours.map(function(t) { return t.duration; }).join(' + ');
+            var durStr = tours.map(function (t) { return t.duration; }).join(' + ');
 
             timeHtml = '<div style="font-weight:700;color:#0f2b48;margin-bottom:2px;display:flex;align-items:center;gap:6px;">'
                 + '<i class="fa-solid fa-clock" style="color:#0284c7;"></i> Approximate Sightseeing Window: <strong>' + startStr + ' &ndash; ' + endStr + '</strong> <span style="font-size:0.7rem;color:#64748b;font-weight:600;">(' + escapeHtml(durStr) + ')</span>'
@@ -1492,7 +1492,7 @@
             if (restoredNote && restored) {
                 restoredNote.style.display = 'block';
             }
-        } catch(e) {}
+        } catch (e) { }
     }
 
     function saveInquiryToLedger(state) {
@@ -1530,7 +1530,7 @@
             if (list.length > 50) list = list.slice(0, 50);
             localStorage.setItem('amt_bookings', JSON.stringify(list));
             dispatchBookingRemote(entry);
-        } catch (e) {}
+        } catch (e) { }
     }
 
     function saveGuestProfile(name, phone, pickup) {
@@ -1543,7 +1543,7 @@
                     time: new Date().toISOString()
                 }));
             }
-        } catch(e) {}
+        } catch (e) { }
     }
 
     function pad2(n) { return (n < 10 ? '0' : '') + n; }
@@ -1651,7 +1651,7 @@
         var paxSel = document.getElementById('amtPax');
         var grpField = document.getElementById('amtGroupField');
         if (paxSel && grpField) {
-            paxSel.addEventListener('change', function() {
+            paxSel.addEventListener('change', function () {
                 if (paxSel.value === '5+') {
                     grpField.style.display = 'block';
                     var tc = document.getElementById('amtTaxiCount');
@@ -1664,7 +1664,7 @@
         }
         var tcSel = document.getElementById('amtTaxiCount');
         if (tcSel) {
-            tcSel.addEventListener('change', function() {
+            tcSel.addEventListener('change', function () {
                 bookingState.taxiCount = parseInt(tcSel.value, 10) || 2;
             });
         }
@@ -1900,14 +1900,14 @@
                     try {
                         bookingState.bookingId = generateBookingId();
                         saveGuestProfile(bookingState.name, bookingState.phone, bookingState.pickup);
-                        try { saveInquiryToLedger(bookingState); } catch (eLedger) {}
+                        try { saveInquiryToLedger(bookingState); } catch (eLedger) { }
                         if (typeof clearBookingDraft === 'function') clearBookingDraft();
 
                         renderVoucherScreen();
                         goToVoucher();
 
                         // Automatically trigger WhatsApp redirect
-                        setTimeout(function() {
+                        setTimeout(function () {
                             try {
                                 var msg = buildConfirmedWhatsAppMessage(bookingState);
                                 var url = getWhatsAppUrl(encodeURIComponent(msg));
@@ -1926,7 +1926,7 @@
                         }, 800);
                     } catch (e) {
                         console.error('Error generating voucher:', e);
-                        try { renderVoucherScreen(); } catch (e2) {}
+                        try { renderVoucherScreen(); } catch (e2) { }
                         goToVoucher();
                     } finally {
                         bookingState.submitting = false;
@@ -1946,186 +1946,186 @@
         }
 
         // ── WORKING ACTION BUTTONS ON STEP 3 VOUCHER ────────────────────────
-        
-        
-    // ── Standalone Isolated Voucher Printing & PDF Generation ─────────
-    function buildStandaloneVoucherHtml(innerContent) {
-        return '<!DOCTYPE html>\n'
-            + '<html lang="en">\n'
-            + '<head>\n'
-            + '  <meta charset="utf-8">\n'
-            + '  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n'
-            + '  <title>Aryan Taxi Mahabaleshwar - Official Booking Voucher</title>\n'
-            + '  <style>\n'
-            + '    @page { size: A4 portrait; margin: 4mm 5mm; }\n'
-            + '    * { box-sizing: border-box !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }\n'
-            + '    body { margin: 0; padding: 6px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; background: #ffffff !important; color: #0f172a !important; font-size: 11px; }\n'
-            + '    .amt-v-card-streamlined { border: 1.5px solid #0f2b48 !important; border-radius: 8px !important; padding: 10px 12px !important; max-width: 760px; margin: 0 auto; background: #ffffff !important; color: #0f172a !important; display: flex; flex-direction: column; gap: 5px; box-sizing: border-box; }\n'
-            + '    .amt-v-hdr { display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 5px; margin-bottom: 4px; }\n'
-            + '    .amt-v-hdr-left { display: flex; align-items: center; gap: 8px; }\n'
-            + '    .amt-v-brand { font-size: 13px; font-weight: 800; color: #0f2b48; letter-spacing: 0.5px; }\n'
-            + '    .amt-v-sub { font-size: 10px; color: #64748b; font-weight: 600; }\n'
-            + '    .amt-v-hdr-right { display: flex; flex-direction: column; align-items: flex-end; text-align: right; gap: 2px; }\n'
-            + '    .amt-v-badge { display: inline-block; padding: 2px 7px; border-radius: 12px; font-size: 9px; font-weight: 800; background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }\n'
-            + '    .amt-v-ref-box { font-size: 10px; color: #334155; }\n'
-            + '    .amt-v-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 10px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 7px; padding: 6px 9px; margin-bottom: 4px; font-size: 10.5px; }\n'
-            + '    .amt-v-cell { display: flex; flex-direction: column; gap: 1.5px; }\n'
-            + '    .amt-v-lbl { font-size: 8.5px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.3px; }\n'
-            + '    .amt-v-val { font-size: 10.5px; font-weight: 700; color: #0f172a; }\n'
-            + '    .amt-v-vehicle-cell { border-top: 1px dashed #e2e8f0; padding-top: 3px; grid-column: 1 / -1; }\n'
-            + '    .amt-v-vehicle-wrap { display: flex; align-items: center; gap: 4px; font-size: 10px; color: #0f172a; }\n'
-            + '    .amt-v-vehicle-lbl { font-size: 8.5px; font-weight: 700; color: #64748b; text-transform: uppercase; }\n'
-            + '    .amt-v-vehicle-val { font-weight: 700; color: #0369a1; }\n'
-            + '    .amt-v-tour-strip { border: 1px solid #bae6fd; background: #f0f9ff; border-radius: 7px; padding: 6px 9px; margin-bottom: 4px; }\n'
-            + '    .amt-v-tour-hdr { display: flex; justify-content: space-between; align-items: center; font-weight: 800; font-size: 11px; color: #0369a1; border-bottom: 1px solid #bae6fd; padding-bottom: 3px; margin-bottom: 3px; }\n'
-            + '    .amt-v-tour-dur { font-size: 9px; color: #0284c7; font-weight: 700; background: #e0f2fe; padding: 1.5px 6px; border-radius: 8px; }\n'
-            + '    .amt-v-tour-meta { font-size: 9.5px; color: #0f2b48; margin-bottom: 3px; }\n'
-            + '    .amt-v-points-box { margin-top: 3px; }\n'
-            + '    .amt-v-points-head { font-size: 8.5px; font-weight: 800; color: #0369a1; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.2px; }\n'
-            + '    .amt-v-chips-wrap { display: flex; flex-wrap: wrap; gap: 3px; }\n'
-            + '    .amt-v-chip { display: inline-block; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 3px; padding: 1px 5px; font-size: 8.5px; color: #334155; font-weight: 600; }\n'
-            + '    .amt-v-route-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; font-size: 9.5px; font-weight: 600; color: #1e293b; margin-top: 3px; }\n'
-            + '    .amt-v-route-step { background: #ffffff; border: 1px solid #cbd5e1; padding: 1.5px 5px; border-radius: 3px; }\n'
-            + '    .amt-v-route-arrow { color: #0284c7; font-weight: 800; }\n'
-            + '    .amt-v-ai-advisory { background: linear-gradient(135deg, #f0fdf4 0%, #ecfeff 100%) !important; border: 1px solid #a7f3d0 !important; border-left: 3px solid #10b981 !important; border-radius: 5px !important; padding: 4px 7px !important; margin: 3px 0 !important; display: flex !important; align-items: center !important; gap: 6px !important; box-sizing: border-box !important; }\n'
-            + '    .amt-v-ai-badge { display: inline-flex !important; align-items: center !important; gap: 3px !important; background: #dcfce7 !important; color: #047857 !important; border: 1px solid #86efac !important; font-size: 8px !important; font-weight: 800 !important; padding: 1.5px 5px !important; border-radius: 3px !important; text-transform: uppercase !important; letter-spacing: 0.3px !important; white-space: nowrap !important; flex-shrink: 0 !important; }\n'
-            + '    .amt-v-ai-text { font-size: 9.5px !important; line-height: 1.35 !important; color: #065f46 !important; font-weight: 500 !important; }\n'
-            + '    .amt-v-fare-bar { display: flex !important; justify-content: space-between !important; align-items: center !important; background: #f8fafc !important; border: 1.2px solid #cbd5e1 !important; border-radius: 6px !important; padding: 4px 8px !important; margin: 3px 0 !important; box-sizing: border-box !important; }\n'
-            + '    .amt-v-fare-left { display: flex !important; flex-direction: column !important; }\n'
-            + '    .amt-v-fare-lbl { font-size: 8px !important; color: #64748b !important; font-weight: 800 !important; text-transform: uppercase !important; letter-spacing: 0.3px !important; }\n'
-            + '    .amt-v-fare-amt { font-size: 13.5px !important; font-weight: 900 !important; color: #0e7490 !important; line-height: 1.1 !important; }\n'
-            + '    .amt-v-fare-breakdown { font-size: 7.5px !important; color: #64748b !important; }\n'
-            + '    .amt-v-fare-right { text-align: right !important; display: flex !important; flex-direction: column !important; align-items: flex-end !important; }\n'
-            + '    .amt-v-pay-badge { font-size: 8.5px !important; font-weight: 800 !important; color: #15803d !important; }\n'
-            + '    .amt-v-pay-note { font-size: 7.5px !important; color: #64748b !important; }\n'
-            + '    .amt-v-terms-compact { background: #fffbeb; border: 1px solid #fde68a; border-radius: 6px; padding: 5px 8px; font-size: 8.5px; margin-bottom: 2px; }\n'
-            + '    .amt-v-terms-title { font-weight: 800; color: #92400e; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.2px; font-size: 8px; }\n'
-            + '    .amt-v-terms-list { margin: 0; padding-left: 12px; color: #78350f; }\n'
-            + '    .amt-v-terms-list li { margin-bottom: 1px; font-size: 8px; line-height: 1.3; }\n'
-            + '    .amt-v-notes-chip { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 5px; padding: 3px 6px; font-size: 9px; color: #166534; margin-bottom: 3px; }\n'
-            + '    .amt-v-print-slip { display: block !important; margin-top: 3px !important; border: 1px dashed #cbd5e1 !important; border-radius: 5px !important; padding: 4px 7px !important; background: #f8fafc !important; font-size: 8.5px !important; color: #475569 !important; }\n'
-            + '    .amt-v-ftr { display: flex; justify-content: space-between; font-size: 8px; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 3px; margin-top: 2px; }\n'
-            + '    @media print { body { padding: 0 !important; } }\n'
-            + '  </style>\n'
-            + '</head>\n'
-            + '<body>\n'
-            + innerContent
-            + '\n</body>\n'
-            + '</html>';
-    }
 
-    function printVoucherDocument() {
-        var voucherEl = document.getElementById('amtVoucherContent');
-        if (!voucherEl || !voucherEl.innerHTML || voucherEl.innerHTML.trim() === '') {
-            try { renderVoucherScreen(); } catch (e) {}
-            voucherEl = document.getElementById('amtVoucherContent');
+
+        // ── Standalone Isolated Voucher Printing & PDF Generation ─────────
+        function buildStandaloneVoucherHtml(innerContent) {
+            return '<!DOCTYPE html>\n'
+                + '<html lang="en">\n'
+                + '<head>\n'
+                + '  <meta charset="utf-8">\n'
+                + '  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n'
+                + '  <title>Aryan Taxi Mahabaleshwar - Official Booking Voucher</title>\n'
+                + '  <style>\n'
+                + '    @page { size: A4 portrait; margin: 4mm 5mm; }\n'
+                + '    * { box-sizing: border-box !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }\n'
+                + '    body { margin: 0; padding: 6px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; background: #ffffff !important; color: #0f172a !important; font-size: 11px; }\n'
+                + '    .amt-v-card-streamlined { border: 1.5px solid #0f2b48 !important; border-radius: 8px !important; padding: 10px 12px !important; max-width: 760px; margin: 0 auto; background: #ffffff !important; color: #0f172a !important; display: flex; flex-direction: column; gap: 5px; box-sizing: border-box; }\n'
+                + '    .amt-v-hdr { display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 5px; margin-bottom: 4px; }\n'
+                + '    .amt-v-hdr-left { display: flex; align-items: center; gap: 8px; }\n'
+                + '    .amt-v-brand { font-size: 13px; font-weight: 800; color: #0f2b48; letter-spacing: 0.5px; }\n'
+                + '    .amt-v-sub { font-size: 10px; color: #64748b; font-weight: 600; }\n'
+                + '    .amt-v-hdr-right { display: flex; flex-direction: column; align-items: flex-end; text-align: right; gap: 2px; }\n'
+                + '    .amt-v-badge { display: inline-block; padding: 2px 7px; border-radius: 12px; font-size: 9px; font-weight: 800; background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }\n'
+                + '    .amt-v-ref-box { font-size: 10px; color: #334155; }\n'
+                + '    .amt-v-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 10px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 7px; padding: 6px 9px; margin-bottom: 4px; font-size: 10.5px; }\n'
+                + '    .amt-v-cell { display: flex; flex-direction: column; gap: 1.5px; }\n'
+                + '    .amt-v-lbl { font-size: 8.5px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.3px; }\n'
+                + '    .amt-v-val { font-size: 10.5px; font-weight: 700; color: #0f172a; }\n'
+                + '    .amt-v-vehicle-cell { border-top: 1px dashed #e2e8f0; padding-top: 3px; grid-column: 1 / -1; }\n'
+                + '    .amt-v-vehicle-wrap { display: flex; align-items: center; gap: 4px; font-size: 10px; color: #0f172a; }\n'
+                + '    .amt-v-vehicle-lbl { font-size: 8.5px; font-weight: 700; color: #64748b; text-transform: uppercase; }\n'
+                + '    .amt-v-vehicle-val { font-weight: 700; color: #0369a1; }\n'
+                + '    .amt-v-tour-strip { border: 1px solid #bae6fd; background: #f0f9ff; border-radius: 7px; padding: 6px 9px; margin-bottom: 4px; }\n'
+                + '    .amt-v-tour-hdr { display: flex; justify-content: space-between; align-items: center; font-weight: 800; font-size: 11px; color: #0369a1; border-bottom: 1px solid #bae6fd; padding-bottom: 3px; margin-bottom: 3px; }\n'
+                + '    .amt-v-tour-dur { font-size: 9px; color: #0284c7; font-weight: 700; background: #e0f2fe; padding: 1.5px 6px; border-radius: 8px; }\n'
+                + '    .amt-v-tour-meta { font-size: 9.5px; color: #0f2b48; margin-bottom: 3px; }\n'
+                + '    .amt-v-points-box { margin-top: 3px; }\n'
+                + '    .amt-v-points-head { font-size: 8.5px; font-weight: 800; color: #0369a1; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.2px; }\n'
+                + '    .amt-v-chips-wrap { display: flex; flex-wrap: wrap; gap: 3px; }\n'
+                + '    .amt-v-chip { display: inline-block; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 3px; padding: 1px 5px; font-size: 8.5px; color: #334155; font-weight: 600; }\n'
+                + '    .amt-v-route-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; font-size: 9.5px; font-weight: 600; color: #1e293b; margin-top: 3px; }\n'
+                + '    .amt-v-route-step { background: #ffffff; border: 1px solid #cbd5e1; padding: 1.5px 5px; border-radius: 3px; }\n'
+                + '    .amt-v-route-arrow { color: #0284c7; font-weight: 800; }\n'
+                + '    .amt-v-ai-advisory { background: linear-gradient(135deg, #f0fdf4 0%, #ecfeff 100%) !important; border: 1px solid #a7f3d0 !important; border-left: 3px solid #10b981 !important; border-radius: 5px !important; padding: 4px 7px !important; margin: 3px 0 !important; display: flex !important; align-items: center !important; gap: 6px !important; box-sizing: border-box !important; }\n'
+                + '    .amt-v-ai-badge { display: inline-flex !important; align-items: center !important; gap: 3px !important; background: #dcfce7 !important; color: #047857 !important; border: 1px solid #86efac !important; font-size: 8px !important; font-weight: 800 !important; padding: 1.5px 5px !important; border-radius: 3px !important; text-transform: uppercase !important; letter-spacing: 0.3px !important; white-space: nowrap !important; flex-shrink: 0 !important; }\n'
+                + '    .amt-v-ai-text { font-size: 9.5px !important; line-height: 1.35 !important; color: #065f46 !important; font-weight: 500 !important; }\n'
+                + '    .amt-v-fare-bar { display: flex !important; justify-content: space-between !important; align-items: center !important; background: #f8fafc !important; border: 1.2px solid #cbd5e1 !important; border-radius: 6px !important; padding: 4px 8px !important; margin: 3px 0 !important; box-sizing: border-box !important; }\n'
+                + '    .amt-v-fare-left { display: flex !important; flex-direction: column !important; }\n'
+                + '    .amt-v-fare-lbl { font-size: 8px !important; color: #64748b !important; font-weight: 800 !important; text-transform: uppercase !important; letter-spacing: 0.3px !important; }\n'
+                + '    .amt-v-fare-amt { font-size: 13.5px !important; font-weight: 900 !important; color: #0e7490 !important; line-height: 1.1 !important; }\n'
+                + '    .amt-v-fare-breakdown { font-size: 7.5px !important; color: #64748b !important; }\n'
+                + '    .amt-v-fare-right { text-align: right !important; display: flex !important; flex-direction: column !important; align-items: flex-end !important; }\n'
+                + '    .amt-v-pay-badge { font-size: 8.5px !important; font-weight: 800 !important; color: #15803d !important; }\n'
+                + '    .amt-v-pay-note { font-size: 7.5px !important; color: #64748b !important; }\n'
+                + '    .amt-v-terms-compact { background: #fffbeb; border: 1px solid #fde68a; border-radius: 6px; padding: 5px 8px; font-size: 8.5px; margin-bottom: 2px; }\n'
+                + '    .amt-v-terms-title { font-weight: 800; color: #92400e; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.2px; font-size: 8px; }\n'
+                + '    .amt-v-terms-list { margin: 0; padding-left: 12px; color: #78350f; }\n'
+                + '    .amt-v-terms-list li { margin-bottom: 1px; font-size: 8px; line-height: 1.3; }\n'
+                + '    .amt-v-notes-chip { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 5px; padding: 3px 6px; font-size: 9px; color: #166534; margin-bottom: 3px; }\n'
+                + '    .amt-v-print-slip { display: block !important; margin-top: 3px !important; border: 1px dashed #cbd5e1 !important; border-radius: 5px !important; padding: 4px 7px !important; background: #f8fafc !important; font-size: 8.5px !important; color: #475569 !important; }\n'
+                + '    .amt-v-ftr { display: flex; justify-content: space-between; font-size: 8px; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 3px; margin-top: 2px; }\n'
+                + '    @media print { body { padding: 0 !important; } }\n'
+                + '  </style>\n'
+                + '</head>\n'
+                + '<body>\n'
+                + innerContent
+                + '\n</body>\n'
+                + '</html>';
         }
-        if (!voucherEl) return;
 
-        var printContent = buildStandaloneVoucherHtml(voucherEl.innerHTML);
-
-        var iframe = document.getElementById('amtVoucherPrintFrame');
-        if (iframe) {
-            try { document.body.removeChild(iframe); } catch (e) {}
-        }
-        iframe = document.createElement('iframe');
-        iframe.id = 'amtVoucherPrintFrame';
-        iframe.style.position = 'fixed';
-        iframe.style.top = '-9999px';
-        iframe.style.left = '-9999px';
-        iframe.style.width = '1px';
-        iframe.style.height = '1px';
-        iframe.style.border = '0';
-        document.body.appendChild(iframe);
-
-        var frameDoc = iframe.contentWindow || iframe.contentDocument;
-        if (frameDoc.document) frameDoc = frameDoc.document;
-
-        frameDoc.open();
-        frameDoc.write(printContent);
-        frameDoc.close();
-
-        setTimeout(function () {
-            try {
-                iframe.contentWindow.focus();
-                iframe.contentWindow.print();
-            } catch (err) {
-                var pWin = window.open('', '_blank', 'width=800,height=900');
-                if (pWin) {
-                    pWin.document.open();
-                    pWin.document.write(printContent);
-                    pWin.document.close();
-                    pWin.focus();
-                    setTimeout(function () { pWin.print(); }, 400);
-                }
+        function printVoucherDocument() {
+            var voucherEl = document.getElementById('amtVoucherContent');
+            if (!voucherEl || !voucherEl.innerHTML || voucherEl.innerHTML.trim() === '') {
+                try { renderVoucherScreen(); } catch (e) { }
+                voucherEl = document.getElementById('amtVoucherContent');
             }
-        }, 350);
-    }
+            if (!voucherEl) return;
 
-    function downloadVoucherPdf() {
-        // Uses Blob URL approach — 100% reliable, no html2canvas blanking issues
-        var voucherEl = document.getElementById('amtVoucherContent');
-        if (!voucherEl || !voucherEl.innerHTML || voucherEl.innerHTML.trim() === '') {
-            try { renderVoucherScreen(); } catch (e) {}
-            voucherEl = document.getElementById('amtVoucherContent');
-        }
-        if (!voucherEl) return;
-        var bId = bookingState.bookingId || ('AMT-' + Date.now().toString().slice(-6));
-        var btn = document.getElementById('amtDownloadPdfBtn');
-        var origText = btn ? btn.innerHTML : '';
-        if (btn) {
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Opening Voucher...';
+            var printContent = buildStandaloneVoucherHtml(voucherEl.innerHTML);
+
+            var iframe = document.getElementById('amtVoucherPrintFrame');
+            if (iframe) {
+                try { document.body.removeChild(iframe); } catch (e) { }
+            }
+            iframe = document.createElement('iframe');
+            iframe.id = 'amtVoucherPrintFrame';
+            iframe.style.position = 'fixed';
+            iframe.style.top = '-9999px';
+            iframe.style.left = '-9999px';
+            iframe.style.width = '1px';
+            iframe.style.height = '1px';
+            iframe.style.border = '0';
+            document.body.appendChild(iframe);
+
+            var frameDoc = iframe.contentWindow || iframe.contentDocument;
+            if (frameDoc.document) frameDoc = frameDoc.document;
+
+            frameDoc.open();
+            frameDoc.write(printContent);
+            frameDoc.close();
+
+            setTimeout(function () {
+                try {
+                    iframe.contentWindow.focus();
+                    iframe.contentWindow.print();
+                } catch (err) {
+                    var pWin = window.open('', '_blank', 'width=800,height=900');
+                    if (pWin) {
+                        pWin.document.open();
+                        pWin.document.write(printContent);
+                        pWin.document.close();
+                        pWin.focus();
+                        setTimeout(function () { pWin.print(); }, 400);
+                    }
+                }
+            }, 350);
         }
 
-        function resetBtn() {
+        function downloadVoucherPdf() {
+            // Uses Blob URL approach — 100% reliable, no html2canvas blanking issues
+            var voucherEl = document.getElementById('amtVoucherContent');
+            if (!voucherEl || !voucherEl.innerHTML || voucherEl.innerHTML.trim() === '') {
+                try { renderVoucherScreen(); } catch (e) { }
+                voucherEl = document.getElementById('amtVoucherContent');
+            }
+            if (!voucherEl) return;
+            var bId = bookingState.bookingId || ('AMT-' + Date.now().toString().slice(-6));
+            var btn = document.getElementById('amtDownloadPdfBtn');
+            var origText = btn ? btn.innerHTML : '';
             if (btn) {
-                btn.disabled = false;
-                btn.innerHTML = origText;
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Opening Voucher...';
             }
-        }
 
-        try {
-            var innerHtml = voucherEl.innerHTML;
-            if (!innerHtml || innerHtml.trim() === '') {
-                try { renderVoucherScreen(); } catch (e) {}
-                innerHtml = voucherEl.innerHTML;
-            }
-            var standaloneHtml = buildStandaloneVoucherHtml(innerHtml);
-            var blob = new Blob([standaloneHtml], { type: 'text/html;charset=utf-8' });
-            var url = URL.createObjectURL(blob);
-            var printWin = window.open(url, '_blank', 'width=850,height=1100,scrollbars=yes,resizable=yes');
-            if (printWin) {
-                printWin.onload = function () {
-                    setTimeout(function () {
-                        printWin.print();
-                        URL.revokeObjectURL(url);
-                    }, 600);
-                };
+            function resetBtn() {
                 if (btn) {
-                    btn.innerHTML = '<i class="fa-solid fa-check"></i> Voucher Opened!';
-                    setTimeout(function () {
-                        resetBtn();
-                        URL.revokeObjectURL(url);
-                    }, 4000);
+                    btn.disabled = false;
+                    btn.innerHTML = origText;
                 }
-            } else {
-                // Popup blocked — use hidden anchor download fallback
-                var a = document.createElement('a');
-                a.href = url;
-                a.download = 'AryanTaxi-Voucher-' + bId + '.html';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                if (btn) btn.innerHTML = '<i class="fa-solid fa-check"></i> Voucher Downloaded!';
-                setTimeout(function () { resetBtn(); URL.revokeObjectURL(url); }, 3000);
             }
-        } catch (e) {
-            console.warn('Blob download failed, using print fallback:', e);
-            resetBtn();
-            printVoucherDocument();
+
+            try {
+                var innerHtml = voucherEl.innerHTML;
+                if (!innerHtml || innerHtml.trim() === '') {
+                    try { renderVoucherScreen(); } catch (e) { }
+                    innerHtml = voucherEl.innerHTML;
+                }
+                var standaloneHtml = buildStandaloneVoucherHtml(innerHtml);
+                var blob = new Blob([standaloneHtml], { type: 'text/html;charset=utf-8' });
+                var url = URL.createObjectURL(blob);
+                var printWin = window.open(url, '_blank', 'width=850,height=1100,scrollbars=yes,resizable=yes');
+                if (printWin) {
+                    printWin.onload = function () {
+                        setTimeout(function () {
+                            printWin.print();
+                            URL.revokeObjectURL(url);
+                        }, 600);
+                    };
+                    if (btn) {
+                        btn.innerHTML = '<i class="fa-solid fa-check"></i> Voucher Opened!';
+                        setTimeout(function () {
+                            resetBtn();
+                            URL.revokeObjectURL(url);
+                        }, 4000);
+                    }
+                } else {
+                    // Popup blocked — use hidden anchor download fallback
+                    var a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'AryanTaxi-Voucher-' + bId + '.html';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    if (btn) btn.innerHTML = '<i class="fa-solid fa-check"></i> Voucher Downloaded!';
+                    setTimeout(function () { resetBtn(); URL.revokeObjectURL(url); }, 3000);
+                }
+            } catch (e) {
+                console.warn('Blob download failed, using print fallback:', e);
+                resetBtn();
+                printVoucherDocument();
+            }
         }
-    }
 
         // 1. Print Voucher (Isolated 1-Page Iframe - Zero Background Bleed)
         var printBtn = document.getElementById('amtPrintBtn');
@@ -2150,7 +2150,7 @@
                 goToStep(2);
             });
         }
-// 3. Email Voucher to Guest (Concise mailto + Clipboard copy fallback)
+        // 3. Email Voucher to Guest (Concise mailto + Clipboard copy fallback)
         var emailVoucherBtn = document.getElementById('amtEmailVoucherBtn');
         if (emailVoucherBtn) {
             emailVoucherBtn.addEventListener('click', function () {
@@ -2185,7 +2185,7 @@
                     + "Helpline: +91 99228 82044";
 
                 if (navigator.clipboard && navigator.clipboard.writeText) {
-                    navigator.clipboard.writeText(fullDetails).catch(function () {});
+                    navigator.clipboard.writeText(fullDetails).catch(function () { });
                 }
 
                 // Trigger mailto
@@ -2219,7 +2219,7 @@
                     + "📞 Helpline: +91 99228 82044";
 
                 if (navigator.clipboard && navigator.clipboard.writeText) {
-                    navigator.clipboard.writeText(shareMsg).catch(function () {});
+                    navigator.clipboard.writeText(shareMsg).catch(function () { });
                 }
 
                 function showShareSuccess() {
@@ -2255,7 +2255,7 @@
                 }
             });
         }
-        
+
         var _lastWaClick = 0;
         var waBtn = document.getElementById('amtWaBtn');
         if (waBtn) {
@@ -2700,7 +2700,7 @@
                 savedAt: Date.now()
             };
             localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(draft));
-        } catch (e) {}
+        } catch (e) { }
     }
 
     function restoreBookingDraft() {
@@ -2786,7 +2786,7 @@
                 var filtered = db.tours.filter(function (t) { return t.category === activeSvc; });
                 renderVisualTourCards(activeSvc, filtered);
             }
-        } catch (e) {}
+        } catch (e) { }
     }
 
     function clearBookingDraft() {
@@ -2796,7 +2796,7 @@
             }
             var banner = document.getElementById('amtDraftBanner');
             if (banner) banner.style.display = 'none';
-        } catch (e) {}
+        } catch (e) { }
     }
 
     function initDraftAutoSave() {
@@ -2882,7 +2882,7 @@
         bookingState.tour2Id = '';
 
         if (service === 'sightseeing') {
-            if (!bookingState.selectedTours || bookingState.selectedTours.length === 0 || !filtered.some(function(t){ return t.id === bookingState.selectedTours[0].id; })) {
+            if (!bookingState.selectedTours || bookingState.selectedTours.length === 0 || !filtered.some(function (t) { return t.id === bookingState.selectedTours[0].id; })) {
                 bookingState.selectedTours = [{ id: firstId, date: bookingState.date, time: bookingState.time }];
             } else {
                 bookingState.selectedTours[0].id = firstId;
@@ -2942,7 +2942,7 @@
         var sLbl = document.getElementById('amtStepLabel'); if (sLbl) sLbl.textContent = 'Step ' + step + ' of ' + totalSteps;
         if (typeof updateStepper === 'function') updateStepper(step);
         if (typeof saveBookingDraft === 'function') saveBookingDraft();
-        try { if (window.history && window.history.pushState) window.history.pushState({ amtStep: step }, '', '#step' + step); } catch (e) {}
+        try { if (window.history && window.history.pushState) window.history.pushState({ amtStep: step }, '', '#step' + step); } catch (e) { }
 
         // Reset scroll position on step transition so the top is always visible
         var modal = document.getElementById('amtBookingModal');
@@ -2979,7 +2979,7 @@
         var pFill = document.getElementById('amtProgressFill'); if (pFill) pFill.style.width = '100%';
         var sLbl = document.getElementById('amtStepLabel'); if (sLbl) sLbl.textContent = 'Booking Voucher (Step 3 of 3)';
         if (typeof updateStepper === 'function') updateStepper(3);
-        try { if (window.history && window.history.pushState) window.history.pushState({ amtStep: 3 }, '', '#voucher'); } catch (e) {}
+        try { if (window.history && window.history.pushState) window.history.pushState({ amtStep: 3 }, '', '#voucher'); } catch (e) { }
 
         // Reset scroll position on voucher screen
         var modal = document.getElementById('amtBookingModal');
@@ -3041,7 +3041,7 @@
         }
     }
 
-        // ── 5.5 AI Dynamic Tour & Route Advisory Engine ─────────────────────
+    // ── 5.5 AI Dynamic Tour & Route Advisory Engine ─────────────────────
     function getAIAdvisory(tours, isOutstation, isLocalDrop, isCombo) {
         if (!tours || !tours.length) return { badge: 'AI Travel Insight', text: '' };
         var t1 = tours[0] || {};
@@ -3086,7 +3086,7 @@
         return { badge: badge, text: text };
     }
 
-        function renderReviewCard() {
+    function renderReviewCard() {
         var el = document.getElementById('amtReviewCard');
         if (!el || !window.TOUR_DATABASE) return;
 
@@ -3269,7 +3269,7 @@
         var isCombo = sRules.key === 'combo';
         var isOutstation = sRules.key === 'outstation';
         var isLocalDrop = sRules.key === 'local_drop';
-        var aiObj = getAIAdvisory(tours.map(function(it){ return it.tour; }), isOutstation, isLocalDrop, isCombo);
+        var aiObj = getAIAdvisory(tours.map(function (it) { return it.tour; }), isOutstation, isLocalDrop, isCombo);
         if (aiObj && aiObj.text) {
             html += '<div class="amt-rev-ai-advisory">'
                 + '<span class="amt-v-ai-badge"><i class="fa-solid fa-sparkles"></i> ' + escapeHtml(aiObj.badge) + '</span> '
@@ -3287,7 +3287,7 @@
             policyBox.innerHTML = '<div class="amt-rev-policy-card">'
                 + '<div class="amt-rev-policy-title"><i class="fa-solid fa-shield-halved"></i> Pre-Dispatch Policy &amp; Important Carriage Terms</div>'
                 + '<div class="amt-policy-grid">'
-                + sRules.policyItems.map(function(p) {
+                + sRules.policyItems.map(function (p) {
                     return '<div class="amt-policy-item">'
                         + '<div class="amt-policy-icon"><i class="fa-solid ' + escapeHtml(p.icon) + '"></i></div>'
                         + '<div class="amt-policy-text-box">'
@@ -3314,230 +3314,230 @@
             }
 
             var tours = [];
-        (bookingState.selectedTours || []).forEach(function (st) {
-            var t = db.getTourById(st.id);
-            if (t) {
-                tours.push({
-                    tour: t,
-                    date: (bookingState.differentSchedule && st.date) ? st.date : bookingState.date,
-                    time: (bookingState.differentSchedule && st.time) ? st.time : bookingState.time
-                });
+            (bookingState.selectedTours || []).forEach(function (st) {
+                var t = db.getTourById(st.id);
+                if (t) {
+                    tours.push({
+                        tour: t,
+                        date: (bookingState.differentSchedule && st.date) ? st.date : bookingState.date,
+                        time: (bookingState.differentSchedule && st.time) ? st.time : bookingState.time
+                    });
+                }
+            });
+
+            if (tours.length === 0 && db.tours && db.tours.length > 0) {
+                var fb = (bookingState.tourId && db.getTourById(bookingState.tourId)) || db.tours[0];
+                tours.push({ tour: fb, date: bookingState.date, time: bookingState.time });
+                bookingState.selectedTours = [{ id: fb.id, date: bookingState.date, time: bookingState.time }];
             }
-        });
 
-        if (tours.length === 0 && db.tours && db.tours.length > 0) {
-            var fb = (bookingState.tourId && db.getTourById(bookingState.tourId)) || db.tours[0];
-            tours.push({ tour: fb, date: bookingState.date, time: bookingState.time });
-            bookingState.selectedTours = [{ id: fb.id, date: bookingState.date, time: bookingState.time }];
-        }
+            var isMulti = tours.length > 1;
+            var baseFare = tours.reduce(function (acc, item) { return acc + item.tour.fare; }, 0);
+            var isLarge = bookingState.pax === '5+';
+            var taxiCount = parseInt(bookingState.taxiCount, 10) || (isLarge ? 2 : 1);
+            var totalFare = baseFare * taxiCount;
 
-        var isMulti = tours.length > 1;
-        var baseFare = tours.reduce(function (acc, item) { return acc + item.tour.fare; }, 0);
-        var isLarge = bookingState.pax === '5+';
-        var taxiCount = parseInt(bookingState.taxiCount, 10) || (isLarge ? 2 : 1);
-        var totalFare = baseFare * taxiCount;
+            var sRules = getServiceRules(bookingState.service || bookingState.serviceType, tours, isLarge, taxiCount);
 
-        var sRules = getServiceRules(bookingState.service || bookingState.serviceType, tours, isLarge, taxiCount);
+            var termsHtml = '<div class="amt-v-terms-compact">'
+                + '<div class="amt-v-terms-title">' + escapeHtml(sRules.termsTitle) + '</div>'
+                + '<ul class="amt-v-terms-list">'
+                + sRules.terms.map(function (t) {
+                    return '<li><strong>' + escapeHtml(t.title) + ':</strong> ' + escapeHtml(t.desc) + '</li>';
+                }).join('')
+                + '</ul>'
+                + '</div>';
 
-        var termsHtml = '<div class="amt-v-terms-compact">'
-            + '<div class="amt-v-terms-title">' + escapeHtml(sRules.termsTitle) + '</div>'
-            + '<ul class="amt-v-terms-list">'
-            + sRules.terms.map(function(t) {
-                return '<li><strong>' + escapeHtml(t.title) + ':</strong> ' + escapeHtml(t.desc) + '</li>';
-            }).join('')
-            + '</ul>'
-            + '</div>';
+            var notesHtml = '';
+            if (bookingState.notes && bookingState.notes.trim()) {
+                notesHtml = '<div class="amt-v-notes-chip">📝 <strong>Special Request:</strong> ' + escapeHtml(bookingState.notes.trim()) + '</div>';
+            }
 
-        var notesHtml = '';
-        if (bookingState.notes && bookingState.notes.trim()) {
-            notesHtml = '<div class="amt-v-notes-chip">📝 <strong>Special Request:</strong> ' + escapeHtml(bookingState.notes.trim()) + '</div>';
-        }
+            var itemizedToursHtml = '';
+            tours.forEach(function (item, idx) {
+                var t = item.tour;
+                var dStr = formatSafeDisplayDate(item.date);
+                var tStr = formatPickupTime(item.time);
 
-        var itemizedToursHtml = '';
-        tours.forEach(function (item, idx) {
-            var t = item.tour;
-            var dStr = formatSafeDisplayDate(item.date);
-            var tStr = formatPickupTime(item.time);
+                var tourPoints = t.points || [];
+                var tourHiddenPts = t.hidden_points || [];
 
-            var tourPoints = t.points || [];
-            var tourHiddenPts = t.hidden_points || [];
-
-            var pointsHtml = '';
-            if (sRules.key === 'sightseeing' || sRules.key === 'combo') {
-                if (tourPoints.length > 0) {
-                    pointsHtml = '<div class="amt-v-points-box">'
-                        + '<div class="amt-v-points-head"><i class="fa-solid fa-list-check"></i> Included Sightseeing Points (' + tourPoints.length + ' Viewpoints)</div>'
-                        + '<div class="amt-v-chips-wrap">'
-                        + tourPoints.map(function (p) {
-                            return '<span class="amt-v-chip"><i class="fa-solid fa-location-dot" style="font-size:0.55rem;color:#0284c7;"></i> ' + escapeHtml(p) + '</span>';
-                        }).join('')
-                        + '</div>'
+                var pointsHtml = '';
+                if (sRules.key === 'sightseeing' || sRules.key === 'combo') {
+                    if (tourPoints.length > 0) {
+                        pointsHtml = '<div class="amt-v-points-box">'
+                            + '<div class="amt-v-points-head"><i class="fa-solid fa-list-check"></i> Included Sightseeing Points (' + tourPoints.length + ' Viewpoints)</div>'
+                            + '<div class="amt-v-chips-wrap">'
+                            + tourPoints.map(function (p) {
+                                return '<span class="amt-v-chip"><i class="fa-solid fa-location-dot" style="font-size:0.55rem;color:#0284c7;"></i> ' + escapeHtml(p) + '</span>';
+                            }).join('')
+                            + '</div>'
+                            + '</div>';
+                    }
+                    if (tourHiddenPts.length > 0) {
+                        pointsHtml += '<div class="amt-v-points-box" style="margin-top:3px;">'
+                            + '<div class="amt-v-points-head" style="color:#b45309;">⚠️ Extra Points (Optional, not in base fare)</div>'
+                            + '<div class="amt-v-chips-wrap">'
+                            + tourHiddenPts.map(function (p) {
+                                return '<span class="amt-v-chip" style="border-color:#fde68a;background:#fffbeb;color:#92400e;"><i class="fa-solid fa-location-dot" style="font-size:0.55rem;color:#d97706;"></i> ' + escapeHtml(p) + '</span>';
+                            }).join('')
+                            + '</div>'
+                            + '</div>';
+                    }
+                } else if (sRules.key === 'outstation') {
+                    pointsHtml = '<div class="amt-v-route-strip">'
+                        + '<i class="fa-solid fa-route" style="color:#0284c7;"></i> '
+                        + '<span class="amt-v-route-step">Hotel Pickup</span>'
+                        + '<span class="amt-v-route-arrow">→</span>'
+                        + '<span class="amt-v-route-step">Pasarni / Wai Ghat</span>'
+                        + '<span class="amt-v-route-arrow">→</span>'
+                        + '<span class="amt-v-route-step">NH-48 Expressway</span>'
+                        + '<span class="amt-v-route-arrow">→</span>'
+                        + '<span class="amt-v-route-step">Destination Drop</span>'
+                        + '</div>';
+                } else if (sRules.key === 'local_drop') {
+                    pointsHtml = '<div class="amt-v-route-strip">'
+                        + '<i class="fa-solid fa-location-dot" style="color:#0284c7;"></i> '
+                        + '<span class="amt-v-route-step">Hotel Porch</span>'
+                        + '<span class="amt-v-route-arrow">→</span>'
+                        + '<span class="amt-v-route-step">Direct Point-to-Point</span>'
+                        + '<span class="amt-v-route-arrow">→</span>'
+                        + '<span class="amt-v-route-step">' + escapeHtml(t.name || 'Destination') + '</span>'
                         + '</div>';
                 }
-                if (tourHiddenPts.length > 0) {
-                    pointsHtml += '<div class="amt-v-points-box" style="margin-top:3px;">'
-                        + '<div class="amt-v-points-head" style="color:#b45309;">⚠️ Extra Points (Optional, not in base fare)</div>'
-                        + '<div class="amt-v-chips-wrap">'
-                        + tourHiddenPts.map(function (p) {
-                            return '<span class="amt-v-chip" style="border-color:#fde68a;background:#fffbeb;color:#92400e;"><i class="fa-solid fa-location-dot" style="font-size:0.55rem;color:#d97706;"></i> ' + escapeHtml(p) + '</span>';
-                        }).join('')
-                        + '</div>'
-                        + '</div>';
+
+                itemizedToursHtml += '<div class="amt-v-tour-strip" style="margin-bottom:6px;">'
+                    + '<div class="amt-v-tour-hdr">'
+                    + '<span class="amt-v-tour-name">🚕 ' + escapeHtml(formatTourDisplayName(t, idx, isMulti)) + '</span>'
+                    + '<span class="amt-v-tour-dur">⏱️ ' + escapeHtml(t.duration) + ' &bull; ₹' + t.fare + '</span>'
+                    + '</div>'
+                    + (isMulti && bookingState.differentSchedule ? ('<div class="amt-v-tour-meta">'
+                        + '<span>📅 <strong>Schedule:</strong> ' + escapeHtml(dStr) + ' at ' + escapeHtml(tStr) + '</span>'
+                        + '<span class="amt-v-tour-rate">Locked Rate</span>'
+                        + '</div>') : '')
+                    + pointsHtml
+                    + '</div>';
+            });
+
+            var isCombo = sRules.key === 'combo';
+            var isOutstation = sRules.key === 'outstation';
+            var isLocalDrop = sRules.key === 'local_drop';
+            var aiObj = getAIAdvisory(tours.map(function (it) { return it.tour; }), isOutstation, isLocalDrop, isCombo);
+
+            var dateSummaryStr = bookingState.differentSchedule
+                ? '<strong>Multi-Day Tour</strong> (Itemized Below)'
+                : '<strong>' + escapeHtml(formatSafeDisplayDate(bookingState.date || 'Scheduled')) + '</strong> at <strong>' + escapeHtml(formatPickupTime(bookingState.time)) + '</strong>';
+
+            var html = '<div class="amt-v-card-streamlined">'
+                + '<div class="amt-v-hdr">'
+                + '  <div class="amt-v-hdr-left">'
+                + '    <img src="images/aryan-taxi-logo.svg" alt="Aryan Taxi Logo" class="amt-v-logo" style="width:38px;height:38px;object-fit:contain;flex-shrink:0;">'
+                + '    <div>'
+                + '      <div class="amt-v-brand">ARYAN TAXI MAHABALESHWAR</div>'
+                + '      <div class="amt-v-sub">' + escapeHtml(sRules.serviceTitle) + ' &bull; Explore Sahyadri</div>'
+                + '    </div>'
+                + '  </div>'
+                + '  <div class="amt-v-hdr-right">'
+                + '    <div class="amt-v-badge" style="background:' + sRules.badgeBg + ';color:' + sRules.badgeColor + ';border-color:' + sRules.badgeBorder + ';">' + sRules.badgeText + '</div>'
+                + '    <div class="amt-v-ref-box"><span class="amt-v-ref-lbl">Inquiry Ref No.:</span> <strong class="amt-v-ref-val">' + escapeHtml(bookingState.bookingId || 'AMT-REQ') + '</strong></div>'
+                + '  </div>'
+                + '</div>'
+
+                + '<div class="amt-v-grid">'
+                + '  <div class="amt-v-cell">'
+                + '    <span class="amt-v-lbl">Lead Passenger</span>'
+                + '    <span class="amt-v-val"><strong>' + escapeHtml(bookingState.name || 'Guest') + '</strong>' + (bookingState.phone ? ' (' + escapeHtml(bookingState.phone) + ')' : '') + '</span>'
+                + '  </div>'
+                + '  <div class="amt-v-cell">'
+                + '    <span class="amt-v-lbl">Travel Schedule</span>'
+                + '    <span class="amt-v-val">' + dateSummaryStr + '</span>'
+                + '  </div>'
+                + '  <div class="amt-v-cell" style="grid-column:1/-1;">'
+                + '    <span class="amt-v-lbl">Pickup Location</span>'
+                + '    <span class="amt-v-val"><strong>' + escapeHtml(bookingState.pickup || 'Mahabaleshwar') + '</strong> (Doorstep Porch)</span>'
+                + '  </div>'
+                + '  <div class="amt-v-cell amt-v-vehicle-cell">'
+                + '    <div class="amt-v-vehicle-wrap">'
+                + '      <span class="amt-v-vehicle-lbl">🚕 Allocated Vehicle:</span>'
+                + '      <strong class="amt-v-vehicle-val">' + escapeHtml(sRules.vehicleDesc) + '</strong>'
+                + '    </div>'
+                + '  </div>'
+                + '</div>'
+
+                + notesHtml
+
+                + '<div style="margin-top:2px;">'
+                + itemizedToursHtml
+                + '</div>'
+
+                + (aiObj && aiObj.text ? ('<div class="amt-v-ai-advisory">'
+                    + '  <span class="amt-v-ai-badge"><i class="fa-solid fa-sparkles"></i> ' + escapeHtml(aiObj.badge) + '</span>'
+                    + '  <span class="amt-v-ai-text">' + aiObj.text + '</span>'
+                    + '</div>') : '')
+
+                + '<div class="amt-v-fare-bar">'
+                + '  <div class="amt-v-fare-left">'
+                + '    <span class="amt-v-fare-lbl">' + escapeHtml(sRules.tariffLabel) + '</span>'
+                + '    <span class="amt-v-fare-amt">₹' + totalFare + '</span>'
+                + (isMulti ? '<span class="amt-v-fare-breakdown">(' + tours.map(function (it) { return '₹' + it.tour.fare; }).join(' + ') + ')' + (taxiCount > 1 ? ' &times; ' + taxiCount + ' Cabs' : '') + '</span>' : '')
+                + '  </div>'
+                + '  <div class="amt-v-fare-right">'
+                + '    <span class="amt-v-pay-badge" style="color:' + sRules.paymentColor + ';">✓ ' + escapeHtml(sRules.paymentBadge) + '</span>'
+                + '    <span class="amt-v-pay-note">Official Union Tariff Rate &bull; No Hidden Surcharges</span>'
+                + '  </div>'
+                + '</div>'
+
+                + termsHtml
+
+                + '<div class="amt-v-print-slip" style="display:block; margin-top:8px; padding:6px 10px; background:#f8fafc; border:1px dashed #cbd5e1; border-radius:6px; font-size:10px; color:#475569;">'
+                + '  <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">'
+                + '    <span><i class="fa-solid fa-file-signature"></i> <strong>Driver Dispatch Acknowledgment:</strong> Reporting at porch on schedule</span>'
+                + '    <div style="display:flex; gap:16px;">'
+                + '      <span>Driver Ack: ________________</span>'
+                + '      <span>Guest Ack: ________________</span>'
+                + '    </div>'
+                + '  </div>'
+                + '</div>'
+
+                + '<div class="amt-v-ftr">'
+                + '  <span>Registered Taxi Union Member Cab &bull; Computer-Generated Voucher &bull; Aryan Taxi Mahabaleshwar</span>'
+                + '  <span>Helpline: +91 99228 82044</span>'
+                + '</div>'
+                + '</div>';
+
+            el.innerHTML = html;
+
+            // Render Desktop WhatsApp QR Code Box
+            var qrContainer = document.getElementById('amtDesktopQrContainer');
+            if (qrContainer) {
+                var qrMsg = buildConfirmedWhatsAppMessage(bookingState);
+                var qrWaUrl = getWhatsAppUrl(encodeURIComponent(qrMsg));
+                var qrImgUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=160x160&margin=4&data=' + encodeURIComponent(qrWaUrl);
+                qrContainer.innerHTML = '<div class="amt-desktop-qr-card" id="amtDesktopQrCard">'
+                    + '<div class="amt-dqr-left">'
+                    + '  <img src="' + qrImgUrl + '" alt="WhatsApp QR Code" class="amt-dqr-img" width="84" height="84" loading="lazy">'
+                    + '</div>'
+                    + '<div class="amt-dqr-right">'
+                    + '  <div class="amt-dqr-badge"><i class="fa-solid fa-qrcode"></i> Instant Mobile WhatsApp Sync</div>'
+                    + '  <div class="amt-dqr-title">Booking from PC? Scan with your Phone Camera!</div>'
+                    + '  <div class="amt-dqr-desc">Point your phone\'s camera at this QR code to instantly launch WhatsApp with your pre-filled booking details &amp; dispatch your cab.</div>'
+                    + '</div>'
+                    + '</div>';
+            }
+
+            var noticeSub = document.getElementById('amtVoucherNoticeSub');
+            if (noticeSub) {
+                noticeSub.textContent = sRules.dispatchNotice;
+            }
+
+            var waSub = document.getElementById('amtWaBtnSubtext');
+            if (waSub) {
+                if (sRules.key === 'outstation') {
+                    waSub.textContent = 'Send outstation transfer details on WhatsApp to lock driver & advance schedule';
+                } else {
+                    waSub.textContent = 'Send travel details on WhatsApp to lock driver dispatch';
                 }
-            } else if (sRules.key === 'outstation') {
-                pointsHtml = '<div class="amt-v-route-strip">'
-                    + '<i class="fa-solid fa-route" style="color:#0284c7;"></i> '
-                    + '<span class="amt-v-route-step">Hotel Pickup</span>'
-                    + '<span class="amt-v-route-arrow">→</span>'
-                    + '<span class="amt-v-route-step">Pasarni / Wai Ghat</span>'
-                    + '<span class="amt-v-route-arrow">→</span>'
-                    + '<span class="amt-v-route-step">NH-48 Expressway</span>'
-                    + '<span class="amt-v-route-arrow">→</span>'
-                    + '<span class="amt-v-route-step">Destination Drop</span>'
-                    + '</div>';
-            } else if (sRules.key === 'local_drop') {
-                pointsHtml = '<div class="amt-v-route-strip">'
-                    + '<i class="fa-solid fa-location-dot" style="color:#0284c7;"></i> '
-                    + '<span class="amt-v-route-step">Hotel Porch</span>'
-                    + '<span class="amt-v-route-arrow">→</span>'
-                    + '<span class="amt-v-route-step">Direct Point-to-Point</span>'
-                    + '<span class="amt-v-route-arrow">→</span>'
-                    + '<span class="amt-v-route-step">' + escapeHtml(t.name || 'Destination') + '</span>'
-                    + '</div>';
             }
-
-            itemizedToursHtml += '<div class="amt-v-tour-strip" style="margin-bottom:6px;">'
-                + '<div class="amt-v-tour-hdr">'
-                + '<span class="amt-v-tour-name">🚕 ' + escapeHtml(formatTourDisplayName(t, idx, isMulti)) + '</span>'
-                + '<span class="amt-v-tour-dur">⏱️ ' + escapeHtml(t.duration) + ' &bull; ₹' + t.fare + '</span>'
-                + '</div>'
-                + (isMulti && bookingState.differentSchedule ? ('<div class="amt-v-tour-meta">'
-                + '<span>📅 <strong>Schedule:</strong> ' + escapeHtml(dStr) + ' at ' + escapeHtml(tStr) + '</span>'
-                + '<span class="amt-v-tour-rate">Locked Rate</span>'
-                + '</div>') : '')
-                + pointsHtml
-                + '</div>';
-        });
-
-        var isCombo = sRules.key === 'combo';
-        var isOutstation = sRules.key === 'outstation';
-        var isLocalDrop = sRules.key === 'local_drop';
-        var aiObj = getAIAdvisory(tours.map(function(it){ return it.tour; }), isOutstation, isLocalDrop, isCombo);
-
-        var dateSummaryStr = bookingState.differentSchedule
-            ? '<strong>Multi-Day Tour</strong> (Itemized Below)'
-            : '<strong>' + escapeHtml(formatSafeDisplayDate(bookingState.date || 'Scheduled')) + '</strong> at <strong>' + escapeHtml(formatPickupTime(bookingState.time)) + '</strong>';
-
-        var html = '<div class="amt-v-card-streamlined">'
-            + '<div class="amt-v-hdr">'
-            + '  <div class="amt-v-hdr-left">'
-            + '    <img src="images/aryan-taxi-logo.svg" alt="Aryan Taxi Logo" class="amt-v-logo" style="width:38px;height:38px;object-fit:contain;flex-shrink:0;">'
-            + '    <div>'
-            + '      <div class="amt-v-brand">ARYAN TAXI MAHABALESHWAR</div>'
-            + '      <div class="amt-v-sub">' + escapeHtml(sRules.serviceTitle) + ' &bull; Explore Sahyadri</div>'
-            + '    </div>'
-            + '  </div>'
-            + '  <div class="amt-v-hdr-right">'
-            + '    <div class="amt-v-badge" style="background:' + sRules.badgeBg + ';color:' + sRules.badgeColor + ';border-color:' + sRules.badgeBorder + ';">' + sRules.badgeText + '</div>'
-            + '    <div class="amt-v-ref-box"><span class="amt-v-ref-lbl">Inquiry Ref No.:</span> <strong class="amt-v-ref-val">' + escapeHtml(bookingState.bookingId || 'AMT-REQ') + '</strong></div>'
-            + '  </div>'
-            + '</div>'
-
-            + '<div class="amt-v-grid">'
-            + '  <div class="amt-v-cell">'
-            + '    <span class="amt-v-lbl">Lead Passenger</span>'
-            + '    <span class="amt-v-val"><strong>' + escapeHtml(bookingState.name || 'Guest') + '</strong>' + (bookingState.phone ? ' (' + escapeHtml(bookingState.phone) + ')' : '') + '</span>'
-            + '  </div>'
-            + '  <div class="amt-v-cell">'
-            + '    <span class="amt-v-lbl">Travel Schedule</span>'
-            + '    <span class="amt-v-val">' + dateSummaryStr + '</span>'
-            + '  </div>'
-            + '  <div class="amt-v-cell" style="grid-column:1/-1;">'
-            + '    <span class="amt-v-lbl">Pickup Location</span>'
-            + '    <span class="amt-v-val"><strong>' + escapeHtml(bookingState.pickup || 'Mahabaleshwar') + '</strong> (Doorstep Porch)</span>'
-            + '  </div>'
-            + '  <div class="amt-v-cell amt-v-vehicle-cell">'
-            + '    <div class="amt-v-vehicle-wrap">'
-            + '      <span class="amt-v-vehicle-lbl">🚕 Allocated Vehicle:</span>'
-            + '      <strong class="amt-v-vehicle-val">' + escapeHtml(sRules.vehicleDesc) + '</strong>'
-            + '    </div>'
-            + '  </div>'
-            + '</div>'
-
-            + notesHtml
-
-            + '<div style="margin-top:2px;">'
-            + itemizedToursHtml
-            + '</div>'
-
-            + (aiObj && aiObj.text ? ('<div class="amt-v-ai-advisory">'
-            + '  <span class="amt-v-ai-badge"><i class="fa-solid fa-sparkles"></i> ' + escapeHtml(aiObj.badge) + '</span>'
-            + '  <span class="amt-v-ai-text">' + aiObj.text + '</span>'
-            + '</div>') : '')
-
-            + '<div class="amt-v-fare-bar">'
-            + '  <div class="amt-v-fare-left">'
-            + '    <span class="amt-v-fare-lbl">' + escapeHtml(sRules.tariffLabel) + '</span>'
-            + '    <span class="amt-v-fare-amt">₹' + totalFare + '</span>'
-            + (isMulti ? '<span class="amt-v-fare-breakdown">(' + tours.map(function(it){ return '₹' + it.tour.fare; }).join(' + ') + ')' + (taxiCount > 1 ? ' &times; ' + taxiCount + ' Cabs' : '') + '</span>' : '')
-            + '  </div>'
-            + '  <div class="amt-v-fare-right">'
-            + '    <span class="amt-v-pay-badge" style="color:' + sRules.paymentColor + ';">✓ ' + escapeHtml(sRules.paymentBadge) + '</span>'
-            + '    <span class="amt-v-pay-note">Official Union Tariff Rate &bull; No Hidden Surcharges</span>'
-            + '  </div>'
-            + '</div>'
-
-            + termsHtml
-
-            + '<div class="amt-v-print-slip" style="display:block; margin-top:8px; padding:6px 10px; background:#f8fafc; border:1px dashed #cbd5e1; border-radius:6px; font-size:10px; color:#475569;">'
-            + '  <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">'
-            + '    <span><i class="fa-solid fa-file-signature"></i> <strong>Driver Dispatch Acknowledgment:</strong> Reporting at porch on schedule</span>'
-            + '    <div style="display:flex; gap:16px;">'
-            + '      <span>Driver Ack: ________________</span>'
-            + '      <span>Guest Ack: ________________</span>'
-            + '    </div>'
-            + '  </div>'
-            + '</div>'
-
-            + '<div class="amt-v-ftr">'
-            + '  <span>Registered Taxi Union Member Cab &bull; Computer-Generated Voucher &bull; Aryan Taxi Mahabaleshwar</span>'
-            + '  <span>Helpline: +91 99228 82044</span>'
-            + '</div>'
-            + '</div>';
-
-        el.innerHTML = html;
-
-        // Render Desktop WhatsApp QR Code Box
-        var qrContainer = document.getElementById('amtDesktopQrContainer');
-        if (qrContainer) {
-            var qrMsg = buildConfirmedWhatsAppMessage(bookingState);
-            var qrWaUrl = getWhatsAppUrl(encodeURIComponent(qrMsg));
-            var qrImgUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=160x160&margin=4&data=' + encodeURIComponent(qrWaUrl);
-            qrContainer.innerHTML = '<div class="amt-desktop-qr-card" id="amtDesktopQrCard">'
-                + '<div class="amt-dqr-left">'
-                + '  <img src="' + qrImgUrl + '" alt="WhatsApp QR Code" class="amt-dqr-img" width="84" height="84" loading="lazy">'
-                + '</div>'
-                + '<div class="amt-dqr-right">'
-                + '  <div class="amt-dqr-badge"><i class="fa-solid fa-qrcode"></i> Instant Mobile WhatsApp Sync</div>'
-                + '  <div class="amt-dqr-title">Booking from PC? Scan with your Phone Camera!</div>'
-                + '  <div class="amt-dqr-desc">Point your phone\'s camera at this QR code to instantly launch WhatsApp with your pre-filled booking details &amp; dispatch your cab.</div>'
-                + '</div>'
-                + '</div>';
-        }
-
-        var noticeSub = document.getElementById('amtVoucherNoticeSub');
-        if (noticeSub) {
-            noticeSub.textContent = sRules.dispatchNotice;
-        }
-
-        var waSub = document.getElementById('amtWaBtnSubtext');
-        if (waSub) {
-            if (sRules.key === 'outstation') {
-                waSub.textContent = 'Send outstation transfer details on WhatsApp to lock driver & advance schedule';
-            } else {
-                waSub.textContent = 'Send travel details on WhatsApp to lock driver dispatch';
-            }
-        }
         } catch (err) {
             console.error('Error rendering voucher in renderVoucherScreen:', err);
             var bId = bookingState.bookingId || ('AMT-' + Date.now().toString().slice(-6));

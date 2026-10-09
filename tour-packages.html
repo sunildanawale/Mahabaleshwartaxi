@@ -112,13 +112,30 @@
     <a href="index.html" style="color: var(--primary);">Home</a> &raquo; <span>Tour Packages</span>
 </div>
 </div>
-<section class="section">
+<section class="section" id="tour-catalog">
     <div class="container">
         <div class="text-center mb-8">
+            <span class="section-label">Official Sightseeing Catalog</span>
             <h2 class="section-title">Popular Taxi Tour Packages</h2>
-            <p class="section-subtitle" style="margin: 0 auto;">Affordable, reliable, and comfortable sightseeing with a local expert driver.</p>
+            <p class="section-subtitle" style="margin: 0 auto; max-width: 650px;">Affordable, reliable, and comfortable sightseeing with verified local drivers. Approved Mahabaleshwar Taxi Union fares with zero advance payment.</p>
         </div>
-        <div class="grid grid--3"> <!-- Tour 1 --> <div class="tour-card reveal">
+
+        <!-- Interactive View Switcher Controls -->
+        <div class="tour-view-controls" style="display: flex; justify-content: center; align-items: center; gap: 12px; margin-bottom: 28px; flex-wrap: wrap;">
+            <span style="font-size: 0.88rem; font-weight: 700; color: var(--text-secondary); margin-right: 4px;">
+                <i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Choose View:
+            </span>
+            <button type="button" id="btnViewCards" class="btn btn--sm btn--primary view-toggle-btn active" style="border-radius: 20px; padding: 7px 18px; font-weight: 700; cursor: pointer; transition: all 0.2s ease;" onclick="switchTourDisplay('cards')">
+                <i class="fa-solid fa-grip"></i> Detailed Cards View
+            </button>
+            <button type="button" id="btnViewTable" class="btn btn--sm btn--outline view-toggle-btn" style="border-radius: 20px; padding: 7px 18px; font-weight: 700; cursor: pointer; border-color: var(--border-color); color: var(--text-primary); transition: all 0.2s ease;" onclick="switchTourDisplay('table')">
+                <i class="fa-solid fa-table-list"></i> Side-by-Side Comparison Table
+            </button>
+        </div>
+
+        <!-- VIEW 1: Cards Grid View (Default) -->
+        <div id="tourCardsView">
+            <div class="grid grid--3"> <!-- Tour 1 --> <div class="tour-card reveal">
             <div class="tour-header" role="button" tabindex="0" aria-controls="tour1-details" aria-expanded="false">
                 <h3 class="tour-name">Tour 1: Mahabaleshwar Darshan</h3>
                 <div class="tour-price">₹1200</div>
@@ -299,74 +316,14 @@
 </div>
 </div>
 </div>
-</div>
-</section> <!-- Help Me Choose a Tour (Interactive Tour Finder) --> <section class="section" id="tour-finder">
-<div class="container">
-    <div class="reveal" style="background: linear-gradient(135deg, #0284c7, #0369a1); border-radius: 20px; padding: 35px 25px; color: white; max-width: 800px; margin: 0 auto; box-shadow: var(--shadow-xl);">
-        <div style="text-align: center; margin-bottom: 20px;">
-            <span style="background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase;">Smart Tour Finder</span>
-            <h2 style="font-size: 1.8rem; margin: 8px 0 6px 0; color: white;">Help Me Choose a Tour</h2>
-            <p style="color: #e0f2fe; font-size: 0.95rem; margin: 0;">Answer 2 quick questions to find the perfect official tour for your trip.</p>
         </div>
-        <div class="tour-finder__grid">
-            <div>
-                <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 5px; color: #f0f9ff;">How much time do you have?</label>
-                <select id="tf_time" style="width: 100%; padding: 10px; border-radius: 8px; border: none; font-size: 0.9rem; color: var(--text-primary);">
-                    <option value="half" selected>Half Day (3 - 4 Hours)</option>
-                    <option value="full">Full Day (6 - 9 Hours)</option>
-                </select>
-            </div>
-            <div>
-                <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 5px; color: #f0f9ff;">What do you want to experience most?</label>
-                <select id="tf_interest" style="width: 100%; padding: 10px; border-radius: 8px; border: none; font-size: 0.9rem; color: var(--text-primary);">
-                    <option value="views" selected>Scenic Viewpoints & Temples (Tour 1)</option>
-                    <option value="nature">Lingmala Waterfall & Sunset Point (Tour 2)</option>
-                    <option value="history">History & Fort Trek - Pratapgad (Tour 3)</option>
-                    <option value="panchgani">Plateaus & Strawberry Lands - Panchgani (Tour 4)</option>
-                    <option value="spiritual">Ancient Temples & Ghats - Wai (Tour 5)</option>
-                    <option value="water">Boating & Water Sports - Tapola Mini Kashmir (Tour 6)</option>
-                </select>
-            </div>
-        </div>
-        <button onclick="window.recommendTour()" class="btn btn--accent" style="width: 100%; margin-top: 18px; padding: 12px; font-weight: 700; border-radius: 8px; font-size: 1rem;">
-            <i class="fa-solid fa-wand-magic-sparkles">
-        </i> Recommend Best Tour </button>
-        <div id="tf_result" style="display: none;">
-        </div>
-    </div>
-</div>
-</section> <!-- Tour Comparison Section --> <section class="section section--bg" id="compare-tours">
-<div class="container">
-    <div class="text-center mb-8 reveal">
-        <span class="section-label">Tour Comparison</span>
-        <h2 class="section-title">Which Mahabaleshwar Tour is Right for You?</h2>
-        <p class="section-subtitle" style="margin: 0 auto; max-width: 650px;">Compare official Mahabaleshwar Taxi Union packages side-by-side to choose the perfect sightseeing itinerary for your family.</p>
-    </div> <!-- Direct Local Owner & Union Driver Network Guarantee Badge --> <div class="reveal owner-disclosure-badge" style="max-width: 1000px; margin: 24px auto; text-align: left; background: var(--bg-primary); border: 1.5px solid var(--border-color); border-left: 5px solid #0891b2; border-radius: 16px; padding: 22px 24px; box-shadow: var(--shadow-sm);">
-    <div style="display: flex; align-items: flex-start; gap: 16px; flex-wrap: wrap;">
-        <div style="width: 46px; height: 46px; border-radius: 12px; background: #e0f2fe; color: #0284c7; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; flex-shrink: 0; margin-top: 2px;">
-            <i class="fa-solid fa-taxi">
-        </i>
-    </div>
-    <div style="flex: 1; min-width: 260px;">
-        <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--text-primary); margin: 0 0 6px;">Local Operator &amp; Union Cab Network</h3>
-        <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.65; margin: 0 0 12px;"> Aryan Taxi Mahabaleshwar coordinates registered tourist cabs (Official Black &amp; Yellow 4-seater tourist taxis) through the Mahabaleshwar Taxi Union circle as per vehicle availability. For local sightseeing circuits in Mahabaleshwar and Panchgani, 4-seater tourist cabs are standard. If your family or group has 5 or more guests, multiple 4-seater cabs are arranged (e.g. 2 cabs for 5–8 guests). For outstation journeys (Pune / Mumbai airport and city transfers), larger vehicles (Ertiga / Innova / Sedans) are available on request. <strong>Please confirm all tour details with the taxi driver before starting your sightseeing.</strong> </p>
-        <div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 0.8rem; font-weight: 700;">
-            <span style="background: #dcfce7; color: #15803d; padding: 5px 12px; border-radius: 20px; display: inline-flex; align-items: center; gap: 5px;">
-            <i class="fa-solid fa-circle-check">
-        </i> Official Fixed Union Tariffs</span>
-        <span style="background: #e0f2fe; color: #0369a1; padding: 5px 12px; border-radius: 20px; display: inline-flex; align-items: center; gap: 5px;">
-        <i class="fa-solid fa-ban">
-    </i> Zero Advance for Local Sightseeing</span>
-    <span style="background: #fef3c7; color: #92400e; padding: 5px 12px; border-radius: 20px; display: inline-flex; align-items: center; gap: 5px;">
-    <i class="fa-solid fa-car-side">
-</i> 4-Seater Cabs for Local Sightseeing</span>
 
-</div>
-</div>
-</div>
-</div>
-<div class="table-scroll-hint"><i class="fa-solid fa-arrows-left-right"></i> Scroll table sideways to view all fares &amp; details &rarr;</div>
-<div class="table-wrap reveal">
+        <!-- VIEW 2: Comparison Table View (Shown on Toggle) -->
+        <div id="tourTableView" style="display: none;">
+            <div class="table-scroll-hint" style="text-align: center; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 12px;">
+                <i class="fa-solid fa-arrows-left-right"></i> Scroll table sideways to view all fares &amp; details &rarr;
+            </div>
+            <div class="table-wrap reveal">
     <table style="width: 100%; border-collapse: collapse; background: var(--bg-primary); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-md);">
         <thead style="background: #0284c7 !important;">
             <tr style="background: #0284c7 !important;">
@@ -466,7 +423,138 @@
                 </tr>
             </tbody>
         </table>
-    </div> <!-- 3-Step Transparent Booking Explanation --> <div style="margin-top: 40px; background: var(--bg-primary); padding: 30px; border-radius: 16px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);" class="reveal">
+    </div>
+        </div>
+    </div>
+</section>
+<section class="section" id="tour-finder">
+<div class="container">
+    <div class="reveal" style="background: linear-gradient(135deg, #0284c7, #0369a1); border-radius: 20px; padding: 35px 25px; color: white; max-width: 800px; margin: 0 auto; box-shadow: var(--shadow-xl);">
+        <div style="text-align: center; margin-bottom: 20px;">
+            <span style="background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase;">Smart Tour Finder</span>
+            <h2 style="font-size: 1.8rem; margin: 8px 0 6px 0; color: white;">Help Me Choose a Tour</h2>
+            <p style="color: #e0f2fe; font-size: 0.95rem; margin: 0;">Answer 2 quick questions to find the perfect official tour for your trip.</p>
+        </div>
+        <div class="tour-finder__grid">
+            <div>
+                <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 5px; color: #f0f9ff;">How much time do you have?</label>
+                <select id="tf_time" style="width: 100%; padding: 10px; border-radius: 8px; border: none; font-size: 0.9rem; color: var(--text-primary);">
+                    <option value="half" selected>Half Day (3 - 4 Hours)</option>
+                    <option value="full">Full Day (6 - 9 Hours)</option>
+                </select>
+            </div>
+            <div>
+                <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 5px; color: #f0f9ff;">What do you want to experience most?</label>
+                <select id="tf_interest" style="width: 100%; padding: 10px; border-radius: 8px; border: none; font-size: 0.9rem; color: var(--text-primary);">
+                    <option value="views" selected>Scenic Viewpoints & Temples (Tour 1)</option>
+                    <option value="nature">Lingmala Waterfall & Sunset Point (Tour 2)</option>
+                    <option value="history">History & Fort Trek - Pratapgad (Tour 3)</option>
+                    <option value="panchgani">Plateaus & Strawberry Lands - Panchgani (Tour 4)</option>
+                    <option value="spiritual">Ancient Temples & Ghats - Wai (Tour 5)</option>
+                    <option value="water">Boating & Water Sports - Tapola Mini Kashmir (Tour 6)</option>
+                </select>
+            </div>
+        </div>
+        <button onclick="window.recommendTour()" class="btn btn--accent" style="width: 100%; margin-top: 18px; padding: 12px; font-weight: 700; border-radius: 8px; font-size: 1rem;">
+            <i class="fa-solid fa-wand-magic-sparkles">
+        </i> Recommend Best Tour </button>
+        <div id="tf_result" style="display: none;">
+        </div>
+    </div>
+</div>
+</section> <!-- Tour Comparison Section --> <section class="section section--bg" id="compare-tours">
+<div class="container">
+    <div class="text-center mb-8 reveal">
+        <span class="section-label">Tour Selection Guide</span>
+        <h2 class="section-title">Which Mahabaleshwar Tour is Right for You?</h2>
+        <p class="section-subtitle" style="margin: 0 auto; max-width: 650px;">Choose the ideal official tour package tailored to your available time and group preferences.</p>
+    </div>
+
+    <!-- 4 Traveler Persona Recommendation Cards -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 30px;" class="reveal">
+        <div style="background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 14px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-sm);">
+            <div>
+                <div style="font-size: 1.8rem; margin-bottom: 10px;">👨‍👩‍👧‍👦</div>
+                <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--text-primary); margin: 0 0 8px;">Families &amp; First-Timers</h3>
+                <div style="display: inline-block; background: #e0f2fe; color: #0284c7; font-size: 0.75rem; font-weight: 700; padding: 3px 10px; border-radius: 12px; margin-bottom: 10px;">Tour 1 • ₹1,200 (3.5 Hrs)</div>
+                <p style="color: var(--text-secondary); font-size: 0.88rem; line-height: 1.5; margin: 0 0 16px;">The quintessential introductory circuit. Covers sacred Old Mahabaleshwar temples, dramatic Arthur's Seat viewpoints, and strawberry gardens.</p>
+            </div>
+            <button onclick="if(window.openBookingModal){window.openBookingModal('Tour 1: Mahabaleshwar Darshan');}else if(window.tourWA){tourWA('Tour 1: Mahabaleshwar Darshan - ₹1200');}" class="btn btn--sm btn--primary btn--full">Book Tour 1</button>
+        </div>
+
+        <div style="background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 14px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-sm);">
+            <div>
+                <div style="font-size: 1.8rem; margin-bottom: 10px;">🌊</div>
+                <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--text-primary); margin: 0 0 8px;">Waterfalls &amp; Sunsets</h3>
+                <div style="display: inline-block; background: #e0f2fe; color: #0284c7; font-size: 0.75rem; font-weight: 700; padding: 3px 10px; border-radius: 12px; margin-bottom: 10px;">Tour 2 • ₹1,200 (3.5 Hrs)</div>
+                <p style="color: var(--text-secondary); font-size: 0.88rem; line-height: 1.5; margin: 0 0 16px;">Perfect for nature lovers. Features morning views from Wilson Point, the roaring Lingmala Waterfall, Venna Mini Dam, and Bombay Sunset Point.</p>
+            </div>
+            <button onclick="if(window.openBookingModal){window.openBookingModal('Tour 2: Waterfall & Sunset');}else if(window.tourWA){tourWA('Tour 2: Waterfall & Sunset Circuit - ₹1200');}" class="btn btn--sm btn--primary btn--full">Book Tour 2</button>
+        </div>
+
+        <div style="background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 14px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-sm);">
+            <div>
+                <div style="font-size: 1.8rem; margin-bottom: 10px;">🚩</div>
+                <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--text-primary); margin: 0 0 8px;">History &amp; Fort Trekkers</h3>
+                <div style="display: inline-block; background: #e0f2fe; color: #0284c7; font-size: 0.75rem; font-weight: 700; padding: 3px 10px; border-radius: 12px; margin-bottom: 10px;">Tour 3 • ₹1,600 (3.5 Hrs)</div>
+                <p style="color: var(--text-secondary); font-size: 0.88rem; line-height: 1.5; margin: 0 0 16px;">Immerse yourself in Chhatrapati Shivaji Maharaj's history with the majestic mountain fortress of Pratapgad, Bhavani Mata Temple, and village machi.</p>
+            </div>
+            <button onclick="if(window.openBookingModal){window.openBookingModal('Tour 3: Pratapgadh Darshan');}else if(window.tourWA){tourWA('Tour 3: Pratapgadh Darshan - ₹1600');}" class="btn btn--sm btn--primary btn--full">Book Tour 3</button>
+        </div>
+
+        <div style="background: var(--bg-primary); border: 1.5px solid var(--accent); border-radius: 14px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-md); position: relative;">
+            <span style="position: absolute; top: -10px; right: 15px; background: var(--accent); color: white; font-size: 0.7rem; font-weight: 800; padding: 2px 10px; border-radius: 10px; text-transform: uppercase;">Best Value</span>
+            <div>
+                <div style="font-size: 1.8rem; margin-bottom: 10px;">⭐</div>
+                <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--text-primary); margin: 0 0 8px;">Complete 1-Day Tour</h3>
+                <div style="display: inline-block; background: #fef3c7; color: #92400e; font-size: 0.75rem; font-weight: 700; padding: 3px 10px; border-radius: 12px; margin-bottom: 10px;">Tour 7 • ₹3,000 (9.0 Hrs)</div>
+                <p style="color: var(--text-secondary); font-size: 0.88rem; line-height: 1.5; margin: 0 0 16px;">Combines Tour 1 (Arthur Seat circuit) + Tour 4 (Panchgani Table Land) + Mapro Garden. Complete full-day hill station experience.</p>
+            </div>
+            <button onclick="if(window.openBookingModal){window.openBookingModal('Tour 7: Full Day Combo');}else if(window.tourWA){tourWA('Tour 7: Full Day Combo - ₹3000');}" class="btn btn--sm btn--whatsapp btn--full">Book Best Value</button>
+        </div>
+    </div>
+
+    <!-- Direct Local Owner & Union Driver Network Guarantee Badge (Preserved 100%) -->
+    <div class="reveal owner-disclosure-badge" style="max-width: 1000px; margin: 24px auto; text-align: left; background: var(--bg-primary); border: 1.5px solid var(--border-color); border-left: 5px solid #0891b2; border-radius: 16px; padding: 22px 24px; box-shadow: var(--shadow-sm);">
+    <div style="display: flex; align-items: flex-start; gap: 16px; flex-wrap: wrap;">
+        <div style="width: 46px; height: 46px; border-radius: 12px; background: #e0f2fe; color: #0284c7; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; flex-shrink: 0; margin-top: 2px;">
+            <i class="fa-solid fa-taxi">
+        </i>
+    </div>
+    <div style="flex: 1; min-width: 260px;">
+        <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--text-primary); margin: 0 0 6px;">Local Operator &amp; Union Cab Network</h3>
+        <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.65; margin: 0 0 12px;"> Aryan Taxi Mahabaleshwar coordinates registered tourist cabs (Official Black &amp; Yellow 4-seater tourist taxis) through the Mahabaleshwar Taxi Union circle as per vehicle availability. For local sightseeing circuits in Mahabaleshwar and Panchgani, 4-seater tourist cabs are standard. If your family or group has 5 or more guests, multiple 4-seater cabs are arranged (e.g. 2 cabs for 5–8 guests). For outstation journeys (Pune / Mumbai airport and city transfers), larger vehicles (Ertiga / Innova / Sedans) are available on request. <strong>Please confirm all tour details with the taxi driver before starting your sightseeing.</strong> </p>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 0.8rem; font-weight: 700;">
+            <span style="background: #dcfce7; color: #15803d; padding: 5px 12px; border-radius: 20px; display: inline-flex; align-items: center; gap: 5px;">
+            <i class="fa-solid fa-circle-check">
+        </i> Official Fixed Union Tariffs</span>
+        <span style="background: #e0f2fe; color: #0369a1; padding: 5px 12px; border-radius: 20px; display: inline-flex; align-items: center; gap: 5px;">
+        <i class="fa-solid fa-ban">
+    </i> Zero Advance for Local Sightseeing</span>
+    <span style="background: #fef3c7; color: #92400e; padding: 5px 12px; border-radius: 20px; display: inline-flex; align-items: center; gap: 5px;">
+    <i class="fa-solid fa-car-side">
+</i> 4-Seater Cabs for Local Sightseeing</span>
+
+</div>
+</div>
+</div>
+</div>
+
+    <!-- Authoritative Link to Official Taxi Union Rate Card -->
+    <div style="margin: 24px auto 30px; padding: 20px; background: var(--bg-primary); border-radius: 14px; border: 1.5px dashed var(--primary); max-width: 1000px; text-align: center;" class="reveal">
+        <h4 style="margin: 0 0 6px; font-size: 1.05rem; color: var(--text-primary); font-weight: 800;">
+            <i class="fa-solid fa-file-invoice-dollar" style="color: var(--primary);"></i> Looking for Outstation Drops or Local Pickups?
+        </h4>
+        <p style="margin: 0 0 14px; font-size: 0.88rem; color: var(--text-secondary);">
+            View fixed union tariffs for Pune Airport (₹4,000), Mumbai Airport (₹8,000), Satara (₹2,000), and local point-to-point drop fares.
+        </p>
+        <a href="taxi-fare.html" class="btn btn--sm btn--primary">
+            <i class="fa-solid fa-arrow-right"></i> Open Official 2026 Taxi Fare Card &amp; Calculator
+        </a>
+    </div>
+
+    <!-- 3-Step Transparent Booking Explanation (Preserved 100%) -->
+    <!-- 3-Step Transparent Booking Explanation --> <div style="margin-top: 40px; background: var(--bg-primary); padding: 30px; border-radius: 16px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);" class="reveal">
     <h3 style="text-align: center; color: var(--text-primary); margin-bottom: 20px; font-size: 1.3rem;">
         <i class="fa-solid fa-circle-check" style="color: #10b981;">
     </i> Simple 3-Step Booking (Zero Advance)</h3>
@@ -780,5 +868,49 @@
     <i class="fa-solid fa-arrow-up">
 </i>
 </button> <script src="js/main.min.js?v=96.0" defer></script> <script src="js/tour-data.js?v=96.0" defer></script> <script src="js/ai-assistant.js?v=96.0" defer></script> <script src="js/booking-widget.min.js?v=96.0" defer></script> <script src="js/advanced-features.js?v=96.0" defer></script> <script>(function(){function autoOpenBooking(){var h=(window.location.hash||"").toLowerCase();var s=window.location.search||"";var b=/[?&](book|booking)=/i.test(s)||h==="#booking"||h==="#book";var tm=s.match(/[?&]tour=([^&#]*)/i);var th=tm?decodeURIComponent(tm[1].replace(/\+/g," ")):"";if(b||th){var t=0;var ti=setInterval(function(){t++;if(window.openBookingModal){clearInterval(ti);window.openBookingModal(th||"");}else if(t>30){clearInterval(ti);}},100);}}if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",autoOpenBooking);}else{autoOpenBooking();}window.addEventListener("hashchange",autoOpenBooking);})();</script>
+
+<script>
+function switchTourDisplay(mode) {
+    var cardsEl = document.getElementById('tourCardsView');
+    var tableEl = document.getElementById('tourTableView');
+    var btnCards = document.getElementById('btnViewCards');
+    var btnTable = document.getElementById('btnViewTable');
+    if (!cardsEl || !tableEl) return;
+    
+    if (mode === 'table') {
+        cardsEl.style.display = 'none';
+        tableEl.style.display = 'block';
+        if (btnCards) {
+            btnCards.className = 'btn btn--sm btn--outline view-toggle-btn';
+            btnCards.style.color = 'var(--text-primary)';
+            btnCards.style.borderColor = 'var(--border-color)';
+        }
+        if (btnTable) {
+            btnTable.className = 'btn btn--sm btn--primary view-toggle-btn active';
+            btnTable.style.color = '#ffffff';
+        }
+    } else {
+        cardsEl.style.display = 'block';
+        tableEl.style.display = 'none';
+        if (btnCards) {
+            btnCards.className = 'btn btn--sm btn--primary view-toggle-btn active';
+            btnCards.style.color = '#ffffff';
+        }
+        if (btnTable) {
+            btnTable.className = 'btn btn--sm btn--outline view-toggle-btn';
+            btnTable.style.color = 'var(--text-primary)';
+            btnTable.style.borderColor = 'var(--border-color)';
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    var h = (window.location.hash || '').toLowerCase();
+    if (h === '#table' || h === '#compare-table' || h === '#table-view') {
+        switchTourDisplay('table');
+    }
+});
+</script>
+
 </body>
 </html>
