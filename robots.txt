@@ -3,3 +3,4 @@ Allow: /
 Disallow: /admin.html
 
 Sitemap: https://sunildanawale.github.io/Mahabaleshwartaxi/sitemap.xml
+Sitemap: https://sunildanawale.github.io/Mahabaleshwartaxi/sitemap.txt
