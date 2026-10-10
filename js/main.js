@@ -65,6 +65,11 @@
 
             if (!this.toggle || !this.menu) return;
 
+            // Ensure overlay is a direct child of document.body so it isn't trapped in .navbar's stacking context / backdrop-filter
+            if (this.overlay && this.overlay.parentNode !== document.body) {
+                document.body.appendChild(this.overlay);
+            }
+
             this.toggle.addEventListener('click', () => this.toggleMenu());
 
             if (this.overlay) {
@@ -86,13 +91,22 @@
             this.toggle.classList.toggle('active');
             this.menu.classList.toggle('active');
             if (this.overlay) this.overlay.classList.toggle('active');
-            document.body.style.overflow = this.menu.classList.contains('active') ? 'hidden' : '';
+            const isOpen = this.menu.classList.contains('active');
+            this.toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            this.toggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+            const navbar = this.toggle.closest('.navbar');
+            if (navbar) navbar.classList.toggle('nav-open', isOpen);
+            document.body.style.overflow = isOpen ? 'hidden' : '';
         },
 
         closeMenu() {
             this.toggle.classList.remove('active');
             this.menu.classList.remove('active');
             if (this.overlay) this.overlay.classList.remove('active');
+            this.toggle.setAttribute('aria-expanded', 'false');
+            this.toggle.setAttribute('aria-label', 'Open menu');
+            const navbar = this.toggle.closest('.navbar');
+            if (navbar) navbar.classList.remove('nav-open');
             document.body.style.overflow = '';
         }
     };
@@ -771,17 +785,4 @@
 
 })();
 
-window.addEventListener('load', function () {
-    navigator.serviceWorker.register('sw.js').catch(function () { });
-});
-        }
-    }
-
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initAll);
-} else {
-    initAll();
-}
-
-}) ();
 

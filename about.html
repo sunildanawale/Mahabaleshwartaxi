@@ -34,6 +34,12 @@
             justify-content: space-between;
             height: 100%;
         }
+        .about-hero-badges {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
         .about-hero-photo-wrap {
             display: flex;
             flex-direction: column;
@@ -59,6 +65,96 @@
             object-position: center 30%;
             display: block;
         }
+
+        /* Direct Booking Advantage Box */
+        .about-advantage-box {
+            background: var(--bg-secondary);
+            padding: var(--space-8);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            margin-top: var(--space-6);
+        }
+
+        /* Verified Driver Box & Credentials */
+        .verified-driver-box {
+            display: grid;
+            grid-template-columns: 1.35fr 0.65fr;
+            align-items: center;
+            gap: 36px;
+            background: var(--bg-secondary);
+            padding: 36px 40px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+        }
+        .driver-credentials-card {
+            background: var(--bg-primary);
+            padding: 22px 28px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+        .driver-credentials-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .driver-cred-row {
+            display: grid;
+            grid-template-columns: 175px 1fr;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+        }
+        .driver-cred-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+        .driver-cred-label i {
+            color: var(--primary);
+            font-size: 1.15rem;
+            width: 22px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .driver-cred-val {
+            color: var(--text-secondary);
+            line-height: 1.5;
+            word-break: break-word;
+        }
+        .verified-driver-badge-col {
+            text-align: center;
+        }
+        .verified-driver-shield-circle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(8, 145, 178, 0.15);
+            border-radius: 50%;
+            width: 140px;
+            height: 140px;
+            margin-bottom: 14px;
+            border: 4px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+        }
+        .verified-driver-shield-circle i {
+            font-size: 4.8rem;
+            color: var(--primary);
+        }
+        .verified-driver-shield-sub {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        /* Mobile Breakpoint Adjustments */
         @media (max-width: 991px) {
             .about-hero-grid {
                 grid-template-columns: 1fr;
@@ -67,6 +163,118 @@
             .about-hero-photo-card {
                 min-height: 280px;
                 height: 280px;
+            }
+            .verified-driver-box {
+                grid-template-columns: 1fr;
+                padding: 28px 24px;
+                gap: 28px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about-advantage-box {
+                padding: 24px 16px;
+                border-radius: var(--radius-lg);
+            }
+            .verified-driver-box {
+                padding: 22px 16px;
+                border-radius: 14px;
+                gap: 22px;
+            }
+            .driver-credentials-card {
+                padding: 18px 14px;
+            }
+            .driver-cred-row {
+                grid-template-columns: 155px 1fr;
+                gap: 10px;
+                font-size: 0.9rem;
+            }
+            .verified-driver-shield-circle {
+                width: 110px;
+                height: 110px;
+                margin-bottom: 8px;
+            }
+            .verified-driver-shield-circle i {
+                font-size: 3.4rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .about-hero-details h2 {
+                font-size: clamp(1.4rem, 5.2vw, 1.8rem);
+                margin-bottom: 0.75rem;
+            }
+            .about-hero-details p {
+                font-size: 0.95rem !important;
+                line-height: 1.65 !important;
+                margin-bottom: 1.25rem !important;
+            }
+            .about-hero-badges {
+                gap: 8px;
+            }
+            .about-hero-badges .badge {
+                font-size: 0.8rem;
+                padding: 6px 10px;
+            }
+            .about-hero-photo-card {
+                min-height: 220px;
+                height: 220px;
+                border-radius: var(--radius-lg);
+            }
+            .about-advantage-box {
+                padding: 18px 12px;
+            }
+            .verified-driver-box {
+                padding: 18px 12px;
+                border-radius: 12px;
+                gap: 18px;
+            }
+            .driver-credentials-card {
+                padding: 14px 10px;
+            }
+            .driver-credentials-list {
+                gap: 12px;
+            }
+            .driver-cred-row {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 3px;
+                padding-bottom: 10px;
+                border-bottom: 1px dashed var(--border-color);
+            }
+            .driver-cred-row:last-child {
+                border-bottom: none;
+                padding-bottom: 0;
+            }
+            .driver-cred-label {
+                gap: 8px;
+                font-size: 0.88rem;
+            }
+            .driver-cred-val {
+                padding-left: 28px;
+                font-size: 0.85rem;
+                line-height: 1.45;
+            }
+            .verified-driver-shield-circle {
+                width: 88px;
+                height: 88px;
+                margin-bottom: 6px;
+            }
+            .verified-driver-shield-circle i {
+                font-size: 2.6rem;
+            }
+            .owner-disclosure-badge {
+                padding: 16px 12px !important;
+                margin: 16px auto !important;
+                border-radius: 12px !important;
+            }
+            .owner-disclosure-badge h3 {
+                font-size: 1rem !important;
+            }
+            .owner-disclosure-badge p {
+                font-size: 0.86rem !important;
+                line-height: 1.55 !important;
             }
         }
     </style>
@@ -171,7 +379,7 @@
                     <h2 class="section-title">Your Trusted Local Taxi Network</h2>
                     <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.8; font-size: 1.05rem;">Namaskar! Welcome to Mahabaleshwar Taxi (c/o Aryan Taxi Mahabaleshwar). What started as a single owner-operated taxi has grown into a strong, reliable network of verified, union-registered taxis. When you book with us, you receive a registered black-and-yellow tourist taxi at the registered union-approved fare (subject to vehicle and driver availability). You get the benefit of direct booking without any hidden middleman fees, ensuring a seamless and transparent travel experience.</p>
                 </div>
-                <div style="display: flex; gap: 15px; flex-wrap: wrap; align-items: center;">
+                <div class="about-hero-badges">
                     <span class="badge badge--primary">
                         <i class="fa-solid fa-road"></i> Experienced Hill Driving
                     </span>
@@ -189,7 +397,7 @@
                 </div>
             </div>
         </div>
-<div class="reveal" style="background: var(--bg-secondary); padding: var(--space-8); border-radius: var(--radius-xl); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); margin-top: var(--space-6);">
+<div class="reveal about-advantage-box">
     <div style="text-align: center; max-width: 680px; margin: 0 auto var(--space-8);">
         <span style="display: inline-flex; align-items: center; gap: 6px; margin-bottom: var(--space-2); color: var(--primary); font-weight: 700; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">
         <i class="fa-solid fa-star"></i> Why Book Direct</span>
@@ -230,7 +438,7 @@
 <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85rem; color: var(--text-primary); display: flex; flex-direction: column; gap: 8px;">
     <li style="display: flex; align-items: center; gap: 8px;">
         <i class="fa-solid fa-circle-check" style="color: #10b981;">
-    </i> 10+ years Sahyadri mountain driving experience</li>
+    </i> 100% Sahyadri mountain driving experience</li>
     <li style="display: flex; align-items: center; gap: 8px;">
         <i class="fa-solid fa-circle-check" style="color: #10b981;">
     </i> Registered Non-AC tourist cabs</li>
@@ -245,49 +453,52 @@
 </section>
 <section class="section" style="background: var(--bg-primary); border-top: 1px solid var(--border-color);">
     <div class="container">
-        <div class="verified-driver-box" style="display: grid; grid-template-columns: 1.4fr 0.6fr; align-items: center; gap: 36px; background: var(--bg-secondary); padding: 36px 40px; border-radius: 16px; border: 1px solid var(--border-color);">
-            <div>
+        <div class="verified-driver-box reveal">
+            <div class="verified-driver-info">
                 <h2 class="section-title" style="margin-bottom: 0.75rem; display: flex; align-items: center; gap: 10px;">
-                    <i class="fa-solid fa-circle-check" style="color: #10b981;">
-                </i> 100% Verified Local Driver </h2>
+                    <i class="fa-solid fa-circle-check" style="color: #10b981;"></i> 100% Verified Local Driver
+                </h2>
                 <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.6;"> Your safety is our top priority. At <strong>Aryan Taxi Mahabaleshwar</strong>, we believe in complete transparency. When you book with us (+91 99228 82044), you deal directly with the taxi owner with a vehicle registered under the official Mahabaleshwar Taxi Union. </p>
-                <div class="driver-credentials-card" style="background: var(--bg-primary); padding: 22px 28px; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
-                    <ul class="driver-credentials-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 15px;">
-                        <li style="display: grid; grid-template-columns: 24px 150px 1fr; align-items: center; gap: 14px; font-size: 0.95rem;">
-                            <i class="fa-solid fa-id-badge" style="color: var(--primary); font-size: 1.2rem; width: 24px; text-align: center;">
-                        </i>
-                        <strong style="color: var(--text-primary); white-space: nowrap;">Brand &amp; Identity:</strong>
-                        <span style="color: var(--text-secondary); white-space: nowrap;">Aryan Taxi Mahabaleshwar (Explore Sahyadri)</span>
-                    </li>
-                    <li style="display: grid; grid-template-columns: 24px 150px 1fr; align-items: center; gap: 14px; font-size: 0.95rem;">
-                        <i class="fa-solid fa-car-side" style="color: var(--primary); font-size: 1.2rem; width: 24px; text-align: center;">
-                    </i>
-                    <strong style="color: var(--text-primary); white-space: nowrap;">Vehicle Type:</strong>
-                    <span style="color: var(--text-secondary); white-space: nowrap;">Black &amp; Yellow Tourist Taxi (4-Seater)</span>
-                </li>
-                <li style="display: grid; grid-template-columns: 24px 150px 1fr; align-items: center; gap: 14px; font-size: 0.95rem;">
-                    <i class="fa-solid fa-building-shield" style="color: var(--primary); font-size: 1.2rem; width: 24px; text-align: center;">
-                </i>
-                <strong style="color: var(--text-primary); white-space: nowrap;">Taxi Registration:</strong>
-                <span style="color: var(--text-secondary); white-space: nowrap;">Registered with Mahabaleshwar Taxi Union</span>
-            </li>
-            <li style="display: grid; grid-template-columns: 24px 150px 1fr; align-items: center; gap: 14px; font-size: 0.95rem;">
-                <i class="fa-solid fa-language" style="color: var(--primary); font-size: 1.2rem; width: 24px; text-align: center;">
-            </i>
-            <strong style="color: var(--text-primary); white-space: nowrap;">Languages:</strong>
-            <span style="color: var(--text-secondary); white-space: nowrap;">Marathi, Hindi, Basic English</span>
-        </li>
-    </ul>
-</div>
-</div>
-<div style="text-align: center;">
-    <div style="display:inline-block; background:rgba(8, 145, 178, 0.15); border-radius:50%; padding:36px; margin-bottom:14px; border: 4px solid var(--border-color); box-shadow: var(--shadow-md);">
-        <i class="fa-solid fa-user-shield" style="font-size: 5.5rem; color: var(--primary);">
-    </i>
-</div>
-<p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 8px; font-weight: 500;">Safe, family-friendly, and professional.</p>
-</div>
-</div> <!-- Direct Local Owner & Union Driver Network Commitment Badge --> <div class="reveal owner-disclosure-badge" style="max-width: 1000px; margin: 24px auto; text-align: left; background: var(--bg-primary); border: 1.5px solid var(--border-color); border-left: 5px solid #0891b2; border-radius: 16px; padding: 22px 24px; box-shadow: var(--shadow-sm);">
+                <div class="driver-credentials-card">
+                    <ul class="driver-credentials-list">
+                        <li class="driver-cred-row">
+                            <div class="driver-cred-label">
+                                <i class="fa-solid fa-id-badge"></i>
+                                <strong>Brand &amp; Identity:</strong>
+                            </div>
+                            <span class="driver-cred-val">Aryan Taxi Mahabaleshwar (Explore Sahyadri)</span>
+                        </li>
+                        <li class="driver-cred-row">
+                            <div class="driver-cred-label">
+                                <i class="fa-solid fa-car-side"></i>
+                                <strong>Vehicle Type:</strong>
+                            </div>
+                            <span class="driver-cred-val">Black &amp; Yellow Tourist Taxi (4-Seater)</span>
+                        </li>
+                        <li class="driver-cred-row">
+                            <div class="driver-cred-label">
+                                <i class="fa-solid fa-building-shield"></i>
+                                <strong>Taxi Registration:</strong>
+                            </div>
+                            <span class="driver-cred-val">Registered with Mahabaleshwar Taxi Union</span>
+                        </li>
+                        <li class="driver-cred-row">
+                            <div class="driver-cred-label">
+                                <i class="fa-solid fa-language"></i>
+                                <strong>Languages:</strong>
+                            </div>
+                            <span class="driver-cred-val">Marathi, Hindi, Basic English</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="verified-driver-badge-col">
+                <div class="verified-driver-shield-circle">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                <p class="verified-driver-shield-sub">Safe, family-friendly, and professional.</p>
+            </div>
+        </div> <!-- Direct Local Owner & Union Driver Network Commitment Badge --> <div class="reveal owner-disclosure-badge" style="max-width: 1000px; margin: 24px auto; text-align: left; background: var(--bg-primary); border: 1.5px solid var(--border-color); border-left: 5px solid #0891b2; border-radius: 16px; padding: 22px 24px; box-shadow: var(--shadow-sm);">
 <div style="display: flex; align-items: flex-start; gap: 16px; flex-wrap: wrap;">
     <div style="width: 46px; height: 46px; border-radius: 12px; background: #e0f2fe; color: #0284c7; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; flex-shrink: 0; margin-top: 2px;">
         <i class="fa-solid fa-taxi">
