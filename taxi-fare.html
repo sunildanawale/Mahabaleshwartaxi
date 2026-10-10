@@ -787,41 +787,159 @@
             <h2 class="section-title">Compare Tourist Taxi Categories</h2>
             <p class="section-subtitle" style="margin: 0 auto;">Choose the right vehicle for your group size, luggage, and mountain route.</p>
         </div>
-        <div class="table-wrap" style="background:#fff; border-radius:14px; box-shadow:var(--shadow-md); overflow-x:auto;">
-            <table style="width:100%; border-collapse:collapse; text-align:left; font-size:0.9rem;">
-                <thead>
-                    <tr style="background:#f8fafc; border-bottom:2px solid #e2e8f0;">
-                        <th style="padding:14px 16px;">Vehicle Model</th>
-                        <th style="padding:14px 16px;">Passenger Capacity</th>
-                        <th style="padding:14px 16px;">Luggage Space</th>
-                        <th style="padding:14px 16px;">Best Suited For</th>
-                        <th style="padding:14px 16px; text-align:right;">Booking Starting At</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr style="border-bottom:1px solid #f1f5f9;">
-                        <td style="padding:14px 16px;"><strong>4-Seater Non-AC Tourist Taxi</strong><br><span style="font-size:0.75rem;color:#64748b;">Black &amp; Yellow Mountain Cab</span></td>
-                        <td style="padding:14px 16px;">1 – 4 Guests</td>
-                        <td style="padding:14px 16px;">1-2 Small Bags</td>
-                        <td style="padding:14px 16px;">Local Mahabaleshwar &amp; Panchgani Darshan</td>
-                        <td style="padding:14px 16px; text-align:right;"><strong style="color:#15803d;font-size:1.05rem;">₹1,200</strong></td>
-                    </tr>
-                    <tr style="border-bottom:1px solid #f1f5f9; background:#f0fdf4;">
-                        <td style="padding:14px 16px;"><strong>Maruti Ertiga (6+1 Seater MPV)</strong><br><span style="font-size:0.75rem;color:#15803d;font-weight:700;">Family Favorite</span></td>
-                        <td style="padding:14px 16px;">5 – 6 Guests</td>
-                        <td style="padding:14px 16px;">3-4 Large Bags</td>
-                        <td style="padding:14px 16px;">Joint Families &amp; Pune Airport Transfers</td>
-                        <td style="padding:14px 16px; text-align:right;"><strong style="color:#0369a1;font-size:1.05rem;">Contact Operator</strong></td>
-                    </tr>
-                    <tr>
-                        <td style="padding:14px 16px;"><strong>Toyota Innova Crysta (AC)</strong><br><span style="font-size:0.75rem;color:#64748b;">Luxury MPV</span></td>
-                        <td style="padding:14px 16px;">6 – 7 Guests</td>
-                        <td style="padding:14px 16px;">5+ Suitcases</td>
-                        <td style="padding:14px 16px;">Mumbai Airport, Corporate &amp; VIP Travel</td>
-                        <td style="padding:14px 16px; text-align:right;"><strong style="color:#0369a1;font-size:1.05rem;">Contact Operator</strong></td>
-                    </tr>
-                </tbody>
-            </table>
+
+        <!-- Desktop Table View (>768px) -->
+        <div class="fleet-table-container">
+            <div class="table-wrap fleet-compare-wrap">
+                <table class="fleet-table">
+                    <thead>
+                        <tr>
+                            <th>Vehicle Model</th>
+                            <th>Passenger Capacity</th>
+                            <th>Luggage Space</th>
+                            <th>Best Suited For</th>
+                            <th style="text-align:right;">Booking Starting At</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <strong>4-Seater Non-AC Tourist Taxi</strong><br>
+                                <span class="fleet-badge fleet-badge--blue">Black &amp; Yellow Mountain Cab</span>
+                            </td>
+                            <td><i class="fa-solid fa-users" style="color:var(--primary); margin-right:6px;"></i> 1 – 4 Guests</td>
+                            <td><i class="fa-solid fa-suitcase" style="color:var(--primary); margin-right:6px;"></i> 1-2 Small Bags</td>
+                            <td>Local Mahabaleshwar &amp; Panchgani Darshan</td>
+                            <td style="text-align:right;"><span class="fleet-price-union">₹1,200</span></td>
+                        </tr>
+                        <tr class="fleet-row--highlight">
+                            <td>
+                                <strong>Maruti Ertiga (6+1 Seater MPV)</strong><br>
+                                <span class="fleet-badge fleet-badge--green">Family Favorite</span>
+                            </td>
+                            <td><i class="fa-solid fa-users" style="color:var(--primary); margin-right:6px;"></i> 5 – 6 Guests</td>
+                            <td><i class="fa-solid fa-suitcase-rolling" style="color:var(--primary); margin-right:6px;"></i> 3-4 Large Bags</td>
+                            <td>Joint Families &amp; Pune Airport Transfers</td>
+                            <td style="text-align:right;"><span class="fleet-price-inquiry">Contact Operator</span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Toyota Innova Crysta (AC)</strong><br>
+                                <span class="fleet-badge fleet-badge--blue">Luxury MPV</span>
+                            </td>
+                            <td><i class="fa-solid fa-users" style="color:var(--primary); margin-right:6px;"></i> 6 – 7 Guests</td>
+                            <td><i class="fa-solid fa-suitcase-rolling" style="color:var(--primary); margin-right:6px;"></i> 5+ Suitcases</td>
+                            <td>Mumbai Airport, Corporate &amp; VIP Travel</td>
+                            <td style="text-align:right;"><span class="fleet-price-inquiry">Contact Operator</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Mobile Card View (<=768px) -->
+        <div class="fleet-cards-grid">
+            <!-- Card 1: 4-Seater -->
+            <div class="fleet-card">
+                <div class="fleet-card__header">
+                    <div>
+                        <h3 class="fleet-card__title">4-Seater Tourist Taxi</h3>
+                        <span class="fleet-card__sub">Black &amp; Yellow Mountain Cab</span>
+                    </div>
+                    <span class="fleet-badge fleet-badge--blue">Union Fixed</span>
+                </div>
+                <div class="fleet-card__specs">
+                    <div class="fleet-card__spec-item">
+                        <i class="fa-solid fa-users"></i>
+                        <span><strong>Capacity:</strong> 1 – 4 Passengers</span>
+                    </div>
+                    <div class="fleet-card__spec-item">
+                        <i class="fa-solid fa-suitcase"></i>
+                        <span><strong>Luggage:</strong> 1-2 Small Bags</span>
+                    </div>
+                    <div class="fleet-card__spec-item">
+                        <i class="fa-solid fa-mountain-sun"></i>
+                        <span><strong>Best For:</strong> Local Sightseeing Tours (T1 to T7)</span>
+                    </div>
+                </div>
+                <div class="fleet-card__footer">
+                    <div>
+                        <span style="font-size:0.75rem; color:var(--text-secondary); display:block;">Starting From</span>
+                        <strong class="fleet-price-union">₹1,200</strong>
+                    </div>
+                    <a href="https://api.whatsapp.com/send?phone=919922882044&text=Hello%20Aryan%20Taxi%2C%20I%20want%20to%20inquire%20about%20the%204-Seater%20Tourist%20Taxi." target="_blank" rel="noopener" class="btn btn--sm btn--primary fleet-card__btn">
+                        <i class="fa-brands fa-whatsapp"></i> Book 4-Seater
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 2: Maruti Ertiga -->
+            <div class="fleet-card fleet-card--highlight">
+                <div class="fleet-card__header">
+                    <div>
+                        <h3 class="fleet-card__title">Maruti Ertiga (6+1 MPV)</h3>
+                        <span class="fleet-card__sub">Comfortable Family Carrier</span>
+                    </div>
+                    <span class="fleet-badge fleet-badge--green">Family Favorite</span>
+                </div>
+                <div class="fleet-card__specs">
+                    <div class="fleet-card__spec-item">
+                        <i class="fa-solid fa-users"></i>
+                        <span><strong>Capacity:</strong> 5 – 6 Passengers</span>
+                    </div>
+                    <div class="fleet-card__spec-item">
+                        <i class="fa-solid fa-suitcase-rolling"></i>
+                        <span><strong>Luggage:</strong> 3-4 Large Suitcases</span>
+                    </div>
+                    <div class="fleet-card__spec-item">
+                        <i class="fa-solid fa-plane-departure"></i>
+                        <span><strong>Best For:</strong> Joint Families &amp; Pune Airport</span>
+                    </div>
+                </div>
+                <div class="fleet-card__footer">
+                    <div>
+                        <span style="font-size:0.75rem; color:var(--text-secondary); display:block;">Tariff</span>
+                        <strong class="fleet-price-inquiry">Custom Tariff</strong>
+                    </div>
+                    <a href="https://api.whatsapp.com/send?phone=919922882044&text=Hello%20Aryan%20Taxi%2C%20I%20want%20to%20inquire%20about%20the%20Maruti%20Ertiga%20(6%2B1%20Seater)." target="_blank" rel="noopener" class="btn btn--sm btn--whatsapp fleet-card__btn">
+                        <i class="fa-brands fa-whatsapp"></i> Inquire Ertiga
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 3: Toyota Innova Crysta -->
+            <div class="fleet-card">
+                <div class="fleet-card__header">
+                    <div>
+                        <h3 class="fleet-card__title">Toyota Innova Crysta (AC)</h3>
+                        <span class="fleet-card__sub">Premium Luxury MPV</span>
+                    </div>
+                    <span class="fleet-badge fleet-badge--blue">Luxury MPV</span>
+                </div>
+                <div class="fleet-card__specs">
+                    <div class="fleet-card__spec-item">
+                        <i class="fa-solid fa-users"></i>
+                        <span><strong>Capacity:</strong> 6 – 7 Passengers</span>
+                    </div>
+                    <div class="fleet-card__spec-item">
+                        <i class="fa-solid fa-suitcase-rolling"></i>
+                        <span><strong>Luggage:</strong> 5+ Large Suitcases</span>
+                    </div>
+                    <div class="fleet-card__spec-item">
+                        <i class="fa-solid fa-briefcase"></i>
+                        <span><strong>Best For:</strong> Mumbai Airport &amp; VIP Travel</span>
+                    </div>
+                </div>
+                <div class="fleet-card__footer">
+                    <div>
+                        <span style="font-size:0.75rem; color:var(--text-secondary); display:block;">Tariff</span>
+                        <strong class="fleet-price-inquiry">Custom Tariff</strong>
+                    </div>
+                    <a href="https://api.whatsapp.com/send?phone=919922882044&text=Hello%20Aryan%20Taxi%2C%20I%20want%20to%20inquire%20about%20the%20Toyota%20Innova%20Crysta." target="_blank" rel="noopener" class="btn btn--sm btn--whatsapp fleet-card__btn">
+                        <i class="fa-brands fa-whatsapp"></i> Inquire Innova
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </section>
