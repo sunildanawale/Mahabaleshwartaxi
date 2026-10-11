@@ -238,9 +238,14 @@
             if (parsed.tourId && db) {
                 var specTour = db.getTourById(parsed.tourId);
                 if (specTour) {
+                    var isSingle = (specTour.sub_category === 'single_tour' || specTour.category === 'single_tour');
+                    var rateHeader = isSingle ? ("💰 **Special Budget Rate for " + specTour.name + ":**<br><br>") : ("💰 **Official Union Rate for " + specTour.name + ":**<br><br>");
+                    var tariffLine = isSingle
+                        ? ("• **Special Direct Rate:** <span style='font-size:1.15rem;font-weight:800;color:#0284c7;'>₹" + specTour.fare + "</span> (Independent budget circuit &bull; Not in Taxi Union card)<br>")
+                        : ("• **Fixed Union Tariff:** <span style='font-size:1.15rem;font-weight:800;color:#16a34a;'>₹" + specTour.fare + "</span> (Non-negotiable union tariff)<br>");
                     return {
-                        text: "💰 **Official Union Rate for " + specTour.name + ":**<br><br>"
-                            + "• **Fixed Union Tariff:** <span style='font-size:1.15rem;font-weight:800;color:#16a34a;'>₹" + specTour.fare + "</span> (Non-negotiable union tariff)<br>"
+                        text: rateHeader
+                            + tariffLine
                             + "• **Tour Duration:** " + specTour.duration + "<br>"
                             + "• **Advance Payment:** ₹0 (Zero advance &bull; Pay driver after tour)<br>"
                             + "• **Sightseeing Points:** " + (specTour.points ? specTour.points.slice(0, 5).join(', ') + '...' : '') + "<br><br>"

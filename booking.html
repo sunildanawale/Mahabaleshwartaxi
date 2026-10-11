@@ -597,6 +597,45 @@
             align-items: center;
             gap: 4px;
         }
+        .amt-stb-union-disclaimer {
+            margin-top: 6px;
+            padding: 6px 9px;
+            background: rgba(245, 158, 11, 0.12);
+            border: 1px solid rgba(245, 158, 11, 0.35);
+            border-radius: 6px;
+            font-size: 0.72rem;
+            color: #92400e;
+            line-height: 1.35;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .amt-schedule-card {
+            background: #f8fafc;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 12px;
+            margin: 12px 0 10px;
+            box-sizing: border-box;
+        }
+        .amt-schedule-title {
+            font-size: 0.82rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .amt-smart-time-btn {
+            background: #e0f2fe;
+            color: #0284c7;
+            border: 1px solid #bae6fd;
+            border-radius: 6px;
+            padding: 2px 8px;
+            font-weight: 700;
+            font-size: 0.73rem;
+            cursor: pointer;
+        }
         .portal-card {
             background: #ffffff;
             border-radius: 18px;
@@ -1151,6 +1190,13 @@
         [data-theme="dark"] #amtBookingModal .amt-policy-item-title { color:#fef08a !important; }
         [data-theme="dark"] #amtBookingModal .amt-policy-item-text { color:#cbd5e1 !important; }
         [data-theme="dark"] #amtBookingModal .amt-policy-note { border-top-color:rgba(217,119,6,0.3) !important; color:#fde68a !important; }
+        [data-theme="dark"] #amtBookingModal .amt-schedule-card { background:#1e293b !important; border-color:#334155 !important; color:#f8fafc !important; }
+        [data-theme="dark"] #amtBookingModal .amt-schedule-title { color:#f8fafc !important; }
+        [data-theme="dark"] #amtBookingModal .amt-quick-time-lbl { color:#94a3b8 !important; }
+        [data-theme="dark"] #amtBookingModal .amt-smart-time-btn { background:rgba(2,132,199,0.25) !important; color:#38bdf8 !important; border-color:rgba(2,132,199,0.5) !important; }
+        [data-theme="dark"] #amtBookingModal #amtSmartTimeReason { color:#94a3b8 !important; }
+        [data-theme="dark"] #amtBookingModal .amt-tour-insight-box { background:#0e3d54 !important; border-color:#06b6d4 !important; color:#67e8f9 !important; }
+        [data-theme="dark"] #amtBookingModal .amt-stb-union-disclaimer { background:rgba(245,158,11,0.18) !important; border-color:rgba(245,158,11,0.45) !important; color:#fde68a !important; }
         .amt-v-card-streamlined { background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; box-sizing: border-box; width: 100%; text-align: left; }
         .amt-v-hdr { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 6px; gap: 8px; }
         .amt-v-hdr-left { display: flex; align-items: center; gap: 10px; }
@@ -1938,15 +1984,15 @@
                         <div id="amtExtraToursContainer"></div>
                         <button type="button" id="amtAddTourBtn" class="amt-add-tour-btn" style="background:#f0fdf4; border:1.5px dashed #16a34a; color:#15803d; border-radius:10px; padding:9px 12px; font-size:0.82rem; font-weight:700; cursor:pointer; width:100%; margin-bottom:10px; display:flex; align-items:center; justify-content:center; gap:6px; min-height:44px; box-sizing:border-box;"><i class="fa-solid fa-plus-circle"></i> + Add Another Tour (Multi-Tour Package)</button>
                         <div id="amtMultiTourSummary" class="amt-multi-tour-summary-banner" style="display:none; background:#f0f9ff; border:1.5px solid #bae6fd; border-radius:10px; padding:8px 12px; font-size:0.8rem; color:#0369a1; margin-bottom:12px; align-items:center; justify-content:space-between; font-weight:700; box-sizing:border-box;"></div>
-                        <div id="amtTourInsight" style="display:none; margin-bottom:12px; padding:8px 12px; border-radius:10px; font-size:0.77rem; background:#f0f9ff; border:1px solid #bae6fd; color:#0369a1; line-height:1.4;"></div>
+                        <div id="amtTourInsight" class="amt-tour-insight-box" style="display:none;"></div>
 
                         <!-- Date & Pickup Time Section -->
-                        <div style="background:#f8fafc; border:1.5px solid #e2e8f0; border-radius:12px; padding:12px; margin:12px 0 10px;">
-                            <div style="font-size:0.82rem; font-weight:800; color:#0f172a; margin-bottom:8px; display:flex; align-items:center; gap:6px;">
+                        <div class="amt-schedule-card">
+                            <div class="amt-schedule-title">
                                 <i class="fa-solid fa-calendar-day" style="color:#0284c7;"></i> Travel Schedule &amp; Departure
                             </div>
                             <div class="amt-quick-time-section" style="margin-bottom:10px;">
-                                <div class="amt-quick-time-lbl" style="font-size:0.74rem; font-weight:700; color:#64748b; margin-bottom:5px;"><i class="fa-solid fa-bolt" style="color:#0284c7;"></i> Quick Departure Options:</div>
+                                <div class="amt-quick-time-lbl"><i class="fa-solid fa-bolt" style="color:#0284c7;"></i> Quick Departure Options:</div>
                                 <div class="amt-time-pills">
                                     <button type="button" class="amt-time-pill" data-time="06:00"><i class="fa-solid fa-sun" style="color:#f59e0b;"></i> 06:00 AM <span class="amt-pill-tag">Sunrise</span></button>
                                     <button type="button" class="amt-time-pill active" data-time="09:00"><i class="fa-solid fa-cloud-sun" style="color:#0284c7;"></i> 09:00 AM <span class="amt-pill-tag">Recommended</span></button>
@@ -1956,19 +2002,19 @@
                             </div>
                             <div class="amt-grid2">
                                 <div>
-                                    <label class="amt-label" for="amtDate" style="font-size:0.8rem; font-weight:700; color:#334155; display:block; margin-bottom:4px;">Travel Date *</label>
-                                    <input type="date" id="amtDate" class="amt-input" style="width:100%; padding:10px 10px; border:1.5px solid #cbd5e1; border-radius:10px; font-size:16px; min-height:44px;" required>
+                                    <label class="amt-label" for="amtDate">Travel Date *</label>
+                                    <input type="date" id="amtDate" class="amt-input" required>
                                 </div>
                                 <div>
-                                    <label class="amt-label" for="amtTime" style="font-size:0.8rem; font-weight:700; color:#334155; display:block; margin-bottom:4px;">Pickup Time *</label>
-                                    <input type="time" id="amtTime" class="amt-input" value="09:00" style="width:100%; padding:10px 10px; border:1.5px solid #cbd5e1; border-radius:10px; font-size:16px; min-height:44px;" required>
+                                    <label class="amt-label" for="amtTime">Pickup Time *</label>
+                                    <input type="time" id="amtTime" class="amt-input" value="09:00" required>
                                     <div id="amtSmartTimeBox" style="margin-top:5px; font-size:0.74rem; color:#0369a1; display:flex; align-items:center; flex-wrap:wrap; gap:5px;">
-                                        <span>💡 <strong>AI Suggested:</strong> <button type="button" id="amtSmartTimeBtn" style="background:#e0f2fe; color:#0284c7; border:1px solid #bae6fd; border-radius:6px; padding:2px 8px; font-weight:700; font-size:0.73rem; cursor:pointer;">09:00 AM</button></span>
+                                        <span>💡 <strong>AI Suggested:</strong> <button type="button" id="amtSmartTimeBtn" class="amt-smart-time-btn">09:00 AM</button></span>
                                         <span id="amtSmartTimeReason" style="color:#64748b; font-size:0.71rem;"></span>
                                     </div>
                                 </div>
                             </div>
-                            <div id="amtMultiDayToggleBox" class="amt-multi-day-box" style="display:none; margin-top:10px; margin-bottom:6px; padding:10px 12px; background:#ffffff; border:1.5px solid #cbd5e1; border-radius:10px; box-sizing:border-box;">
+                            <div id="amtMultiDayToggleBox" class="amt-multi-day-box" style="display:none; margin-top:10px; margin-bottom:6px; box-sizing:border-box;">
                                 <label style="display:flex; align-items:center; gap:8px; font-size:0.8rem; font-weight:700; color:#0f2b48; cursor:pointer;">
                                     <input type="checkbox" id="amtDiffScheduleCheckbox" style="width:18px; height:18px; accent-color:#0284c7; cursor:pointer;">
                                     <span>Schedule tours on different dates or times (Multi-Day Circuit)</span>

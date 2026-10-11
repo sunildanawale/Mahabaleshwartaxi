@@ -4344,7 +4344,7 @@ div[style*="bottom: 0px; z-index: 9999;"] {
     width: 100% !important;
     height: 100% !important;
     background: rgba(15, 23, 42, 0.85) !important;
-    z-index: 99999 !important;
+    z-index: 20000000 !important;
     align-items: flex-start !important;
     justify-content: center !important;
     padding: 16px 14px 40px !important;
@@ -4359,8 +4359,18 @@ div[style*="bottom: 0px; z-index: 9999;"] {
 
 @media (max-width: 480px) {
     .amt-modal-overlay {
-        padding: 6px 6px 30px !important;
+        padding: calc(env(safe-area-inset-top, 8px) + 8px) 8px 30px !important;
     }
+}
+
+body.modal-open .navbar {
+    display: none !important;
+    visibility: hidden !important;
+    z-index: 0 !important;
+}
+
+body.modal-open .mobile-cta {
+    display: none !important;
 }
 
 .amt-modal-overlay.active,
@@ -6881,6 +6891,74 @@ body.modal-open {
     background: #0f172a !important;
     border-color: #334155 !important;
     color: #cbd5e1 !important;
+}
+.amt-schedule-card {
+    background: #f8fafc;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 12px;
+    margin: 12px 0 10px;
+    box-sizing: border-box;
+}
+.amt-schedule-title {
+    font-size: 0.82rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.amt-smart-time-btn {
+    background: #e0f2fe;
+    color: #0284c7;
+    border: 1px solid #bae6fd;
+    border-radius: 6px;
+    padding: 2px 8px;
+    font-weight: 700;
+    font-size: 0.73rem;
+    cursor: pointer;
+}
+.amt-stb-union-disclaimer {
+    margin-top: 6px;
+    padding: 6px 9px;
+    background: rgba(245, 158, 11, 0.12);
+    border: 1px solid rgba(245, 158, 11, 0.35);
+    border-radius: 6px;
+    font-size: 0.72rem;
+    color: #92400e;
+    line-height: 1.35;
+    width: 100%;
+    box-sizing: border-box;
+}
+[data-theme="dark"] #amtBookingModal .amt-schedule-card {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+    color: #f8fafc !important;
+}
+[data-theme="dark"] #amtBookingModal .amt-schedule-title {
+    color: #f8fafc !important;
+}
+[data-theme="dark"] #amtBookingModal .amt-quick-time-lbl {
+    color: #94a3b8 !important;
+}
+[data-theme="dark"] #amtBookingModal .amt-smart-time-btn {
+    background: rgba(2, 132, 199, 0.25) !important;
+    color: #38bdf8 !important;
+    border-color: rgba(2, 132, 199, 0.5) !important;
+}
+[data-theme="dark"] #amtBookingModal #amtSmartTimeReason {
+    color: #94a3b8 !important;
+}
+[data-theme="dark"] #amtBookingModal .amt-tour-insight-box {
+    background: #0e3d54 !important;
+    border-color: #06b6d4 !important;
+    color: #67e8f9 !important;
+}
+[data-theme="dark"] #amtBookingModal .amt-stb-union-disclaimer {
+    background: rgba(245, 158, 11, 0.18) !important;
+    border-color: rgba(245, 158, 11, 0.45) !important;
+    color: #fde68a !important;
 }
 [data-theme="dark"] #amtBookingModal .amt-time-pill {
     background: #1e293b !important;

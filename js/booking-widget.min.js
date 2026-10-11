@@ -364,6 +364,53 @@
             };
         }
 
+        var allAreSingleTours = tours.length > 0 && tours.every(function (it) {
+            return it.tour && (it.tour.sub_category === 'single_tour' || it.tour.fare === 800);
+        });
+
+        if (allAreSingleTours) {
+            return {
+                key: 'sightseeing',
+                serviceTitle: 'Express Single Tour (Budget Option)',
+                badgeText: isSameDayAfternoon ? 'SINGLE TOUR INQUIRY (AVAILABILITY CHECK REQUIRED)' : 'EXPRESS SINGLE TOUR INQUIRY',
+                badgeBg: '#fef3c7',
+                badgeColor: '#92400e',
+                badgeBorder: '#fde68a',
+                paymentBadge: 'Zero Advance Required • Pay Driver After Tour',
+                paymentColor: '#15803d',
+                tariffLabel: isLarge ? 'ESTIMATED SINGLE TOUR TARIFF' : 'CONFIRMED SPECIAL FARE (₹800)',
+                advanceNote: 'Zero Advance Required (Special Single Tour)',
+                paymentSettlement: '100% Cash / UPI to Driver directly after tour completion',
+                vehicleDesc: isLarge
+                    ? (taxiCount + 'x 4-Seater Tourist Cabs, arranged as per availability')
+                    : '4-Seater Tourist Cab, arranged as per availability.',
+                dispatchNotice: isSameDayAfternoon
+                    ? '⚠️ Vehicle availability may be limited for same-day afternoon/evening bookings, especially during the tourist season. Your booking will be confirmed after vehicle availability is checked.'
+                    : '⚠️ Express Single Tour: Driver dispatch confirmed after final WhatsApp/phone reconfirmation before departure.',
+                reviewNotice: 'Please review your single tour sector, included viewpoints, and confirmed special ₹800 fare below.',
+                termsTitle: 'Important Single Tour Guidelines & Terms',
+                terms: [
+                    { title: 'Independent Budget Option', desc: 'Single tour (₹800 flat, 2.5 hrs) is an independent budget option offered directly by Aryan Taxi for visitors wanting minimum viewpoints. Note: It is not part of the official Taxi Union rate card (official Union packages are full Tours 1–7).' },
+                    { title: 'Sightseeing Sequence', desc: 'Operating driver covers all included viewpoints in this sector. Viewpoint halts are subject to weather, mountain fog, and local authority regulations.' },
+                    { title: 'Zero Advance Payment', desc: 'Zero advance required for Mahabaleshwar hotel pickup — pay operating driver directly after tour completion via UPI or Cash.' },
+                    { title: 'Vehicle Allocation', desc: isLarge ? (taxiCount + 'x 4-Seater Tourist Cabs allocated for group.') : '4-Seater tourist cab allocated as per availability.' },
+                    { title: 'Cancellation Policy', desc: 'Free cancellation up to 2 hours prior. Standard ₹200 union reporting charge applies if cancelled after taxi reaches hotel porch.' },
+                    { title: 'Helpline Support', desc: 'Direct assistance available at +91 99228 82044 for driver dispatch coordination.' }
+                ],
+                policyItems: [
+                    { icon: 'fa-phone', title: 'Pre-Dispatch Call', text: 'Driver reconfirms pickup time before departure' },
+                    { icon: 'fa-mountain-sun', title: 'Single Sector Tour', text: 'Focused 2.5-hour circuit with key viewpoints' },
+                    { icon: 'fa-tag', title: 'Special ₹800 Fare', text: 'Direct Aryan Taxi rate (not in union card)' },
+                    { icon: 'fa-rotate-left', title: 'Free Cancellation', text: 'Notify up to 2 hours prior to trip' }
+                ],
+                policyNote: 'Please confirm single tour route points with the taxi driver before starting sightseeing.',
+                whatsappTariffNote: function (fare) {
+                    return '💰 *Tour Fare:* ₹' + fare + ' (Special Single Tour Rate' + (isLarge ? ' • ' + taxiCount + ' Cabs' : '') + ')\n_Zero advance required • Pay driver after tour_\nℹ️ *Note:* Single tour (₹800) is an independent budget option offered directly by Aryan Taxi (not part of the official Taxi Union rate card).\n\n';
+                },
+                whatsappReadiness: 'I confirm this is a genuine single tour inquiry. Please confirm cab availability and driver dispatch with me.'
+            };
+        }
+
         // Default: Local Sightseeing (Single or Multi-Tour)
         return {
             key: 'sightseeing',
@@ -540,10 +587,12 @@
         var s = document.createElement('style');
         s.id = 'amtWidgetStyles';
         s.textContent = [
-            '.amt-modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,0.85);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:none;justify-content:center;align-items:flex-start;z-index:99999;padding:16px 14px 40px;overflow-y:auto;-webkit-overflow-scrolling:touch;box-sizing:border-box;}',
+            '.amt-modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,0.85);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:none;justify-content:center;align-items:flex-start;z-index:20000000 !important;padding:16px 14px 40px;overflow-y:auto;-webkit-overflow-scrolling:touch;box-sizing:border-box;}',
             '.amt-card,#amtBookingModal .amt-card{background:#ffffff;border-radius:20px;width:100%;max-width:520px;box-shadow:0 25px 60px rgba(0,0,0,0.45);overflow:visible;margin:16px auto;border:1px solid #e2e8f0;box-sizing:border-box;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}',
             '@media (min-width:768px){.amt-card,#amtBookingModal .amt-card{max-width:740px !important;margin:28px auto !important;}}',
-            '@media (max-width:640px){.amt-modal-overlay{padding:6px 6px 30px !important;}.amt-card,#amtBookingModal .amt-card{width:100% !important;max-width:100% !important;margin:6px auto !important;border-radius:16px !important;}}',
+            '@media (max-width:640px){.amt-modal-overlay{padding:calc(env(safe-area-inset-top, 8px) + 8px) 8px 30px !important;z-index:20000000 !important;}.amt-card,#amtBookingModal .amt-card{width:100% !important;max-width:100% !important;margin:0 auto !important;border-radius:16px !important;}}',
+            'body.modal-open .navbar{z-index:0 !important;visibility:hidden !important;display:none !important;}',
+            'body.modal-open .mobile-cta{display:none !important;}',
             '.amt-card-header{background:linear-gradient(135deg,#0e2338 0%,#0891b2 100%);color:#ffffff;padding:16px 22px 14px;border-radius:20px 20px 0 0;position:relative;box-sizing:border-box;}',
             '.amt-header-brand{font-size:0.72rem;text-transform:uppercase;letter-spacing:1px;color:#fbbf24;font-weight:700;margin-bottom:2px;white-space:nowrap !important;}',
             '.amt-header-title{font-size:1.22rem;font-weight:800;color:#ffffff;margin-bottom:8px;letter-spacing:-0.2px;line-height:1.2;}',
@@ -944,7 +993,20 @@
             '@media (max-width:640px){.amt-desktop-qr-card{display:none !important;}}',
             '.amt-draft-banner{display:flex;align-items:center;justify-content:space-between;background:#ecfeff;border:1px solid #a5f3fc;border-radius:8px;padding:6px 10px;margin-bottom:10px;font-size:0.74rem;color:#0891b2;animation:tfFadeIn 0.3s ease;}',
             '.amt-draft-btn-clear{background:transparent;border:none;color:#ef4444;font-size:0.72rem;font-weight:700;cursor:pointer;text-decoration:underline;padding:0;}',
+            /* Schedule Card & Time Selection */
+            '.amt-schedule-card{background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:12px;padding:12px;margin:12px 0 10px;box-sizing:border-box;}',
+            '.amt-schedule-title{font-size:0.82rem;font-weight:800;color:#0f172a;margin-bottom:8px;display:flex;align-items:center;gap:6px;}',
+            '.amt-smart-time-btn{background:#e0f2fe;color:#0284c7;border:1px solid #bae6fd;border-radius:6px;padding:2px 8px;font-weight:700;font-size:0.73rem;cursor:pointer;}',
+            '.amt-tour-insight-box{margin-bottom:12px;padding:8px 12px;border-radius:10px;font-size:0.77rem;background:#f0f9ff;border:1px solid #bae6fd;color:#0369a1;line-height:1.4;}',
+            '.amt-stb-union-disclaimer{margin-top:6px;padding:6px 9px;background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.35);border-radius:6px;font-size:0.72rem;color:#92400e;line-height:1.35;width:100%;box-sizing:border-box;}',
             /* Dark Theme Overrides */
+            '[data-theme="dark"] #amtBookingModal .amt-schedule-card{background:#1e293b !important;border-color:#334155 !important;color:#f8fafc !important;}',
+            '[data-theme="dark"] #amtBookingModal .amt-schedule-title{color:#f8fafc !important;}',
+            '[data-theme="dark"] #amtBookingModal .amt-quick-time-lbl{color:#94a3b8 !important;}',
+            '[data-theme="dark"] #amtBookingModal .amt-smart-time-btn{background:rgba(2,132,199,0.25) !important;color:#38bdf8 !important;border-color:rgba(2,132,199,0.5) !important;}',
+            '[data-theme="dark"] #amtBookingModal #amtSmartTimeReason{color:#94a3b8 !important;}',
+            '[data-theme="dark"] #amtBookingModal .amt-tour-insight-box{background:#0e3d54 !important;border-color:#06b6d4 !important;color:#67e8f9 !important;}',
+            '[data-theme="dark"] #amtBookingModal .amt-stb-union-disclaimer{background:rgba(245,158,11,0.18) !important;border-color:rgba(245,158,11,0.45) !important;color:#fde68a !important;}',
             '[data-theme="dark"] #amtBookingModal .amt-sightseeing-filter-bar{background:#0f172a !important;border-color:#334155 !important;}',
             '[data-theme="dark"] #amtBookingModal .amt-tf-pill{color:#94a3b8 !important;}',
             '[data-theme="dark"] #amtBookingModal .amt-tf-pill:hover{background:rgba(255,255,255,0.06) !important;color:#ffffff !important;}',
@@ -1206,11 +1268,11 @@
             + '<div id="amtExtraToursContainer"></div>'
             + '<button type="button" id="amtAddTourBtn" class="amt-add-tour-btn" style="background:#f0fdf4;border:1.5px dashed #16a34a;color:#15803d;border-radius:10px;padding:9px 12px;font-size:0.82rem;font-weight:700;cursor:pointer;width:100%;margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:6px;min-height:44px;box-sizing:border-box;"><i class="fa-solid fa-plus-circle"></i> + Add Another Tour (Multi-Tour Package)</button>'
             + '<div id="amtMultiTourSummary" class="amt-multi-tour-summary-banner" style="display:none;background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:10px;padding:8px 12px;font-size:0.8rem;color:#0369a1;margin-bottom:12px;align-items:center;justify-content:space-between;font-weight:700;box-sizing:border-box;"></div>'
-            + '<div id="amtTourInsight" style="display:none;margin-bottom:12px;padding:8px 12px;border-radius:10px;font-size:0.77rem;background:#f0f9ff;border:1px solid #bae6fd;color:#0369a1;line-height:1.4;"></div>'
-            + '<div style="background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:12px;padding:12px;margin:12px 0 10px;">'
-            + '  <div style="font-size:0.82rem;font-weight:800;color:#0f172a;margin-bottom:8px;display:flex;align-items:center;gap:6px;"><i class="fa-solid fa-calendar-day" style="color:#0284c7;"></i> Travel Schedule &amp; Departure</div>'
+            + '<div id="amtTourInsight" class="amt-tour-insight-box" style="display:none;"></div>'
+            + '<div class="amt-schedule-card">'
+            + '  <div class="amt-schedule-title"><i class="fa-solid fa-calendar-day" style="color:#0284c7;"></i> Travel Schedule &amp; Departure</div>'
             + '  <div class="amt-quick-time-section" style="margin-bottom:10px;">'
-            + '    <div class="amt-quick-time-lbl" style="font-size:0.74rem;font-weight:700;color:#64748b;margin-bottom:5px;"><i class="fa-solid fa-bolt" style="color:#0284c7;"></i> Quick Departure Options:</div>'
+            + '    <div class="amt-quick-time-lbl"><i class="fa-solid fa-bolt" style="color:#0284c7;"></i> Quick Departure Options:</div>'
             + '    <div class="amt-time-pills">'
             + '      <button type="button" class="amt-time-pill" data-time="06:00"><i class="fa-solid fa-sun" style="color:#f59e0b;"></i> 06:00 AM <span class="amt-pill-tag">Sunrise</span></button>'
             + '      <button type="button" class="amt-time-pill active" data-time="09:00"><i class="fa-solid fa-cloud-sun" style="color:#0284c7;"></i> 09:00 AM <span class="amt-pill-tag">Recommended</span></button>'
@@ -1227,13 +1289,13 @@
             + '      <label class="amt-label" for="amtTime">Pickup Time *</label>'
             + '      <input type="time" id="amtTime" class="amt-input" value="09:00" required>'
             + '      <div id="amtSmartTimeBox" style="margin-top:5px;font-size:0.74rem;color:#0369a1;display:flex;align-items:center;flex-wrap:wrap;gap:5px;">'
-            + '        <span>💡 <strong>AI Suggested:</strong> <button type="button" id="amtSmartTimeBtn" style="background:#e0f2fe;color:#0284c7;border:1px solid #bae6fd;border-radius:6px;padding:2px 8px;font-weight:700;font-size:0.73rem;cursor:pointer;">09:00 AM</button></span>'
+            + '        <span>💡 <strong>AI Suggested:</strong> <button type="button" id="amtSmartTimeBtn" class="amt-smart-time-btn">09:00 AM</button></span>'
             + '        <span id="amtSmartTimeReason" style="color:#64748b;font-size:0.71rem;"></span>'
             + '      </div>'
             + '    </div>'
             + '  </div>'
-            + '  <div id="amtMultiDayToggleBox" class="amt-multi-day-box" style="display:none;margin-top:10px;margin-bottom:6px;padding:10px 12px;background:#ffffff;border:1.5px solid #cbd5e1;border-radius:10px;box-sizing:border-box;">'
-            + '    <label style="display:flex;align-items:center;gap:8px;font-size:0.8rem;font-weight:700;color:#0f2b48;cursor:pointer;">'
+            + '  <div id="amtMultiDayToggleBox" class="amt-multi-day-box" style="display:none;margin-top:10px;margin-bottom:6px;box-sizing:border-box;">'
+            + '    <label style="display:flex;align-items:center;gap:8px;font-size:0.8rem;font-weight:700;cursor:pointer;">'
             + '      <input type="checkbox" id="amtDiffScheduleCheckbox" style="width:18px;height:18px;accent-color:#0284c7;cursor:pointer;">'
             + '      <span>Schedule tours on different dates or times (Multi-Day Circuit)</span>'
             + '    </label>'
@@ -2642,14 +2704,21 @@
         var isCombo = (t.category === 'combo');
         var isOutstation = (t.category === 'outstation');
         var isLocalDrop = (t.category === 'local_drop');
-        var badgeText = isSingle ? '⚡ EXPRESS SINGLE TOUR' : (isCombo ? '⭐ FULL DAY COMBO' : (isOutstation ? '✈️ OUTSTATION ROUTE' : (isLocalDrop ? '📍 LOCAL POINT DROP' : '⭐ STANDARD SIGHTSEEING')));
+        var badgeText = isSingle ? '⚡ EXPRESS SINGLE (CUSTOM TOUR)' : (isCombo ? '⭐ FULL DAY COMBO' : (isOutstation ? '✈️ OUTSTATION ROUTE' : (isLocalDrop ? '📍 LOCAL POINT DROP' : '⭐ STANDARD SIGHTSEEING')));
+        var fareSubText = isSingle
+            ? 'Special Direct Rate • Not in Union Card'
+            : (isCombo ? 'Official Union Combo' : (isOutstation ? 'Direct Highway Tariff' : (isLocalDrop ? 'Official Union Drop Rate' : 'Official Taxi Union Rate')));
         var pointsCount = (t.points || []).length;
+
+        var disclaimerHtml = isSingle
+            ? '<div class="amt-stb-union-disclaimer"><i class="fa-solid fa-circle-info"></i> <strong>Note:</strong> Single Tour (₹800 flat rate) is an independent budget option offered directly by Aryan Taxi. It is <strong>NOT</strong> part of the official Taxi Union rate card (official Union packages are Tours 1–7).</div>'
+            : '';
 
         banner.innerHTML = '<div class="amt-stb-icon"><i class="fa-solid fa-circle-check"></i></div>'
             + '<div class="amt-stb-content">'
             + '  <div class="amt-stb-header">'
             + '    <span class="amt-stb-badge">' + badgeText + '</span>'
-            + '    <span class="amt-stb-fare">₹' + t.fare + ' <small style="font-size:0.65rem;font-weight:700;opacity:0.85;">Locked Union Rate</small></span>'
+            + '    <span class="amt-stb-fare">₹' + t.fare + ' <small style="font-size:0.65rem;font-weight:700;opacity:0.85;">' + fareSubText + '</small></span>'
             + '  </div>'
             + '  <div class="amt-stb-title">' + escapeHtml(t.name) + '</div>'
             + '  <div class="amt-stb-meta">'
@@ -2658,6 +2727,7 @@
             + '    <span><i class="fa-solid fa-car" style="color:#0284c7;"></i> 4-Seater Tourist Cab</span>'
             + '    <span><i class="fa-solid fa-shield-halved" style="color:#10b981;"></i> Zero Advance • Pay After Tour</span>'
             + '  </div>'
+            + disclaimerHtml
             + '</div>';
         banner.style.display = 'flex';
     }
@@ -2704,13 +2774,13 @@
                 var guideMsg = '';
                 var guideClass = '';
                 if (activeFilter === 'single_tour') {
-                    guideMsg = '<strong>⚡ Express Single Tours (₹800 Flat Rate • 2.5 Hrs):</strong> Quick focused trips to an individual sightseeing area (e.g. Arthur\'s Seat only or Kate\'s Point only). Ideal for budget-friendly visits or travellers wanting minimum points without a full half-day tour.';
+                    guideMsg = '<strong>⚡ Express Single Tours (₹800 Flat Rate • 2.5 Hrs):</strong> Quick focused trips to an individual sightseeing area (e.g. Arthur\'s Seat only or Kate\'s Point only). Ideal for budget-friendly visits or travellers wanting minimum points.<br><span style="color:#d97706;font-weight:700;">⚠️ Please Note:</span> Single tours are an independent budget option offered directly by Aryan Taxi and are <strong>NOT part of the official Taxi Union rate card</strong>. (Official Taxi Union packages are the full circuits, Tours 1–7).';
                     guideClass = '';
                 } else if (activeFilter === 'standard_tour') {
-                    guideMsg = '<strong>⭐ Standard Union Sightseeing (₹1,200 - ₹2,500 • 3.5 to 6 Hrs):</strong> Comprehensive official Taxi Union circuits covering 8 to 15 viewpoints, heritage temples, clifftops, and valleys across Mahabaleshwar.';
+                    guideMsg = '<strong>⭐ Standard Union Sightseeing (₹1,200 - ₹2,500 • 3.5 to 6 Hrs):</strong> Official Mahabaleshwar Taxi Union approved packages covering comprehensive 8 to 17 viewpoint circuits across Mahabaleshwar.';
                     guideClass = 'standard';
                 } else {
-                    guideMsg = '<strong>📋 All Sightseeing Options (9 Tours):</strong> Browse all approved Taxi Union options side-by-side — from quick ₹800 single tours to full half-day packages.';
+                    guideMsg = '<strong>📋 All Sightseeing Options (9 Tours):</strong> Compare official Taxi Union standard packages (Tours 1–7) alongside ₹800 express single tour options (independent budget circuits).';
                     guideClass = 'all';
                 }
 
@@ -2802,7 +2872,7 @@
             if (isSingle) {
                 badgeClass = 'express';
                 badgeIcon = 'fa-bolt';
-                badgeText = 'Express • ₹800';
+                badgeText = 'Express • ₹800 (Single Tour)';
             } else if (t.id === 'T3') {
                 badgeClass = 'heritage';
                 badgeIcon = 'fa-landmark';
@@ -2829,6 +2899,8 @@
                 badgeText = 'Local Drop';
             }
 
+            var fareSub = isSingle ? 'Special Single Rate' : 'Official Union Rate';
+
             return '<div class="amt-vt-card' + (isSelected ? ' active' : '') + '" data-tour-id="' + t.id + '" role="button" tabindex="0">'
                 + '<div class="amt-vt-card-top">'
                 + '  <div class="amt-vt-badge-row">'
@@ -2837,12 +2909,13 @@
                 + '  </div>'
                 + '  <div class="amt-vt-title">' + escapeHtml(t.name) + '</div>'
                 + (t.description ? '  <p class="amt-vt-desc">' + escapeHtml(t.description) + '</p>' : '')
+                + (isSingle ? '  <div style="font-size:0.67rem;color:#b45309;font-weight:700;margin:3px 0 2px;display:flex;align-items:center;gap:4px;"><i class="fa-solid fa-circle-exclamation"></i> Special Single Tour (Not in Union Card)</div>' : '')
                 + '</div>'
                 + '<div class="amt-vt-card-bottom">'
                 + pointsPanel
                 + '  <div class="amt-vt-price-row">'
                 + '    <div class="amt-vt-dur-wrap"><i class="fa-solid fa-clock" style="color:#0284c7;font-size:0.75rem;"></i> <span class="amt-vt-dur">' + escapeHtml(t.duration) + '</span></div>'
-                + '    <div class="amt-vt-fare-wrap"><span class="amt-vt-fare">₹' + t.fare + '</span><span class="amt-vt-fare-sub">Locked Rate</span></div>'
+                + '    <div class="amt-vt-fare-wrap"><span class="amt-vt-fare">₹' + t.fare + '</span><span class="amt-vt-fare-sub">' + fareSub + '</span></div>'
                 + '  </div>'
                 + '</div>'
                 + '</div>';
