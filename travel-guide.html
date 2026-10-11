@@ -906,7 +906,7 @@
           "name": "What are the official Mahabaleshwar sightseeing taxi rates for 2026?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Mahabaleshwar taxi rates follow official union tariffs: Tour 1 (Mahabaleshwar Darshan) is ₹1,200 (3:30 Hrs), Tour 2 (Wilson Point & Waterfall) is ₹1,200 (3:30 Hrs), Tour 3 (Pratapgadh Fort) is ₹1,600 (3:30 Hrs), Tour 4 (Panchgani Darshan) is ₹1,200 (3:00 Hrs), Tour 5 (Wai Darshan) is ₹2,500 (6:00 Hrs), and Tour 6 (Tapola Mini Kashmir) is ₹1,450 (3:30 Hrs)."
+            "text": "Mahabaleshwar taxi rates follow official union tariffs: Express Single Tours (Tour 01, 02, 03) are ₹800 (2:30 Hrs), Tour 1 (Mahabaleshwar Darshan) is ₹1,200 (3:30 Hrs), Tour 2 (Wilson Point & Waterfall) is ₹1,200 (3:30 Hrs), Tour 3 (Pratapgadh Fort) is ₹1,600 (3:30 Hrs), Tour 4 (Panchgani Darshan) is ₹1,200 (3:00 Hrs), Tour 5 (Wai Darshan) is ₹2,500 (6:00 Hrs), Tour 6 (Tapola Mini Kashmir) is ₹1,450 (3:30 Hrs), and Tour 7 (Full Day Combo) is ₹3,000 (9:00 Hrs)."
           }
         },
         {
@@ -1298,107 +1298,220 @@
                     </p>
                 </div>
 
-                <!-- Sightseeing Tours Table -->
+                <!-- Sightseeing Tours Selector & Tariff Summary -->
                 <div class="guide-table-scroll-hint hide-desktop">
-                    <i class="fa-solid fa-arrows-left-right"></i> Scroll sideways to view all tariff columns
+                    <i class="fa-solid fa-arrows-left-right"></i> Scroll sideways to compare sightseeing tour formats
                 </div>
                 <div class="guide-tariff-table-wrap reveal">
-                    <table class="guide-tariff-table" aria-label="Official Mahabaleshwar Sightseeing Tours 2026">
+                    <table class="guide-tariff-table" aria-label="Official Mahabaleshwar Sightseeing Tours Selector 2026">
                         <thead>
-                            <tr>
-                                <th style="width: 12%;">Tour No.</th>
-                                <th style="width: 25%;">Tour Name &amp; Duration</th>
-                                <th style="width: 45%;">Sightseeing Attractions Included</th>
-                                <th style="width: 18%;">Official Union Fare</th>
+                            <tr style="background: #0284c7 !important;">
+                                <th style="width: 22%; color: #fff !important; font-weight: 700;">Sightseeing Format</th>
+                                <th style="width: 25%; color: #fff !important; font-weight: 700;">Duration &amp; Union Fare</th>
+                                <th style="width: 38%; color: #fff !important; font-weight: 700;">Included Highlights &amp; Circuits</th>
+                                <th style="width: 15%; text-align: center; color: #fff !important; font-weight: 700;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><strong>Tour 1</strong></td>
+                            <!-- Format 1: Express Single Tours -->
+                            <tr style="background: rgba(2, 132, 199, 0.05); border-bottom: 1px solid var(--border-color);">
+                                <td colspan="4" style="padding: 10px 16px; font-weight: 800; font-size: 0.85rem; color: #0284c7; text-transform: uppercase; letter-spacing: 0.5px;">
+                                    ⚡ Express Single Tours (Budget-Friendly • Minimum Points Option)
+                                </td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
                                 <td>
-                                    <strong>Mahabaleshwar Darshan</strong><br>
+                                    <strong>Tour 01: Arthur Seat Circuit</strong><br>
+                                    <span style="font-size: 0.8rem; color: #64748b;">Heritage &amp; Valley Cliffs</span>
+                                </td>
+                                <td>
+                                    <span class="guide-rate-badge" style="background: #0284c7; color: #fff;">₹800</span><br>
+                                    <span style="font-size: 0.8rem; color: #64748b;"><i class="fa-regular fa-clock"></i> 2.50 Hrs • 4-Seater</span>
+                                </td>
+                                <td>
+                                    Panchganga &amp; Lord Shiva Mandir, Arthurseat Point, Window Point, Tiger Point, Malcolm Point, Eco Point, Hunting Point, Castle Rock, Savitri, Monkey &amp; Marjorie Points (12 Points).
+                                </td>
+                                <td style="text-align: center;">
+                                    <button onclick="if(window.openBookingModal){window.openBookingModal('Tour 01: Mahabaleshwar Darshan 1 (₹800, 2.5 Hrs)');}else{tourWA('Tour 01: Arthur Seat Circuit - ₹800');}" class="btn btn--sm btn--primary">Book ₹800</button>
+                                </td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td>
+                                    <strong>Tour 02: Kate's Point &amp; Strawberry</strong><br>
+                                    <span style="font-size: 0.8rem; color: #64748b;">Scenic Ridge &amp; Farms</span>
+                                </td>
+                                <td>
+                                    <span class="guide-rate-badge" style="background: #0284c7; color: #fff;">₹800</span><br>
+                                    <span style="font-size: 0.8rem; color: #64748b;"><i class="fa-regular fa-clock"></i> 2.50 Hrs • 4-Seater</span>
+                                </td>
+                                <td>
+                                    Kate's Point (Krishna Valley view), Eco Point, Strawberry Garden visit (seasonal), Elephant Head (Needle Hole Rock Arch) (4 Points).
+                                </td>
+                                <td style="text-align: center;">
+                                    <button onclick="if(window.openBookingModal){window.openBookingModal('Tour 02: Mahabaleshwar Darshan 2 (₹800, 2.5 Hrs)');}else{tourWA('Tour 02: Kate\'s Point & Strawberry - ₹800');}" class="btn btn--sm btn--primary">Book ₹800</button>
+                                </td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td>
+                                    <strong>Tour 03: Wilson Point &amp; Waterfall</strong><br>
+                                    <span style="font-size: 0.8rem; color: #64748b;">Sunrise Peak &amp; Cascades</span>
+                                </td>
+                                <td>
+                                    <span class="guide-rate-badge" style="background: #0284c7; color: #fff;">₹800</span><br>
+                                    <span style="font-size: 0.8rem; color: #64748b;"><i class="fa-regular fa-clock"></i> 2.50 Hrs • 4-Seater</span>
+                                </td>
+                                <td>
+                                    Wilson Point (Highest point 1,439m &amp; sunrise views), Ganesh Temple at Machutar Village, King's Chair, Plato Point, Lingmala Waterfall &amp; Venna Lake (6 Points).
+                                </td>
+                                <td style="text-align: center;">
+                                    <button onclick="if(window.openBookingModal){window.openBookingModal('Tour 03: Mahabaleshwar Darshan 3 (₹800, 2.5 Hrs)');}else{tourWA('Tour 03: Wilson Point & Waterfall - ₹800');}" class="btn btn--sm btn--primary">Book ₹800</button>
+                                </td>
+                            </tr>
+
+                            <!-- Format 2: Standard Union Sightseeing -->
+                            <tr style="background: rgba(37, 99, 235, 0.05); border-bottom: 1px solid var(--border-color);">
+                                <td colspan="4" style="padding: 10px 16px; font-weight: 800; font-size: 0.85rem; color: #2563eb; text-transform: uppercase; letter-spacing: 0.5px;">
+                                    ⭐ Standard Union Sightseeing Packages (Full Circuits • 3.0 to 6.0 Hrs)
+                                </td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td>
+                                    <strong>Tour 1: Mahabaleshwar Darshan</strong><br>
+                                    <span style="font-size: 0.8rem; color: #16a34a; font-weight: 700;">Top Choice for Families</span>
+                                </td>
+                                <td>
+                                    <span class="guide-rate-badge">₹1,200</span><br>
                                     <span style="font-size: 0.8rem; color: #64748b;"><i class="fa-regular fa-clock"></i> 3:30 Hrs • 4-Seater</span>
                                 </td>
                                 <td>
-                                    Old Mahabaleshwar, Panchganga Temple, Lord Shiva Temple, Arthur Seat, Window Point, Tiger Spring, Hunting Point, Malcum Point, Echo Point, Castle Rock Point, Savitri Point, Marjori Point, Elphinston Upper, Elphinston Lower, Kate's Point, Echo Point, Needle Hole (Elephant Head), Free Strawberry Garden Visit (only Strawberry Season).<br>
-                                    <em style="font-size: 0.8rem; color: #16a34a;">Extra: None.</em>
+                                    Combines Old Mahabaleshwar Temples + Arthur's Seat Circuit + Kate's Point, Echo Point &amp; Needle Hole (17 Points total).
                                 </td>
-                                <td>
-                                    <span class="guide-rate-badge">₹1,200</span>
+                                <td style="text-align: center;">
+                                    <button onclick="if(window.openBookingModal){window.openBookingModal('Tour 1: Mahabaleshwar Darshan (₹1200, 3.30 Hrs)');}else{tourWA('Tour 1: Mahabaleshwar Darshan - ₹1200');}" class="btn btn--sm btn--primary">Book ₹1200</button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td><strong>Tour 2</strong></td>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
                                 <td>
-                                    <strong>Mahabaleshwar Darshan</strong><br>
+                                    <strong>Tour 2: Waterfall &amp; Sunset</strong><br>
+                                    <span style="font-size: 0.8rem; color: #64748b;">Monsoon &amp; Nature Circuit</span>
+                                </td>
+                                <td>
+                                    <span class="guide-rate-badge">₹1,200</span><br>
                                     <span style="font-size: 0.8rem; color: #64748b;"><i class="fa-regular fa-clock"></i> 3:30 Hrs • 4-Seater</span>
                                 </td>
                                 <td>
-                                    Wilson Point, Ganesh Temple (Machutar Village), Plato Point, King's Chair Point, Lingmala Waterfall, Venna Mini Dam, Lodwik Point, Mumbai Point.<br>
-                                    <em style="font-size: 0.8rem; color: #16a34a;">Extra: None.</em>
+                                    Wilson Point, Ganesh Temple, Plato Point, Lingmala Waterfall, Venna Mini Dam, Lodwik Point &amp; Sunset at Mumbai Point.
                                 </td>
-                                <td>
-                                    <span class="guide-rate-badge">₹1,200</span>
+                                <td style="text-align: center;">
+                                    <button onclick="if(window.openBookingModal){window.openBookingModal('Tour 2: Waterfall & Sunset Circuit (₹1200, 3.30 Hrs)');}else{tourWA('Tour 2: Waterfall & Sunset - ₹1200');}" class="btn btn--sm btn--primary">Book ₹1200</button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td><strong>Tour 3</strong></td>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
                                 <td>
-                                    <strong>Pratapgadh Darshan</strong><br>
+                                    <strong>Tour 3: Pratapgadh Fort</strong><br>
+                                    <span style="font-size: 0.8rem; color: #64748b;">History, Trekking &amp; Temple</span>
+                                </td>
+                                <td>
+                                    <span class="guide-rate-badge">₹1,600</span><br>
                                     <span style="font-size: 0.8rem; color: #64748b;"><i class="fa-regular fa-clock"></i> 3:30 Hrs • 4-Seater</span>
                                 </td>
                                 <td>
-                                    Pratapgadh Fort, Bhavani Mata Temple, Pratap Garden, Shivaji Maharaj Statue, Kadelat Point, Tomb of Afzalkhan, Shivkalin Village (Pratapgadh Machi).<br>
-                                    <em style="font-size: 0.8rem; color: #d97706;">Optional extra: Shree Ramvardhayni Mandir (Par).</em>
+                                    Chhatrapati Shivaji Maharaj Hill Fort, Bhavani Mata Temple, Shivaji Statue, Kadelot Point, Afzalkhan Tomb &amp; Shivkalin Village.
                                 </td>
-                                <td>
-                                    <span class="guide-rate-badge">₹1,600</span>
+                                <td style="text-align: center;">
+                                    <button onclick="if(window.openBookingModal){window.openBookingModal('Tour 3: Pratapgadh Darshan (₹1600, 3.30 Hrs)');}else{tourWA('Tour 3: Pratapgadh Darshan - ₹1600');}" class="btn btn--sm btn--primary">Book ₹1600</button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td><strong>Tour 4</strong></td>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
                                 <td>
-                                    <strong>Panchgani Darshan</strong><br>
+                                    <strong>Tour 4: Panchgani Darshan</strong><br>
+                                    <span style="font-size: 0.8rem; color: #64748b;">Plateau &amp; Photography</span>
+                                </td>
+                                <td>
+                                    <span class="guide-rate-badge">₹1,200</span><br>
                                     <span style="font-size: 0.8rem; color: #64748b;"><i class="fa-regular fa-clock"></i> 3:00 Hrs • 4-Seater</span>
                                 </td>
                                 <td>
-                                    Parsi Point, Table Land (Caves), Museum (Gureghar), Bhilar Waterfall (Monsoon only), Avis World Theme Park.<br>
-                                    <em style="font-size: 0.8rem; color: #d97706;">Optional: Velocity, Mapro Garden.</em>
+                                    Parsi Point, Table Land (Caves), Gureghar Museum, Bhilar Waterfall (Monsoon), Avis World Theme Park.
                                 </td>
-                                <td>
-                                    <span class="guide-rate-badge">₹1,200</span>
+                                <td style="text-align: center;">
+                                    <button onclick="if(window.openBookingModal){window.openBookingModal('Tour 4: Panchgani Darshan (₹1200, 3.00 Hrs)');}else{tourWA('Tour 4: Panchgani Darshan - ₹1200');}" class="btn btn--sm btn--primary">Book ₹1200</button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td><strong>Tour 5</strong></td>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
                                 <td>
-                                    <strong>Wai Darshan</strong><br>
+                                    <strong>Tour 5: Wai &amp; Dhom Dam</strong><br>
+                                    <span style="font-size: 0.8rem; color: #64748b;">Spiritual &amp; Lake Backwaters</span>
+                                </td>
+                                <td>
+                                    <span class="guide-rate-badge">₹2,500</span><br>
                                     <span style="font-size: 0.8rem; color: #64748b;"><i class="fa-regular fa-clock"></i> 6:00 Hrs • 4-Seater</span>
                                 </td>
                                 <td>
-                                    Sydney Point, Wai, Shree Ganesh Temple, Shree Kashivishveshwar Temple, Dhom Dam, Nana Phadnavis Wada (Menavli), Mapro Factory (Shendurjane Wai).<br>
-                                    <em style="font-size: 0.8rem; color: #16a34a;">Extra: None.</em>
+                                    Sydney Point, Wai Ganpati Temple, Kashivishveshwar Temple, Dhom Dam, Menavli Nana Phadnavis Wada &amp; Mapro Factory Wai.
                                 </td>
-                                <td>
-                                    <span class="guide-rate-badge">₹2,500</span>
+                                <td style="text-align: center;">
+                                    <button onclick="if(window.openBookingModal){window.openBookingModal('Tour 5: Wai Darshan (₹2500, 6.00 Hrs)');}else{tourWA('Tour 5: Wai Darshan - ₹2500');}" class="btn btn--sm btn--primary">Book ₹2500</button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td><strong>Tour 6</strong></td>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
                                 <td>
-                                    <strong>Tapola Darshan (Mini Kashmir)</strong><br>
+                                    <strong>Tour 6: Tapola (Mini Kashmir)</strong><br>
+                                    <span style="font-size: 0.8rem; color: #64748b;">Koyna Backwaters &amp; Boating</span>
+                                </td>
+                                <td>
+                                    <span class="guide-rate-badge">₹1,450</span><br>
                                     <span style="font-size: 0.8rem; color: #64748b;"><i class="fa-regular fa-clock"></i> 3:30 Hrs • 4-Seater</span>
                                 </td>
                                 <td>
-                                    Mini Kashmir, Water Sports, Shivsagar Darshan.<br>
-                                    <em style="font-size: 0.8rem; color: #d97706;">Optional: Honey Village (Manghar).</em>
+                                    Mini Kashmir scenic valley drive, water sports on Shivsagar Lake &amp; optional visit to Honey Village Manghar.
+                                </td>
+                                <td style="text-align: center;">
+                                    <button onclick="if(window.openBookingModal){window.openBookingModal('Tour 6: Tapola Darshan (₹1450, 3.30 Hrs)');}else{tourWA('Tour 6: Tapola Darshan - ₹1450');}" class="btn btn--sm btn--primary">Book ₹1450</button>
+                                </td>
+                            </tr>
+
+                            <!-- Format 3: Full Day Combo -->
+                            <tr style="background: rgba(245, 158, 11, 0.08); border-bottom: 1px solid var(--border-color);">
+                                <td>
+                                    <strong style="color: var(--primary);">Tour 7: Full Day Combo</strong><br>
+                                    <span style="font-size: 0.8rem; color: #d97706; font-weight: 700;">👑 Mahabaleshwar + Panchgani</span>
                                 </td>
                                 <td>
-                                    <span class="guide-rate-badge">₹1,450</span>
+                                    <span class="guide-rate-badge" style="background: #f59e0b; color: #fff;">₹3,000</span><br>
+                                    <span style="font-size: 0.8rem; color: #64748b;"><i class="fa-regular fa-clock"></i> 9:00 Hrs (9 AM–6 PM)</span>
+                                </td>
+                                <td>
+                                    All-inclusive 1-day trip: Old Mahabaleshwar, Arthur Seat &amp; Kate's Point + Table Land, Parsi Point, Mapro Garden &amp; Bhilar Waterfall.
+                                </td>
+                                <td style="text-align: center;">
+                                    <button onclick="if(window.openBookingModal){window.openBookingModal('Tour 7: Mahabaleshwar & Panchgani (₹3000, 9.00 Hrs)');}else{tourWA('Tour 7: Full Day Combo - ₹3000');}" class="btn btn--sm btn--whatsapp" style="font-weight: 700;">Book ₹3000</button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
+                </div>
+
+                <!-- Navigation Cross-Links to Avoid Redundant Duplication -->
+                <div class="grid grid--2 reveal" style="gap: 16px; margin-top: 20px; margin-bottom: 28px;">
+                    <div style="background: var(--bg-primary); border: 1.5px solid var(--border-color); border-radius: 12px; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+                        <div>
+                            <strong style="color: var(--text-primary); font-size: 0.95rem; display: block;">📋 Detailed Point Itineraries &amp; Photos</strong>
+                            <span style="font-size: 0.82rem; color: var(--text-secondary);">Browse individual point descriptions and side-by-side comparison for all 10 packages.</span>
+                        </div>
+                        <a href="tour-packages.html" class="btn btn--sm btn--primary" style="white-space: nowrap; font-weight: 700;">
+                            View Tour Packages &rarr;
+                        </a>
+                    </div>
+                    <div style="background: var(--bg-primary); border: 1.5px solid var(--border-color); border-radius: 12px; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+                        <div>
+                            <strong style="color: var(--text-primary); font-size: 0.95rem; display: block;">🧮 Interactive Taxi Tariff Calculator</strong>
+                            <span style="font-size: 0.82rem; color: var(--text-secondary);">Calculate multi-tour combinations, local drops, and outstation airport transfers instantly.</span>
+                        </div>
+                        <a href="taxi-fare.html" class="btn btn--sm btn--outline" style="white-space: nowrap; font-weight: 700; border-color: var(--primary); color: var(--primary);">
+                            Calculate Taxi Fare &rarr;
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Outstation & Local Drops Grid -->
@@ -1487,7 +1600,7 @@
                             <i class="fa-solid fa-circle-check" style="color: #10b981;"></i> <span>What are the official Mahabaleshwar sightseeing taxi rates for 2026?</span>
                         </h3>
                         <p class="guide-faq-answer">
-                            Mahabaleshwar taxi rates follow official union tariffs: Tour 1 (Mahabaleshwar Darshan) is ₹1,200 (3:30 Hrs), Tour 2 (Wilson Point &amp; Waterfall) is ₹1,200 (3:30 Hrs), Tour 3 (Pratapgadh Fort) is ₹1,600 (3:30 Hrs), Tour 4 (Panchgani Darshan) is ₹1,200 (3:00 Hrs), Tour 5 (Wai Darshan) is ₹2,500 (6:00 Hrs), and Tour 6 (Tapola Mini Kashmir) is ₹1,450 (3:30 Hrs).
+                            Mahabaleshwar taxi rates follow official union tariffs: Express Single Tours (Tour 01, 02, 03) are ₹800 (2:30 Hrs), Tour 1 (Mahabaleshwar Darshan) is ₹1,200 (3:30 Hrs), Tour 2 (Wilson Point &amp; Waterfall) is ₹1,200 (3:30 Hrs), Tour 3 (Pratapgadh Fort) is ₹1,600 (3:30 Hrs), Tour 4 (Panchgani Darshan) is ₹1,200 (3:00 Hrs), Tour 5 (Wai Darshan) is ₹2,500 (6:00 Hrs), Tour 6 (Tapola Mini Kashmir) is ₹1,450 (3:30 Hrs), and Tour 7 (Full Day Combo) is ₹3,000 (9:00 Hrs).
                         </p>
                     </div>
 

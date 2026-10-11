@@ -160,7 +160,107 @@
         </div>
 
         <!-- VIEW 1: Cards Grid View (Default) -->
+        <!-- VIEW 1: Cards Grid View (Default) -->
         <div id="tourCardsView">
+            <!-- SECTION 1: Express Single Tours (₹800 • 2.5 Hrs) -->
+            <div style="background: linear-gradient(135deg, rgba(8, 145, 178, 0.08) 0%, rgba(14, 165, 233, 0.04) 100%); border: 1.5px solid rgba(8, 145, 178, 0.25); border-radius: 16px; padding: 22px 24px; margin-bottom: 32px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
+                    <div>
+                        <span style="display: inline-block; background: #0284c7; color: #fff; font-size: 0.75rem; font-weight: 800; padding: 3px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">⚡ New Express Option</span>
+                        <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--text-primary); margin: 0;">Express Single Tours (₹800 Flat • 2.5 Hours)</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 4px 0 0;">Don't need all points in a 3.5-hr tour? Book a focused 2.5-hour single circuit at the official ₹800 union tariff for a private 4-seater cab.</p>
+                    </div>
+                    <div style="background: var(--bg-primary); border: 1.5px solid #0284c7; padding: 8px 18px; border-radius: 10px; text-align: center; box-shadow: var(--shadow-xs);">
+                        <span style="display: block; font-size: 0.72rem; color: var(--text-secondary); font-weight: 700; text-transform: uppercase;">Fixed Union Fare</span>
+                        <span style="font-size: 1.35rem; font-weight: 800; color: #0284c7;">₹800</span>
+                    </div>
+                </div>
+
+                <div class="grid grid--3">
+                    <!-- Tour 01 -->
+                    <div class="tour-card reveal">
+                        <div class="tour-header" role="button" tabindex="0" aria-controls="tour01-details" aria-expanded="false">
+                            <h3 class="tour-name">Tour 01: Arthur Seat Circuit</h3>
+                            <div class="tour-price">₹800</div>
+                            <div class="badge-row">
+                                <span class="badge">2.50 Hrs</span>
+                            </div>
+                            <i class="fa-solid fa-chevron-down toggle-icon" style="float: right;"></i>
+                        </div>
+                        <div class="tour-details" id="tour01-details" aria-hidden="true">
+                            <h4 style="color: var(--primary); font-size: var(--text-md); margin-bottom: 0.5rem; margin-top: 1rem;">Detailed Itinerary (12 Points)</h4>
+                            <ul class="itinerary-list" style="margin-bottom: 1rem;">
+                                <li class="itinerary-item">Panchganga Mandir</li>
+                                <li class="itinerary-item">Lord Shiva Mandir</li>
+                                <li class="itinerary-item">Arthurseat Point</li>
+                                <li class="itinerary-item">Window Point</li>
+                                <li class="itinerary-item">Tiger Point</li>
+                                <li class="itinerary-item">Malcolm Point</li>
+                                <li class="itinerary-item">Eco Point</li>
+                                <li class="itinerary-item">Hunting Point</li>
+                                <li class="itinerary-item">Castle Rock Point</li>
+                                <li class="itinerary-item">Savitri Point</li>
+                                <li class="itinerary-item">Monkey Point</li>
+                                <li class="itinerary-item">Marjorie Point</li>
+                            </ul>
+                            <button class="btn btn--primary btn--full mt-4" onclick="if(window.openBookingModal){window.openBookingModal('Tour 01: Mahabaleshwar Darshan 1 (₹800, 2.5 Hrs)');}else{tourWA('Tour 01: Arthur Seat Circuit - ₹800');}">Book This Tour</button>
+                        </div>
+                    </div>
+
+                    <!-- Tour 02 -->
+                    <div class="tour-card reveal">
+                        <div class="tour-header" role="button" tabindex="0" aria-controls="tour02-details" aria-expanded="false">
+                            <h3 class="tour-name">Tour 02: Kate's Point &amp; Strawberry</h3>
+                            <div class="tour-price">₹800</div>
+                            <div class="badge-row">
+                                <span class="badge">2.50 Hrs</span>
+                            </div>
+                            <i class="fa-solid fa-chevron-down toggle-icon" style="float: right;"></i>
+                        </div>
+                        <div class="tour-details" id="tour02-details" aria-hidden="true">
+                            <h4 style="color: var(--primary); font-size: var(--text-md); margin-bottom: 0.5rem; margin-top: 1rem;">Detailed Itinerary (4 Points)</h4>
+                            <ul class="itinerary-list" style="margin-bottom: 1rem;">
+                                <li class="itinerary-item">Kate's Point</li>
+                                <li class="itinerary-item">Eco Point</li>
+                                <li class="itinerary-item">Strawberry Garden (Seasonal)</li>
+                                <li class="itinerary-item">Elephant Head (Needle Hole)</li>
+                            </ul>
+                            <button class="btn btn--primary btn--full mt-4" onclick="if(window.openBookingModal){window.openBookingModal('Tour 02: Mahabaleshwar Darshan 2 (₹800, 2.5 Hrs)');}else{tourWA('Tour 02: Kate\'s Point & Strawberry - ₹800');}">Book This Tour</button>
+                        </div>
+                    </div>
+
+                    <!-- Tour 03 -->
+                    <div class="tour-card reveal">
+                        <div class="tour-header" role="button" tabindex="0" aria-controls="tour03-details" aria-expanded="false">
+                            <h3 class="tour-name">Tour 03: Wilson Point &amp; Waterfall</h3>
+                            <div class="tour-price">₹800</div>
+                            <div class="badge-row">
+                                <span class="badge">2.50 Hrs</span>
+                            </div>
+                            <i class="fa-solid fa-chevron-down toggle-icon" style="float: right;"></i>
+                        </div>
+                        <div class="tour-details" id="tour03-details" aria-hidden="true">
+                            <h4 style="color: var(--primary); font-size: var(--text-md); margin-bottom: 0.5rem; margin-top: 1rem;">Detailed Itinerary (6 Points)</h4>
+                            <ul class="itinerary-list" style="margin-bottom: 1rem;">
+                                <li class="itinerary-item">Wilson Point (Highest Sunrise Peak)</li>
+                                <li class="itinerary-item">Ganesh Temple (Machutar Village)</li>
+                                <li class="itinerary-item">King's Chair Point</li>
+                                <li class="itinerary-item">Plato Point</li>
+                                <li class="itinerary-item">Lingmala Waterfall</li>
+                                <li class="itinerary-item">Venna Lake</li>
+                            </ul>
+                            <button class="btn btn--primary btn--full mt-4" onclick="if(window.openBookingModal){window.openBookingModal('Tour 03: Mahabaleshwar Darshan 3 (₹800, 2.5 Hrs)');}else{tourWA('Tour 03: Wilson Point & Waterfall - ₹800');}">Book This Tour</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 2: Standard Union Sightseeing Packages Header -->
+            <div style="margin: 36px 0 20px;">
+                <span style="display: inline-block; background: #2563eb; color: #fff; font-size: 0.75rem; font-weight: 800; padding: 3px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">⭐ Full Circuits • 3.5 to 6.0 Hrs</span>
+                <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--text-primary); margin: 0;">Standard Union Sightseeing Packages</h3>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 4px 0 0;">Comprehensive official union itineraries covering historic temples, deep valley viewpoints, Pratapgadh Fort, Wai, and Tapola.</p>
+            </div>
             <div class="grid grid--3"> <!-- Tour 1 --> <div class="tour-card reveal">
             <div class="tour-header" role="button" tabindex="0" aria-controls="tour1-details" aria-expanded="false">
                 <h3 class="tour-name">Tour 1: Mahabaleshwar Darshan</h3>
@@ -362,6 +462,52 @@
             </tr>
         </thead>
         <tbody style="font-size: 0.9rem;">
+            <tr style="background: rgba(2, 132, 199, 0.06); border-bottom: 1px solid var(--border-color);">
+                <td colspan="6" style="padding: 10px 16px; font-weight: 800; font-size: 0.85rem; color: #0284c7; text-transform: uppercase; letter-spacing: 0.5px;">
+                    ⚡ Express Single Tours (2.5 Hrs • Minimum Points Option)
+                </td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 14px 16px; font-weight: 700;">Tour 01: Arthur Seat Circuit</td>
+                <td style="padding: 14px 16px; text-align: center;">
+                    <span class="badge">2.50 Hrs</span>
+                </td>
+                <td style="padding: 14px 16px; text-align: center; font-weight: 800; color: var(--primary);">₹800</td>
+                <td style="padding: 14px 16px;">Panchganga &amp; Shiva Mandir, Arthurseat, Window, Tiger, Malcolm, Eco, Hunting, Castle Rock, Savitri, Monkey, Marjorie Points.</td>
+                <td style="padding: 14px 16px;">Quick heritage &amp; dramatic clifftop views without full 3.5-hr itinerary</td>
+                <td style="padding: 14px 16px; text-align: center;">
+                    <button onclick="window.openBookingModal('Tour 01: Mahabaleshwar Darshan 1 (₹800, 2.5 Hrs)')" class="btn btn--sm btn--primary">Book</button>
+                </td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 14px 16px; font-weight: 700;">Tour 02: Kate's Point &amp; Strawberry</td>
+                <td style="padding: 14px 16px; text-align: center;">
+                    <span class="badge">2.50 Hrs</span>
+                </td>
+                <td style="padding: 14px 16px; text-align: center; font-weight: 800; color: var(--primary);">₹800</td>
+                <td style="padding: 14px 16px;">Kate's Point, Eco Point, Strawberry Garden (Seasonal), Elephant Head (Needle Hole).</td>
+                <td style="padding: 14px 16px;">Scenic valley views, photography &amp; strawberry garden visit</td>
+                <td style="padding: 14px 16px; text-align: center;">
+                    <button onclick="window.openBookingModal('Tour 02: Mahabaleshwar Darshan 2 (₹800, 2.5 Hrs)')" class="btn btn--sm btn--primary">Book</button>
+                </td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 14px 16px; font-weight: 700;">Tour 03: Wilson Point &amp; Waterfall</td>
+                <td style="padding: 14px 16px; text-align: center;">
+                    <span class="badge">2.50 Hrs</span>
+                </td>
+                <td style="padding: 14px 16px; text-align: center; font-weight: 800; color: var(--primary);">₹800</td>
+                <td style="padding: 14px 16px;">Wilson Point (Sunrise), Ganesh Temple (Machutar), King's Chair, Plato Point, Lingmala Waterfall, Venna Lake.</td>
+                <td style="padding: 14px 16px;">Sunrise lovers, roaring waterfall &amp; lake nature walk</td>
+                <td style="padding: 14px 16px; text-align: center;">
+                    <button onclick="window.openBookingModal('Tour 03: Mahabaleshwar Darshan 3 (₹800, 2.5 Hrs)')" class="btn btn--sm btn--primary">Book</button>
+                </td>
+            </tr>
+            <tr style="background: rgba(37, 99, 235, 0.05); border-bottom: 1px solid var(--border-color);">
+                <td colspan="6" style="padding: 10px 16px; font-weight: 800; font-size: 0.85rem; color: #2563eb; text-transform: uppercase; letter-spacing: 0.5px;">
+                    ⭐ Standard Union Sightseeing Packages (3.5 Hrs - 6.0 Hrs)
+                </td>
+            </tr>
             <tr style="border-bottom: 1px solid var(--border-color);">
                 <td style="padding: 14px 16px; font-weight: 700;">Tour 1: Mahabaleshwar Darshan</td>
                 <td style="padding: 14px 16px; text-align: center;">

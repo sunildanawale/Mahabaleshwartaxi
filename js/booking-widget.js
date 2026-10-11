@@ -1058,11 +1058,24 @@
         var comboOptions = '<option value="">-- None (Single Tour) --</option>';
 
         if (db) {
-            db.tours.filter(function (t) { return t.type === 'tour'; }).forEach(function (t) {
-                var line = '<option value="' + t.id + '">' + t.name + ' — ₹' + t.fare + ' (' + t.duration + ')</option>';
-                tourOptions += line;
-                comboOptions += line;
-            });
+            var stours = db.tours.filter(function (t) { return t.sub_category === 'single_tour' || t.fare === 800; });
+            var mtours = db.tours.filter(function (t) { return (t.category === 'sightseeing' || t.type === 'tour') && t.sub_category !== 'single_tour' && t.fare !== 800; });
+            if (stours.length > 0) {
+                tourOptions += '<optgroup label="⚡ Express Single Tours (₹800 • 2.5 Hrs)">';
+                stours.forEach(function (t) {
+                    tourOptions += '<option value="' + t.id + '">' + t.name + ' — ₹' + t.fare + ' (' + t.duration + ')</option>';
+                });
+                tourOptions += '</optgroup>';
+            }
+            if (mtours.length > 0) {
+                tourOptions += '<optgroup label="⭐ Standard Union Sightseeing (₹1,200 - ₹1,600 • 3.5 Hrs)">';
+                mtours.forEach(function (t) {
+                    var line = '<option value="' + t.id + '">' + t.name + ' — ₹' + t.fare + ' (' + t.duration + ')</option>';
+                    tourOptions += line;
+                    comboOptions += line;
+                });
+                tourOptions += '</optgroup>';
+            }
         }
 
         var html = '<div id="amtBookingModal" class="amt-modal-overlay">'
@@ -1105,7 +1118,7 @@
             + '<p class="amt-step-sub">Choose your tour category, sightseeing package, travel date, and preferred departure time.</p>'
             + '<div class="amt-service-grid" role="radiogroup" aria-label="Service Category">'
             + '  <div class="amt-service-btn active" role="radio" aria-checked="true" tabindex="0" data-service="sightseeing">'
-            + '    <strong>🚕 Sightseeing</strong><span>Tour 1 to 6</span>'
+            + '    <strong>🚕 Sightseeing</strong><span>Express ₹800 &amp; Full</span>'
             + '  </div>'
             + '  <div class="amt-service-btn" role="radio" aria-checked="false" tabindex="0" data-service="combo">'
             + '    <strong>⭐ Full Day Combo</strong><span>Tour 7 (Maha + Panchgani)</span>'
@@ -2873,9 +2886,26 @@
             bookingState.selectedTours = [];
         }
 
-        sel.innerHTML = filtered.map(function (t) {
-            return '<option value="' + t.id + '">' + escapeHtml(t.name) + ' — ₹' + t.fare + ' (' + escapeHtml(t.duration) + ')</option>';
-        }).join('');
+        if (service === 'sightseeing') {
+            var singleTours = filtered.filter(function (t) { return t.sub_category === 'single_tour' || t.fare === 800; });
+            var standardTours = filtered.filter(function (t) { return t.sub_category !== 'single_tour' && t.fare !== 800; });
+            var optHtml = '';
+            if (singleTours.length > 0) {
+                optHtml += '<optgroup label="⚡ Express Single Tours (₹800 • 2.5 Hrs)">' + singleTours.map(function (t) {
+                    return '<option value="' + t.id + '">' + escapeHtml(t.name) + ' — ₹' + t.fare + ' (' + escapeHtml(t.duration) + ')</option>';
+                }).join('') + '</optgroup>';
+            }
+            if (standardTours.length > 0) {
+                optHtml += '<optgroup label="⭐ Standard Union Sightseeing (₹1,200 - ₹1,600 • 3.5 Hrs)">' + standardTours.map(function (t) {
+                    return '<option value="' + t.id + '">' + escapeHtml(t.name) + ' — ₹' + t.fare + ' (' + escapeHtml(t.duration) + ')</option>';
+                }).join('') + '</optgroup>';
+            }
+            sel.innerHTML = optHtml;
+        } else {
+            sel.innerHTML = filtered.map(function (t) {
+                return '<option value="' + t.id + '">' + escapeHtml(t.name) + ' — ₹' + t.fare + ' (' + escapeHtml(t.duration) + ')</option>';
+            }).join('');
+        }
 
         var firstId = sel.value || (filtered[0] ? filtered[0].id : '');
         bookingState.tourId = firstId;

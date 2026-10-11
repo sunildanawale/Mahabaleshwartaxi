@@ -56,6 +56,81 @@ const TOUR_DATABASE = {
         includeWeekends: true
     },
     tours: [
+        // ===== SINGLE TOURS OPTIONAL (Express 2.5 Hrs • ₹800) =====
+        {
+            id: 'M1',
+            tour_no: '01',
+            name: 'Mahabaleshwar Darshan 1: Arthur Seat Circuit',
+            short_name: 'Tour 01: Arthur Seat Heritage',
+            category: 'sightseeing',
+            sub_category: 'single_tour',
+            type: 'single_tour',
+            fare: 800,
+            duration: '2.5 Hrs.',
+            duration_minutes: 150,
+            badge: 'Express • ₹800',
+            points: [
+                'Panchganga Mandir',
+                'Lord Shiva Mandir',
+                'Arthurseat Point',
+                'Window Point',
+                'Tiger Point',
+                'Malcolm Point',
+                'Eco Point',
+                'Hunting Point',
+                'Castle Rock Point',
+                'Savitri Point',
+                'Monkey Point',
+                'Marjorie Point'
+            ],
+            hidden_points: [],
+            description: 'Focused 2.5-hour heritage circuit covering sacred Kshetra Mahabaleshwar temples and dramatic clifftop viewpoints over Savitri River Valley.'
+        },
+        {
+            id: 'M2',
+            tour_no: '02',
+            name: 'Mahabaleshwar Darshan 2: Kate\'s Point & Elephant Head',
+            short_name: 'Tour 02: Kate\'s Point & Strawberry',
+            category: 'sightseeing',
+            sub_category: 'single_tour',
+            type: 'single_tour',
+            fare: 800,
+            duration: '2.5 Hrs.',
+            duration_minutes: 150,
+            badge: 'Scenic • ₹800',
+            points: [
+                'Kate\'s Point',
+                'Eco Point',
+                'Strawberry Garden (Seasonal)',
+                'Elephant Head (Needle Hole)'
+            ],
+            hidden_points: [],
+            description: 'Breezy 2.5-hour viewpoint tour featuring iconic Kamalgadh valley views, Elephant Head rock formation, and strawberry farm visit.'
+        },
+        {
+            id: 'M3',
+            tour_no: '03',
+            name: 'Mahabaleshwar Darshan 3: Wilson Point & Waterfall',
+            short_name: 'Tour 03: Wilson Point & Lingmala',
+            category: 'sightseeing',
+            sub_category: 'single_tour',
+            type: 'single_tour',
+            fare: 800,
+            duration: '2.5 Hrs.',
+            duration_minutes: 150,
+            badge: 'Nature • ₹800',
+            points: [
+                'Wilson Point (Sunrise / Highest Peak)',
+                'Ganesh Temple',
+                'King\'s Chair Point',
+                'Plato Point',
+                'Lingmala Waterfall',
+                'Venna Lake'
+            ],
+            hidden_points: [],
+            description: 'Scenic nature tour to the highest plateau of Mahabaleshwar, roaring Lingmala Waterfall, sacred Ganesh temple, and Venna Lake.'
+        },
+        // ===== STANDARD UNION SIGHTSEEING PACKAGES (3.5 Hrs • ₹1200 - ₹1600) =====
         {
             id: 'T1',
             tour_no: 1,
@@ -415,6 +490,17 @@ const TOUR_DATABASE = {
         }
         if (q.includes('wai drop') || q.includes('wai town drop') || (q.includes('wai') && q.includes('drop'))) {
             return this.getTourById('LOC_WAI');
+        }
+
+        // Single / Mini Tours (₹800)
+        if (q.includes('800') || q.includes('single') || q.includes('mini') || q.includes('tour 01') || q.includes('tour 02') || q.includes('tour 03')) {
+            if (q.includes('02') || (q.includes('kate') && !q.includes('tour 1')) || q.includes('strawberry')) {
+                return this.getTourById('M2');
+            }
+            if (q.includes('03') || (q.includes('wilson') && !q.includes('tour 2'))) {
+                return this.getTourById('M3');
+            }
+            return this.getTourById('M1');
         }
 
         // Sightseeing Tours

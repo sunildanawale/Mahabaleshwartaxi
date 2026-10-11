@@ -152,7 +152,14 @@
             </i>
         </div>
         <div class="cms-dropdown" id="cmsDropdown">
-            <div class="cms-group">Sightseeing Tours</div>
+            <div class="cms-group">⚡ Express Single Tours (₹800 • 2.5 Hrs)</div>
+            <label class="cms-option">
+            <input type="checkbox" class="fare-checkbox" value="tour01" data-label="Tour 01: Arthur's Seat Heritage (₹800)"> Tour 01: Arthur's Seat Heritage (₹800)</label>
+            <label class="cms-option">
+            <input type="checkbox" class="fare-checkbox" value="tour02" data-label="Tour 02: Kate's Point &amp; Strawberry (₹800)"> Tour 02: Kate's Point &amp; Strawberry (₹800)</label>
+            <label class="cms-option">
+            <input type="checkbox" class="fare-checkbox" value="tour03" data-label="Tour 03: Wilson Point &amp; Waterfall (₹800)"> Tour 03: Wilson Point &amp; Waterfall (₹800)</label>
+            <div class="cms-group">⭐ Standard Union Sightseeing (3.5 Hrs - 9 Hrs)</div>
             <label class="cms-option">
             <input type="checkbox" class="fare-checkbox" value="tour1" data-label="Tour 1: Mahabaleshwar Darshan"> Tour 1: Mahabaleshwar Darshan</label>
             <label class="cms-option">
@@ -377,6 +384,43 @@
             </tr>
         </thead>
         <tbody>
+            <tr style="background: rgba(2, 132, 199, 0.05); border-bottom: 1px solid var(--border-color);">
+                <td colspan="3" style="padding: 10px 1rem; font-weight: 800; font-size: 0.85rem; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px;">
+                    ⚡ Express Single Tours (2.5 Hrs • Minimum Points Option)
+                </td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 1rem;">
+                    <strong>Tour 01: Arthur Seat Circuit (Single Tour)</strong>
+                    <br>
+                    <span style="font-size: 0.85rem; color: var(--text-secondary);">12 Points: Panchganga &amp; Shiva Mandir, Arthurseat, Window, Tiger, Malcolm, Eco, Hunting, Castle Rock, Savitri, Monkey, Marjorie Points</span>
+                </td>
+                <td style="padding: 1rem;">2.5 hrs</td>
+                <td style="padding: 1rem; text-align: left; font-weight: bold; color: var(--primary);">₹800</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 1rem;">
+                    <strong>Tour 02: Kate's Point &amp; Elephant Head (Single Tour)</strong>
+                    <br>
+                    <span style="font-size: 0.85rem; color: var(--text-secondary);">4 Points: Kate's Point, Eco Point, Strawberry Garden, Elephant Head (Needle Hole)</span>
+                </td>
+                <td style="padding: 1rem;">2.5 hrs</td>
+                <td style="padding: 1rem; text-align: left; font-weight: bold; color: var(--primary);">₹800</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 1rem;">
+                    <strong>Tour 03: Wilson Point &amp; Waterfall (Single Tour)</strong>
+                    <br>
+                    <span style="font-size: 0.85rem; color: var(--text-secondary);">6 Points: Wilson Point (Sunrise), Ganesh Temple, King's Chair, Plato Point, Lingmala Waterfall, Venna Lake</span>
+                </td>
+                <td style="padding: 1rem;">2.5 hrs</td>
+                <td style="padding: 1rem; text-align: left; font-weight: bold; color: var(--primary);">₹800</td>
+            </tr>
+            <tr style="background: rgba(37, 99, 235, 0.05); border-bottom: 1px solid var(--border-color);">
+                <td colspan="3" style="padding: 10px 1rem; font-weight: 800; font-size: 0.85rem; color: #2563eb; text-transform: uppercase; letter-spacing: 0.5px;">
+                    ⭐ Standard Union Sightseeing Packages (3.5 Hrs - 6.0 Hrs)
+                </td>
+            </tr>
             <tr style="border-bottom: 1px solid var(--border-color);">
                 <td style="padding: 1rem;">
                     <strong>Mahabaleshwar Darshan</strong>
@@ -1156,7 +1200,7 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     var mapping = {
-        'tour1': 'T1', 'tour2': 'T2', 'tour3': 'T3', 'tour4': 'T4', 'tour5': 'T5', 'tour6': 'T6', 'tour7': 'T7',
+        'tour01': 'M1', 'tour02': 'M2', 'tour03': 'M3', 'tour1': 'T1', 'tour2': 'T2', 'tour3': 'T3', 'tour4': 'T4', 'tour5': 'T5', 'tour6': 'T6', 'tour7': 'T7',
         'local2km': 'LOC_2KM', 'local5km': 'LOC_5KM', 'mapro': 'LOC_MAPRO', 'panchgani': 'LOC_PANCHGANI',
         'oldmaha': 'LOC_OLD_MAHA', 'wilson': 'LOC_WILSON', 'bombay': 'LOC_BOMBAY', 'wai': 'LOC_WAI',
         'pune_apt': 'TR_PUNE_APT', 'pune_rly': 'TR_PUNE_RLY', 'mumbai_apt': 'TR_MUM_APT', 'mumbai_city': 'TR_MUM_VASHI',
