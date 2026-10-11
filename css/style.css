@@ -6164,47 +6164,191 @@ body.modal-open {
     color: #34d399;
 }
 
-/* ── 2. Interactive Visual Tour Cards ── */
-.amt-visual-tour-cards {
+/* ── 2. Sightseeing Sub-Category Switcher & Interactive Visual Tour Cards ── */
+.amt-sightseeing-filter-bar {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 10px;
+    padding: 4px;
+    background: #f1f5f9;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-sizing: border-box;
+}
+.amt-tf-pill {
+    flex: 1;
+    padding: 8px 6px;
+    border: none;
+    background: transparent;
+    border-radius: 9px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #475569;
+    cursor: pointer;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    margin-bottom: 12px;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    transition: all 0.18s ease;
+    text-align: center;
+    min-height: 46px;
+    box-sizing: border-box;
 }
+.amt-tf-pill:hover {
+    background: rgba(255, 255, 255, 0.7);
+    color: #0f2b48;
+}
+.amt-tf-pill.active {
+    background: #ffffff;
+    color: #0284c7;
+    font-weight: 800;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 1px solid #bae6fd;
+}
+.amt-tf-pill-title {
+    font-size: 0.76rem;
+    font-weight: 800;
+    line-height: 1.2;
+}
+.amt-tf-pill-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 10px;
+    background: #e0f2fe;
+    color: #0369a1;
+    white-space: nowrap;
+}
+.amt-tf-pill.active .amt-tf-pill-badge {
+    background: #0284c7;
+    color: #ffffff;
+}
+
+/* Clarity Guidance Box */
+.amt-tour-guide-box {
+    background: #f0fdf4;
+    border: 1.5px solid #86efac;
+    border-left: 4px solid #16a34a;
+    border-radius: 10px;
+    padding: 8px 12px;
+    margin-bottom: 12px;
+    font-size: 0.76rem;
+    color: #14532d;
+    line-height: 1.4;
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+.amt-tour-guide-box.standard {
+    background: #eff6ff;
+    border-color: #93c5fd;
+    border-left-color: #0284c7;
+    color: #1e3a8a;
+}
+.amt-tour-guide-box.all {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+    border-left-color: #64748b;
+    color: #334155;
+}
+
+/* Responsive Grid for Visual Tour Cards */
+.amt-visual-tour-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+}
+@media (min-width: 641px) and (max-width: 991px) {
+    .amt-visual-tour-cards {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+    }
+}
+@media (min-width: 992px) {
+    .amt-visual-tour-cards {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 12px !important;
+    }
+}
+
+/* Card Layout */
 .amt-vt-card {
     background: #ffffff;
     border: 1.5px solid #cbd5e1;
     border-radius: 12px;
-    padding: 10px 12px;
+    padding: 12px;
     cursor: pointer;
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     box-sizing: border-box;
     position: relative;
     text-align: left;
     outline: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 140px;
 }
 .amt-vt-card:hover {
-    border-color: #38bdf8;
-    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.12);
-    transform: translateY(-1px);
+    border-color: #0284c7;
+    box-shadow: 0 6px 16px rgba(2, 132, 199, 0.12);
+    transform: translateY(-2px);
 }
 .amt-vt-card.active {
     border-color: #0284c7;
     background: #f0f9ff;
-    box-shadow: 0 0 0 1.5px #0284c7, 0 4px 14px rgba(2, 132, 199, 0.18);
+    box-shadow: 0 0 0 2px #0284c7, 0 6px 18px rgba(2, 132, 199, 0.18);
 }
-.amt-vt-header {
+.amt-vt-card-top {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.amt-vt-badge-row {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    gap: 8px;
-    margin-bottom: 4px;
-}
-.amt-vt-title-wrap {
-    display: flex;
     align-items: center;
-    gap: 6px;
-    flex: 1;
+    margin-bottom: 2px;
+}
+.amt-vt-tag-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 7px;
+    border-radius: 6px;
+    font-size: 0.66rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+.amt-vt-tag-badge.express {
+    background: #ecfdf5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+}
+.amt-vt-tag-badge.standard {
+    background: #e0f2fe;
+    color: #0369a1;
+    border: 1px solid #bae6fd;
+}
+.amt-vt-tag-badge.heritage {
+    background: #fef3c7;
+    color: #92400e;
+    border: 1px solid #fde68a;
+}
+.amt-vt-tag-badge.wai {
+    background: #fae8ff;
+    color: #86198f;
+    border: 1px solid #f5d0fe;
+}
+.amt-vt-tag-badge.lake {
+    background: #cffafe;
+    color: #155e75;
+    border: 1px solid #a5f3fc;
 }
 .amt-vt-radio {
     width: 16px;
@@ -6232,51 +6376,34 @@ body.modal-open {
     display: block;
 }
 .amt-vt-title {
-    font-size: 0.88rem;
+    font-size: 0.9rem;
     font-weight: 800;
     color: #0f2b48;
     line-height: 1.25;
 }
-.amt-vt-badges {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    flex-shrink: 0;
-}
-.amt-vt-dur {
-    font-size: 0.7rem;
-    font-weight: 700;
-    color: #0284c7;
-    background: #e0f2fe;
-    padding: 2px 6px;
-    border-radius: 4px;
-    white-space: nowrap;
-}
-.amt-vt-fare {
-    font-size: 0.88rem;
-    font-weight: 900;
-    color: #0e7490;
-    white-space: nowrap;
-}
 .amt-vt-desc {
-    font-size: 0.74rem;
+    font-size: 0.73rem;
     color: #475569;
     line-height: 1.35;
     margin: 3px 0 6px;
-    padding-left: 22px;
+}
+.amt-vt-card-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: auto;
 }
 .amt-vt-actions {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-left: 22px;
 }
 .amt-vt-accordion-btn {
     background: transparent;
     border: none;
     padding: 3px 0;
     color: #0284c7;
-    font-size: 0.73rem;
+    font-size: 0.72rem;
     font-weight: 700;
     cursor: pointer;
     display: inline-flex;
@@ -6289,7 +6416,7 @@ body.modal-open {
     text-decoration: underline;
 }
 .amt-vt-arrow {
-    font-size: 0.65rem;
+    font-size: 0.62rem;
     transition: transform 0.2s ease;
 }
 .amt-vt-accordion-btn.expanded .amt-vt-arrow {
@@ -6308,13 +6435,114 @@ body.modal-open {
     gap: 3.5px;
 }
 .amt-vt-chip {
-    font-size: 0.68rem;
+    font-size: 0.67rem;
     font-weight: 600;
     color: #334155;
     background: #ffffff;
     border: 1px solid #cbd5e1;
     padding: 2px 6px;
     border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+.amt-vt-price-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-top: 6px;
+    border-top: 1px dashed #e2e8f0;
+    margin-top: 4px;
+}
+.amt-vt-dur-wrap {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.amt-vt-dur {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #0284c7;
+}
+.amt-vt-fare-wrap {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    text-align: right;
+}
+.amt-vt-fare {
+    font-size: 1.12rem;
+    font-weight: 900;
+    color: #0e7490;
+}
+.amt-vt-fare-sub {
+    font-size: 0.65rem;
+    color: #64748b;
+    font-weight: 600;
+}
+
+/* ── Live Confirmed Selection Banner ── */
+.amt-selected-tour-banner {
+    background: linear-gradient(135deg, #f0fdf4 0%, #ecfeff 100%);
+    border: 1.5px solid #10b981;
+    border-radius: 12px;
+    padding: 10px 14px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-sizing: border-box;
+    box-shadow: 0 3px 12px rgba(16, 185, 129, 0.1);
+}
+.amt-stb-icon {
+    font-size: 1.4rem;
+    color: #10b981;
+    flex-shrink: 0;
+}
+.amt-stb-content {
+    flex: 1;
+    min-width: 0;
+}
+.amt-stb-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 2px;
+}
+.amt-stb-badge {
+    font-size: 0.65rem;
+    font-weight: 800;
+    background: #059669;
+    color: #ffffff;
+    padding: 2px 7px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+.amt-stb-fare {
+    font-size: 1.12rem;
+    font-weight: 900;
+    color: #065f46;
+}
+.amt-stb-title {
+    font-size: 0.92rem;
+    font-weight: 800;
+    color: #0f2b48;
+    line-height: 1.25;
+    margin-bottom: 4px;
+    word-break: break-word;
+}
+.amt-stb-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+    font-size: 0.72rem;
+    color: #065f46;
+    font-weight: 600;
+}
+.amt-stb-meta span {
     display: inline-flex;
     align-items: center;
     gap: 4px;

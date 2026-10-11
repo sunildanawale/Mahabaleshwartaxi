@@ -858,29 +858,65 @@
             '.amt-step-item.completed .amt-step-num{display:none;}',
             '.amt-step-item.completed .amt-step-check{display:inline-block;}',
             '.amt-step-item.completed .amt-step-name{color:#34d399;}',
-            '.amt-visual-tour-cards{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}',
-            '.amt-vt-card{background:#ffffff;border:1.5px solid #cbd5e1;border-radius:12px;padding:10px 12px;cursor:pointer;transition:all 0.2s cubic-bezier(0.16,1,0.3,1);box-sizing:border-box;position:relative;text-align:left;outline:none;}',
-            '.amt-vt-card:hover{border-color:#38bdf8;box-shadow:0 4px 14px rgba(2,132,199,0.12);transform:translateY(-1px);}',
-            '.amt-vt-card.active{border-color:#0284c7;background:#f0f9ff;box-shadow:0 0 0 1.5px #0284c7,0 4px 14px rgba(2,132,199,0.18);}',
-            '.amt-vt-header{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:4px;}',
-            '.amt-vt-title-wrap{display:flex;align-items:center;gap:6px;flex:1;}',
+            /* Sub-Category Switcher Filter Bar */
+            '.amt-sightseeing-filter-bar{display:flex;gap:6px;margin-bottom:10px;padding:4px;background:#f1f5f9;border-radius:12px;border:1px solid #e2e8f0;box-sizing:border-box;}',
+            '.amt-tf-pill{flex:1;padding:8px 6px;border:none;background:transparent;border-radius:9px;font-size:0.78rem;font-weight:700;color:#475569;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transition:all 0.18s ease;text-align:center;min-height:46px;box-sizing:border-box;}',
+            '.amt-tf-pill:hover{background:rgba(255,255,255,0.7);color:#0f2b48;}',
+            '.amt-tf-pill.active{background:#ffffff;color:#0284c7;font-weight:800;box-shadow:0 2px 8px rgba(0,0,0,0.08);border:1px solid #bae6fd;}',
+            '.amt-tf-pill-title{font-size:0.76rem;font-weight:800;line-height:1.2;}',
+            '.amt-tf-pill-badge{font-size:0.65rem;font-weight:700;padding:1px 6px;border-radius:10px;background:#e0f2fe;color:#0369a1;white-space:nowrap;}',
+            '.amt-tf-pill.active .amt-tf-pill-badge{background:#0284c7;color:#ffffff;}',
+            /* Clarity Guidance Box */
+            '.amt-tour-guide-box{background:#f0fdf4;border:1.5px solid #86efac;border-left:4px solid #16a34a;border-radius:10px;padding:8px 12px;margin-bottom:12px;font-size:0.76rem;color:#14532d;line-height:1.4;box-sizing:border-box;display:flex;align-items:flex-start;gap:8px;}',
+            '.amt-tour-guide-box.standard{background:#eff6ff;border-color:#93c5fd;border-left-color:#0284c7;color:#1e3a8a;}',
+            '.amt-tour-guide-box.all{background:#f8fafc;border-color:#cbd5e1;border-left-color:#64748b;color:#334155;}',
+            /* Responsive Grid for Visual Tour Cards */
+            '.amt-visual-tour-cards{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:12px;box-sizing:border-box;}',
+            '@media (min-width:641px) and (max-width:991px){.amt-visual-tour-cards{grid-template-columns:repeat(2,1fr) !important;gap:10px !important;}}',
+            '@media (min-width:992px){.amt-visual-tour-cards{grid-template-columns:repeat(3,1fr) !important;gap:12px !important;}.portal-booking-container{max-width:1000px !important;}.amt-card,#amtBookingModal .amt-card{max-width:940px !important;}}',
+            /* Card Layout */
+            '.amt-vt-card{background:#ffffff;border:1.5px solid #cbd5e1;border-radius:12px;padding:12px;cursor:pointer;transition:all 0.2s cubic-bezier(0.16,1,0.3,1);box-sizing:border-box;position:relative;text-align:left;outline:none;display:flex;flex-direction:column;justify-content:space-between;min-height:140px;}',
+            '.amt-vt-card:hover{border-color:#0284c7;box-shadow:0 6px 16px rgba(2,132,199,0.12);transform:translateY(-2px);}',
+            '.amt-vt-card.active{border-color:#0284c7;background:#f0f9ff;box-shadow:0 0 0 2px #0284c7,0 6px 18px rgba(2,132,199,0.18);}',
+            '.amt-vt-card-top{display:flex;flex-direction:column;gap:5px;}',
+            '.amt-vt-badge-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:2px;}',
+            '.amt-vt-tag-badge{display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border-radius:6px;font-size:0.66rem;font-weight:800;text-transform:uppercase;letter-spacing:0.3px;white-space:nowrap;}',
+            '.amt-vt-tag-badge.express{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0;}',
+            '.amt-vt-tag-badge.standard{background:#e0f2fe;color:#0369a1;border:1px solid #bae6fd;}',
+            '.amt-vt-tag-badge.heritage{background:#fef3c7;color:#92400e;border:1px solid #fde68a;}',
+            '.amt-vt-tag-badge.wai{background:#fae8ff;color:#86198f;border:1px solid #f5d0fe;}',
+            '.amt-vt-tag-badge.lake{background:#cffafe;color:#155e75;border:1px solid #a5f3fc;}',
             '.amt-vt-radio{width:16px;height:16px;border-radius:50%;border:2px solid #94a3b8;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s ease;}',
             '.amt-vt-card.active .amt-vt-radio{border-color:#0284c7;background:#0284c7;}',
             '.amt-vt-radio-dot{width:6px;height:6px;border-radius:50%;background:#ffffff;display:none;}',
             '.amt-vt-card.active .amt-vt-radio-dot{display:block;}',
-            '.amt-vt-title{font-size:0.88rem;font-weight:800;color:#0f2b48;line-height:1.25;}',
-            '.amt-vt-badges{display:flex;align-items:center;gap:5px;flex-shrink:0;}',
-            '.amt-vt-dur{font-size:0.7rem;font-weight:700;color:#0284c7;background:#e0f2fe;padding:2px 6px;border-radius:4px;white-space:nowrap;}',
-            '.amt-vt-fare{font-size:0.88rem;font-weight:900;color:#0e7490;white-space:nowrap;}',
-            '.amt-vt-desc{font-size:0.74rem;color:#475569;line-height:1.35;margin:3px 0 6px;padding-left:22px;}',
-            '.amt-vt-actions{display:flex;align-items:center;justify-content:space-between;padding-left:22px;}',
-            '.amt-vt-accordion-btn{background:transparent;border:none;padding:3px 0;color:#0284c7;font-size:0.73rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:4px;transition:color 0.15s ease;}',
+            '.amt-vt-title{font-size:0.9rem;font-weight:800;color:#0f2b48;line-height:1.25;}',
+            '.amt-vt-desc{font-size:0.73rem;color:#475569;line-height:1.35;margin:3px 0 6px;}',
+            '.amt-vt-card-bottom{display:flex;flex-direction:column;gap:6px;margin-top:auto;}',
+            '.amt-vt-actions{display:flex;align-items:center;justify-content:space-between;}',
+            '.amt-vt-accordion-btn{background:transparent;border:none;padding:3px 0;color:#0284c7;font-size:0.72rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:4px;transition:color 0.15s ease;}',
             '.amt-vt-accordion-btn:hover{color:#0369a1;text-decoration:underline;}',
-            '.amt-vt-arrow{font-size:0.65rem;transition:transform 0.2s ease;}',
+            '.amt-vt-arrow{font-size:0.62rem;transition:transform 0.2s ease;}',
             '.amt-vt-accordion-btn.expanded .amt-vt-arrow{transform:rotate(180deg);}',
             '.amt-vt-points-panel{margin-top:6px;padding:8px 10px;background:#f8fafc;border-radius:8px;border:1px solid #e2e8f0;}',
             '.amt-vt-chips-wrap{display:flex;flex-wrap:wrap;gap:3.5px;}',
-            '.amt-vt-chip{font-size:0.68rem;font-weight:600;color:#334155;background:#ffffff;border:1px solid #cbd5e1;padding:2px 6px;border-radius:4px;display:inline-flex;align-items:center;gap:4px;}',
+            '.amt-vt-chip{font-size:0.67rem;font-weight:600;color:#334155;background:#ffffff;border:1px solid #cbd5e1;padding:2px 6px;border-radius:4px;display:inline-flex;align-items:center;gap:4px;}',
+            '.amt-vt-price-row{display:flex;align-items:baseline;justify-content:space-between;padding-top:6px;border-top:1px dashed #e2e8f0;margin-top:4px;}',
+            '.amt-vt-dur-wrap{display:flex;align-items:center;gap:4px;}',
+            '.amt-vt-dur{font-size:0.72rem;font-weight:700;color:#0284c7;}',
+            '.amt-vt-fare-wrap{display:flex;align-items:baseline;gap:4px;text-align:right;}',
+            '.amt-vt-fare{font-size:1.12rem;font-weight:900;color:#0e7490;}',
+            '.amt-vt-fare-sub{font-size:0.65rem;color:#64748b;font-weight:600;}',
+            /* Confirmed Selection Banner */
+            '.amt-selected-tour-banner{background:linear-gradient(135deg,#f0fdf4 0%,#ecfeff 100%);border:1.5px solid #10b981;border-radius:12px;padding:10px 14px;margin-bottom:12px;display:flex;align-items:center;gap:12px;box-sizing:border-box;box-shadow:0 3px 12px rgba(16,185,129,0.1);}',
+            '.amt-stb-icon{font-size:1.4rem;color:#10b981;flex-shrink:0;}',
+            '.amt-stb-content{flex:1;min-width:0;}',
+            '.amt-stb-header{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:2px;}',
+            '.amt-stb-badge{font-size:0.65rem;font-weight:800;background:#059669;color:#ffffff;padding:2px 7px;border-radius:4px;text-transform:uppercase;letter-spacing:0.3px;}',
+            '.amt-stb-fare{font-size:1.12rem;font-weight:900;color:#065f46;}',
+            '.amt-stb-title{font-size:0.92rem;font-weight:800;color:#0f2b48;line-height:1.25;margin-bottom:4px;word-break:break-word;}',
+            '.amt-stb-meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;font-size:0.72rem;color:#065f46;font-weight:600;}',
+            '.amt-stb-meta span{display:inline-flex;align-items:center;gap:4px;}',
             '.amt-quick-time-section{margin-bottom:8px;}',
             '.amt-quick-time-lbl{font-size:0.73rem;font-weight:700;color:#334155;margin-bottom:5px;display:flex;align-items:center;gap:4px;}',
             '.amt-time-pills{display:flex;flex-wrap:wrap;gap:6px;}',
@@ -908,6 +944,23 @@
             '@media (max-width:640px){.amt-desktop-qr-card{display:none !important;}}',
             '.amt-draft-banner{display:flex;align-items:center;justify-content:space-between;background:#ecfeff;border:1px solid #a5f3fc;border-radius:8px;padding:6px 10px;margin-bottom:10px;font-size:0.74rem;color:#0891b2;animation:tfFadeIn 0.3s ease;}',
             '.amt-draft-btn-clear{background:transparent;border:none;color:#ef4444;font-size:0.72rem;font-weight:700;cursor:pointer;text-decoration:underline;padding:0;}',
+            /* Dark Theme Overrides */
+            '[data-theme="dark"] #amtBookingModal .amt-sightseeing-filter-bar{background:#0f172a !important;border-color:#334155 !important;}',
+            '[data-theme="dark"] #amtBookingModal .amt-tf-pill{color:#94a3b8 !important;}',
+            '[data-theme="dark"] #amtBookingModal .amt-tf-pill:hover{background:rgba(255,255,255,0.06) !important;color:#ffffff !important;}',
+            '[data-theme="dark"] #amtBookingModal .amt-tf-pill.active{background:#1e293b !important;color:#38bdf8 !important;border-color:#0284c7 !important;}',
+            '[data-theme="dark"] #amtBookingModal .amt-tf-pill-badge{background:#0f172a !important;color:#38bdf8 !important;}',
+            '[data-theme="dark"] #amtBookingModal .amt-tf-pill.active .amt-tf-pill-badge{background:#0284c7 !important;color:#ffffff !important;}',
+            '[data-theme="dark"] #amtBookingModal .amt-tour-guide-box{background:rgba(16,185,129,0.12) !important;border-color:rgba(16,185,129,0.35) !important;border-left-color:#10b981 !important;color:#a7f3d0 !important;}',
+            '[data-theme="dark"] #amtBookingModal .amt-tour-guide-box.standard{background:rgba(8,145,178,0.15) !important;border-color:rgba(8,145,178,0.35) !important;border-left-color:#0284c7 !important;color:#67e8f9 !important;}',
+            '[data-theme="dark"] #amtBookingModal .amt-tour-guide-box.all{background:#0f172a !important;border-color:#334155 !important;border-left-color:#64748b !important;color:#cbd5e1 !important;}',
+            '[data-theme="dark"] #amtBookingModal .amt-selected-tour-banner{background:#0f172a !important;border-color:#059669 !important;box-shadow:none !important;}',
+            '[data-theme="dark"] #amtBookingModal .amt-stb-title{color:#ffffff !important;}',
+            '[data-theme="dark"] #amtBookingModal .amt-stb-fare{color:#4ade80 !important;}',
+            '[data-theme="dark"] #amtBookingModal .amt-stb-meta{color:#a7f3d0 !important;}',
+            '[data-theme="dark"] #amtBookingModal .amt-vt-price-row{border-top-color:#334155 !important;}',
+            '[data-theme="dark"] #amtBookingModal .amt-vt-fare{color:#22d3ee !important;}',
+            '[data-theme="dark"] #amtBookingModal .amt-vt-fare-sub{color:#94a3b8 !important;}',
             '[data-theme="dark"] #amtBookingModal .amt-vt-card{background:#0f172a !important;border-color:#334155 !important;}',
             '[data-theme="dark"] #amtBookingModal .amt-vt-card:hover{border-color:#38bdf8 !important;}',
             '[data-theme="dark"] #amtBookingModal .amt-vt-card.active{background:rgba(2,132,199,0.15) !important;border-color:#38bdf8 !important;}',
@@ -932,6 +985,16 @@
             '[data-theme="dark"] #amtBookingModal .amt-v-link-btn{background:#1e293b !important;border-color:#334155 !important;color:#cbd5e1 !important;}',
             /* Mobile Alignment & Touch Optimization */
             '@media (max-width:640px){',
+            '  .amt-sightseeing-filter-bar{gap:4px !important;padding:3px !important;}',
+            '  .amt-tf-pill{padding:6px 4px !important;min-height:44px !important;}',
+            '  .amt-tf-pill-title{font-size:0.72rem !important;}',
+            '  .amt-tf-pill-badge{font-size:0.6rem !important;padding:1px 4px !important;}',
+            '  .amt-tour-guide-box{font-size:0.72rem !important;padding:7px 9px !important;margin-bottom:10px !important;}',
+            '  .amt-selected-tour-banner{padding:8px 10px !important;gap:8px !important;flex-direction:row !important;}',
+            '  .amt-stb-icon{font-size:1.15rem !important;}',
+            '  .amt-stb-title{font-size:0.84rem !important;}',
+            '  .amt-stb-fare{font-size:1rem !important;}',
+            '  .amt-stb-meta{gap:4px 8px !important;font-size:0.68rem !important;}',
             '  .amt-rev-ai-advisory,.amt-v-ai-advisory{display:flex !important;flex-direction:column !important;align-items:flex-start !important;gap:5px !important;padding:8px 10px !important;width:100% !important;box-sizing:border-box !important;border-radius:8px !important;}',
             '  .amt-rev-ai-advisory .amt-v-ai-badge,.amt-v-ai-advisory .amt-v-ai-badge{align-self:flex-start !important;margin-bottom:2px !important;font-size:0.65rem !important;padding:2.5px 7px !important;white-space:nowrap !important;flex-shrink:0 !important;}',
             '  .amt-rev-ai-advisory .amt-v-ai-text,.amt-v-ai-advisory .amt-v-ai-text{font-size:0.74rem !important;line-height:1.4 !important;color:#065f46 !important;width:100% !important;box-sizing:border-box !important;word-break:break-word !important;}',
@@ -1130,8 +1193,10 @@
             + '    <strong>📍 Local Point Drop</strong><span>Mapro / Panchgani / Market</span>'
             + '  </div>'
             + '</div>'
+            + '<div id="amtSightseeingFilterWrap"></div>'
             + '<div class="amt-visual-tour-cards" id="amtVisualTourCards"></div>'
-            + '<div class="amt-form-group">'
+            + '<div id="amtSelectedTourBanner" class="amt-selected-tour-banner" style="display:none;"></div>'
+            + '<div class="amt-form-group" style="display:none;">'
             + '  <label class="amt-label" for="amtTourSelect">Selected Tour Package / Route</label>'
             + '  <select id="amtTourSelect" class="amt-select">'
             + '    <option value="">-- Choose a Tour Package --</option>'
@@ -2562,10 +2627,47 @@
         });
     }
 
+    function updateSelectedTourBanner(tourId) {
+        var banner = document.getElementById('amtSelectedTourBanner');
+        if (!banner) return;
+        var db = window.TOUR_DATABASE;
+        if (!db) return;
+        var t = db.getTourById(tourId);
+        if (!t) {
+            banner.style.display = 'none';
+            return;
+        }
+
+        var isSingle = (t.sub_category === 'single_tour' || t.fare === 800);
+        var isCombo = (t.category === 'combo');
+        var isOutstation = (t.category === 'outstation');
+        var isLocalDrop = (t.category === 'local_drop');
+        var badgeText = isSingle ? '⚡ EXPRESS SINGLE TOUR' : (isCombo ? '⭐ FULL DAY COMBO' : (isOutstation ? '✈️ OUTSTATION ROUTE' : (isLocalDrop ? '📍 LOCAL POINT DROP' : '⭐ STANDARD SIGHTSEEING')));
+        var pointsCount = (t.points || []).length;
+
+        banner.innerHTML = '<div class="amt-stb-icon"><i class="fa-solid fa-circle-check"></i></div>'
+            + '<div class="amt-stb-content">'
+            + '  <div class="amt-stb-header">'
+            + '    <span class="amt-stb-badge">' + badgeText + '</span>'
+            + '    <span class="amt-stb-fare">₹' + t.fare + ' <small style="font-size:0.65rem;font-weight:700;opacity:0.85;">Locked Union Rate</small></span>'
+            + '  </div>'
+            + '  <div class="amt-stb-title">' + escapeHtml(t.name) + '</div>'
+            + '  <div class="amt-stb-meta">'
+            + '    <span><i class="fa-solid fa-clock" style="color:#0284c7;"></i> ' + escapeHtml(t.duration) + '</span>'
+            + (pointsCount > 0 ? '    <span><i class="fa-solid fa-location-dot" style="color:#0284c7;"></i> ' + pointsCount + ' Viewpoints</span>' : '')
+            + '    <span><i class="fa-solid fa-car" style="color:#0284c7;"></i> 4-Seater Tourist Cab</span>'
+            + '    <span><i class="fa-solid fa-shield-halved" style="color:#10b981;"></i> Zero Advance • Pay After Tour</span>'
+            + '  </div>'
+            + '</div>';
+        banner.style.display = 'flex';
+    }
+
     function renderVisualTourCards(service, filtered) {
         var container = document.getElementById('amtVisualTourCards');
         if (!container) return;
+        var filterWrap = document.getElementById('amtSightseeingFilterWrap');
         var db = window.TOUR_DATABASE;
+
         if (!filtered || filtered.length === 0) {
             if (db) {
                 filtered = db.tours.filter(function (t) { return t.category === service; });
@@ -2573,13 +2675,106 @@
         }
         if (!filtered || filtered.length === 0) {
             container.innerHTML = '';
+            if (filterWrap) filterWrap.style.display = 'none';
             return;
         }
 
         var currentTourId = bookingState.tourId || (document.getElementById('amtTourSelect') ? document.getElementById('amtTourSelect').value : filtered[0].id);
 
-        var cardsHtml = filtered.map(function (t) {
-            var isSelected = (t.id === currentTourId);
+        // Sightseeing Sub-Category Switcher Filter
+        var toursToRender = filtered;
+        if (service === 'sightseeing') {
+            var curTour = db ? db.getTourById(currentTourId) : null;
+            if (curTour) {
+                var isCurSingle = (curTour.sub_category === 'single_tour' || curTour.fare === 800);
+                if (isCurSingle && window._amtActiveSightseeingFilter === 'standard_tour') {
+                    window._amtActiveSightseeingFilter = 'single_tour';
+                } else if (!isCurSingle && window._amtActiveSightseeingFilter === 'single_tour') {
+                    window._amtActiveSightseeingFilter = 'standard_tour';
+                } else if (!window._amtActiveSightseeingFilter) {
+                    window._amtActiveSightseeingFilter = isCurSingle ? 'single_tour' : 'standard_tour';
+                }
+            } else if (!window._amtActiveSightseeingFilter) {
+                window._amtActiveSightseeingFilter = 'single_tour';
+            }
+
+            var activeFilter = window._amtActiveSightseeingFilter;
+
+            if (filterWrap) {
+                var guideMsg = '';
+                var guideClass = '';
+                if (activeFilter === 'single_tour') {
+                    guideMsg = '<strong>⚡ Express Single Tours (₹800 Flat Rate • 2.5 Hrs):</strong> Quick focused trips to an individual sightseeing area (e.g. Arthur\'s Seat only or Kate\'s Point only). Ideal for budget-friendly visits or travellers wanting minimum points without a full half-day tour.';
+                    guideClass = '';
+                } else if (activeFilter === 'standard_tour') {
+                    guideMsg = '<strong>⭐ Standard Union Sightseeing (₹1,200 - ₹2,500 • 3.5 to 6 Hrs):</strong> Comprehensive official Taxi Union circuits covering 8 to 15 viewpoints, heritage temples, clifftops, and valleys across Mahabaleshwar.';
+                    guideClass = 'standard';
+                } else {
+                    guideMsg = '<strong>📋 All Sightseeing Options (9 Tours):</strong> Browse all approved Taxi Union options side-by-side — from quick ₹800 single tours to full half-day packages.';
+                    guideClass = 'all';
+                }
+
+                filterWrap.style.display = 'block';
+                filterWrap.innerHTML = '<div class="amt-sightseeing-filter-bar" role="tablist" aria-label="Sightseeing Sub-Categories">'
+                    + '<button type="button" class="amt-tf-pill' + (activeFilter === 'single_tour' ? ' active' : '') + '" data-filter="single_tour" role="tab" aria-selected="' + (activeFilter === 'single_tour') + '">'
+                    + '  <span class="amt-tf-pill-title">⚡ Express Single</span>'
+                    + '  <span class="amt-tf-pill-badge">₹800 Flat • 2.5 Hrs</span>'
+                    + '</button>'
+                    + '<button type="button" class="amt-tf-pill' + (activeFilter === 'standard_tour' ? ' active' : '') + '" data-filter="standard_tour" role="tab" aria-selected="' + (activeFilter === 'standard_tour') + '">'
+                    + '  <span class="amt-tf-pill-title">⭐ Standard Packages</span>'
+                    + '  <span class="amt-tf-pill-badge">₹1,200+ • 3.5-6 Hrs</span>'
+                    + '</button>'
+                    + '<button type="button" class="amt-tf-pill' + (activeFilter === 'all' ? ' active' : '') + '" data-filter="all" role="tab" aria-selected="' + (activeFilter === 'all') + '">'
+                    + '  <span class="amt-tf-pill-title">All Tours</span>'
+                    + '  <span class="amt-tf-pill-badge">9 Options</span>'
+                    + '</button>'
+                    + '</div>'
+                    + '<div class="amt-tour-guide-box ' + guideClass + '">'
+                    + '  <i class="fa-solid fa-circle-info" style="font-size:0.95rem;margin-top:1px;flex-shrink:0;"></i>'
+                    + '  <div>' + guideMsg + '</div>'
+                    + '</div>';
+
+                // Pill click listeners
+                var pills = filterWrap.querySelectorAll('.amt-tf-pill');
+                pills.forEach(function (pill) {
+                    pill.addEventListener('click', function () {
+                        var newFilter = pill.getAttribute('data-filter');
+                        window._amtActiveSightseeingFilter = newFilter;
+                        var targetList = filtered;
+                        if (newFilter === 'single_tour') {
+                            targetList = filtered.filter(function (t) { return t.sub_category === 'single_tour' || t.fare === 800; });
+                        } else if (newFilter === 'standard_tour') {
+                            targetList = filtered.filter(function (t) { return t.sub_category !== 'single_tour' && t.fare !== 800; });
+                        }
+                        if (!targetList.some(function (t) { return t.id === bookingState.tourId; })) {
+                            var newFirst = targetList[0] ? targetList[0].id : '';
+                            bookingState.tourId = newFirst;
+                            var selEl = document.getElementById('amtTourSelect');
+                            if (selEl) selEl.value = newFirst;
+                            syncSelectedToursFromPrimary();
+                            if (typeof updateTourInsight === 'function') updateTourInsight();
+                            if (typeof updateSmartTimeUI === 'function') updateSmartTimeUI();
+                        }
+                        renderVisualTourCards(service, filtered);
+                    });
+                });
+            }
+
+            if (activeFilter === 'single_tour') {
+                toursToRender = filtered.filter(function (t) { return t.sub_category === 'single_tour' || t.fare === 800; });
+            } else if (activeFilter === 'standard_tour') {
+                toursToRender = filtered.filter(function (t) { return t.sub_category !== 'single_tour' && t.fare !== 800; });
+            } else {
+                toursToRender = filtered;
+            }
+        } else {
+            if (filterWrap) filterWrap.style.display = 'none';
+            toursToRender = filtered;
+        }
+
+        // Render Cards
+        var cardsHtml = toursToRender.map(function (t) {
+            var isSelected = (t.id === bookingState.tourId);
             var tourPoints = t.points || [];
             var pointsCount = tourPoints.length;
             var hasPoints = pointsCount > 0;
@@ -2587,7 +2782,7 @@
             var pointsPanel = '';
             if (hasPoints) {
                 var chips = tourPoints.map(function (p) {
-                    return '<span class="amt-vt-chip"><i class="fa-solid fa-location-dot" style="font-size:0.58rem;color:#0284c7;"></i> ' + escapeHtml(p) + '</span>';
+                    return '<span class="amt-vt-chip"><i class="fa-solid fa-location-dot" style="font-size:0.56rem;color:#0284c7;"></i> ' + escapeHtml(p) + '</span>';
                 }).join('');
                 pointsPanel = '<div class="amt-vt-actions">'
                     + '<button type="button" class="amt-vt-accordion-btn" data-target="amt-vt-pts-' + t.id + '">'
@@ -2599,19 +2794,57 @@
                     + '</div>';
             }
 
+            var isSingle = (t.sub_category === 'single_tour' || t.fare === 800);
+            var badgeClass = 'standard';
+            var badgeIcon = 'fa-star';
+            var badgeText = 'Standard Circuit';
+
+            if (isSingle) {
+                badgeClass = 'express';
+                badgeIcon = 'fa-bolt';
+                badgeText = 'Express • ₹800';
+            } else if (t.id === 'T3') {
+                badgeClass = 'heritage';
+                badgeIcon = 'fa-landmark';
+                badgeText = 'Fort Heritage';
+            } else if (t.id === 'T5') {
+                badgeClass = 'wai';
+                badgeIcon = 'fa-gopuram';
+                badgeText = 'Temple Circuit';
+            } else if (t.id === 'T6') {
+                badgeClass = 'lake';
+                badgeIcon = 'fa-water';
+                badgeText = 'Lake Boating';
+            } else if (t.category === 'combo') {
+                badgeClass = 'standard';
+                badgeIcon = 'fa-star';
+                badgeText = 'Full Day Combo';
+            } else if (t.category === 'outstation') {
+                badgeClass = 'standard';
+                badgeIcon = 'fa-plane-departure';
+                badgeText = 'Outstation Drop';
+            } else if (t.category === 'local_drop') {
+                badgeClass = 'express';
+                badgeIcon = 'fa-location-dot';
+                badgeText = 'Local Drop';
+            }
+
             return '<div class="amt-vt-card' + (isSelected ? ' active' : '') + '" data-tour-id="' + t.id + '" role="button" tabindex="0">'
-                + '<div class="amt-vt-header">'
-                + '  <div class="amt-vt-title-wrap">'
+                + '<div class="amt-vt-card-top">'
+                + '  <div class="amt-vt-badge-row">'
+                + '    <span class="amt-vt-tag-badge ' + badgeClass + '"><i class="fa-solid ' + badgeIcon + '"></i> ' + badgeText + '</span>'
                 + '    <div class="amt-vt-radio"><span class="amt-vt-radio-dot"></span></div>'
-                + '    <div class="amt-vt-title">' + escapeHtml(t.name) + '</div>'
                 + '  </div>'
-                + '  <div class="amt-vt-badges">'
-                + '    <span class="amt-vt-dur">⏱️ ' + escapeHtml(t.duration) + '</span>'
-                + '    <span class="amt-vt-fare">₹' + t.fare + '</span>'
+                + '  <div class="amt-vt-title">' + escapeHtml(t.name) + '</div>'
+                + (t.description ? '  <p class="amt-vt-desc">' + escapeHtml(t.description) + '</p>' : '')
+                + '</div>'
+                + '<div class="amt-vt-card-bottom">'
+                + pointsPanel
+                + '  <div class="amt-vt-price-row">'
+                + '    <div class="amt-vt-dur-wrap"><i class="fa-solid fa-clock" style="color:#0284c7;font-size:0.75rem;"></i> <span class="amt-vt-dur">' + escapeHtml(t.duration) + '</span></div>'
+                + '    <div class="amt-vt-fare-wrap"><span class="amt-vt-fare">₹' + t.fare + '</span><span class="amt-vt-fare-sub">Locked Rate</span></div>'
                 + '  </div>'
                 + '</div>'
-                + (t.description ? '<p class="amt-vt-desc">' + escapeHtml(t.description) + '</p>' : '')
-                + pointsPanel
                 + '</div>';
         }).join('');
 
@@ -2634,6 +2867,7 @@
                 }
                 cards.forEach(function (c) { c.classList.remove('active'); });
                 card.classList.add('active');
+                updateSelectedTourBanner(tourId);
                 if (typeof saveBookingDraft === 'function') saveBookingDraft();
             }
             card.addEventListener('click', selectThisCard);
@@ -2658,6 +2892,9 @@
                 }
             });
         });
+
+        // Update live confirmed banner
+        updateSelectedTourBanner(bookingState.tourId || (toursToRender[0] ? toursToRender[0].id : ''));
     }
 
     function initQuickTimePills() {
@@ -2907,22 +3144,26 @@
             }).join('');
         }
 
-        var firstId = sel.value || (filtered[0] ? filtered[0].id : '');
-        bookingState.tourId = firstId;
+        var targetId = (bookingState.tourId && filtered.some(function (t) { return t.id === bookingState.tourId; }))
+            ? bookingState.tourId
+            : (sel.value || (filtered[0] ? filtered[0].id : ''));
+        sel.value = targetId;
+        bookingState.tourId = targetId;
         bookingState.tour2Id = '';
 
         if (service === 'sightseeing') {
             if (!bookingState.selectedTours || bookingState.selectedTours.length === 0 || !filtered.some(function (t) { return t.id === bookingState.selectedTours[0].id; })) {
-                bookingState.selectedTours = [{ id: firstId, date: bookingState.date, time: bookingState.time }];
+                bookingState.selectedTours = [{ id: targetId, date: bookingState.date, time: bookingState.time }];
             } else {
-                bookingState.selectedTours[0].id = firstId;
+                bookingState.selectedTours[0].id = targetId;
             }
             renderExtraTourRows();
         } else {
-            bookingState.selectedTours = [{ id: firstId, date: bookingState.date, time: bookingState.time }];
+            bookingState.selectedTours = [{ id: targetId, date: bookingState.date, time: bookingState.time }];
         }
 
         if (typeof renderVisualTourCards === 'function') renderVisualTourCards(service, filtered);
+        if (typeof updateSelectedTourBanner === 'function') updateSelectedTourBanner(targetId);
         if (typeof updateTourInsight === 'function') updateTourInsight();
         if (typeof updateSmartTimeUI === 'function') updateSmartTimeUI();
     }
@@ -3674,6 +3915,9 @@
             var sel = document.getElementById('amtTourSelect');
             if (sel) {
                 sel.value = targetTour.id;
+            }
+            if (typeof updateSelectedTourBanner === 'function') {
+                updateSelectedTourBanner(targetTour.id);
             }
         } else {
             bookingState.service = 'sightseeing';
