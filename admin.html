@@ -415,6 +415,8 @@
         .act-wa-followup { background: #f59e0b; color: #fff; }
         .act-driver { background: #e0f2fe; color: #0284c7; border: 1px solid #bae6fd; }
         .act-voucher { background: #f8fafc; color: #334155; border: 1px solid #cbd5e1; }
+        .act-edit { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
+        .act-edit:hover { background: #f59e0b; color: #fff; }
         .act-del { background: #fee2e2; color: #ef4444; border: 1px solid #fca5a5; }
         .act-del:hover { background: #ef4444; color: #fff; }
 
@@ -960,9 +962,14 @@
                         <h2><i class="fa-solid fa-taxi" style="color: var(--primary);"></i> Registered Driver &amp; Cab Directory</h2>
                         <p>Manage fellow licensed Mahabaleshwar Taxi Union colleague drivers for dispatch and duty allocation.</p>
                     </div>
-                    <button id="addDriverBtn" class="act-btn" style="background: var(--primary); color: #fff; padding: 10px 18px;">
-                        <i class="fa-solid fa-user-plus"></i> + Add New Driver
-                    </button>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button id="addDriverBtn" class="act-btn" style="background: var(--primary); color: #fff; padding: 10px 18px;">
+                            <i class="fa-solid fa-user-plus"></i> + Add New Driver
+                        </button>
+                        <button id="resetFleetBtn" type="button" onclick="window.resetFleetDefaults()" class="act-btn" style="background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; padding: 10px 14px;" title="Reset fleet to default union drivers">
+                            <i class="fa-solid fa-rotate-left"></i> Reset Defaults
+                        </button>
+                    </div>
                 </div>
 
                 <div class="table-scroll-hint"><i class="fa-solid fa-arrows-left-right"></i> Scroll table sideways &rarr;</div>
@@ -1173,12 +1180,61 @@
                     <label class="m-label">Vehicle Registration No. *</label>
                     <input type="text" id="newDriverVehNo" class="m-input" placeholder="e.g. MH-11-AX-9999" required>
                 </div>
-                <div class="form-full">
+                <div>
                     <label class="m-label">Cab Model</label>
                     <input type="text" id="newDriverVehModel" class="m-input" value="Black &amp; Yellow Tourist Taxi (4-Seater)">
                 </div>
+                <div>
+                    <label class="m-label">Cab Status</label>
+                    <select id="newDriverStatus" class="m-input">
+                        <option value="Active" selected>Active</option>
+                        <option value="On Tour">On Tour</option>
+                        <option value="Off Duty">Off Duty</option>
+                    </select>
+                </div>
                 <div class="form-full">
                     <button type="submit" class="auth-btn" style="margin-top: 10px;">Save to Driver Fleet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 2B: EDIT FLEET DRIVER MODAL -->
+    <div id="editDriverModal" class="admin-modal">
+        <div class="admin-modal-card">
+            <button class="modal-close" onclick="window.closeModals()">&times;</button>
+            <h3 style="font-size: 1.15rem; color: #0f172a; margin-bottom: 4px;">
+                <i class="fa-solid fa-user-pen" style="color: var(--primary);"></i> Edit Driver Details
+            </h3>
+            <p style="font-size: 0.8rem; color: #64748b;">Update driver name, phone, cab registration, or duty status.</p>
+            <form id="editDriverForm" class="form-grid">
+                <input type="hidden" id="editDriverId">
+                <div class="form-full">
+                    <label class="m-label">Driver Full Name *</label>
+                    <input type="text" id="editDriverName" class="m-input" placeholder="e.g. Sunil Danawale" required>
+                </div>
+                <div>
+                    <label class="m-label">WhatsApp Mobile *</label>
+                    <input type="tel" id="editDriverPhone" class="m-input" placeholder="e.g. 9922882044" required>
+                </div>
+                <div>
+                    <label class="m-label">Vehicle Registration No. *</label>
+                    <input type="text" id="editDriverVehNo" class="m-input" placeholder="e.g. MH-11-BV-1234" required>
+                </div>
+                <div>
+                    <label class="m-label">Cab Model</label>
+                    <input type="text" id="editDriverVehModel" class="m-input" placeholder="e.g. Black &amp; Yellow Tourist Taxi">
+                </div>
+                <div>
+                    <label class="m-label">Cab Status</label>
+                    <select id="editDriverStatus" class="m-input">
+                        <option value="Active">Active</option>
+                        <option value="On Tour">On Tour</option>
+                        <option value="Off Duty">Off Duty</option>
+                    </select>
+                </div>
+                <div class="form-full">
+                    <button type="submit" class="auth-btn" style="margin-top: 10px; background: #0284c7;">Update Driver Details</button>
                 </div>
             </form>
         </div>
@@ -1284,10 +1340,10 @@
             var currentEditingBookingId = null;
 
             var defaultFleet = [
-                { name: 'Aryan Taxi Owner Driver', phone: '9922882044', vehicleNo: 'MH-11-BV-1234', model: 'Black & Yellow Tourist Taxi (Owner Cab)', status: 'Active' },
-                { name: 'Santosh Shinde', phone: '9421463727', vehicleNo: 'MH-11-AX-5678', model: 'Maruti Suzuki Ritz (Tourist Cab)', status: 'Active' },
-                { name: 'Ganesh Patil', phone: '9822334455', vehicleNo: 'MH-11-CK-3421', model: 'Tata Indigo (Black & Yellow)', status: 'Active' },
-                { name: 'Nilesh Kadam', phone: '9850112233', vehicleNo: 'MH-11-DF-7890', model: 'Maruti Ertiga (7-Seater Outstation)', status: 'Active' }
+                { id: 'drv_1', name: 'Aryan Taxi Owner Driver', phone: '9922882044', vehicleNo: 'MH-11-BV-1234', model: 'Black & Yellow Tourist Taxi (Owner Cab)', status: 'Active' },
+                { id: 'drv_2', name: 'Santosh Shinde', phone: '9421463727', vehicleNo: 'MH-11-AX-5678', model: 'Maruti Suzuki Ritz (Tourist Cab)', status: 'Active' },
+                { id: 'drv_3', name: 'Ganesh Patil', phone: '9822334455', vehicleNo: 'MH-11-CK-3421', model: 'Tata Indigo (Black & Yellow)', status: 'Active' },
+                { id: 'drv_4', name: 'Nilesh Kadam', phone: '9850112233', vehicleNo: 'MH-11-DF-7890', model: 'Maruti Ertiga (7-Seater Outstation)', status: 'Active' }
             ];
 
             // DOM Elements
@@ -1727,59 +1783,136 @@
             function getFleet() {
                 try {
                     var stored = localStorage.getItem('amt_driver_fleet');
-                    if (stored) {
+                    if (stored !== null) {
                         var parsed = JSON.parse(stored);
-                        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+                        if (Array.isArray(parsed)) {
+                            // Ensure each driver has a stable unique ID
+                            parsed.forEach(function(d, idx) {
+                                if (!d.id) d.id = 'drv_' + (idx + 1) + '_' + Math.random().toString(36).substr(2, 5);
+                            });
+                            return parsed;
+                        }
                     }
                 } catch(e) {}
-                return defaultFleet || [];
+                var initial = JSON.parse(JSON.stringify(defaultFleet));
+                saveFleet(initial);
+                return initial;
             }
 
             function saveFleet(fleet) {
-                localStorage.setItem('amt_driver_fleet', JSON.stringify(fleet));
+                try {
+                    localStorage.setItem('amt_driver_fleet', JSON.stringify(fleet || []));
+                } catch(e) {}
             }
 
             function renderFleetTable() {
                 var fleet = getFleet() || [];
-                if (!Array.isArray(fleet)) fleet = [];
                 var tbody = document.getElementById('driverTableBody');
                 if (!tbody) return;
 
-                tbody.innerHTML = fleet.map(function(d, index) {
-                    var pClean = d.phone.replace(/D/g, '');
-                    return '<tr>'
-                        + '<td><strong>' + d.name + '</strong></td>'
-                        + '<td>' + d.phone + '</td>'
-                        + '<td>' + (d.model || 'Black & Yellow Taxi') + '</td>'
-                        + '<td><span style="font-family:monospace;font-weight:700;background:#f1f5f9;padding:3px 8px;border-radius:6px;">' + d.vehicleNo + '</span></td>'
-                        + '<td><span class="badge-status badge-confirmed"><i class="fa-solid fa-circle-check"></i> ' + (d.status || 'Active') + '</span></td>'
-                        + '<td style="text-align: right;">'
-                        + '<div style="display:inline-flex;gap:5px;">'
-                        + '<a href="https://wa.me/91' + pClean + '" target="_blank" class="act-btn act-wa" title="WhatsApp Driver"><i class="fa-brands fa-whatsapp"></i></a>'
-                        + '<a href="tel:+91' + pClean + '" class="act-btn" style="background:#e0f2fe;color:#0369a1;" title="Call Driver"><i class="fa-solid fa-phone"></i></a>'
-                        + '<button class="act-btn act-del" onclick="window.deleteDriver(' + index + ')" title="Remove Driver"><i class="fa-solid fa-trash"></i></button>'
+                if (fleet.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:36px 16px;color:#64748b;">'
+                        + '<i class="fa-solid fa-taxi" style="font-size:2rem;color:#cbd5e1;display:block;margin-bottom:8px;"></i>'
+                        + '<strong>No drivers in fleet directory.</strong><br>'
+                        + '<span style="font-size:0.85rem;color:#94a3b8;">All drivers were removed. You can add new drivers or restore default union drivers.</span><br>'
+                        + '<div style="display:inline-flex;gap:10px;margin-top:14px;">'
+                        + '<button type="button" onclick="document.getElementById(\'addDriverModal\').style.display=\'flex\'" class="act-btn" style="background:var(--primary);color:#fff;padding:8px 16px;"><i class="fa-solid fa-user-plus"></i> Add New Driver</button>'
+                        + '<button type="button" onclick="window.resetFleetDefaults()" class="act-btn" style="background:#f1f5f9;color:#475569;border:1px solid #cbd5e1;padding:8px 16px;"><i class="fa-solid fa-rotate-left"></i> Restore Defaults</button>'
                         + '</div>'
-                        + '</td>'
-                        + '</tr>';
-                }).join('');
+                        + '</td></tr>';
+                } else {
+                    tbody.innerHTML = fleet.map(function(d) {
+                        var pClean = (d.phone || '').replace(/\D/g, '');
+                        var statusCls = (d.status === 'On Tour') ? 'badge-pending' : ((d.status === 'Off Duty') ? 'badge-cancelled' : 'badge-confirmed');
+                        var statusIcon = (d.status === 'On Tour') ? 'fa-clock' : ((d.status === 'Off Duty') ? 'fa-ban' : 'fa-circle-check');
+
+                        return '<tr>'
+                            + '<td><strong>' + escapeHtml(d.name) + '</strong></td>'
+                            + '<td>' + escapeHtml(d.phone) + '</td>'
+                            + '<td>' + escapeHtml(d.model || 'Black & Yellow Taxi') + '</td>'
+                            + '<td><span style="font-family:monospace;font-weight:700;background:#f1f5f9;padding:3px 8px;border-radius:6px;">' + escapeHtml(d.vehicleNo) + '</span></td>'
+                            + '<td><span class="badge-status ' + statusCls + '"><i class="fa-solid ' + statusIcon + '"></i> ' + escapeHtml(d.status || 'Active') + '</span></td>'
+                            + '<td style="text-align: right;">'
+                            + '<div style="display:inline-flex;gap:5px;">'
+                            + '<a href="https://wa.me/91' + pClean + '" target="_blank" class="act-btn act-wa" title="WhatsApp Driver"><i class="fa-brands fa-whatsapp"></i></a>'
+                            + '<a href="tel:+91' + pClean + '" class="act-btn" style="background:#e0f2fe;color:#0369a1;" title="Call Driver"><i class="fa-solid fa-phone"></i></a>'
+                            + '<button type="button" class="act-btn act-edit" onclick="window.openEditDriverModal(\'' + d.id + '\')" title="Edit Driver Details"><i class="fa-solid fa-pen-to-square"></i></button>'
+                            + '<button type="button" class="act-btn act-del" onclick="window.deleteDriver(\'' + d.id + '\')" title="Remove Driver"><i class="fa-solid fa-trash"></i></button>'
+                            + '</div>'
+                            + '</td>'
+                            + '</tr>';
+                    }).join('');
+                }
 
                 // Populate driver modal select dropdown
                 var dmSelect = document.getElementById('dmDriverSelect');
                 if (dmSelect) {
                     dmSelect.innerHTML = '<option value="">-- Choose from saved fleet --</option>'
                         + fleet.map(function(d) {
-                            return '<option value="' + d.name + '|' + d.phone + '|' + d.vehicleNo + '|' + (d.model || '') + '">' + d.name + ' (' + d.vehicleNo + ')</option>';
+                            return '<option value="' + escapeHtml(d.name) + '|' + escapeHtml(d.phone) + '|' + escapeHtml(d.vehicleNo) + '|' + escapeHtml(d.model || '') + '">' + escapeHtml(d.name) + ' (' + escapeHtml(d.vehicleNo) + ')</option>';
                         }).join('');
                 }
+
+                // Update analytics driver count KPI
+                var analyticsCount = document.getElementById('analyticsDriverCount');
+                if (analyticsCount) analyticsCount.textContent = fleet.length;
             }
 
-            window.deleteDriver = function(index) {
-                if (!confirm("Remove driver from fleet list?")) return;
+            window.deleteDriver = function(driverId) {
                 var fleet = getFleet();
-                fleet.splice(index, 1);
+                var d = fleet.find(function(item) { return item.id === driverId; });
+                var dName = d ? d.name : 'this driver';
+                if (!confirm('Remove "' + dName + '" from driver fleet?')) return;
+
+                fleet = fleet.filter(function(item) { return item.id !== driverId; });
                 saveFleet(fleet);
                 renderFleetTable();
-                showToast('Driver removed from fleet.');
+                showToast('✓ Driver "' + dName + '" removed from fleet.');
+            };
+
+            window.openEditDriverModal = function(driverId) {
+                var fleet = getFleet();
+                var d = fleet.find(function(item) { return item.id === driverId; });
+                if (!d) return;
+
+                document.getElementById('editDriverId').value = d.id;
+                document.getElementById('editDriverName').value = d.name || '';
+                document.getElementById('editDriverPhone').value = d.phone || '';
+                document.getElementById('editDriverVehNo').value = d.vehicleNo || '';
+                document.getElementById('editDriverVehModel').value = d.model || '';
+                document.getElementById('editDriverStatus').value = d.status || 'Active';
+
+                document.getElementById('editDriverModal').style.display = 'flex';
+            };
+
+            var editDriverForm = document.getElementById('editDriverForm');
+            if (editDriverForm) {
+                editDriverForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    var driverId = document.getElementById('editDriverId').value;
+                    var fleet = getFleet();
+                    var d = fleet.find(function(item) { return item.id === driverId; });
+                    if (!d) return;
+
+                    d.name = document.getElementById('editDriverName').value.trim();
+                    d.phone = document.getElementById('editDriverPhone').value.trim();
+                    d.vehicleNo = document.getElementById('editDriverVehNo').value.trim();
+                    d.model = document.getElementById('editDriverVehModel').value.trim();
+                    d.status = document.getElementById('editDriverStatus').value;
+
+                    saveFleet(fleet);
+                    window.closeModals();
+                    renderFleetTable();
+                    showToast('✓ Driver "' + d.name + '" details updated!');
+                });
+            }
+
+            window.resetFleetDefaults = function() {
+                if (!confirm("Reset fleet list back to default union drivers? (This will restore default registered cabs)")) return;
+                var initial = JSON.parse(JSON.stringify(defaultFleet));
+                saveFleet(initial);
+                renderFleetTable();
+                showToast('✓ Fleet reset to default union drivers.');
             };
 
             window.selectFleetDriver = function(val) {
@@ -1793,27 +1926,34 @@
                 }
             };
 
-            document.getElementById('addDriverBtn').addEventListener('click', function() {
-                document.getElementById('addDriverModal').style.display = 'flex';
-            });
+            var addDriverBtn = document.getElementById('addDriverBtn');
+            if (addDriverBtn) {
+                addDriverBtn.addEventListener('click', function() {
+                    document.getElementById('addDriverModal').style.display = 'flex';
+                });
+            }
 
-            document.getElementById('addDriverForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                var newD = {
-                    name: document.getElementById('newDriverName').value.trim(),
-                    phone: document.getElementById('newDriverPhone').value.trim(),
-                    vehicleNo: document.getElementById('newDriverVehNo').value.trim(),
-                    model: document.getElementById('newDriverVehModel').value.trim(),
-                    status: 'Active'
-                };
-                var fleet = getFleet();
-                fleet.push(newD);
-                saveFleet(fleet);
-                closeModals();
-                renderFleetTable();
-                showToast('✓ New driver added to fleet!');
-                document.getElementById('addDriverForm').reset();
-            });
+            var addDriverForm = document.getElementById('addDriverForm');
+            if (addDriverForm) {
+                addDriverForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    var newD = {
+                        id: 'drv_' + Date.now(),
+                        name: document.getElementById('newDriverName').value.trim(),
+                        phone: document.getElementById('newDriverPhone').value.trim(),
+                        vehicleNo: document.getElementById('newDriverVehNo').value.trim(),
+                        model: document.getElementById('newDriverVehModel').value.trim() || 'Black & Yellow Tourist Taxi (4-Seater)',
+                        status: document.getElementById('newDriverStatus') ? document.getElementById('newDriverStatus').value : 'Active'
+                    };
+                    var fleet = getFleet();
+                    fleet.push(newD);
+                    saveFleet(fleet);
+                    window.closeModals();
+                    renderFleetTable();
+                    showToast('✓ New driver added to fleet!');
+                    addDriverForm.reset();
+                });
+            }
 
             // --- SECTION 4: ANALYTICS RENDER ---
             function renderAnalytics() {
@@ -1960,11 +2100,14 @@
                 var b = list.find(function(item) { return item.bookingId === id; });
                 if (!b) return;
 
+                var fleet = getFleet();
+                var firstDriver = fleet.length > 0 ? fleet[0] : null;
+
                 document.getElementById('dmBookingSub').textContent = b.bookingId + '  |  ' + b.name + '  |  ' + b.date + ' (' + b.time + ')';
-                document.getElementById('dmDriverName').value = b.driverName || 'Aryan Taxi Owner Driver';
-                document.getElementById('dmDriverPhone').value = b.driverPhone || '9922882044';
-                document.getElementById('dmVehicleNo').value = b.vehicleNo || 'MH-11-BV-1234';
-                document.getElementById('dmVehicleModel').value = b.vehicleModel || 'Black & Yellow Tourist Taxi (Owner Cab)';
+                document.getElementById('dmDriverName').value = b.driverName || (firstDriver ? firstDriver.name : '');
+                document.getElementById('dmDriverPhone').value = b.driverPhone || (firstDriver ? firstDriver.phone : '');
+                document.getElementById('dmVehicleNo').value = b.vehicleNo || (firstDriver ? firstDriver.vehicleNo : '');
+                document.getElementById('dmVehicleModel').value = b.vehicleModel || (firstDriver ? firstDriver.model : '');
                 var advInp = document.getElementById('dmAdvisoryNote');
                 if (advInp) advInp.value = b.advisoryNote || '';
 
@@ -1994,7 +2137,7 @@
                 var b = list.find(function(item) { return item.bookingId === currentEditingBookingId; });
                 if (!b) return;
 
-                var dPhone = (document.getElementById('dmDriverPhone').value || '').replace(/D/g, '');
+                var dPhone = (document.getElementById('dmDriverPhone').value || '').replace(/\D/g, '');
                 var db = window.TOUR_DATABASE;
                 var t = db ? db.getTourById(b.tourId) : null;
                 var tourName = t ? t.name : (b.tourId || 'Tour 1');
@@ -2015,7 +2158,7 @@
                 var b = list.find(function(item) { return item.bookingId === currentEditingBookingId; });
                 if (!b) return;
 
-                var cPhone = (b.phone || '').replace(/D/g, '');
+                var cPhone = (b.phone || '').replace(/\D/g, '');
                 var dName = document.getElementById('dmDriverName').value;
                 var dPhone = document.getElementById('dmDriverPhone').value;
                 var veh = document.getElementById('dmVehicleNo').value;
