@@ -1,0 +1,17 @@
+# Ignore local backup folders and archives
+Mahabaleshwartaxi-main/
+backup-before-infinityfree-build/
+backup-before-responsive-overhaul/
+backup-before-upgrade/
+github-ready-upload/
+production-infinityfree/
+
+# Ignore local duplicate/orphan html draft backups
+clean_original.html
+github-pages-index.html
+original_github_index.html
+
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
