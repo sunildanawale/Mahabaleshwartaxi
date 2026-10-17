@@ -87,7 +87,18 @@
         extracted.isBookingQuery = /how to book|booking process|confirm booking|procedure|step/i.test(t);
 
         // Tour Intent Scoring
-        var scores = { T1: 0, T2: 0, T3: 0, T4: 0, T5: 0, T6: 0, T7: 0, TR_PUNE_APT: 0, TR_MUM_APT: 0 };
+        var scores = { M1: 0, M2: 0, M3: 0, T1: 0, T2: 0, T3: 0, T4: 0, T5: 0, T6: 0, T7: 0, TR_PUNE_APT: 0, TR_MUM_APT: 0 };
+
+        // Express Single Tours (Tour 01, 02, 03 @ ₹800)
+        if (t.includes('800') || t.includes('single tour') || t.includes('express tour') || t.includes('budget tour') || t.includes('tour 01') || t.includes('darshan 1') || t.includes('arthur seat circuit') || t.includes('2.5 hour') || t.includes('2.5 hr')) {
+            scores.M1 += 12;
+        }
+        if (t.includes('tour 02') || t.includes('darshan 2') || t.includes('kate point express') || t.includes('needle hole') || t.includes('kamalgadh')) {
+            scores.M2 += 12;
+        }
+        if (t.includes('tour 03') || t.includes('darshan 3') || t.includes('wilson point express') || t.includes('sunrise point express')) {
+            scores.M3 += 12;
+        }
 
         // Full day / 1 day / complete trip
         if (t.includes('one day') || t.includes('1 day') || t.includes('full day') || t.includes('all sightseeing') || t.includes('cover everything') || t.includes('tour 7') || t.includes('combo')) {
@@ -257,16 +268,17 @@
 
             // General rate table
             return {
-                text: "💰 **Official Mahabaleshwar Taxi Union Rate Card (Fixed & Transparent):**<br><br>"
+                text: "💰 **Official Mahabaleshwar Taxi Union Rate Card & Express Circuits:**<br><br>"
+                    + "• **⚡ Express Single Tours:** ₹800 each (Tour 01: Arthur Seat Circuit • Tour 02: Kate's Point & Strawberry • Tour 03: Wilson Point & Lingmala &bull; 2.5 hrs each)<br>"
                     + "• **Tour 1 (Mahabaleshwar Darshan):** ₹1,200 (17 Points &bull; 3.5 hrs)<br>"
                     + "• **Tour 2 (Waterfall & Sunset):** ₹1,200 (Lingmala & Mumbai Pt &bull; 2.5 hrs)<br>"
                     + "• **Tour 3 (Pratapgadh Darshan):** ₹1,600 (Historic Fort & Darshan &bull; 3.5 hrs)<br>"
                     + "• **Tour 4 (Panchgani Darshan):** ₹1,200 (Table Land & Parsi Pt &bull; 3.5 hrs)<br>"
-                    + "• **Tour 5 (Wai Darshan):** ₹2,500 (Dhom Dam & Temples &bull; 5 hrs)<br>"
-                    + "• **Tour 6 (Tapola Mini Kashmir):** ₹1,450 (Lake & Boating &bull; 4 hrs)<br>"
-                    + "• **Tour 7 (Full Day Combo):** ₹3,000 (Mahabaleshwar + Panchgani Complete &bull; 7 hrs)<br><br>"
-                    + "✅ *All rates are approved union tariffs. Zero advance required for Mahabaleshwar pickups.*",
-                cards: [db ? db.getTourById('T7') : null, db ? db.getTourById('T1') : null, db ? db.getTourById('T3') : null].filter(Boolean)
+                    + "• **Tour 5 (Wai Darshan):** ₹2,500 (Dhom Dam & Temples &bull; 5-6 hrs)<br>"
+                    + "• **Tour 6 (Tapola Mini Kashmir):** ₹1,450 (Lake & Boating &bull; 3.5-4 hrs)<br>"
+                    + "• **Tour 7 (Full Day Combo):** ₹3,000 (Mahabaleshwar + Panchgani Complete &bull; 8-9 hrs)<br><br>"
+                    + "✅ *All rates are approved union & direct driver tariffs. Zero advance required for Mahabaleshwar pickups.*",
+                cards: [db ? db.getTourById('M1') : null, db ? db.getTourById('T7') : null, db ? db.getTourById('T1') : null, db ? db.getTourById('T3') : null].filter(Boolean)
             };
         }
 
@@ -284,7 +296,13 @@
             var primary = db.getTourById(collectedState.tourId);
             if (primary) {
                 recommendedTours.push(primary);
-                if (primary.id === 'T7') {
+                if (primary.id === 'M1') {
+                    rationale = "For a high-value express tour, **Tour 01: Arthur Seat Circuit (₹800)** covers 12 iconic cliff viewpoints and Kshetra Mahabaleshwar heritage temples in 2.5 hours.";
+                } else if (primary.id === 'M2') {
+                    rationale = "For valley panoramas and strawberry gardens, **Tour 02: Kate\'s Point & Strawberry (₹800)** covers Kate's Point, Echo Point, Elephant Head, and strawberry fields in 2.5 hours.";
+                } else if (primary.id === 'M3') {
+                    rationale = "For sunrise views, waterfalls, and lakes, **Tour 03: Wilson Point & Lingmala (₹800)** covers Wilson Point (highest peak), Lingmala Waterfall, and Venna Lake in 2.5 hours.";
+                } else if (primary.id === 'T7') {
                     rationale = "For maximum sightseeing in a single day, our **Full Day Combo (Tour 7 - ₹3,000)** is the highest-rated option. It connects Arthur\'s Seat viewpoints in Mahabaleshwar and Table Land in Panchgani seamlessly without backtracking.";
                 } else if (primary.id === 'T1') {
                     rationale = "For classic viewpoints and sacred temples, **Mahabaleshwar Darshan (Tour 1 - ₹1,200)** is ideal. It covers 17 attractions including Arthur\'s Seat, Kate\'s Point, and Old Mahabaleshwar heritage temples in a relaxed 3.5 hours.";

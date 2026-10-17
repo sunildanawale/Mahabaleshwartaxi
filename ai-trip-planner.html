@@ -22,6 +22,398 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <link rel="icon" type="image/png" href="images/aryan-tours-logo.png" sizes="32x32">
         <link rel="stylesheet" href="css/advanced-features.min.css?v=96.0">
+        <style>
+/* ================================================================
+   AI TRIP PLANNER — LUXURY TRAVEL DESIGN SYSTEM (v2.0)
+   ================================================================ */
+.booking-box {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: var(--space-6);
+    box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.form-group {
+    margin-bottom: var(--space-4);
+}
+.form-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+}
+.form-select, .form-input {
+    width: 100%;
+    padding: 11px 14px;
+    border-radius: 10px;
+    border: 1.5px solid var(--border-color);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 0.92rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    outline: none;
+}
+.form-select:focus, .form-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+}
+
+/* Smart Estimate Header Box */
+.ai-summary-card {
+    background: linear-gradient(135deg, rgba(2, 132, 199, 0.08) 0%, rgba(16, 185, 129, 0.08) 100%);
+    border: 1.5px solid rgba(2, 132, 199, 0.25);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+.ai-summary-tag {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.75px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+}
+.ai-summary-price {
+    font-size: 2.1rem;
+    font-weight: 800;
+    color: #16a34a;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+}
+.ai-meta-summary {
+    font-size: 0.84rem;
+    color: var(--text-secondary);
+    margin-top: 5px;
+    font-weight: 600;
+}
+.ai-summary-cta {
+    border-radius: 999px;
+    padding: 12px 24px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
+    white-space: nowrap;
+}
+
+/* Day-by-Day Cards */
+.ai-day-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 22px;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+.ai-day-card:hover {
+    border-color: rgba(2, 132, 199, 0.4);
+    box-shadow: 0 8px 25px -4px rgba(15, 23, 42, 0.09);
+    transform: translateY(-2px);
+}
+.ai-day-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
+    gap: 12px;
+}
+.ai-day-card__meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.ai-day-pill {
+    font-size: 0.75rem;
+    font-weight: 800;
+    background: #dcfce7;
+    color: #15803d;
+    padding: 3px 10px;
+    border-radius: 999px;
+    letter-spacing: 0.5px;
+}
+.amt-badge-express {
+    background: #fef3c7;
+    color: #b45309;
+    border: 1px solid #fde68a;
+    font-weight: 700;
+    font-size: 0.75rem;
+    padding: 3px 10px;
+    border-radius: 999px;
+}
+.amt-badge-union {
+    background: #e0f2fe;
+    color: #0369a1;
+    border: 1px solid #bae6fd;
+    font-weight: 700;
+    font-size: 0.75rem;
+    padding: 3px 10px;
+    border-radius: 999px;
+}
+.ai-day-card__price {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #16a34a;
+    letter-spacing: -0.5px;
+    white-space: nowrap;
+}
+.ai-day-time {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+}
+.ai-day-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 6px 0;
+    line-height: 1.35;
+}
+.ai-tour-name-row {
+    margin-bottom: 12px;
+}
+.ai-tour-selected {
+    font-size: 0.86rem;
+    color: var(--text-secondary);
+}
+.ai-tour-selected strong {
+    color: var(--primary);
+}
+.ai-points-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 12px 0 16px 0;
+}
+.ai-point-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    transition: background 0.15s ease;
+}
+.ai-point-tag i {
+    color: var(--primary);
+    font-size: 0.72rem;
+}
+.ai-driver-tip {
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-left: 4px solid #f59e0b;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.82rem;
+    color: #78350f;
+    line-height: 1.45;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+.ai-swap-wrap {
+    background: var(--bg-secondary);
+    border: 1px dashed var(--border-color);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-top: 14px;
+}
+.ai-swap-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.ai-swap-select {
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border-color);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+.ai-swap-select:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+/* Actions Panel */
+.ai-actions-panel {
+    background: linear-gradient(135deg, rgba(2,132,199,0.06) 0%, rgba(16,185,129,0.06) 100%);
+    border: 1.5px solid rgba(2,132,199,0.2);
+    border-radius: 16px;
+    padding: 24px;
+    margin-top: 24px;
+}
+.ai-actions-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.ai-actions-sub {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.45;
+    margin-bottom: 18px;
+}
+.ai-actions-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.ai-btn-wa {
+    background: #25D366 !important;
+    color: #ffffff !important;
+    border: none;
+    font-weight: 700;
+    padding: 14px 20px;
+    border-radius: 12px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 4px 14px rgba(37,211,102,0.3);
+    cursor: pointer;
+    transition: transform 0.15s ease, filter 0.15s ease;
+}
+.ai-btn-wa:hover {
+    filter: brightness(1.05);
+    transform: translateY(-1px);
+}
+.ai-btn-online {
+    background: var(--bg-primary) !important;
+    border: 2px solid var(--primary) !important;
+    color: var(--primary) !important;
+    font-weight: 700;
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+.ai-btn-online:hover {
+    background: var(--primary) !important;
+    color: #ffffff !important;
+}
+.ai-btn-copy {
+    background: transparent !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-secondary) !important;
+    font-weight: 600;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+.ai-btn-copy:hover {
+    background: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Toast */
+.ai-toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: #0f172a;
+    color: #ffffff;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    z-index: 10000;
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.ai-toast--visible {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+/* Dark Mode Overrides */
+[data-theme="dark"] .amt-badge-express {
+    background: #78350f;
+    color: #fef3c7;
+    border-color: #92400e;
+}
+[data-theme="dark"] .amt-badge-union {
+    background: #0c4a6e;
+    color: #bae6fd;
+    border-color: #0369a1;
+}
+[data-theme="dark"] .ai-day-pill {
+    background: #14532d;
+    color: #86efac;
+}
+[data-theme="dark"] .ai-driver-tip {
+    background: #291b00;
+    color: #fde68a;
+    border-color: #78350f;
+}
+[data-theme="dark"] .ai-day-card__price,
+[data-theme="dark"] .ai-summary-price {
+    color: #4ade80;
+}
+        </style>
     </head>
     <body>
         <a href="#main-content" class="skip-link">Skip to main content</a> <!-- Top Bar --> <div class="top-bar" role="banner">
@@ -119,62 +511,121 @@
 </div>
 <section class="section">
     <div class="container">
-        <div class="grid grid--2" style="align-items: start; gap: var(--space-8);"> <!-- AI Input Form --> <div class="booking-box reveal">
-            <h2 style="font-size: var(--text-2xl); color: var(--primary); margin-bottom: var(--space-4);">Tell Us About Your Trip</h2>
-            <p style="color: var(--text-secondary); margin-bottom: var(--space-6); font-size: var(--text-sm);">Our smart engine uses actual local taxi fares and route times to build the perfect plan.</p>
-            <form id="ai-planner-form">
-                <div class="form-group">
-                    <label for="ai-days" class="form-label">How many days for sightseeing?</label>
-                    <select id="ai-days" class="form-select" required>
-                        <option value="1">1 Day (Quick Explorer)</option>
-                        <option value="2" selected>2 Days (Perfect Weekend)</option>
-                        <option value="3">3 Days (Deep Dive)</option>
-                    </select>
+        <div class="grid grid--2" style="align-items: start; gap: var(--space-8);">
+            <!-- AI Input Form -->
+            <div class="booking-box reveal">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-3);">
+                    <h2 style="font-size: var(--text-2xl); color: var(--primary); margin: 0;">Plan Your Sightseeing</h2>
+                    <span style="font-size: 0.72rem; font-weight: 800; background: rgba(2, 132, 199, 0.1); color: var(--primary); padding: 4px 10px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.5px;">AI Powered</span>
                 </div>
-                <div class="form-group">
-                    <label for="ai-group" class="form-label">Who are you traveling with?</label>
-                    <select id="ai-group" class="form-select" required>
-                        <option value="family" selected>Family (Kids & Seniors)</option>
-                        <option value="couple">Couple / Honeymoon</option>
-                        <option value="friends">Group of Friends</option>
-                        <option value="solo">Solo Traveler</option>
-                    </select>
+                <p style="color: var(--text-secondary); margin-bottom: var(--space-5); font-size: var(--text-sm);">Select your preferences below. Our algorithm calculates genuine Union-fixed tariffs and recommended sightseeing routes with zero advance required.</p>
+                <form id="ai-planner-form">
+                    <div class="form-group">
+                        <label for="ai-days" class="form-label">
+                            <i class="fa-solid fa-calendar-days" style="color: var(--primary);"></i> How many days for sightseeing?
+                        </label>
+                        <select id="ai-days" class="form-select" required>
+                            <option value="0.5">⚡ Half Day / Express (2.5h • ₹800 Single Tours)</option>
+                            <option value="1">1 Full Day (Grand Explorer • 8-9h)</option>
+                            <option value="2" selected>2 Days (Perfect Weekend Classic)</option>
+                            <option value="3">3 Days (In-Depth Sahyadri Discovery)</option>
+                            <option value="4">4 Days (The Grand Expedition &amp; Heritage)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ai-theme" class="form-label">
+                            <i class="fa-solid fa-compass" style="color: var(--primary);"></i> Trip Theme &amp; Sightseeing Focus
+                        </label>
+                        <select id="ai-theme" class="form-select" required>
+                            <option value="all" selected>🌟 Must-See Highlights (Balanced Classic)</option>
+                            <option value="budget_express">⚡ Express Single Tours (₹800 • Quick 2.5h circuits)</option>
+                            <option value="nature_viewpoints">🌄 Clifftops, Waterfalls &amp; Sunsets</option>
+                            <option value="history_forts">🚩 Pratapgad Fort &amp; Maratha Heritage</option>
+                            <option value="lakes_adventure">🚤 Venna Lake &amp; Tapola Mini Kashmir Boating</option>
+                            <option value="plateau_strawberry">🍓 Panchgani Table Land &amp; Strawberry Farms</option>
+                            <option value="temples_culture">🛕 Ancient Temples &amp; Wai Heritage Darshan</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ai-group" class="form-label">
+                            <i class="fa-solid fa-users" style="color: var(--primary);"></i> Who are you traveling with?
+                        </label>
+                        <select id="ai-group" class="form-select" required>
+                            <option value="family" selected>👨‍👩‍👧‍👦 Family (Kids &amp; Elders — Relaxed Steps)</option>
+                            <option value="couple">💑 Couple / Honeymoon (Romantic &amp; Scenic)</option>
+                            <option value="friends">👥 Group of Friends (Adventure, Lakes &amp; Boating)</option>
+                            <option value="solo">🎒 Solo Traveler (Explorer &amp; Photography)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ai-pace" class="form-label">
+                            <i class="fa-solid fa-gauge-high" style="color: var(--primary);"></i> Sightseeing Pace Preference
+                        </label>
+                        <select id="ai-pace" class="form-select" required>
+                            <option value="relaxed" selected>☕ Relaxed (More time at each attraction)</option>
+                            <option value="fast">⚡ Fast (Cover maximum sightseeing points)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ai-date" class="form-label">
+                            <i class="fa-regular fa-calendar-check" style="color: var(--primary);"></i> Expected Travel Date (Optional)
+                        </label>
+                        <input type="date" id="ai-date" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="ai-pickup" class="form-label">
+                            <i class="fa-solid fa-hotel" style="color: var(--primary);"></i> Pickup Hotel / Area
+                        </label>
+                        <select id="ai-pickup" class="form-select">
+                            <option value="Mahabaleshwar Town" selected>Mahabaleshwar Town (Free Doorstep Pickup)</option>
+                            <option value="Panchgani Market">Panchgani Market &amp; Resorts</option>
+                            <option value="Venna Lake Area">Venna Lake Area</option>
+                            <option value="Old Mahabaleshwar">Old Mahabaleshwar / Kshetra Area</option>
+                            <option value="Arthur's Seat Road">Arthur's Seat Road / Valley Resorts</option>
+                            <option value="Metgutad / Bhilar">Metgutad / Bhilar / Bhose Valley</option>
+                            <option value="Tapola Road">Tapola Road / Forest Resorts</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--full btn--lg mt-4" style="border-radius: var(--radius-md); font-weight: 700; font-size: 1.05rem; padding: 14px 20px; box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Generate AI Itinerary
+                    </button>
+                </form>
+            </div>
+
+            <!-- AI Result Area -->
+            <div class="reveal" style="min-height: 400px; position: relative;">
+                <!-- Initial State -->
+                <div id="ai-initial" style="height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: var(--bg-secondary); border-radius: 18px; padding: var(--space-8); border: 2px dashed var(--border-color);">
+                    <i class="fa-solid fa-map-location-dot fa-4x" style="color: var(--primary); opacity: 0.4; margin-bottom: var(--space-4);"></i>
+                    <h3 style="color: var(--text-primary); font-size: 1.25rem; margin-bottom: 6px;">Your personalized itinerary will appear here</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.88rem; max-width: 320px;">Choose your trip duration and theme on the left to see accurate fares, timing, viewpoints, and custom driver tips.</p>
                 </div>
-                <div class="form-group">
-                    <label for="ai-pace" class="form-label">What pace do you prefer?</label>
-                    <select id="ai-pace" class="form-select" required>
-                        <option value="relaxed" selected>Relaxed (More time at each point)</option>
-                        <option value="fast">Fast (See as much as possible)</option>
-                    </select>
+
+                <!-- Loading State -->
+                <div id="ai-loader" style="display: none; height: 100%; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: var(--bg-secondary); border-radius: 18px; padding: var(--space-8);">
+                    <i class="fa-solid fa-spinner fa-spin fa-3x" style="color: var(--primary); margin-bottom: var(--space-4);"></i>
+                    <h3 style="color: var(--text-primary); font-size: 1.2rem;">Analyzing Routes &amp; Union Fares...</h3>
+                    <p style="color: var(--text-secondary); font-size: var(--text-sm);">Building your zero-hallucination Mahabaleshwar sightseeing plan.</p>
                 </div>
-                <button type="submit" class="btn btn--primary btn--full btn--lg mt-4" style="border-radius: var(--radius-md);">
-                    <i class="fa-solid fa-bolt">
-                </i> Generate Custom Itinerary </button>
-            </form>
-        </div> <!-- AI Result Area --> <div class="reveal" style="min-height: 400px; position: relative;"> <!-- Initial State --> <div id="ai-initial" style="height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: var(--bg-secondary); border-radius: var(--radius-lg); padding: var(--space-8); border: 2px dashed var(--border-color);">
-        <i class="fa-solid fa-map-location-dot fa-4x" style="color: var(--gray-300); margin-bottom: var(--space-4);">
-    </i>
-    <h3 style="color: var(--text-secondary);">Your personalized itinerary will appear here.</h3>
-</div> <!-- Loading State --> <div id="ai-loader" style="display: none; height: 100%; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: var(--bg-secondary); border-radius: var(--radius-lg); padding: var(--space-8);">
-<i class="fa-solid fa-spinner fa-spin fa-3x" style="color: var(--primary); margin-bottom: var(--space-4);">
-</i>
-<h3 style="color: var(--text-primary);">Analyzing routes & fares</h3>
-<p style="color: var(--text-secondary); font-size: var(--text-sm);">Generating the perfect plan.</p>
-</div> <!-- Result State --> <div id="ai-result" style="display: none;">
-<div style="background: var(--primary-50); border: 1px solid rgba(8,145,178,0.2); padding: var(--space-4); border-radius: var(--radius-md); margin-bottom: var(--space-6); display: flex; align-items: center; justify-content: space-between;">
-    <div>
-        <span style="font-size: var(--text-xs); color: var(--primary); font-weight: bold; text-transform: uppercase;">Smart Estimate</span>
-        <div id="ai-total-price" style="font-size: var(--text-2xl); font-weight: 800; color: var(--primary-dark);">
+
+                <!-- Result State -->
+                <div id="ai-result" style="display: none;">
+                    <div class="ai-summary-card">
+                        <div>
+                            <span class="ai-summary-tag"><i class="fa-solid fa-bolt" style="color: #f59e0b;"></i> Smart Taxi Fare Estimate</span>
+                            <div id="ai-total-price" class="ai-summary-price">₹0</div>
+                            <div id="ai-meta-summary" class="ai-meta-summary">Custom Plan</div>
+                        </div>
+                        <button id="ai-book-btn" class="btn btn--accent ai-summary-cta">
+                            <i class="fa-brands fa-whatsapp"></i> Book This Plan
+                        </button>
+                    </div>
+                    <div id="ai-itinerary-container">
+                        <!-- JS inserts here -->
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <button id="ai-book-btn" class="btn btn--accent" style="border-radius: var(--radius-full);">
-        <i class="fa-brands fa-whatsapp">
-    </i> Book This Plan</button>
-</div>
-<div id="ai-itinerary-container"> <!-- JS inserts here --> </div>
-</div>
-</div>
-</div>
 </div>
 </section> <!-- Trust Banner --> <section class="section section--bg">
 <div class="container text-center">
