@@ -947,20 +947,33 @@
         <div class="tour-finder__grid">
             <div>
                 <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 5px; color: #f0f9ff;">How much time do you have?</label>
-                <select id="tf_time" style="width: 100%; padding: 10px; border-radius: 8px; border: none; font-size: 0.9rem; color: var(--text-primary);">
-                    <option value="half" selected>Half Day (3 - 4 Hours)</option>
-                    <option value="full">Full Day (6 - 9 Hours)</option>
+                <select id="tf_time" onchange="if(window.syncTourFinderInterests){window.syncTourFinderInterests(this.value);}" style="width: 100%; padding: 10px; border-radius: 8px; border: none; font-size: 0.9rem; color: var(--text-primary); background: #ffffff; font-weight: 500;">
+                    <option value="express">⚡ Quick Express Tour (2 - 2.5 Hours • ₹800)</option>
+                    <option value="half" selected>⭐ Standard Half-Day (3 - 4 Hours • ₹1,200 - ₹1,600)</option>
+                    <option value="full">🌟 Complete Full-Day (6 - 9 Hours • ₹2,500 - ₹3,000)</option>
                 </select>
             </div>
             <div>
                 <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 5px; color: #f0f9ff;">What do you want to experience most?</label>
-                <select id="tf_interest" style="width: 100%; padding: 10px; border-radius: 8px; border: none; font-size: 0.9rem; color: var(--text-primary);">
-                    <option value="views" selected>Scenic Viewpoints & Temples (Tour 1)</option>
-                    <option value="nature">Lingmala Waterfall & Sunset Point (Tour 2)</option>
-                    <option value="history">History & Fort Trek - Pratapgad (Tour 3)</option>
-                    <option value="panchgani">Plateaus & Strawberry Lands - Panchgani (Tour 4)</option>
-                    <option value="spiritual">Ancient Temples & Ghats - Wai (Tour 5)</option>
-                    <option value="water">Boating & Water Sports - Tapola Mini Kashmir (Tour 6)</option>
+                <select id="tf_interest" onchange="if(window.syncTourFinderDuration){window.syncTourFinderDuration(this.value);}" style="width: 100%; padding: 10px; border-radius: 8px; border: none; font-size: 0.9rem; color: var(--text-primary); background: #ffffff; font-weight: 500;">
+                    <optgroup label="⚡ Express Single Tours (₹800 Flat • 2.5 Hrs)">
+                        <option value="m1_arthur">M1: Arthur's Seat &amp; Old Kshetra Circuit (12 Pts • ₹800)</option>
+                        <option value="m2_kates">M2: Kate's Point, Needle Hole &amp; Strawberry (4 Pts • ₹800)</option>
+                        <option value="m3_wilson">M3: Wilson Point Sunrise &amp; Waterfall (6 Pts • ₹800)</option>
+                    </optgroup>
+                    <optgroup label="⭐ Standard Half-Day Packages (Official Union Rates)">
+                        <option value="views" selected>Tour 1: Arthur Seat &amp; Heritage Darshan (17 Pts • ₹1,200)</option>
+                        <option value="nature">Tour 2: Lingmala Waterfall &amp; Sunset Point (8 Pts • ₹1,200)</option>
+                        <option value="history">Tour 3: Pratapgad Fort Heritage Trek (7 Pts • ₹1,600)</option>
+                        <option value="panchgani">Tour 4: Panchgani Table Land &amp; Strawberry (5 Pts • ₹1,200)</option>
+                        <option value="water">Tour 6: Tapola Mini Kashmir Speedboating (3 Pts • ₹1,450)</option>
+                    </optgroup>
+                    <optgroup label="🌟 Full-Day Comprehensive Circuits">
+                        <option value="combo">Tour 7: Mahabaleshwar + Panchgani Grand Combo (22 Pts • ₹3,000)</option>
+                        <option value="pratapgad_combo">Full Day: Pratapgad Fort + Mahabaleshwar Combo (₹2,800)</option>
+                        <option value="spiritual">Tour 5: Wai Darshan Sacred Ghats Pilgrimage (7 Pts • ₹2,500)</option>
+                        <option value="tapola_combo">Full Day: Tapola Mini Kashmir + Venna Leisure (₹2,650)</option>
+                    </optgroup>
                 </select>
             </div>
         </div>

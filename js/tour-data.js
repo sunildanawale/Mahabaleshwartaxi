@@ -788,6 +788,45 @@ if (typeof window !== 'undefined') {
 
     TOUR_DATABASE.loadCustomRates();
 
+    // ── SMART TOUR FINDER INTERACTIVE SYNC ──────────────────────────
+    window.syncTourFinderInterests = function(duration) {
+        var timeEl = document.getElementById('tf_time');
+        var interestEl = document.getElementById('tf_interest');
+        if (timeEl && timeEl.value !== duration) {
+            timeEl.value = duration;
+        }
+        if (!interestEl) return;
+        if (duration === 'express') {
+            interestEl.value = 'm1_arthur';
+        } else if (duration === 'full') {
+            interestEl.value = 'combo';
+        } else {
+            interestEl.value = 'views';
+        }
+        if (typeof window.recommendTour === 'function') {
+            window.recommendTour();
+        }
+    };
+
+    window.syncTourFinderDuration = function(interest) {
+        var timeEl = document.getElementById('tf_time');
+        var interestEl = document.getElementById('tf_interest');
+        if (interestEl && interestEl.value !== interest) {
+            interestEl.value = interest;
+        }
+        if (!timeEl) return;
+        if (interest === 'm1_arthur' || interest === 'm2_kates' || interest === 'm3_wilson') {
+            timeEl.value = 'express';
+        } else if (interest === 'combo' || interest === 'spiritual' || interest === 'pratapgad_combo' || interest === 'tapola_combo') {
+            timeEl.value = 'full';
+        } else {
+            timeEl.value = 'half';
+        }
+        if (typeof window.recommendTour === 'function') {
+            window.recommendTour();
+        }
+    };
+
     // SMART TOUR FINDER ENGINE
     window.recommendTour = function() {
         var timeEl = document.getElementById('tf_time');
@@ -798,18 +837,89 @@ if (typeof window !== 'undefined') {
         var time = timeEl ? timeEl.value : 'half';
         var interest = interestEl ? interestEl.value : 'views';
 
+        // Auto-align time and interest if user picked mismatched combo
+        if (interest === 'm1_arthur' || interest === 'm2_kates' || interest === 'm3_wilson') {
+            time = 'express';
+            if (timeEl && timeEl.value !== 'express') timeEl.value = 'express';
+        } else if (time === 'express' && !(interest === 'm1_arthur' || interest === 'm2_kates' || interest === 'm3_wilson')) {
+            interest = 'm1_arthur';
+            if (interestEl) interestEl.value = 'm1_arthur';
+        }
+
         var rec = null;
 
-        if (time === 'half') {
+        if (time === 'express') {
+            switch(interest) {
+                case 'm2_kates':
+                    rec = {
+                        tourId: 'M2',
+                        title: 'Mahabaleshwar Darshan 2: Kate\'s Point & Strawberry (Tour 02)',
+                        badge: '⚡ Express Scenic Match',
+                        fare: '₹800 Flat',
+                        duration: '2.5 Hrs',
+                        pointsCount: '4 Iconic Points',
+                        isSingle: true,
+                        summary: 'A breezy 2.5-hour express clifftop tour featuring needle-hole rock formations, Kamalgad vistas, and fresh strawberry farm visit.',
+                        highlights: [
+                            'Kate\'s Point & Echo Point overlooking Balakwadi Dam gorge',
+                            'Needle Hole Rock (Iconic Elephant\'s Head natural cliff arch)',
+                            'Fresh Strawberry Garden Halt (Free visit in strawberry season)',
+                            'Dedicated private 4-seater tourist taxi • Zero advance payment required'
+                        ],
+                        detailsUrl: '#t02'
+                    };
+                    break;
+                case 'm3_wilson':
+                    rec = {
+                        tourId: 'M3',
+                        title: 'Mahabaleshwar Darshan 3: Wilson Point & Waterfall (Tour 03)',
+                        badge: '⚡ Express Sunrise Match',
+                        fare: '₹800 Flat',
+                        duration: '2.5 Hrs',
+                        pointsCount: '6 Viewpoints',
+                        isSingle: true,
+                        summary: 'Early morning sunrise summit experience at Mahabaleshwar\'s highest elevation (1,439m) followed by the refreshing Lingmala forest trail.',
+                        highlights: [
+                            'Wilson Point (Sunrise Point) — Highest mountain elevation in Mahabaleshwar',
+                            'Lingmala Cascading Waterfall (Lush Sahyadri rainforest walk)',
+                            'Venna Lake picturesque lakeside drive halt',
+                            'Ganesh Temple, Plato Point & King\'s Chair viewpoint'
+                        ],
+                        detailsUrl: '#t03'
+                    };
+                    break;
+                case 'm1_arthur':
+                default:
+                    rec = {
+                        tourId: 'M1',
+                        title: 'Mahabaleshwar Darshan 1: Arthur Seat Circuit (Tour 01)',
+                        badge: '⚡ Express Heritage Match',
+                        fare: '₹800 Flat',
+                        duration: '2.5 Hrs',
+                        pointsCount: '12 Viewpoints',
+                        isSingle: true,
+                        summary: 'Focused 2.5-hour heritage circuit covering holy Kshetra Mahabaleshwar temples and dramatic clifftop viewpoints over Savitri River Valley.',
+                        highlights: [
+                            'Arthur\'s Seat (Queen of Points) & Window Point over 2,000-ft abyss',
+                            'Ancient Panchganga Mandir (origin of 5 holy rivers) & Shiva Mandir',
+                            'Echo Point, Malcolm Point, Hunting Point & Castle Rock cliff ridges',
+                            'Savitri Point, Monkey Point & Marjorie Point valley overlooks'
+                        ],
+                        detailsUrl: '#t01'
+                    };
+                    break;
+            }
+        } else if (time === 'half') {
             switch(interest) {
                 case 'nature':
                     rec = {
                         tourId: 'T2',
                         title: 'Mahabaleshwar Darshan (Tour 2 - Waterfall & Sunset)',
-                        badge: 'Half-Day Nature Match',
+                        badge: '⭐ Half-Day Nature Match',
                         fare: '₹1,200',
                         duration: '3:30 Hrs',
                         pointsCount: '8 Iconic Spots',
+                        isSingle: false,
                         summary: 'Designed for lush waterfalls, serene lake vistas, and evening sunset magic.',
                         highlights: [
                             'Lingmala Cascading Waterfall (Roaring seasonal falls & forest walk)',
@@ -824,10 +934,11 @@ if (typeof window !== 'undefined') {
                     rec = {
                         tourId: 'T3',
                         title: 'Pratapgadh Fort Darshan (Tour 3 - Mountain Citadel)',
-                        badge: 'Half-Day Heritage Match',
+                        badge: '⭐ Half-Day Heritage Match',
                         fare: '₹1,600',
                         duration: '3:30 Hrs',
                         pointsCount: '7 Historic Points',
+                        isSingle: false,
                         summary: 'Relive Maratha history at Chhatrapati Shivaji Maharaj\'s majestic fortress in Sahyadri.',
                         highlights: [
                             'Pratapgad Fort Citadel, Ramparts & Double Bastions',
@@ -842,10 +953,11 @@ if (typeof window !== 'undefined') {
                     rec = {
                         tourId: 'T4',
                         title: 'Panchgani Sightseeing (Tour 4 - Plateau & Strawberry)',
-                        badge: 'Half-Day Panchgani Match',
+                        badge: '⭐ Half-Day Panchgani Match',
                         fare: '₹1,200',
                         duration: '3:00 Hrs',
                         pointsCount: '5 Top Spots',
+                        isSingle: false,
                         summary: 'Breezy highland tour across volcanic tablelands and strawberry farm lands.',
                         highlights: [
                             'Table Land - Asia\'s 2nd largest volcanic plateau & Devil\'s Kitchen caves',
@@ -860,10 +972,11 @@ if (typeof window !== 'undefined') {
                     rec = {
                         tourId: 'T5',
                         title: 'Wai Darshan (Tour 5 - Sacred Ghats & Dakshin Kashi)',
-                        badge: 'Spiritual Heritage Match',
+                        badge: '⭐ Spiritual Heritage Match',
                         fare: '₹2,500',
                         duration: '6:00 Hrs',
                         pointsCount: '7 Sacred Spots',
+                        isSingle: false,
                         summary: 'Peaceful temple pilgrimage to holy Krishna River stone ghats and 12th-century shrines.',
                         highlights: [
                             'Dholya Ganpati Mandir - Massive monolithic idol on holy Krishna Ghats',
@@ -878,10 +991,11 @@ if (typeof window !== 'undefined') {
                     rec = {
                         tourId: 'T6',
                         title: 'Tapola Mini Kashmir (Tour 6 - Boating & Backwaters)',
-                        badge: 'Half-Day Adventure Match',
+                        badge: '⭐ Half-Day Adventure Match',
                         fare: '₹1,450',
                         duration: '3:30 - 4:00 Hrs',
                         pointsCount: '3 Scenic Points',
+                        isSingle: false,
                         summary: 'Scenic 30km jungle ghat ride to Shivsagar Lake backwaters for exhilarating speedboating.',
                         highlights: [
                             'Shivsagar Lake - Koyna Dam pristine backwaters',
@@ -897,10 +1011,11 @@ if (typeof window !== 'undefined') {
                     rec = {
                         tourId: 'T1',
                         title: 'Mahabaleshwar Darshan (Tour 1 - Heritage & Views)',
-                        badge: 'Most Popular Half-Day Tour',
+                        badge: '⭐ Most Popular Half-Day Tour',
                         fare: '₹1,200',
                         duration: '3:30 Hrs',
                         pointsCount: '17 Union Points',
+                        isSingle: false,
                         summary: 'The flagship Mahabaleshwar tour! Sweeping cliffside viewpoints and sacred river origin shrines.',
                         highlights: [
                             'Arthur\'s Seat (Queen of Points) & Window Point over Savitri Valley',
@@ -915,14 +1030,16 @@ if (typeof window !== 'undefined') {
         } else {
             // Full Day selections
             switch(interest) {
+                case 'pratapgad_combo':
                 case 'history':
                     rec = {
                         tourId: 'T3',
                         title: 'Pratapgad Fort Heritage Expedition + Sightseeing Combo',
-                        badge: 'Full-Day Heritage Match',
+                        badge: '🌟 Full-Day Heritage Match',
                         fare: '₹1,600 (T3) / ₹2,800 (T1+T3 Combo)',
                         duration: '3:30 to 7:00 Hrs',
                         pointsCount: 'Fort + Viewpoints',
+                        isSingle: false,
                         summary: 'Full historical immersion into Maratha forts combined with Mahabaleshwar\'s top viewpoints.',
                         highlights: [
                             'Full guided exploration of Pratapgad Fort, Machi, and Shivaji Memorial',
@@ -937,10 +1054,11 @@ if (typeof window !== 'undefined') {
                     rec = {
                         tourId: 'T5',
                         title: 'Wai Darshan Pilgrimage Circuit (Tour 5)',
-                        badge: 'Full-Day Spiritual Match',
+                        badge: '🌟 Full-Day Spiritual Match',
                         fare: '₹2,500',
                         duration: '6:00 - 7:00 Hrs',
                         pointsCount: '7 Sacred Shrines',
+                        isSingle: false,
                         summary: 'A deep spiritual and architectural journey to Dakshin Kashi and ancient Sahyadri shrines.',
                         highlights: [
                             'Dholya Ganpati Temple & holy Krishna River Ghats',
@@ -951,14 +1069,16 @@ if (typeof window !== 'undefined') {
                         detailsUrl: '#t5'
                     };
                     break;
+                case 'tapola_combo':
                 case 'water':
                     rec = {
                         tourId: 'T6',
                         title: 'Tapola Mini Kashmir + Lake Leisure Experience (Tour 6)',
-                        badge: 'Full-Day Water & Adventure',
+                        badge: '🌟 Full-Day Water & Adventure',
                         fare: '₹1,450 (Tour 6) / ₹2,650 (Combo with Venna)',
                         duration: '4:00 - 6:00 Hrs',
                         pointsCount: 'Lakes & Backwaters',
+                        isSingle: false,
                         summary: 'Spend an unhurried day enjoying speedboating at Tapola backwaters and relaxing at Venna Lake.',
                         highlights: [
                             'Tapola Shivsagar Lake: Exhilarating speedboat cruises & watersports',
@@ -970,38 +1090,23 @@ if (typeof window !== 'undefined') {
                     };
                     break;
                 case 'nature':
-                    rec = {
-                        tourId: 'T7',
-                        title: 'Full Day Sahyadri Nature & Waterfalls Combo (Tour 7)',
-                        badge: 'Full-Day Nature Match',
-                        fare: '₹3,000',
-                        duration: '8:00 - 9:00 Hrs',
-                        pointsCount: '22 Panoramic Spots',
-                        summary: 'A comprehensive full-day immersion in waterfalls, clifftop views, and strawberry plateaus.',
-                        highlights: [
-                            'Lingmala Cascading Waterfall & Wilson Sunrise Point',
-                            'Arthur\'s Seat Queen of Points & Savitri Valley vistas',
-                            'Panchgani Table Land volcanic plateau & Parsi Point',
-                            'Venna Mini Dam, Plato Point & Old Mahabaleshwar temples'
-                        ],
-                        detailsUrl: '#t7'
-                    };
-                    break;
+                case 'combo':
                 case 'views':
                 case 'panchgani':
                 default:
                     rec = {
                         tourId: 'T7',
                         title: 'Full Day Mahabaleshwar & Panchgani Combo (Tour 7)',
-                        badge: 'Ultimate Full-Day Combo',
+                        badge: '🌟 Ultimate Full-Day Combo',
                         fare: '₹3,000',
                         duration: '8:00 - 9:00 Hrs',
                         pointsCount: '22 Union Points',
+                        isSingle: false,
                         summary: 'The best value 1-day package! Covers all premier spots in both Mahabaleshwar and Panchgani in a single relaxed day.',
                         highlights: [
                             'All Mahabaleshwar Gems: Arthur\'s Seat, Old Mahabaleshwar, Kate\'s Point & Needle Hole',
                             'All Panchgani Highlights: Table Land volcanic plateau, Parsi Point & Gureghar',
-                            '22 Official Union Sightseeing circuit points (points visited subject to weather & road conditions)',
+                            '22 Official Union Sightseeing circuit points (weather permitting)',
                             'Zero advance required • Pay directly to driver after tour completion'
                         ],
                         detailsUrl: '#t7'
@@ -1013,9 +1118,13 @@ if (typeof window !== 'undefined') {
         var waText = encodeURIComponent('Hello Aryan Taxi Mahabaleshwar! Smart Tour Finder recommended: ' + rec.title + ' (' + rec.fare + '). Please confirm availability.');
         var waUrl = 'https://api.whatsapp.com/send?phone=919922882044&text=' + waText;
 
+        var singleNoteHtml = rec.isSingle
+            ? '<div style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:8px 12px;margin-bottom:12px;font-size:0.78rem;color:#92400e;font-weight:600;"><i class="fa-solid fa-bolt" style="color:#d97706;"></i> <strong>Express Single Tour:</strong> Independent budget option offered directly by Aryan Taxi for quick visits. Zero advance required!</div>'
+            : '';
+
         var html = '<div style="background: rgba(255, 255, 255, 0.98); color: #0f172a; border-radius: 16px; padding: 22px 20px; margin-top: 20px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.25); text-align: left; border: 2px solid #38bdf8; animation: tfFadeIn 0.3s ease-out;">' +
             '<div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">' +
-                '<span style="background: #0284c7; color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; display: inline-flex; align-items: center; gap: 6px;">' +
+                '<span style="background: ' + (rec.isSingle ? '#0891b2' : '#0284c7') + '; color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; display: inline-flex; align-items: center; gap: 6px;">' +
                     '<i class="fa-solid fa-wand-magic-sparkles"></i> ' + rec.badge +
                 '</span>' +
                 '<div style="background: #e0f2fe; color: #0369a1; padding: 5px 12px; border-radius: 20px; font-size: 0.92rem; font-weight: 800;">' +
@@ -1025,9 +1134,10 @@ if (typeof window !== 'undefined') {
             '<h3 style="color: #0f172a; font-size: 1.25rem; font-weight: 800; margin: 0 0 8px 0; line-height: 1.35;">' +
                 rec.title +
             '</h3>' +
-            '<p style="color: #475569; font-size: 0.92rem; line-height: 1.5; margin: 0 0 14px 0;">' +
+            '<p style="color: #475569; font-size: 0.92rem; line-height: 1.5; margin: 0 0 12px 0;">' +
                 rec.summary +
             '</p>' +
+            singleNoteHtml +
             '<div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px 14px; margin-bottom: 16px;">' +
                 '<div style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: #64748b; letter-spacing: 0.5px; margin-bottom: 6px;">' +
                     'Key Itinerary Highlights:' +
