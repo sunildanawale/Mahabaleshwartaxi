@@ -1732,12 +1732,27 @@
             });
         });
 
-        // Autocomplete on Pickup field
+        // Autocomplete on Pickup field & Clear Button
         var pickInput = document.getElementById('amtPickup');
-        var autoList = document.getElementById('amtAutoList');
+        var autoList = document.getElementById('amtAutocompleteList') || document.getElementById('amtAutoList');
+        var pickClear = document.getElementById('amtPickupClear');
         if (pickInput && autoList) {
+            if (pickClear) {
+                if (pickInput.value) pickClear.style.display = 'block';
+                pickClear.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    pickInput.value = '';
+                    bookingState.pickup = '';
+                    pickClear.style.display = 'none';
+                    autoList.style.display = 'none';
+                    updateZoneNotice();
+                    pickInput.focus();
+                });
+            }
+
             pickInput.addEventListener('input', function () {
                 var val = pickInput.value.trim();
+                if (pickClear) pickClear.style.display = val ? 'block' : 'none';
                 var results = window.TOUR_DATABASE ? window.TOUR_DATABASE.searchLocations(val) : [];
                 if (results.length > 0) {
                     autoList.innerHTML = results.map(function (loc) {
@@ -1757,6 +1772,7 @@
                     pickInput.value = item.getAttribute('data-val');
                     bookingState.pickup = pickInput.value;
                     autoList.style.display = 'none';
+                    if (pickClear) pickClear.style.display = 'block';
                     updateZoneNotice();
                 }
             });
@@ -3206,7 +3222,7 @@
                 }).join('') + '</optgroup>';
             }
             if (standardTours.length > 0) {
-                optHtml += '<optgroup label="⭐ Standard Union Sightseeing (₹1,200 - ₹1,600 • 3.5 Hrs)">' + standardTours.map(function (t) {
+                optHtml += '<optgroup label="⭐ Standard Union Sightseeing (₹1,200 - ₹2,500 • 3.5 to 6 Hrs)">' + standardTours.map(function (t) {
                     return '<option value="' + t.id + '">' + escapeHtml(t.name) + ' — ₹' + t.fare + ' (' + escapeHtml(t.duration) + ')</option>';
                 }).join('') + '</optgroup>';
             }
@@ -3422,6 +3438,15 @@
         } else if (pId === 'T6' || pName.indexOf('tapola') !== -1) {
             badge = 'Backwaters Advisory';
             text = 'Scenic 28km mountain road to Tapola backwaters (Mini Kashmir). Boating available at Koyna lake.';
+        } else if (pId === 'M1') {
+            badge = 'Express Circuit Advisory';
+            text = 'Focused 2.5-hour clifftop express tour covering Arthur\'s Seat and Echo Point. Best experienced in morning hours before mountain mist sets in.';
+        } else if (pId === 'M2') {
+            badge = 'Express Circuit Advisory';
+            text = 'Direct 2.5-hour tour to Kate\'s Point, Elephant\'s Head needle-hole cliff &amp; fresh strawberry farm. Perfect scenic quick excursion.';
+        } else if (pId === 'M3') {
+            badge = 'Sunrise &amp; Falls Advisory';
+            text = 'Early morning 2.5-hour tour for spectacular Wilson Point sunrise followed by fresh forest trail at Lingmala Waterfall.';
         } else {
             badge = 'Trip Advisory';
             text = 'Circuit route planned as per official Mahabaleshwar Taxi Union guidelines.';

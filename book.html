@@ -2140,11 +2140,17 @@
 
         function syncTourHint() {
             if (!tourHint) return;
-            var hint = tourHint.toLowerCase();
-            var isCombo = hint.includes('full day') || hint.includes('combo') || hint.includes('tour 7');
-            var isOutstation = hint.includes('pune') || hint.includes('mumbai') || hint.includes('satara') || hint.includes('airport') || hint.includes('transfer');
-            var isLocalDrop = hint.includes('drop') || hint.includes('mapro') || hint.includes('wilson');
-            var targetService = isCombo ? 'combo' : (isOutstation ? 'outstation' : (isLocalDrop ? 'local_drop' : 'sightseeing'));
+            var resolved = (window.TOUR_DATABASE && window.TOUR_DATABASE.resolveTour) ? window.TOUR_DATABASE.resolveTour(tourHint) : null;
+            var targetService = 'sightseeing';
+            if (resolved && resolved.category) {
+                targetService = resolved.category;
+            } else {
+                var hint = tourHint.toLowerCase();
+                var isCombo = hint.includes('full day') || hint.includes('combo') || hint.includes('tour 7');
+                var isOutstation = hint.includes('pune') || hint.includes('mumbai') || hint.includes('satara') || hint.includes('airport') || hint.includes('transfer');
+                var isLocalDrop = hint.includes('drop') || hint.includes('local drop') || hint.includes('point to point');
+                targetService = isCombo ? 'combo' : (isOutstation ? 'outstation' : (isLocalDrop ? 'local_drop' : 'sightseeing'));
+            }
 
             var serviceBtns = document.querySelectorAll('.amt-service-btn');
             serviceBtns.forEach(function(b) {
