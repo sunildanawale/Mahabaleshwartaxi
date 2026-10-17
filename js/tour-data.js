@@ -398,6 +398,88 @@ const TOUR_DATABASE = {
         return this.tours.find(function(t) { return t.id === q; }) || null;
     },
 
+    // ANTI-DUPLICATE & OVERLAP PREVENTION ENGINE
+    tourConflicts: {
+        'M1': {
+            conflicts: ['T1', 'T7'],
+            reason: "Arthur's Seat clifftop viewpoints are already 100% covered in Standard Tour 1 and Combo Tour 7.",
+            recText: "Pair with Tour 2 (Sunset & Waterfall) or Tour 3 (Pratapgad Fort) for completely new sights!",
+            suggestedTourId: 'T2'
+        },
+        'M2': {
+            conflicts: ['T1', 'T7'],
+            reason: "Kate's Point and Elephant's Head are already included in Standard Tour 1 and Combo Tour 7.",
+            recText: "Pair with Tour 2 (Sunset & Waterfall) or Tour 4 (Panchgani Table Land) for 100% new sights!",
+            suggestedTourId: 'T2'
+        },
+        'M3': {
+            conflicts: ['T2'],
+            reason: "Wilson Point and Lingmala Waterfall are already included in Standard Tour 2.",
+            recText: "Pair with Tour 1 (Arthur's Seat & Old Mahabaleshwar) or Tour 3 (Pratapgad Fort) for new sights!",
+            suggestedTourId: 'T1'
+        },
+        'T1': {
+            conflicts: ['M1', 'M2', 'T7'],
+            reason: "Tour 1 already includes Arthur's Seat (M1) and Kate's Point (M2). Combo Tour 7 also includes Tour 1.",
+            recText: "Pair with Tour 2 (Sunset/Lodwick/Wilson), Tour 3 (Pratapgad Fort), or Tour 4 (Panchgani) for new circuits!",
+            suggestedTourId: 'T2'
+        },
+        'T2': {
+            conflicts: ['M3'],
+            reason: "Tour 2 already includes Wilson Point and Lingmala Waterfall (M3).",
+            recText: "Pair with Tour 1 (Arthur's Seat & Old Mahabaleshwar) or Tour 3 (Pratapgad Fort) for completely new sights!",
+            suggestedTourId: 'T1'
+        },
+        'T4': {
+            conflicts: ['T7'],
+            reason: "Panchgani Darshan is already 100% included in Combo Tour 7.",
+            recText: "Pair with Tour 1 (Mahabaleshwar Darshan) or Tour 3 (Pratapgad Fort)!",
+            suggestedTourId: 'T1'
+        },
+        'T7': {
+            conflicts: ['M1', 'M2', 'T1', 'T4'],
+            reason: "Combo Tour 7 is a full-day package already combining Tour 1 (M1, M2) and Tour 4 (Panchgani).",
+            recText: "Combo Tour 7 is already a complete full-day tour. For an extra day, choose Tour 2 or Tour 3 (Pratapgad Fort)!",
+            suggestedTourId: 'T2'
+        }
+    },
+
+    getConflictingTourIds: function(id) {
+        if (!id) return [];
+        var q = String(id).toUpperCase().trim();
+        return (this.tourConflicts[q] && this.tourConflicts[q].conflicts) ? this.tourConflicts[q].conflicts : [];
+    },
+
+    checkTourOverlap: function(tourIds) {
+        if (!tourIds || tourIds.length <= 1) return null;
+        var self = this;
+        for (var i = 0; i < tourIds.length; i++) {
+            var rawA = typeof tourIds[i] === 'object' ? tourIds[i].id : tourIds[i];
+            var idA = String(rawA || '').toUpperCase();
+            var confA = self.tourConflicts[idA];
+            if (!confA) continue;
+            for (var j = 0; j < tourIds.length; j++) {
+                if (i === j) continue;
+                var rawB = typeof tourIds[j] === 'object' ? tourIds[j].id : tourIds[j];
+                var idB = String(rawB || '').toUpperCase();
+                if (confA.conflicts.indexOf(idB) !== -1) {
+                    var tourA = self.getTourById(idA);
+                    var tourB = self.getTourById(idB);
+                    return {
+                        tourA: tourA,
+                        tourB: tourB,
+                        reason: confA.reason,
+                        recText: confA.recText,
+                        suggestedTourId: confA.suggestedTourId || 'T2',
+                        conflictingIndex: j,
+                        conflictingId: idB
+                    };
+                }
+            }
+        }
+        return null;
+    },
+
     resolveTour: function(query) {
         if (!query) return this.tours[0];
         var q = String(query).toLowerCase().trim();

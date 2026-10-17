@@ -2469,9 +2469,26 @@
 
     function getAvailableSightseeingTours(excludeTourId) {
         if (!window.TOUR_DATABASE) return [];
-        var currentIds = bookingState.selectedTours.map(function (st) { return st.id; });
-        return window.TOUR_DATABASE.tours.filter(function (t) {
-            return t.category === 'sightseeing' && (!currentIds.includes(t.id) || t.id === excludeTourId);
+        var db = window.TOUR_DATABASE;
+        var currentIds = (bookingState.selectedTours || []).map(function (st) { return st.id; });
+
+        // Collect all conflicting tour IDs for currently selected tours (excluding the slot being edited)
+        var conflictingIds = [];
+        currentIds.forEach(function (cid) {
+            if (cid !== excludeTourId && db.getConflictingTourIds) {
+                var cList = db.getConflictingTourIds(cid);
+                (cList || []).forEach(function (cfId) {
+                    if (conflictingIds.indexOf(cfId) === -1) conflictingIds.push(cfId);
+                });
+            }
+        });
+
+        return db.tours.filter(function (t) {
+            if (t.category !== 'sightseeing') return false;
+            if (t.id === excludeTourId) return true;
+            if (currentIds.indexOf(t.id) !== -1) return false;
+            if (conflictingIds.indexOf(t.id) !== -1) return false;
+            return true;
         });
     }
 
@@ -2499,26 +2516,46 @@
         extraTours.forEach(function (st, idx) {
             var realIndex = idx + 1;
             var available = getAvailableSightseeingTours(st.id);
+            // If current tour conflicts due to primary change, keep it visible with a warning badge
+            var currentTourObj = db ? db.getTourById(st.id) : null;
+            if (currentTourObj && !available.some(function (t) { return t.id === st.id; })) {
+                available.unshift(currentTourObj);
+            }
+
             var optHtml = '';
             available.forEach(function (t) {
                 var selected = (t.id === st.id) ? ' selected' : '';
-                optHtml += '<option value="' + t.id + '"' + selected + '>' + escapeHtml(t.name) + ' — ₹' + t.fare + ' (' + escapeHtml(t.duration) + ')</option>';
+                var isSingle = (t.sub_category === 'single_tour' || t.fare === 800);
+                var prefix = isSingle ? '⚡ Express: ' : '⭐ Standard: ';
+                optHtml += '<option value="' + t.id + '"' + selected + '>' + prefix + escapeHtml(t.name) + ' — ₹' + t.fare + ' (' + escapeHtml(t.duration) + ')</option>';
             });
+
+            var overlapWithPrimary = (db && db.checkTourOverlap && bookingState.selectedTours[0])
+                ? db.checkTourOverlap([bookingState.selectedTours[0].id, st.id])
+                : null;
 
             html += '<div class="amt-extra-tour-row" data-index="' + realIndex + '">'
                 + '<div style="flex:1;min-width:0;">'
-                + '<label class="amt-label" style="font-size:0.75rem;margin-bottom:3px;color:#0369a1;">'
-                + '<i class="fa-solid fa-plus-circle"></i> Additional Tour #' + (realIndex + 1) + ' (Multi-Tour Package)'
+                + '<label class="amt-label" style="font-size:0.75rem;margin-bottom:3px;color:#0369a1;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:4px;">'
+                + '<span><i class="fa-solid fa-plus-circle"></i> Additional Tour #' + (realIndex + 1) + ' (Multi-Tour Package)</span>'
+                + (overlapWithPrimary ? '<span style="color:#b45309;font-weight:700;font-size:0.72rem;"><i class="fa-solid fa-triangle-exclamation"></i> Overlapping Viewpoints</span>' : '<span style="color:#16a34a;font-weight:700;font-size:0.72rem;"><i class="fa-solid fa-circle-check"></i> Unique Circuit</span>')
                 + '</label>'
-                + '<select class="amt-input amt-extra-tour-select" data-index="' + realIndex + '" style="font-size:16px;min-height:44px;font-weight:600;">'
+                + '<select class="amt-input amt-extra-tour-select" data-index="' + realIndex + '" style="font-size:16px;min-height:44px;font-weight:600;' + (overlapWithPrimary ? 'border:1.5px solid #f59e0b;background:#fffbeb;' : '') + '">'
                 + optHtml
                 + '</select>'
+                + (overlapWithPrimary ? '<div style="font-size:0.72rem;color:#b45309;margin-top:3px;line-height:1.35;"><i class="fa-solid fa-triangle-exclamation"></i> ' + escapeHtml(overlapWithPrimary.reason) + '</div>' : '')
                 + '</div>'
                 + '<button type="button" class="amt-remove-tour-btn" data-index="' + realIndex + '" title="Remove this tour" aria-label="Remove tour">'
                 + '<i class="fa-solid fa-trash-can"></i>'
                 + '</button>'
                 + '</div>';
         });
+
+        if (extraTours.length > 0) {
+            html += '<div style="font-size:0.72rem;color:#0369a1;margin:4px 0 10px;display:flex;align-items:center;gap:5px;background:#f0f9ff;padding:6px 10px;border-radius:6px;border:1px solid #bae6fd;">'
+                + '<i class="fa-solid fa-shield-halved" style="color:#0284c7;"></i> <span><strong>Smart Route Protection:</strong> Redundant tour packages sharing the same viewpoints are automatically filtered out to save you money.</span>'
+                + '</div>';
+        }
 
         container.innerHTML = html;
 
@@ -2592,9 +2629,55 @@
         var totalFare = tours.reduce(function (sum, t) { return sum + t.fare; }, 0);
         var tourNames = tours.map(function (t) { return t.tour_no ? 'Tour ' + t.tour_no : t.name; }).join(' + ');
 
-        summaryEl.innerHTML = '<div><i class="fa-solid fa-layer-group" style="color:#0284c7;"></i> <strong>' + tours.length + ' Tours Selected:</strong> ' + escapeHtml(tourNames) + '</div>'
-            + '<div style="font-size:0.92rem;font-weight:900;color:#0e7490;">Combined: ₹' + totalFare + '</div>';
-        summaryEl.style.display = 'flex';
+        var overlap = (db.checkTourOverlap) ? db.checkTourOverlap(bookingState.selectedTours) : null;
+
+        var html = '<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;flex-wrap:wrap;">'
+            + '  <div><i class="fa-solid fa-layer-group" style="color:#0284c7;"></i> <strong>' + tours.length + ' Tours Selected:</strong> ' + escapeHtml(tourNames) + '</div>'
+            + '  <div style="font-size:0.92rem;font-weight:900;color:#0e7490;">Combined: ₹' + totalFare + '</div>'
+            + '</div>';
+
+        if (overlap) {
+            var recTour = db.getTourById(overlap.suggestedTourId);
+            var recName = recTour ? (recTour.tour_no ? 'Tour ' + recTour.tour_no + ' (' + recTour.name + ')' : recTour.name) : 'Tour 2';
+            html += '<div class="amt-tour-overlap-card" style="width:100%;margin-top:10px;padding:12px 14px;border-radius:10px;background:#fffbeb;border:1.5px solid #f59e0b;color:#92400e;box-sizing:border-box;">'
+                + '  <div style="display:flex;align-items:center;gap:7px;font-weight:800;color:#b45309;font-size:0.86rem;margin-bottom:4px;">'
+                + '    <i class="fa-solid fa-triangle-exclamation" style="color:#d97706;font-size:1.1rem;"></i>'
+                + '    <span>Viewpoint Overlap Detected (Save Money & Time!)</span>'
+                + '  </div>'
+                + '  <div style="font-size:0.8rem;line-height:1.45;color:#78350f;margin-bottom:8px;">'
+                + '    <strong>' + escapeHtml(overlap.tourA.name) + '</strong> and <strong>' + escapeHtml(overlap.tourB.name) + '</strong> share the same viewpoints! '
+                + '    <br>' + escapeHtml(overlap.reason)
+                + '  </div>'
+                + '  <div style="background:#fef3c7;border-left:3px solid #d97706;padding:6px 10px;border-radius:6px;font-size:0.78rem;color:#78350f;margin-bottom:8px;">'
+                + '    💡 <strong>Local Expert Recommendation:</strong> ' + escapeHtml(overlap.recText)
+                + '  </div>'
+                + '  <button type="button" class="amt-auto-resolve-overlap-btn" data-conflicting-idx="' + overlap.conflictingIndex + '" data-replacement-id="' + escapeHtml(overlap.suggestedTourId) + '" style="background:#d97706;color:#ffffff;border:none;padding:8px 14px;border-radius:8px;font-size:0.8rem;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;gap:6px;">'
+                + '    <i class="fa-solid fa-wand-magic-sparkles"></i> Switch to ' + escapeHtml(recName) + ' (Zero Duplicate Sights)'
+                + '  </button>'
+                + '</div>';
+        } else {
+            html += '<div style="width:100%;margin-top:8px;padding:6px 10px;border-radius:8px;background:#f0fdf4;border:1px solid #86efac;color:#166534;font-size:0.75rem;font-weight:700;display:flex;align-items:center;gap:6px;box-sizing:border-box;">'
+                + '  <i class="fa-solid fa-circle-check" style="color:#16a34a;font-size:0.9rem;"></i>'
+                + '  <span>Optimal Multi-Tour Circuit: 100% Unique Viewpoints &bull; No Duplicate Sights Selected</span>'
+                + '</div>';
+        }
+
+        summaryEl.innerHTML = html;
+        summaryEl.style.display = 'block';
+
+        var resolveBtn = summaryEl.querySelector('.amt-auto-resolve-overlap-btn');
+        if (resolveBtn) {
+            resolveBtn.addEventListener('click', function () {
+                var cIdx = parseInt(resolveBtn.getAttribute('data-conflicting-idx'), 10);
+                var repId = resolveBtn.getAttribute('data-replacement-id');
+                if (bookingState.selectedTours[cIdx]) {
+                    bookingState.selectedTours[cIdx].id = repId;
+                    renderExtraTourRows();
+                    updateTourInsight();
+                    updateMultiTourSummary();
+                }
+            });
+        }
     }
 
     function renderMultiDayScheduleUI() {
@@ -2957,6 +3040,8 @@
                 cards.forEach(function (c) { c.classList.remove('active'); });
                 card.classList.add('active');
                 updateSelectedTourBanner(tourId);
+                if (typeof renderExtraTourRows === 'function') renderExtraTourRows();
+                if (typeof updateMultiTourSummary === 'function') updateMultiTourSummary();
                 if (typeof saveBookingDraft === 'function') saveBookingDraft();
             }
             card.addEventListener('click', selectThisCard);
