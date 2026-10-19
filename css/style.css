@@ -4246,57 +4246,151 @@ img {
 }
 
 
-/* 9. Mobile Sticky CTA Bar Guaranteed 50/50 Alignment */
+/* 9. Next-Gen Mobile Floating Micro-Dock (iOS/Android Glass Capsule) */
 .mobile-cta {
     display: none;
     position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    bottom: calc(12px + env(safe-area-inset-bottom, 8px));
+    left: 12px;
+    right: 12px;
+    max-width: 440px;
+    margin: 0 auto;
     z-index: 99999;
-    background: #0f172a;
-    padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 8px));
-    border-top: 1.5px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 -6px 25px rgba(0, 0, 0, 0.35);
-    gap: 12px;
+    background: rgba(15, 23, 42, 0.92);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 20px;
+    box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+    padding: 7px 8px;
+    gap: 8px;
+    box-sizing: border-box;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
 }
+
 @media (max-width: 768px) {
     .mobile-cta {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr !important;
+        display: flex !important;
         align-items: center !important;
+        justify-content: space-between !important;
     }
     body {
-        padding-bottom: 74px !important;
+        padding-bottom: calc(88px + env(safe-area-inset-bottom, 8px)) !important;
     }
 }
+
 .mobile-cta .btn,
 .mobile-cta a {
-    width: 100% !important;
     height: 46px !important;
-    border-radius: 12px !important;
-    font-weight: 800 !important;
-    font-size: 0.95rem !important;
+    border-radius: 14px !important;
+    font-weight: 700 !important;
+    font-size: 0.9rem !important;
+    letter-spacing: 0.01em !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 8px !important;
+    gap: 7px !important;
     text-decoration: none !important;
     white-space: nowrap !important;
     box-sizing: border-box !important;
     border: none !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
+    transition: transform 0.15s ease, box-shadow 0.2s ease, opacity 0.2s ease !important;
+    user-select: none !important;
+    -webkit-tap-highlight-color: transparent !important;
 }
+
+.mobile-cta a:active,
+.mobile-cta .btn:active {
+    transform: scale(0.96) !important;
+}
+
+/* Call Button - Sleek Dark Slate with Warm Amber Border & Icon */
 .mobile-cta .btn--accent,
 .mobile-cta .btn--dark,
 .mobile-cta a[href^="tel:"] {
-    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
-    color: #ffffff !important;
+    flex: 1 1 40% !important;
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%) !important;
+    border: 1px solid rgba(245, 158, 11, 0.45) !important;
+    color: #f8fafc !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3) !important;
 }
+
+.mobile-cta a[href^="tel:"] i,
+.mobile-cta .btn--accent i,
+.mobile-cta .btn--dark i {
+    color: #fbbf24 !important;
+    font-size: 0.95rem !important;
+}
+
+/* WhatsApp Button - High-Conversion Spotlight with Sheen & Online Pulse */
 .mobile-cta .btn--whatsapp,
 .mobile-cta a[href*="whatsapp"] {
-    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%) !important;
+    flex: 1.35 1 60% !important;
+    background: linear-gradient(135deg, #25D366 0%, #16a34a 100%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.35) !important;
     color: #ffffff !important;
+    box-shadow: 0 6px 20px -2px rgba(37, 211, 102, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.mobile-cta a[href*="whatsapp"] i,
+.mobile-cta .btn--whatsapp i {
+    font-size: 1.15rem !important;
+    color: #ffffff !important;
+}
+
+/* Online Pulse Dot on WhatsApp Button */
+.mobile-cta a[href*="whatsapp"]::after,
+.mobile-cta .btn--whatsapp::after {
+    content: '';
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    background: #ffffff;
+    border-radius: 50%;
+    margin-left: 6px;
+    box-shadow: 0 0 8px #ffffff;
+    animation: waPulseOnline 1.8s infinite ease-in-out;
+    flex-shrink: 0;
+}
+
+@keyframes waPulseOnline {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.35; transform: scale(1.4); }
+}
+
+/* Ambient Shimmer Across WhatsApp Button */
+.mobile-cta a[href*="whatsapp"]::before,
+.mobile-cta .btn--whatsapp::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 50%;
+    height: 200%;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.28), transparent);
+    transform: rotate(25deg);
+    animation: waShimmer 4s infinite ease-in-out;
+    pointer-events: none;
+}
+
+@keyframes waShimmer {
+    0%, 75% { left: -60%; }
+    100% { left: 160%; }
+}
+
+/* Optional 3rd Fares / Rates Button */
+.mobile-cta .mobile-cta__fares {
+    flex: 0.9 1 28% !important;
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.92) 0%, rgba(15, 23, 42, 0.96) 100%) !important;
+    border: 1px solid rgba(56, 189, 248, 0.45) !important;
+    color: #f8fafc !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3) !important;
+}
+.mobile-cta .mobile-cta__fares i {
+    color: #38bdf8 !important;
+    font-size: 0.9rem !important;
 }
 
 /* 10. Eradicate Stale/Legacy Cached Bottom Bars & Elements */
