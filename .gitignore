@@ -15,3 +15,7 @@ original_github_index.html
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Antigravity local agent skills cache
+.agents/
+skills-lock.json
