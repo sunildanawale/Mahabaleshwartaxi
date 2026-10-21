@@ -3100,7 +3100,7 @@
         }
 
         var isSingle = (t.sub_category === 'single_tour' || t.fare === 800);
-        var isCombo = (t.category === 'combo');
+        var isCombo = (t.category === 'combo' || t.id === 'T7');
         var isOutstation = (t.category === 'outstation');
         var isLocalDrop = (t.category === 'local_drop');
 
@@ -3108,6 +3108,7 @@
         var badgeClass = '';
         var fareTitle = '';
         var fareTerms = '';
+        var durText = escapeHtml(t.duration || '');
 
         if (isSingle) {
             badgeText = '⚡ Express Single';
@@ -3119,6 +3120,7 @@
             badgeClass = 'amt-badge-combo';
             fareTitle = '₹3,000';
             fareTerms = 'Union Tariff';
+            durText = '8-9 Hrs.'; // Compact duration to prevent meta row wrapping
         } else if (isOutstation) {
             badgeText = '✈️ Outstation Route';
             badgeClass = 'amt-badge-outstation';
@@ -3139,7 +3141,10 @@
         var points = t.points || [];
         var pointsHtml = '';
         if (points.length > 0) {
-            var displayPts = points.slice(0, 4);
+            // For combo, highlight the marquee attractions cleanly
+            var displayPts = isCombo
+                ? ['Old Mahabaleshwar', 'Arthur Seat', 'Table Land']
+                : points.slice(0, 3).map(function(p) { return p.replace(/\s*\([^)]*\)/g, ''); });
             var remaining = points.length - displayPts.length;
             pointsHtml = '<div class="amt-stb-points-wrap">' +
                 '<span class="amt-stb-points-lbl"><i class="fa-solid fa-location-dot"></i> Points:</span> ' +
@@ -3156,7 +3161,7 @@
             '    </div>' +
             '  </div>' +
             '  <div class="amt-stb-meta-row">' +
-            '    <span><i class="fa-solid fa-clock"></i> ' + escapeHtml(t.duration) + '</span>' +
+            '    <span><i class="fa-solid fa-clock"></i> ' + durText + '</span>' +
             (points.length > 0 ? '    <span><i class="fa-solid fa-binoculars"></i> ' + points.length + ' Viewpoints</span>' : '') +
             '    <span><i class="fa-solid fa-shield-halved"></i> Zero Advance</span>' +
             '  </div>' +
@@ -3389,10 +3394,10 @@
         } else if (service === 'combo') {
             filtered = db.tours.filter(function (t) { return t.category === 'combo'; });
             labelText = 'Select Full Day Combo Package *';
-            countText = '1 Comprehensive Pass';
+            countText = '1 Combo Pass';
             optHtml = '<optgroup label="⭐ Full Day Mahabaleshwar + Panchgani Combo">' +
                 filtered.map(function (t) {
-                    return '<option value="' + t.id + '">' + escapeHtml(t.name) + ' — ₹' + t.fare + ' (' + escapeHtml(t.duration) + ')</option>';
+                    return '<option value="' + t.id + '">Full Day Combo (Tour 7) — ₹' + t.fare + ' (8-9 Hrs.)</option>';
                 }).join('') +
                 '</optgroup>';
         } else if (service === 'outstation') {
