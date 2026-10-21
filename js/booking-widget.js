@@ -251,8 +251,8 @@
                 advanceNote: 'Nominal Fuel Advance • Balance to Driver upon Drop',
                 paymentSettlement: 'Nominal fuel lock advance via link; balance to driver upon drop',
                 vehicleDesc: isLarge
-                    ? (taxiCount + 'x Tourist Cabs (AC Sedan / SUV, arranged as per availability)')
-                    : 'Tourist Cab (AC Sedan / SUV, arranged as per availability)',
+                    ? (taxiCount + 'x 6-7 Seater Cabs (Arranged as per availability)')
+                    : '4-Seater Tourist Cab (Arranged as per availability)',
                 dispatchNotice: isSameDayAfternoon
                     ? '⚠️ Vehicle availability may be limited for same-day afternoon/evening bookings, especially during the tourist season. Your booking will be confirmed after vehicle availability is checked.'
                     : '⚠️ Outstation Cab Dispatch: Reconfirmation required on WhatsApp/Phone. Nominal fuel advance applies. ₹200 reporting fee applies if cancelled after driver departs for pickup.',
@@ -260,7 +260,7 @@
                 termsTitle: 'Important Outstation Travel Guidelines & Carriage Terms',
                 terms: [
                     { title: 'Direct Highway Transit', desc: 'Direct intercity transfer via Pasarni / Wai Ghat descent connecting directly to NH-48 Expressway to your drop destination.' },
-                    { title: 'Vehicle Allocation', desc: 'Tourist cab (AC Sedan or 6-Seater SUV arranged as per vehicle availability).' },
+                    { title: 'Vehicle Allocation', desc: 'Tourist cab (4-Seater or 6-7 Seater arranged as per vehicle availability).' },
                     { title: 'Tolls & Fastag', desc: 'Locked outstation base fare. Highway tolls and airport parking payable as per actual Fastag receipts.' },
                     { title: 'Fuel Advance & Balance', desc: 'Operator shares secure payment link for nominal fuel lock advance; remaining balance payable directly to driver upon destination arrival.' },
                     { title: 'Cancellation Policy', desc: 'Free cancellation up to 2 hours prior to scheduled departure. Standard reporting charge applies if cancelled after vehicle departs for pickup.' },
@@ -274,7 +274,7 @@
                 ],
                 policyNote: 'Please confirm drop destination and route halts with the taxi driver before departure.',
                 whatsappTariffNote: function (fare) {
-                    return '💰 *Outstation Tariff:* ₹' + fare + ' (+ Tolls at actuals)\n_Nominal fuel advance • Balance payable to driver upon drop_\nℹ️ _Outstation Transit: AC Sedan / 6-Seater SUV arranged as per vehicle availability._\n\n';
+                    return '💰 *Outstation Tariff:* ₹' + fare + ' (+ Tolls at actuals)\n_Nominal fuel advance • Balance payable to driver upon drop_\nℹ️ _Outstation Transit: Tourist cab arranged as per vehicle availability._\n\n';
                 },
                 whatsappReadiness: 'I confirm this is a genuine outstation travel inquiry. Please confirm vehicle availability and driver dispatch with me.'
             };
@@ -521,11 +521,11 @@
 
         var msg = 'Hello Aryan Taxi Mahabaleshwar 👋\n'
             + '🚕 *TAXI INQUIRY & TARIFF LOCK REQUEST — ' + sRules.serviceTitle.toUpperCase() + '*\n'
-            + '_(Registered Mahabaleshwar Taxi Union Member Cab)_\n\n'
+            + '_(Subject to Cab Availability • Pay Driver After Trip)_\n\n'
             + '🔖 *Inquiry Ref No.:* ' + (b.bookingId || 'AMT-REQ') + '\n'
             + '👤 *Guest:* ' + b.name + (b.phone ? ' (' + b.phone + ')' : '') + '\n'
             + '🏨 *Pickup Location:* ' + pickupStr + '\n'
-            + '👥 *Allocated Vehicle:* ' + sRules.vehicleDesc + '\n\n'
+            + '👥 *Cab Requirement:* ' + sRules.vehicleDesc + '\n\n'
             + '🚖 *Selected Tour' + (isMulti ? 's (' + tours.length + ' Tours):*' : ':*') + '\n'
             + tourListStr + '\n\n';
 
@@ -587,23 +587,51 @@
         var s = document.createElement('style');
         s.id = 'amtWidgetStyles';
         s.textContent = [
-            '.amt-modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,0.85);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:none;justify-content:center;align-items:flex-start;z-index:20000000 !important;padding:16px 14px 40px;overflow-y:auto;-webkit-overflow-scrolling:touch;box-sizing:border-box;}',
-            '.amt-card,#amtBookingModal .amt-card{background:#ffffff;border-radius:20px;width:100%;max-width:520px;box-shadow:0 25px 60px rgba(0,0,0,0.45);overflow:visible;margin:16px auto;border:1px solid #e2e8f0;box-sizing:border-box;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}',
-            '@media (min-width:768px){.amt-card,#amtBookingModal .amt-card{max-width:740px !important;margin:28px auto !important;}}',
-            '@media (max-width:640px){.amt-modal-overlay{padding:calc(env(safe-area-inset-top, 8px) + 8px) 8px 30px !important;z-index:20000000 !important;}.amt-card,#amtBookingModal .amt-card{width:100% !important;max-width:100% !important;margin:0 auto !important;border-radius:16px !important;}}',
+            '.amt-modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,0.85);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:none;justify-content:center;align-items:center;z-index:20000000 !important;padding:12px;box-sizing:border-box;}',
+            '.amt-card,#amtBookingModal .amt-card{background:#ffffff;border-radius:20px;width:100%;max-width:500px;max-height:90vh;display:flex;flex-direction:column;box-shadow:0 25px 60px rgba(0,0,0,0.45);overflow:hidden;margin:auto;border:1px solid #e2e8f0;box-sizing:border-box;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}',
+            '@media (min-width:768px){.amt-card,#amtBookingModal .amt-card{max-width:540px !important;margin:auto !important;}}',
+            '@media (max-width:640px){.amt-modal-overlay{padding:calc(env(safe-area-inset-top, 8px) + 8px) 8px 30px !important;z-index:20000000 !important;}.amt-card,#amtBookingModal .amt-card{width:100% !important;max-width:100% !important;margin:0 auto !important;border-radius:16px !important;max-height:92vh !important;}}',
             'body.modal-open .navbar{z-index:0 !important;visibility:hidden !important;display:none !important;}',
             'body.modal-open .mobile-cta{display:none !important;}',
-            '.amt-card-header{background:linear-gradient(135deg,#0e2338 0%,#0891b2 100%);color:#ffffff;padding:16px 22px 14px;border-radius:20px 20px 0 0;position:relative;box-sizing:border-box;}',
+            '.amt-card-header{background:linear-gradient(135deg,#0e2338 0%,#0891b2 100%);color:#ffffff;padding:14px 18px 10px;border-radius:20px 20px 0 0;position:relative;box-sizing:border-box;flex-shrink:0;}',
             '.amt-header-brand{font-size:0.72rem;text-transform:uppercase;letter-spacing:1px;color:#fbbf24;font-weight:700;margin-bottom:2px;white-space:nowrap !important;}',
-            '.amt-header-title{font-size:1.22rem;font-weight:800;color:#ffffff;margin-bottom:8px;letter-spacing:-0.2px;line-height:1.2;}',
+            '.amt-header-title{font-size:1.18rem;font-weight:800;color:#ffffff;margin-bottom:6px;letter-spacing:-0.2px;line-height:1.2;}',
             '.amt-header-step-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:4px;}',
             '.amt-header-step-label{font-size:0.78rem;font-weight:700;color:#e0f2fe;white-space:nowrap;}',
             '.amt-header-track{flex:1;height:6px;background:rgba(255,255,255,0.22);border-radius:6px;overflow:hidden;}',
             '.amt-header-fill{height:100%;background:#38bdf8;border-radius:6px;transition:width 0.35s ease;}',
-            '.amt-close-btn{position:absolute;top:14px;right:14px;background:rgba(255,255,255,0.18);border:none;color:#ffffff;min-width:44px;min-height:44px;width:44px;height:44px;border-radius:50%;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:background 0.2s;box-sizing:border-box;}',
+            '.amt-close-btn{position:absolute;top:12px;right:12px;background:rgba(255,255,255,0.18);border:none;color:#ffffff;min-width:40px;min-height:40px;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:background 0.2s;box-sizing:border-box;}',
             '.amt-close-btn:hover{background:rgba(255,255,255,0.32);}',
-            '.amt-card-body{padding:18px 20px 22px;overflow:visible;max-height:none;}',
-            '@media (max-width:640px){.amt-card-header{padding:14px 16px 12px;border-radius:16px 16px 0 0;}.amt-header-title{font-size:1.05rem;margin-bottom:6px;}.amt-card-body{padding:14px 12px 18px;}.amt-input,.amt-card input,.amt-card select,.amt-card textarea{font-size:16px !important;min-height:44px !important;}}',
+            '.amt-card-body{padding:14px 18px 18px;overflow-y:auto;-webkit-overflow-scrolling:touch;flex:1;box-sizing:border-box;}',
+            '@media (max-width:640px){.amt-card-header{padding:12px 14px 10px;border-radius:16px 16px 0 0;}.amt-header-title{font-size:1.05rem;margin-bottom:4px;}.amt-card-body{padding:12px 14px 16px;}.amt-input,.amt-card input,.amt-card select,.amt-card textarea{font-size:16px !important;min-height:42px !important;}}',
+            '.amt-step-hdr-compact{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}',
+            '.amt-step-hdr-compact .amt-step-title{font-size:0.95rem;font-weight:800;color:#0f172a;margin:0;}',
+            '.amt-trust-chip{font-size:0.68rem;font-weight:700;color:#059669;background:#ecfdf5;padding:2px 7px;border-radius:6px;border:1px solid #a7f3d0;white-space:nowrap;}',
+            '.amt-category-pills{display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px;margin-bottom:10px;scrollbar-width:none;}',
+            '.amt-category-pills::-webkit-scrollbar{display:none;}',
+            '.amt-category-pills .amt-service-btn{flex:0 0 auto;padding:7px 11px;border-radius:20px;border:1.5px solid #cbd5e1;background:#f8fafc;color:#334155;font-size:0.76rem;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.15s ease;}',
+            '.amt-category-pills .amt-service-btn:hover{border-color:#0284c7;background:#f0f9ff;color:#0284c7;}',
+            '.amt-category-pills .amt-service-btn.active{background:#0284c7;border-color:#0284c7;color:#ffffff;box-shadow:0 2px 8px rgba(2,132,199,0.3);}',
+            '.amt-time-chip{padding:3px 7px;border-radius:6px;border:1px solid #cbd5e1;background:#f8fafc;font-size:0.68rem;font-weight:700;color:#475569;cursor:pointer;}',
+            '.amt-time-chip:hover{border-color:#0284c7;color:#0284c7;}',
+            '.amt-time-chip.active{background:#0284c7;border-color:#0284c7;color:#ffffff;}',
+            '.amt-cab-selector-wrap{margin-bottom:10px;}',
+            '.amt-cab-pill-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px;}',
+            '.amt-cab-pill{display:flex;align-items:center;gap:8px;padding:8px 10px;border:1.5px solid #cbd5e1;border-radius:10px;background:#ffffff;cursor:pointer;transition:all 0.15s ease;}',
+            '.amt-cab-pill:hover{border-color:#0284c7;background:#f0f9ff;}',
+            '.amt-cab-pill.active{border-color:#0284c7;background:#f0f9ff;box-shadow:0 0 0 2px #0284c7;}',
+            '.amt-cab-pill-radio{width:14px;height:14px;border-radius:50%;border:2px solid #94a3b8;flex-shrink:0;display:flex;align-items:center;justify-content:center;}',
+            '.amt-cab-pill.active .amt-cab-pill-radio{border-color:#0284c7;background:#0284c7;}',
+            '.amt-cab-pill-info{display:flex;flex-direction:column;text-align:left;}',
+            '.amt-cab-pill-info strong{font-size:0.78rem;color:#0f172a;line-height:1.2;}',
+            '.amt-cab-pill-info span{font-size:0.65rem;color:#64748b;margin-top:1px;}',
+            '.amt-cab-subnote{font-size:0.68rem;color:#475569;margin:5px 0 0;line-height:1.3;}',
+            '.amt-compact-review-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:9px;padding:8px 10px;margin-bottom:10px;}',
+            '.amt-crb-row{display:flex;justify-content:space-between;align-items:center;}',
+            '.amt-crb-item{font-size:0.78rem;color:#0f172a;font-weight:600;}',
+            '.amt-crb-fare{font-size:1.05rem;font-weight:900;color:#0e7490;}',
+            '.amt-crb-meta{display:flex;flex-wrap:wrap;gap:8px;font-size:0.68rem;color:#64748b;margin-top:3px;}',
+            '.amt-crb-zero{color:#15803d;font-weight:700;}',
             '.amt-step-title{font-size:1.02rem;font-weight:800;color:#0f172a;margin:0 0 3px;}',
             '.amt-step-sub{font-size:0.8rem;color:#64748b;margin:0 0 14px;}',
             '.amt-service-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}',
@@ -1239,147 +1267,127 @@
             + '  <span><i class="fa-solid fa-clock-rotate-left"></i> Restored your previous trip selections</span>'
             + '  <button type="button" id="amtClearDraftBtn" class="amt-draft-btn-clear">Start Fresh</button>'
             + '</div>'
-            + '<h3 class="amt-step-title">1. Select Tour Package &amp; Schedule</h3>'
-            + '<p class="amt-step-sub">Choose your tour category, sightseeing package, travel date, and preferred departure time.</p>'
-            + '<div class="amt-service-grid" role="radiogroup" aria-label="Service Category">'
-            + '  <div class="amt-service-btn active" role="radio" aria-checked="true" tabindex="0" data-service="sightseeing">'
-            + '    <strong>🚕 Sightseeing</strong><span>Express ₹800 &amp; Full</span>'
-            + '  </div>'
-            + '  <div class="amt-service-btn" role="radio" aria-checked="false" tabindex="0" data-service="combo">'
-            + '    <strong>⭐ Full Day Combo</strong><span>Tour 7 (Maha + Panchgani)</span>'
-            + '  </div>'
-            + '  <div class="amt-service-btn" role="radio" aria-checked="false" tabindex="0" data-service="outstation">'
-            + '    <strong>✈️ Outstation Drop</strong><span>Pune / Mumbai / Satara</span>'
-            + '  </div>'
-            + '  <div class="amt-service-btn" role="radio" aria-checked="false" tabindex="0" data-service="local_drop">'
-            + '    <strong>📍 Local Point Drop</strong><span>Mapro / Panchgani / Market</span>'
-            + '  </div>'
+            + '<div class="amt-step-hdr-compact">'
+            + '  <h3 class="amt-step-title">1. Select Tour &amp; Departure</h3>'
+            + '  <span class="amt-trust-chip"><i class="fa-solid fa-shield-halved"></i> Fixed Rates &bull; Zero Advance</span>'
             + '</div>'
-            + '<div id="amtSightseeingFilterWrap"></div>'
-            + '<div class="amt-visual-tour-cards" id="amtVisualTourCards"></div>'
-            + '<div id="amtSelectedTourBanner" class="amt-selected-tour-banner" style="display:none;"></div>'
-            + '<div class="amt-form-group" style="display:none;">'
-            + '  <label class="amt-label" for="amtTourSelect">Selected Tour Package / Route</label>'
-            + '  <select id="amtTourSelect" class="amt-select">'
-            + '    <option value="">-- Choose a Tour Package --</option>'
+            + '<div class="amt-category-pills" role="radiogroup" aria-label="Service Category">'
+            + '  <button type="button" class="amt-service-btn active" role="radio" aria-checked="true" data-service="sightseeing">🚕 Sightseeing</button>'
+            + '  <button type="button" class="amt-service-btn" role="radio" aria-checked="false" data-service="express">⚡ Express ₹800</button>'
+            + '  <button type="button" class="amt-service-btn" role="radio" aria-checked="false" data-service="combo">⭐ Full Day</button>'
+            + '  <button type="button" class="amt-service-btn" role="radio" aria-checked="false" data-service="outstation">✈️ Outstation</button>'
+            + '  <button type="button" class="amt-service-btn" role="radio" aria-checked="false" data-service="local_drop">📍 Local Drop</button>'
+            + '</div>'
+            + '<div class="amt-form-group" style="margin-bottom:8px;">'
+            + '  <label class="amt-label" for="amtTourSelect">Select Tour Package / Route *</label>'
+            + '  <select id="amtTourSelect" class="amt-select" style="width:100%;font-weight:700;">'
             + tourOptions
             + '  </select>'
             + '</div>'
-            + '<div id="amtExtraToursContainer"></div>'
-            + '<button type="button" id="amtAddTourBtn" class="amt-add-tour-btn" style="background:#f0fdf4;border:1.5px dashed #16a34a;color:#15803d;border-radius:10px;padding:9px 12px;font-size:0.82rem;font-weight:700;cursor:pointer;width:100%;margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:6px;min-height:44px;box-sizing:border-box;"><i class="fa-solid fa-plus-circle"></i> + Add Another Tour (Multi-Tour Package)</button>'
-            + '<div id="amtMultiTourSummary" class="amt-multi-tour-summary-banner" style="display:none;background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:10px;padding:8px 12px;font-size:0.8rem;color:#0369a1;margin-bottom:12px;align-items:center;justify-content:space-between;font-weight:700;box-sizing:border-box;"></div>'
-            + '<div id="amtTourInsight" class="amt-tour-insight-box" style="display:none;"></div>'
-            + '<div class="amt-schedule-card">'
-            + '  <div class="amt-schedule-title"><i class="fa-solid fa-calendar-day" style="color:#0284c7;"></i> Travel Schedule &amp; Departure</div>'
-            + '  <div class="amt-quick-time-section" style="margin-bottom:10px;">'
-            + '    <div class="amt-quick-time-lbl"><i class="fa-solid fa-bolt" style="color:#0284c7;"></i> Quick Departure Options:</div>'
-            + '    <div class="amt-time-pills">'
-            + '      <button type="button" class="amt-time-pill" data-time="06:00"><i class="fa-solid fa-sun" style="color:#f59e0b;"></i> 06:00 AM <span class="amt-pill-tag">Sunrise</span></button>'
-            + '      <button type="button" class="amt-time-pill active" data-time="09:00"><i class="fa-solid fa-cloud-sun" style="color:#0284c7;"></i> 09:00 AM <span class="amt-pill-tag">Recommended</span></button>'
-            + '      <button type="button" class="amt-time-pill" data-time="10:30"><i class="fa-solid fa-sun-plant-wilt" style="color:#10b981;"></i> 10:30 AM <span class="amt-pill-tag">Mid-Morning</span></button>'
-            + '      <button type="button" class="amt-time-pill" data-time="14:00"><i class="fa-solid fa-mountain-sun" style="color:#8b5cf6;"></i> 02:00 PM <span class="amt-pill-tag">Sunset Circuit</span></button>'
+            + '<div id="amtSelectedTourBanner" class="amt-selected-tour-banner" style="display:none;"></div>'
+            + '<div id="amtSightseeingFilterWrap" style="display:none;"></div>'
+            + '<div id="amtVisualTourCards" style="display:none;"></div>'
+            + '<div id="amtExtraToursContainer" style="display:none;"></div>'
+            + '<button type="button" id="amtAddTourBtn" style="display:none;"></button>'
+            + '<div id="amtMultiTourSummary" style="display:none;"></div>'
+            + '<div id="amtTourInsight" style="display:none;"></div>'
+            + '<div class="amt-grid2" style="margin-top:10px;margin-bottom:8px;">'
+            + '  <div>'
+            + '    <label class="amt-label" for="amtDate">Travel Date *</label>'
+            + '    <input type="date" id="amtDate" class="amt-input" required>'
+            + '  </div>'
+            + '  <div>'
+            + '    <label class="amt-label" for="amtTime">Pickup Time *</label>'
+            + '    <input type="time" id="amtTime" class="amt-input" value="09:00" required>'
+            + '    <div class="amt-quick-time-chips" style="display:flex;gap:4px;margin-top:4px;">'
+            + '      <button type="button" class="amt-time-chip active" data-time="09:00">09:00 AM</button>'
+            + '      <button type="button" class="amt-time-chip" data-time="10:30">10:30 AM</button>'
+            + '      <button type="button" class="amt-time-chip" data-time="14:00">02:00 PM</button>'
             + '    </div>'
             + '  </div>'
-            + '  <div class="amt-grid2">'
-            + '    <div>'
-            + '      <label class="amt-label" for="amtDate">Travel Date *</label>'
-            + '      <input type="date" id="amtDate" class="amt-input" required>'
-            + '    </div>'
-            + '    <div>'
-            + '      <label class="amt-label" for="amtTime">Pickup Time *</label>'
-            + '      <input type="time" id="amtTime" class="amt-input" value="09:00" required>'
-            + '      <div id="amtSmartTimeBox" style="margin-top:5px;font-size:0.74rem;color:#0369a1;display:flex;align-items:center;flex-wrap:wrap;gap:5px;">'
-            + '        <span>💡 <strong>AI Suggested:</strong> <button type="button" id="amtSmartTimeBtn" class="amt-smart-time-btn">09:00 AM</button></span>'
-            + '        <span id="amtSmartTimeReason" style="color:#64748b;font-size:0.71rem;"></span>'
-            + '      </div>'
-            + '    </div>'
-            + '  </div>'
-            + '  <div id="amtMultiDayToggleBox" class="amt-multi-day-box" style="display:none;margin-top:10px;margin-bottom:6px;box-sizing:border-box;">'
-            + '    <label style="display:flex;align-items:center;gap:8px;font-size:0.8rem;font-weight:700;cursor:pointer;">'
-            + '      <input type="checkbox" id="amtDiffScheduleCheckbox" style="width:18px;height:18px;accent-color:#0284c7;cursor:pointer;">'
-            + '      <span>Schedule tours on different dates or times (Multi-Day Circuit)</span>'
-            + '    </label>'
-            + '    <div id="amtMultiDayList" style="display:none;margin-top:10px;display:flex;flex-direction:column;gap:8px;"></div>'
-            + '  </div>'
-            + '  <div id="amtAdvisoryBox" style="display:none;margin-top:10px;padding:10px 12px;border-radius:10px;font-size:0.78rem;"></div>'
             + '</div>'
-            + '<div class="amt-btn-row">'
-            + '  <button type="button" class="amt-btn-next" id="amtToStep2" style="width:100%;padding:13px 20px;background:linear-gradient(135deg, #0284c7 0%, #0369a1 100%);color:#ffffff;border:none;border-radius:11px;font-weight:800;font-size:0.96rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 12px rgba(2,132,199,0.35);">'
-            + '    Next: Pickup &amp; Contact Details <i class="fa-solid fa-arrow-right"></i>'
+            + '<div id="amtSmartTimeBox" style="display:none;">'
+            + '  <button type="button" id="amtSmartTimeBtn" class="amt-smart-time-btn" style="display:none;">09:00 AM</button>'
+            + '  <span id="amtSmartTimeReason" style="display:none;"></span>'
+            + '</div>'
+            + '<div id="amtMultiDayToggleBox" style="display:none;">'
+            + '  <input type="checkbox" id="amtDiffScheduleCheckbox">'
+            + '  <div id="amtMultiDayList"></div>'
+            + '</div>'
+            + '<div id="amtAdvisoryBox" style="display:none;"></div>'
+            + '<div class="amt-btn-row" style="margin-top:12px;">'
+            + '  <button type="button" class="amt-btn-next" id="amtToStep2" style="width:100%;padding:12px 20px;background:linear-gradient(135deg, #0284c7 0%, #0369a1 100%);color:#ffffff;border:none;border-radius:11px;font-weight:800;font-size:0.96rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 12px rgba(2,132,199,0.35);">'
+            + '    Next: Pickup &amp; Cab Details <i class="fa-solid fa-arrow-right"></i>'
             + '  </button>'
             + '</div>'
             + '</div>'
 
             // STEP 2: PICKUP HOTEL & GUEST DETAILS
             + '<div id="amtStep2" style="display:none;">'
-            + '<h3 class="amt-step-title">2. Pickup Hotel &amp; Guest Details</h3>'
-            + '<p class="amt-step-sub">Enter your pickup hotel, passenger contact, and review your guaranteed fixed tariff.</p>'
-            + '<div id="amtGuestRestored" style="display:none;padding:6px 10px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;font-size:0.74rem;color:#166534;margin-bottom:10px;"><i class="fa-solid fa-clock-rotate-left"></i> Details pre-filled from your previous visit</div>'
-            + '<div class="amt-vehicle-spec-card">'
-            + '  <div class="amt-vspec-hdr">'
-            + '    <div class="amt-vspec-avatar"><i class="fa-solid fa-taxi"></i></div>'
-            + '    <div>'
-            + '      <div class="amt-vspec-title">Official Mahabaleshwar Taxi Union Vehicle Specs</div>'
-            + '      <div class="amt-vspec-sub">Dedicated Mountain-Grade Cab &bull; No Sharing &bull; Hotel Porch Pickup</div>'
+            + '<div class="amt-step-hdr-compact">'
+            + '  <h3 class="amt-step-title">2. Pickup Hotel &amp; Cab Details</h3>'
+            + '  <span class="amt-trust-chip"><i class="fa-solid fa-shield-halved"></i> Pay Driver After Trip</span>'
+            + '</div>'
+            + '<div class="amt-cab-selector-wrap" style="margin-bottom:10px;">'
+            + '  <label class="amt-label">Cab Capacity (Non-Sharing Private Tourist Cab)</label>'
+            + '  <div class="amt-cab-pill-grid">'
+            + '    <div class="amt-cab-pill active" data-cab="4-seater">'
+            + '      <div class="amt-cab-pill-radio"></div>'
+            + '      <div class="amt-cab-pill-info">'
+            + '        <strong>🚕 4-Seater Tourist Cab</strong>'
+            + '        <span>1 to 4 Guests &bull; As per availability</span>'
+            + '      </div>'
+            + '    </div>'
+            + '    <div class="amt-cab-pill" data-cab="6-7-seater">'
+            + '      <div class="amt-cab-pill-radio"></div>'
+            + '      <div class="amt-cab-pill-info">'
+            + '        <strong>🚙 6-7 Seater Cab</strong>'
+            + '        <span>5 to 7 Guests &bull; As per availability</span>'
+            + '      </div>'
             + '    </div>'
             + '  </div>'
-            + '  <div class="amt-vspec-grid">'
-            + '    <div class="amt-vspec-cell"><i class="fa-solid fa-users" style="color:#0284c7;"></i><div><strong>Max 4 Guests</strong><span>Mountain Union Permit</span></div></div>'
-            + '    <div class="amt-vspec-cell"><i class="fa-solid fa-shield-halved" style="color:#10b981;"></i><div><strong>Private Cab</strong><span>Zero Co-passenger Sharing</span></div></div>'
-            + '    <div class="amt-vspec-cell"><i class="fa-solid fa-hotel" style="color:#f59e0b;"></i><div><strong>Porch Pickup</strong><span>Direct Resort Reception</span></div></div>'
-            + '    <div class="amt-vspec-cell"><i class="fa-solid fa-receipt" style="color:#8b5cf6;"></i><div><strong>Fixed Tariff</strong><span>Pay Driver After Trip</span></div></div>'
-            + '  </div>'
+            + '  <p class="amt-cab-subnote"><i class="fa-solid fa-circle-check" style="color:#10b981;"></i> Dedicated cab for your group &bull; Model subject to availability &bull; Hotel porch pickup</p>'
+            + '  <select id="amtPax" style="display:none;"><option value="3-4" selected>3-4 Guests</option><option value="5+">5+ Guests</option></select>'
+            + '  <div id="amtLargeGroupNotice" style="display:none;"><select id="amtTaxiCount" style="display:none;"><option value="2" selected>2</option></select></div>'
             + '</div>'
-            + '<div style="position:relative;margin-bottom:8px;">'
-            + '  <label class="amt-label" for="amtPickup">Hotel / Resort / Landmark in Mahabaleshwar / Panchgani *</label>'
+            + '<div style="position:relative;margin-bottom:10px;">'
+            + '  <label class="amt-label" for="amtPickup">Pickup Hotel / Landmark in Mahabaleshwar / Panchgani *</label>'
             + '  <div style="position:relative;">'
-            + '    <input type="text" id="amtPickup" class="amt-input" placeholder="Type hotel name (e.g. Dreamland, Le Méridien, Club Mahindra...)" autocomplete="off" required>'
+            + '    <input type="text" id="amtPickup" class="amt-input" placeholder="Type hotel name (e.g. Club Mahindra, Le Méridien, Market...)" autocomplete="off" required>'
             + '    <span id="amtPickupClear" style="display:none;position:absolute;right:10px;top:50%;transform:translateY(-50%);cursor:pointer;color:#94a3b8;font-size:1.1rem;padding:4px;">&times;</span>'
             + '  </div>'
             + '  <div id="amtAutocompleteList" class="amt-autocomplete-dropdown" style="display:none;"></div>'
             + '</div>'
-            + '<div id="amtZoneNotice" style="display:none;margin-bottom:10px;padding:7px 10px;border-radius:8px;font-size:0.76rem;"></div>'
-            + '<div id="amtAvailabilityBox" style="display:none;margin-bottom:10px;padding:7px 10px;border-radius:8px;font-size:0.76rem;"></div>'
-            + '<div style="margin-bottom:12px;">'
-            + '  <label class="amt-label" for="amtPax">Total Passengers (Adults + Kids)</label>'
-            + '  <select id="amtPax" class="amt-select">'
-            + '    <option value="1-2">1 to 2 Guests (1 Dedicated Taxi)</option>'
-            + '    <option value="3-4" selected>3 to 4 Guests (1 Dedicated Taxi - Union Limit)</option>'
-            + '    <option value="5+">5+ Guests (Requires 2+ Taxis under Union Rules)</option>'
-            + '  </select>'
-            + '  <div id="amtLargeGroupNotice" style="display:none;margin-top:6px;padding:8px 10px;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;font-size:0.75rem;color:#92400e;">'
-            + '    <i class="fa-solid fa-triangle-exclamation"></i> Official mountain rule: Standard taxi allows max 4 passengers. Groups of 5+ require multiple taxis traveling in convoy.'
-            + '    <div style="margin-top:6px;display:flex;align-items:center;gap:8px;">'
-            + '      <label for="amtTaxiCount" style="font-weight:700;font-size:0.78rem;">Number of Cabs Needed:</label>'
-            + '      <select id="amtTaxiCount" style="padding:4px 8px;border-radius:6px;border:1px solid #cbd5e1;font-weight:700;">'
-            + '        <option value="2" selected>2 Cabs (Up to 8 Guests)</option>'
-            + '        <option value="3">3 Cabs (Up to 12 Guests)</option>'
-            + '        <option value="4">4 Cabs (Up to 16 Guests)</option>'
-            + '      </select>'
-            + '    </div>'
-            + '  </div>'
-            + '</div>'
-            + '<div class="amt-grid2">'
+            + '<div id="amtZoneNotice" style="display:none;"></div>'
+            + '<div id="amtAvailabilityBox" style="display:none;"></div>'
+            + '<div class="amt-grid2" style="margin-bottom:10px;">'
             + '  <div>'
             + '    <label class="amt-label" for="amtName">Your Full Name *</label>'
             + '    <input type="text" id="amtName" class="amt-input" placeholder="e.g. Rahul Sharma" required>'
             + '  </div>'
             + '  <div>'
-            + '    <label class="amt-label" for="amtPhone">WhatsApp Number *</label>'
-            + '    <input type="tel" id="amtPhone" class="amt-input" placeholder="e.g. 9876543210" required>'
+            + '    <label class="amt-label" for="amtPhone">WhatsApp Mobile Number *</label>'
+            + '    <input type="tel" id="amtPhone" class="amt-input" placeholder="10-digit mobile number" required>'
             + '  </div>'
             + '</div>'
-            + '<div style="margin:10px 0 6px;">'
-            + '  <label class="amt-label" for="amtNotes">Special Notes / Vehicle Request <span style="font-weight:400;color:#64748b;font-size:0.72rem;">(Optional)</span></label>'
-            + '  <input type="text" id="amtNotes" class="amt-input" placeholder="Outstation only: Need an AC Sedan or 6-Seater SUV (Ertiga/Innova)? Mention here..." maxlength="120">'
+            + '<div style="margin-bottom:10px;">'
+            + '  <label class="amt-label" for="amtNotes">Special Notes <span style="font-weight:400;color:#64748b;font-size:0.72rem;">(Optional)</span></label>'
+            + '  <input type="text" id="amtNotes" class="amt-input" placeholder="Any special notes (luggage count, senior citizen, etc.)?" maxlength="120">'
             + '</div>'
-            + '<div id="amtReviewCard" class="amt-tour-summary-card" style="background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:12px;padding:12px;margin:10px 0;"></div>'
-            + '<div id="amtStep4PolicyBox"></div>'
-            + '<div class="amt-btn-row" style="display:flex;gap:8px;margin-top:14px;">'
-            + '  <button type="button" class="amt-btn-back" id="amtBackTo1" style="padding:11px 16px;border:1.5px solid #cbd5e1;background:#ffffff;color:#475569;border-radius:10px;font-weight:700;cursor:pointer;"><i class="fa-solid fa-arrow-left"></i> Change Tour</button>'
-            + '  <button type="button" class="amt-btn-next amt-btn-confirm" id="amtConfirmBtn" style="flex:1;padding:11px 16px;background:linear-gradient(135deg, #10b981 0%, #059669 100%);color:#ffffff;border:none;border-radius:10px;font-weight:800;font-size:0.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 4px 14px rgba(16,185,129,0.35); min-height:48px; text-align:center; flex-wrap:wrap; line-height:1.2;">'
-            + '    <i class="fa-solid fa-lock"></i> GENERATE VOUCHER &amp; OPEN WHATSAPP <i class="fa-solid fa-arrow-right"></i>'
+            + '<div id="amtReviewCard" class="amt-compact-review-bar"></div>'
+            + '<div id="amtStep4PolicyBox" style="display:none;"></div>'
+            + '<div class="amt-btn-row" style="margin-top:10px;display:flex;flex-direction:column;gap:8px;">'
+            + '  <button type="button" class="amt-btn-next amt-btn-confirm" id="amtConfirmBtn" style="width:100%;padding:12px 16px;background:linear-gradient(135deg, #10b981 0%, #059669 100%);color:#ffffff;border:none;border-radius:11px;font-weight:800;font-size:0.95rem;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;box-shadow:0 4px 14px rgba(16,185,129,0.35);">'
+            + '    <div style="display:flex;align-items:center;gap:8px;"><i class="fa-brands fa-whatsapp" style="font-size:1.25rem;"></i> CHECK CAB AVAILABILITY ON WHATSAPP</div>'
+            + '    <span style="font-size:0.72rem;font-weight:600;opacity:0.92;">Instant dispatch check with Aryan Taxi &bull; Pay driver after trip</span>'
             + '  </button>'
+            + '  <div style="display:flex;justify-content:space-between;align-items:center;padding:0 2px;">'
+            + '    <button type="button" class="amt-btn-back" id="amtBackTo1" style="padding:7px 12px;border:1px solid #cbd5e1;background:#ffffff;color:#475569;border-radius:8px;font-weight:700;font-size:0.78rem;cursor:pointer;"><i class="fa-solid fa-arrow-left"></i> Change Tour</button>'
+            + '    <button type="button" id="amtPreviewVoucherBtn" style="padding:7px 12px;border:none;background:transparent;color:#0284c7;font-weight:700;font-size:0.78rem;cursor:pointer;text-decoration:underline;"><i class="fa-solid fa-file-lines"></i> View Trip Pass / Voucher</button>'
+            + '  </div>'
+            + '</div>'
+            + '<div style="margin-top:6px;font-size:0.71rem;color:#64748b;text-align:center;">'
+            + '  <i class="fa-solid fa-circle-check" style="color:#10b981;"></i> Taxi inquiry is subject to cab availability &bull; No advance required &bull; Free cancellation'
             + '</div>'
             + '</div>'
 
@@ -1785,6 +1793,79 @@
         }
 
         // Date Picker advisory & Constraints
+        // Quick Time Chips Listener
+        var timeChips = document.querySelectorAll('.amt-time-chip');
+        timeChips.forEach(function (chip) {
+            chip.addEventListener('click', function () {
+                var t = chip.getAttribute('data-time') || '09:00';
+                var timeInput = document.getElementById('amtTime');
+                if (timeInput) {
+                    timeInput.value = t;
+                    bookingState.time = t;
+                }
+                timeChips.forEach(function (c) { c.classList.remove('active'); });
+                chip.classList.add('active');
+            });
+        });
+
+        // Cab Selector Pills Listener
+        var cabPills = document.querySelectorAll('.amt-cab-pill');
+        cabPills.forEach(function (pill) {
+            pill.addEventListener('click', function () {
+                cabPills.forEach(function (p) { p.classList.remove('active'); });
+                pill.classList.add('active');
+                var cabType = pill.getAttribute('data-cab');
+                if (cabType === '6-7-seater') {
+                    bookingState.pax = '5+';
+                    bookingState.taxiCount = 1;
+                } else {
+                    bookingState.pax = '3-4';
+                    bookingState.taxiCount = 1;
+                }
+                var paxSel = document.getElementById('amtPax');
+                if (paxSel) paxSel.value = bookingState.pax;
+                renderReviewCard();
+            });
+        });
+
+        // Preview Voucher Button Listener
+        var prevVoucherBtn = document.getElementById('amtPreviewVoucherBtn');
+        if (prevVoucherBtn) {
+            prevVoucherBtn.addEventListener('click', function () {
+                var pickInput = document.getElementById('amtPickup');
+                var nameEl = document.getElementById('amtName');
+                var phoneEl = document.getElementById('amtPhone');
+                var notesEl = document.getElementById('amtNotes');
+
+                bookingState.pickup = pickInput ? pickInput.value.trim() : '';
+                bookingState.name = nameEl ? nameEl.value.trim() : '';
+                bookingState.phone = phoneEl ? phoneEl.value.trim() : '';
+                bookingState.notes = notesEl ? notesEl.value.trim() : '';
+
+                if (!bookingState.pickup || bookingState.pickup.length < 3) {
+                    alert('Please enter your pickup hotel, resort, or landmark in Mahabaleshwar / Panchgani.');
+                    if (pickInput) pickInput.focus();
+                    return;
+                }
+                if (!bookingState.name || bookingState.name.length < 2) {
+                    alert('Please enter your full name (at least 2 characters).');
+                    if (nameEl) nameEl.focus();
+                    return;
+                }
+                var validatedPhone = validateIndianPhone(bookingState.phone);
+                if (!validatedPhone) {
+                    alert('Please enter a valid 10-digit mobile number for WhatsApp coordination (e.g. 9876543210).');
+                    if (phoneEl) phoneEl.focus();
+                    return;
+                }
+                bookingState.phone = validatedPhone;
+
+                if (!bookingState.bookingId) bookingState.bookingId = generateBookingId();
+                renderVoucherScreen();
+                goToVoucher();
+            });
+        }
+
         var dateInput = document.getElementById('amtDate');
         if (dateInput) {
             var now = new Date();
@@ -2803,272 +2884,40 @@
         var isCombo = (t.category === 'combo');
         var isOutstation = (t.category === 'outstation');
         var isLocalDrop = (t.category === 'local_drop');
-        var badgeText = isSingle ? '⚡ EXPRESS SINGLE (CUSTOM TOUR)' : (isCombo ? '⭐ FULL DAY COMBO' : (isOutstation ? '✈️ OUTSTATION ROUTE' : (isLocalDrop ? '📍 LOCAL POINT DROP' : '⭐ STANDARD SIGHTSEEING')));
+        var badgeText = isSingle ? '⚡ EXPRESS SINGLE (BUDGET TOUR)' : (isCombo ? '⭐ FULL DAY COMBO' : (isOutstation ? '✈️ OUTSTATION ROUTE' : (isLocalDrop ? '📍 LOCAL POINT DROP' : '⭐ OFFICIAL UNION SIGHTSEEING')));
+        var badgeClass = isSingle ? 'express' : (isOutstation ? 'outstation' : 'standard');
         var fareSubText = isSingle
-            ? 'Special Direct Rate • Not in Union Card'
-            : (isCombo ? 'Official Union Combo' : (isOutstation ? 'Direct Highway Tariff' : (isLocalDrop ? 'Official Union Drop Rate' : 'Official Taxi Union Rate')));
-        var pointsCount = (t.points || []).length;
-
-        var disclaimerHtml = isSingle
-            ? '<div class="amt-stb-union-disclaimer"><i class="fa-solid fa-circle-info"></i> <strong>Note:</strong> Single Tour (₹800 flat rate) is an independent budget option offered directly by Aryan Taxi. It is <strong>NOT</strong> part of the official Taxi Union rate card (official Union packages are Tours 1–7).</div>'
+            ? 'Special Budget Fare (Private Offer)'
+            : (isCombo ? 'Official Union Rate' : (isOutstation ? 'Direct Highway Drop' : (isLocalDrop ? 'Official Union Drop Rate' : 'Official Taxi Union Rate')));
+        var points = t.points || [];
+        var pointsText = points.length > 0
+            ? ('<div class="amt-stb-points"><strong>📍 Included:</strong> ' + escapeHtml(points.slice(0, 5).join(', ')) + (points.length > 5 ? ' + ' + (points.length - 5) + ' more' : '') + '</div>')
             : '';
 
-        banner.innerHTML = '<div class="amt-stb-icon"><i class="fa-solid fa-circle-check"></i></div>'
-            + '<div class="amt-stb-content">'
-            + '  <div class="amt-stb-header">'
-            + '    <span class="amt-stb-badge">' + badgeText + '</span>'
-            + '    <span class="amt-stb-fare">₹' + t.fare + ' <small style="font-size:0.65rem;font-weight:700;opacity:0.85;">' + fareSubText + '</small></span>'
-            + '  </div>'
-            + '  <div class="amt-stb-title">' + escapeHtml(t.name) + '</div>'
-            + '  <div class="amt-stb-meta">'
-            + '    <span><i class="fa-solid fa-clock" style="color:#0284c7;"></i> ' + escapeHtml(t.duration) + '</span>'
-            + (pointsCount > 0 ? '    <span><i class="fa-solid fa-location-dot" style="color:#0284c7;"></i> ' + pointsCount + ' Viewpoints</span>' : '')
-            + '    <span><i class="fa-solid fa-car" style="color:#0284c7;"></i> 4-Seater Tourist Cab</span>'
-            + '    <span><i class="fa-solid fa-shield-halved" style="color:#10b981;"></i> Zero Advance • Pay After Tour</span>'
-            + '  </div>'
-            + disclaimerHtml
-            + '</div>';
-        banner.style.display = 'flex';
+        var disclaimerHtml = isSingle
+            ? '<div class="amt-stb-disclaimer"><i class="fa-solid fa-circle-info"></i> <strong>Note:</strong> Express Single Tour (₹800 flat) is an independent budget option offered directly by Aryan Taxi (not part of the Taxi Union rate card).</div>'
+            : '';
+
+        banner.innerHTML = '<div class="amt-stb-header">'
+            + '  <span class="amt-stb-badge ' + badgeClass + '">' + badgeText + '</span>'
+            + '  <span class="amt-stb-fare">₹' + t.fare + ' <small>' + fareSubText + '</small></span>'
+            + '</div>'
+            + '<div class="amt-stb-title">' + escapeHtml(t.name) + '</div>'
+            + '<div class="amt-stb-meta">'
+            + '  <span><i class="fa-solid fa-clock"></i> ' + escapeHtml(t.duration) + '</span>'
+            + (points.length > 0 ? '  <span><i class="fa-solid fa-location-dot"></i> ' + points.length + ' Viewpoints</span>' : '')
+            + '  <span><i class="fa-solid fa-shield-halved"></i> Zero Advance &bull; Pay After Trip</span>'
+            + '</div>'
+            + pointsText
+            + disclaimerHtml;
+        banner.style.display = 'block';
     }
 
     function renderVisualTourCards(service, filtered) {
         var container = document.getElementById('amtVisualTourCards');
-        if (!container) return;
+        if (container) container.style.display = 'none';
         var filterWrap = document.getElementById('amtSightseeingFilterWrap');
-        var db = window.TOUR_DATABASE;
-
-        if (!filtered || filtered.length === 0) {
-            if (db) {
-                filtered = db.tours.filter(function (t) { return t.category === service; });
-            }
-        }
-        if (!filtered || filtered.length === 0) {
-            container.innerHTML = '';
-            if (filterWrap) filterWrap.style.display = 'none';
-            return;
-        }
-
-        var currentTourId = bookingState.tourId || (document.getElementById('amtTourSelect') ? document.getElementById('amtTourSelect').value : filtered[0].id);
-
-        // Sightseeing Sub-Category Switcher Filter
-        var toursToRender = filtered;
-        if (service === 'sightseeing') {
-            var curTour = db ? db.getTourById(currentTourId) : null;
-            if (curTour) {
-                var isCurSingle = (curTour.sub_category === 'single_tour' || curTour.fare === 800);
-                if (isCurSingle && window._amtActiveSightseeingFilter === 'standard_tour') {
-                    window._amtActiveSightseeingFilter = 'single_tour';
-                } else if (!isCurSingle && window._amtActiveSightseeingFilter === 'single_tour') {
-                    window._amtActiveSightseeingFilter = 'standard_tour';
-                } else if (!window._amtActiveSightseeingFilter) {
-                    window._amtActiveSightseeingFilter = isCurSingle ? 'single_tour' : 'standard_tour';
-                }
-            } else if (!window._amtActiveSightseeingFilter) {
-                window._amtActiveSightseeingFilter = 'single_tour';
-            }
-
-            var activeFilter = window._amtActiveSightseeingFilter;
-
-            if (filterWrap) {
-                var guideMsg = '';
-                var guideClass = '';
-                if (activeFilter === 'single_tour') {
-                    guideMsg = '<strong>⚡ Express Single Tours (₹800 Flat Rate • 2.5 Hrs):</strong> Quick focused trips to an individual sightseeing area (e.g. Arthur\'s Seat only or Kate\'s Point only). Ideal for budget-friendly visits or travellers wanting minimum points.<br><span style="color:#d97706;font-weight:700;">⚠️ Please Note:</span> Single tours are an independent budget option offered directly by Aryan Taxi and are <strong>NOT part of the official Taxi Union rate card</strong>. (Official Taxi Union packages are the full circuits, Tours 1–7).';
-                    guideClass = '';
-                } else if (activeFilter === 'standard_tour') {
-                    guideMsg = '<strong>⭐ Standard Union Sightseeing (₹1,200 - ₹2,500 • 3.5 to 6 Hrs):</strong> Official Mahabaleshwar Taxi Union approved packages covering comprehensive 8 to 17 viewpoint circuits across Mahabaleshwar.';
-                    guideClass = 'standard';
-                } else {
-                    guideMsg = '<strong>📋 All Sightseeing Options (9 Tours):</strong> Compare official Taxi Union standard packages (Tours 1–7) alongside ₹800 express single tour options (independent budget circuits).';
-                    guideClass = 'all';
-                }
-
-                filterWrap.style.display = 'block';
-                filterWrap.innerHTML = '<div class="amt-sightseeing-filter-bar" role="tablist" aria-label="Sightseeing Sub-Categories">'
-                    + '<button type="button" class="amt-tf-pill' + (activeFilter === 'single_tour' ? ' active' : '') + '" data-filter="single_tour" role="tab" aria-selected="' + (activeFilter === 'single_tour') + '">'
-                    + '  <span class="amt-tf-pill-title">⚡ Express Single</span>'
-                    + '  <span class="amt-tf-pill-badge">₹800 Flat • 2.5 Hrs</span>'
-                    + '</button>'
-                    + '<button type="button" class="amt-tf-pill' + (activeFilter === 'standard_tour' ? ' active' : '') + '" data-filter="standard_tour" role="tab" aria-selected="' + (activeFilter === 'standard_tour') + '">'
-                    + '  <span class="amt-tf-pill-title">⭐ Standard Packages</span>'
-                    + '  <span class="amt-tf-pill-badge">₹1,200+ • 3.5-6 Hrs</span>'
-                    + '</button>'
-                    + '<button type="button" class="amt-tf-pill' + (activeFilter === 'all' ? ' active' : '') + '" data-filter="all" role="tab" aria-selected="' + (activeFilter === 'all') + '">'
-                    + '  <span class="amt-tf-pill-title">All Tours</span>'
-                    + '  <span class="amt-tf-pill-badge">9 Options</span>'
-                    + '</button>'
-                    + '</div>'
-                    + '<div class="amt-tour-guide-box ' + guideClass + '">'
-                    + '  <i class="fa-solid fa-circle-info" style="font-size:0.95rem;margin-top:1px;flex-shrink:0;"></i>'
-                    + '  <div>' + guideMsg + '</div>'
-                    + '</div>';
-
-                // Pill click listeners
-                var pills = filterWrap.querySelectorAll('.amt-tf-pill');
-                pills.forEach(function (pill) {
-                    pill.addEventListener('click', function () {
-                        var newFilter = pill.getAttribute('data-filter');
-                        window._amtActiveSightseeingFilter = newFilter;
-                        var targetList = filtered;
-                        if (newFilter === 'single_tour') {
-                            targetList = filtered.filter(function (t) { return t.sub_category === 'single_tour' || t.fare === 800; });
-                        } else if (newFilter === 'standard_tour') {
-                            targetList = filtered.filter(function (t) { return t.sub_category !== 'single_tour' && t.fare !== 800; });
-                        }
-                        if (!targetList.some(function (t) { return t.id === bookingState.tourId; })) {
-                            var newFirst = targetList[0] ? targetList[0].id : '';
-                            bookingState.tourId = newFirst;
-                            var selEl = document.getElementById('amtTourSelect');
-                            if (selEl) selEl.value = newFirst;
-                            syncSelectedToursFromPrimary();
-                            if (typeof updateTourInsight === 'function') updateTourInsight();
-                            if (typeof updateSmartTimeUI === 'function') updateSmartTimeUI();
-                        }
-                        renderVisualTourCards(service, filtered);
-                    });
-                });
-            }
-
-            if (activeFilter === 'single_tour') {
-                toursToRender = filtered.filter(function (t) { return t.sub_category === 'single_tour' || t.fare === 800; });
-            } else if (activeFilter === 'standard_tour') {
-                toursToRender = filtered.filter(function (t) { return t.sub_category !== 'single_tour' && t.fare !== 800; });
-            } else {
-                toursToRender = filtered;
-            }
-        } else {
-            if (filterWrap) filterWrap.style.display = 'none';
-            toursToRender = filtered;
-        }
-
-        // Render Cards
-        var cardsHtml = toursToRender.map(function (t) {
-            var isSelected = (t.id === bookingState.tourId);
-            var tourPoints = t.points || [];
-            var pointsCount = tourPoints.length;
-            var hasPoints = pointsCount > 0;
-
-            var pointsPanel = '';
-            if (hasPoints) {
-                var chips = tourPoints.map(function (p) {
-                    return '<span class="amt-vt-chip"><i class="fa-solid fa-location-dot" style="font-size:0.56rem;color:#0284c7;"></i> ' + escapeHtml(p) + '</span>';
-                }).join('');
-                pointsPanel = '<div class="amt-vt-actions">'
-                    + '<button type="button" class="amt-vt-accordion-btn" data-target="amt-vt-pts-' + t.id + '">'
-                    + '<span>👁️ ' + pointsCount + ' Viewpoints</span> <i class="fa-solid fa-chevron-down amt-vt-arrow"></i>'
-                    + '</button>'
-                    + '</div>'
-                    + '<div class="amt-vt-points-panel" id="amt-vt-pts-' + t.id + '" style="display:none;">'
-                    + '<div class="amt-vt-chips-wrap">' + chips + '</div>'
-                    + '</div>';
-            }
-
-            var isSingle = (t.sub_category === 'single_tour' || t.fare === 800);
-            var badgeClass = 'standard';
-            var badgeIcon = 'fa-star';
-            var badgeText = 'Standard Circuit';
-
-            if (isSingle) {
-                badgeClass = 'express';
-                badgeIcon = 'fa-bolt';
-                badgeText = 'Express • ₹800 (Single Tour)';
-            } else if (t.id === 'T3') {
-                badgeClass = 'heritage';
-                badgeIcon = 'fa-landmark';
-                badgeText = 'Fort Heritage';
-            } else if (t.id === 'T5') {
-                badgeClass = 'wai';
-                badgeIcon = 'fa-gopuram';
-                badgeText = 'Temple Circuit';
-            } else if (t.id === 'T6') {
-                badgeClass = 'lake';
-                badgeIcon = 'fa-water';
-                badgeText = 'Lake Boating';
-            } else if (t.category === 'combo') {
-                badgeClass = 'standard';
-                badgeIcon = 'fa-star';
-                badgeText = 'Full Day Combo';
-            } else if (t.category === 'outstation') {
-                badgeClass = 'standard';
-                badgeIcon = 'fa-plane-departure';
-                badgeText = 'Outstation Drop';
-            } else if (t.category === 'local_drop') {
-                badgeClass = 'express';
-                badgeIcon = 'fa-location-dot';
-                badgeText = 'Local Drop';
-            }
-
-            var fareSub = isSingle ? 'Special Single Rate' : 'Official Union Rate';
-
-            return '<div class="amt-vt-card' + (isSelected ? ' active' : '') + '" data-tour-id="' + t.id + '" role="button" tabindex="0">'
-                + '<div class="amt-vt-card-top">'
-                + '  <div class="amt-vt-badge-row">'
-                + '    <span class="amt-vt-tag-badge ' + badgeClass + '"><i class="fa-solid ' + badgeIcon + '"></i> ' + badgeText + '</span>'
-                + '    <div class="amt-vt-radio"><span class="amt-vt-radio-dot"></span></div>'
-                + '  </div>'
-                + '  <div class="amt-vt-title">' + escapeHtml(t.name) + '</div>'
-                + (t.description ? '  <p class="amt-vt-desc">' + escapeHtml(t.description) + '</p>' : '')
-                + (isSingle ? '  <div style="font-size:0.67rem;color:#b45309;font-weight:700;margin:3px 0 2px;display:flex;align-items:center;gap:4px;"><i class="fa-solid fa-circle-exclamation"></i> Special Single Tour (Not in Union Card)</div>' : '')
-                + '</div>'
-                + '<div class="amt-vt-card-bottom">'
-                + pointsPanel
-                + '  <div class="amt-vt-price-row">'
-                + '    <div class="amt-vt-dur-wrap"><i class="fa-solid fa-clock" style="color:#0284c7;font-size:0.75rem;"></i> <span class="amt-vt-dur">' + escapeHtml(t.duration) + '</span></div>'
-                + '    <div class="amt-vt-fare-wrap"><span class="amt-vt-fare">₹' + t.fare + '</span><span class="amt-vt-fare-sub">' + fareSub + '</span></div>'
-                + '  </div>'
-                + '</div>'
-                + '</div>';
-        }).join('');
-
-        container.innerHTML = cardsHtml;
-
-        // Card selection clicks
-        var cards = container.querySelectorAll('.amt-vt-card');
-        cards.forEach(function (card) {
-            function selectThisCard(e) {
-                if (e.target.closest('.amt-vt-accordion-btn') || e.target.closest('.amt-vt-points-panel')) {
-                    return;
-                }
-                var tourId = card.getAttribute('data-tour-id');
-                var sel = document.getElementById('amtTourSelect');
-                if (sel) {
-                    sel.value = tourId;
-                    syncSelectedToursFromPrimary();
-                    if (typeof updateTourInsight === 'function') updateTourInsight();
-                    if (typeof updateSmartTimeUI === 'function') updateSmartTimeUI();
-                }
-                cards.forEach(function (c) { c.classList.remove('active'); });
-                card.classList.add('active');
-                updateSelectedTourBanner(tourId);
-                if (typeof renderExtraTourRows === 'function') renderExtraTourRows();
-                if (typeof updateMultiTourSummary === 'function') updateMultiTourSummary();
-                if (typeof saveBookingDraft === 'function') saveBookingDraft();
-            }
-            card.addEventListener('click', selectThisCard);
-            card.addEventListener('keydown', function (e) {
-                if (e.key === 'Enter' || e.keyCode === 13) {
-                    selectThisCard(e);
-                }
-            });
-        });
-
-        // Viewpoints accordion toggles
-        var accBtns = container.querySelectorAll('.amt-vt-accordion-btn');
-        accBtns.forEach(function (btn) {
-            btn.addEventListener('click', function (e) {
-                e.stopPropagation();
-                var targetId = btn.getAttribute('data-target');
-                var panel = document.getElementById(targetId);
-                if (panel) {
-                    var isVisible = panel.style.display !== 'none';
-                    panel.style.display = isVisible ? 'none' : 'block';
-                    btn.classList.toggle('expanded', !isVisible);
-                }
-            });
-        });
-
-        // Update live confirmed banner
-        updateSelectedTourBanner(bookingState.tourId || (toursToRender[0] ? toursToRender[0].id : ''));
+        if (filterWrap) filterWrap.style.display = 'none';
     }
 
     function initQuickTimePills() {
@@ -3266,57 +3115,36 @@
                 labelEl.textContent = 'Select Local Drop Destination *';
             } else if (service === 'combo') {
                 labelEl.textContent = 'Select Full Day Combo Package *';
+            } else if (service === 'express') {
+                labelEl.textContent = 'Select Express Tour (₹800 Flat Rate) *';
             } else {
-                labelEl.textContent = 'Select Sightseeing Tour *';
+                labelEl.textContent = 'Select Sightseeing Tour (Official Union Rate) *';
             }
         }
 
         var db = window.TOUR_DATABASE;
         var filtered = [];
-        if (service === 'sightseeing') {
-            filtered = db.tours.filter(function (t) { return t.category === 'sightseeing'; });
-            if (addBtn) addBtn.style.display = 'flex';
-            if (container) container.style.display = 'block';
+        if (service === 'express') {
+            filtered = db ? db.tours.filter(function (t) { return t.sub_category === 'single_tour' || t.fare === 800; }) : [];
+            bookingState.selectedTours = [];
+        } else if (service === 'sightseeing') {
+            filtered = db ? db.tours.filter(function (t) { return t.category === 'sightseeing' && t.sub_category !== 'single_tour' && t.fare !== 800; }) : [];
+            bookingState.selectedTours = [];
         } else if (service === 'combo') {
-            filtered = db.tours.filter(function (t) { return t.category === 'combo'; });
-            if (addBtn) addBtn.style.display = 'none';
-            if (container) { container.innerHTML = ''; container.style.display = 'none'; }
-            if (summary) summary.style.display = 'none';
+            filtered = db ? db.tours.filter(function (t) { return t.category === 'combo'; }) : [];
             bookingState.selectedTours = [];
         } else if (service === 'outstation') {
-            filtered = db.tours.filter(function (t) { return t.category === 'outstation'; });
-            if (addBtn) addBtn.style.display = 'none';
-            if (container) { container.innerHTML = ''; container.style.display = 'none'; }
-            if (summary) summary.style.display = 'none';
+            filtered = db ? db.tours.filter(function (t) { return t.category === 'outstation'; }) : [];
             bookingState.selectedTours = [];
         } else if (service === 'local_drop') {
-            filtered = db.tours.filter(function (t) { return t.category === 'local_drop'; });
-            if (addBtn) addBtn.style.display = 'none';
-            if (container) { container.innerHTML = ''; container.style.display = 'none'; }
-            if (summary) summary.style.display = 'none';
+            filtered = db ? db.tours.filter(function (t) { return t.category === 'local_drop'; }) : [];
             bookingState.selectedTours = [];
         }
 
-        if (service === 'sightseeing') {
-            var singleTours = filtered.filter(function (t) { return t.sub_category === 'single_tour' || t.fare === 800; });
-            var standardTours = filtered.filter(function (t) { return t.sub_category !== 'single_tour' && t.fare !== 800; });
-            var optHtml = '';
-            if (singleTours.length > 0) {
-                optHtml += '<optgroup label="⚡ Express Single Tours (₹800 • 2.5 Hrs)">' + singleTours.map(function (t) {
-                    return '<option value="' + t.id + '">' + escapeHtml(t.name) + ' — ₹' + t.fare + ' (' + escapeHtml(t.duration) + ')</option>';
-                }).join('') + '</optgroup>';
-            }
-            if (standardTours.length > 0) {
-                optHtml += '<optgroup label="⭐ Standard Union Sightseeing (₹1,200 - ₹2,500 • 3.5 to 6 Hrs)">' + standardTours.map(function (t) {
-                    return '<option value="' + t.id + '">' + escapeHtml(t.name) + ' — ₹' + t.fare + ' (' + escapeHtml(t.duration) + ')</option>';
-                }).join('') + '</optgroup>';
-            }
-            sel.innerHTML = optHtml;
-        } else {
-            sel.innerHTML = filtered.map(function (t) {
-                return '<option value="' + t.id + '">' + escapeHtml(t.name) + ' — ₹' + t.fare + ' (' + escapeHtml(t.duration) + ')</option>';
-            }).join('');
-        }
+        sel.innerHTML = filtered.map(function (t) {
+            var tag = (t.fare === 800 || t.sub_category === 'single_tour') ? '₹800 Flat' : ('₹' + t.fare);
+            return '<option value="' + t.id + '">' + escapeHtml(t.name) + ' — ' + tag + ' (' + escapeHtml(t.duration) + ')</option>';
+        }).join('');
 
         var targetId = (bookingState.tourId && filtered.some(function (t) { return t.id === bookingState.tourId; }))
             ? bookingState.tourId
@@ -3324,19 +3152,8 @@
         sel.value = targetId;
         bookingState.tourId = targetId;
         bookingState.tour2Id = '';
+        bookingState.selectedTours = [{ id: targetId, date: bookingState.date, time: bookingState.time }];
 
-        if (service === 'sightseeing') {
-            if (!bookingState.selectedTours || bookingState.selectedTours.length === 0 || !filtered.some(function (t) { return t.id === bookingState.selectedTours[0].id; })) {
-                bookingState.selectedTours = [{ id: targetId, date: bookingState.date, time: bookingState.time }];
-            } else {
-                bookingState.selectedTours[0].id = targetId;
-            }
-            renderExtraTourRows();
-        } else {
-            bookingState.selectedTours = [{ id: targetId, date: bookingState.date, time: bookingState.time }];
-        }
-
-        if (typeof renderVisualTourCards === 'function') renderVisualTourCards(service, filtered);
         if (typeof updateSelectedTourBanner === 'function') updateSelectedTourBanner(targetId);
         if (typeof updateTourInsight === 'function') updateTourInsight();
         if (typeof updateSmartTimeUI === 'function') updateSmartTimeUI();
@@ -3549,211 +3366,32 @@
         }
 
         var db = window.TOUR_DATABASE;
-        var tours = [];
-        (bookingState.selectedTours || []).forEach(function (st) {
-            var t = db.getTourById(st.id);
-            if (t) {
-                tours.push({
-                    tour: t,
-                    date: (bookingState.differentSchedule && st.date) ? st.date : bookingState.date,
-                    time: (bookingState.differentSchedule && st.time) ? st.time : bookingState.time
-                });
-            }
-        });
+        var t = (bookingState.tourId && db.getTourById(bookingState.tourId)) || db.tours[0];
+        if (!t) return;
 
-        if (tours.length === 0 && db.tours && db.tours.length > 0) {
-            var fb = (bookingState.tourId && db.getTourById(bookingState.tourId)) || db.tours[0];
-            tours.push({ tour: fb, date: bookingState.date, time: bookingState.time });
-            bookingState.selectedTours = [{ id: fb.id, date: bookingState.date, time: bookingState.time }];
-        }
-
-        var isMulti = tours.length > 1;
-        var baseFare = tours.reduce(function (acc, item) { return acc + item.tour.fare; }, 0);
-        var isLarge = bookingState.pax === '5+';
-        var taxiCount = parseInt(bookingState.taxiCount, 10) || (isLarge ? 2 : 1);
-        var totalFare = baseFare * taxiCount;
-
-        // Get single source of truth for service rules
-        var sRules = getServiceRules(bookingState.service || bookingState.serviceType, tours, isLarge, taxiCount);
-
-        // Update Step 4 Heading dynamically
-        var titleEl = document.getElementById('amtStep4Title');
-        if (titleEl) {
-            titleEl.innerHTML = '<i class="fa-solid fa-clipboard-check" style="color:var(--amt-primary,#c2410c);"></i> 4. Review ' + escapeHtml(sRules.serviceTitle) + ' &amp; Tariff';
-        }
-        var subEl = document.getElementById('amtStep4Sub');
-        if (subEl) {
-            subEl.textContent = sRules.reviewNotice;
-        }
-
-        var zone = (db && db.getPickupZone) ? db.getPickupZone(bookingState.pickup) : null;
-        var isNonMahaZone = zone && !zone.isStandardTariffZone;
-
-        var nameInput = document.getElementById('amtName');
-        var phoneInput = document.getElementById('amtPhone');
-        var notesInput = document.getElementById('amtNotes');
-        var currentName = (nameInput && nameInput.value.trim()) || bookingState.name || 'Guest';
-        var currentPhone = (phoneInput && phoneInput.value.trim()) || bookingState.phone || '';
-        var currentNotes = (notesInput && notesInput.value.trim()) || bookingState.notes || '';
+        var isLarge = (bookingState.pax === '5+');
+        var cabLabel = isLarge ? '6-7 Seater Cab (As per availability)' : '4-Seater Tourist Cab (As per availability)';
+        var fare = t.fare;
+        var tourTitle = t.name + ' (' + t.duration + ')';
 
         var dStr = formatSafeDisplayDate(bookingState.date || 'Scheduled');
         var tStr = formatPickupTime(bookingState.time);
 
-        // 9-PART STANDARDIZED VISUAL STRUCTURE:
-        // (1) Service Type & (2) Inquiry Ref No.
-        var html = '<div class="amt-rev-header-bar">'
-            + '  <div class="amt-rev-service-badge" style="background:' + sRules.badgeBg + ';color:' + sRules.badgeColor + ';border-color:' + sRules.badgeBorder + ';">'
-            + '    <i class="fa-solid fa-tag"></i> ' + escapeHtml(sRules.serviceTitle)
-            + '  </div>'
-            + '  <div class="amt-v-ref-box">'
-            + '    <span class="amt-v-ref-lbl">Inquiry Ref No.:</span>'
-            + '    <strong class="amt-v-ref-val">' + escapeHtml(bookingState.bookingId || 'AMT-REQ') + '</strong>'
-            + '  </div>'
-            + '</div>';
-
-        // (3) Customer Details & (4) Date & Time & (5) Pickup Details
-        html += '<div class="amt-rev-meta-grid" style="margin-top:8px;">'
-            + '  <div class="amt-rev-meta-cell">'
-            + '    <span class="amt-rev-meta-lbl"><i class="fa-solid fa-user"></i> Lead Passenger</span>'
-            + '    <strong class="amt-rev-meta-val">' + escapeHtml(currentName) + (currentPhone ? ' (' + escapeHtml(currentPhone) + ')' : '') + '</strong>'
-            + '  </div>'
-            + '  <div class="amt-rev-meta-cell">'
-            + '    <span class="amt-rev-meta-lbl"><i class="fa-solid fa-calendar-day"></i> Travel Schedule</span>'
-            + '    <strong class="amt-rev-meta-val">' + (bookingState.differentSchedule ? 'Multi-Day Schedule' : escapeHtml(dStr) + ' at ' + escapeHtml(tStr)) + '</strong>'
-            + '  </div>'
-            + '  <div class="amt-rev-meta-cell" style="grid-column:1/-1;">'
-            + '    <span class="amt-rev-meta-lbl"><i class="fa-solid fa-location-dot"></i> Pickup Location</span>'
-            + '    <strong class="amt-rev-meta-val">' + escapeHtml(bookingState.pickup || 'Mahabaleshwar') + ' (Doorstep Porch)</strong>'
-            + '  </div>'
-            + '</div>';
-
-        if (currentNotes) {
-            html += '<div class="amt-v-notes-chip" style="margin-top:6px;">'
-                + '📝 <strong>Special Request:</strong> ' + escapeHtml(currentNotes)
-                + '</div>';
-        }
-
-        if (isNonMahaZone) {
-            var nonMahaTitle = (zone && zone.id === 'OTHER') ? 'Custom Location' : (zone ? zone.name : 'Out of Town');
-            html += '<div class="amt-rev-zone-notice">'
-                + '<strong><i class="fa-solid fa-location-dot"></i> Note on ' + escapeHtml(nonMahaTitle) + ' Pickup:</strong> Outside standard Mahabaleshwar town limits. Additional location charge applies and will be confirmed by operator.'
-                + '</div>';
-        }
-
-        // (6) Selected Tour(s) / Package & Points
-        tours.forEach(function (item, idx) {
-            var t = item.tour;
-            var points = t.points || [];
-            var tourDStr = formatSafeDisplayDate(item.date);
-            var tourTStr = formatPickupTime(item.time);
-
-            html += '<div class="amt-rev-tour-card" style="margin-top:8px;">'
-                + '<div class="amt-rev-tour-hdr">'
-                + '<div class="amt-rev-tour-main-col">'
-                + '<strong class="amt-rev-tour-title">' + escapeHtml(formatTourDisplayName(t, idx, isMulti)) + '</strong>'
-                + '<span class="amt-rev-tour-dur">⏱️ Duration: ' + escapeHtml(t.duration) + ' &bull; Union Standard</span>'
-                + '</div>'
-                + '<div class="amt-rev-tour-rate-col">'
-                + '<span class="amt-rev-tour-fare">₹' + t.fare + '</span>'
-                + '<span class="amt-rev-tour-rate-sub">Standard Rate</span>'
-                + '</div>'
-                + '</div>';
-
-            if (bookingState.differentSchedule) {
-                html += '<div class="amt-rev-schedule-box">'
-                    + '📅 <strong>Schedule:</strong> ' + escapeHtml(tourDStr) + ' at ' + escapeHtml(tourTStr)
-                    + '</div>';
-            }
-
-            if (sRules.key === 'sightseeing' || sRules.key === 'combo') {
-                if (points.length > 0) {
-                    html += '<div class="amt-rev-points-title">'
-                        + '<i class="fa-solid fa-list-check"></i> Included Sightseeing Points (' + points.length + ' Viewpoints):'
-                        + '</div>'
-                        + '<div class="amt-points-wrap">'
-                        + points.map(function (p) {
-                            return '<span class="amt-point-badge"><i class="fa-solid fa-location-dot"></i> ' + escapeHtml(p) + '</span>';
-                        }).join('')
-                        + '</div>';
-                }
-            } else if (sRules.key === 'outstation') {
-                html += '<div class="amt-rev-route-box">'
-                    + '<i class="fa-solid fa-route"></i> <strong>Drop Route:</strong> Hotel Pickup &rarr; Pasarni / Wai Ghat &rarr; NH-48 Expressway &rarr; Direct Destination Drop'
-                    + '</div>';
-            } else if (sRules.key === 'local_drop') {
-                html += '<div class="amt-rev-route-box">'
-                    + '<i class="fa-solid fa-location-dot"></i> <strong>Point-to-Point Drop:</strong> Direct transit from hotel porch to destination'
-                    + '</div>';
-            }
-
-            if (t.hidden_points && t.hidden_points.length > 0) {
-                html += '<div class="amt-rev-extra-box">'
-                    + '<strong>Extra Points (Optional, not in base fare):</strong> ' + escapeHtml(t.hidden_points.join(', '))
-                    + '</div>';
-            }
-
-            html += '</div>';
-        });
-
-        // (7) Vehicle Details
-        html += '<div class="amt-rev-vehicle-banner" style="margin-top:8px;">'
-            + '<strong>🚕 Allocated Vehicle:</strong> ' + escapeHtml(sRules.vehicleDesc)
-            + '</div>';
-
-        // (8) Fare Details
-        html += '<div class="amt-rev-tariff-card">'
-            + '<div class="amt-rev-tariff-hdr">'
-            + '<div><span class="amt-rev-tariff-lbl">' + escapeHtml(sRules.tariffLabel) + '</span>'
-            + (isMulti ? '<div class="amt-rev-tariff-breakdown">' + tours.map(function (it) { return '₹' + it.tour.fare; }).join(' + ') + (taxiCount > 1 ? ' &times; ' + taxiCount + ' Cabs' : '') + '</div>' : '')
+        var html = '<div class="amt-compact-review-box">'
+            + '<div class="amt-crb-row">'
+            + '  <div class="amt-crb-item"><i class="fa-solid fa-map-location-dot" style="color:#0284c7;"></i> <strong>' + escapeHtml(tourTitle) + '</strong></div>'
+            + '  <div class="amt-crb-fare">₹' + fare + '</div>'
             + '</div>'
-            + '<div class="amt-rev-tariff-amt-col">'
-            + '<span class="amt-rev-tariff-amt">₹' + totalFare + '</span>'
-            + '<span class="amt-rev-tariff-terms ' + (sRules.key === 'outstation' ? 'amt-rev-advance' : 'amt-rev-zero-advance') + '">'
-            + escapeHtml(sRules.paymentBadge)
-            + '</span>'
-            + '</div>'
-            + '</div>'
-            + '<div class="amt-rev-meta-grid" style="margin-top:6px;">'
-            + '<div class="amt-rev-meta-cell"><span class="amt-rev-meta-lbl">Passenger Capacity:</span> <strong class="amt-rev-meta-val">' + escapeHtml(bookingState.pax) + ' (' + taxiCount + ' Cab' + (taxiCount > 1 ? 's' : '') + ')</strong></div>'
-            + '<div class="amt-rev-meta-cell"><span class="amt-rev-meta-lbl">Payment Mode:</span> <strong class="amt-rev-meta-val" style="color:' + sRules.paymentColor + ';">' + escapeHtml(sRules.paymentSettlement || sRules.advanceNote) + '</strong></div>'
+            + '<div class="amt-crb-meta">'
+            + '  <span>📅 ' + escapeHtml(dStr) + ' at ' + escapeHtml(tStr) + '</span>'
+            + '  <span>🚕 ' + cabLabel + '</span>'
+            + '  <span class="amt-crb-zero"><i class="fa-solid fa-check"></i> Pay Driver After Trip</span>'
             + '</div>'
             + '</div>';
-
-        // AI Advisory
-        var isCombo = sRules.key === 'combo';
-        var isOutstation = sRules.key === 'outstation';
-        var isLocalDrop = sRules.key === 'local_drop';
-        var aiObj = getAIAdvisory(tours.map(function (it) { return it.tour; }), isOutstation, isLocalDrop, isCombo);
-        if (aiObj && aiObj.text) {
-            html += '<div class="amt-rev-ai-advisory">'
-                + '<span class="amt-v-ai-badge"><i class="fa-solid fa-sparkles"></i> ' + escapeHtml(aiObj.badge) + '</span> '
-                + '<span class="amt-v-ai-text">' + aiObj.text + '</span>'
-                + '</div>';
-        }
-
-        html += '<div class="amt-rev-footer-note"><i class="fa-solid fa-check-circle"></i> Please review your tour details and locked tariff above before locking your inquiry.</div>';
 
         el.innerHTML = html;
-
-        // (9) Applicable Rules / Notes (Dynamic Policy Box)
         var policyBox = document.getElementById('amtStep4PolicyBox');
-        if (policyBox) {
-            policyBox.innerHTML = '<div class="amt-rev-policy-card">'
-                + '<div class="amt-rev-policy-title"><i class="fa-solid fa-shield-halved"></i> Pre-Dispatch Policy &amp; Important Carriage Terms</div>'
-                + '<div class="amt-policy-grid">'
-                + sRules.policyItems.map(function (p) {
-                    return '<div class="amt-policy-item">'
-                        + '<div class="amt-policy-icon"><i class="fa-solid ' + escapeHtml(p.icon) + '"></i></div>'
-                        + '<div class="amt-policy-text-box">'
-                        + '<div class="amt-policy-item-title">' + escapeHtml(p.title) + '</div>'
-                        + '<div class="amt-policy-item-text">' + escapeHtml(p.text) + '</div>'
-                        + '</div>'
-                        + '</div>';
-                }).join('')
-                + '</div>'
-                + '<div class="amt-policy-note"><i class="fa-solid fa-triangle-exclamation"></i> ' + escapeHtml(sRules.policyNote) + '</div>'
-                + '</div>';
-        }
+        if (policyBox) policyBox.innerHTML = '';
     }
 
     function renderVoucherScreen() {
@@ -4082,6 +3720,9 @@
 
         if (targetTour) {
             var cat = targetTour.category || 'sightseeing';
+            if (targetTour.fare === 800 || targetTour.sub_category === 'single_tour') {
+                cat = 'express';
+            }
             bookingState.service = cat;
             bookingState.tourId = targetTour.id;
 

@@ -1867,191 +1867,127 @@
                             <span><i class="fa-solid fa-clock-rotate-left"></i> Restored your previous trip selections</span>
                             <button type="button" id="amtClearDraftBtn" class="amt-draft-btn-clear">Start Fresh</button>
                         </div>
-                        <h3 class="amt-step-title" style="font-size:1.05rem; font-weight:800; color:#0f172a; margin:0 0 4px;">1. Select Tour Package &amp; Schedule</h3>
-                        <p class="amt-step-sub" style="font-size:0.8rem; color:#64748b; margin:0 0 12px;">Choose your tour category, sightseeing package, travel date, and preferred departure time.</p>
-                        
-                        <div class="amt-service-grid" role="radiogroup" aria-label="Service Category">
-                            <div class="amt-service-btn active" role="radio" aria-checked="true" tabindex="0" data-service="sightseeing">
-                                <strong>🚕 Sightseeing</strong>
-                                <span>Express ₹800 &amp; Full</span>
-                            </div>
-                            <div class="amt-service-btn" role="radio" aria-checked="false" tabindex="0" data-service="combo">
-                                <strong>⭐ Full Day Combo</strong>
-                                <span>Tour 7 (Maha + Panchgani)</span>
-                            </div>
-                            <div class="amt-service-btn" role="radio" aria-checked="false" tabindex="0" data-service="outstation">
-                                <strong>✈️ Outstation Drop</strong>
-                                <span>Pune / Mumbai / Satara</span>
-                            </div>
-                            <div class="amt-service-btn" role="radio" aria-checked="false" tabindex="0" data-service="local_drop">
-                                <strong>📍 Local Point Drop</strong>
-                                <span>Mapro / Panchgani / Market</span>
-                            </div>
+                        <div class="amt-step-hdr-compact">
+                            <h3 class="amt-step-title">1. Select Tour &amp; Departure</h3>
+                            <span class="amt-trust-chip"><i class="fa-solid fa-shield-halved"></i> Fixed Rates &bull; Zero Advance</span>
                         </div>
-
-                        <!-- Sightseeing Sub-Category Switcher & Clarity Guide -->
-                        <div id="amtSightseeingFilterWrap"></div>
-
-                        <!-- Visual Tour Selection Cards Grid (Responsive PC 3-Col / Mobile 1-Col) -->
-                        <div class="amt-visual-tour-cards" id="amtVisualTourCards"></div>
-
-                        <!-- Live Confirmed Tour Selection Banner (Eliminates redundant dropdown) -->
-                        <div id="amtSelectedTourBanner" class="amt-selected-tour-banner" style="display:none;"></div>
-
-                        <!-- Hidden Tour Select (Kept for seamless JS & form sync) -->
-                        <div class="amt-form-group" style="display:none; margin-bottom:10px;">
-                            <label class="amt-label" for="amtTourSelect">Selected Tour Package / Route</label>
-                            <select id="amtTourSelect" class="amt-select">
+                        <div class="amt-category-pills" role="radiogroup" aria-label="Service Category">
+                            <button type="button" class="amt-service-btn active" role="radio" aria-checked="true" data-service="sightseeing">🚕 Sightseeing</button>
+                            <button type="button" class="amt-service-btn" role="radio" aria-checked="false" data-service="express">⚡ Express ₹800</button>
+                            <button type="button" class="amt-service-btn" role="radio" aria-checked="false" data-service="combo">⭐ Full Day</button>
+                            <button type="button" class="amt-service-btn" role="radio" aria-checked="false" data-service="outstation">✈️ Outstation</button>
+                            <button type="button" class="amt-service-btn" role="radio" aria-checked="false" data-service="local_drop">📍 Local Drop</button>
+                        </div>
+                        <div class="amt-form-group" style="margin-bottom:8px;">
+                            <label class="amt-label" for="amtTourSelect">Select Tour Package / Route *</label>
+                            <select id="amtTourSelect" class="amt-select" style="width:100%;font-weight:700;">
                                 <option value="">-- Choose a Tour Package --</option>
                             </select>
                         </div>
-
-                        <div id="amtExtraToursContainer"></div>
-                        <button type="button" id="amtAddTourBtn" class="amt-add-tour-btn" style="background:#f0fdf4; border:1.5px dashed #16a34a; color:#15803d; border-radius:10px; padding:9px 12px; font-size:0.82rem; font-weight:700; cursor:pointer; width:100%; margin-bottom:10px; display:flex; align-items:center; justify-content:center; gap:6px; min-height:44px; box-sizing:border-box;"><i class="fa-solid fa-plus-circle"></i> + Add Another Tour (Multi-Tour Package)</button>
-                        <div id="amtMultiTourSummary" class="amt-multi-tour-summary-banner" style="display:none; background:#f0f9ff; border:1.5px solid #bae6fd; border-radius:10px; padding:8px 12px; font-size:0.8rem; color:#0369a1; margin-bottom:12px; align-items:center; justify-content:space-between; font-weight:700; box-sizing:border-box;"></div>
-                        <div id="amtTourInsight" class="amt-tour-insight-box" style="display:none;"></div>
-
-                        <!-- Date & Pickup Time Section -->
-                        <div class="amt-schedule-card">
-                            <div class="amt-schedule-title">
-                                <i class="fa-solid fa-calendar-day" style="color:#0284c7;"></i> Travel Schedule &amp; Departure
+                        <div id="amtSelectedTourBanner" class="amt-selected-tour-banner" style="display:none;"></div>
+                        <div id="amtSightseeingFilterWrap" style="display:none;"></div>
+                        <div id="amtVisualTourCards" style="display:none;"></div>
+                        <div id="amtExtraToursContainer" style="display:none;"></div>
+                        <button type="button" id="amtAddTourBtn" style="display:none;"></button>
+                        <div id="amtMultiTourSummary" style="display:none;"></div>
+                        <div id="amtTourInsight" style="display:none;"></div>
+                        <div class="amt-grid2" style="margin-top:10px;margin-bottom:8px;">
+                            <div>
+                                <label class="amt-label" for="amtDate">Travel Date *</label>
+                                <input type="date" id="amtDate" class="amt-input" required>
                             </div>
-                            <div class="amt-quick-time-section" style="margin-bottom:10px;">
-                                <div class="amt-quick-time-lbl"><i class="fa-solid fa-bolt" style="color:#0284c7;"></i> Quick Departure Options:</div>
-                                <div class="amt-time-pills">
-                                    <button type="button" class="amt-time-pill" data-time="06:00"><i class="fa-solid fa-sun" style="color:#f59e0b;"></i> 06:00 AM <span class="amt-pill-tag">Sunrise</span></button>
-                                    <button type="button" class="amt-time-pill active" data-time="09:00"><i class="fa-solid fa-cloud-sun" style="color:#0284c7;"></i> 09:00 AM <span class="amt-pill-tag">Recommended</span></button>
-                                    <button type="button" class="amt-time-pill" data-time="10:30"><i class="fa-solid fa-sun-plant-wilt" style="color:#10b981;"></i> 10:30 AM <span class="amt-pill-tag">Mid-Morning</span></button>
-                                    <button type="button" class="amt-time-pill" data-time="14:00"><i class="fa-solid fa-mountain-sun" style="color:#8b5cf6;"></i> 02:00 PM <span class="amt-pill-tag">Sunset Circuit</span></button>
+                            <div>
+                                <label class="amt-label" for="amtTime">Pickup Time *</label>
+                                <input type="time" id="amtTime" class="amt-input" value="09:00" required>
+                                <div class="amt-quick-time-chips" style="display:flex;gap:4px;margin-top:4px;">
+                                    <button type="button" class="amt-time-chip active" data-time="09:00">09:00 AM</button>
+                                    <button type="button" class="amt-time-chip" data-time="10:30">10:30 AM</button>
+                                    <button type="button" class="amt-time-chip" data-time="14:00">02:00 PM</button>
                                 </div>
                             </div>
-                            <div class="amt-grid2">
-                                <div>
-                                    <label class="amt-label" for="amtDate">Travel Date *</label>
-                                    <input type="date" id="amtDate" class="amt-input" required>
-                                </div>
-                                <div>
-                                    <label class="amt-label" for="amtTime">Pickup Time *</label>
-                                    <input type="time" id="amtTime" class="amt-input" value="09:00" required>
-                                    <div id="amtSmartTimeBox" style="margin-top:5px; font-size:0.74rem; color:#0369a1; display:flex; align-items:center; flex-wrap:wrap; gap:5px;">
-                                        <span>💡 <strong>AI Suggested:</strong> <button type="button" id="amtSmartTimeBtn" class="amt-smart-time-btn">09:00 AM</button></span>
-                                        <span id="amtSmartTimeReason" style="color:#64748b; font-size:0.71rem;"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="amtMultiDayToggleBox" class="amt-multi-day-box" style="display:none; margin-top:10px; margin-bottom:6px; box-sizing:border-box;">
-                                <label style="display:flex; align-items:center; gap:8px; font-size:0.8rem; font-weight:700; color:#0f2b48; cursor:pointer;">
-                                    <input type="checkbox" id="amtDiffScheduleCheckbox" style="width:18px; height:18px; accent-color:#0284c7; cursor:pointer;">
-                                    <span>Schedule tours on different dates or times (Multi-Day Circuit)</span>
-                                </label>
-                                <div id="amtMultiDayList" style="display:none; margin-top:10px; display:flex; flex-direction:column; gap:8px;"></div>
-                            </div>
-                            <div id="amtAdvisoryBox" style="display:none; margin-top:10px; padding:10px 12px; border-radius:10px; font-size:0.78rem;"></div>
                         </div>
-
-                        <div class="amt-btn-row" style="margin-top:14px;">
-                            <button type="button" class="amt-btn-next" id="amtToStep2" style="width:100%; padding:13px 20px; background:linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color:#ffffff; border:none; border-radius:11px; font-weight:800; font-size:0.96rem; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 4px 12px rgba(2,132,199,0.35);">
-                                Next: Pickup &amp; Contact Details <i class="fa-solid fa-arrow-right"></i>
+                        <div id="amtSmartTimeBox" style="display:none;">
+                            <button type="button" id="amtSmartTimeBtn" class="amt-smart-time-btn" style="display:none;">09:00 AM</button>
+                            <span id="amtSmartTimeReason" style="display:none;"></span>
+                        </div>
+                        <div id="amtMultiDayToggleBox" style="display:none;">
+                            <input type="checkbox" id="amtDiffScheduleCheckbox">
+                            <div id="amtMultiDayList"></div>
+                        </div>
+                        <div id="amtAdvisoryBox" style="display:none;"></div>
+                        <div class="amt-btn-row" style="margin-top:12px;">
+                            <button type="button" class="amt-btn-next" id="amtToStep2" style="width:100%;padding:12px 20px;background:linear-gradient(135deg, #0284c7 0%, #0369a1 100%);color:#ffffff;border:none;border-radius:11px;font-weight:800;font-size:0.96rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 12px rgba(2,132,199,0.35);">
+                                Next: Pickup &amp; Cab Details <i class="fa-solid fa-arrow-right"></i>
                             </button>
                         </div>
                     </div>
 
                     <!-- STEP 2: PICKUP HOTEL & GUEST DETAILS -->
                     <div id="amtStep2" style="display:none;">
-                        <h3 class="amt-step-title" style="font-size:1.05rem; font-weight:800; color:#0f172a; margin:0 0 4px;">2. Pickup Hotel &amp; Guest Details</h3>
-                        <p class="amt-step-sub" style="font-size:0.8rem; color:#64748b; margin:0 0 12px;">Enter your pickup hotel, passenger contact, and review your guaranteed fixed tariff.</p>
-                        
-                        <div id="amtGuestRestored" style="display:none; padding:6px 10px; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; font-size:0.74rem; color:#166534; margin-bottom:10px;"><i class="fa-solid fa-clock-rotate-left"></i> Details pre-filled from your previous visit</div>
-
-                        <!-- Official Mountain Union Vehicle Specs -->
-                        <div class="amt-vehicle-spec-card">
-                            <div class="amt-vspec-hdr">
-                                <div class="amt-vspec-avatar"><i class="fa-solid fa-taxi"></i></div>
-                                <div>
-                                    <div class="amt-vspec-title">Mahabaleshwar Taxi Union Vehicle Specs</div>
-                                    <div class="amt-vspec-sub">Tourist Cab &bull; Private Ride &bull; Hotel Pickup</div>
-                                </div>
-                            </div>
-                            <div class="amt-vspec-grid">
-                                <div class="amt-vspec-cell">
-                                    <i class="fa-solid fa-users" style="color:#0284c7;"></i>
-                                    <div><strong>Max 4 Guests</strong><span>Union Limit</span></div>
-                                </div>
-                                <div class="amt-vspec-cell">
-                                    <i class="fa-solid fa-shield-halved" style="color:#10b981;"></i>
-                                    <div><strong>Private Ride</strong><span>Zero Co-passenger Sharing</span></div>
-                                </div>
-                                <div class="amt-vspec-cell">
-                                    <i class="fa-solid fa-hotel" style="color:#f59e0b;"></i>
-                                    <div><strong>Porch Pickup</strong><span>Direct Resort Reception</span></div>
-                                </div>
-                                <div class="amt-vspec-cell">
-                                    <i class="fa-solid fa-receipt" style="color:#8b5cf6;"></i>
-                                    <div><strong>Fixed Tariff</strong><span>Pay Driver After Trip</span></div>
-                                </div>
-                            </div>
+                        <div class="amt-step-hdr-compact">
+                            <h3 class="amt-step-title">2. Pickup Hotel &amp; Cab Details</h3>
+                            <span class="amt-trust-chip"><i class="fa-solid fa-shield-halved"></i> Pay Driver After Trip</span>
                         </div>
-
-                        <!-- Pickup Location with Autocomplete & 1-Tap Pills -->
-                        <div style="position:relative; margin-bottom:8px;">
-                            <label class="amt-label" for="amtPickup" style="font-size:0.8rem; font-weight:700; color:#334155; display:block; margin-bottom:4px;">Hotel / Resort / Landmark in Mahabaleshwar / Panchgani *</label>
+                        <div class="amt-cab-selector-wrap" style="margin-bottom:10px;">
+                            <label class="amt-label">Cab Capacity (Non-Sharing Private Tourist Cab)</label>
+                            <div class="amt-cab-pill-grid">
+                                <div class="amt-cab-pill active" data-cab="4-seater">
+                                    <div class="amt-cab-pill-radio"></div>
+                                    <div class="amt-cab-pill-info">
+                                        <strong>🚕 4-Seater Tourist Cab</strong>
+                                        <span>1 to 4 Guests &bull; As per availability</span>
+                                    </div>
+                                </div>
+                                <div class="amt-cab-pill" data-cab="6-7-seater">
+                                    <div class="amt-cab-pill-radio"></div>
+                                    <div class="amt-cab-pill-info">
+                                        <strong>🚙 6-7 Seater Cab</strong>
+                                        <span>5 to 7 Guests &bull; As per availability</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="amt-cab-subnote"><i class="fa-solid fa-circle-check" style="color:#10b981;"></i> Dedicated cab for your group &bull; Model subject to availability &bull; Hotel porch pickup</p>
+                            <select id="amtPax" style="display:none;"><option value="3-4" selected>3-4 Guests</option><option value="5+">5+ Guests</option></select>
+                            <div id="amtLargeGroupNotice" style="display:none;"><select id="amtTaxiCount" style="display:none;"><option value="2" selected>2</option></select></div>
+                        </div>
+                        <div style="position:relative;margin-bottom:10px;">
+                            <label class="amt-label" for="amtPickup">Pickup Hotel / Landmark in Mahabaleshwar / Panchgani *</label>
                             <div style="position:relative;">
-                                <input type="text" id="amtPickup" class="amt-input" placeholder="Type hotel name (e.g. Dreamland, Le Méridien, Club Mahindra...)" autocomplete="off" style="width:100%; padding:10px 10px; border:1.5px solid #cbd5e1; border-radius:10px; font-size:16px; min-height:44px;" required>
-                                <span id="amtPickupClear" style="display:none; position:absolute; right:10px; top:50%; transform:translateY(-50%); cursor:pointer; color:#94a3b8; font-size:1.1rem; padding:4px;">&times;</span>
+                                <input type="text" id="amtPickup" class="amt-input" placeholder="Type hotel name (e.g. Club Mahindra, Le Méridien, Market...)" autocomplete="off" required>
+                                <span id="amtPickupClear" style="display:none;position:absolute;right:10px;top:50%;transform:translateY(-50%);cursor:pointer;color:#94a3b8;font-size:1.1rem;padding:4px;">&times;</span>
                             </div>
                             <div id="amtAutocompleteList" class="amt-autocomplete-dropdown" style="display:none;"></div>
                         </div>
-
-
-                        <div id="amtZoneNotice" style="display:none; margin-bottom:10px; padding:7px 10px; border-radius:8px; font-size:0.76rem;"></div>
-                        <div id="amtAvailabilityBox" style="display:none; margin-bottom:10px; padding:7px 10px; border-radius:8px; font-size:0.76rem;"></div>
-
-                        <!-- Guests Selection -->
-                        <div style="margin-bottom:12px;">
-                            <label class="amt-label" for="amtPax" style="font-size:0.8rem; font-weight:700; color:#334155; display:block; margin-bottom:4px;">Total Passengers (Adults + Kids)</label>
-                            <select id="amtPax" class="amt-select" style="width:100%; padding:10px 10px; border:1.5px solid #cbd5e1; border-radius:10px; font-size:16px; min-height:44px;">
-                                <option value="1-2">1 to 2 Guests (1 Tourist Cab)</option>
-                                <option value="3-4" selected>3 to 4 Guests (1 Tourist Cab - Union Limit)</option>
-                                <option value="5+">5+ Guests (Requires 2+ Cabs under Union Rules)</option>
-                            </select>
-                            <div id="amtLargeGroupNotice" style="display:none; margin-top:6px; padding:8px 10px; background:#fffbeb; border:1px solid #fde68a; border-radius:8px; font-size:0.75rem; color:#92400e;">
-                                <i class="fa-solid fa-triangle-exclamation"></i> Official mountain rule: Standard taxi allows max 4 passengers. Groups of 5+ require multiple taxis traveling in convoy.
-                                <div style="margin-top:6px; display:flex; align-items:center; gap:8px;">
-                                    <label for="amtTaxiCount" style="font-weight:700; font-size:0.78rem;">Number of Cabs Needed:</label>
-                                    <select id="amtTaxiCount" style="padding:4px 8px; border-radius:6px; border:1px solid #cbd5e1; font-weight:700;">
-                                        <option value="2" selected>2 Cabs (Up to 8 Guests)</option>
-                                        <option value="3">3 Cabs (Up to 12 Guests)</option>
-                                        <option value="4">4 Cabs (Up to 16 Guests)</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Passenger Name & WhatsApp Number -->
-                        <div class="amt-grid2">
+                        <div id="amtZoneNotice" style="display:none;"></div>
+                        <div id="amtAvailabilityBox" style="display:none;"></div>
+                        <div class="amt-grid2" style="margin-bottom:10px;">
                             <div>
-                                <label class="amt-label" for="amtName" style="font-size:0.8rem; font-weight:700; color:#334155; display:block; margin-bottom:4px;">Your Full Name *</label>
-                                <input type="text" id="amtName" class="amt-input" placeholder="e.g. Rahul Sharma" style="width:100%; padding:10px 10px; border:1.5px solid #cbd5e1; border-radius:10px; font-size:16px; min-height:44px;" required>
+                                <label class="amt-label" for="amtName">Your Full Name *</label>
+                                <input type="text" id="amtName" class="amt-input" placeholder="e.g. Rahul Sharma" required>
                             </div>
                             <div>
-                                <label class="amt-label" for="amtPhone" style="font-size:0.8rem; font-weight:700; color:#334155; display:block; margin-bottom:4px;">WhatsApp Number *</label>
-                                <input type="tel" id="amtPhone" class="amt-input" placeholder="e.g. 9876543210" style="width:100%; padding:10px 10px; border:1.5px solid #cbd5e1; border-radius:10px; font-size:16px; min-height:44px;" required>
+                                <label class="amt-label" for="amtPhone">WhatsApp Mobile Number *</label>
+                                <input type="tel" id="amtPhone" class="amt-input" placeholder="10-digit mobile number" required>
                             </div>
                         </div>
-                        <div style="margin:10px 0 6px;">
-                            <label class="amt-label" for="amtNotes" style="font-size:0.8rem; font-weight:700; color:#334155; display:block; margin-bottom:4px;">Special Notes / Vehicle Request <span style="font-weight:400; color:#64748b; font-size:0.72rem;">(Optional)</span></label>
-                            <input type="text" id="amtNotes" class="amt-input" placeholder="Outstation only: Need an AC Sedan or 6-Seater SUV (Ertiga/Innova)? Mention here..." maxlength="120" style="width:100%; padding:10px 10px; border:1.5px solid #cbd5e1; border-radius:10px; font-size:16px; min-height:44px;">
+                        <div style="margin-bottom:10px;">
+                            <label class="amt-label" for="amtNotes">Special Notes <span style="font-weight:400;color:#64748b;font-size:0.72rem;">(Optional)</span></label>
+                            <input type="text" id="amtNotes" class="amt-input" placeholder="Any special notes (luggage count, senior citizen, etc.)?" maxlength="120">
                         </div>
-
-                        <!-- Live Tour & Tariff Review Card -->
-                        <div id="amtReviewCard" class="amt-tour-summary-card" style="background:#f8fafc; border:1.5px solid #e2e8f0; border-radius:12px; padding:12px; margin:10px 0;"></div>
-                        <div id="amtStep4PolicyBox"></div>
-
-                        <div class="amt-btn-row" style="display:flex; gap:8px; margin-top:14px;">
-                            <button type="button" class="amt-btn-back" id="amtBackTo1" style="padding:11px 16px; border:1.5px solid #cbd5e1; background:#ffffff; color:#475569; border-radius:10px; font-weight:700; cursor:pointer;"><i class="fa-solid fa-arrow-left"></i> Change Tour</button>
-                            <button type="button" class="amt-btn-next amt-btn-confirm" id="amtConfirmBtn" style="flex:1; padding:11px 16px; background:linear-gradient(135deg, #10b981 0%, #059669 100%); color:#ffffff; border:none; border-radius:10px; font-weight:800; font-size:0.9rem; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; box-shadow:0 4px 14px rgba(16,185,129,0.35); min-height:48px; text-align:center; flex-wrap:wrap; line-height:1.2;">
-                                <i class="fa-solid fa-lock"></i> GENERATE VOUCHER &amp; OPEN WHATSAPP <i class="fa-solid fa-arrow-right"></i>
+                        <div id="amtReviewCard" class="amt-compact-review-bar"></div>
+                        <div id="amtStep4PolicyBox" style="display:none;"></div>
+                        <div class="amt-btn-row" style="margin-top:10px;display:flex;flex-direction:column;gap:8px;">
+                            <button type="button" class="amt-btn-next amt-btn-confirm" id="amtConfirmBtn" style="width:100%;padding:12px 16px;background:linear-gradient(135deg, #10b981 0%, #059669 100%);color:#ffffff;border:none;border-radius:11px;font-weight:800;font-size:0.95rem;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;box-shadow:0 4px 14px rgba(16,185,129,0.35);">
+                                <div style="display:flex;align-items:center;gap:8px;"><i class="fa-brands fa-whatsapp" style="font-size:1.25rem;"></i> CHECK CAB AVAILABILITY ON WHATSAPP</div>
+                                <span style="font-size:0.72rem;font-weight:600;opacity:0.92;">Instant dispatch check with Aryan Taxi &bull; Pay driver after trip</span>
                             </button>
+                            <div style="display:flex;justify-content:space-between;align-items:center;padding:0 2px;">
+                                <button type="button" class="amt-btn-back" id="amtBackTo1" style="padding:7px 12px;border:1px solid #cbd5e1;background:#ffffff;color:#475569;border-radius:8px;font-weight:700;font-size:0.78rem;cursor:pointer;"><i class="fa-solid fa-arrow-left"></i> Change Tour</button>
+                                <button type="button" id="amtPreviewVoucherBtn" style="padding:7px 12px;border:none;background:transparent;color:#0284c7;font-weight:700;font-size:0.78rem;cursor:pointer;text-decoration:underline;"><i class="fa-solid fa-file-lines"></i> View Trip Pass / Voucher</button>
+                            </div>
+                        </div>
+                        <div style="margin-top:6px;font-size:0.71rem;color:#64748b;text-align:center;">
+                            <i class="fa-solid fa-circle-check" style="color:#10b981;"></i> Taxi inquiry is subject to cab availability &bull; No advance required &bull; Free cancellation
                         </div>
                     </div>
 

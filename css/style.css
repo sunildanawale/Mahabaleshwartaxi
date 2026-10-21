@@ -8107,3 +8107,32 @@ body.modal-open {
 }
 
 
+
+/* ============================================================
+   COMPACT ZERO-SCROLLING BOOKING ENGINE EXTENSIONS
+   ============================================================ */
+.amt-step-hdr-compact { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.amt-trust-chip { font-size: 0.68rem; font-weight: 700; color: #0284c7; background: #f0f9ff; padding: 3px 8px; border-radius: 12px; border: 1px solid #bae6fd; white-space: nowrap; }
+.amt-category-pills { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; margin-bottom: 8px; }
+@media (max-width: 480px) { .amt-category-pills { grid-template-columns: repeat(3, 1fr); gap: 4px; } }
+.amt-category-pills .amt-service-btn { padding: 6px 4px; font-size: 0.72rem; font-weight: 700; border: 1px solid #cbd5e1; border-radius: 8px; background: #f8fafc; color: #334155; cursor: pointer; text-align: center; display: block; width: 100%; box-sizing: border-box; transition: all 0.15s ease; }
+.amt-category-pills .amt-service-btn.active { background: #0284c7; color: #ffffff; border-color: #0284c7; }
+.amt-time-chip { padding: 4px 8px; font-size: 0.68rem; font-weight: 700; border: 1px solid #cbd5e1; border-radius: 6px; background: #f8fafc; color: #334155; cursor: pointer; }
+.amt-time-chip.active { background: #0284c7; color: #ffffff; border-color: #0284c7; }
+.amt-cab-selector-wrap { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 8px 10px; }
+.amt-cab-pill-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 6px; }
+.amt-cab-pill { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border: 1.5px solid #cbd5e1; border-radius: 10px; background: #ffffff; cursor: pointer; transition: all 0.15s ease; }
+.amt-cab-pill:hover { border-color: #0284c7; background: #f0f9ff; }
+.amt-cab-pill.active { border-color: #0284c7; background: #f0f9ff; box-shadow: 0 0 0 2px #0284c7; }
+.amt-cab-pill-radio { width: 14px; height: 14px; border-radius: 50%; border: 2px solid #94a3b8; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.amt-cab-pill.active .amt-cab-pill-radio { border-color: #0284c7; background: #0284c7; }
+.amt-cab-pill-info { display: flex; flex-direction: column; text-align: left; }
+.amt-cab-pill-info strong { font-size: 0.78rem; color: #0f172a; line-height: 1.2; }
+.amt-cab-pill-info span { font-size: 0.65rem; color: #64748b; margin-top: 1px; }
+.amt-cab-subnote { font-size: 0.68rem; color: #475569; margin: 5px 0 0; line-height: 1.3; }
+.amt-compact-review-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 9px; padding: 8px 10px; margin-bottom: 10px; }
+.amt-crb-row { display: flex; justify-content: space-between; align-items: center; }
+.amt-crb-item { font-size: 0.78rem; color: #0f172a; font-weight: 600; }
+.amt-crb-fare { font-size: 1.05rem; font-weight: 900; color: #0e7490; }
+.amt-crb-meta { display: flex; flex-wrap: wrap; gap: 8px; font-size: 0.68rem; color: #64748b; margin-top: 3px; }
+.amt-crb-zero { color: #15803d; font-weight: 700; }
