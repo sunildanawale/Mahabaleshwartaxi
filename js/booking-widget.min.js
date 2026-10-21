@@ -1745,26 +1745,8 @@
     function updateTourInsight() {
         var insight = document.getElementById('amtTourInsight');
         if (!insight) return;
-        var tourEl = document.getElementById('amtTourSelect');
-        var tour2El = document.getElementById('amtTour2Select');
-        var t1Id = tourEl ? tourEl.value : (bookingState.tourId || 'T1');
-        var t2Id = tour2El ? tour2El.value : (bookingState.tour2Id || '');
-
-        if (t1Id === 'T1' && (!t2Id || t2Id === '')) {
-            insight.innerHTML = '💡 <strong>Smart Tour Tip:</strong> Tour 1 covers Arthur\'s Seat &amp; Temples (3.5 hrs). Want to cover Panchgani Table Land in one day? <strong>Tour 7 (Full Day Combo — ₹3,000)</strong> combines both circuits (arranged as per availability).';
-            insight.style.display = 'block';
-        } else if (t1Id === 'T1' && t2Id === 'T4') {
-            insight.innerHTML = '💡 <strong>Combo Suggestion:</strong> Booking Tour 1 + Tour 4 separately? <strong>Tour 7 (Full Day Combo — ₹3,000)</strong> is the official union package combining both circuits in one day.';
-            insight.style.display = 'block';
-        } else if (t1Id === 'T3') {
-            insight.innerHTML = '🏰 <strong>Heritage Tip:</strong> Pratapgad fort involves walking and mountain steps. Morning departure recommended. Cabs arranged as per availability.';
-            insight.style.display = 'block';
-        } else if (t1Id === 'T6') {
-            insight.innerHTML = '🚤 <strong>Tapola Tip:</strong> Scenic 30km jungle ghat ride to Shivsagar Lake. Water sports charges payable directly at lake boating counter.';
-            insight.style.display = 'block';
-        } else {
-            insight.style.display = 'none';
-        }
+        insight.innerHTML = '';
+        insight.style.display = 'none';
     }
 
     function parseTimeMinutes(timeStr) {

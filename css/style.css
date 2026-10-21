@@ -8814,3 +8814,4 @@ body.booking-portal-page .portal-card {
     border-color: #334155 !important;
     color: #cbd5e1 !important;
 }
+#amtTourInsight, .amt-tour-insight-box { display: none !important; margin: 0 !important; padding: 0 !important; height: 0 !important; overflow: hidden !important; }
