@@ -607,11 +607,53 @@
             '.amt-step-hdr-compact{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}',
             '.amt-step-hdr-compact .amt-step-title{font-size:0.95rem;font-weight:800;color:#0f172a;margin:0;}',
             '.amt-trust-chip{font-size:0.68rem;font-weight:700;color:#059669;background:#ecfdf5;padding:2px 7px;border-radius:6px;border:1px solid #a7f3d0;white-space:nowrap;}',
-            '.amt-category-pills{display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px;margin-bottom:10px;scrollbar-width:none;}',
-            '.amt-category-pills::-webkit-scrollbar{display:none;}',
-            '.amt-category-pills .amt-service-btn{flex:0 0 auto;padding:7px 11px;border-radius:20px;border:1.5px solid #cbd5e1;background:#f8fafc;color:#334155;font-size:0.76rem;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.15s ease;}',
-            '.amt-category-pills .amt-service-btn:hover{border-color:#0284c7;background:#f0f9ff;color:#0284c7;}',
-            '.amt-category-pills .amt-service-btn.active{background:#0284c7;border-color:#0284c7;color:#ffffff;box-shadow:0 2px 8px rgba(2,132,199,0.3);}',
+            /* Category Grid — 6-col responsive segmented layout */
+            '.amt-category-grid{display:grid !important;grid-template-columns:repeat(6, 1fr) !important;gap:6px !important;margin-bottom:12px !important;width:100% !important;box-sizing:border-box !important;}',
+            '.amt-category-grid .amt-service-btn:nth-child(1){grid-column:span 2 !important;}',
+            '.amt-category-grid .amt-service-btn:nth-child(2){grid-column:span 2 !important;}',
+            '.amt-category-grid .amt-service-btn:nth-child(3){grid-column:span 2 !important;}',
+            '.amt-category-grid .amt-service-btn:nth-child(4){grid-column:span 3 !important;}',
+            '.amt-category-grid .amt-service-btn:nth-child(5){grid-column:span 3 !important;}',
+            '@media (min-width:768px){.amt-category-grid{grid-template-columns:repeat(5, 1fr) !important;gap:8px !important;}.amt-category-grid .amt-service-btn{grid-column:span 1 !important;}}',
+            '.amt-category-grid .amt-service-btn{display:flex !important;flex-direction:column !important;align-items:center !important;justify-content:center !important;padding:8px 4px !important;border:1.5px solid #cbd5e1 !important;background:#ffffff !important;border-radius:10px !important;cursor:pointer !important;transition:all 0.18s ease-in-out !important;min-height:52px !important;box-sizing:border-box !important;width:100% !important;box-shadow:0 1px 3px rgba(0,0,0,0.06) !important;-webkit-tap-highlight-color:transparent !important;text-align:center !important;}',
+            '.amt-category-grid .amt-service-btn:hover{border-color:#0284c7 !important;background:#f0f9ff !important;transform:translateY(-1px) !important;}',
+            '.amt-category-grid .amt-service-btn.active{background:linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;border-color:#0284c7 !important;color:#ffffff !important;box-shadow:0 4px 12px rgba(2, 132, 199, 0.35) !important;}',
+            '.amt-category-grid .amt-service-btn .amt-cat-icon{font-size:1.15rem !important;line-height:1 !important;margin-bottom:3px !important;display:block !important;}',
+            '.amt-category-grid .amt-service-btn .amt-cat-name{display:block !important;font-size:0.76rem !important;font-weight:800 !important;color:#0f172a !important;line-height:1.2 !important;white-space:nowrap !important;}',
+            '.amt-category-grid .amt-service-btn.active .amt-cat-name{color:#ffffff !important;}',
+            '.amt-category-grid .amt-service-btn .amt-cat-tag{display:block !important;font-size:0.62rem !important;font-weight:700 !important;color:#64748b !important;margin-top:2px !important;line-height:1.1 !important;white-space:nowrap !important;}',
+            '.amt-category-grid .amt-service-btn.active .amt-cat-tag{color:#e0f2fe !important;}',
+            '.amt-category-grid .amt-service-btn .amt-tag-green{color:#15803d !important;}',
+            '.amt-category-grid .amt-service-btn.active .amt-tag-green{color:#bbf7d0 !important;}',
+            /* Live Selected Tour Showcase Banner */
+            '.amt-stb-card{background:#ffffff;border:1.5px solid #0284c7;border-radius:12px;padding:10px 12px;margin:8px 0;box-sizing:border-box;box-shadow:0 2px 10px rgba(2,132,199,0.1);}',
+            '.amt-stb-top-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;gap:8px;}',
+            '.amt-stb-badge{font-size:0.65rem;font-weight:800;text-transform:uppercase;padding:3px 8px;border-radius:12px;letter-spacing:0.3px;white-space:nowrap;}',
+            '.amt-stb-badge.amt-badge-union{background:#e0f2fe;color:#0369a1;border:1px solid #bae6fd;}',
+            '.amt-stb-badge.amt-badge-express{background:#fef3c7;color:#92400e;border:1px solid #fde68a;}',
+            '.amt-stb-badge.amt-badge-combo{background:#f3e8ff;color:#6b21a8;border:1px solid #e9d5ff;}',
+            '.amt-stb-badge.amt-badge-outstation{background:#ecfeff;color:#0e7490;border:1px solid #a5f3fc;}',
+            '.amt-stb-badge.amt-badge-local{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0;}',
+            '.amt-stb-fare-box{text-align:right;}',
+            '.amt-stb-fare-val{font-size:1.15rem;font-weight:900;color:#0284c7;display:block;line-height:1.1;}',
+            '.amt-stb-fare-sub{font-size:0.65rem;color:#64748b;font-weight:600;}',
+            '.amt-stb-tour-title{font-size:0.92rem;font-weight:800;color:#0f172a;margin-bottom:5px;line-height:1.25;}',
+            '.amt-stb-meta-row{display:flex;flex-wrap:wrap;gap:8px;font-size:0.72rem;color:#475569;margin-bottom:6px;padding-bottom:6px;border-bottom:1px dashed #e2e8f0;}',
+            '.amt-stb-meta-row span{display:inline-flex;align-items:center;gap:4px;}',
+            '.amt-stb-points-wrap{display:flex;flex-wrap:wrap;gap:4px;align-items:center;margin-top:4px;}',
+            '.amt-stb-points-lbl{font-size:0.7rem;font-weight:700;color:#0f172a;}',
+            '.amt-stb-point-chip{font-size:0.65rem;background:#f1f5f9;color:#334155;padding:2px 6px;border-radius:6px;border:1px solid #e2e8f0;}',
+            '.amt-chip-more{background:#e0f2fe;color:#0284c7;font-weight:700;}',
+            '.amt-stb-disclaimer{margin-top:6px;padding:6px 8px;background:#f8fafc;border-left:3px solid #0284c7;border-radius:4px;font-size:0.68rem;color:#475569;line-height:1.3;}',
+            /* Dark Theme Overrides */
+            '[data-theme="dark"] #amtBookingModal .amt-category-grid .amt-service-btn{background:#1e293b !important;border-color:#334155 !important;color:#f8fafc !important;}',
+            '[data-theme="dark"] #amtBookingModal .amt-category-grid .amt-service-btn .amt-cat-name{color:#f8fafc !important;}',
+            '[data-theme="dark"] #amtBookingModal .amt-category-grid .amt-service-btn .amt-cat-tag{color:#94a3b8 !important;}',
+            '[data-theme="dark"] #amtBookingModal .amt-category-grid .amt-service-btn.active{background:linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;color:#ffffff !important;}',
+            '[data-theme="dark"] #amtBookingModal .amt-stb-card{background:#1e293b !important;border-color:#334155 !important;color:#f8fafc !important;}',
+            '[data-theme="dark"] #amtBookingModal .amt-stb-tour-title{color:#f8fafc !important;}',
+            '[data-theme="dark"] #amtBookingModal .amt-stb-point-chip{background:#0f172a !important;border-color:#334155 !important;color:#cbd5e1 !important;}',
+            '[data-theme="dark"] #amtBookingModal .amt-stb-disclaimer{background:#0f172a !important;color:#cbd5e1 !important;}',
             '.amt-time-chip{padding:3px 7px;border-radius:6px;border:1px solid #cbd5e1;background:#f8fafc;font-size:0.68rem;font-weight:700;color:#475569;cursor:pointer;}',
             '.amt-time-chip:hover{border-color:#0284c7;color:#0284c7;}',
             '.amt-time-chip.active{background:#0284c7;border-color:#0284c7;color:#ffffff;}',
@@ -1268,19 +1310,42 @@
             + '  <button type="button" id="amtClearDraftBtn" class="amt-draft-btn-clear">Start Fresh</button>'
             + '</div>'
             + '<div class="amt-step-hdr-compact">'
-            + '  <h3 class="amt-step-title">1. Select Tour &amp; Departure</h3>'
+            + '  <h3 class="amt-step-title">1. Select Service &amp; Departure</h3>'
             + '  <span class="amt-trust-chip"><i class="fa-solid fa-shield-halved"></i> Fixed Rates &bull; Zero Advance</span>'
             + '</div>'
-            + '<div class="amt-category-pills" role="radiogroup" aria-label="Service Category">'
-            + '  <button type="button" class="amt-service-btn active" role="radio" aria-checked="true" data-service="sightseeing">🚕 Sightseeing</button>'
-            + '  <button type="button" class="amt-service-btn" role="radio" aria-checked="false" data-service="express">⚡ Express ₹800</button>'
-            + '  <button type="button" class="amt-service-btn" role="radio" aria-checked="false" data-service="combo">⭐ Full Day</button>'
-            + '  <button type="button" class="amt-service-btn" role="radio" aria-checked="false" data-service="outstation">✈️ Outstation</button>'
-            + '  <button type="button" class="amt-service-btn" role="radio" aria-checked="false" data-service="local_drop">📍 Local Drop</button>'
+            + '<div class="amt-category-grid" role="radiogroup" aria-label="Select Service Category">'
+            + '  <button type="button" class="amt-service-btn active" role="radio" aria-checked="true" data-service="sightseeing">'
+            + '    <span class="amt-cat-icon">🚕</span>'
+            + '    <strong class="amt-cat-name">Sightseeing</strong>'
+            + '    <span class="amt-cat-tag">Union Rates</span>'
+            + '  </button>'
+            + '  <button type="button" class="amt-service-btn" role="radio" aria-checked="false" data-service="express">'
+            + '    <span class="amt-cat-icon">⚡</span>'
+            + '    <strong class="amt-cat-name">Express ₹800</strong>'
+            + '    <span class="amt-cat-tag amt-tag-green">Budget Flat</span>'
+            + '  </button>'
+            + '  <button type="button" class="amt-service-btn" role="radio" aria-checked="false" data-service="combo">'
+            + '    <span class="amt-cat-icon">⭐</span>'
+            + '    <strong class="amt-cat-name">Full Day</strong>'
+            + '    <span class="amt-cat-tag">Combo ₹3000</span>'
+            + '  </button>'
+            + '  <button type="button" class="amt-service-btn" role="radio" aria-checked="false" data-service="outstation">'
+            + '    <span class="amt-cat-icon">✈️</span>'
+            + '    <strong class="amt-cat-name">Outstation Drop</strong>'
+            + '    <span class="amt-cat-tag">Pune &bull; Mumbai &bull; Satara</span>'
+            + '  </button>'
+            + '  <button type="button" class="amt-service-btn" role="radio" aria-checked="false" data-service="local_drop">'
+            + '    <span class="amt-cat-icon">📍</span>'
+            + '    <strong class="amt-cat-name">Local Point Drop</strong>'
+            + '    <span class="amt-cat-tag">Mapro &bull; Panchgani &bull; Local</span>'
+            + '  </button>'
             + '</div>'
             + '<div class="amt-form-group" style="margin-bottom:8px;">'
-            + '  <label class="amt-label" for="amtTourSelect">Select Tour Package / Route *</label>'
-            + '  <select id="amtTourSelect" class="amt-select" style="width:100%;font-weight:700;">'
+            + '  <label class="amt-label" for="amtTourSelect" style="display:flex;justify-content:space-between;align-items:center;">'
+            + '    <span id="amtTourSelectLabel">Select Sightseeing Tour (Official Union Rate) *</span>'
+            + '    <span id="amtTourCountBadge" style="font-size:0.68rem;font-weight:700;color:#0284c7;background:#e0f2fe;padding:2px 7px;border-radius:10px;">6 Tours</span>'
+            + '  </label>'
+            + '  <select id="amtTourSelect" class="amt-select" style="width:100%;font-weight:700;font-size:15px;padding:10px 12px;border:1.5px solid #0284c7;border-radius:10px;background:#f0f9ff;color:#0f172a;min-height:44px;">'
             + tourOptions
             + '  </select>'
             + '</div>'
@@ -2884,32 +2949,75 @@
         var isCombo = (t.category === 'combo');
         var isOutstation = (t.category === 'outstation');
         var isLocalDrop = (t.category === 'local_drop');
-        var badgeText = isSingle ? '⚡ EXPRESS SINGLE (BUDGET TOUR)' : (isCombo ? '⭐ FULL DAY COMBO' : (isOutstation ? '✈️ OUTSTATION ROUTE' : (isLocalDrop ? '📍 LOCAL POINT DROP' : '⭐ OFFICIAL UNION SIGHTSEEING')));
-        var badgeClass = isSingle ? 'express' : (isOutstation ? 'outstation' : 'standard');
-        var fareSubText = isSingle
-            ? 'Special Budget Fare (Private Offer)'
-            : (isCombo ? 'Official Union Rate' : (isOutstation ? 'Direct Highway Drop' : (isLocalDrop ? 'Official Union Drop Rate' : 'Official Taxi Union Rate')));
+
+        var badgeText = '';
+        var badgeClass = '';
+        var fareTitle = '';
+        var fareTerms = '';
+        var guideNote = '';
+
+        if (isSingle) {
+            badgeText = '⚡ SPECIAL BUDGET EXPRESS TOUR';
+            badgeClass = 'amt-badge-express';
+            fareTitle = '₹800 Flat Rate';
+            fareTerms = 'Private Offer • Pay Driver After Trip';
+            guideNote = '<div class="amt-stb-disclaimer"><i class="fa-solid fa-bolt" style="color:#f59e0b;"></i> <strong>Express Single Tour:</strong> Fixed budget sightseeing at ₹800 flat. Arranged directly by Aryan Taxi (independent offer).</div>';
+        } else if (isCombo) {
+            badgeText = '⭐ FULL DAY COMPREHENSIVE COMBO';
+            badgeClass = 'amt-badge-combo';
+            fareTitle = '₹3,000 Total Fare';
+            fareTerms = 'Official Union Rate • Pay Driver After Trip';
+            guideNote = '<div class="amt-stb-disclaimer"><i class="fa-solid fa-crown" style="color:#8b5cf6;"></i> <strong>Full Day Pass:</strong> Covers Mahabaleshwar Arthur Seat circuit + Panchgani Table Land in one comprehensive private day trip.</div>';
+        } else if (isOutstation) {
+            badgeText = '✈️ OUTSTATION INTERCITY TRANSIT';
+            badgeClass = 'amt-badge-outstation';
+            fareTitle = '₹' + t.fare + ' Base Tariff';
+            fareTerms = '+ Tolls at actuals • Balance to Driver upon Drop';
+            guideNote = '<div class="amt-stb-disclaimer"><i class="fa-solid fa-road" style="color:#0284c7;"></i> <strong>Intercity Travel:</strong> Direct highway transit via Pasarni/Wai Ghat to NH-48. Highway tolls & airport parking as per actual Fastag receipts.</div>';
+        } else if (isLocalDrop) {
+            badgeText = '📍 POINT-TO-POINT LOCAL DROP';
+            badgeClass = 'amt-badge-local';
+            fareTitle = '₹' + t.fare + ' Fixed Drop Tariff';
+            fareTerms = 'Zero Advance • Pay Driver Upon Drop';
+            guideNote = '<div class="amt-stb-disclaimer"><i class="fa-solid fa-map-pin" style="color:#10b981;"></i> <strong>Local Transit:</strong> Direct hotel pickup and drop to destination. Driver arranged as per network availability.</div>';
+        } else {
+            // Standard sightseeing
+            badgeText = '🛡️ OFFICIAL UNION SIGHTSEEING';
+            badgeClass = 'amt-badge-union';
+            fareTitle = '₹' + t.fare + ' Official Tariff';
+            fareTerms = 'Pay Driver After Trip • Zero Advance';
+            guideNote = '';
+        }
+
         var points = t.points || [];
-        var pointsText = points.length > 0
-            ? ('<div class="amt-stb-points"><strong>📍 Included:</strong> ' + escapeHtml(points.slice(0, 5).join(', ')) + (points.length > 5 ? ' + ' + (points.length - 5) + ' more' : '') + '</div>')
-            : '';
+        var pointsHtml = '';
+        if (points.length > 0) {
+            var displayPts = points.slice(0, 6);
+            var remaining = points.length - displayPts.length;
+            pointsHtml = '<div class="amt-stb-points-wrap">' +
+                '<span class="amt-stb-points-lbl"><i class="fa-solid fa-location-dot"></i> Included Points:</span> ' +
+                displayPts.map(function (p) { return '<span class="amt-stb-point-chip">' + escapeHtml(p) + '</span>'; }).join('') +
+                (remaining > 0 ? '<span class="amt-stb-point-chip amt-chip-more">+' + remaining + ' more</span>' : '') +
+                '</div>';
+        }
 
-        var disclaimerHtml = isSingle
-            ? '<div class="amt-stb-disclaimer"><i class="fa-solid fa-circle-info"></i> <strong>Note:</strong> Express Single Tour (₹800 flat) is an independent budget option offered directly by Aryan Taxi (not part of the Taxi Union rate card).</div>'
-            : '';
-
-        banner.innerHTML = '<div class="amt-stb-header">'
-            + '  <span class="amt-stb-badge ' + badgeClass + '">' + badgeText + '</span>'
-            + '  <span class="amt-stb-fare">₹' + t.fare + ' <small>' + fareSubText + '</small></span>'
-            + '</div>'
-            + '<div class="amt-stb-title">' + escapeHtml(t.name) + '</div>'
-            + '<div class="amt-stb-meta">'
-            + '  <span><i class="fa-solid fa-clock"></i> ' + escapeHtml(t.duration) + '</span>'
-            + (points.length > 0 ? '  <span><i class="fa-solid fa-location-dot"></i> ' + points.length + ' Viewpoints</span>' : '')
-            + '  <span><i class="fa-solid fa-shield-halved"></i> Zero Advance &bull; Pay After Trip</span>'
-            + '</div>'
-            + pointsText
-            + disclaimerHtml;
+        banner.innerHTML = '<div class="amt-stb-card">' +
+            '  <div class="amt-stb-top-row">' +
+            '    <span class="amt-stb-badge ' + badgeClass + '">' + badgeText + '</span>' +
+            '    <div class="amt-stb-fare-box">' +
+            '      <span class="amt-stb-fare-val">' + fareTitle + '</span>' +
+            '      <span class="amt-stb-fare-sub">' + fareTerms + '</span>' +
+            '    </div>' +
+            '  </div>' +
+            '  <div class="amt-stb-tour-title">' + escapeHtml(t.name) + '</div>' +
+            '  <div class="amt-stb-meta-row">' +
+            '    <span><i class="fa-solid fa-clock"></i> ' + escapeHtml(t.duration) + '</span>' +
+            (points.length > 0 ? '    <span><i class="fa-solid fa-binoculars"></i> ' + points.length + ' Viewpoints</span>' : '') +
+            '    <span><i class="fa-solid fa-shield-halved"></i> Dedicated Private Cab</span>' +
+            '  </div>' +
+            pointsHtml +
+            guideNote +
+            '</div>';
         banner.style.display = 'block';
     }
 
@@ -3107,51 +3215,99 @@
         var summary = document.getElementById('amtMultiTourSummary');
         if (!sel || !window.TOUR_DATABASE) return;
 
-        var labelEl = document.querySelector('label[for="amtTourSelect"]');
-        if (labelEl) {
-            if (service === 'outstation') {
-                labelEl.textContent = 'Select Outstation Route *';
-            } else if (service === 'local_drop') {
-                labelEl.textContent = 'Select Local Drop Destination *';
-            } else if (service === 'combo') {
-                labelEl.textContent = 'Select Full Day Combo Package *';
-            } else if (service === 'express') {
-                labelEl.textContent = 'Select Express Tour (₹800 Flat Rate) *';
-            } else {
-                labelEl.textContent = 'Select Sightseeing Tour (Official Union Rate) *';
-            }
-        }
-
         var db = window.TOUR_DATABASE;
+        var labelEl = document.getElementById('amtTourSelectLabel') || document.querySelector('label[for="amtTourSelect"]');
+        var countBadge = document.getElementById('amtTourCountBadge');
+
+        // Update category button active classes across entire DOM
+        var allServiceBtns = document.querySelectorAll('.amt-service-btn');
+        allServiceBtns.forEach(function (btn) {
+            var bService = btn.getAttribute('data-service');
+            var isActive = (bService === service);
+            btn.classList.toggle('active', isActive);
+            btn.setAttribute('aria-checked', isActive ? 'true' : 'false');
+        });
+
         var filtered = [];
+        var optHtml = '';
+        var labelText = '';
+        var countText = '';
+
         if (service === 'express') {
-            filtered = db ? db.tours.filter(function (t) { return t.sub_category === 'single_tour' || t.fare === 800; }) : [];
-            bookingState.selectedTours = [];
-        } else if (service === 'sightseeing') {
-            filtered = db ? db.tours.filter(function (t) { return t.category === 'sightseeing' && t.sub_category !== 'single_tour' && t.fare !== 800; }) : [];
-            bookingState.selectedTours = [];
+            filtered = db.tours.filter(function (t) { return t.sub_category === 'single_tour' || t.fare === 800; });
+            labelText = 'Select Express Single Tour (Flat ₹800) *';
+            countText = filtered.length + ' Express Tours';
+            optHtml = '<optgroup label="⚡ Special ₹800 Express Single Tours (Budget Flat Rate)">' +
+                filtered.map(function (t) {
+                    return '<option value="' + t.id + '">' + escapeHtml(t.name) + ' — ₹800 Flat (' + escapeHtml(t.duration) + ')</option>';
+                }).join('') +
+                '</optgroup>';
         } else if (service === 'combo') {
-            filtered = db ? db.tours.filter(function (t) { return t.category === 'combo'; }) : [];
-            bookingState.selectedTours = [];
+            filtered = db.tours.filter(function (t) { return t.category === 'combo'; });
+            labelText = 'Select Full Day Combo Package *';
+            countText = '1 Comprehensive Pass';
+            optHtml = '<optgroup label="⭐ Full Day Mahabaleshwar + Panchgani Combo">' +
+                filtered.map(function (t) {
+                    return '<option value="' + t.id + '">' + escapeHtml(t.name) + ' — ₹' + t.fare + ' (' + escapeHtml(t.duration) + ')</option>';
+                }).join('') +
+                '</optgroup>';
         } else if (service === 'outstation') {
-            filtered = db ? db.tours.filter(function (t) { return t.category === 'outstation'; }) : [];
-            bookingState.selectedTours = [];
+            filtered = db.tours.filter(function (t) { return t.category === 'outstation'; });
+            labelText = 'Select Outstation Destination (Airport / City Drop) *';
+            countText = filtered.length + ' Outstation Routes';
+
+            var aptTransfers = filtered.filter(function (t) {
+                return t.id.indexOf('APT') !== -1 || t.id.indexOf('RLY') !== -1 || t.id.indexOf('BUS') !== -1 || t.id.indexOf('VASHI') !== -1;
+            });
+            var cityDrops = filtered.filter(function (t) {
+                return t.id.indexOf('APT') === -1 && t.id.indexOf('RLY') === -1 && t.id.indexOf('BUS') === -1 && t.id.indexOf('VASHI') === -1;
+            });
+
+            optHtml = '<optgroup label="✈️ Airport & Railway Station Drops">' +
+                aptTransfers.map(function (t) {
+                    var cleanName = t.name.replace(/^Mahabaleshwar to /i, '');
+                    return '<option value="' + t.id + '">' + escapeHtml(cleanName) + ' — ₹' + t.fare + ' (+ Tolls at actuals)</option>';
+                }).join('') +
+                '</optgroup>' +
+                '<optgroup label="🏔️ Intercity & Popular Destinations">' +
+                cityDrops.map(function (t) {
+                    var cleanName = t.name.replace(/^Mahabaleshwar to /i, '');
+                    return '<option value="' + t.id + '">' + escapeHtml(cleanName) + ' — ₹' + t.fare + ' (+ Tolls at actuals)</option>';
+                }).join('') +
+                '</optgroup>';
         } else if (service === 'local_drop') {
-            filtered = db ? db.tours.filter(function (t) { return t.category === 'local_drop'; }) : [];
-            bookingState.selectedTours = [];
+            filtered = db.tours.filter(function (t) { return t.category === 'local_drop'; });
+            labelText = 'Select Local Drop / Pickup Destination *';
+            countText = filtered.length + ' Local Drops';
+            optHtml = '<optgroup label="📍 Point-to-Point Local Drops (Fixed Union Tariffs)">' +
+                filtered.map(function (t) {
+                    return '<option value="' + t.id + '">' + escapeHtml(t.name) + ' — ₹' + t.fare + ' (' + escapeHtml(t.duration) + ')</option>';
+                }).join('') +
+                '</optgroup>';
+        } else {
+            // Default: sightseeing
+            filtered = db.tours.filter(function (t) { return t.category === 'sightseeing' && t.sub_category !== 'single_tour' && t.fare !== 800; });
+            labelText = 'Select Sightseeing Tour (Official Union Rate) *';
+            countText = filtered.length + ' Union Tours';
+            optHtml = '<optgroup label="🛡️ Official Mahabaleshwar Taxi Union Sightseeing">' +
+                filtered.map(function (t) {
+                    return '<option value="' + t.id + '">' + escapeHtml(t.name) + ' — ₹' + t.fare + ' (' + escapeHtml(t.duration) + ')</option>';
+                }).join('') +
+                '</optgroup>';
         }
 
-        sel.innerHTML = filtered.map(function (t) {
-            var tag = (t.fare === 800 || t.sub_category === 'single_tour') ? '₹800 Flat' : ('₹' + t.fare);
-            return '<option value="' + t.id + '">' + escapeHtml(t.name) + ' — ' + tag + ' (' + escapeHtml(t.duration) + ')</option>';
-        }).join('');
+        if (labelEl) labelEl.textContent = labelText;
+        if (countBadge) countBadge.textContent = countText;
+
+        sel.innerHTML = optHtml;
 
         var targetId = (bookingState.tourId && filtered.some(function (t) { return t.id === bookingState.tourId; }))
             ? bookingState.tourId
-            : (sel.value || (filtered[0] ? filtered[0].id : ''));
+            : (filtered[0] ? filtered[0].id : '');
         sel.value = targetId;
         bookingState.tourId = targetId;
         bookingState.tour2Id = '';
+        bookingState.service = service;
         bookingState.selectedTours = [{ id: targetId, date: bookingState.date, time: bookingState.time }];
 
         if (typeof updateSelectedTourBanner === 'function') updateSelectedTourBanner(targetId);

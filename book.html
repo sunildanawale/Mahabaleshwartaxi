@@ -690,51 +690,102 @@
         }
 
         /* Service Category Grid & Buttons (Base) */
-        .amt-service-grid {
+        /* Segmented Category Grid (6-column responsive) */
+        .amt-category-grid {
             display: grid !important;
-            grid-template-columns: 1fr 1fr !important;
-            gap: 8px !important;
+            grid-template-columns: repeat(6, 1fr) !important;
+            gap: 6px !important;
             margin-bottom: 12px !important;
-        }
-        .amt-service-btn {
-            padding: 11px 9px !important;
-            border: 2px solid #e2e8f0 !important;
-            background: #f8fafc !important;
-            border-radius: 12px !important;
-            cursor: pointer !important;
-            text-align: left !important;
-            transition: all 0.2s ease !important;
+            width: 100% !important;
             box-sizing: border-box !important;
-            user-select: none !important;
+        }
+        .amt-category-grid .amt-service-btn:nth-child(1) { grid-column: span 2 !important; }
+        .amt-category-grid .amt-service-btn:nth-child(2) { grid-column: span 2 !important; }
+        .amt-category-grid .amt-service-btn:nth-child(3) { grid-column: span 2 !important; }
+        .amt-category-grid .amt-service-btn:nth-child(4) { grid-column: span 3 !important; }
+        .amt-category-grid .amt-service-btn:nth-child(5) { grid-column: span 3 !important; }
+
+        @media (min-width: 768px) {
+            .amt-category-grid {
+                grid-template-columns: repeat(5, 1fr) !important;
+                gap: 8px !important;
+            }
+            .amt-category-grid .amt-service-btn { grid-column: span 1 !important; }
+        }
+
+        .amt-category-grid .amt-service-btn,
+        .amt-service-btn {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            padding: 8px 4px !important;
+            border: 1.5px solid #cbd5e1 !important;
+            background: #ffffff !important;
+            border-radius: 10px !important;
+            cursor: pointer !important;
+            transition: all 0.18s ease-in-out !important;
+            min-height: 52px !important;
+            box-sizing: border-box !important;
+            width: 100% !important;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06) !important;
             -webkit-tap-highlight-color: transparent !important;
+            text-align: center !important;
         }
+        .amt-category-grid .amt-service-btn:hover,
         .amt-service-btn:hover {
-            border-color: #0891b2 !important;
+            border-color: #0284c7 !important;
             background: #f0f9ff !important;
+            transform: translateY(-1px) !important;
         }
+        .amt-category-grid .amt-service-btn.active,
         .amt-service-btn.active {
-            border-color: #0891b2 !important;
-            background: #ecfeff !important;
-            box-shadow: 0 0 0 2px rgba(8, 145, 178, 0.25) !important;
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+            border-color: #0284c7 !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35) !important;
         }
-        .amt-service-btn strong {
+        .amt-category-grid .amt-service-btn .amt-cat-icon,
+        .amt-service-btn .amt-cat-icon {
+            font-size: 1.15rem !important;
+            line-height: 1 !important;
+            margin-bottom: 3px !important;
             display: block !important;
-            font-size: 0.84rem !important;
+        }
+        .amt-category-grid .amt-service-btn .amt-cat-name,
+        .amt-service-btn .amt-cat-name {
+            display: block !important;
+            font-size: 0.76rem !important;
+            font-weight: 800 !important;
             color: #0f172a !important;
-            line-height: 1.25 !important;
-        }
-        .amt-service-btn span {
-            display: block !important;
-            font-size: 0.72rem !important;
-            color: #64748b !important;
             line-height: 1.2 !important;
+            white-space: nowrap !important;
+        }
+        .amt-category-grid .amt-service-btn.active .amt-cat-name,
+        .amt-service-btn.active .amt-cat-name {
+            color: #ffffff !important;
+        }
+        .amt-category-grid .amt-service-btn .amt-cat-tag,
+        .amt-service-btn .amt-cat-tag {
+            display: block !important;
+            font-size: 0.62rem !important;
+            font-weight: 700 !important;
+            color: #64748b !important;
             margin-top: 2px !important;
+            line-height: 1.1 !important;
+            white-space: nowrap !important;
         }
-        .amt-service-btn.active strong {
-            color: #0e7490 !important;
+        .amt-category-grid .amt-service-btn.active .amt-cat-tag,
+        .amt-service-btn.active .amt-cat-tag {
+            color: #e0f2fe !important;
         }
-        .amt-service-btn.active span {
-            color: #0891b2 !important;
+        .amt-category-grid .amt-service-btn .amt-tag-green,
+        .amt-service-btn .amt-tag-green {
+            color: #15803d !important;
+        }
+        .amt-category-grid .amt-service-btn.active .amt-tag-green,
+        .amt-service-btn.active .amt-tag-green {
+            color: #bbf7d0 !important;
         }
         .amt-grid2 {
             display: grid !important;
@@ -849,39 +900,7 @@
             .portal-card-body {
                 padding: 14px 12px;
             }
-            .amt-service-grid {
-                display: grid !important;
-                grid-template-columns: 1fr 1fr !important;
-                gap: 6px !important;
-                margin-bottom: 12px !important;
-                width: 100% !important;
-            }
-            .amt-service-btn {
-                display: flex !important;
-                flex-direction: column !important;
-                align-items: flex-start !important;
-                justify-content: center !important;
-                padding: 9px 8px !important;
-                min-width: 0 !important;
-                width: 100% !important;
-                box-sizing: border-box !important;
-                border-radius: 10px !important;
-                min-height: 52px !important;
-            }
-            .amt-service-btn strong {
-                font-size: 0.78rem !important;
-                line-height: 1.25 !important;
-                white-space: normal !important;
-                word-break: break-word !important;
-            }
-            .amt-service-btn span {
-                font-size: 0.66rem !important;
-                line-height: 1.2 !important;
-                color: #64748b !important;
-                margin-top: 2px !important;
-                white-space: normal !important;
-                word-break: break-word !important;
-            }
+
 
             /* Step 1 Visual Tour Cards Header & Badges Mobile Alignment */
             .amt-vt-card {
@@ -1868,19 +1887,42 @@
                             <button type="button" id="amtClearDraftBtn" class="amt-draft-btn-clear">Start Fresh</button>
                         </div>
                         <div class="amt-step-hdr-compact">
-                            <h3 class="amt-step-title">1. Select Tour &amp; Departure</h3>
+                            <h3 class="amt-step-title">1. Select Service &amp; Departure</h3>
                             <span class="amt-trust-chip"><i class="fa-solid fa-shield-halved"></i> Fixed Rates &bull; Zero Advance</span>
                         </div>
-                        <div class="amt-category-pills" role="radiogroup" aria-label="Service Category">
-                            <button type="button" class="amt-service-btn active" role="radio" aria-checked="true" data-service="sightseeing">🚕 Sightseeing</button>
-                            <button type="button" class="amt-service-btn" role="radio" aria-checked="false" data-service="express">⚡ Express ₹800</button>
-                            <button type="button" class="amt-service-btn" role="radio" aria-checked="false" data-service="combo">⭐ Full Day</button>
-                            <button type="button" class="amt-service-btn" role="radio" aria-checked="false" data-service="outstation">✈️ Outstation</button>
-                            <button type="button" class="amt-service-btn" role="radio" aria-checked="false" data-service="local_drop">📍 Local Drop</button>
+                        <div class="amt-category-grid" role="radiogroup" aria-label="Select Service Category">
+                            <button type="button" class="amt-service-btn active" role="radio" aria-checked="true" data-service="sightseeing">
+                                <span class="amt-cat-icon">🚕</span>
+                                <strong class="amt-cat-name">Sightseeing</strong>
+                                <span class="amt-cat-tag">Union Rates</span>
+                            </button>
+                            <button type="button" class="amt-service-btn" role="radio" aria-checked="false" data-service="express">
+                                <span class="amt-cat-icon">⚡</span>
+                                <strong class="amt-cat-name">Express ₹800</strong>
+                                <span class="amt-cat-tag amt-tag-green">Budget Flat</span>
+                            </button>
+                            <button type="button" class="amt-service-btn" role="radio" aria-checked="false" data-service="combo">
+                                <span class="amt-cat-icon">⭐</span>
+                                <strong class="amt-cat-name">Full Day</strong>
+                                <span class="amt-cat-tag">Combo ₹3000</span>
+                            </button>
+                            <button type="button" class="amt-service-btn" role="radio" aria-checked="false" data-service="outstation">
+                                <span class="amt-cat-icon">✈️</span>
+                                <strong class="amt-cat-name">Outstation Drop</strong>
+                                <span class="amt-cat-tag">Pune &bull; Mumbai &bull; Satara</span>
+                            </button>
+                            <button type="button" class="amt-service-btn" role="radio" aria-checked="false" data-service="local_drop">
+                                <span class="amt-cat-icon">📍</span>
+                                <strong class="amt-cat-name">Local Point Drop</strong>
+                                <span class="amt-cat-tag">Mapro &bull; Panchgani &bull; Local</span>
+                            </button>
                         </div>
                         <div class="amt-form-group" style="margin-bottom:8px;">
-                            <label class="amt-label" for="amtTourSelect">Select Tour Package / Route *</label>
-                            <select id="amtTourSelect" class="amt-select" style="width:100%;font-weight:700;">
+                            <label class="amt-label" for="amtTourSelect" style="display:flex;justify-content:space-between;align-items:center;">
+                                <span id="amtTourSelectLabel">Select Sightseeing Tour (Official Union Rate) *</span>
+                                <span id="amtTourCountBadge" style="font-size:0.68rem;font-weight:700;color:#0284c7;background:#e0f2fe;padding:2px 7px;border-radius:10px;">6 Tours</span>
+                            </label>
+                            <select id="amtTourSelect" class="amt-select" style="width:100%;font-weight:700;font-size:15px;padding:10px 12px;border:1.5px solid #0284c7;border-radius:10px;background:#f0f9ff;color:#0f172a;min-height:44px;">
                                 <option value="">-- Choose a Tour Package --</option>
                             </select>
                         </div>
