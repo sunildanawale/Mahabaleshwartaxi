@@ -4184,39 +4184,39 @@
         var time = timeInput ? timeInput.value : '09:00';
         var tour = routeSelect ? routeSelect.value : '';
 
-        // Open modal with the resolved tour
-        window.openBookingModal(tour);
+        // Save draft in localStorage for instant synchronization
+        try {
+            if (typeof localStorage !== 'undefined') {
+                var draft = {
+                    name: name,
+                    phone: phone,
+                    date: date,
+                    time: time,
+                    tourId: tour,
+                    service: 'sightseeing',
+                    savedAt: Date.now()
+                };
+                if (window.TOUR_DATABASE && window.TOUR_DATABASE.resolveTour) {
+                    var resolved = window.TOUR_DATABASE.resolveTour(tour);
+                    if (resolved) {
+                        draft.tourId = resolved.id;
+                        draft.service = (resolved.fare === 800 || resolved.sub_category === 'single_tour') ? 'express' : (resolved.category || 'sightseeing');
+                    }
+                }
+                localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(draft));
+            }
+        } catch (e) { }
 
-        setTimeout(function () {
-            if (name) {
-                var mn = document.getElementById('amtName');
-                if (mn) mn.value = name;
-                bookingState.name = name;
-            }
-            if (phone) {
-                var mp = document.getElementById('amtPhone');
-                if (mp) mp.value = phone;
-                bookingState.phone = phone;
-            }
-            if (date) {
-                var md = document.getElementById('amtDate');
-                if (md) md.value = date;
-                bookingState.date = date;
-            }
-            if (time) {
-                var mt = document.getElementById('amtTime');
-                if (mt) mt.value = time;
-                bookingState.time = time;
-            }
+        // Redirect directly to the dedicated Booking Engine page
+        var query = [];
+        if (tour) query.push('tour=' + encodeURIComponent(tour));
+        if (date) query.push('date=' + encodeURIComponent(date));
+        if (time) query.push('time=' + encodeURIComponent(time));
+        if (name) query.push('name=' + encodeURIComponent(name));
+        if (phone) query.push('phone=' + encodeURIComponent(phone));
 
-            if (name && date) {
-                goToStep(3);
-                var pick = document.getElementById('amtPickup');
-                if (pick) pick.focus();
-            } else if (tour) {
-                goToStep(2);
-            }
-        }, 150);
+        var targetUrl = 'booking.html' + (query.length ? '?' + query.join('&') : '');
+        window.location.href = targetUrl;
     };
 
     var _autoOpenFired = false;
@@ -4241,6 +4241,15 @@
                 setTimeout(function () {
                     if (window.openBookingModal) {
                         window.openBookingModal(tourHint || '');
+                var qParams = (typeof URLSearchParams !== 'undefined') ? new URLSearchParams(search) : null;
+                var qDate = qParams ? (qParams.get('date') || '') : '';
+                var qTime = qParams ? (qParams.get('time') || '') : '';
+                var qName = qParams ? (qParams.get('name') || '') : '';
+                var qPhone = qParams ? (qParams.get('phone') || '') : '';
+                if (qDate) { var dEl = document.getElementById('amtDate'); if (dEl) dEl.value = qDate; bookingState.date = qDate; }
+                if (qTime) { var tEl = document.getElementById('amtTime'); if (tEl) tEl.value = qTime; bookingState.time = qTime; }
+                if (qName) { var nEl = document.getElementById('amtName'); if (nEl) nEl.value = qName; bookingState.name = qName; }
+                if (qPhone) { var pEl = document.getElementById('amtPhone'); if (pEl) pEl.value = qPhone; bookingState.phone = qPhone; }
                     }
                 }, 350);
             }

@@ -28,8 +28,8 @@
     <meta name="twitter:image" content="https://sunildanawale.github.io/Mahabaleshwartaxi/images/mahabaleshwar-hero-hd.jpg">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/advanced-features.min.css?v=98.0">
-    <link rel="stylesheet" href="css/style.min.css?v=98.0">
+    <link rel="stylesheet" href="css/advanced-features.min.css?v=106.0">
+    <link rel="stylesheet" href="css/style.min.css?v=106.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
@@ -2728,7 +2728,10 @@ body.booking-portal-page .portal-card {
                 display: none !important;
             }
         }
-    </style>
+    .amt-selected-tour-banner:empty { display: none !important; }
+    .hero__booking-col .amt-card, body.booking-portal-page .amt-card, .portal-card { height: auto !important; min-height: auto !important; max-height: none !important; overflow: visible !important; }
+    .hero__booking-col .amt-card-body, body.booking-portal-page .amt-card-body, .portal-card-body { height: auto !important; min-height: auto !important; max-height: none !important; overflow-y: visible !important; }
+</style>
 </head>
 <body class="booking-portal-page">
 
@@ -2843,7 +2846,29 @@ body.booking-portal-page .portal-card {
                                 <option value="">-- Choose a Tour Package --</option>
                             </select>
                         </div>
-                        <div id="amtSelectedTourBanner" class="amt-selected-tour-banner" style="display:none;"></div>
+                        <div id="amtSelectedTourBanner" class="amt-selected-tour-banner" style="display:block !important;">
+                            <div class="amt-stb-card">
+                                <div class="amt-stb-top-row">
+                                    <span class="amt-stb-badge amt-badge-union">🛡️ Union Sightseeing</span>
+                                    <div class="amt-stb-fare-box">
+                                        <span class="amt-stb-fare-val">₹1,200</span>
+                                    </div>
+                                </div>
+                                <div class="amt-stb-meta-row">
+                                    <span><i class="fa-solid fa-clock"></i> 3.5 Hours</span>
+                                    <span><i class="fa-solid fa-binoculars"></i> 5 Viewpoints</span>
+                                    <span><i class="fa-solid fa-receipt"></i> Official Union Tariff</span>
+                                    <span><i class="fa-solid fa-shield-halved"></i> Zero Advance</span>
+                                </div>
+                                <div class="amt-stb-points-wrap">
+                                    <span class="amt-stb-points-lbl"><i class="fa-solid fa-location-dot"></i> Points:</span>
+                                    <span class="amt-stb-point-chip">Arthur Seat</span>
+                                    <span class="amt-stb-point-chip">Window Point</span>
+                                    <span class="amt-stb-point-chip">Echo Point</span>
+                                    <span class="amt-stb-point-chip amt-chip-more">+2 more</span>
+                                </div>
+                            </div>
+                        </div>
                         <div id="amtSightseeingFilterWrap" style="display:none;"></div>
                         <div id="amtVisualTourCards" style="display:none;"></div>
                         <div id="amtExtraToursContainer" style="display:none;"></div>
@@ -3025,52 +3050,82 @@ body.booking-portal-page .portal-card {
     </footer>
 
     <!-- Scripts -->
-    <script src="js/tour-data.js?v=98.0"></script>
-    <script src="js/booking-widget.min.js?v=98.0"></script>
+    <script src="js/tour-data.js?v=106.0"></script>
+    <script src="js/booking-widget.min.js?v=106.0"></script>
     <script>
     (function() {
         var search = window.location.search || '';
-        var tm = search.match(/[?&]tour=([^&#]*)/i);
-        var tourHint = tm ? decodeURIComponent(tm[1].replace(/\+/g, ' ')) : '';
+        var params = (typeof URLSearchParams !== 'undefined') ? new URLSearchParams(search) : null;
+        var tourHint = params ? (params.get('tour') || '') : '';
+        if (!tourHint) {
+            var tm = search.match(/[?&]tour=([^&#]*)/i);
+            tourHint = tm ? decodeURIComponent(tm[1].replace(/\+/g, ' ')) : '';
+        }
+        var dateParam = params ? (params.get('date') || '') : '';
+        var timeParam = params ? (params.get('time') || '') : '';
+        var nameParam = params ? (params.get('name') || '') : '';
+        var phoneParam = params ? (params.get('phone') || '') : '';
 
-        function syncTourHint() {
-            if (!tourHint) return;
-            var resolved = (window.TOUR_DATABASE && window.TOUR_DATABASE.resolveTour) ? window.TOUR_DATABASE.resolveTour(tourHint) : null;
-            var targetService = 'sightseeing';
-            if (resolved && resolved.category) {
-                targetService = resolved.category;
-            } else {
-                var hint = tourHint.toLowerCase();
-                var isCombo = hint.includes('full day') || hint.includes('combo') || hint.includes('tour 7');
-                var isOutstation = hint.includes('pune') || hint.includes('mumbai') || hint.includes('satara') || hint.includes('airport') || hint.includes('transfer');
-                var isLocalDrop = hint.includes('drop') || hint.includes('local drop') || hint.includes('point to point');
-                targetService = isCombo ? 'combo' : (isOutstation ? 'outstation' : (isLocalDrop ? 'local_drop' : 'sightseeing'));
+        function syncAllParams() {
+            var db = window.TOUR_DATABASE;
+            if (tourHint && db && db.resolveTour) {
+                var resolved = db.resolveTour(tourHint);
+                if (resolved) {
+                    var targetService = (resolved.fare === 800 || resolved.sub_category === 'single_tour')
+                        ? 'express'
+                        : (resolved.category || 'sightseeing');
+
+                    var serviceBtns = document.querySelectorAll('.amt-service-btn');
+                    serviceBtns.forEach(function(b) {
+                        b.classList.toggle('active', b.getAttribute('data-service') === targetService);
+                    });
+
+                    if (typeof populateTourDropdownByService === 'function') {
+                        populateTourDropdownByService(targetService);
+                    }
+                    var sel = document.getElementById('amtTourSelect');
+                    if (sel) sel.value = resolved.id;
+                    if (typeof updateSelectedTourBanner === 'function') {
+                        updateSelectedTourBanner(resolved.id);
+                    }
+                }
             }
 
-            var serviceBtns = document.querySelectorAll('.amt-service-btn');
-            serviceBtns.forEach(function(b) {
-                b.classList.toggle('active', b.getAttribute('data-service') === targetService);
-            });
-
-            // Note: openBookingModal is invoked automatically by booking-widget.js init()
-        }
-
-        // Set today's date
-        var dateInp = document.getElementById('amtDate');
-        if (dateInp) {
-            var now = new Date();
-            var yyyy = now.getFullYear();
-            var mm = String(now.getMonth() + 1).padStart(2, '0');
-            var dd = String(now.getDate()).padStart(2, '0');
-            var today = yyyy + '-' + mm + '-' + dd;
-            dateInp.min = today;
-            if (!dateInp.value) dateInp.value = today;
+            if (dateParam) {
+                var d = document.getElementById('amtDate');
+                if (d) d.value = dateParam;
+            } else {
+                var dateInp = document.getElementById('amtDate');
+                if (dateInp) {
+                    var now = new Date();
+                    var yyyy = now.getFullYear();
+                    var mm = String(now.getMonth() + 1).padStart(2, '0');
+                    var dd = String(now.getDate()).padStart(2, '0');
+                    var today = yyyy + '-' + mm + '-' + dd;
+                    dateInp.min = today;
+                    if (!dateInp.value) dateInp.value = today;
+                }
+            }
+            if (timeParam) {
+                var t = document.getElementById('amtTime');
+                if (t) t.value = timeParam;
+            }
+            if (nameParam) {
+                var n = document.getElementById('amtName');
+                if (n) n.value = nameParam;
+            }
+            if (phoneParam) {
+                var p = document.getElementById('amtPhone');
+                if (p) p.value = phoneParam;
+            }
         }
 
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', syncTourHint);
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(syncAllParams, 120);
+            });
         } else {
-            syncTourHint();
+            setTimeout(syncAllParams, 120);
         }
     })();
     </script>
