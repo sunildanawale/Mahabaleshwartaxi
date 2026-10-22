@@ -1482,7 +1482,7 @@
             + '  <button type="button" id="amtClearDraftBtn" class="amt-draft-btn-clear">Start Fresh</button>'
             + '</div>'
             + '<div class="amt-step-hdr-compact">'
-            + '  <h3 class="amt-step-title">1. Select Service &amp; Departure</h3>'
+            + '  <h3 class="amt-step-title">1. Service &amp; Departure</h3>'
             + '  <span class="amt-trust-chip"><i class="fa-solid fa-shield-halved"></i> Fixed Rates &bull; Zero Advance</span>'
             + '</div>'
             + '<div class="amt-category-grid" role="radiogroup" aria-label="Select Service Category">'
@@ -1514,10 +1514,10 @@
             + '</div>'
             + '<div class="amt-form-group" style="margin-bottom:8px;">'
             + '  <label class="amt-label" for="amtTourSelect" style="display:flex;justify-content:space-between;align-items:center;">'
-            + '    <span id="amtTourSelectLabel">Select Sightseeing Tour (Official Union Rate) *</span>'
-            + '    <span id="amtTourCountBadge" style="font-size:0.68rem;font-weight:700;color:#0284c7;background:#e0f2fe;padding:2px 7px;border-radius:10px;">6 Tours</span>'
+            + '    <span id="amtTourSelectLabel">Select Sightseeing Tour *</span>'
+            + '    <span id="amtTourCountBadge" class="amt-count-badge">6 Tours</span>'
             + '  </label>'
-            + '  <select id="amtTourSelect" class="amt-select" style="width:100%;font-weight:700;font-size:15px;padding:10px 12px;border:1.5px solid #0284c7;border-radius:10px;background:#f0f9ff;color:#0f172a;min-height:44px;">'
+            + '  <select id="amtTourSelect" class="amt-select" style="width:100%;font-weight:700;font-size:13px;padding:6px 9px;border:1.5px solid #0284c7;border-radius:8px;background:#f0f9ff;color:#0f172a;min-height:35px;height:35px;">'
             + tourOptions
             + '  </select>'
             + '</div>'
@@ -3124,17 +3124,17 @@
         } else if (isOutstation) {
             badgeText = '✈️ Outstation Route';
             badgeClass = 'amt-badge-outstation';
-            fareTitle = '₹' + t.fare;
+            fareTitle = '₹' + Number(t.fare).toLocaleString('en-IN');
             fareTerms = '+ Toll at actuals';
         } else if (isLocalDrop) {
             badgeText = '📍 Local Drop';
             badgeClass = 'amt-badge-local';
-            fareTitle = '₹' + t.fare;
+            fareTitle = '₹' + Number(t.fare).toLocaleString('en-IN');
             fareTerms = 'Fixed Drop Fare';
         } else {
             badgeText = '🛡️ Union Sightseeing';
             badgeClass = 'amt-badge-union';
-            fareTitle = '₹' + t.fare;
+            fareTitle = '₹' + Number(t.fare).toLocaleString('en-IN');
             fareTerms = 'Official Union Tariff';
         }
 
@@ -3157,12 +3157,13 @@
             '  <div class="amt-stb-top-row">' +
             '    <span class="amt-stb-badge ' + badgeClass + '">' + badgeText + '</span>' +
             '    <div class="amt-stb-fare-box">' +
-            '      <span class="amt-stb-fare-val">' + fareTitle + ' <small style="font-size:0.58rem;font-weight:600;opacity:0.85;">(' + fareTerms + ')</small></span>' +
+            '      <span class="amt-stb-fare-val">' + fareTitle + '</span>' +
             '    </div>' +
             '  </div>' +
             '  <div class="amt-stb-meta-row">' +
             '    <span><i class="fa-solid fa-clock"></i> ' + durText + '</span>' +
             (points.length > 0 ? '    <span><i class="fa-solid fa-binoculars"></i> ' + points.length + ' Viewpoints</span>' : '') +
+            '    <span><i class="fa-solid fa-receipt"></i> ' + fareTerms + '</span>' +
             '    <span><i class="fa-solid fa-shield-halved"></i> Zero Advance</span>' +
             '  </div>' +
             pointsHtml +
@@ -3384,26 +3385,26 @@
 
         if (service === 'express') {
             filtered = db.tours.filter(function (t) { return t.sub_category === 'single_tour' || t.fare === 800; });
-            labelText = 'Select Express Single Tour (Flat ₹800) *';
-            countText = filtered.length + ' Express Tours';
+            labelText = 'Select Express Tour *';
+            countText = filtered.length + ' Tours';
             optHtml = '<optgroup label="⚡ Special ₹800 Express Single Tours (Budget Flat Rate)">' +
                 filtered.map(function (t) {
-                    return '<option value="' + t.id + '">' + escapeHtml(t.name) + ' — ₹800 Flat (' + escapeHtml(t.duration) + ')</option>';
+                    var cleanName = t.name.replace(/^Mahabaleshwar Darshan\s*\d*:\s*/i, '').trim(); return '<option value="' + t.id + '">' + t.id + ': ' + escapeHtml(cleanName) + ' — ₹800</option>';
                 }).join('') +
                 '</optgroup>';
         } else if (service === 'combo') {
             filtered = db.tours.filter(function (t) { return t.category === 'combo'; });
-            labelText = 'Select Full Day Combo Package *';
-            countText = '1 Combo Pass';
+            labelText = 'Select Full Day Tour *';
+            countText = 'Tour 7';
             optHtml = '<optgroup label="⭐ Full Day Mahabaleshwar + Panchgani Combo">' +
                 filtered.map(function (t) {
-                    return '<option value="' + t.id + '">Full Day Combo (Tour 7) — ₹' + t.fare + ' (8-9 Hrs.)</option>';
+                    return '<option value="' + t.id + '">Tour 7: Full Day Combo Pass — ₹3,000</option>';
                 }).join('') +
                 '</optgroup>';
         } else if (service === 'outstation') {
             filtered = db.tours.filter(function (t) { return t.category === 'outstation'; });
-            labelText = 'Select Outstation Destination (Airport / City Drop) *';
-            countText = filtered.length + ' Outstation Routes';
+            labelText = 'Select Outstation Route *';
+            countText = filtered.length + ' Routes';
 
             var aptTransfers = filtered.filter(function (t) {
                 return t.id.indexOf('APT') !== -1 || t.id.indexOf('RLY') !== -1 || t.id.indexOf('BUS') !== -1 || t.id.indexOf('VASHI') !== -1;
@@ -3414,33 +3415,31 @@
 
             optHtml = '<optgroup label="✈️ Airport & Railway Station Drops">' +
                 aptTransfers.map(function (t) {
-                    var cleanName = t.name.replace(/^Mahabaleshwar to /i, '');
-                    return '<option value="' + t.id + '">' + escapeHtml(cleanName) + ' — ₹' + t.fare + ' (+ Tolls at actuals)</option>';
+                    var cleanName = t.name.replace(/^Mahabaleshwar to /i, '').replace(/\s+Drop$/i, '').trim(); var formattedFare = Number(t.fare).toLocaleString('en-IN'); return '<option value="' + t.id + '">' + escapeHtml(cleanName) + ' — ₹' + formattedFare + '</option>';
                 }).join('') +
                 '</optgroup>' +
                 '<optgroup label="🏔️ Intercity & Popular Destinations">' +
                 cityDrops.map(function (t) {
-                    var cleanName = t.name.replace(/^Mahabaleshwar to /i, '');
-                    return '<option value="' + t.id + '">' + escapeHtml(cleanName) + ' — ₹' + t.fare + ' (+ Tolls at actuals)</option>';
+                    var cleanName = t.name.replace(/^Mahabaleshwar to /i, '').replace(/\s+Drop$/i, '').trim(); var formattedFare = Number(t.fare).toLocaleString('en-IN'); return '<option value="' + t.id + '">' + escapeHtml(cleanName) + ' — ₹' + formattedFare + '</option>';
                 }).join('') +
                 '</optgroup>';
         } else if (service === 'local_drop') {
             filtered = db.tours.filter(function (t) { return t.category === 'local_drop'; });
-            labelText = 'Select Local Drop / Pickup Destination *';
-            countText = filtered.length + ' Local Drops';
+            labelText = 'Select Local Drop *';
+            countText = filtered.length + ' Drops';
             optHtml = '<optgroup label="📍 Point-to-Point Local Drops (Fixed Union Tariffs)">' +
                 filtered.map(function (t) {
-                    return '<option value="' + t.id + '">' + escapeHtml(t.name) + ' — ₹' + t.fare + ' (' + escapeHtml(t.duration) + ')</option>';
+                    var cleanName = t.name.replace(/\s*\(From Taxi Union Rate Sheet\)/i, '').trim(); var formattedFare = Number(t.fare).toLocaleString('en-IN'); return '<option value="' + t.id + '">' + escapeHtml(cleanName) + ' — ₹' + formattedFare + '</option>';
                 }).join('') +
                 '</optgroup>';
         } else {
             // Default: sightseeing
             filtered = db.tours.filter(function (t) { return t.category === 'sightseeing' && t.sub_category !== 'single_tour' && t.fare !== 800; });
-            labelText = 'Select Sightseeing Tour (Official Union Rate) *';
-            countText = filtered.length + ' Union Tours';
+            labelText = 'Select Sightseeing Tour *';
+            countText = filtered.length + ' Tours';
             optHtml = '<optgroup label="🛡️ Official Mahabaleshwar Taxi Union Sightseeing">' +
                 filtered.map(function (t) {
-                    return '<option value="' + t.id + '">' + escapeHtml(t.name) + ' — ₹' + t.fare + ' (' + escapeHtml(t.duration) + ')</option>';
+                    var cleanName = t.name.replace(/\s*\(Tour\s*\d+\)/i, '').trim(); var tourNum = t.tour_no || t.id.replace('T', ''); var formattedFare = Number(t.fare).toLocaleString('en-IN'); return '<option value="' + t.id + '">Tour ' + tourNum + ': ' + escapeHtml(cleanName) + ' — ₹' + formattedFare + '</option>';
                 }).join('') +
                 '</optgroup>';
         }

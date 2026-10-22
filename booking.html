@@ -778,6 +778,155 @@
     overflow: hidden !important;
 }
 
+        
+/* ============================================================
+   MOBILE OPTIMIZATIONS: CLEAN DROPDOWN, UNCORNERED BADGES & SPACIOUS TOP ROW
+   ============================================================ */
+.amt-step-hdr-compact {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 4px !important;
+    margin-bottom: 4px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+.amt-step-hdr-compact .amt-step-title {
+    font-size: 0.82rem !important;
+    font-weight: 800 !important;
+    margin: 0 !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+}
+.amt-trust-chip {
+    font-size: 0.58rem !important;
+    font-weight: 700 !important;
+    padding: 1.5px 6px !important;
+    border-radius: 5px !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+}
+
+.amt-form-group {
+    margin-bottom: 4px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+.amt-label {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 4px !important;
+    font-size: 0.70rem !important;
+    font-weight: 700 !important;
+    color: #334155 !important;
+    margin-bottom: 2px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+.amt-count-badge {
+    font-size: 0.58rem !important;
+    font-weight: 700 !important;
+    padding: 1px 6px !important;
+    border-radius: 6px !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+}
+
+/* Dropdown Font & Layout */
+.amt-select, #amtTourSelect {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    padding: 6px 9px !important;
+    min-height: 35px !important;
+    height: 35px !important;
+    line-height: 1.25 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    text-overflow: ellipsis !important;
+}
+.amt-select option, #amtTourSelect option {
+    font-size: 13px !important;
+    line-height: 1.4 !important;
+    padding: 6px 8px !important;
+}
+.amt-select optgroup, #amtTourSelect optgroup {
+    font-size: 12.5px !important;
+    font-weight: 800 !important;
+    padding: 6px 4px !important;
+}
+
+/* Banner Top Row: Spacious & Luxurious */
+.amt-stb-card {
+    padding: 5px 8px !important;
+    margin: 3px 0 !important;
+    border-radius: 9px !important;
+    box-sizing: border-box !important;
+}
+.amt-stb-top-row {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 12px !important;
+    margin-bottom: 2px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+.amt-stb-badge {
+    font-size: 0.60rem !important;
+    font-weight: 800 !important;
+    padding: 2px 6px !important;
+    border-radius: 6px !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+}
+.amt-stb-fare-box {
+    text-align: right !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+}
+.amt-stb-fare-val {
+    font-size: 0.95rem !important;
+    font-weight: 900 !important;
+    line-height: 1 !important;
+}
+.amt-stb-meta-row {
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    gap: 6px !important;
+    font-size: 0.64rem !important;
+    margin-top: 2px !important;
+    line-height: 1.2 !important;
+}
+.amt-stb-meta-row span {
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+}
+.amt-stb-points-wrap {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scrollbar-width: none !important;
+    white-space: nowrap !important;
+    gap: 3px !important;
+    align-items: center !important;
+    margin-top: 2px !important;
+    padding-top: 2px !important;
+    border-top: 1px dashed #e2e8f0 !important;
+    box-sizing: border-box !important;
+}
+.amt-stb-points-wrap::-webkit-scrollbar { display: none !important; }
+.amt-stb-point-chip {
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    font-size: 0.58rem !important;
+}
+
         /* Service Category Grid & Buttons (Base) */
 
 /* ============================================================
@@ -2648,7 +2797,7 @@ body.booking-portal-page .portal-card {
                             <button type="button" id="amtClearDraftBtn" class="amt-draft-btn-clear">Start Fresh</button>
                         </div>
                         <div class="amt-step-hdr-compact">
-                            <h3 class="amt-step-title">1. Select Service &amp; Departure</h3>
+                            <h3 class="amt-step-title">1. Service &amp; Departure</h3>
                             <span class="amt-trust-chip"><i class="fa-solid fa-shield-halved"></i> Fixed Rates &bull; Zero Advance</span>
                         </div>
                         <div class="amt-category-grid" role="radiogroup" aria-label="Select Service Category">
@@ -2680,7 +2829,7 @@ body.booking-portal-page .portal-card {
                         </div>
                         <div class="amt-form-group" style="margin-bottom:8px;">
                             <label class="amt-label" for="amtTourSelect" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-                                <span id="amtTourSelectLabel">Select Sightseeing Tour (Official Union Rate) *</span>
+                                <span id="amtTourSelectLabel">Select Sightseeing Tour *</span>
                                 <span id="amtTourCountBadge" class="amt-count-badge">6 Tours</span>
                             </label>
                             <select id="amtTourSelect" class="amt-select" style="width:100%;font-weight:700;font-size:13.5px;">
