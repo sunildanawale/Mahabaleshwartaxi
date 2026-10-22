@@ -4279,6 +4279,15 @@
                 goToVoucher();
             } else {
                 window.openBookingModal(tourHint || '');
+                var qParams = (typeof URLSearchParams !== 'undefined') ? new URLSearchParams(search) : null;
+                var qDate = qParams ? (qParams.get('date') || '') : '';
+                var qTime = qParams ? (qParams.get('time') || '') : '';
+                var qName = qParams ? (qParams.get('name') || '') : '';
+                var qPhone = qParams ? (qParams.get('phone') || '') : '';
+                if (qDate) { var dEl = document.getElementById('amtDate'); if (dEl) dEl.value = qDate; bookingState.date = qDate; }
+                if (qTime) { var tEl = document.getElementById('amtTime'); if (tEl) tEl.value = qTime; bookingState.time = qTime; }
+                if (qName) { var nEl = document.getElementById('amtName'); if (nEl) nEl.value = qName; bookingState.name = qName; }
+                if (qPhone) { var pEl = document.getElementById('amtPhone'); if (pEl) pEl.value = qPhone; bookingState.phone = qPhone; }
             }
         } else {
             checkAutoOpen();

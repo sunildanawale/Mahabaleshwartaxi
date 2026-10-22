@@ -852,48 +852,56 @@
 
         }
 
-        /* Route Select dropdown options styling (100% visible in both light & dark themes) */
-
+        /* Route Select dropdown options styling (100% visible in both light & dark themes, single-line mobile fit) */
         #routeSelect {
-
             color: #ffffff !important;
-
-            background-color: rgba(15, 23, 42, 0.6) !important;
-
+            background-color: rgba(15, 23, 42, 0.75) !important;
+            font-size: 13px !important;
+            font-weight: 700 !important;
+            text-overflow: ellipsis !important;
+            white-space: nowrap !important;
         }
 
         #routeSelect option {
-
             background-color: #1e293b !important;
-
             color: #f8fafc !important;
-
-            padding: 10px 14px !important;
-
-            font-size: 0.9rem !important;
-
+            padding: 8px 12px !important;
+            font-size: 13px !important;
+            font-weight: 600 !important;
+            white-space: nowrap !important;
         }
 
         #routeSelect option:hover, #routeSelect option:checked {
-
-            background-color: #2563eb !important;
-
+            background-color: #0284c7 !important;
             color: #ffffff !important;
-
         }
 
         #routeSelect optgroup {
-
-            background-color: #0f172a !important;
-
+            background-color: #0e2338 !important;
             color: #38bdf8 !important;
-
             font-weight: 800 !important;
+            padding: 7px 10px !important;
+            font-size: 11px !important;
+            letter-spacing: 0.6px !important;
+            text-transform: uppercase !important;
+            border-bottom: 1px solid rgba(56, 189, 248, 0.3) !important;
+        }
 
-            padding: 8px 10px !important;
-
-            font-size: 0.85rem !important;
-
+        @media (max-width: 640px) {
+            #routeSelect {
+                font-size: 12px !important;
+                padding-left: 28px !important;
+                padding-right: 24px !important;
+            }
+            #routeSelect option {
+                font-size: 12px !important;
+                padding: 6px 10px !important;
+                white-space: nowrap !important;
+            }
+            #routeSelect optgroup {
+                font-size: 10.5px !important;
+                padding: 5px 8px !important;
+            }
         }
 
         /* Tablet & Mobile Stack (<= 991px) */
@@ -1270,6 +1278,7 @@ function bridgeHomeForm() {
                     draft.service = (res.fare === 800 || res.sub_category === 'single_tour') ? 'express' : (res.category || 'sightseeing');
                 }
             }
+            localStorage.setItem('amt_booking_draft_v1', JSON.stringify(draft));
             localStorage.setItem('amt_booking_draft_v2', JSON.stringify(draft));
         }
     } catch(e) {}
@@ -1670,50 +1679,34 @@ function bridgeHomeForm() {
 
                         <i class="fa-solid fa-map-location-dot" style="position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: #64748b; font-size: 0.8rem; pointer-events: none;"></i>
 
-                        <select id="routeSelect" class="form-select hero-dark-input" style="width: 100%; height: 35px; padding: 6px 26px 6px 30px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; font-size: 0.84rem; font-weight: 700; color: #ffffff; transition: all 0.3s ease; appearance: none; background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2394a3b8%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right 10px top 50%; background-size: 9px auto; box-sizing: border-box; outline: none; cursor: pointer;">
-
-                            <optgroup label="⚡ Express Single Tours (₹800 • 2.5 Hrs - Budget Friendly)">
-
-                                <option value="Tour 01: Mahabaleshwar Darshan 1 (₹800, 2.5 Hrs)">Tour 01: Arthur's Seat Heritage (₹800 - 12 Points)</option>
-
-                                <option value="Tour 02: Mahabaleshwar Darshan 2 (₹800, 2.5 Hrs)">Tour 02: Kate's Point &amp; Strawberry (₹800 - 4 Points)</option>
-
-                                <option value="Tour 03: Mahabaleshwar Darshan 3 (₹800, 2.5 Hrs)">Tour 03: Wilson Point &amp; Lingmala (₹800 - 6 Points)</option>
-
+                        <select id="routeSelect" class="form-select hero-dark-input" style="width: 100%; height: 36px; padding: 6px 26px 6px 30px; background: rgba(15, 23, 42, 0.75); border: 1.5px solid rgba(56, 189, 248, 0.4); border-radius: 8px; font-size: 12.5px; font-weight: 700; color: #ffffff; transition: all 0.3s ease; appearance: none; background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2338bdf8%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right 10px top 50%; background-size: 9px auto; box-sizing: border-box; outline: none; cursor: pointer;">
+                            <optgroup label="── 🛡️ UNION SIGHTSEEING ──">
+                                <option value="T1">T1: Arthur Seat — ₹1,200</option>
+                                <option value="T2">T2: Wilson Point — ₹1,200</option>
+                                <option value="T3">T3: Pratapgad — ₹1,600</option>
+                                <option value="T4">T4: Panchgani — ₹1,200</option>
+                                <option value="T5">T5: Wai Darshan — ₹2,500</option>
+                                <option value="T6">T6: Tapola Lake — ₹1,450</option>
                             </optgroup>
-
-                            <optgroup label="⭐ Standard Union Sightseeing (₹1,200 - ₹1,600 • 3.5 Hrs)">
-
-                                <option value="Tour 1: Mahabaleshwar Darshan (₹1200, 3.30 Hrs)">Tour 1: Mahabaleshwar Darshan (₹1,200 - 17 Points)</option>
-
-                                <option value="Tour 2: Waterfall & Sunset Circuit (₹1200, 3.30 Hrs)">Tour 2: Waterfall &amp; Sunset Circuit (₹1,200 - 8 Points)</option>
-
-                                <option value="Tour 3: Pratapgadh Darshan (₹1600, 3.30 Hrs)">Tour 3: Pratapgadh Fort (₹1,600 - 7 Points)</option>
-
-                                <option value="Tour 4: Panchgani Darshan (₹1200, 3.00 Hrs)">Tour 4: Panchgani Darshan (₹1,200 - 5 Points)</option>
-
-                                <option value="Tour 5: Wai Darshan & Dhom Dam (₹2500, 6.00 Hrs)">Tour 5: Wai &amp; Dhom Dam (₹2,500 - 6.00 Hrs)</option>
-
-                                <option value="Tour 6: Tapola Mini Kashmir (₹1450, 3.30 Hrs)">Tour 6: Tapola Mini Kashmir (₹1,450 - 3.30 Hrs)</option>
-
-                                <option value="Tour 7: Full Day Mahabaleshwar & Panchgani Combo (₹3000)" selected>Tour 7: Full Day Combo (₹3,000 - Best Value)</option>
-
+                            <optgroup label="── ⚡ EXPRESS FLAT ₹800 ──">
+                                <option value="M1">M1: Arthur Seat — ₹800</option>
+                                <option value="M2">M2: Kate's Point — ₹800</option>
+                                <option value="M3">M3: Wilson Point — ₹800</option>
                             </optgroup>
-
-                            <optgroup label="Outstation Airport & Station Drops (+ Toll)">
-
-                                <option value="Pune Airport Drop (₹4000 + Toll)">Pune Airport Drop (₹4,000 + Toll)</option>
-
-                                <option value="Pune Railway Station (₹3500 + Toll)">Pune Railway Station (₹3,500 + Toll)</option>
-
-                                <option value="Mumbai Airport CSMIA (₹8000 + Toll)">Mumbai Airport Drop (₹8,000 + Toll)</option>
-
-                                <option value="Mumbai City Vashi/Dadar (₹7000 + Toll)">Mumbai City Drop (₹7,000 + Toll)</option>
-
-                                <option value="Satara Railway Station / Bus Stand">Satara Station / Bus Stand</option>
-
+                            <optgroup label="── ⭐ FULL DAY PASS ──">
+                                <option value="T7" selected>T7: Full Day Combo — ₹3,000</option>
                             </optgroup>
-
+                            <optgroup label="── ✈️ AIRPORT & RAILWAY ──">
+                                <option value="TR_PUNE_APT">Pune Airport — ₹4,000</option>
+                                <option value="TR_PUNE_RLY">Pune Railway — ₹3,500</option>
+                                <option value="TR_MUM_APT">Mumbai Airport — ₹8,000</option>
+                                <option value="TR_SAT_RLY">Satara Railway — ₹2,300</option>
+                            </optgroup>
+                            <optgroup label="── 🏔️ INTERCITY DROPS ──">
+                                <option value="TR_MUM_CITY">Mumbai Dadar — ₹7,000</option>
+                                <option value="TR_MUM_VASHI">Mumbai Vashi — ₹7,000</option>
+                                <option value="TR_SAT_BUS">Satara Bus Stand — ₹2,000</option>
+                            </optgroup>
                         </select>
 
                     </div>
