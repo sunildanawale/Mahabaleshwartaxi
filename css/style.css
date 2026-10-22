@@ -8932,10 +8932,10 @@ body.booking-portal-page .portal-card {
 
 /* Dropdown Font & Layout */
 .amt-select, #amtTourSelect {
-    font-size: 13px !important;
+    font-size: 11.5px !important;
     font-weight: 700 !important;
-    padding: 6px 9px !important;
-    min-height: 35px !important;
+    padding: 4px 7px !important;
+    min-height: 33px !important;
     height: 35px !important;
     line-height: 1.25 !important;
     width: 100% !important;
@@ -8943,14 +8943,15 @@ body.booking-portal-page .portal-card {
     text-overflow: ellipsis !important;
 }
 .amt-select option, #amtTourSelect option {
-    font-size: 13px !important;
-    line-height: 1.4 !important;
-    padding: 6px 8px !important;
+    font-size: 11px !important;
+    line-height: 1.3 !important;
+    padding: 4px 6px !important;
+    font-weight: 600 !important;
 }
 .amt-select optgroup, #amtTourSelect optgroup {
-    font-size: 12.5px !important;
+    font-size: 10.5px !important;
     font-weight: 800 !important;
-    padding: 6px 4px !important;
+    padding: 4px 3px !important;
 }
 
 /* Banner Top Row: Spacious & Luxurious */

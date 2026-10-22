@@ -118,25 +118,43 @@
 
 /* Dropdown Font & Layout */
 .amt-select, #amtTourSelect {
-    font-size: 13px !important;
+    font-size: 11.5px !important;
     font-weight: 700 !important;
-    padding: 6px 9px !important;
-    min-height: 35px !important;
-    height: 35px !important;
-    line-height: 1.25 !important;
+    padding: 4px 7px !important;
+    min-height: 33px !important;
+    height: 33px !important;
+    line-height: 1.2 !important;
     width: 100% !important;
     box-sizing: border-box !important;
     text-overflow: ellipsis !important;
+    -webkit-text-size-adjust: 100% !important;
 }
 .amt-select option, #amtTourSelect option {
-    font-size: 13px !important;
-    line-height: 1.4 !important;
-    padding: 6px 8px !important;
+    font-size: 11px !important;
+    line-height: 1.3 !important;
+    padding: 4px 6px !important;
+    font-weight: 600 !important;
 }
 .amt-select optgroup, #amtTourSelect optgroup {
-    font-size: 12.5px !important;
+    font-size: 10.5px !important;
     font-weight: 800 !important;
-    padding: 6px 4px !important;
+    padding: 4px 3px !important;
+}
+@media (max-width: 480px) {
+    .amt-select, #amtTourSelect {
+        font-size: 11px !important;
+        padding: 3px 5px !important;
+        min-height: 30px !important;
+        height: 30px !important;
+    }
+    .amt-select option, #amtTourSelect option {
+        font-size: 10.5px !important;
+        padding: 3px 4px !important;
+    }
+    .amt-select optgroup, #amtTourSelect optgroup {
+        font-size: 10px !important;
+        padding: 3px 2px !important;
+    }
 }
 
 /* Banner Top Row: Spacious & Luxurious */
