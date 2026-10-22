@@ -8464,9 +8464,16 @@ body.booking-portal-page .portal-card {
     font-weight: 500 !important;
 }
 .amt-select optgroup, #amtTourSelect optgroup {
-    background: #f1f5f9 !important;
-    color: #0369a1 !important;
+    font-size: 10.5px !important;
     font-weight: 800 !important;
+    padding: 6px 8px !important;
+    background: #e0f2fe !important;
+    background-color: #e0f2fe !important;
+    color: #0369a1 !important;
+    letter-spacing: 0.8px !important;
+    text-transform: uppercase !important;
+    border-bottom: 1.5px solid #0284c7 !important;
+    border-top: 1.5px solid #bae6fd !important;
 }
 
 /* Streamlined Tour Banner — Ultra Compact 48px */
@@ -8951,7 +8958,14 @@ body.booking-portal-page .portal-card {
 .amt-select optgroup, #amtTourSelect optgroup {
     font-size: 10.5px !important;
     font-weight: 800 !important;
-    padding: 4px 3px !important;
+    padding: 6px 8px !important;
+    background: #e0f2fe !important;
+    background-color: #e0f2fe !important;
+    color: #0369a1 !important;
+    letter-spacing: 0.8px !important;
+    text-transform: uppercase !important;
+    border-bottom: 1.5px solid #0284c7 !important;
+    border-top: 1.5px solid #bae6fd !important;
 }
 
 /* Banner Top Row: Spacious & Luxurious */
