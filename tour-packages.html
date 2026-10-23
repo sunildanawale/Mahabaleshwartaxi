@@ -608,32 +608,32 @@
         <div class="tour-finder__grid">
             <div>
                 <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 5px; color: #f0f9ff;">How much time do you have?</label>
-                <select id="tf_time" onchange="if(window.syncTourFinderInterests){window.syncTourFinderInterests(this.value);}" style="width: 100%; padding: 10px; border-radius: 8px; border: none; font-size: 0.9rem; color: var(--text-primary); background: #ffffff; font-weight: 500;">
-                    <option value="express">⚡ Quick Express Tour (2 - 2.5 Hours • ₹800)</option>
-                    <option value="half" selected>⭐ Standard Half-Day (3 - 4 Hours • ₹1,200 - ₹1,600)</option>
-                    <option value="full">🌟 Complete Full-Day (6 - 9 Hours • ₹2,500 - ₹3,000)</option>
+                <select id="tf_time" onchange="if(window.syncTourFinderInterests){window.syncTourFinderInterests(this.value);}" style="width: 100%; padding: 8px 10px; border-radius: 8px; border: 1.5px solid #cbd5e1; font-size: 13px; color: #0f172a; background: #ffffff; font-weight: 600; white-space: nowrap; text-overflow: ellipsis;">
+                    <option value="express">⚡ Express — ₹800 (2.5h)</option>
+                    <option value="half" selected>⭐ Half-Day — ₹1,200 - ₹1,600 (3.5h)</option>
+                    <option value="full">🌟 Full-Day Pass — ₹2,500 - ₹3,000</option>
                 </select>
             </div>
             <div>
                 <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 5px; color: #f0f9ff;">What do you want to experience most?</label>
-                <select id="tf_interest" onchange="if(window.syncTourFinderDuration){window.syncTourFinderDuration(this.value);}" style="width: 100%; padding: 10px; border-radius: 8px; border: none; font-size: 0.9rem; color: var(--text-primary); background: #ffffff; font-weight: 500;">
-                    <optgroup label="⚡ Express Single Tours (₹800 Flat • 2.5 Hrs)">
-                        <option value="m1_arthur">M1: Arthur's Seat &amp; Old Kshetra Circuit (12 Pts • ₹800)</option>
-                        <option value="m2_kates">M2: Kate's Point, Needle Hole &amp; Strawberry (4 Pts • ₹800)</option>
-                        <option value="m3_wilson">M3: Wilson Point Sunrise &amp; Waterfall (6 Pts • ₹800)</option>
+                <select id="tf_interest" onchange="if(window.syncTourFinderDuration){window.syncTourFinderDuration(this.value);}" style="width: 100%; padding: 8px 10px; border-radius: 8px; border: 1.5px solid #cbd5e1; font-size: 13px; color: #0f172a; background: #ffffff; font-weight: 600; white-space: nowrap; text-overflow: ellipsis;">
+                    <optgroup label="── ⚡ EXPRESS FLAT ₹800 ──">
+                        <option value="m1_arthur">M1: Arthur Seat — ₹800</option>
+                        <option value="m2_kates">M2: Kate's Point — ₹800</option>
+                        <option value="m3_wilson">M3: Wilson Point — ₹800</option>
                     </optgroup>
-                    <optgroup label="⭐ Standard Half-Day Packages (Official Union Rates)">
-                        <option value="views" selected>Tour 1: Arthur Seat &amp; Heritage Darshan (17 Pts • ₹1,200)</option>
-                        <option value="nature">Tour 2: Lingmala Waterfall &amp; Sunset Point (8 Pts • ₹1,200)</option>
-                        <option value="history">Tour 3: Pratapgad Fort Heritage Trek (7 Pts • ₹1,600)</option>
-                        <option value="panchgani">Tour 4: Panchgani Table Land &amp; Strawberry (5 Pts • ₹1,200)</option>
-                        <option value="water">Tour 6: Tapola Mini Kashmir Speedboating (3 Pts • ₹1,450)</option>
+                    <optgroup label="── ⭐ UNION SIGHTSEEING ──">
+                        <option value="views" selected>T1: Arthur Seat — ₹1,200</option>
+                        <option value="nature">T2: Wilson &amp; Lingmala — ₹1,200</option>
+                        <option value="history">T3: Pratapgad Fort — ₹1,600</option>
+                        <option value="panchgani">T4: Panchgani — ₹1,200</option>
+                        <option value="water">T6: Tapola Lake — ₹1,450</option>
                     </optgroup>
-                    <optgroup label="🌟 Full-Day Comprehensive Circuits">
-                        <option value="combo">Tour 7: Mahabaleshwar + Panchgani Grand Combo (22 Pts • ₹3,000)</option>
-                        <option value="pratapgad_combo">Full Day: Pratapgad Fort + Mahabaleshwar Combo (₹2,800)</option>
-                        <option value="spiritual">Tour 5: Wai Darshan Sacred Ghats Pilgrimage (7 Pts • ₹2,500)</option>
-                        <option value="tapola_combo">Full Day: Tapola Mini Kashmir + Venna Leisure (₹2,650)</option>
+                    <optgroup label="── 🌟 FULL-DAY PASS ──">
+                        <option value="combo">T7: Full Day Combo — ₹3,000</option>
+                        <option value="pratapgad_combo">Pratapgad Combo — ₹2,800</option>
+                        <option value="spiritual">T5: Wai Darshan — ₹2,500</option>
+                        <option value="tapola_combo">Tapola + Venna — ₹2,650</option>
                     </optgroup>
                 </select>
             </div>

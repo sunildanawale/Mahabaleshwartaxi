@@ -347,33 +347,36 @@
             '.aai-float-btn{position:fixed;bottom:90px;right:24px;z-index:9998;background:linear-gradient(135deg,#0891b2 0%,#1e3a5f 100%);color:#fff;border:none;border-radius:30px;padding:10px 16px;font-size:0.85rem;font-weight:700;display:flex;align-items:center;gap:8px;box-shadow:0 10px 25px -5px rgba(8,145,178,0.4);cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;font-family:system-ui,-apple-system,sans-serif;}',
             '@media(max-width:991px){.aai-float-btn,#aaiOpenBtn{display:none !important;visibility:hidden !important;opacity:0 !important;pointer-events:none !important;}}',
             '.aai-float-btn:hover{transform:translateY(-2px);box-shadow:0 14px 28px -5px rgba(8,145,178,0.5);}',
-            '.aai-drawer{display:none;position:fixed;bottom:0;left:0;right:0;max-width:500px;height:85vh;max-height:650px;background:#ffffff;border-radius:24px 24px 0 0;z-index:99999;box-shadow:0 -10px 40px rgba(0,0,0,0.3);flex-direction:column;overflow:hidden;border:1px solid #e2e8f0;font-family:system-ui,-apple-system,sans-serif;}',
-            '@media(min-width:640px){.aai-drawer{bottom:20px;right:20px;left:auto;width:440px;border-radius:20px;height:630px;box-shadow:0 20px 50px rgba(0,0,0,0.25);}}',
-            '.aai-backdrop{display:none;position:fixed;inset:0;background:rgba(15,23,42,0.6);z-index:99998;backdrop-filter:blur(2px);}',
-            '.aai-header{background:linear-gradient(135deg,#0891b2 0%,#1e3a5f 100%);color:#ffffff;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;}',
-            '.aai-body{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;background:#f8fafc;}',
+            '.aai-modal-wrapper{position:fixed;inset:0;width:100%;height:100%;z-index:100000;display:none;align-items:flex-end;justify-content:center;box-sizing:border-box;}',
+            '@media(min-width:640px){.aai-modal-wrapper{align-items:flex-end;justify-content:flex-end;padding:24px;pointer-events:none;}}',
+            '.aai-backdrop{position:fixed;inset:0;width:100%;height:100%;background:rgba(15,23,42,0.72);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:1;pointer-events:auto;}',
+            '.aai-drawer{position:relative;z-index:2;width:100%;max-width:500px;height:85vh;height:85dvh;max-height:640px;background:#ffffff;border-radius:20px 20px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,0.4);display:flex;flex-direction:column;overflow:hidden;border:1px solid #cbd5e1;font-family:system-ui,-apple-system,sans-serif;pointer-events:auto;box-sizing:border-box;transform:translateY(0);animation:aaiSlideUp 0.25s cubic-bezier(0.16,1,0.3,1);}',
+            '@media(min-width:640px){.aai-drawer{width:420px;height:600px;border-radius:18px;box-shadow:0 20px 50px rgba(0,0,0,0.35);}}',
+            '@keyframes aaiSlideUp{from{transform:translateY(100%);}to{transform:translateY(0);}}',
+            '.aai-header{background:linear-gradient(135deg,#0891b2 0%,#1e3a5f 100%);color:#ffffff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;box-sizing:border-box;}',
+            '.aai-body{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 16px;display:flex;flex-direction:column;gap:12px;background:#f8fafc;box-sizing:border-box;}',
             '.aai-bubble-bot{background:#ffffff;border:1px solid #e2e8f0;color:#1e293b;padding:12px 14px;border-radius:16px 16px 16px 4px;font-size:0.86rem;line-height:1.55;box-shadow:0 2px 4px rgba(0,0,0,0.03);max-width:94%;}',
             '.aai-bubble-user{background:#0891b2;color:#ffffff;padding:10px 14px;border-radius:16px 16px 4px 16px;font-size:0.86rem;line-height:1.4;align-self:flex-end;max-width:85%;}',
             '.aai-card{background:#ffffff;border:1.5px solid #0891b2;border-radius:14px;padding:14px;margin-top:8px;box-shadow:0 4px 12px rgba(8,145,178,0.08);}',
             '.aai-card-title{font-size:0.96rem;font-weight:800;color:#0f172a;margin:0 0 4px;}',
             '.aai-card-fare{font-size:1.2rem;font-weight:800;color:#16a34a;}',
             '.aai-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}',
-            '.aai-chip{background:#e0f2fe;color:#0369a1;border:none;padding:5px 10px;border-radius:14px;font-size:0.75rem;font-weight:600;cursor:pointer;transition:background 0.15s;}',
+            '.aai-chip{background:#e0f2fe;color:#0369a1;border:none;padding:6px 11px;border-radius:14px;font-size:0.75rem;font-weight:600;cursor:pointer;transition:background 0.15s;}',
             '.aai-chip:hover{background:#bae6fd;}',
             '.aai-book-btn{width:100%;margin-top:10px;padding:10px;background:#10b981;color:#ffffff;border:none;border-radius:10px;font-weight:700;font-size:0.85rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:background 0.15s;}',
             '.aai-book-btn:hover{background:#059669;}',
-            '.aai-footer{padding:12px;background:#ffffff;border-top:1px solid #e2e8f0;display:flex;gap:8px;align-items:center;}',
+            '.aai-footer{padding:10px 14px;background:#ffffff;border-top:1px solid #e2e8f0;display:flex;gap:8px;align-items:center;flex-shrink:0;box-sizing:border-box;}',
             '.aai-input{flex:1;padding:10px 14px;border:1.5px solid #cbd5e1;border-radius:24px;font-size:0.88rem;outline:none;}',
             '.aai-input:focus{border-color:#0891b2;}',
-            '.aai-send-btn{background:#0891b2;color:#ffffff;border:none;width:38px;height:38px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;}'
+            '.aai-send-btn{background:#0891b2;color:#ffffff;border:none;width:38px;height:38px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}'
         ].join('');
         document.head.appendChild(s);
     }
 
     function injectAssistantDOM() {
-        if (document.getElementById('aaiDrawer')) return;
+        if (document.getElementById('aaiModalWrapper') || document.getElementById('aaiDrawer')) return;
 
-        // Floating Trigger
+        // Floating Trigger (Desktop)
         var btn = document.createElement('button');
         btn.className = 'aai-float-btn';
         btn.id = 'aaiOpenBtn';
@@ -381,28 +384,31 @@
         btn.setAttribute('aria-label', 'Open AI Trip Assistant');
         document.body.appendChild(btn);
 
-        // Backdrop & Drawer
-        var html = '<div id="aaiBackdrop" class="aai-backdrop"></div>'
-            + '<div id="aaiDrawer" class="aai-drawer" role="dialog" aria-label="Aryan AI Trip Assistant">'
+        // Backdrop & Drawer inside fixed modal wrapper
+        var html = '<div id="aaiModalWrapper" class="aai-modal-wrapper" role="dialog" aria-modal="true" aria-label="Aryan AI Trip Assistant" style="display:none;">'
+            + '<div id="aaiBackdrop" class="aai-backdrop"></div>'
+            + '<div id="aaiDrawer" class="aai-drawer">'
             + '<div class="aai-header">'
-            + '<div style="display:flex;align-items:center;gap:8px;">'
-            + '<i class="fa-solid fa-wand-magic-sparkles" style="color:#fbbf24;font-size:1.2rem;"></i>'
-            + '<div><strong style="font-size:0.95rem;display:block;">Ask Aryan AI</strong><span style="font-size:0.75rem;opacity:0.85;">Official Taxi &amp; Sightseeing Assistant</span></div>'
+            + '<div style="display:flex;align-items:center;gap:10px;">'
+            + '<div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">'
+            + '<i class="fa-solid fa-wand-magic-sparkles" style="color:#fbbf24;font-size:1.05rem;"></i>'
             + '</div>'
-            + '<button id="aaiCloseBtn" style="background:none;border:none;color:#ffffff;font-size:1.5rem;cursor:pointer;padding:4px 8px;">&times;</button>'
+            + '<div><strong style="font-size:0.95rem;display:block;color:#ffffff;line-height:1.2;">Ask Aryan AI</strong><span style="font-size:0.75rem;color:#e0f2fe;display:block;">Official Taxi &amp; Sightseeing Assistant</span></div>'
+            + '</div>'
+            + '<button id="aaiCloseBtn" type="button" aria-label="Close Assistant" style="background:rgba(255,255,255,0.15);border:none;color:#ffffff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.3rem;transition:background 0.2s;">&times;</button>'
             + '</div>'
 
             + '<div id="aaiBody" class="aai-body">'
             + '<div class="aai-bubble-bot">'
             + 'Namaste! 🙏 I am <strong>Ask Aryan AI</strong>, your local Mahabaleshwar taxi assistant. Ask me anything about sightseeing tours, official union rates, vehicle details, or pickup points. Or tap a quick question below:'
             + '<div class="aai-chips">'
-            + '<button class="aai-chip" onclick="window.AryanAI.sendChip(\'What are the official taxi rates?\')">💰 Official Rate Card</button>'
-            + '<button class="aai-chip" onclick="window.AryanAI.sendChip(\'Do I need to pay advance?\')">💳 Zero Advance Policy</button>'
-            + '<button class="aai-chip" onclick="window.AryanAI.sendChip(\'What type of taxi or car do you provide?\')">🚗 Cabs &amp; Vehicle Details</button>'
-            + '<button class="aai-chip" onclick="window.AryanAI.sendChip(\'What are waiting charges at viewpoints?\')">⏱️ Waiting Charges</button>'
-            + '<button class="aai-chip" onclick="window.AryanAI.sendChip(\'Do you pick up from hotels and villages?\')">🏨 Hotel Pickup Coverage</button>'
-            + '<button class="aai-chip" onclick="window.AryanAI.sendChip(\'I want full day Mahabaleshwar and Panchgani tour\')">⭐ Full Day Combo (Tour 7)</button>'
-            + '<button class="aai-chip" onclick="window.AryanAI.sendChip(\'Pratapgad Fort taxi rate and details\')">🏰 Pratapgad Fort (Tour 3)</button>'
+            + '<button type="button" class="aai-chip" onclick="window.AryanAI.sendChip(\'What are the official taxi rates?\')">💰 Official Rate Card</button>'
+            + '<button type="button" class="aai-chip" onclick="window.AryanAI.sendChip(\'Do I need to pay advance?\')">💳 Zero Advance Policy</button>'
+            + '<button type="button" class="aai-chip" onclick="window.AryanAI.sendChip(\'What type of taxi or car do you provide?\')">🚗 Cabs &amp; Vehicle Details</button>'
+            + '<button type="button" class="aai-chip" onclick="window.AryanAI.sendChip(\'What are waiting charges at viewpoints?\')">⏱️ Waiting Charges</button>'
+            + '<button type="button" class="aai-chip" onclick="window.AryanAI.sendChip(\'Do you pick up from hotels and villages?\')">🏨 Hotel Pickup Coverage</button>'
+            + '<button type="button" class="aai-chip" onclick="window.AryanAI.sendChip(\'I want full day Mahabaleshwar and Panchgani tour\')">⭐ Full Day Combo (Tour 7)</button>'
+            + '<button type="button" class="aai-chip" onclick="window.AryanAI.sendChip(\'Pratapgad Fort taxi rate and details\')">🏰 Pratapgad Fort (Tour 3)</button>'
             + '</div>'
             + '</div>'
             + '</div>'
@@ -411,6 +417,7 @@
             + '<input type="text" id="aaiInput" class="aai-input" placeholder="Type trip question (e.g. rate, advance, car)..." autocomplete="off">'
             + '<button type="submit" class="aai-send-btn" aria-label="Send"><i class="fa-solid fa-paper-plane"></i></button>'
             + '</form>'
+            + '</div>'
             + '</div>';
 
         document.body.insertAdjacentHTML('beforeend', html);
@@ -419,24 +426,17 @@
         var openBtn = document.getElementById('aaiOpenBtn');
         var closeBtn = document.getElementById('aaiCloseBtn');
         var backdrop = document.getElementById('aaiBackdrop');
-        var drawer = document.getElementById('aaiDrawer');
         var form = document.getElementById('aaiForm');
         var input = document.getElementById('aaiInput');
 
-        function toggleAssistant(open) {
-            drawer.style.display = open ? 'flex' : 'none';
-            backdrop.style.display = open ? 'block' : 'none';
-            if (open) input.focus();
-        }
-
-        if (openBtn) openBtn.addEventListener('click', function () { toggleAssistant(true); });
-        if (closeBtn) closeBtn.addEventListener('click', function () { toggleAssistant(false); });
-        if (backdrop) backdrop.addEventListener('click', function () { toggleAssistant(false); });
+        if (openBtn) openBtn.addEventListener('click', function () { window.AryanAI.open(); });
+        if (closeBtn) closeBtn.addEventListener('click', function () { window.AryanAI.close(); });
+        if (backdrop) backdrop.addEventListener('click', function () { window.AryanAI.close(); });
 
         if (form) {
             form.addEventListener('submit', function (e) {
                 e.preventDefault();
-                var txt = input.value.trim();
+                var txt = input ? input.value.trim() : '';
                 if (!txt) return;
                 input.value = '';
                 handleUserChat(txt);
@@ -489,16 +489,27 @@
     // ── 4. Public API ────────────────────────────────────────────────
     window.AryanAI = {
         open: function () {
-            var drawer = document.getElementById('aaiDrawer');
-            var backdrop = document.getElementById('aaiBackdrop');
-            if (drawer) drawer.style.display = 'flex';
-            if (backdrop) backdrop.style.display = 'block';
+            var wrapper = document.getElementById('aaiModalWrapper');
+            if (wrapper) {
+                wrapper.style.display = 'flex';
+            }
+            if (document.body) {
+                document.body.classList.add('modal-open');
+            }
+            var input = document.getElementById('aaiInput');
+            if (input) {
+                setTimeout(function () { try { input.focus(); } catch(e){} }, 200);
+            }
         },
         close: function () {
-            var drawer = document.getElementById('aaiDrawer');
-            var backdrop = document.getElementById('aaiBackdrop');
-            if (drawer) drawer.style.display = 'none';
-            if (backdrop) backdrop.style.display = 'none';
+            var wrapper = document.getElementById('aaiModalWrapper');
+            if (wrapper) {
+                wrapper.style.display = 'none';
+            }
+            if (document.body) {
+                document.body.classList.remove('modal-open');
+                document.body.style.overflow = '';
+            }
         },
         sendChip: function (text) {
             handleUserChat(text);
