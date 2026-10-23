@@ -1122,12 +1122,12 @@ if (typeof window !== 'undefined') {
             ? '<div style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:8px 12px;margin-bottom:12px;font-size:0.78rem;color:#92400e;font-weight:600;"><i class="fa-solid fa-bolt" style="color:#d97706;"></i> <strong>Express Single Tour:</strong> Independent budget option offered directly by Aryan Taxi for quick visits. Zero advance required!</div>'
             : '';
 
-        var html = '<div style="background: rgba(255, 255, 255, 0.98); color: #0f172a; border-radius: 16px; padding: 22px 20px; margin-top: 20px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.25); text-align: left; border: 2px solid #38bdf8; animation: tfFadeIn 0.3s ease-out;">' +
-            '<div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">' +
-                '<span style="background: ' + (rec.isSingle ? '#0891b2' : '#0284c7') + '; color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; display: inline-flex; align-items: center; gap: 6px;">' +
+        var html = '<div class="tf-result-card">' +
+            '<div class="tf-result-header">' +
+                '<span class="tf-badge-category" style="background: ' + (rec.isSingle ? '#0891b2' : '#0284c7') + ';">' +
                     '<i class="fa-solid fa-wand-magic-sparkles"></i> ' + rec.badge +
                 '</span>' +
-                '<div style="background: #e0f2fe; color: #0369a1; padding: 5px 12px; border-radius: 20px; font-size: 0.92rem; font-weight: 800;">' +
+                '<div class="tf-badge-meta">' +
                     rec.fare + ' <span style="font-weight: 600; font-size: 0.8rem; color: #475569;">• ' + rec.duration + ' • ' + rec.pointsCount + '</span>' +
                 '</div>' +
             '</div>' +
@@ -1146,11 +1146,11 @@ if (typeof window !== 'undefined') {
                     rec.highlights.map(function(h) { return '<li>' + h + '</li>'; }).join('') +
                 '</ul>' +
             '</div>' +
-            '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">' +
-                '<button type="button" onclick="window.bookFromFinder(\'' + rec.tourId + '\')" class="btn btn--accent" style="padding: 12px 16px; font-size: 0.95rem; font-weight: 700; border-radius: 8px; justify-content: center; width: 100%; border: none; cursor: pointer;">' +
+            '<div class="tf-card-actions">' +
+                '<button type="button" onclick="window.bookFromFinder(\'' + rec.tourId + '\')" class="btn btn--accent" style="border: none; cursor: pointer;">' +
                     '<i class="fa-solid fa-calendar-check"></i> Book This Tour' +
                 '</button>' +
-                '<a href="' + rec.detailsUrl + '" onclick="window.scrollFromFinder(\'' + rec.detailsUrl + '\'); return false;" class="btn btn--outline" style="padding: 12px 16px; font-size: 0.95rem; font-weight: 700; border-radius: 8px; justify-content: center; width: 100%; border: 1.5px solid #0284c7; color: #0284c7; background: white; text-align: center; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">' +
+                '<a href="' + rec.detailsUrl + '" onclick="window.scrollFromFinder(\'' + rec.detailsUrl + '\'); return false;" class="btn btn--outline tf-btn-itinerary">' +
                     '<i class="fa-solid fa-circle-info"></i> View Itinerary' +
                 '</a>' +
             '</div>' +
