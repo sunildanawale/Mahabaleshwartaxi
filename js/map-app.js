@@ -324,12 +324,13 @@ function getFilteredPlaces() {
     const query = (searchEl ? searchEl.value : '').trim().toLowerCase();
 
     return window.PLACES_DATA.filter(p => {
-        const matchTour = tour === 'all' || p.tour === tour;
+        const matchTour = tour === 'all' || p.tour === tour || (Array.isArray(p.tours) && p.tours.includes(tour));
         const matchCat = cat === 'all' || p.category === cat;
         const matchQuery = !query ||
             p.name.toLowerCase().includes(query) ||
             p.desc.toLowerCase().includes(query) ||
-            p.tour.toLowerCase().includes(query);
+            p.tour.toLowerCase().includes(query) ||
+            (Array.isArray(p.aliases) && p.aliases.some(a => a.toLowerCase().includes(query)));
 
         return matchTour && matchCat && matchQuery;
     });
