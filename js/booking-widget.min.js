@@ -3401,7 +3401,7 @@
             countText = 'Tour 7';
             optHtml = '<optgroup label="── ⭐ FULL DAY COMBO PASS ──">' +
                 filtered.map(function (t) {
-                    return '<option value="' + t.id + '">T7: Full Day Combo — ₹3,000</option>';
+                    return '<option value="' + t.id + '">T7: Full Day — ₹3,000</option>';
                 }).join('') +
                 '</optgroup>';
         } else if (service === 'outstation') {
