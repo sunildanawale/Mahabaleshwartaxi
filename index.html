@@ -646,29 +646,40 @@
 
         }
 
-        .hero__content-custom .hero__title {
+        .hero__text-col {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            text-align: left !important;
+            position: relative !important;
+            z-index: 1 !important;
+        }
 
+        .hero__content-custom .hero__title {
             font-size: clamp(1.75rem, 2.35vw, 2.45rem) !important;
             text-wrap: balance !important;
-
             font-weight: 800 !important;
-
-            line-height: 1.14 !important;
-
-            letter-spacing: -0.02em !important;
-
+            line-height: 1.15 !important;
+            letter-spacing: -0.025em !important;
             color: #ffffff !important;
-
             margin-bottom: 16px !important;
-
             word-break: normal !important;
-
             overflow-wrap: normal !important;
-
             text-shadow: 0 4px 20px rgba(0,0,0,0.5) !important;
-
             animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s backwards !important;
+        }
 
+        .hero-title-line {
+            display: block !important;
+            line-height: 1.15 !important;
+        }
+
+        .hero-title-line--main {
+            color: #ffffff !important;
+        }
+
+        .hero-title-line--sub {
+            margin-top: 6px !important;
         }
 
         /* Shifting Aurora Gradient on Title */
@@ -1001,13 +1012,16 @@
 
             }
 
-            .hero__content-custom > div:first-child {
+            .hero__content-custom > div:first-child,
+            .hero__text-col {
 
                 align-items: center !important;
 
                 display: flex !important;
 
                 flex-direction: column !important;
+
+                text-align: center !important;
 
             }
 
@@ -1030,6 +1044,12 @@
                 text-align: center !important;
 
                 margin-bottom: 12px !important;
+
+            }
+
+            .hero-title-line {
+
+                text-align: center !important;
 
             }
 
@@ -1532,7 +1552,7 @@ function bridgeHomeForm() {
 
         <!-- Left Column --> 
 
-        <div style="display: flex; flex-direction: column; align-items: flex-start; position: relative; z-index: 1;">
+        <div class="hero__text-col" style="display: flex; flex-direction: column; align-items: flex-start; position: relative; z-index: 1;">
 
             <!-- Luxury Eyebrow Status Pill -->
             <div class="hero-animated-trust" style="background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255,255,255,0.18); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-radius: 999px; padding: 6px 16px; margin-bottom: 18px; display: inline-flex; align-items: center; gap: 9px; box-shadow: 0 4px 20px -2px rgba(0,0,0,0.35);">
@@ -1545,9 +1565,9 @@ function bridgeHomeForm() {
             </div>
 
             <!-- Page H1 Heading -->
-            <h1 class="hero__title" style="font-weight: 800; line-height: 1.2; letter-spacing: -0.025em; color: #ffffff; margin-bottom: 18px; text-shadow: 0 4px 24px rgba(0,0,0,0.65); text-wrap: balance;">
-                <span class="hero-title-line" style="display: block;">Taxi in Mahabaleshwar <span style="white-space: nowrap;">• Mahabaleshwar Taxi Service</span></span>
-                <span class="hero-gradient-text hero-title-line" style="display: block; margin-top: 6px;">Local Sightseeing Cabs, Union Rates <span style="white-space: nowrap;">&amp; Outstation Trips</span></span>
+            <h1 class="hero__title" style="font-weight: 800; line-height: 1.18; letter-spacing: -0.025em; color: #ffffff; margin-bottom: 18px; text-shadow: 0 4px 24px rgba(0,0,0,0.65); text-wrap: balance;">
+                <span class="hero-title-line hero-title-line--main" style="display: block;">Taxi in Mahabaleshwar</span>
+                <span class="hero-title-line hero-title-line--sub" style="display: block; margin-top: 6px;"><span class="hero-gradient-text">Local Sightseeing Cabs &amp; Union Rates</span></span>
             </h1>
 
             <!-- Subtitle -->
