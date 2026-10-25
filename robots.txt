@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /admin.html
+Disallow: /_legacy_backups/
 
 Sitemap: https://sunildanawale.github.io/Mahabaleshwartaxi/sitemap.xml
 Sitemap: https://sunildanawale.github.io/Mahabaleshwartaxi/sitemap.txt

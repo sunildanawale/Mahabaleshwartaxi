@@ -19,3 +19,5 @@ desktop.ini
 # Antigravity local agent skills cache
 .agents/
 skills-lock.json
+
+_legacy_backups/
