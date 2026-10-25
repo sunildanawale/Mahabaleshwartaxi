@@ -368,7 +368,15 @@
             '.aai-footer{padding:10px 14px;background:#ffffff;border-top:1px solid #e2e8f0;display:flex;gap:8px;align-items:center;flex-shrink:0;box-sizing:border-box;}',
             '.aai-input{flex:1;padding:10px 14px;border:1.5px solid #cbd5e1;border-radius:24px;font-size:0.88rem;outline:none;}',
             '.aai-input:focus{border-color:#0891b2;}',
-            '.aai-send-btn{background:#0891b2;color:#ffffff;border:none;width:38px;height:38px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}'
+            '.aai-send-btn{background:#0891b2;color:#ffffff;border:none;width:38px;height:38px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}',
+            '.aai-quick-dock{display:flex;gap:6px;padding:8px 14px 4px;background:#ffffff;border-top:1px solid #f1f5f9;overflow-x:auto;-webkit-overflow-scrolling:touch;white-space:nowrap;scrollbar-width:none;}',
+            '.aai-quick-dock::-webkit-scrollbar{display:none;}',
+            '.aai-dock-chip{background:#f1f5f9;color:#334155;border:1px solid #cbd5e1;padding:5px 12px;border-radius:14px;font-size:0.75rem;font-weight:700;cursor:pointer;flex-shrink:0;transition:all 0.15s;}',
+            '.aai-dock-chip:hover{background:#0284c7;color:#ffffff;border-color:#0284c7;}',
+            '.aai-voice-btn{background:#f1f5f9;color:#0284c7;border:1px solid #cbd5e1;width:38px;height:38px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s;}',
+            '.aai-voice-btn:hover{background:#e0f2fe;color:#0369a1;}',
+            '.aai-voice-btn.aai-listening{background:#ef4444 !important;color:#ffffff !important;border-color:#ef4444 !important;box-shadow:0 0 14px rgba(239,68,68,0.7);animation:aaiPulse 1.2s infinite;}',
+            '@keyframes aaiPulse{0%{transform:scale(1);}50%{transform:scale(1.08);}100%{transform:scale(1);}}'
         ].join('');
         document.head.appendChild(s);
     }
@@ -413,8 +421,17 @@
             + '</div>'
             + '</div>'
 
+            + '<div class="aai-quick-dock" id="aaiQuickDock">'
+            + '<button type="button" class="aai-dock-chip" onclick="window.AryanAI.sendChip(\'Tell me about Tour 01 Arthur Seat Circuit (₹800 express)\')">⚡ ₹800 Tour</button>'
+            + '<button type="button" class="aai-dock-chip" onclick="window.AryanAI.sendChip(\'What are official taxi rates for all tours?\')">💰 Rate Card</button>'
+            + '<button type="button" class="aai-dock-chip" onclick="window.AryanAI.sendChip(\'Pratapgad Fort cab rate and details\')">🏰 Pratapgad</button>'
+            + '<button type="button" class="aai-dock-chip" onclick="window.AryanAI.sendChip(\'I want full day Mahabaleshwar and Panchgani tour\')">⭐ Full Day Combo</button>'
+            + '<button type="button" class="aai-dock-chip" onclick="window.AryanAI.sendChip(\'Taxi fare to Pune or Mumbai Airport\')">✈️ Airport Drop</button>'
+            + '<button type="button" class="aai-dock-chip" onclick="window.AryanAI.sendChip(\'Strawberry farms and sunset viewpoint tour\')">🍓 Strawberry &amp; Sunset</button>'
+            + '</div>'
             + '<form id="aaiForm" class="aai-footer">'
-            + '<input type="text" id="aaiInput" class="aai-input" placeholder="Type trip question (e.g. rate, advance, car)..." autocomplete="off">'
+            + '<input type="text" id="aaiInput" class="aai-input" placeholder="Type or tap mic to speak..." autocomplete="off">'
+            + '<button type="button" id="aaiVoiceBtn" class="aai-voice-btn" aria-label="Voice Search" title="Speak to Ask Aryan AI"><i class="fa-solid fa-microphone"></i></button>'
             + '<button type="submit" class="aai-send-btn" aria-label="Send"><i class="fa-solid fa-paper-plane"></i></button>'
             + '</form>'
             + '</div>'
@@ -432,6 +449,64 @@
         if (openBtn) openBtn.addEventListener('click', function () { window.AryanAI.open(); });
         if (closeBtn) closeBtn.addEventListener('click', function () { window.AryanAI.close(); });
         if (backdrop) backdrop.addEventListener('click', function () { window.AryanAI.close(); });
+
+        // Web Speech Recognition Handler
+        var voiceBtn = document.getElementById('aaiVoiceBtn');
+        var SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (voiceBtn) {
+            if (SpeechRec) {
+                var recognition = new SpeechRec();
+                recognition.lang = 'en-IN';
+                recognition.interimResults = false;
+                var isListening = false;
+
+                voiceBtn.addEventListener('click', function () {
+                    if (isListening) {
+                        try { recognition.stop(); } catch (err) {}
+                        isListening = false;
+                        voiceBtn.classList.remove('aai-listening');
+                        return;
+                    }
+                    try {
+                        recognition.start();
+                        isListening = true;
+                        voiceBtn.classList.add('aai-listening');
+                        if (input) input.placeholder = 'Listening... Speak now';
+                    } catch (err) {
+                        console.error('Speech error', err);
+                        isListening = false;
+                        voiceBtn.classList.remove('aai-listening');
+                    }
+                });
+
+                recognition.onresult = function (event) {
+                    isListening = false;
+                    voiceBtn.classList.remove('aai-listening');
+                    if (input) input.placeholder = 'Type or tap mic to speak...';
+                    if (event.results && event.results[0] && event.results[0][0]) {
+                        var transcript = event.results[0][0].transcript;
+                        if (transcript && transcript.trim()) {
+                            if (input) input.value = transcript.trim();
+                            handleUserChat(transcript.trim());
+                        }
+                    }
+                };
+
+                recognition.onerror = function () {
+                    isListening = false;
+                    voiceBtn.classList.remove('aai-listening');
+                    if (input) input.placeholder = 'Type or tap mic to speak...';
+                };
+
+                recognition.onend = function () {
+                    isListening = false;
+                    voiceBtn.classList.remove('aai-listening');
+                    if (input) input.placeholder = 'Type or tap mic to speak...';
+                };
+            } else {
+                voiceBtn.style.display = 'none';
+            }
+        }
 
         if (form) {
             form.addEventListener('submit', function (e) {

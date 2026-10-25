@@ -1984,7 +1984,7 @@ tr:hover td {
 
 @media (max-width: 768px) {
     .whatsapp-float {
-        bottom: calc(var(--mobile-bar-height) + var(--space-4));
+        display: none !important;
     }
 }
 
