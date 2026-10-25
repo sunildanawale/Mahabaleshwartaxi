@@ -165,6 +165,25 @@
         .portal-btn-call:hover {
             opacity: 0.95;
         }
+        .portal-btn-ai {
+            background: rgba(8, 145, 178, 0.12);
+            color: #0284c7;
+            border: 1px solid rgba(8, 145, 178, 0.3);
+            cursor: pointer;
+        }
+        .portal-btn-ai:hover {
+            background: rgba(8, 145, 178, 0.22);
+            color: #0369a1;
+        }
+        .portal-btn-ai i {
+            color: #d97706;
+        }
+        body.booking-portal-page .amt-header-brand {
+            display: none !important;
+        }
+        .portal-booking-container, #amtBookingModal, .portal-card {
+            scroll-margin-top: 75px !important;
+        }
         .portal-hero-strip {
             text-align: center;
             padding: 20px 16px 14px;
@@ -1698,36 +1717,70 @@ body.booking-portal-page .portal-card {
         /* Mobile View Clean Alignment */
         @media (max-width: 640px) {
             .portal-header {
-                padding: 10px 12px;
+                padding: 8px 12px !important;
+                gap: 8px !important;
             }
             .portal-brand {
-                gap: 8px;
+                gap: 8px !important;
+                min-width: 0 !important;
+                flex: 1 1 auto !important;
+                overflow: hidden !important;
             }
             .portal-brand img {
-                width: 32px;
-                height: 32px;
+                width: 28px !important;
+                height: 28px !important;
+                flex-shrink: 0 !important;
+            }
+            .portal-brand-text {
+                min-width: 0 !important;
+                flex: 1 1 auto !important;
+                overflow: hidden !important;
             }
             .portal-brand-title {
-                font-size: 0.88rem;
-                line-height: 1.15;
+                font-size: 0.88rem !important;
+                line-height: 1.15 !important;
+                white-space: nowrap !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
             }
             .portal-brand-sub {
-                font-size: 0.64rem;
-                line-height: 1.1;
+                font-size: 0.62rem !important;
+                line-height: 1.1 !important;
+                white-space: nowrap !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
             }
             .portal-actions {
-                gap: 6px;
+                gap: 6px !important;
+                flex-shrink: 0 !important;
             }
             .portal-btn {
-                padding: 6px 9px;
-                font-size: 0.76rem;
-                border-radius: 8px;
+                padding: 5px 9px !important;
+                font-size: 0.76rem !important;
+                border-radius: 8px !important;
+                white-space: nowrap !important;
+            }
+            /* Hide top-bar Ask AI on mobile because floating Ask Aryan AI assistant is already active & accessible */
+            .portal-btn-ai {
+                display: none !important;
             }
             .portal-btn-home span {
-                display: none;
+                display: none !important;
+            }
+            .portal-btn-call {
+                padding: 6px 10px !important;
             }
             .portal-btn-call span {
-                font-size: 0.76rem;
+                font-size: 0.76rem !important;
+            }
+            body.booking-portal-page .amt-header-brand {
+                display: none !important;
+            }
+            .portal-card-header {
+                padding: 12px 14px 10px !important;
+            }
+            .portal-booking-container, #amtBookingModal, .portal-card {
+                scroll-margin-top: 70px !important;
             }
             .portal-hero-strip {
                 padding: 16px 12px 10px;
@@ -2745,14 +2798,14 @@ body.booking-portal-page .portal-card {
             </div>
         </a>
         <div class="portal-actions">
-            <button onclick="if(window.AryanAI){window.AryanAI.open();}else{window.location.href='ai-trip-planner.html';}" type="button" class="portal-btn portal-btn-ai" title="Ask Aryan AI Trip Assistant" style="background:rgba(8,145,178,0.12);color:#0284c7;border:1px solid rgba(8,145,178,0.3);cursor:pointer;display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:8px;font-weight:700;font-size:0.82rem;">
-                <i class="fa-solid fa-wand-magic-sparkles" style="color:#d97706;"></i> <span>Ask AI</span>
+            <button onclick="if(window.AryanAI){window.AryanAI.open();}else{window.location.href='ai-trip-planner.html';}" type="button" class="portal-btn portal-btn-ai" title="Ask Aryan AI Trip Assistant">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> <span>Ask AI</span>
             </button>
             <a href="index.html" class="portal-btn portal-btn-home" title="Return to Main Website">
                 <i class="fa-solid fa-house"></i> <span>Website</span>
             </a>
             <a href="tel:+919922882044" class="portal-btn portal-btn-call" title="Call Cab Operator">
-                <i class="fa-solid fa-phone"></i> <span>Call Operator</span>
+                <i class="fa-solid fa-phone"></i> <span>Call</span>
             </a>
         </div>
     </header>

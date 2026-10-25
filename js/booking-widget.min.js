@@ -3582,7 +3582,9 @@
             if (isStandalone) {
                 var container = document.querySelector('.portal-booking-container') || modal;
                 if (container) {
-                    var y = container.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop || 0) - 50;
+                    var navHeader = document.querySelector('.portal-header');
+                    var navH = navHeader ? navHeader.offsetHeight : 54;
+                    var y = container.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop || 0) - navH - 12;
                     window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
                 }
             }
@@ -3619,7 +3621,9 @@
             if (isStandalone) {
                 var container = document.querySelector('.portal-booking-container') || modal;
                 if (container) {
-                    var y = container.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop || 0) - 50;
+                    var navHeader = document.querySelector('.portal-header');
+                    var navH = navHeader ? navHeader.offsetHeight : 54;
+                    var y = container.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop || 0) - navH - 12;
                     window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
                 }
             }

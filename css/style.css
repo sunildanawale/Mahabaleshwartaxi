@@ -8192,23 +8192,82 @@ body.modal-open {
 
 /* Portal Header & Hero Strip Compact (booking.html & book.html) */
 .portal-header {
-    padding: 6px 14px !important;
+    padding: 8px 14px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+}
+.portal-brand {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+    overflow: hidden !important;
 }
 .portal-brand img {
     width: 28px !important;
     height: 28px !important;
+    flex-shrink: 0 !important;
+}
+.portal-brand-text {
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+    overflow: hidden !important;
 }
 .portal-brand-title {
     font-size: 0.88rem !important;
-    line-height: 1.1 !important;
+    line-height: 1.15 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
 }
 .portal-brand-sub {
     font-size: 0.62rem !important;
-    line-height: 1 !important;
+    line-height: 1.1 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+.portal-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    flex-shrink: 0 !important;
 }
 .portal-btn {
     padding: 5px 9px !important;
     font-size: 0.75rem !important;
+    white-space: nowrap !important;
+}
+.portal-btn-ai {
+    background: rgba(8, 145, 178, 0.12) !important;
+    color: #0284c7 !important;
+    border: 1px solid rgba(8, 145, 178, 0.3) !important;
+}
+.portal-btn-ai i {
+    color: #d97706 !important;
+}
+body.booking-portal-page .amt-header-brand {
+    display: none !important;
+}
+.portal-booking-container, #amtBookingModal, .portal-card {
+    scroll-margin-top: 75px !important;
+}
+@media (max-width: 640px) {
+    .portal-btn-ai {
+        display: none !important;
+    }
+    .portal-btn-home span {
+        display: none !important;
+    }
+    body.booking-portal-page .amt-header-brand {
+        display: none !important;
+    }
+    .portal-booking-container, #amtBookingModal, .portal-card {
+        scroll-margin-top: 70px !important;
+    }
 }
 .portal-hero-strip {
     padding: 4px 12px 2px !important;
