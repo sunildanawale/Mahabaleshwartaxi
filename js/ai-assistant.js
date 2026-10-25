@@ -271,9 +271,9 @@
                 text: "💰 **Official Mahabaleshwar Taxi Union Rate Card & Express Circuits:**<br><br>"
                     + "• **⚡ Express Single Tours:** ₹800 each (Tour 01: Arthur Seat Circuit • Tour 02: Kate's Point & Strawberry • Tour 03: Wilson Point & Lingmala &bull; 2.5 hrs each)<br>"
                     + "• **Tour 1 (Mahabaleshwar Darshan):** ₹1,200 (17 Points &bull; 3.5 hrs)<br>"
-                    + "• **Tour 2 (Waterfall & Sunset):** ₹1,200 (Lingmala & Mumbai Pt &bull; 2.5 hrs)<br>"
+                    + "• **Tour 2 (Waterfall & Sunset):** ₹1,200 (Lingmala & Mumbai Pt &bull; 3.5 hrs)<br>"
                     + "• **Tour 3 (Pratapgadh Darshan):** ₹1,600 (Historic Fort & Darshan &bull; 3.5 hrs)<br>"
-                    + "• **Tour 4 (Panchgani Darshan):** ₹1,200 (Table Land & Parsi Pt &bull; 3.5 hrs)<br>"
+                    + "• **Tour 4 (Panchgani Darshan):** ₹1,200 (Table Land & Parsi Pt &bull; 3.0 hrs)<br>"
                     + "• **Tour 5 (Wai Darshan):** ₹2,500 (Dhom Dam & Temples &bull; 5-6 hrs)<br>"
                     + "• **Tour 6 (Tapola Mini Kashmir):** ₹1,450 (Lake & Boating &bull; 3.5-4 hrs)<br>"
                     + "• **Tour 7 (Full Day Combo):** ₹3,000 (Mahabaleshwar + Panchgani Complete &bull; 8-9 hrs)<br><br>"
@@ -345,7 +345,7 @@
         s.id = 'aryanAiStyles';
         s.textContent = [
             '.aai-float-btn{position:fixed;bottom:90px;right:24px;z-index:9998;background:linear-gradient(135deg,#0891b2 0%,#1e3a5f 100%);color:#fff;border:none;border-radius:30px;padding:10px 16px;font-size:0.85rem;font-weight:700;display:flex;align-items:center;gap:8px;box-shadow:0 10px 25px -5px rgba(8,145,178,0.4);cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;font-family:system-ui,-apple-system,sans-serif;}',
-            '@media(max-width:991px){.aai-float-btn,#aaiOpenBtn{display:none !important;visibility:hidden !important;opacity:0 !important;pointer-events:none !important;}}',
+            '@media(max-width:991px){.aai-float-btn{bottom:74px;right:14px;padding:8px 14px;font-size:0.8rem;border-radius:24px;box-shadow:0 6px 18px rgba(0,0,0,0.25);z-index:9998;}}',
             '.aai-float-btn:hover{transform:translateY(-2px);box-shadow:0 14px 28px -5px rgba(8,145,178,0.5);}',
             '.aai-modal-wrapper{position:fixed;inset:0;width:100%;height:100%;z-index:100000;display:none;align-items:flex-end;justify-content:center;box-sizing:border-box;}',
             '@media(min-width:640px){.aai-modal-wrapper{align-items:flex-end;justify-content:flex-end;padding:24px;pointer-events:none;}}',
@@ -533,9 +533,14 @@
                     var locEl = document.getElementById('amtPickup') || document.getElementById('aib_pickup');
                     if (collectedState.pickup && locEl) {
                         locEl.value = collectedState.pickup;
-                        locEl.dispatchEvent(new Event('input'));
+                        locEl.dispatchEvent(new Event('change'));
                     }
                 }, 150);
+            } else {
+                var q = 'booking.html?tour=' + encodeURIComponent(tourId);
+                if (collectedState.date) q += '&date=' + encodeURIComponent(collectedState.date);
+                if (collectedState.pickup) q += '&pickup=' + encodeURIComponent(collectedState.pickup);
+                window.location.href = q;
             }
         }
     };

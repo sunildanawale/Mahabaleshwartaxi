@@ -2136,9 +2136,13 @@
         if (mainTourSel) {
             mainTourSel.addEventListener('change', function () {
                 syncSelectedToursFromPrimary();
+                if (typeof updateSelectedTourBanner === 'function') {
+                    updateSelectedTourBanner(mainTourSel.value);
+                }
                 renderExtraTourRows();
                 updateTourInsight();
                 updateSmartTimeUI();
+                renderReviewCard();
             });
         }
 
@@ -3726,8 +3730,23 @@
         if (!t) return;
 
         var isLarge = (bookingState.pax === '5+');
-        var cabLabel = isLarge ? '6-7 Seater Cab (As per availability)' : '4-Seater Tourist Cab (As per availability)';
-        var fare = t.fare;
+        var taxiCount = parseInt(bookingState.taxiCount, 10) || (isLarge ? 2 : 1);
+        var cabLabel = isLarge ? '6-7 Seater / 2 Cabs (2x Cabs required for 5+ guests)' : '4-Seater Tourist Cab (1 Cab)';
+
+        var selectedTours = bookingState.selectedTours || [];
+        var totalFare = 0;
+        if (selectedTours.length > 0) {
+            selectedTours.forEach(function (st) {
+                var tourObj = db.getTourById(st.id);
+                if (tourObj) totalFare += (tourObj.fare || 0);
+            });
+        }
+        if (totalFare === 0) {
+            totalFare = t.fare || 0;
+        }
+        totalFare = totalFare * taxiCount;
+
+        var fareDisplay = '₹' + Number(totalFare).toLocaleString('en-IN') + (taxiCount > 1 ? ' <small style="font-size:0.75rem;font-weight:600;opacity:0.85;">(2 Cabs)</small>' : '');
         var tourTitle = t.name + ' (' + t.duration + ')';
 
         var dStr = formatSafeDisplayDate(bookingState.date || 'Scheduled');
@@ -3736,7 +3755,7 @@
         var html = '<div class="amt-compact-review-box">'
             + '<div class="amt-crb-row">'
             + '  <div class="amt-crb-item"><i class="fa-solid fa-map-location-dot" style="color:#0284c7;"></i> <strong>' + escapeHtml(tourTitle) + '</strong></div>'
-            + '  <div class="amt-crb-fare">₹' + fare + '</div>'
+            + '  <div class="amt-crb-fare">' + fareDisplay + '</div>'
             + '</div>'
             + '<div class="amt-crb-meta">'
             + '  <span>📅 ' + escapeHtml(dStr) + ' at ' + escapeHtml(tStr) + '</span>'
@@ -4014,6 +4033,11 @@
     // ── 6. Global Public Methods & Bridges ─────────────────────────────
     window.buildConfirmedWhatsAppMessage = buildConfirmedWhatsAppMessage;
     window.getServiceRules = getServiceRules;
+    window.populateTourDropdownByService = populateTourDropdownByService;
+    window.updateSelectedTourBanner = updateSelectedTourBanner;
+    window.goToStep = goToStep;
+    window.renderReviewCard = renderReviewCard;
+    window.getBookingState = function() { return bookingState; };
 
     window.closeBookingModal = function () {
         // Do not force redirect to index.html on portal pages; preserve current state

@@ -307,7 +307,7 @@ const TOUR_DATABASE = {
         { id: 'LOC_2KM', name: 'Local Drop (Up to 2 KM)', category: 'local_drop', type: 'local', fare: 100, return_fare: 150, duration: '15 Mins', points: ['Direct Point-to-Point Drop within 2 KM in Mahabaleshwar Market area'] },
         { id: 'LOC_5KM', name: 'Local Drop (Up to 5 KM)', category: 'local_drop', type: 'local', fare: 400, return_fare: 500, duration: '20 Mins', points: ['Direct Point-to-Point Drop within 5 KM radius'] },
         { id: 'LOC_MAPRO', name: 'Mapro Garden (Gureghar) Drop', category: 'local_drop', type: 'local', fare: 600, return_fare: 800, duration: '45 Mins', points: ['Drop to Mapro Garden strawberry center (or Return with waiting)'] },
-        { id: 'LOC_PANCHGANI', name: 'Panchgani Town Drop', category: 'local_drop', type: 'local', fare: 600, return_fare: 900, duration: '45 Mins', points: ['Direct Drop to Panchgani Market / Hotels'] },
+        { id: 'LOC_PANCHGANI', name: 'Panchgani Town Drop', category: 'local_drop', type: 'local', fare: 800, return_fare: 1100, duration: '45 Mins', points: ['Direct Drop to Panchgani Market / Hotels'] },
         { id: 'LOC_OLD_MAHA', name: 'Old Mahabaleshwar Temple Drop', category: 'local_drop', type: 'local', fare: 400, return_fare: 600, duration: '30 Mins', points: ['Drop to sacred Old Mahabaleshwar Panchganga Temple'] },
         { id: 'LOC_WILSON', name: 'Wilson Point (Sunrise Trip)', category: 'local_drop', type: 'local', fare: 400, return_fare: 600, duration: '45 Mins', points: ['Early morning Sunrise drop & return from Wilson Point'] },
         { id: 'LOC_BOMBAY', name: 'Bombay Point (Sunset Trip)', category: 'local_drop', type: 'local', fare: 400, return_fare: 600, duration: '45 Mins', points: ['Evening Sunset drop & return from Bombay Point (Mumbai Point)'] },
@@ -488,6 +488,62 @@ const TOUR_DATABASE = {
         var direct = this.tours.find(function(t) { return t.id.toLowerCase() === q; });
         if (direct) return direct;
 
+        // Alias Dictionary for shorthand and legacy route slugs
+        var aliases = {
+            'tr_sat_rly': 'TR_SATARA_RLY',
+            'tr_satara_rly': 'TR_SATARA_RLY',
+            'tr_sat_bus': 'TR_SATARA_BUS',
+            'tr_satara_bus': 'TR_SATARA_BUS',
+            'tr_mum_city': 'TR_MUM_VASHI',
+            'tr_mum_vashi': 'TR_MUM_VASHI',
+            'tr_mum_air': 'TR_MUM_APT',
+            'tr_mum_airport': 'TR_MUM_APT',
+            'tr_mum_apt': 'TR_MUM_APT',
+            'tr_pune_air': 'TR_PUNE_APT',
+            'tr_pune_airport': 'TR_PUNE_APT',
+            'tr_pune_apt': 'TR_PUNE_APT',
+            'tr_pune_rly': 'TR_PUNE_RLY',
+            'tr_pun_rly': 'TR_PUNE_RLY',
+            'tr_kas': 'TR_KAS_PATHAR',
+            'tr_kas_pathar': 'TR_KAS_PATHAR',
+            'tr_sajjangad': 'TR_SAJJANGAD',
+            'tr_wathar': 'TR_WATHAR',
+            'tr_poladpur': 'TR_POLADPUR',
+            'tr_mahad': 'TR_MAHAD',
+            'tr_raigadh': 'TR_RAIGADH',
+            'tr_raigad': 'TR_RAIGADH',
+            'tr_matheran': 'TR_MATHERAN',
+            'tr_ganpatipule': 'TR_GANPATIPULE',
+            'tr_kolhapur': 'TR_KOLHAPUR',
+            'tr_sangli': 'TR_SANGLI',
+            'tr_khed': 'TR_KHED',
+            'tr_chiplun': 'TR_CHIPLUN',
+            'tr_lonavala': 'TR_LONAVALA',
+            'tr_alibaug': 'TR_ALIBAUG',
+            'loc_panchgani': 'LOC_PANCHGANI',
+            'loc_mapro': 'LOC_MAPRO',
+            'loc_old_maha': 'LOC_OLD_MAHA',
+            'loc_wilson': 'LOC_WILSON',
+            'loc_bombay': 'LOC_BOMBAY',
+            'loc_wai': 'LOC_WAI',
+            'loc_2km': 'LOC_2KM',
+            'loc_5km': 'LOC_5KM',
+            't1': 'T1',
+            't2': 'T2',
+            't3': 'T3',
+            't4': 'T4',
+            't5': 'T5',
+            't6': 'T6',
+            't7': 'T7',
+            'm1': 'M1',
+            'm2': 'M2',
+            'm3': 'M3'
+        };
+        if (aliases[q]) {
+            var aliasTour = this.getTourById(aliases[q]);
+            if (aliasTour) return aliasTour;
+        }
+
         // Combos (Tour 7)
         if (q.includes('tour 7') || q.includes('combo') || q.includes('full day') || q.includes('1 day') || q.includes('one day') || (q.includes('all') && q.includes('maha'))) {
             return this.getTourById('T7');
@@ -607,7 +663,16 @@ const TOUR_DATABASE = {
 
         // Substring search in tour names
         var matched = this.tours.find(function(t) { return t.name.toLowerCase().includes(q); });
-        return matched || this.tours[0];
+        if (matched) return matched;
+
+        // Context-aware safe fallback
+        if (q.indexOf('tr_') === 0) {
+            return this.getTourById('TR_PUNE_RLY') || this.tours[0];
+        }
+        if (q.indexOf('loc_') === 0) {
+            return this.getTourById('LOC_2KM') || this.tours[0];
+        }
+        return this.tours[0];
     },
 
     searchLocations: function(query) {
