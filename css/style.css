@@ -8256,11 +8256,32 @@ body.booking-portal-page .amt-header-brand {
     scroll-margin-top: 75px !important;
 }
 @media (max-width: 640px) {
-    .portal-btn-ai {
+    .portal-header {
+        padding: 7px 10px !important;
+        gap: 6px !important;
+    }
+    .portal-brand {
+        gap: 6px !important;
+    }
+    .portal-brand img {
+        width: 26px !important;
+        height: 26px !important;
+    }
+    .portal-brand-title {
+        font-size: clamp(0.76rem, 3.2vw, 0.86rem) !important;
+    }
+    .portal-brand-sub {
+        font-size: 0.58rem !important;
+    }
+    .portal-btn-ai,
+    .hide-on-mobile {
         display: none !important;
     }
     .portal-btn-home span {
         display: none !important;
+    }
+    .portal-btn-call {
+        padding: 5px 9px !important;
     }
     body.booking-portal-page .amt-header-brand {
         display: none !important;

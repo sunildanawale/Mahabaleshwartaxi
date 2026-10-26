@@ -28,8 +28,8 @@
     <meta name="twitter:image" content="https://sunildanawale.github.io/Mahabaleshwartaxi/images/mahabaleshwar-hero-hd.jpg">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/advanced-features.min.css?v=108.0">
-    <link rel="stylesheet" href="css/style.min.css?v=108.0">
+    <link rel="stylesheet" href="css/advanced-features.min.css?v=109.0">
+    <link rel="stylesheet" href="css/style.min.css?v=109.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
@@ -1717,18 +1717,18 @@ body.booking-portal-page .portal-card {
         /* Mobile View Clean Alignment */
         @media (max-width: 640px) {
             .portal-header {
-                padding: 8px 12px !important;
-                gap: 8px !important;
+                padding: 7px 10px !important;
+                gap: 6px !important;
             }
             .portal-brand {
-                gap: 8px !important;
+                gap: 6px !important;
                 min-width: 0 !important;
                 flex: 1 1 auto !important;
                 overflow: hidden !important;
             }
             .portal-brand img {
-                width: 28px !important;
-                height: 28px !important;
+                width: 26px !important;
+                height: 26px !important;
                 flex-shrink: 0 !important;
             }
             .portal-brand-text {
@@ -1737,41 +1737,43 @@ body.booking-portal-page .portal-card {
                 overflow: hidden !important;
             }
             .portal-brand-title {
-                font-size: 0.88rem !important;
+                font-size: clamp(0.76rem, 3.2vw, 0.86rem) !important;
+                font-weight: 800 !important;
                 line-height: 1.15 !important;
                 white-space: nowrap !important;
                 overflow: hidden !important;
                 text-overflow: ellipsis !important;
             }
             .portal-brand-sub {
-                font-size: 0.62rem !important;
+                font-size: 0.58rem !important;
                 line-height: 1.1 !important;
                 white-space: nowrap !important;
                 overflow: hidden !important;
                 text-overflow: ellipsis !important;
             }
             .portal-actions {
-                gap: 6px !important;
+                gap: 5px !important;
                 flex-shrink: 0 !important;
             }
             .portal-btn {
-                padding: 5px 9px !important;
-                font-size: 0.76rem !important;
+                padding: 5px 8px !important;
+                font-size: 0.74rem !important;
                 border-radius: 8px !important;
                 white-space: nowrap !important;
             }
             /* Hide top-bar Ask AI on mobile because floating Ask Aryan AI assistant is already active & accessible */
-            .portal-btn-ai {
+            .portal-btn-ai,
+            .hide-on-mobile {
                 display: none !important;
             }
             .portal-btn-home span {
                 display: none !important;
             }
             .portal-btn-call {
-                padding: 6px 10px !important;
+                padding: 5px 9px !important;
             }
             .portal-btn-call span {
-                font-size: 0.76rem !important;
+                font-size: 0.74rem !important;
             }
             body.booking-portal-page .amt-header-brand {
                 display: none !important;
@@ -2039,21 +2041,29 @@ body.booking-portal-page .portal-card {
 
         @media (max-width: 380px) {
             .portal-header {
-                padding: 8px 10px !important;
+                padding: 6px 8px !important;
+                gap: 5px !important;
+            }
+            .portal-brand {
+                gap: 5px !important;
+            }
+            .portal-brand img {
+                width: 24px !important;
+                height: 24px !important;
             }
             .portal-brand-title {
-                font-size: 0.80rem !important;
+                font-size: 0.76rem !important;
             }
             .portal-brand-sub {
-                font-size: 0.58rem !important;
+                font-size: 0.56rem !important;
             }
             .portal-btn {
-                padding: 5px 8px !important;
-                font-size: 0.72rem !important;
+                padding: 4px 7px !important;
+                font-size: 0.70rem !important;
                 gap: 4px !important;
             }
             .portal-btn-call span {
-                font-size: 0.72rem !important;
+                font-size: 0.70rem !important;
             }
         }
 
@@ -2798,7 +2808,7 @@ body.booking-portal-page .portal-card {
             </div>
         </a>
         <div class="portal-actions">
-            <button onclick="if(window.AryanAI){window.AryanAI.open();}else{window.location.href='ai-trip-planner.html';}" type="button" class="portal-btn portal-btn-ai" title="Ask Aryan AI Trip Assistant">
+            <button onclick="if(window.AryanAI){window.AryanAI.open();}else{window.location.href='ai-trip-planner.html';}" type="button" class="portal-btn portal-btn-ai hide-on-mobile" title="Ask Aryan AI Trip Assistant">
                 <i class="fa-solid fa-wand-magic-sparkles"></i> <span>Ask AI</span>
             </button>
             <a href="index.html" class="portal-btn portal-btn-home" title="Return to Main Website">
@@ -2899,16 +2909,16 @@ body.booking-portal-page .portal-card {
                                 <span id="amtTourCountBadge" class="amt-count-badge">6 Tours</span>
                             </label>
                             <select id="amtTourSelect" class="amt-select" style="width:100%;font-weight:700;font-size:11.5px;min-height:33px;height:33px;">
-                                <option value="T1" selected>Tour 1: Mahabaleshwar Darshan (₹1,200 • 3.5 Hrs)</option>
-                                <option value="T2">Tour 2: Mahabaleshwar Darshan (₹1,200 • 3.5 Hrs)</option>
-                                <option value="T3">Tour 3: Pratapgad Fort Darshan (₹1,600 • 3.5 Hrs)</option>
-                                <option value="T4">Tour 4: Panchgani Darshan (₹1,200 • 3.0 Hrs)</option>
-                                <option value="T5">Tour 5: Wai Ganpati Darshan (₹2,500 • 6.0 Hrs)</option>
-                                <option value="T6">Tour 6: Tapola Mini Kashmir (₹1,450 • 3.5 Hrs)</option>
-                                <option value="T7">Tour 7: Mahabaleshwar + Panchgani Combo (₹3,000 • 8-9 Hrs)</option>
-                                <option value="M1">Tour 01: Arthur Seat Circuit (₹800 • 2.5 Hrs)</option>
-                                <option value="M2">Tour 02: Kate's Point &amp; Elephant Head (₹800 • 2.5 Hrs)</option>
-                                <option value="M3">Tour 03: Wilson Point &amp; Waterfall (₹800 • 2.5 Hrs)</option>
+                                <option value="T1" selected>T1: Arthur Seat — ₹1,200</option>
+                                <option value="T2">T2: Wilson Point — ₹1,200</option>
+                                <option value="T3">T3: Pratapgad — ₹1,600</option>
+                                <option value="T4">T4: Panchgani — ₹1,200</option>
+                                <option value="T5">T5: Wai Darshan — ₹2,500</option>
+                                <option value="T6">T6: Tapola Lake — ₹1,450</option>
+                                <option value="T7">T7: Full Day — ₹3,000</option>
+                                <option value="M1">M1: Arthur Seat — ₹800</option>
+                                <option value="M2">M2: Kate's Point — ₹800</option>
+                                <option value="M3">M3: Wilson Point — ₹800</option>
                             </select>
                         </div>
                         <div id="amtSelectedTourBanner" class="amt-selected-tour-banner" style="display:block !important;">
@@ -3137,7 +3147,7 @@ body.booking-portal-page .portal-card {
             if (tourHint && db && db.resolveTour) {
                 var resolved = db.resolveTour(tourHint);
                 if (resolved) {
-                    var targetService = (resolved.fare === 800 || resolved.sub_category === 'single_tour')
+                    var targetService = (resolved.id === 'M1' || resolved.id === 'M2' || resolved.id === 'M3' || resolved.sub_category === 'single_tour')
                         ? 'express'
                         : (resolved.category || 'sightseeing');
 

@@ -1430,9 +1430,9 @@
             if (stours.length > 0) {
                 tourOptions += '<optgroup label="── ⚡ EXPRESS FLAT ₹800 (2.5 Hrs) ──">';
                 stours.forEach(function (t) {
-                    var cleanName = 'Tour 01: Arthur Seat Circuit';
-                    if (t.id === 'M2') cleanName = "Tour 02: Kate's Point & Elephant Head";
-                    else if (t.id === 'M3') cleanName = 'Tour 03: Wilson Point & Waterfall';
+                    var cleanName = 'Arthur Seat';
+                    if (t.id === 'M2') cleanName = "Kate's Point";
+                    else if (t.id === 'M3') cleanName = 'Wilson Point';
                     tourOptions += '<option value="' + t.id + '">' + t.id + ': ' + cleanName + ' — ₹800</option>';
                 });
                 tourOptions += '</optgroup>';
@@ -2833,8 +2833,11 @@
             available.forEach(function (t) {
                 var selected = (t.id === st.id) ? ' selected' : '';
                 var isSingle = (t.sub_category === 'single_tour' || t.id === 'M1' || t.id === 'M2' || t.id === 'M3');
-                var prefix = isSingle ? '⚡ Express: ' : '⭐ Standard: ';
-                optHtml += '<option value="' + t.id + '"' + selected + '>' + prefix + escapeHtml(t.name) + ' — ₹' + t.fare + ' (' + escapeHtml(t.duration) + ')</option>';
+                var optLabel = isSingle
+                    ? (t.id + ': ' + (t.id === 'M1' ? 'Arthur Seat' : t.id === 'M2' ? "Kate's Point" : 'Wilson Point') + ' — ₹800')
+                    : ((t.tour_no ? 'T' + t.tour_no : t.id) + ': ' + t.name.replace(/\s*\(Tour\s*\d+\)/i, '').replace(/\s*\(Single Tour\)/i, '').trim() + ' — ₹' + Number(t.fare).toLocaleString('en-IN'));
+                var prefix = isSingle ? '⚡ ' : '⭐ ';
+                optHtml += '<option value="' + t.id + '"' + selected + '>' + prefix + escapeHtml(optLabel) + '</option>';
             });
 
             var overlapWithPrimary = (db && db.checkTourOverlap && bookingState.selectedTours[0])
@@ -3396,9 +3399,9 @@
             countText = filtered.length + ' Tours';
             optHtml = '<optgroup label="── ⚡ EXPRESS FLAT ₹800 ──">' +
                 filtered.map(function (t) {
-                    var cleanName = 'Tour 01: Arthur Seat Circuit';
-                    if (t.id === 'M2') cleanName = "Tour 02: Kate's Point & Elephant Head";
-                    else if (t.id === 'M3') cleanName = 'Tour 03: Wilson Point & Waterfall';
+                    var cleanName = 'Arthur Seat';
+                    if (t.id === 'M2') cleanName = "Kate's Point";
+                    else if (t.id === 'M3') cleanName = 'Wilson Point';
                     return '<option value="' + t.id + '">' + t.id + ': ' + escapeHtml(cleanName) + ' — ₹800</option>';
                 }).join('') +
                 '</optgroup>';
