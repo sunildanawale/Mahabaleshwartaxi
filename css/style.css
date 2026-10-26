@@ -9757,3 +9757,125 @@ body.booking-portal-page .portal-card {
     border-color: rgba(16, 185, 129, 0.4) !important;
     color: #4ade80 !important;
 }
+
+
+/* Quick Time Chips - Guaranteed Single Line & Full Visibility */
+.amt-quick-time-chips {
+    display: flex !important;
+    gap: 4px !important;
+    margin-top: 4px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+.amt-time-chip {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    white-space: nowrap !important;
+    height: auto !important;
+    min-height: 24px !important;
+    padding: 3px 2px !important;
+    font-size: 0.60rem !important;
+    line-height: 1.15 !important;
+    border-radius: 4px !important;
+    font-weight: 700 !important;
+    border: 1px solid #cbd5e1 !important;
+    background: #f8fafc !important;
+    color: #475569 !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    overflow: visible !important;
+    box-sizing: border-box !important;
+}
+.amt-time-chip:hover {
+    border-color: #0284c7 !important;
+    color: #0284c7 !important;
+}
+.amt-time-chip.active {
+    background: #0284c7 !important;
+    border-color: #0284c7 !important;
+    color: #ffffff !important;
+}
+
+
+/* Cab Capacity Selector - Both 4-Seater & 6-7 Seater Stacked 100% Full Width Matching */
+.amt-cab-selector-wrap {
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    padding: 6px 10px !important;
+    margin-bottom: 6px !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+}
+.amt-cab-pill-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    margin-top: 3px !important;
+}
+.amt-cab-pill {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 7px 10px !important;
+    border: 1.5px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+    background: #ffffff !important;
+    cursor: pointer !important;
+    transition: all 0.15s ease !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+.amt-cab-pill:hover {
+    border-color: #0284c7 !important;
+    background: #f0f9ff !important;
+}
+.amt-cab-pill.active {
+    border-color: #0284c7 !important;
+    background: #f0f9ff !important;
+    box-shadow: 0 0 0 2px #0284c7 !important;
+}
+.amt-cab-pill-radio {
+    width: 14px !important;
+    height: 14px !important;
+    border-radius: 50% !important;
+    border: 2px solid #94a3b8 !important;
+    flex-shrink: 0 !important;
+    box-sizing: border-box !important;
+}
+.amt-cab-pill.active .amt-cab-pill-radio {
+    border-color: #0284c7 !important;
+    background: #0284c7 !important;
+}
+.amt-cab-pill-info {
+    display: flex !important;
+    flex-direction: column !important;
+    text-align: left !important;
+    flex: 1 1 auto !important;
+}
+.amt-cab-pill-info strong {
+    font-size: 0.76rem !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+    line-height: 1.2 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+}
+.amt-cab-pill-info span {
+    font-size: 0.62rem !important;
+    color: #64748b !important;
+    margin-top: 1px !important;
+    display: block !important;
+}
+.amt-cab-subnote {
+    font-size: 0.62rem !important;
+    color: #475569 !important;
+    margin: 4px 0 0 !important;
+    line-height: 1.25 !important;
+}

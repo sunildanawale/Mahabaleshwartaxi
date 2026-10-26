@@ -28,8 +28,8 @@
     <meta name="twitter:image" content="https://sunildanawale.github.io/Mahabaleshwartaxi/images/mahabaleshwar-hero-hd.jpg">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/advanced-features.min.css?v=116.0">
-    <link rel="stylesheet" href="css/style.min.css?v=116.0">
+    <link rel="stylesheet" href="css/advanced-features.min.css?v=117.0">
+    <link rel="stylesheet" href="css/style.min.css?v=117.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
@@ -1401,15 +1401,34 @@ body.booking-portal-page .portal-card {
     border-color: #0284c7 !important;
     box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.2) !important;
 }
+.amt-quick-time-chips {
+    display: flex !important;
+    gap: 4px !important;
+    margin-top: 4px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
 .amt-time-chip {
-    padding: 2px 5px !important;
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    white-space: nowrap !important;
+    height: auto !important;
+    min-height: 24px !important;
+    padding: 3px 2px !important;
     border-radius: 4px !important;
     border: 1px solid #cbd5e1 !important;
     background: #f8fafc !important;
-    font-size: 0.61rem !important;
+    font-size: 0.60rem !important;
+    line-height: 1.15 !important;
     font-weight: 700 !important;
     color: #475569 !important;
     cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    overflow: visible !important;
+    box-sizing: border-box !important;
 }
 .amt-time-chip:hover { border-color: #0284c7 !important; color: #0284c7 !important; }
 .amt-time-chip.active { background: #0284c7 !important; border-color: #0284c7 !important; color: #ffffff !important; }
@@ -1445,35 +1464,41 @@ body.booking-portal-page .portal-card {
     margin-bottom: 5px !important;
 }
 .amt-cab-pill-grid {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 5px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
     margin-top: 3px !important;
 }
 .amt-cab-pill {
     display: flex !important;
     align-items: center !important;
-    gap: 5px !important;
-    padding: 5px 7px !important;
+    gap: 8px !important;
+    padding: 7px 10px !important;
     border: 1.5px solid #cbd5e1 !important;
     border-radius: 8px !important;
     background: #ffffff !important;
     cursor: pointer !important;
     transition: all 0.15s ease !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    min-height: 44px !important;
 }
 .amt-cab-pill:hover { border-color: #0284c7 !important; background: #f0f9ff !important; }
 .amt-cab-pill.active { border-color: #0284c7 !important; background: #f0f9ff !important; box-shadow: 0 0 0 2px #0284c7 !important; }
 .amt-cab-pill-radio {
-    width: 12px !important;
-    height: 12px !important;
+    width: 14px !important;
+    height: 14px !important;
     border-radius: 50% !important;
     border: 2px solid #94a3b8 !important;
     flex-shrink: 0 !important;
 }
 .amt-cab-pill.active .amt-cab-pill-radio { border-color: #0284c7 !important; background: #0284c7 !important; }
-.amt-cab-pill-info strong { font-size: 0.72rem !important; color: #0f172a !important; line-height: 1.15 !important; display: block !important; }
-.amt-cab-pill-info span { font-size: 0.60rem !important; color: #64748b !important; display: block !important; }
-.amt-cab-subnote { font-size: 0.62rem !important; color: #475569 !important; margin: 3px 0 0 !important; }
+.amt-cab-pill-info { display: flex !important; flex-direction: column !important; text-align: left !important; flex: 1 1 auto !important; }
+.amt-cab-pill-info strong { font-size: 0.76rem !important; color: #0f172a !important; line-height: 1.2 !important; display: flex !important; align-items: center !important; gap: 4px !important; font-weight: 700 !important; }
+.amt-cab-pill-info span { font-size: 0.62rem !important; color: #64748b !important; margin-top: 1px !important; display: block !important; }
+.amt-cab-subnote { font-size: 0.62rem !important; color: #475569 !important; margin: 4px 0 0 !important; line-height: 1.25 !important; display: block !important; }
 .amt-compact-review-box, .amt-compact-review-bar {
     background: #f8fafc !important;
     border: 1px solid #e2e8f0 !important;
@@ -2131,18 +2156,29 @@ body.booking-portal-page .portal-card {
             }
             .amt-quick-time-chips {
                 display: flex !important;
-                gap: 3px !important;
-                margin-top: 2px !important;
+                gap: 4px !important;
+                margin-top: 4px !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
             }
             .amt-time-chip {
-                padding: 1px 4px !important;
-                font-size: 0.58rem !important;
-                height: 18px !important;
-                min-height: 18px !important;
-                line-height: 1 !important;
+                flex: 1 1 0 !important;
+                min-width: 0 !important;
+                white-space: nowrap !important;
+                height: auto !important;
+                min-height: 24px !important;
+                padding: 3px 2px !important;
+                font-size: 0.60rem !important;
+                line-height: 1.15 !important;
                 border-radius: 4px !important;
-                font-weight: 600 !important;
+                font-weight: 700 !important;
                 border: 1px solid #cbd5e1 !important;
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                text-align: center !important;
+                overflow: visible !important;
+                box-sizing: border-box !important;
             }
             .amt-policy-grid {
                 display: grid;
@@ -2189,23 +2225,35 @@ body.booking-portal-page .portal-card {
                 color: #166534 !important;
             }
             .amt-cab-selector-wrap {
-                margin-bottom: 5px !important;
+                margin-bottom: 6px !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
             }
             .amt-cab-pill-grid {
-                gap: 5px !important;
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 6px !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
             }
             .amt-cab-pill {
-                padding: 4px 6px !important;
-                min-height: 36px !important;
+                padding: 6px 8px !important;
+                min-height: 40px !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+                display: flex !important;
+                align-items: center !important;
             }
             .amt-cab-pill-info strong {
                 font-size: 0.74rem !important;
             }
             .amt-cab-pill-info span {
-                font-size: 0.58rem !important;
+                font-size: 0.60rem !important;
             }
             .amt-cab-subnote {
-                display: none !important;
+                display: block !important;
+                font-size: 0.60rem !important;
+                margin-top: 3px !important;
             }
             .amt-v-card-streamlined {
                 padding: 6px 8px !important;
@@ -3183,7 +3231,7 @@ body.booking-portal-page .portal-card {
                             <div>
                                 <label class="amt-label" for="amtTime">Pickup Time *</label>
                                 <input type="time" id="amtTime" class="amt-input" value="09:00" required>
-                                <div class="amt-quick-time-chips" style="display:flex;gap:3px;margin-top:2px;">
+                                <div class="amt-quick-time-chips" style="display:flex;gap:4px;margin-top:4px;width:100%;box-sizing:border-box;">
                                     <button type="button" class="amt-time-chip active" data-time="09:00">09:00 AM</button>
                                     <button type="button" class="amt-time-chip" data-time="10:30">10:30 AM</button>
                                     <button type="button" class="amt-time-chip" data-time="14:00">02:00 PM</button>
@@ -3213,24 +3261,24 @@ body.booking-portal-page .portal-card {
                             <span class="amt-trust-chip"><i class="fa-solid fa-shield-halved"></i> Pay Driver After Trip</span>
                         </div>
                         <div class="amt-cab-selector-wrap" style="margin-bottom:6px;">
-                            <label class="amt-label">Cab Capacity (Standard Union 4-Seater Cab)</label>
-                            <div class="amt-cab-pill-grid" style="grid-template-columns:1fr;">
-                                <div class="amt-cab-pill active" data-cab="4-seater" style="grid-column:1/-1;">
+                            <label class="amt-label">Cab Capacity (Select Cab Type)</label>
+                            <div class="amt-cab-pill-grid" style="display:flex;flex-direction:column;gap:6px;margin-top:3px;width:100%;">
+                                <div class="amt-cab-pill active" data-cab="4-seater" style="width:100%;box-sizing:border-box;">
                                     <div class="amt-cab-pill-radio"></div>
                                     <div class="amt-cab-pill-info">
                                         <strong>🚖 4-Seater Dedicated Tourist Cab</strong>
                                         <span>1 to 4 Guests &bull; Standard Union Private Cab</span>
                                     </div>
                                 </div>
-                                <div class="amt-cab-pill" data-cab="6-7-seater" style="display:none;">
+                                <div class="amt-cab-pill" data-cab="6-7-seater" style="width:100%;box-sizing:border-box;">
                                     <div class="amt-cab-pill-radio"></div>
                                     <div class="amt-cab-pill-info">
                                         <strong>🚙 6-7 Seater Cab</strong>
-                                        <span>5 to 7 Guests &bull; Ertiga / Innova (Outstation Only)</span>
+                                        <span>5 to 7 Guests &bull; Ertiga / Innova (Arranged as per availability)</span>
                                     </div>
                                 </div>
                             </div>
-                            <p class="amt-cab-subnote"><i class="fa-solid fa-circle-check" style="color:#10b981;"></i> Standard 4-seater union tourist cab &bull; Dedicated private cab for your group</p>
+                            <p class="amt-cab-subnote"><i class="fa-solid fa-circle-check" style="color:#10b981;"></i> Dedicated private cab for your group &bull; Hotel porch pickup &bull; Zero advance</p>
                             <select id="amtPax" style="display:none;"><option value="3-4" selected>3-4 Guests</option><option value="5+">5+ Guests</option></select>
                             <div id="amtLargeGroupNotice" style="display:none;"><select id="amtTaxiCount" style="display:none;"><option value="2" selected>2</option></select></div>
                         </div>
@@ -3340,9 +3388,9 @@ body.booking-portal-page .portal-card {
     </footer>
 
     <!-- Scripts -->
-    <script src="js/tour-data.js?v=116.0"></script>
-    <script src="js/ai-assistant.js?v=116.0" defer></script>
-    <script src="js/booking-widget.min.js?v=116.0"></script>
+    <script src="js/tour-data.js?v=117.0"></script>
+    <script src="js/ai-assistant.js?v=117.0" defer></script>
+    <script src="js/booking-widget.min.js?v=117.0"></script>
     <script>
     (function() {
         var search = window.location.search || '';
