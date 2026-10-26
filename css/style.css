@@ -9668,49 +9668,46 @@ body.booking-portal-page .portal-card {
 
 @media (min-width: 768px) {
     .portal-booking-container {
-        max-width: 540px !important;
-        margin: 6px auto 14px !important;
+        max-width: 560px !important;
+        margin: 12px auto 28px !important;
         padding: 0 !important;
     }
     .portal-card, .amt-card, #amtBookingModal .amt-card {
-        max-width: 540px !important;
+        max-width: 560px !important;
         width: 100% !important;
-        height: 550px !important;
-        min-height: 550px !important;
-        max-height: 550px !important;
+        min-height: 680px !important;
+        height: auto !important;
+        max-height: none !important;
         box-sizing: border-box !important;
         display: flex !important;
         flex-direction: column !important;
+        background: #ffffff !important;
+        border: 1.5px solid #cbd5e1 !important;
+        border-radius: 16px !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+        overflow: hidden !important;
     }
     .portal-card-header, .amt-card-header {
         flex-shrink: 0 !important;
+        padding: 10px 16px 8px !important;
     }
     .portal-card-body, .amt-card-body {
         flex: 1 1 auto !important;
-        height: calc(550px - 66px) !important;
-        min-height: calc(550px - 66px) !important;
-        max-height: calc(550px - 66px) !important;
-        overflow-y: auto !important;
+        min-height: calc(680px - 72px) !important;
+        height: auto !important;
+        max-height: none !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: flex-start !important;
-        padding: 8px 14px 12px !important;
+        padding: 12px 16px 16px !important;
         box-sizing: border-box !important;
-        scrollbar-width: thin !important;
-        scrollbar-color: #cbd5e1 transparent !important;
-    }
-    .portal-card-body::-webkit-scrollbar, .amt-card-body::-webkit-scrollbar {
-        width: 5px !important;
-    }
-    .portal-card-body::-webkit-scrollbar-thumb, .amt-card-body::-webkit-scrollbar-thumb {
-        background: #cbd5e1 !important;
-        border-radius: 4px !important;
+        overflow: visible !important;
     }
 }
 
 @media (max-width: 767px) {
     .portal-booking-container {
-        margin: 2px auto !important;
+        margin: 4px auto !important;
         padding: 0 4px !important;
         max-width: 100% !important;
     }
@@ -9720,13 +9717,15 @@ body.booking-portal-page .portal-card {
         height: auto !important;
         min-height: auto !important;
         max-height: none !important;
+        border-radius: 12px !important;
+        overflow: hidden !important;
     }
     .portal-card-body, .amt-card-body {
         height: auto !important;
         min-height: auto !important;
         max-height: none !important;
         overflow-y: visible !important;
-        padding: 6px 10px 10px !important;
+        padding: 8px 10px 12px !important;
     }
 }
 
