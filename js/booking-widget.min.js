@@ -3585,7 +3585,7 @@
         }
         if (typeof window !== 'undefined' && window.scrollTo) {
             var isStandalone = document.body && document.body.classList.contains('booking-portal-page');
-            if (isStandalone) {
+            if (isStandalone && step > 1) {
                 var container = document.querySelector('.portal-booking-container') || modal;
                 if (container) {
                     var navHeader = document.querySelector('.portal-header');
@@ -3593,6 +3593,8 @@
                     var y = container.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop || 0) - navH - 12;
                     window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
                 }
+            } else if (isStandalone && step === 1) {
+                window.scrollTo({ top: 0, behavior: 'instant' });
             }
         }
     }

@@ -28,8 +28,8 @@
     <meta name="twitter:image" content="https://sunildanawale.github.io/Mahabaleshwartaxi/images/mahabaleshwar-hero-hd.jpg">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/advanced-features.min.css?v=109.0">
-    <link rel="stylesheet" href="css/style.min.css?v=109.0">
+    <link rel="stylesheet" href="css/advanced-features.min.css?v=110.0">
+    <link rel="stylesheet" href="css/style.min.css?v=110.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
@@ -1779,39 +1779,95 @@ body.booking-portal-page .portal-card {
                 display: none !important;
             }
             .portal-card-header {
-                padding: 12px 14px 10px !important;
+                padding: 6px 10px 5px !important;
             }
             .portal-booking-container, #amtBookingModal, .portal-card {
-                scroll-margin-top: 70px !important;
+                scroll-margin-top: 50px !important;
             }
             .portal-hero-strip {
-                padding: 16px 12px 10px;
+                padding: 3px 8px 1px !important;
+                margin: 0 auto !important;
+                text-align: center !important;
             }
             .portal-hero-strip h1 {
-                font-size: 1.15rem;
-                margin-bottom: 4px;
+                font-size: 0.92rem !important;
+                font-weight: 800 !important;
+                margin: 0 0 1px !important;
+                line-height: 1.15 !important;
             }
             .portal-hero-strip p {
-                font-size: 0.78rem;
-                line-height: 1.4;
+                display: none !important;
             }
             .portal-badge {
-                font-size: 0.68rem;
-                padding: 3px 10px;
-                margin-bottom: 6px;
+                font-size: 0.60rem !important;
+                padding: 2px 7px !important;
+                margin-bottom: 2px !important;
+                line-height: 1.15 !important;
+                display: inline-flex !important;
+                align-items: center !important;
+                gap: 4px !important;
             }
             .portal-booking-container {
-                padding: 0 8px;
-                margin-bottom: 18px;
+                padding: 0 5px !important;
+                margin: 1px auto 4px !important;
+                max-width: 520px !important;
             }
             .portal-card {
-                border-radius: 16px;
-            }
-            .portal-card-header {
-                padding: 14px 14px 10px;
+                border-radius: 12px !important;
             }
             .portal-card-body {
-                padding: 14px 12px;
+                padding: 6px 10px 8px !important;
+            }
+            .amt-category-grid .amt-service-btn {
+                min-height: 38px !important;
+                padding: 3px 2px !important;
+                border-radius: 7px !important;
+            }
+            .amt-category-grid .amt-service-btn .amt-cat-icon {
+                font-size: 0.90rem !important;
+                margin-bottom: 0 !important;
+                line-height: 1 !important;
+            }
+            .amt-category-grid .amt-service-btn .amt-cat-name {
+                font-size: 0.68rem !important;
+                line-height: 1.15 !important;
+            }
+            .amt-category-grid .amt-service-btn .amt-cat-tag {
+                font-size: 0.54rem !important;
+                line-height: 1 !important;
+            }
+            .amt-stb-card {
+                padding: 5px 8px !important;
+                margin: 3px 0 !important;
+                border-radius: 8px !important;
+            }
+            .amt-stb-fare-val {
+                font-size: 0.92rem !important;
+            }
+            .amt-stb-meta-row {
+                font-size: 0.62rem !important;
+                gap: 6px !important;
+                padding: 2px 0 !important;
+                margin-bottom: 2px !important;
+            }
+            .amt-stb-points-wrap {
+                font-size: 0.60rem !important;
+                padding-top: 2px !important;
+                gap: 3px !important;
+            }
+            .amt-grid2 {
+                margin-top: 4px !important;
+                margin-bottom: 4px !important;
+                gap: 6px !important;
+            }
+            .amt-btn-row {
+                margin-top: 6px !important;
+            }
+            .amt-btn-next {
+                height: 38px !important;
+                min-height: 38px !important;
+                padding: 8px 12px !important;
+                font-size: 0.82rem !important;
             }
 
 
@@ -3198,12 +3254,19 @@ body.booking-portal-page .portal-card {
             }
         }
 
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(syncAllParams, 120);
+                window.scrollTo(0, 0);
             });
         } else {
             setTimeout(syncAllParams, 120);
+            window.scrollTo(0, 0);
         }
     })();
     </script>
