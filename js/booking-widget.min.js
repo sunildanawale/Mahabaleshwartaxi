@@ -241,7 +241,7 @@
             return {
                 key: 'outstation',
                 serviceTitle: 'Outstation Drop Transfer',
-                badgeText: isSameDayAfternoon ? 'OUTSTATION INQUIRY (AVAILABILITY CONFIRMATION REQUIRED)' : 'OUTSTATION INQUIRY (CONFIRMATION PENDING)',
+                badgeText: isSameDayAfternoon ? 'OUTSTATION INQUIRY (AVAILABILITY CONFIRMATION REQUIRED)' : 'DIRECT OUTSTATION BOOKING CONFIRMED',
                 badgeBg: '#e0f2fe',
                 badgeColor: '#0369a1',
                 badgeBorder: '#bae6fd',
@@ -276,7 +276,7 @@
                 whatsappTariffNote: function (fare) {
                     return '💰 *Outstation Tariff:* ₹' + fare + ' (+ Tolls at actuals)\n_Nominal fuel advance • Balance payable to driver upon drop_\nℹ️ _Outstation Transit: Tourist cab arranged as per vehicle availability._\n\n';
                 },
-                whatsappReadiness: 'I confirm this is a genuine outstation travel inquiry. Please confirm vehicle availability and driver dispatch with me.'
+                whatsappReadiness: 'I confirm this direct outstation booking. Please dispatch the cab driver for my trip as per schedule.'
             };
         }
 
@@ -284,7 +284,7 @@
             return {
                 key: 'local_drop',
                 serviceTitle: 'Local Point-to-Point Drop',
-                badgeText: isSameDayAfternoon ? 'LOCAL DROP INQUIRY (AVAILABILITY CONFIRMATION REQUIRED)' : 'LOCAL DROP INQUIRY (CONFIRMATION PENDING)',
+                badgeText: isSameDayAfternoon ? 'LOCAL DROP INQUIRY (AVAILABILITY CONFIRMATION REQUIRED)' : 'DIRECT LOCAL DROP BOOKING CONFIRMED',
                 badgeBg: '#fef3c7',
                 badgeColor: '#92400e',
                 badgeBorder: '#fde68a',
@@ -317,7 +317,7 @@
                 whatsappTariffNote: function (fare) {
                     return '💰 *Local Drop Tariff:* ₹' + fare + ' (Official Union Rate)\n_Zero advance required • Pay driver directly after drop_\nℹ️ _Direct point-to-point transfer from hotel porch to destination._\n\n';
                 },
-                whatsappReadiness: 'I confirm this is a genuine local drop inquiry. Please confirm cab availability and driver dispatch with me.'
+                whatsappReadiness: 'I confirm this direct local drop booking. Please dispatch the cab driver for my drop as per schedule.'
             };
         }
 
@@ -325,7 +325,7 @@
             return {
                 key: 'combo',
                 serviceTitle: 'Full Day Combined Tour',
-                badgeText: isSameDayAfternoon ? 'COMBO TOUR INQUIRY (AVAILABILITY CONFIRMATION REQUIRED)' : 'COMBO TOUR INQUIRY (CONFIRMATION PENDING)',
+                badgeText: isSameDayAfternoon ? 'COMBO TOUR INQUIRY (AVAILABILITY CONFIRMATION REQUIRED)' : 'DIRECT COMBO TOUR BOOKING CONFIRMED',
                 badgeBg: '#f0fdf4',
                 badgeColor: '#166534',
                 badgeBorder: '#bbf7d0',
@@ -360,7 +360,7 @@
                 whatsappTariffNote: function (fare) {
                     return '💰 *Combo Tariff:* ₹' + fare + ' (Official Union Rate' + (isLarge ? ' • ' + taxiCount + ' Cabs' : '') + ')\n_Zero advance required • Pay driver after completing the combined tour_\nℹ️ _Full Day Combo: Continuous sightseeing itinerary (~7-9 hrs)._\n\n';
                 },
-                whatsappReadiness: 'I confirm this is a genuine full day combo inquiry. Please confirm cab availability and driver dispatch with me.'
+                whatsappReadiness: 'I confirm this direct full day combo booking. Please dispatch the cab driver for my tour as per schedule.'
             };
         }
 
@@ -372,7 +372,7 @@
             return {
                 key: 'sightseeing',
                 serviceTitle: 'Express Single Tour (Budget Option)',
-                badgeText: isSameDayAfternoon ? 'SINGLE TOUR INQUIRY (AVAILABILITY CHECK REQUIRED)' : 'EXPRESS SINGLE TOUR INQUIRY',
+                badgeText: isSameDayAfternoon ? 'SINGLE TOUR INQUIRY (AVAILABILITY CHECK REQUIRED)' : 'DIRECT SINGLE TOUR BOOKING CONFIRMED',
                 badgeBg: '#fef3c7',
                 badgeColor: '#92400e',
                 badgeBorder: '#fde68a',
@@ -407,7 +407,7 @@
                 whatsappTariffNote: function (fare) {
                     return '💰 *Tour Fare:* ₹' + fare + ' (Special Single Tour Rate' + (isLarge ? ' • ' + taxiCount + ' Cabs' : '') + ')\n_Zero advance required • Pay driver after tour_\nℹ️ *Note:* Single tour (₹800) is an independent budget option offered directly by Aryan Taxi (not part of the official Taxi Union rate card).\n\n';
                 },
-                whatsappReadiness: 'I confirm this is a genuine single tour inquiry. Please confirm cab availability and driver dispatch with me.'
+                whatsappReadiness: 'I confirm this direct single tour booking. Please dispatch the cab driver for my tour as per schedule.'
             };
         }
 
@@ -416,8 +416,8 @@
             key: 'sightseeing',
             serviceTitle: isMultiSightseeing ? 'Combined Sightseeing Packages' : 'Local Sightseeing',
             badgeText: isMultiSightseeing
-                ? (isSameDayAfternoon ? 'MULTI-TOUR INQUIRY (AVAILABILITY CONFIRMATION REQUIRED)' : 'MULTI-TOUR INQUIRY (CONFIRMATION PENDING)')
-                : (isSameDayAfternoon ? 'SIGHTSEEING INQUIRY (AVAILABILITY CONFIRMATION REQUIRED)' : 'SIGHTSEEING INQUIRY (CONFIRMATION PENDING)'),
+                ? (isSameDayAfternoon ? 'MULTI-TOUR INQUIRY (AVAILABILITY CONFIRMATION REQUIRED)' : 'DIRECT MULTI-TOUR BOOKING CONFIRMED')
+                : (isSameDayAfternoon ? 'SIGHTSEEING INQUIRY (AVAILABILITY CONFIRMATION REQUIRED)' : 'DIRECT SIGHTSEEING BOOKING CONFIRMED'),
             badgeBg: '#fef3c7',
             badgeColor: '#92400e',
             badgeBorder: '#fde68a',
@@ -456,7 +456,7 @@
             whatsappTariffNote: function (fare) {
                 return '💰 *Approved Tariff:* ₹' + fare + ' (Locked Union Rate' + (isLarge ? ' • ' + taxiCount + ' Cabs' : '') + ')\n_Zero advance required for Mahabaleshwar pickup • Pay driver after tour_\nℹ️ _Union Rule: Local sightseeing is strictly 4-seater tourist cabs._\n\n';
             },
-            whatsappReadiness: 'I confirm this is a genuine sightseeing inquiry. Please confirm cab availability and driver dispatch with me.'
+            whatsappReadiness: 'I confirm this direct sightseeing booking. Please dispatch the cab driver for my tour as per schedule.'
         };
     }
 
@@ -520,13 +520,13 @@
         }
 
         var msg = 'Hello Aryan Taxi Mahabaleshwar 👋\n'
-            + '🚕 *TAXI INQUIRY & TARIFF LOCK REQUEST — ' + sRules.serviceTitle.toUpperCase() + '*\n'
-            + '_(Subject to Cab Availability • Pay Driver After Trip)_\n\n'
-            + '🔖 *Inquiry Ref No.:* ' + (b.bookingId || 'AMT-REQ') + '\n'
-            + '👤 *Guest:* ' + b.name + (b.phone ? ' (' + b.phone + ')' : '') + '\n'
+            + '🚕 *DIRECT TAXI BOOKING CONFIRMATION — ' + sRules.serviceTitle.toUpperCase() + '*\n'
+            + '_(Official Union Tariff • Zero Advance • Pay Driver After Trip)_\n\n'
+            + '🔖 *Booking Voucher ID:* ' + (b.bookingId || 'AMT-REQ') + '\n'
+            + '👤 *Guest Name:* ' + b.name + (b.phone ? ' (' + b.phone + ')' : '') + '\n'
             + '🏨 *Pickup Location:* ' + pickupStr + '\n'
             + '👥 *Cab Requirement:* ' + sRules.vehicleDesc + '\n\n'
-            + '🚖 *Selected Tour' + (isMulti ? 's (' + tours.length + ' Tours):*' : ':*') + '\n'
+            + '🚖 *Confirmed Tour' + (isMulti ? 's (' + tours.length + ' Tours):*' : ':*') + '\n'
             + tourListStr + '\n\n';
 
         if (b.notes) {
@@ -1616,45 +1616,41 @@
             + '</div>'
             + '<div id="amtReviewCard" class="amt-compact-review-bar"></div>'
             + '<div id="amtStep4PolicyBox" style="display:none;"></div>'
-            + '<div class="amt-btn-row" style="margin-top:10px;display:flex;flex-direction:column;gap:8px;">'
-            + '  <button type="button" class="amt-btn-next amt-btn-confirm" id="amtConfirmBtn" style="width:100%;padding:12px 16px;background:linear-gradient(135deg, #10b981 0%, #059669 100%);color:#ffffff;border:none;border-radius:11px;font-weight:800;font-size:0.95rem;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;box-shadow:0 4px 14px rgba(16,185,129,0.35);">'
-            + '    <div style="display:flex;align-items:center;gap:8px;"><i class="fa-brands fa-whatsapp" style="font-size:1.25rem;"></i> CHECK CAB AVAILABILITY ON WHATSAPP</div>'
-            + '    <span style="font-size:0.72rem;font-weight:600;opacity:0.92;">Instant dispatch check with Aryan Taxi &bull; Pay driver after trip</span>'
-            + '  </button>'
-            + '  <div style="display:flex;justify-content:space-between;align-items:center;padding:0 2px;">'
-            + '    <button type="button" class="amt-btn-back" id="amtBackTo1" style="padding:7px 12px;border:1px solid #cbd5e1;background:#ffffff;color:#475569;border-radius:8px;font-weight:700;font-size:0.78rem;cursor:pointer;"><i class="fa-solid fa-arrow-left"></i> Change Tour</button>'
-            + '    <button type="button" id="amtPreviewVoucherBtn" style="padding:7px 12px;border:none;background:transparent;color:#0284c7;font-weight:700;font-size:0.78rem;cursor:pointer;text-decoration:underline;"><i class="fa-solid fa-file-lines"></i> View Trip Pass / Voucher</button>'
+            + '  <div class="amt-btn-row" style="margin-top:8px;display:flex;flex-direction:column;gap:6px;">'
+            + '    <button type="button" class="amt-btn-next amt-btn-confirm" id="amtConfirmBtn" style="width:100%;padding:10px 14px;background:linear-gradient(135deg, #10b981 0%, #059669 100%);color:#ffffff;border:none;border-radius:10px;font-weight:800;font-size:0.92rem;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;box-shadow:0 4px 14px rgba(16,185,129,0.35);">'
+            + '      <div style="display:flex;align-items:center;gap:6px;"><i class="fa-brands fa-whatsapp" style="font-size:1.15rem;"></i> CONFIRM BOOKING ON WHATSAPP</div>'
+            + '      <span style="font-size:0.68rem;font-weight:600;opacity:0.95;">Direct Local Driver Dispatch &bull; Pay Driver After Trip</span>'
+            + '    </button>'
+            + '    <button type="button" class="amt-btn-back" id="amtBackTo1" style="width:100%;padding:6px 12px;border:1px solid #cbd5e1;background:#ffffff;color:#475569;border-radius:8px;font-weight:700;font-size:0.75rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;"><i class="fa-solid fa-arrow-left"></i> Change Tour Selection</button>'
             + '  </div>'
-            + '</div>'
-            + '<div style="margin-top:6px;font-size:0.71rem;color:#64748b;text-align:center;">'
-            + '  <i class="fa-solid fa-circle-check" style="color:#10b981;"></i> Taxi inquiry is subject to cab availability &bull; No advance required &bull; Free cancellation'
-            + '</div>'
+            + '  <div style="margin-top:4px;font-size:0.68rem;color:#10b981;font-weight:600;text-align:center;">'
+            + '    <i class="fa-solid fa-circle-check"></i> Official Union Tariff &bull; Zero Advance &bull; Pay Driver Directly After Trip'
+            + '  </div>'
             + '</div>'
 
             // STEP 3: DIGITAL CONFIRMED VOUCHER SCREEN
             + '<div id="amtStepVoucher" style="display:none;">'
-            + '<div id="amtVoucherNotice" class="amt-voucher-screen-notice" style="background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:8px 12px;margin-bottom:10px;text-align:left;box-sizing:border-box;">'
-            + '  <div style="display:flex;align-items:center;gap:6px;color:#92400e;font-size:0.82rem;font-weight:800;margin-bottom:2px;"><i class="fa-solid fa-clock"></i> Booking Inquiry Received &bull; Reconfirmation Required</div>'
-            + '  <p id="amtVoucherNoticeSub" style="margin:0;font-size:0.76rem;color:#b45309;line-height:1.35;font-weight:500;">⚠️ Cab dispatch is confirmed ONLY after final WhatsApp/phone reconfirmation before departure to prevent driver no-show disputes.</p>'
+            + '<div id="amtVoucherNotice" class="amt-voucher-screen-notice" style="background:#ecfdf5;border:1px solid #a7f3d0;border-radius:8px;padding:6px 10px;margin-bottom:8px;text-align:left;box-sizing:border-box;">'
+            + '  <div style="display:flex;align-items:center;gap:6px;color:#065f46;font-size:0.80rem;font-weight:800;margin-bottom:1px;"><i class="fa-solid fa-circle-check" style="color:#10b981;"></i> Booking Voucher Generated &bull; Union Rate Locked</div>'
+            + '  <p id="amtVoucherNoticeSub" style="margin:0;font-size:0.72rem;color:#047857;line-height:1.25;font-weight:500;">Your trip reference is saved. Tap below to send details on WhatsApp for immediate cab dispatch. Pay driver after trip.</p>'
             + '</div>'
             + '<div id="amtVoucherContent" class="amt-voucher"></div>'
             + '<div id="amtDesktopQrContainer"></div>'
             + '<div class="amt-voucher-actions">'
-            + '<button type="button" id="amtWaBtn" class="amt-btn-next amt-btn-confirm" style="width:100%;margin-top:8px;padding:12px;font-size:0.92rem;font-weight:800;border-radius:11px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;box-shadow:0 4px 14px rgba(16,185,129,0.35);background:#10b981;color:#ffffff;border:none;cursor:pointer;">'
-            + '<div style="display:flex;align-items:center;gap:8px;"><i class="fa-brands fa-whatsapp" style="font-size:1.3rem;"></i> RECONFIRM MY TRIP &amp; DISPATCH CAB ON WHATSAPP</div>'
-            + '<span id="amtWaBtnSubtext" style="font-size:0.7rem;font-weight:600;opacity:0.92;">Send travel details on WhatsApp to lock driver dispatch</span>'
+            + '<button type="button" id="amtWaBtn" class="amt-btn-next amt-btn-confirm" style="width:100%;margin-top:6px;padding:10px 12px;font-size:0.90rem;font-weight:800;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;box-shadow:0 4px 14px rgba(16,185,129,0.35);background:#10b981;color:#ffffff;border:none;cursor:pointer;">'
+            + '<div style="display:flex;align-items:center;gap:8px;"><i class="fa-brands fa-whatsapp" style="font-size:1.2rem;"></i> OPEN WHATSAPP TO DISPATCH CAB</div>'
+            + '<span id="amtWaBtnSubtext" style="font-size:0.68rem;font-weight:600;opacity:0.95;">Sends official booking details directly to Aryan Taxi dispatch</span>'
             + '</button>'
-            + '<div class="amt-voucher-question" style="text-align:center;margin-top:6px;font-size:0.75rem;color:#64748b;">Have a question before confirming? <a href="https://api.whatsapp.com/send?phone=919922882044&text=Hello%20Aryan%20Taxi%2C%20I%20have%20a%20question%20about%20my%20taxi%20booking%20inquiry." target="_blank" style="color:#0284c7;font-weight:700;text-decoration:underline;">Chat with Dispatcher</a></div>'
-            + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;">'
-            + '<button type="button" id="amtDownloadPdfBtn" class="amt-btn-back amt-btn-pdf" style="display:flex;align-items:center;justify-content:center;gap:6px;padding:9px;font-size:0.83rem;border:1.5px solid #0891b2;background:#f0fdf4;color:#0e7490;font-weight:700;"><i class="fa-solid fa-file-arrow-down" style="color:#0891b2;"></i> Download Voucher PDF</button>'
-            + '<button type="button" id="amtPrintBtn" class="amt-btn-back" style="display:flex;align-items:center;justify-content:center;gap:6px;padding:9px;font-size:0.83rem;"><i class="fa-solid fa-print"></i> Print Voucher</button>'
+            + '<div class="amt-voucher-question" style="text-align:center;margin-top:4px;font-size:0.72rem;color:#64748b;">Need instant assistance? <a href="https://api.whatsapp.com/send?phone=919922882044&text=Hello%20Aryan%20Taxi%2C%20I%20have%20a%20question%20about%20my%20taxi%20booking." target="_blank" style="color:#0284c7;font-weight:700;text-decoration:underline;">Chat with Helpline</a></div>'
+            + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px;">'
+            + '<button type="button" id="amtDownloadPdfBtn" class="amt-btn-back amt-btn-pdf" style="display:flex;align-items:center;justify-content:center;gap:5px;padding:8px;font-size:0.78rem;border:1.5px solid #0891b2;background:#f0fdf4;color:#0e7490;font-weight:700;"><i class="fa-solid fa-file-arrow-down" style="color:#0891b2;"></i> Download PDF</button>'
+            + '<button type="button" id="amtPrintBtn" class="amt-btn-back" style="display:flex;align-items:center;justify-content:center;gap:5px;padding:8px;font-size:0.78rem;"><i class="fa-solid fa-print"></i> Print Voucher</button>'
             + '</div>'
-            + '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:8px;">'
-            + '<button type="button" id="amtEmailVoucherBtn" class="amt-v-link-btn" style="padding:8px 4px;border:1px solid #cbd5e1;background:#f8fafc;color:#0284c7;border-radius:8px;font-size:0.75rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;"><i class="fa-solid fa-envelope"></i> Email Copy</button>'
-            + '<button type="button" id="amtShareFamilyBtn" class="amt-v-link-btn" style="padding:8px 4px;border:1px solid #cbd5e1;background:#f8fafc;color:#10b981;border-radius:8px;font-size:0.75rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;"><i class="fa-solid fa-share-nodes"></i> Share Trip</button>'
-            + '<a id="amtCallBtn" href="tel:+919922882044" style="padding:8px 4px;border:1px solid #0284c7;background:#f0f9ff;color:#0369a1;font-size:0.75rem;font-weight:700;border-radius:8px;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:4px;"><i class="fa-solid fa-phone"></i> Call</a>'
+            + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px;">'
+            + '<a id="amtCallBtn" href="tel:+919922882044" style="padding:7px 4px;border:1px solid #0284c7;background:#f0f9ff;color:#0369a1;font-size:0.74rem;font-weight:700;border-radius:8px;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:4px;"><i class="fa-solid fa-phone"></i> Call Helpline</a>'
+            + '<button type="button" id="amtShareFamilyBtn" class="amt-v-link-btn" style="padding:7px 4px;border:1px solid #cbd5e1;background:#f8fafc;color:#10b981;border-radius:8px;font-size:0.74rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;"><i class="fa-solid fa-share-nodes"></i> Share Trip</button>'
             + '</div>'
-            + '<button type="button" id="amtEditTripBtn" class="amt-btn-back" style="width:100%;margin-top:8px;padding:9px;font-size:0.82rem;border:1.5px solid #cbd5e1;background:#ffffff;color:#334155;border-radius:9px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;"><i class="fa-solid fa-arrow-left"></i> Edit Trip Details / Change Tour</button>'
+            + '<button type="button" id="amtEditTripBtn" class="amt-btn-back" style="width:100%;margin-top:6px;padding:8px;font-size:0.78rem;border:1.5px solid #cbd5e1;background:#ffffff;color:#334155;border-radius:8px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;"><i class="fa-solid fa-arrow-left"></i> Edit Details / Book Another Tour</button>'
             + '</div>'
             + '</div>'
 
@@ -1688,11 +1684,11 @@
         if (zone && !zone.isStandardTariffZone) {
             availBox.style.display = 'none';
             zoneNotice.style.display = 'block';
-            zoneNotice.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> <strong>Pickup in ' + escapeHtml(zone.name || 'Selected Location') + ':</strong> Outside standard Mahabaleshwar town limits. Base sightseeing tariff applies, plus additional location charge as per distance (to be confirmed by operator).';
+            zoneNotice.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> <strong>Outside Town Limits (' + escapeHtml(zone.name || 'Selected Location') + '):</strong> Standard sightseeing tariff applies + nominal distance charge confirmed by driver.';
         } else {
             zoneNotice.style.display = 'none';
             availBox.style.display = 'block';
-            availBox.innerHTML = '<i class="fa-solid fa-circle-check"></i> <strong>Mahabaleshwar Town Pickup:</strong> Standard union sightseeing tariff applies. Zero advance required.';
+            availBox.innerHTML = '<i class="fa-solid fa-circle-check"></i> <strong>Mahabaleshwar Town Limits:</strong> Standard union sightseeing tariff applies. Zero advance.';
             availBox.style.background = '#f0fdf4';
             availBox.style.color = '#166534';
             availBox.style.border = '1px solid #bbf7d0';
@@ -2359,44 +2355,36 @@
                 confirmBtn.disabled = true;
                 confirmBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> GENERATING OFFICIAL VOUCHER...';
 
-                setTimeout(function () {
-                    try {
-                        bookingState.bookingId = generateBookingId();
-                        saveGuestProfile(bookingState.name, bookingState.phone, bookingState.pickup);
-                        try { saveInquiryToLedger(bookingState); } catch (eLedger) { }
-                        if (typeof clearBookingDraft === 'function') clearBookingDraft();
+                try {
+                    bookingState.bookingId = generateBookingId();
+                    saveGuestProfile(bookingState.name, bookingState.phone, bookingState.pickup);
+                    try { saveInquiryToLedger(bookingState); } catch (eLedger) { }
+                    if (typeof clearBookingDraft === 'function') clearBookingDraft();
 
-                        renderVoucherScreen();
-                        goToVoucher();
+                    renderVoucherScreen();
+                    goToVoucher();
 
-                        // Automatically trigger WhatsApp redirect
-                        setTimeout(function () {
-                            try {
-                                var msg = buildConfirmedWhatsAppMessage(bookingState);
-                                var url = getWhatsAppUrl(encodeURIComponent(msg));
-                                var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-                                if (isMobile) {
-                                    window.location.href = url;
-                                } else {
-                                    var win = window.open(url, '_blank');
-                                    if (!win || win.closed || typeof win.closed === 'undefined') {
-                                        window.location.href = url;
-                                    }
-                                }
-                            } catch (waErr) {
-                                console.error('Error auto-opening WhatsApp', waErr);
-                            }
-                        }, 800);
-                    } catch (e) {
-                        console.error('Error generating voucher:', e);
-                        try { renderVoucherScreen(); } catch (e2) { }
-                        goToVoucher();
-                    } finally {
-                        bookingState.submitting = false;
-                        confirmBtn.disabled = false;
-                        confirmBtn.innerHTML = '<i class="fa-solid fa-lock"></i> GENERATE VOUCHER &amp; OPEN WHATSAPP';
+                    // Instantly trigger WhatsApp within active user tap gesture
+                    var msg = buildConfirmedWhatsAppMessage(bookingState);
+                    var url = getWhatsAppUrl(encodeURIComponent(msg));
+                    var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+                    if (isMobile) {
+                        window.location.href = url;
+                    } else {
+                        var win = window.open(url, '_blank');
+                        if (!win || win.closed || typeof win.closed === 'undefined') {
+                            window.location.href = url;
+                        }
                     }
-                }, 400);
+                } catch (e) {
+                    console.error('Error generating voucher:', e);
+                    try { renderVoucherScreen(); } catch (e2) { }
+                    goToVoucher();
+                } finally {
+                    bookingState.submitting = false;
+                    confirmBtn.disabled = false;
+                    confirmBtn.innerHTML = '<i class="fa-brands fa-whatsapp"></i> CONFIRM BOOKING ON WHATSAPP';
+                }
             });
         }
 
@@ -3818,14 +3806,19 @@
 
             var sRules = getServiceRules(bookingState.service || bookingState.serviceType, tours, isLarge, taxiCount);
 
-            var termsHtml = '<div class="amt-v-terms-compact">'
-                + '<div class="amt-v-terms-title">' + escapeHtml(sRules.termsTitle) + '</div>'
-                + '<ul class="amt-v-terms-list">'
+            var termsHtml = '<details class="amt-v-details" style="margin-top:6px;">'
+                + '<summary class="amt-v-summary">'
+                + '  <span><i class="fa-solid fa-shield-halved" style="color:#0284c7;"></i> ' + escapeHtml(sRules.termsTitle) + '</span>'
+                + '  <span class="amt-v-toggle-pill">View Guidelines ▾</span>'
+                + '</summary>'
+                + '<div class="amt-v-terms-compact" style="padding:6px 8px;">'
+                + '<ul class="amt-v-terms-list" style="margin:0;padding-left:16px;">'
                 + sRules.terms.map(function (t) {
                     return '<li><strong>' + escapeHtml(t.title) + ':</strong> ' + escapeHtml(t.desc) + '</li>';
                 }).join('')
                 + '</ul>'
-                + '</div>';
+                + '</div>'
+                + '</details>';
 
             var notesHtml = '';
             if (bookingState.notes && bookingState.notes.trim()) {
@@ -3844,24 +3837,30 @@
                 var pointsHtml = '';
                 if (sRules.key === 'sightseeing' || sRules.key === 'combo') {
                     if (tourPoints.length > 0) {
-                        pointsHtml = '<div class="amt-v-points-box">'
-                            + '<div class="amt-v-points-head"><i class="fa-solid fa-list-check"></i> Included Sightseeing Points (' + tourPoints.length + ' Viewpoints)</div>'
-                            + '<div class="amt-v-chips-wrap">'
+                        pointsHtml = '<details class="amt-v-details" style="margin-top:4px;">'
+                            + '<summary class="amt-v-summary">'
+                            + '  <span><i class="fa-solid fa-location-dot" style="color:#0284c7;"></i> Included Sightseeing (' + tourPoints.length + ' Viewpoints)</span>'
+                            + '  <span class="amt-v-toggle-pill">View All ▾</span>'
+                            + '</summary>'
+                            + '<div class="amt-v-chips-wrap" style="padding:5px 6px;">'
                             + tourPoints.map(function (p) {
                                 return '<span class="amt-v-chip"><i class="fa-solid fa-location-dot" style="font-size:0.55rem;color:#0284c7;"></i> ' + escapeHtml(p) + '</span>';
                             }).join('')
                             + '</div>'
-                            + '</div>';
+                            + '</details>';
                     }
                     if (tourHiddenPts.length > 0) {
-                        pointsHtml += '<div class="amt-v-points-box" style="margin-top:3px;">'
-                            + '<div class="amt-v-points-head" style="color:#b45309;">⚠️ Extra Points (Optional, not in base fare)</div>'
-                            + '<div class="amt-v-chips-wrap">'
+                        pointsHtml += '<details class="amt-v-details" style="margin-top:3px;">'
+                            + '<summary class="amt-v-summary" style="background:#fffbeb;border-color:#fde68a;color:#92400e;">'
+                            + '  <span><i class="fa-solid fa-triangle-exclamation" style="color:#d97706;"></i> Optional Points (' + tourHiddenPts.length + ' Extra Points)</span>'
+                            + '  <span class="amt-v-toggle-pill" style="color:#b45309;">View ▾</span>'
+                            + '</summary>'
+                            + '<div class="amt-v-chips-wrap" style="padding:5px 6px;">'
                             + tourHiddenPts.map(function (p) {
                                 return '<span class="amt-v-chip" style="border-color:#fde68a;background:#fffbeb;color:#92400e;"><i class="fa-solid fa-location-dot" style="font-size:0.55rem;color:#d97706;"></i> ' + escapeHtml(p) + '</span>';
                             }).join('')
                             + '</div>'
-                            + '</div>';
+                            + '</details>';
                     }
                 } else if (sRules.key === 'outstation') {
                     pointsHtml = '<div class="amt-v-route-strip">'
@@ -3918,7 +3917,7 @@
                 + '  </div>'
                 + '  <div class="amt-v-hdr-right">'
                 + '    <div class="amt-v-badge" style="background:' + sRules.badgeBg + ';color:' + sRules.badgeColor + ';border-color:' + sRules.badgeBorder + ';">' + sRules.badgeText + '</div>'
-                + '    <div class="amt-v-ref-box"><span class="amt-v-ref-lbl">Inquiry Ref No.:</span> <strong class="amt-v-ref-val">' + escapeHtml(bookingState.bookingId || 'AMT-REQ') + '</strong></div>'
+                + '    <div class="amt-v-ref-box"><span class="amt-v-ref-lbl">Booking Voucher ID:</span> <strong class="amt-v-ref-val">' + escapeHtml(bookingState.bookingId || 'AMT-REQ') + '</strong></div>'
                 + '  </div>'
                 + '</div>'
 
