@@ -28,8 +28,8 @@
     <meta name="twitter:image" content="https://sunildanawale.github.io/Mahabaleshwartaxi/images/mahabaleshwar-hero-hd.jpg">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/advanced-features.min.css?v=111.0">
-    <link rel="stylesheet" href="css/style.min.css?v=111.0">
+    <link rel="stylesheet" href="css/advanced-features.min.css?v=112.0">
+    <link rel="stylesheet" href="css/style.min.css?v=112.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
@@ -1821,8 +1821,8 @@ body.booking-portal-page .portal-card {
             .amt-category-grid {
                 display: grid !important;
                 grid-template-columns: repeat(6, 1fr) !important;
-                gap: 3px !important;
-                margin-bottom: 3px !important;
+                gap: 4px !important;
+                margin-bottom: 4px !important;
             }
             .amt-category-grid .amt-service-btn:nth-child(1),
             .amt-category-grid .amt-service-btn:nth-child(2),
@@ -1834,27 +1834,43 @@ body.booking-portal-page .portal-card {
                 grid-column: span 3 !important;
             }
             .amt-category-grid .amt-service-btn {
-                flex-direction: row !important;
-                gap: 4px !important;
-                min-height: 28px !important;
-                height: 28px !important;
-                padding: 2px 4px !important;
-                border-radius: 6px !important;
+                display: flex !important;
+                flex-direction: column !important;
                 align-items: center !important;
                 justify-content: center !important;
+                padding: 4px 2px !important;
+                border: 1.5px solid #cbd5e1 !important;
+                background: #ffffff !important;
+                border-radius: 8px !important;
+                min-height: 48px !important;
+                height: auto !important;
+                box-sizing: border-box !important;
+                width: 100% !important;
+                box-shadow: 0 1px 2px rgba(0,0,0,0.03) !important;
+                text-align: center !important;
+                overflow: hidden !important;
             }
             .amt-category-grid .amt-service-btn .amt-cat-icon {
-                font-size: 0.82rem !important;
-                margin: 0 !important;
+                font-size: 0.95rem !important;
+                margin: 0 0 1px !important;
                 line-height: 1 !important;
+                display: block !important;
             }
             .amt-category-grid .amt-service-btn .amt-cat-name {
-                font-size: 0.66rem !important;
-                line-height: 1 !important;
+                display: block !important;
+                font-size: 0.68rem !important;
+                font-weight: 800 !important;
+                line-height: 1.1 !important;
                 white-space: nowrap !important;
             }
             .amt-category-grid .amt-service-btn .amt-cat-tag {
-                display: none !important;
+                display: block !important;
+                font-size: 0.54rem !important;
+                font-weight: 700 !important;
+                color: #64748b !important;
+                margin-top: 1px !important;
+                line-height: 1 !important;
+                white-space: nowrap !important;
             }
             .amt-stb-card {
                 padding: 5px 8px !important;
@@ -2079,19 +2095,44 @@ body.booking-portal-page .portal-card {
                 flex-wrap: wrap !important;
             }
             .amt-label {
-                font-size: 0.68rem !important;
+                font-size: 0.66rem !important;
                 margin-bottom: 2px !important;
                 line-height: 1.1 !important;
+                font-weight: 700 !important;
             }
-            .amt-input, select.amt-input, .amt-card select, #amtTourSelect {
+            .amt-input,
+            select.amt-input,
+            .amt-card select,
+            #amtTourSelect,
+            #amtDate,
+            #amtTime,
+            input[type="date"].amt-input,
+            input[type="time"].amt-input {
                 min-width: 0 !important;
                 max-width: 100% !important; 
                 font-size: 12px !important;
-                padding: 3px 6px !important;
+                padding: 2px 6px !important;
                 min-height: 30px !important;
                 height: 30px !important;
                 border-radius: 6px !important;
+                border: 1.2px solid #cbd5e1 !important;
                 box-sizing: border-box !important;
+                line-height: normal !important;
+            }
+            .amt-quick-time-chips {
+                display: flex !important;
+                gap: 3px !important;
+                margin-top: 2px !important;
+            }
+            .amt-time-chip {
+                padding: 1px 4px !important;
+                font-size: 0.58rem !important;
+                height: 18px !important;
+                min-height: 18px !important;
+                line-height: 1 !important;
+                border-radius: 4px !important;
+                font-weight: 600 !important;
+                border: 1px solid #cbd5e1 !important;
             }
             .amt-policy-grid {
                 display: grid;
@@ -3054,7 +3095,7 @@ body.booking-portal-page .portal-card {
                         <button type="button" id="amtAddTourBtn" style="display:none;"></button>
                         <div id="amtMultiTourSummary" style="display:none;"></div>
                         <div id="amtTourInsight" style="display:none;"></div>
-                        <div class="amt-grid2" style="margin-top:10px;margin-bottom:8px;">
+                        <div class="amt-grid2" style="margin-top:4px;margin-bottom:4px;">
                             <div>
                                 <label class="amt-label" for="amtDate">Travel Date *</label>
                                 <input type="date" id="amtDate" class="amt-input" required>
@@ -3062,7 +3103,7 @@ body.booking-portal-page .portal-card {
                             <div>
                                 <label class="amt-label" for="amtTime">Pickup Time *</label>
                                 <input type="time" id="amtTime" class="amt-input" value="09:00" required>
-                                <div class="amt-quick-time-chips" style="display:flex;gap:4px;margin-top:4px;">
+                                <div class="amt-quick-time-chips" style="display:flex;gap:3px;margin-top:2px;">
                                     <button type="button" class="amt-time-chip active" data-time="09:00">09:00 AM</button>
                                     <button type="button" class="amt-time-chip" data-time="10:30">10:30 AM</button>
                                     <button type="button" class="amt-time-chip" data-time="14:00">02:00 PM</button>
@@ -3229,9 +3270,9 @@ body.booking-portal-page .portal-card {
     </footer>
 
     <!-- Scripts -->
-    <script src="js/tour-data.js?v=111.0"></script>
-    <script src="js/ai-assistant.js?v=111.0" defer></script>
-    <script src="js/booking-widget.min.js?v=111.0"></script>
+    <script src="js/tour-data.js?v=112.0"></script>
+    <script src="js/ai-assistant.js?v=112.0" defer></script>
+    <script src="js/booking-widget.min.js?v=112.0"></script>
     <script>
     (function() {
         var search = window.location.search || '';
