@@ -241,7 +241,7 @@
             return {
                 key: 'outstation',
                 serviceTitle: 'Outstation Drop Transfer',
-                badgeText: isSameDayAfternoon ? 'OUTSTATION INQUIRY (AVAILABILITY CONFIRMATION REQUIRED)' : 'DIRECT OUTSTATION BOOKING CONFIRMED',
+                badgeText: isSameDayAfternoon ? 'OUTSTATION INQUIRY (AVAILABILITY CONFIRMATION REQUIRED)' : '✓ BOOKING CONFIRMED',
                 badgeBg: '#e0f2fe',
                 badgeColor: '#0369a1',
                 badgeBorder: '#bae6fd',
@@ -284,10 +284,10 @@
             return {
                 key: 'local_drop',
                 serviceTitle: 'Local Point-to-Point Drop',
-                badgeText: isSameDayAfternoon ? 'LOCAL DROP INQUIRY (AVAILABILITY CONFIRMATION REQUIRED)' : 'DIRECT LOCAL DROP BOOKING CONFIRMED',
-                badgeBg: '#fef3c7',
-                badgeColor: '#92400e',
-                badgeBorder: '#fde68a',
+                badgeText: isSameDayAfternoon ? 'LOCAL DROP INQUIRY (AVAILABILITY CONFIRMATION REQUIRED)' : '✓ BOOKING CONFIRMED',
+                badgeBg: '#f0fdf4',
+                badgeColor: '#166534',
+                badgeBorder: '#86efac',
                 paymentBadge: 'Zero Advance Required • Pay Driver After Drop',
                 paymentColor: '#15803d',
                 tariffLabel: 'OFFICIAL UNION DROP TARIFF',
@@ -325,7 +325,7 @@
             return {
                 key: 'combo',
                 serviceTitle: 'Full Day Combined Tour',
-                badgeText: isSameDayAfternoon ? 'COMBO TOUR INQUIRY (AVAILABILITY CONFIRMATION REQUIRED)' : 'DIRECT COMBO TOUR BOOKING CONFIRMED',
+                badgeText: isSameDayAfternoon ? 'COMBO TOUR INQUIRY (AVAILABILITY CONFIRMATION REQUIRED)' : '✓ BOOKING CONFIRMED',
                 badgeBg: '#f0fdf4',
                 badgeColor: '#166534',
                 badgeBorder: '#bbf7d0',
@@ -372,10 +372,10 @@
             return {
                 key: 'sightseeing',
                 serviceTitle: 'Express Single Tour (Budget Option)',
-                badgeText: isSameDayAfternoon ? 'SINGLE TOUR INQUIRY (AVAILABILITY CHECK REQUIRED)' : 'DIRECT SINGLE TOUR BOOKING CONFIRMED',
-                badgeBg: '#fef3c7',
-                badgeColor: '#92400e',
-                badgeBorder: '#fde68a',
+                badgeText: isSameDayAfternoon ? 'SINGLE TOUR INQUIRY (AVAILABILITY CHECK REQUIRED)' : '✓ BOOKING CONFIRMED',
+                badgeBg: '#f0fdf4',
+                badgeColor: '#166534',
+                badgeBorder: '#86efac',
                 paymentBadge: 'Zero Advance Required • Pay Driver After Tour',
                 paymentColor: '#15803d',
                 tariffLabel: isLarge ? 'ESTIMATED SINGLE TOUR TARIFF' : 'CONFIRMED SPECIAL FARE (₹800)',
@@ -416,11 +416,11 @@
             key: 'sightseeing',
             serviceTitle: isMultiSightseeing ? 'Combined Sightseeing Packages' : 'Local Sightseeing',
             badgeText: isMultiSightseeing
-                ? (isSameDayAfternoon ? 'MULTI-TOUR INQUIRY (AVAILABILITY CONFIRMATION REQUIRED)' : 'DIRECT MULTI-TOUR BOOKING CONFIRMED')
-                : (isSameDayAfternoon ? 'SIGHTSEEING INQUIRY (AVAILABILITY CONFIRMATION REQUIRED)' : 'DIRECT SIGHTSEEING BOOKING CONFIRMED'),
-            badgeBg: '#fef3c7',
-            badgeColor: '#92400e',
-            badgeBorder: '#fde68a',
+                ? (isSameDayAfternoon ? 'MULTI-TOUR INQUIRY (AVAILABILITY CONFIRMATION REQUIRED)' : '✓ BOOKING CONFIRMED')
+                : (isSameDayAfternoon ? 'SIGHTSEEING INQUIRY (AVAILABILITY CONFIRMATION REQUIRED)' : '✓ BOOKING CONFIRMED'),
+            badgeBg: '#f0fdf4',
+            badgeColor: '#166534',
+            badgeBorder: '#86efac',
             paymentBadge: 'Zero Advance Required • Pay Driver After Tour',
             paymentColor: '#15803d',
             tariffLabel: isLarge ? 'ESTIMATED GROUP SIGHTSEEING TARIFF' : (isMultiSightseeing ? 'LOCKED UNION TARIFF (COMBINED)' : 'LOCKED UNION TARIFF'),
@@ -1636,21 +1636,18 @@
             + '</div>'
             + '<div id="amtVoucherContent" class="amt-voucher"></div>'
             + '<div id="amtDesktopQrContainer"></div>'
-            + '<div class="amt-voucher-actions">'
-            + '<button type="button" id="amtWaBtn" class="amt-btn-next amt-btn-confirm" style="width:100%;margin-top:6px;padding:10px 12px;font-size:0.90rem;font-weight:800;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;box-shadow:0 4px 14px rgba(16,185,129,0.35);background:#10b981;color:#ffffff;border:none;cursor:pointer;">'
+            + '<div class="amt-voucher-actions" style="margin-top:6px;">'
+            + '<button type="button" id="amtWaBtn" class="amt-btn-next amt-btn-confirm" style="width:100%;padding:10px 12px;font-size:0.90rem;font-weight:800;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;box-shadow:0 4px 14px rgba(16,185,129,0.35);background:#10b981;color:#ffffff;border:none;cursor:pointer;">'
             + '<div style="display:flex;align-items:center;gap:8px;"><i class="fa-brands fa-whatsapp" style="font-size:1.2rem;"></i> OPEN WHATSAPP TO DISPATCH CAB</div>'
-            + '<span id="amtWaBtnSubtext" style="font-size:0.68rem;font-weight:600;opacity:0.95;">Sends official booking details directly to Aryan Taxi dispatch</span>'
+            + '<span id="amtWaBtnSubtext" style="font-size:0.68rem;font-weight:600;opacity:0.95;">Locks your driver dispatch instantly &bull; Pay driver after trip</span>'
             + '</button>'
-            + '<div class="amt-voucher-question" style="text-align:center;margin-top:4px;font-size:0.72rem;color:#64748b;">Need instant assistance? <a href="https://api.whatsapp.com/send?phone=919922882044&text=Hello%20Aryan%20Taxi%2C%20I%20have%20a%20question%20about%20my%20taxi%20booking." target="_blank" style="color:#0284c7;font-weight:700;text-decoration:underline;">Chat with Helpline</a></div>'
-            + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px;">'
-            + '<button type="button" id="amtDownloadPdfBtn" class="amt-btn-back amt-btn-pdf" style="display:flex;align-items:center;justify-content:center;gap:5px;padding:8px;font-size:0.78rem;border:1.5px solid #0891b2;background:#f0fdf4;color:#0e7490;font-weight:700;"><i class="fa-solid fa-file-arrow-down" style="color:#0891b2;"></i> Download PDF</button>'
-            + '<button type="button" id="amtPrintBtn" class="amt-btn-back" style="display:flex;align-items:center;justify-content:center;gap:5px;padding:8px;font-size:0.78rem;"><i class="fa-solid fa-print"></i> Print Voucher</button>'
+            + '<div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:5px;margin-top:6px;">'
+            + '<button type="button" id="amtDownloadPdfBtn" class="amt-btn-back amt-btn-pdf" style="padding:7px 2px;border:1px solid #0891b2;background:#f0fdf4;color:#0e7490;border-radius:6px;font-weight:700;cursor:pointer;font-size:0.72rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;"><i class="fa-solid fa-file-arrow-down" style="color:#0891b2;font-size:0.85rem;"></i><span>PDF</span></button>'
+            + '<button type="button" id="amtPrintBtn" class="amt-btn-back" style="padding:7px 2px;border:1px solid #cbd5e1;background:#ffffff;color:#334155;border-radius:6px;font-weight:700;cursor:pointer;font-size:0.72rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;"><i class="fa-solid fa-print" style="font-size:0.85rem;"></i><span>Print</span></button>'
+            + '<a id="amtCallBtn" href="tel:+919922882044" style="padding:7px 2px;border:1px solid #0284c7;background:#f0f9ff;color:#0369a1;border-radius:6px;font-weight:700;text-decoration:none;font-size:0.72rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;"><i class="fa-solid fa-phone" style="font-size:0.85rem;"></i><span>Call</span></a>'
+            + '<button type="button" id="amtShareFamilyBtn" class="amt-v-link-btn" style="padding:7px 2px;border:1px solid #cbd5e1;background:#ffffff;color:#10b981;border-radius:6px;font-size:0.72rem;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;"><i class="fa-solid fa-share-nodes" style="font-size:0.85rem;"></i><span>Share</span></button>'
             + '</div>'
-            + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px;">'
-            + '<a id="amtCallBtn" href="tel:+919922882044" style="padding:7px 4px;border:1px solid #0284c7;background:#f0f9ff;color:#0369a1;font-size:0.74rem;font-weight:700;border-radius:8px;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:4px;"><i class="fa-solid fa-phone"></i> Call Helpline</a>'
-            + '<button type="button" id="amtShareFamilyBtn" class="amt-v-link-btn" style="padding:7px 4px;border:1px solid #cbd5e1;background:#f8fafc;color:#10b981;border-radius:8px;font-size:0.74rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;"><i class="fa-solid fa-share-nodes"></i> Share Trip</button>'
-            + '</div>'
-            + '<button type="button" id="amtEditTripBtn" class="amt-btn-back" style="width:100%;margin-top:6px;padding:8px;font-size:0.78rem;border:1.5px solid #cbd5e1;background:#ffffff;color:#334155;border-radius:8px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;"><i class="fa-solid fa-arrow-left"></i> Edit Details / Book Another Tour</button>'
+            + '<button type="button" id="amtEditTripBtn" class="amt-btn-back" style="width:100%;margin-top:6px;padding:6px;font-size:0.74rem;border:1px solid #cbd5e1;background:#f8fafc;color:#475569;border-radius:6px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;"><i class="fa-solid fa-arrow-left"></i> Change Tour Selection / Edit Trip</button>'
             + '</div>'
             + '</div>'
 
@@ -3917,7 +3914,7 @@
                 + '  </div>'
                 + '  <div class="amt-v-hdr-right">'
                 + '    <div class="amt-v-badge" style="background:' + sRules.badgeBg + ';color:' + sRules.badgeColor + ';border-color:' + sRules.badgeBorder + ';">' + sRules.badgeText + '</div>'
-                + '    <div class="amt-v-ref-box"><span class="amt-v-ref-lbl">Booking Voucher ID:</span> <strong class="amt-v-ref-val">' + escapeHtml(bookingState.bookingId || 'AMT-REQ') + '</strong></div>'
+                + '    <div class="amt-v-ref-box"><span class="amt-v-ref-lbl">Pass ID:</span> <strong class="amt-v-ref-val">' + escapeHtml(bookingState.bookingId || 'AMT-REQ') + '</strong></div>'
                 + '  </div>'
                 + '</div>'
 
@@ -3993,12 +3990,12 @@
                 var qrImgUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=160x160&margin=4&data=' + encodeURIComponent(qrWaUrl);
                 qrContainer.innerHTML = '<div class="amt-desktop-qr-card" id="amtDesktopQrCard">'
                     + '<div class="amt-dqr-left">'
-                    + '  <img src="' + qrImgUrl + '" alt="WhatsApp QR Code" class="amt-dqr-img" width="84" height="84" loading="lazy">'
+                    + '  <img src="' + qrImgUrl + '" alt="WhatsApp QR Code" class="amt-dqr-img" width="48" height="48" loading="lazy">'
                     + '</div>'
                     + '<div class="amt-dqr-right">'
-                    + '  <div class="amt-dqr-badge"><i class="fa-solid fa-qrcode"></i> Instant Mobile WhatsApp Sync</div>'
-                    + '  <div class="amt-dqr-title">Booking from PC? Scan with your Phone Camera!</div>'
-                    + '  <div class="amt-dqr-desc">Point your phone\'s camera at this QR code to instantly launch WhatsApp with your pre-filled booking details &amp; dispatch your cab.</div>'
+                    + '  <div class="amt-dqr-badge"><i class="fa-solid fa-qrcode"></i> Instant Mobile Sync</div>'
+                    + '  <div class="amt-dqr-title">Booking from PC? Scan with Phone Camera!</div>'
+                    + '  <div class="amt-dqr-desc">Scan to launch WhatsApp with pre-filled booking details.</div>'
                     + '</div>'
                     + '</div>';
             }

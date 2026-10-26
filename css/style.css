@@ -9543,3 +9543,176 @@ body.booking-portal-page .portal-card {
 [data-theme="dark"] .amt-v-details .amt-v-terms-list {
     border-top-color: #334155 !important;
 }
+
+/* ===== 3-Step Perfect Alignment & Voucher Header Alignment Fix ===== */
+.amt-v-hdr {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    border-bottom: 1.5px solid #e2e8f0 !important;
+    padding-bottom: 7px !important;
+    gap: 8px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+.amt-v-hdr-left {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+}
+.amt-v-logo {
+    width: 32px !important;
+    height: 32px !important;
+    object-fit: contain !important;
+    flex-shrink: 0 !important;
+}
+.amt-v-brand {
+    font-size: 0.88rem !important;
+    font-weight: 800 !important;
+    color: #0f2b48 !important;
+    letter-spacing: 0.3px !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+}
+.amt-v-sub {
+    font-size: 0.67rem !important;
+    color: #0284c7 !important;
+    font-weight: 700 !important;
+    margin-top: 1px !important;
+    white-space: nowrap !important;
+}
+.amt-v-hdr-right {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end !important;
+    justify-content: center !important;
+    gap: 3px !important;
+    flex-shrink: 0 !important;
+    text-align: right !important;
+    max-width: 48% !important;
+    box-sizing: border-box !important;
+}
+.amt-v-badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 3px !important;
+    padding: 2px 7px !important;
+    border-radius: 5px !important;
+    font-size: 0.64rem !important;
+    font-weight: 800 !important;
+    border: 1px solid #86efac !important;
+    background: #f0fdf4 !important;
+    color: #166534 !important;
+    text-transform: uppercase !important;
+    white-space: nowrap !important;
+    letter-spacing: 0.2px !important;
+    line-height: 1.2 !important;
+    box-sizing: border-box !important;
+}
+.amt-v-ref-box {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    font-size: 0.67rem !important;
+    color: #475569 !important;
+    white-space: nowrap !important;
+    background: #f1f5f9 !important;
+    padding: 2px 6px !important;
+    border-radius: 5px !important;
+    border: 1px solid #e2e8f0 !important;
+    line-height: 1.2 !important;
+    box-sizing: border-box !important;
+}
+.amt-v-ref-box .amt-v-ref-lbl {
+    font-weight: 600 !important;
+    color: #64748b !important;
+    font-size: 0.62rem !important;
+}
+.amt-v-ref-box .amt-v-ref-val {
+    color: #0284c7 !important;
+    font-family: monospace !important;
+    font-weight: 800 !important;
+    font-size: 0.70rem !important;
+}
+.amt-desktop-qr-card {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    background: #f0fdf4 !important;
+    border: 1px solid #86efac !important;
+    border-radius: 8px !important;
+    padding: 5px 8px !important;
+    margin-top: 6px !important;
+    box-sizing: border-box !important;
+}
+.amt-dqr-left {
+    background: #ffffff !important;
+    border: 1px solid #bbf7d0 !important;
+    border-radius: 6px !important;
+    padding: 2px !important;
+    flex-shrink: 0 !important;
+}
+.amt-dqr-img {
+    width: 44px !important;
+    height: 44px !important;
+    object-fit: contain !important;
+    display: block !important;
+}
+.amt-dqr-right { flex: 1 !important; }
+.amt-dqr-badge { font-size: 0.58rem !important; font-weight: 800 !important; color: #15803d !important; text-transform: uppercase !important; }
+.amt-dqr-title { font-size: 0.74rem !important; font-weight: 800 !important; color: #0f2b48 !important; line-height: 1.15 !important; }
+.amt-dqr-desc { font-size: 0.62rem !important; color: #475569 !important; line-height: 1.2 !important; }
+
+@media (min-width: 768px) {
+    .portal-booking-container {
+        max-width: 540px !important;
+        margin: 10px auto 20px !important;
+        padding: 0 !important;
+    }
+    .portal-card, .amt-card, #amtBookingModal .amt-card {
+        max-width: 540px !important;
+        width: 100% !important;
+        min-height: 520px !important;
+        box-sizing: border-box !important;
+    }
+    .portal-card-body, .amt-card-body {
+        min-height: 460px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        padding: 10px 14px 14px !important;
+        box-sizing: border-box !important;
+    }
+}
+
+@media (max-width: 420px) {
+    .amt-v-hdr {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 5px !important;
+    }
+    .amt-v-hdr-right {
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        border-top: 1px dashed #e2e8f0 !important;
+        padding-top: 4px !important;
+    }
+}
+[data-theme="dark"] .amt-v-ref-box {
+    background: #0f172a !important;
+    border-color: #334155 !important;
+    color: #94a3b8 !important;
+}
+[data-theme="dark"] .amt-v-ref-box .amt-v-ref-lbl { color: #94a3b8 !important; }
+[data-theme="dark"] .amt-v-ref-box .amt-v-ref-val { color: #38bdf8 !important; }
+[data-theme="dark"] .amt-v-badge {
+    background: rgba(16, 185, 129, 0.2) !important;
+    border-color: rgba(16, 185, 129, 0.4) !important;
+    color: #4ade80 !important;
+}
