@@ -9669,22 +9669,64 @@ body.booking-portal-page .portal-card {
 @media (min-width: 768px) {
     .portal-booking-container {
         max-width: 540px !important;
-        margin: 10px auto 20px !important;
+        margin: 6px auto 14px !important;
         padding: 0 !important;
     }
     .portal-card, .amt-card, #amtBookingModal .amt-card {
         max-width: 540px !important;
         width: 100% !important;
-        min-height: 520px !important;
+        height: 550px !important;
+        min-height: 550px !important;
+        max-height: 550px !important;
         box-sizing: border-box !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    .portal-card-header, .amt-card-header {
+        flex-shrink: 0 !important;
     }
     .portal-card-body, .amt-card-body {
-        min-height: 460px !important;
+        flex: 1 1 auto !important;
+        height: calc(550px - 66px) !important;
+        min-height: calc(550px - 66px) !important;
+        max-height: calc(550px - 66px) !important;
+        overflow-y: auto !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: flex-start !important;
-        padding: 10px 14px 14px !important;
+        padding: 8px 14px 12px !important;
         box-sizing: border-box !important;
+        scrollbar-width: thin !important;
+        scrollbar-color: #cbd5e1 transparent !important;
+    }
+    .portal-card-body::-webkit-scrollbar, .amt-card-body::-webkit-scrollbar {
+        width: 5px !important;
+    }
+    .portal-card-body::-webkit-scrollbar-thumb, .amt-card-body::-webkit-scrollbar-thumb {
+        background: #cbd5e1 !important;
+        border-radius: 4px !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .portal-booking-container {
+        margin: 2px auto !important;
+        padding: 0 4px !important;
+        max-width: 100% !important;
+    }
+    .portal-card, .amt-card, #amtBookingModal .amt-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
+    }
+    .portal-card-body, .amt-card-body {
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
+        overflow-y: visible !important;
+        padding: 6px 10px 10px !important;
     }
 }
 

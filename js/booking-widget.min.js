@@ -7,6 +7,8 @@
 (function () {
     'use strict';
 
+    var ARYAN_LOGO_DATA_URI = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIj4NCiAgPGRlZnM+DQogICAgPCEtLSBSYWRpYWwgQmFja2dyb3VuZCBHcmFkaWVudCAtLT4NCiAgICA8cmFkaWFsR3JhZGllbnQgaWQ9ImJnR3JhZCIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iNTAlIj4NCiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMxZTI5M2IiLz4NCiAgICAgIDxzdG9wIG9mZnNldD0iODUlIiBzdG9wLWNvbG9yPSIjMGYxNzJhIi8+DQogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMjA2MTciLz4NCiAgICA8L3JhZGlhbEdyYWRpZW50Pg0KDQogICAgPCEtLSBHb2xkIEdyYWRpZW50IC0tPg0KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZ29sZEdyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPg0KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZlZjA4YSIvPg0KICAgICAgPHN0b3Agb2Zmc2V0PSI0MCUiIHN0b3AtY29sb3I9IiNmYmJmMjQiLz4NCiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2Q5NzcwNiIvPg0KICAgIDwvbGluZWFyR3JhZGllbnQ+DQoNCiAgICA8IS0tIE1vdW50YWluIEdyYWRpZW50IC0tPg0KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0ibXRuR3JhZCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPg0KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzM4YmRmOCIvPg0KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMDM2OWExIi8+DQogICAgPC9saW5lYXJHcmFkaWVudD4NCg0KICAgIDwhLS0gVGF4aSBZZWxsb3cgR3JhZGllbnQgLS0+DQogICAgPGxpbmVhckdyYWRpZW50IGlkPSJ0YXhpWWVsbG93IiB4MT0iMCUiIHkxPSIwJSIgeDI9IjAlIiB5Mj0iMTAwJSI+DQogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZmRlMDQ3Ii8+DQogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlYWIzMDgiLz4NCiAgICA8L2xpbmVhckdyYWRpZW50Pg0KICA8L2RlZnM+DQoNCiAgPCEtLSBDaXJjdWxhciBCYXNlIEJhZGdlIC0tPg0KICA8Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9Ijk2IiBmaWxsPSJ1cmwoI2JnR3JhZCkiIHN0cm9rZT0idXJsKCNnb2xkR3JhZCkiIHN0cm9rZS13aWR0aD0iNC41Ii8+DQogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iODkiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzM4YmRmOCIgc3Ryb2tlLXdpZHRoPSIxLjIiIHN0cm9rZS1kYXNoYXJyYXk9IjMgMiIgb3BhY2l0eT0iMC42Ii8+DQoNCiAgPCEtLSBTYWh5YWRyaSBNb3VudGFpbiBQZWFrcyAtLT4NCiAgPHBvbHlnb24gcG9pbnRzPSIyNiwxMjYgNTgsODIgOTIsMTI2IiBmaWxsPSIjMDI4NGM3IiBvcGFjaXR5PSIwLjUiLz4NCiAgPHBvbHlnb24gcG9pbnRzPSI3NiwxMjYgMTE2LDcwIDE1NiwxMjYiIGZpbGw9IiMwMzY5YTEiIG9wYWNpdHk9IjAuNiIvPg0KICA8cG9seWdvbiBwb2ludHM9IjQ0LDEyNiA4MCw4OCAxMTYsMTI2IiBmaWxsPSJ1cmwoI210bkdyYWQpIiBvcGFjaXR5PSIwLjg1Ii8+DQogIDxwb2x5Z29uIHBvaW50cz0iMTAyLDEyNiAxMzgsODAgMTc0LDEyNiIgZmlsbD0idXJsKCNtdG5HcmFkKSIgb3BhY2l0eT0iMC45Ii8+DQoNCiAgPCEtLSBNb3JuaW5nIFN1bnJpc2UgU3VuIEdsb3cgLS0+DQogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjgwIiByPSIxMyIgZmlsbD0iI2ZiYmYyNCIgb3BhY2l0eT0iMC44Ii8+DQoNCiAgPCEtLSBSb2FkIFBsYXRlYXUgQmFzZWxpbmUgLS0+DQogIDxwYXRoIGQ9Ik0yMiwxMjYgUTEwMCwxMjIgMTc4LDEyNiBMMTc4LDE0NiBRMTAwLDE0MiAyMiwxNDYgWiIgZmlsbD0iIzBmMTcyYSIvPg0KICA8cGF0aCBkPSJNNjAsMTM2IEw3NiwxMzYgTTk0LDEzNiBMMTEwLDEzNiBNMTI4LDEzNiBMMTQ0LDEzNiIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBvcGFjaXR5PSIwLjciLz4NCg0KICA8IS0tIEljb25pYyBCbGFjayAmIFllbGxvdyBUYXhpIENhYiAtLT4NCiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNTYsIDEwMikiPg0KICAgIDwhLS0gQ2FiIEJvZHkgKFllbGxvdyBCYXNlKSAtLT4NCiAgICA8cmVjdCB4PSI4IiB5PSIxNiIgd2lkdGg9IjcyIiBoZWlnaHQ9IjE0IiByeD0iNCIgZmlsbD0idXJsKCN0YXhpWWVsbG93KSIvPg0KICAgIA0KICAgIDwhLS0gQ2FiIENhYmluIChDbGFzc2ljIEJsYWNrIFRvcCkgLS0+DQogICAgPHBhdGggZD0iTTE4LDE2IEwyNyw1IEw2MSw1IEw3MCwxNiBaIiBmaWxsPSIjMGYxNzJhIiBzdHJva2U9IiMzMzQxNTUiIHN0cm9rZS13aWR0aD0iMSIvPg0KICAgIA0KICAgIDwhLS0gV2luZG93cyAtLT4NCiAgICA8cGF0aCBkPSJNMjIsMTQgTDI5LDcgTDQyLDcgTDQyLDE0IFoiIGZpbGw9IiNlMGYyZmUiLz4NCiAgICA8cGF0aCBkPSJNNDYsNyBMNTksNyBMNjYsMTQgTDQ2LDE0IFoiIGZpbGw9IiNlMGYyZmUiLz4NCg0KICAgIDwhLS0gVEFYSSBSb29mIFNpZ24gLS0+DQogICAgPHJlY3QgeD0iMzciIHk9IjEiIHdpZHRoPSIxNCIgaGVpZ2h0PSI0LjUiIHJ4PSIxLjIiIGZpbGw9IiNmNTllMGIiLz4NCiAgICA8dGV4dCB4PSI0NCIgeT0iNC4yIiBmb250LXNpemU9IjIuOCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iOTAwIiBmaWxsPSIjMGYxNzJhIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5UQVhJPC90ZXh0Pg0KDQogICAgPCEtLSBXaGVlbHMgLS0+DQogICAgPGNpcmNsZSBjeD0iMjMiIGN5PSIyOSIgcj0iNi44IiBmaWxsPSIjMGYxNzJhIiBzdHJva2U9IiNjYmQ1ZTEiIHN0cm9rZS13aWR0aD0iMS41Ii8+DQogICAgPGNpcmNsZSBjeD0iMjMiIGN5PSIyOSIgcj0iMyIgZmlsbD0iIzY0NzQ4YiIvPg0KICAgIDxjaXJjbGUgY3g9IjY1IiBjeT0iMjkiIHI9IjYuOCIgZmlsbD0iIzBmMTcyYSIgc3Ryb2tlPSIjY2JkNWUxIiBzdHJva2Utd2lkdGg9IjEuNSIvPg0KICAgIDxjaXJjbGUgY3g9IjY1IiBjeT0iMjkiIHI9IjMiIGZpbGw9IiM2NDc0OGIiLz4NCg0KICAgIDwhLS0gSGVhZGxpZ2h0ICYgVGFpbGxpZ2h0IC0tPg0KICAgIDxyZWN0IHg9Ijc4IiB5PSIxOCIgd2lkdGg9IjMiIGhlaWdodD0iNC41IiByeD0iMSIgZmlsbD0iI2ZlZjA4YSIvPg0KICAgIDxyZWN0IHg9IjciIHk9IjE4IiB3aWR0aD0iMi41IiBoZWlnaHQ9IjMuNSIgcng9IjEiIGZpbGw9IiNlZjQ0NDQiLz4NCiAgPC9nPg0KDQogIDwhLS0gVHlwb2dyYXBoeSBBcmM6IEFSWUFOIFRBWEkgLS0+DQogIDx0ZXh0IHg9IjEwMCIgeT0iNDAiIGZvbnQtZmFtaWx5PSJzeXN0ZW0tdWksIC1hcHBsZS1zeXN0ZW0sICdTZWdvZSBVSScsIFJvYm90bywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0idXJsKCNnb2xkR3JhZCkiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj4NCiAgICBBUllBTiBUQVhJDQogIDwvdGV4dD4NCiAgDQogIDwhLS0gU3VidGl0bGU6IE1BSEFCQUxFU0hXQVIgLS0+DQogIDx0ZXh0IHg9IjEwMCIgeT0iNTYiIGZvbnQtZmFtaWx5PSJzeXN0ZW0tdWksIC1hcHBsZS1zeXN0ZW0sICdTZWdvZSBVSScsIFJvYm90bywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSI4LjUiIGZvbnQtd2VpZ2h0PSI4MDAiIGZpbGw9IiMzOGJkZjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIzIj4NCiAgICBNQUhBQkFMRVNIV0FSDQogIDwvdGV4dD4NCg0KICA8IS0tIEJvdHRvbSBUYWdsaW5lIFJpYmJvbiAtLT4NCiAgPHJlY3QgeD0iMzUiIHk9IjE2MCIgd2lkdGg9IjEzMCIgaGVpZ2h0PSIxOCIgcng9IjkiIGZpbGw9IiMwODkxYjIiIHN0cm9rZT0iIzM4YmRmOCIgc3Ryb2tlLXdpZHRoPSIxIi8+DQogIDx0ZXh0IHg9IjEwMCIgeT0iMTcyLjUiIGZvbnQtZmFtaWx5PSJzeXN0ZW0tdWksIC1hcHBsZS1zeXN0ZW0sICdTZWdvZSBVSScsIFJvYm90bywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSI3LjUiIGZvbnQtd2VpZ2h0PSI4MDAiIGZpbGw9IiNmZmZmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIxIj4NCiAgICBFWFBMT1JFIFNBSFlBRFJJDQogIDwvdGV4dD4NCg0KICA8IS0tIFN0YXIgQWNjZW50cyAtLT4NCiAgPHBvbHlnb24gcG9pbnRzPSIxMDAsNjEgMTAxLjUsNjUgMTA2LDY1LjUgMTAyLjUsNjguNSAxMDMuNSw3MyAxMDAsNzAuNSA5Ni41LDczIDk3LjUsNjguNSA5NCw2NS41IDk4LjUsNjUiIGZpbGw9IiNmYmJmMjQiLz4NCjwvc3ZnPg==';
+
     var currentStep = 1;
     var totalSteps = 3; // 1: Tour & Schedule, 2: Pickup & Contact, 3: Voucher // 1: Service & Tour, 2: Date & Time, 3: Guests & Pickup, 4: Passenger & Confirm
     var bookingState = {
@@ -1623,10 +1625,7 @@
             + '    </button>'
             + '    <button type="button" class="amt-btn-back" id="amtBackTo1" style="width:100%;padding:6px 12px;border:1px solid #cbd5e1;background:#ffffff;color:#475569;border-radius:8px;font-weight:700;font-size:0.75rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;"><i class="fa-solid fa-arrow-left"></i> Change Tour Selection</button>'
             + '  </div>'
-            + '  <div style="margin-top:4px;font-size:0.68rem;color:#10b981;font-weight:600;text-align:center;">'
-            + '    <i class="fa-solid fa-circle-check"></i> Official Union Tariff &bull; Zero Advance &bull; Pay Driver Directly After Trip'
-            + '  </div>'
-            + '</div>'
+                        + '</div>'
 
             // STEP 3: DIGITAL CONFIRMED VOUCHER SCREEN
             + '<div id="amtStepVoucher" style="display:none;">'
@@ -2027,9 +2026,21 @@
         var cabPills = document.querySelectorAll('.amt-cab-pill');
         cabPills.forEach(function (pill) {
             pill.addEventListener('click', function () {
+                var cabType = pill.getAttribute('data-cab');
+                var db = window.TOUR_DATABASE;
+                var tours = (bookingState.selectedTours && bookingState.selectedTours.length > 0)
+                    ? bookingState.selectedTours
+                    : [{ id: bookingState.tourId || (db && db.tours[0] ? db.tours[0].id : 'T1') }];
+                var primaryId = tours[0].id || '';
+                var primaryTour = db ? db.getTourById(primaryId) : null;
+                var isOutstation = (bookingState.service === 'outstation') ||
+                    (primaryTour && (primaryTour.category === 'outstation' || primaryTour.type === 'transfer')) ||
+                    (primaryId.indexOf('TR_') === 0) || (primaryId.indexOf('outstation') !== -1);
+                if (cabType === '6-7-seater' && !isOutstation) {
+                    return; // 6-7 Seater Cab is strictly for Outstation Drops only
+                }
                 cabPills.forEach(function (p) { p.classList.remove('active'); });
                 pill.classList.add('active');
-                var cabType = pill.getAttribute('data-cab');
                 if (cabType === '6-7-seater') {
                     bookingState.pax = '5+';
                     bookingState.taxiCount = 1;
@@ -3543,6 +3554,7 @@
             return;
         }
         currentStep = step;
+        if (step === 2) { try { updateCabSelector(); renderReviewCard(); } catch(e){} }
         var s1 = document.getElementById('amtStep1'); if (s1) s1.style.display = step === 1 ? 'block' : 'none';
         var s2 = document.getElementById('amtStep2'); if (s2) s2.style.display = step === 2 ? 'block' : 'none';
         var s3 = document.getElementById('amtStep3'); if (s3) s3.style.display = 'none';
@@ -3714,6 +3726,97 @@
         return { badge: badge, text: text };
     }
 
+    
+    function updateCabSelector() {
+        var db = window.TOUR_DATABASE;
+        var tours = (bookingState.selectedTours && bookingState.selectedTours.length > 0)
+            ? bookingState.selectedTours
+            : [{ id: bookingState.tourId || (db && db.tours[0] ? db.tours[0].id : 'T1') }];
+        var primaryId = tours[0].id || '';
+        var primaryTour = db ? db.getTourById(primaryId) : null;
+        var isOutstation = (bookingState.service === 'outstation') ||
+            (primaryTour && (primaryTour.category === 'outstation' || primaryTour.type === 'transfer')) ||
+            (primaryId.indexOf('TR_') === 0) || (primaryId.indexOf('outstation') !== -1);
+
+        var wraps = document.querySelectorAll('.amt-cab-selector-wrap');
+        wraps.forEach(function (wrap) {
+            var pill4 = wrap.querySelector('.amt-cab-pill[data-cab="4-seater"]');
+            var pill67 = wrap.querySelector('.amt-cab-pill[data-cab="6-7-seater"]');
+            var label = wrap.querySelector('.amt-label');
+            var subnote = wrap.querySelector('.amt-cab-subnote');
+            var grid = wrap.querySelector('.amt-cab-pill-grid');
+
+            if (!isOutstation) {
+                // Local sightseeing & local drop: 6-7 Seater Cab is strictly NOT available!
+                if (pill67) {
+                    pill67.style.display = 'none';
+                    pill67.classList.remove('active');
+                }
+                if (pill4) {
+                    pill4.style.display = 'flex';
+                    pill4.style.gridColumn = '1 / -1';
+                    pill4.classList.add('active');
+                    var p4 = pill4.querySelector('.amt-cab-pill-info');
+                    if (p4) {
+                        p4.innerHTML = '<strong>🚖 4-Seater Dedicated Tourist Cab</strong>'
+                            + '<span>1 to 4 Guests • Standard Union Private Cab</span>';
+                    }
+                }
+                if (label) {
+                    label.textContent = 'Cab Capacity (Standard Union 4-Seater Cab)';
+                }
+                if (subnote) {
+                    subnote.innerHTML = '<i class="fa-solid fa-circle-check" style="color:#10b981;"></i> Standard 4-seater union tourist cab • Dedicated private cab for your group';
+                    subnote.style.display = 'block';
+                }
+                if (grid) {
+                    grid.style.gridTemplateColumns = '1fr';
+                }
+                bookingState.pax = '3-4';
+                bookingState.taxiCount = 1;
+                var paxSel = document.getElementById('amtPax');
+                if (paxSel) paxSel.value = '3-4';
+            } else {
+                // Outstation transfer: both 4-seater and 6-7 seater available
+                if (pill67) {
+                    pill67.style.display = 'flex';
+                    pill67.style.gridColumn = 'auto';
+                    var p67 = pill67.querySelector('.amt-cab-pill-info');
+                    if (p67) {
+                        p67.innerHTML = '<strong>🚙 6-7 Seater Cab</strong>'
+                            + '<span>5 to 7 Guests • Ertiga / Innova</span>';
+                    }
+                }
+                if (pill4) {
+                    pill4.style.display = 'flex';
+                    pill4.style.gridColumn = 'auto';
+                    var p4o = pill4.querySelector('.amt-cab-pill-info');
+                    if (p4o) {
+                        p4o.innerHTML = '<strong>🚖 4-Seater Tourist Cab</strong>'
+                            + '<span>1 to 4 Guests • Sedan / Hatchback</span>';
+                    }
+                }
+                if (label) {
+                    label.textContent = 'Cab Capacity (Select Sedan or 6-7 Seater SUV)';
+                }
+                if (subnote) {
+                    subnote.innerHTML = '<i class="fa-solid fa-circle-check" style="color:#10b981;"></i> Dedicated private cab for your outstation trip • Model arranged as per booking';
+                    subnote.style.display = 'block';
+                }
+                if (grid) {
+                    grid.style.gridTemplateColumns = '1fr 1fr';
+                }
+                if (bookingState.pax === '5+' && pill67) {
+                    if (pill4) pill4.classList.remove('active');
+                    pill67.classList.add('active');
+                } else if (pill4) {
+                    if (pill67) pill67.classList.remove('active');
+                    pill4.classList.add('active');
+                }
+            }
+        });
+    }
+
     function renderReviewCard() {
         var el = document.getElementById('amtReviewCard');
         if (!el || !window.TOUR_DATABASE) return;
@@ -3728,7 +3831,11 @@
 
         var isLarge = (bookingState.pax === '5+');
         var taxiCount = parseInt(bookingState.taxiCount, 10) || (isLarge ? 2 : 1);
-        var cabLabel = isLarge ? '6-7 Seater / 2 Cabs (2x Cabs required for 5+ guests)' : '4-Seater Tourist Cab (1 Cab)';
+        var dbTour = (bookingState.tourId && db.getTourById(bookingState.tourId)) || db.tours[0];
+        var isOutstationTour = (bookingState.service === 'outstation') ||
+            (dbTour && (dbTour.category === 'outstation' || dbTour.type === 'transfer')) ||
+            (dbTour && dbTour.id && dbTour.id.indexOf('TR_') === 0);
+        var cabLabel = (isLarge && isOutstationTour) ? '6-7 Seater Cab (Ertiga / Innova)' : '4-Seater Tourist Cab (1 Cab)';
 
         var selectedTours = bookingState.selectedTours || [];
         var totalFare = 0;
@@ -3906,7 +4013,7 @@
             var html = '<div class="amt-v-card-streamlined">'
                 + '<div class="amt-v-hdr">'
                 + '  <div class="amt-v-hdr-left">'
-                + '    <img src="images/aryan-taxi-logo.svg" alt="Aryan Taxi Logo" class="amt-v-logo" style="width:38px;height:38px;object-fit:contain;flex-shrink:0;">'
+                + '    <img src="' + ARYAN_LOGO_DATA_URI + '" alt="Aryan Taxi Logo" class="amt-v-logo" style="width:38px;height:38px;object-fit:contain;flex-shrink:0;">'
                 + '    <div>'
                 + '      <div class="amt-v-brand">ARYAN TAXI MAHABALESHWAR</div>'
                 + '      <div class="amt-v-sub">' + escapeHtml(sRules.serviceTitle) + ' &bull; Explore Sahyadri</div>'
