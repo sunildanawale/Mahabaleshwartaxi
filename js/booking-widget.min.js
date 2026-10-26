@@ -1425,12 +1425,15 @@
         var comboOptions = '<option value="">-- None (Single Tour) --</option>';
 
         if (db) {
-            var stours = db.tours.filter(function (t) { return t.sub_category === 'single_tour' || t.fare === 800; });
-            var mtours = db.tours.filter(function (t) { return (t.category === 'sightseeing' || t.type === 'tour') && t.sub_category !== 'single_tour' && t.fare !== 800; });
+            var stours = db.tours.filter(function (t) { return (t.category === 'sightseeing' && t.sub_category === 'single_tour') || t.id === 'M1' || t.id === 'M2' || t.id === 'M3'; });
+            var mtours = db.tours.filter(function (t) { return (t.category === 'sightseeing' || t.type === 'tour') && t.sub_category !== 'single_tour' && t.id !== 'M1' && t.id !== 'M2' && t.id !== 'M3'; });
             if (stours.length > 0) {
-                tourOptions += '<optgroup label="⚡ Express Single Tours (₹800 • 2.5 Hrs)">';
+                tourOptions += '<optgroup label="── ⚡ EXPRESS FLAT ₹800 (2.5 Hrs) ──">';
                 stours.forEach(function (t) {
-                    tourOptions += '<option value="' + t.id + '">' + t.name + ' — ₹' + t.fare + ' (' + t.duration + ')</option>';
+                    var cleanName = 'Tour 01: Arthur Seat Circuit';
+                    if (t.id === 'M2') cleanName = "Tour 02: Kate's Point & Elephant Head";
+                    else if (t.id === 'M3') cleanName = 'Tour 03: Wilson Point & Waterfall';
+                    tourOptions += '<option value="' + t.id + '">' + t.id + ': ' + cleanName + ' — ₹800</option>';
                 });
                 tourOptions += '</optgroup>';
             }
@@ -2829,7 +2832,7 @@
             var optHtml = '';
             available.forEach(function (t) {
                 var selected = (t.id === st.id) ? ' selected' : '';
-                var isSingle = (t.sub_category === 'single_tour' || t.fare === 800);
+                var isSingle = (t.sub_category === 'single_tour' || t.id === 'M1' || t.id === 'M2' || t.id === 'M3');
                 var prefix = isSingle ? '⚡ Express: ' : '⭐ Standard: ';
                 optHtml += '<option value="' + t.id + '"' + selected + '>' + prefix + escapeHtml(t.name) + ' — ₹' + t.fare + ' (' + escapeHtml(t.duration) + ')</option>';
             });
@@ -3103,7 +3106,7 @@
             return;
         }
 
-        var isSingle = (t.sub_category === 'single_tour' || t.fare === 800);
+        var isSingle = (t.sub_category === 'single_tour' || t.id === 'M1' || t.id === 'M2' || t.id === 'M3');
         var isCombo = (t.category === 'combo' || t.id === 'T7');
         var isOutstation = (t.category === 'outstation');
         var isLocalDrop = (t.category === 'local_drop');
@@ -3388,14 +3391,14 @@
         var countText = '';
 
         if (service === 'express') {
-            filtered = db.tours.filter(function (t) { return t.sub_category === 'single_tour' || t.fare === 800; });
+            filtered = db.tours.filter(function (t) { return (t.category === 'sightseeing' && t.sub_category === 'single_tour') || t.id === 'M1' || t.id === 'M2' || t.id === 'M3'; });
             labelText = 'Select Express Tour *';
             countText = filtered.length + ' Tours';
             optHtml = '<optgroup label="── ⚡ EXPRESS FLAT ₹800 ──">' +
                 filtered.map(function (t) {
-                    var cleanName = 'Arthur Seat';
-                    if (t.id === 'M2') cleanName = "Kate's Point";
-                    else if (t.id === 'M3') cleanName = 'Wilson Point';
+                    var cleanName = 'Tour 01: Arthur Seat Circuit';
+                    if (t.id === 'M2') cleanName = "Tour 02: Kate's Point & Elephant Head";
+                    else if (t.id === 'M3') cleanName = 'Tour 03: Wilson Point & Waterfall';
                     return '<option value="' + t.id + '">' + t.id + ': ' + escapeHtml(cleanName) + ' — ₹800</option>';
                 }).join('') +
                 '</optgroup>';
@@ -3475,7 +3478,7 @@
                 '</optgroup>';
         } else {
             // Default: sightseeing
-            filtered = db.tours.filter(function (t) { return t.category === 'sightseeing' && t.sub_category !== 'single_tour' && t.fare !== 800; });
+            filtered = db.tours.filter(function (t) { return t.category === 'sightseeing' && t.sub_category !== 'single_tour' && t.id !== 'M1' && t.id !== 'M2' && t.id !== 'M3'; });
             labelText = 'Select Sightseeing Tour *';
             countText = filtered.length + ' Tours';
 
@@ -4104,7 +4107,7 @@
 
         if (targetTour) {
             var cat = targetTour.category || 'sightseeing';
-            if (targetTour.fare === 800 || targetTour.sub_category === 'single_tour') {
+            if ((targetTour.category === 'sightseeing' && targetTour.sub_category === 'single_tour') || targetTour.id === 'M1' || targetTour.id === 'M2' || targetTour.id === 'M3') {
                 cat = 'express';
             }
             bookingState.service = cat;
@@ -4228,7 +4231,7 @@
                     var resolved = window.TOUR_DATABASE.resolveTour(tour);
                     if (resolved) {
                         draft.tourId = resolved.id;
-                        draft.service = (resolved.fare === 800 || resolved.sub_category === 'single_tour') ? 'express' : (resolved.category || 'sightseeing');
+                        draft.service = ((resolved.category === 'sightseeing' && resolved.sub_category === 'single_tour') || resolved.id === 'M1' || resolved.id === 'M2' || resolved.id === 'M3') ? 'express' : (resolved.category || 'sightseeing');
                     }
                 }
                 localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(draft));
