@@ -6133,7 +6133,7 @@ body.modal-open {
         flex-wrap: wrap !important;
     }
 }
-.portal-btn, #amtPrintBtn, #amtCallBtn, #amtNewBookingBtn {
+#amtPrintBtn, #amtCallBtn, #amtNewBookingBtn {
     min-height: 44px !important;
     display: inline-flex !important;
     align-items: center !important;
@@ -8326,23 +8326,52 @@ body.booking-portal-page .amt-header-brand {
     .portal-card-body {
         padding: 6px 10px 8px !important;
     }
+    .amt-category-grid {
+        display: grid !important;
+        grid-template-columns: repeat(6, 1fr) !important;
+        gap: 3px !important;
+        margin-bottom: 3px !important;
+    }
+    .amt-category-grid .amt-service-btn:nth-child(1),
+    .amt-category-grid .amt-service-btn:nth-child(2),
+    .amt-category-grid .amt-service-btn:nth-child(3) {
+        grid-column: span 2 !important;
+    }
+    .amt-category-grid .amt-service-btn:nth-child(4),
+    .amt-category-grid .amt-service-btn:nth-child(5) {
+        grid-column: span 3 !important;
+    }
     .amt-category-grid .amt-service-btn {
-        min-height: 38px !important;
-        padding: 3px 2px !important;
-        border-radius: 7px !important;
+        flex-direction: row !important;
+        gap: 4px !important;
+        min-height: 28px !important;
+        height: 28px !important;
+        padding: 2px 4px !important;
+        border-radius: 6px !important;
+        align-items: center !important;
+        justify-content: center !important;
     }
     .amt-category-grid .amt-service-btn .amt-cat-icon {
-        font-size: 0.90rem !important;
-        margin-bottom: 0 !important;
+        font-size: 0.82rem !important;
+        margin: 0 !important;
         line-height: 1 !important;
     }
     .amt-category-grid .amt-service-btn .amt-cat-name {
-        font-size: 0.68rem !important;
-        line-height: 1.15 !important;
+        font-size: 0.66rem !important;
+        line-height: 1 !important;
+        white-space: nowrap !important;
     }
     .amt-category-grid .amt-service-btn .amt-cat-tag {
-        font-size: 0.54rem !important;
-        line-height: 1 !important;
+        display: none !important;
+    }
+    .portal-card-header .amt-header-title {
+        display: none !important;
+    }
+    .amt-input, select.amt-input, .amt-card select, #amtTourSelect {
+        min-height: 30px !important;
+        height: 30px !important;
+        font-size: 12px !important;
+        padding: 3px 6px !important;
     }
     .amt-stb-card {
         padding: 5px 8px !important;
