@@ -252,9 +252,7 @@
                 tariffLabel: 'LOCKED OUTSTATION TARIFF',
                 advanceNote: 'Nominal Fuel Advance • Balance to Driver upon Drop',
                 paymentSettlement: 'Nominal fuel lock advance via link; balance to driver upon drop',
-                vehicleDesc: isLarge
-                    ? (taxiCount + 'x 6-7 Seater Cabs (Arranged as per availability)')
-                    : '4-Seater Tourist Cab (Arranged as per availability)',
+                vehicleDesc: '4-Seater Dedicated Tourist Cab (Arranged as per availability)',
                 dispatchNotice: isSameDayAfternoon
                     ? '⚠️ Vehicle availability may be limited for same-day afternoon/evening bookings, especially during the tourist season. Your booking will be confirmed after vehicle availability is checked.'
                     : '⚠️ Outstation Cab Dispatch: Reconfirmation required on WhatsApp/Phone. Nominal fuel advance applies. ₹200 reporting fee applies if cancelled after driver departs for pickup.',
@@ -262,7 +260,7 @@
                 termsTitle: 'Important Outstation Travel Guidelines & Carriage Terms',
                 terms: [
                     { title: 'Direct Highway Transit', desc: 'Direct intercity transfer via Pasarni / Wai Ghat descent connecting directly to NH-48 Expressway to your drop destination.' },
-                    { title: 'Vehicle Allocation', desc: 'Tourist cab (4-Seater or 6-7 Seater arranged as per vehicle availability).' },
+                    { title: 'Vehicle Allocation', desc: 'Standard 4-Seater tourist cab allocated for your private group.' },
                     { title: 'Tolls & Fastag', desc: 'Locked outstation base fare. Highway tolls and airport parking payable as per actual Fastag receipts.' },
                     { title: 'Fuel Advance & Balance', desc: 'Operator shares secure payment link for nominal fuel lock advance; remaining balance payable directly to driver upon destination arrival.' },
                     { title: 'Cancellation Policy', desc: 'Free cancellation up to 2 hours prior to scheduled departure. Standard reporting charge applies if cancelled after vehicle departs for pickup.' },
@@ -1572,7 +1570,7 @@
             + '  <span class="amt-trust-chip"><i class="fa-solid fa-shield-halved"></i> Pay Driver After Trip</span>'
             + '</div>'
             + '<div class="amt-cab-selector-wrap" style="margin-bottom:6px;">'
-            + '  <label class="amt-label">Cab Capacity (Select Cab Type)</label>'
+            + '  <label class="amt-label">Cab Type (Standard 4-Seater Tourist Cab)</label>'
             + '  <div class="amt-cab-pill-grid" style="display:flex;flex-direction:column;gap:6px;margin-top:3px;width:100%;">'
             + '    <div class="amt-cab-pill active" data-cab="4-seater" style="width:100%;box-sizing:border-box;">'
             + '      <div class="amt-cab-pill-radio"></div>'
@@ -1581,17 +1579,11 @@
             + '        <span>1 to 4 Guests &bull; Standard Union Private Cab</span>'
             + '      </div>'
             + '    </div>'
-            + '    <div class="amt-cab-pill" data-cab="6-7-seater" style="width:100%;box-sizing:border-box;">'
-            + '      <div class="amt-cab-pill-radio"></div>'
-            + '      <div class="amt-cab-pill-info">'
-            + '        <strong>🚙 6-7 Seater Cab</strong>'
-            + '        <span>5 to 7 Guests &bull; Ertiga / Innova (Arranged as per availability)</span>'
-            + '      </div>'
-            + '    </div>'
+
             + '  </div>'
             + '  <p class="amt-cab-subnote" style="margin-top:4px;"><i class="fa-solid fa-circle-check" style="color:#10b981;"></i> Dedicated private cab for your group &bull; Hotel porch pickup &bull; Zero advance</p>'
-            + '  <select id="amtPax" style="display:none;"><option value="3-4" selected>3-4 Guests</option><option value="5+">5+ Guests</option></select>'
-            + '  <div id="amtLargeGroupNotice" style="display:none;"><select id="amtTaxiCount" style="display:none;"><option value="2" selected>2</option></select></div>'
+            + '  <select id="amtPax" style="display:none;"><option value="3-4" selected>3-4 Guests</option></select>'
+            + '  '
             + '</div>'
             + '<div style="position:relative;margin-bottom:10px;">'
             + '  <label class="amt-label" for="amtPickup">Pickup Hotel / Landmark in Mahabaleshwar / Panchgani *</label>'
@@ -2024,21 +2016,16 @@
         });
 
         // Cab Selector Pills Listener
+        // Only 4-seater cab available - all rates are for 4-seater only
         var cabPills = document.querySelectorAll('.amt-cab-pill');
         cabPills.forEach(function (pill) {
             pill.addEventListener('click', function () {
-                var cabType = pill.getAttribute('data-cab');
                 cabPills.forEach(function (p) { p.classList.remove('active'); });
                 pill.classList.add('active');
-                if (cabType === '6-7-seater') {
-                    bookingState.pax = '5+';
-                    bookingState.taxiCount = 1;
-                } else {
-                    bookingState.pax = '3-4';
-                    bookingState.taxiCount = 1;
-                }
+                bookingState.pax = '3-4';
+                bookingState.taxiCount = 1;
                 var paxSel = document.getElementById('amtPax');
-                if (paxSel) paxSel.value = bookingState.pax;
+                if (paxSel) paxSel.value = '3-4';
                 renderReviewCard();
             });
         });
@@ -3571,16 +3558,9 @@
         }
         if (typeof window !== 'undefined' && window.scrollTo) {
             var isStandalone = document.body && document.body.classList.contains('booking-portal-page');
-            if (isStandalone && step > 1) {
-                var container = document.querySelector('.portal-booking-container') || modal;
-                if (container) {
-                    var navHeader = document.querySelector('.portal-header');
-                    var navH = navHeader ? navHeader.offsetHeight : 54;
-                    var y = container.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop || 0) - navH - 12;
-                    window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
-                }
-            } else if (isStandalone && step === 1) {
-                window.scrollTo({ top: 0, behavior: 'instant' });
+            if (isStandalone) {
+                // Always scroll to top so hero strip stays visible on all steps
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
     }
@@ -3613,13 +3593,8 @@
         if (typeof window !== 'undefined' && window.scrollTo) {
             var isStandalone = document.body && document.body.classList.contains('booking-portal-page');
             if (isStandalone) {
-                var container = document.querySelector('.portal-booking-container') || modal;
-                if (container) {
-                    var navHeader = document.querySelector('.portal-header');
-                    var navH = navHeader ? navHeader.offsetHeight : 54;
-                    var y = container.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop || 0) - navH - 12;
-                    window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
-                }
+                // Always scroll to top so hero strip stays visible
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
 
@@ -3717,15 +3692,9 @@
 
     
     function updateCabSelector() {
-        var db = window.TOUR_DATABASE;
-        var tours = (bookingState.selectedTours && bookingState.selectedTours.length > 0)
-            ? bookingState.selectedTours
-            : [{ id: bookingState.tourId || (db && db.tours[0] ? db.tours[0].id : 'T1') }];
-        var primaryId = tours[0].id || '';
-        var primaryTour = db ? db.getTourById(primaryId) : null;
-        var isOutstation = (bookingState.service === 'outstation') ||
-            (primaryTour && (primaryTour.category === 'outstation' || primaryTour.type === 'transfer')) ||
-            (primaryId.indexOf('TR_') === 0) || (primaryId.indexOf('outstation') !== -1);
+        // Only 4-seater cab available - all updated rates apply to 4-seater cars only
+        bookingState.pax = '3-4';
+        bookingState.taxiCount = 1;
 
         var wraps = document.querySelectorAll('.amt-cab-selector-wrap');
         wraps.forEach(function (wrap) {
@@ -3733,50 +3702,32 @@
             var pill67 = wrap.querySelector('.amt-cab-pill[data-cab="6-7-seater"]');
             var label = wrap.querySelector('.amt-label');
             var subnote = wrap.querySelector('.amt-cab-subnote');
-            var grid = wrap.querySelector('.amt-cab-pill-grid');
 
-            // Both boxes stacked full-width, perfectly matching each other in alignment & size
-            if (grid) {
-                grid.style.display = 'flex';
-                grid.style.flexDirection = 'column';
-                grid.style.gap = '6px';
-                grid.style.width = '100%';
+            if (pill67) {
+                pill67.remove(); // Completely removed from DOM
             }
             if (pill4) {
                 pill4.style.display = 'flex';
                 pill4.style.width = '100%';
                 pill4.style.boxSizing = 'border-box';
+                pill4.style.cursor = 'default';
+                pill4.classList.add('active');
                 var p4 = pill4.querySelector('.amt-cab-pill-info');
                 if (p4) {
                     p4.innerHTML = '<strong>🚖 4-Seater Dedicated Tourist Cab</strong>'
-                        + '<span>1 to 4 Guests &bull; Standard Union Private Cab</span>';
-                }
-            }
-            if (pill67) {
-                pill67.style.display = 'flex';
-                pill67.style.width = '100%';
-                pill67.style.boxSizing = 'border-box';
-                var p67 = pill67.querySelector('.amt-cab-pill-info');
-                if (p67) {
-                    p67.innerHTML = '<strong>🚙 6-7 Seater Cab</strong>'
-                        + '<span>5 to 7 Guests &bull; Ertiga / Innova' + (isOutstation ? '' : ' (Outstation Drop / 2 Cabs for Local)') + '</span>';
+                        + '<span>1 to 4 Guests &bull; Official Union Tariff &bull; Private Cab for Your Group</span>';
                 }
             }
             if (label) {
-                label.textContent = 'Cab Capacity (Select Cab Type)';
+                label.textContent = 'Cab Type (Standard 4-Seater Tourist Cab)';
             }
             if (subnote) {
                 subnote.innerHTML = '<i class="fa-solid fa-circle-check" style="color:#10b981;"></i> Dedicated private cab for your group &bull; Hotel porch pickup &bull; Zero advance';
                 subnote.style.display = 'block';
             }
-            if (bookingState.pax === '5+' && pill67) {
-                if (pill4) pill4.classList.remove('active');
-                pill67.classList.add('active');
-            } else if (pill4) {
-                if (pill67) pill67.classList.remove('active');
-                pill4.classList.add('active');
-            }
         });
+        var paxSel = document.getElementById('amtPax');
+        if (paxSel) paxSel.value = '3-4';
     }
 
     function renderReviewCard() {
@@ -3791,9 +3742,9 @@
         var t = (bookingState.tourId && db.getTourById(bookingState.tourId)) || db.tours[0];
         if (!t) return;
 
-        var isLarge = (bookingState.pax === '5+');
-        var taxiCount = parseInt(bookingState.taxiCount, 10) || (isLarge ? 2 : 1);
-        var cabLabel = isLarge ? '6-7 Seater Cab (Ertiga / Innova)' : '4-Seater Tourist Cab (1 Cab)';
+        var isLarge = false;
+        var taxiCount = 1;
+        var cabLabel = '4-Seater Dedicated Tourist Cab (1 Cab)';
 
         var selectedTours = bookingState.selectedTours || [];
         var totalFare = 0;
@@ -3862,9 +3813,9 @@
 
             var isMulti = tours.length > 1;
             var baseFare = tours.reduce(function (acc, item) { return acc + item.tour.fare; }, 0);
-            var isLarge = bookingState.pax === '5+';
-            var taxiCount = parseInt(bookingState.taxiCount, 10) || (isLarge ? 2 : 1);
-            var totalFare = baseFare * taxiCount;
+            var isLarge = false;
+            var taxiCount = 1;
+            var totalFare = baseFare;
 
             var sRules = getServiceRules(bookingState.service || bookingState.serviceType, tours, isLarge, taxiCount);
 
