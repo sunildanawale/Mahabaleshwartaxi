@@ -1659,6 +1659,25 @@
         if (!zoneNotice || !availBox) return;
 
         var db = window.TOUR_DATABASE;
+        var sType = bookingState.service || bookingState.serviceType;
+        var isOutstation = (sType === 'outstation') || (bookingState.tourId && String(bookingState.tourId).toLowerCase().indexOf('out_') === 0);
+        if (db && db.getTourById && bookingState.tourId) {
+            var currT = db.getTourById(bookingState.tourId);
+            if (currT && (currT.category === 'outstation' || currT.type === 'transfer')) {
+                isOutstation = true;
+            }
+        }
+
+        if (isOutstation) {
+            zoneNotice.style.display = 'none';
+            availBox.style.display = 'block';
+            availBox.innerHTML = '<i class="fa-solid fa-route" style="color:#0284c7;"></i> <strong>Outstation Doorstep Pickup:</strong> Hotel porch pickup across Mahabaleshwar & Panchgani. Fuel advance link shared via WhatsApp.';
+            availBox.style.background = '#f0f9ff';
+            availBox.style.color = '#0369a1';
+            availBox.style.border = '1px solid #bae6fd';
+            return;
+        }
+
         if (!db || !db.getPickupZone || !pickupVal.trim()) {
             zoneNotice.style.display = 'none';
             availBox.style.display = 'block';
@@ -1670,7 +1689,8 @@
         }
 
         var zone = db.getPickupZone(pickupVal);
-        if (zone && !zone.isStandardTariffZone) {
+        var isOutside = zone && !zone.isStandardTariffZone && (zone.id === 'PANCHGANI' || zone.id === 'TAPOLA_VALLEY' || zone.id === 'WAI');
+        if (isOutside) {
             availBox.style.display = 'none';
             zoneNotice.style.display = 'block';
             zoneNotice.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> <strong>Outside Town Limits (' + escapeHtml(zone.name || 'Selected Location') + '):</strong> Standard sightseeing tariff applies + nominal distance charge confirmed by driver.';
@@ -3696,6 +3716,13 @@
         bookingState.pax = '3-4';
         bookingState.taxiCount = 1;
 
+        var db = window.TOUR_DATABASE;
+        var t = (bookingState.tourId && db && db.getTourById) ? db.getTourById(bookingState.tourId) : (db && db.tours ? db.tours[0] : null);
+        var tours = t ? [{ tour: t, date: bookingState.date, time: bookingState.time }] : [];
+        var sRules = getServiceRules(bookingState.service || bookingState.serviceType, tours, false, 1);
+        var isOutstation = (sRules.key === 'outstation');
+        var isLocalDrop = (sRules.key === 'local_drop');
+
         var wraps = document.querySelectorAll('.amt-cab-selector-wrap');
         wraps.forEach(function (wrap) {
             var pill4 = wrap.querySelector('.amt-cab-pill[data-cab="4-seater"]');
@@ -3722,12 +3749,52 @@
                 label.textContent = 'Cab Type';
             }
             if (subnote) {
-                subnote.innerHTML = '<i class="fa-solid fa-circle-check" style="color:#10b981;"></i> Dedicated private cab &bull; Hotel porch pickup';
+                if (isOutstation) {
+                    subnote.innerHTML = '<i class="fa-solid fa-circle-check" style="color:#0284c7;"></i> Dedicated private cab &bull; Hotel porch pickup &bull; Direct highway transit';
+                } else {
+                    subnote.innerHTML = '<i class="fa-solid fa-circle-check" style="color:#10b981;"></i> Dedicated private cab &bull; Hotel porch pickup';
+                }
                 subnote.style.display = 'block';
             }
         });
         var paxSel = document.getElementById('amtPax');
         if (paxSel) paxSel.value = '3-4';
+
+        // Update Step 2 Header Trust Chip
+        var trustChips = document.querySelectorAll('#amtStep2 .amt-trust-chip');
+        trustChips.forEach(function (chip) {
+            if (isOutstation) {
+                chip.innerHTML = '<i class="fa-solid fa-gas-pump"></i> Nominal Fuel Advance';
+                chip.style.color = '#0284c7';
+                chip.style.background = '#e0f2fe';
+                chip.style.borderColor = '#bae6fd';
+            } else if (isLocalDrop) {
+                chip.innerHTML = '<i class="fa-solid fa-shield-halved"></i> Pay Driver After Drop';
+                chip.style.color = '#166534';
+                chip.style.background = '#ecfdf5';
+                chip.style.borderColor = '#a7f3d0';
+            } else {
+                chip.innerHTML = '<i class="fa-solid fa-shield-halved"></i> Pay Driver After Tour';
+                chip.style.color = '#166534';
+                chip.style.background = '#ecfdf5';
+                chip.style.borderColor = '#a7f3d0';
+            }
+        });
+
+        // Update Step 2 Confirm Button Subtext
+        var confirmBtn = document.getElementById('amtConfirmBtn');
+        if (confirmBtn) {
+            var btnSub = confirmBtn.querySelector('span');
+            if (btnSub) {
+                if (isOutstation) {
+                    btnSub.innerHTML = 'Direct Local Driver Dispatch &bull; Nominal Fuel Advance';
+                } else if (isLocalDrop) {
+                    btnSub.innerHTML = 'Direct Local Driver Dispatch &bull; Pay Driver After Drop';
+                } else {
+                    btnSub.innerHTML = 'Direct Local Driver Dispatch &bull; Pay Driver After Tour';
+                }
+            }
+        }
     }
 
     function renderReviewCard() {
@@ -3760,20 +3827,37 @@
         totalFare = totalFare * taxiCount;
 
         var fareDisplay = '₹' + Number(totalFare).toLocaleString('en-IN') + (taxiCount > 1 ? ' <small style="font-size:0.75rem;font-weight:600;opacity:0.85;">(2 Cabs)</small>' : '');
-        var tourTitle = t.name + ' (' + t.duration + ')';
+        var tourTitle = t.name;
 
         var dStr = formatSafeDisplayDate(bookingState.date || 'Scheduled');
         var tStr = formatPickupTime(bookingState.time);
 
+        var tours = [{ tour: t, date: bookingState.date, time: bookingState.time }];
+        var sRules = getServiceRules(bookingState.service || bookingState.serviceType, tours, false, 1);
+        var isOutstation = (sRules.key === 'outstation');
+        var isLocalDrop = (sRules.key === 'local_drop');
+
+        var tourIcon = 'fa-mountain-sun';
+        var payBadgeHtml = '<span class="amt-crb-zero"><i class="fa-solid fa-check"></i> Pay Driver After Tour</span>';
+
+        if (isOutstation) {
+            tourIcon = 'fa-route';
+            payBadgeHtml = '<span class="amt-crb-zero" style="color:#b45309;font-weight:700;"><i class="fa-solid fa-gas-pump"></i> Nominal Fuel Advance • Balance to Driver</span>';
+        } else if (isLocalDrop) {
+            tourIcon = 'fa-location-dot';
+            payBadgeHtml = '<span class="amt-crb-zero"><i class="fa-solid fa-check"></i> Pay Driver After Drop</span>';
+        }
+
         var html = '<div class="amt-compact-review-box">'
             + '<div class="amt-crb-row">'
-            + '  <div class="amt-crb-item"><i class="fa-solid fa-map-location-dot" style="color:#0284c7;"></i> <strong>' + escapeHtml(tourTitle) + '</strong></div>'
+            + '  <div class="amt-crb-item"><i class="fa-solid ' + tourIcon + '" style="color:#0284c7;"></i> <strong>' + escapeHtml(tourTitle) + '</strong></div>'
             + '  <div class="amt-crb-fare">' + fareDisplay + '</div>'
             + '</div>'
             + '<div class="amt-crb-meta">'
+            + '  <span>⏱️ ' + escapeHtml(t.duration) + '</span>'
             + '  <span>📅 ' + escapeHtml(dStr) + ' at ' + escapeHtml(tStr) + '</span>'
             + '  <span>🚕 ' + cabLabel + '</span>'
-            + '  <span class="amt-crb-zero"><i class="fa-solid fa-check"></i> Pay Driver After Trip</span>'
+            + '  ' + payBadgeHtml
             + '</div>'
             + '</div>';
 
@@ -3949,7 +4033,7 @@
                 + '  </div>'
                 + '  <div class="amt-v-cell amt-v-vehicle-cell">'
                 + '    <div class="amt-v-vehicle-wrap">'
-                + '      <span class="amt-v-vehicle-lbl">🚕 Allocated Vehicle:</span>'
+                + '      <span class="amt-v-vehicle-lbl">🚕 Cab:</span>'
                 + '      <strong class="amt-v-vehicle-val">' + escapeHtml(sRules.vehicleDesc) + '</strong>'
                 + '    </div>'
                 + '  </div>'
@@ -4024,9 +4108,11 @@
             var waSub = document.getElementById('amtWaBtnSubtext');
             if (waSub) {
                 if (sRules.key === 'outstation') {
-                    waSub.textContent = 'Send outstation transfer details on WhatsApp to confirm the driver and advance payment.';
+                    waSub.textContent = 'Send transfer details on WhatsApp to confirm driver & advance schedule';
+                } else if (sRules.key === 'local_drop') {
+                    waSub.textContent = 'Send drop details on WhatsApp to confirm driver dispatch';
                 } else {
-                    waSub.textContent = 'Send tour details on WhatsApp to confirm driver dispatch and timing.';
+                    waSub.textContent = 'Send tour details on WhatsApp to confirm driver dispatch & timing';
                 }
             }
         } catch (err) {
