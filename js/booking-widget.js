@@ -2556,7 +2556,6 @@
         }
 
         function downloadVoucherPdf() {
-            // Uses Blob URL approach — 100% reliable, no html2canvas blanking issues
             var voucherEl = document.getElementById('amtVoucherContent');
             if (!voucherEl || !voucherEl.innerHTML || voucherEl.innerHTML.trim() === '') {
                 try { renderVoucherScreen(); } catch (e) { }
@@ -2568,7 +2567,7 @@
             var origText = btn ? btn.innerHTML : '';
             if (btn) {
                 btn.disabled = true;
-                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" style="color:#0891b2;font-size:0.80rem;"></i><span>PDF...</span>';
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" style="color:#0891b2;font-size:0.80rem;"></i><span>Saving PDF...</span>';
             }
 
             function resetBtn() {
@@ -2578,45 +2577,80 @@
                 }
             }
 
-            try {
-                var innerHtml = voucherEl.innerHTML;
-                if (!innerHtml || innerHtml.trim() === '') {
-                    try { renderVoucherScreen(); } catch (e) { }
-                    innerHtml = voucherEl.innerHTML;
-                }
-                var standaloneHtml = buildStandaloneVoucherHtml(innerHtml);
-                var blob = new Blob([standaloneHtml], { type: 'text/html;charset=utf-8' });
-                var url = URL.createObjectURL(blob);
-                var printWin = window.open(url, '_blank', 'width=850,height=1100,scrollbars=yes,resizable=yes');
-                if (printWin) {
-                    printWin.onload = function () {
-                        setTimeout(function () {
-                            printWin.print();
-                            URL.revokeObjectURL(url);
-                        }, 600);
-                    };
-                    if (btn) {
-                        btn.innerHTML = '<i class="fa-solid fa-check"></i> Voucher Opened!';
-                        setTimeout(function () {
-                            resetBtn();
-                            URL.revokeObjectURL(url);
-                        }, 4000);
-                    }
-                } else {
-                    // Popup blocked — use hidden anchor download fallback
+            function fallbackDownloadHtml() {
+                try {
+                    var innerHtml = voucherEl.innerHTML;
+                    var standaloneHtml = buildStandaloneVoucherHtml(innerHtml);
+                    var blob = new Blob([standaloneHtml], { type: 'text/html;charset=utf-8' });
+                    var url = URL.createObjectURL(blob);
                     var a = document.createElement('a');
                     a.href = url;
                     a.download = 'AryanTaxi-Voucher-' + bId + '.html';
                     document.body.appendChild(a);
                     a.click();
                     document.body.removeChild(a);
-                    if (btn) btn.innerHTML = '<i class="fa-solid fa-check"></i> Voucher Downloaded!';
+                    if (btn) btn.innerHTML = '<i class="fa-solid fa-check"></i> Voucher Saved!';
                     setTimeout(function () { resetBtn(); URL.revokeObjectURL(url); }, 3000);
+                } catch (err) {
+                    resetBtn();
                 }
-            } catch (e) {
-                console.warn('Blob download failed, using print fallback:', e);
-                resetBtn();
-                printVoucherDocument();
+            }
+
+            function executePdfGeneration() {
+                try {
+                    // Create an offscreen clone with all details sections expanded for full voucher capture
+                    var clone = voucherEl.cloneNode(true);
+                    var detailsList = clone.querySelectorAll('details');
+                    detailsList.forEach(function (d) {
+                        d.setAttribute('open', '');
+                    });
+                    clone.style.width = '700px';
+                    clone.style.maxWidth = '700px';
+                    clone.style.background = '#ffffff';
+                    clone.style.padding = '12px';
+                    clone.style.boxSizing = 'border-box';
+                    clone.style.position = 'absolute';
+                    clone.style.left = '-9999px';
+                    clone.style.top = '0';
+                    document.body.appendChild(clone);
+
+                    var opt = {
+                        margin: [6, 6, 6, 6],
+                        filename: 'AryanTaxi-Voucher-' + bId + '.pdf',
+                        image: { type: 'jpeg', quality: 0.98 },
+                        html2canvas: { scale: 2, useCORS: true, logging: false },
+                        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                    };
+
+                    html2pdf().set(opt).from(clone).save().then(function () {
+                        try { document.body.removeChild(clone); } catch (e) { }
+                        if (btn) {
+                            btn.innerHTML = '<i class="fa-solid fa-check"></i> PDF Saved!';
+                            setTimeout(resetBtn, 3000);
+                        }
+                    }).catch(function (err) {
+                        console.warn('html2pdf generation error, falling back:', err);
+                        try { document.body.removeChild(clone); } catch (e) { }
+                        fallbackDownloadHtml();
+                    });
+                } catch (ePdf) {
+                    console.warn('PDF generation exception, falling back:', ePdf);
+                    fallbackDownloadHtml();
+                }
+            }
+
+            if (typeof html2pdf !== 'undefined') {
+                executePdfGeneration();
+            } else {
+                var script = document.createElement('script');
+                script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+                script.onload = function () {
+                    executePdfGeneration();
+                };
+                script.onerror = function () {
+                    fallbackDownloadHtml();
+                };
+                document.head.appendChild(script);
             }
         }
 
