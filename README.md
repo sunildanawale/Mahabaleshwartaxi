@@ -12,7 +12,7 @@ This is the improved, conversion-optimized website for **Aryan Taxi Mahabaleshwa
 - `index.html`: The main landing page requiring zero dependencies.
 - `mahabaleshwar-hero.jpg`: High-quality hero image.
 - `mahabaleshwar.jpg`: Secondary optimized image.
-- `Aryan Tours Logo.png`: Brand logo.
+- `images/aryan-tours-logo.png`: Brand logo.
 - `sitemap.xml`: For Google Search Console indexing.
 - `robots.txt`: Crawler instructions.
 
