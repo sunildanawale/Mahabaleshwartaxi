@@ -10161,3 +10161,145 @@ body.booking-portal-page .portal-card {
     width: 100% !important;
     margin: 1px 0 0 !important;
 }
+
+
+/* ==========================================================================
+   PAGE 3 DIGITAL TRAVEL PASS UPGRADES: ZERO-SCROLL & POLISH
+   ========================================================================== */
+
+/* Auto-capitalization of Guest & Pickup Names */
+.amt-v-val strong,
+.amt-v-val {
+    text-transform: capitalize !important;
+}
+
+/* 1-Click Copy Pass ID Button */
+.amt-v-copy-btn {
+    background: transparent !important;
+    border: none !important;
+    color: #0284c7 !important;
+    cursor: pointer !important;
+    font-size: 0.70rem !important;
+    padding: 1px 3px !important;
+    margin-left: 3px !important;
+    vertical-align: middle !important;
+    transition: all 0.15s ease !important;
+    border-radius: 3px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+.amt-v-copy-btn:hover {
+    background: #e0f2fe !important;
+    color: #0369a1 !important;
+}
+
+/* Verified Fleet Tag in Vehicle Row */
+.amt-v-fleet-tag {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 3px !important;
+    font-size: 0.58rem !important;
+    font-weight: 700 !important;
+    color: #065f46 !important;
+    background: #ecfdf5 !important;
+    border: 1px solid #a7f3d0 !important;
+    border-radius: 4px !important;
+    padding: 1px 4px !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    margin-left: auto !important;
+}
+
+/* 3-Step "What Happens Next?" Dispatch Tracker */
+.amt-dispatch-tracker {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    padding: 4px 10px !important;
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+}
+.amt-dt-step {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 1px !important;
+    text-align: center !important;
+}
+.amt-dt-icon {
+    width: 18px !important;
+    height: 18px !important;
+    border-radius: 50% !important;
+    background: #cbd5e1 !important;
+    color: #ffffff !important;
+    font-size: 0.55rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+.amt-dt-step.completed .amt-dt-icon {
+    background: #10b981 !important;
+}
+.amt-dt-step.active .amt-dt-icon {
+    background: #0284c7 !important;
+    box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.25) !important;
+}
+.amt-dt-label {
+    font-size: clamp(0.56rem, 2.0vw, 0.62rem) !important;
+    font-weight: 700 !important;
+    color: #64748b !important;
+    white-space: nowrap !important;
+}
+.amt-dt-step.completed .amt-dt-label,
+.amt-dt-step.active .amt-dt-label {
+    color: #0f2b48 !important;
+}
+.amt-dt-line {
+    flex: 1 1 0 !important;
+    height: 2px !important;
+    background: #cbd5e1 !important;
+    margin: 0 4px 10px 4px !important;
+}
+
+/* Zero-Scroll Desktop Viewport Fit for Page 3 */
+@media (min-width: 768px) {
+    .portal-booking-container {
+        margin: 8px auto 16px !important;
+    }
+    .portal-card, .amt-card, #amtBookingModal .amt-card {
+        min-height: auto !important;
+        max-height: 94vh !important;
+    }
+    .portal-card-body, .amt-card-body {
+        padding: 8px 14px 10px !important;
+        min-height: auto !important;
+    }
+    .amt-v-card-streamlined {
+        padding: 6px 10px !important;
+        gap: 4px !important;
+    }
+    .amt-desktop-qr-card {
+        padding: 4px 8px !important;
+        margin: 3px 0 !important;
+        gap: 8px !important;
+        border-radius: 8px !important;
+    }
+    .amt-desktop-qr-card .amt-dqr-img {
+        width: 38px !important;
+        height: 38px !important;
+    }
+    .amt-dqr-title {
+        font-size: 0.72rem !important;
+        line-height: 1.2 !important;
+    }
+    .amt-dqr-desc {
+        font-size: 0.62rem !important;
+        line-height: 1.15 !important;
+    }
+}

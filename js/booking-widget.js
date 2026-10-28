@@ -207,6 +207,42 @@
         return isoDateStr;
     }
 
+    
+    function formatSafeTitleCase(str) {
+        if (!str) return '';
+        return String(str).replace(/\b[a-z]/g, function (letter) {
+            return letter.toUpperCase();
+        });
+    }
+
+    function addBookingToGoogleCalendar() {
+        var b = bookingState;
+        var db = window.TOUR_DATABASE;
+        var t = (db && b.selectedTours && b.selectedTours[0]) ? db.getTourById(b.selectedTours[0].id) : (db && db.getTourById ? db.getTourById(b.tourId) : null);
+        var title = encodeURIComponent((t ? t.name : 'Mahabaleshwar Taxi Tour') + ' - Aryan Taxi');
+        var details = encodeURIComponent('Booking Voucher ID: ' + (b.bookingId || '') + '\nPickup: ' + (b.pickup || 'Mahabaleshwar') + '\nOperator Helpline: +91 99228 82044');
+        var loc = encodeURIComponent(b.pickup || 'Mahabaleshwar, Maharashtra');
+
+        var dRaw = (b.date || '').replace(/-/g, '');
+        if (!dRaw) {
+            var now = new Date();
+            var yyyy = now.getFullYear();
+            var mm = String(now.getMonth() + 1).padStart(2, '0');
+            var dd = String(now.getDate()).padStart(2, '0');
+            dRaw = yyyy + mm + dd;
+        }
+        var tRaw = (b.time || '09:00').replace(':', '') + '00';
+        var startIso = dRaw + 'T' + tRaw;
+
+        var hr = parseInt((b.time || '09:00').split(':')[0], 10) || 9;
+        var mn = (b.time || '09:00').split(':')[1] || '00';
+        var endHr = String((hr + 3) % 24).padStart(2, '0');
+        var endIso = dRaw + 'T' + endHr + mn + '00';
+
+        var url = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + title + '&dates=' + startIso + '/' + endIso + '&details=' + details + '&location=' + loc;
+        window.open(url, '_blank', 'noopener,noreferrer');
+    }
+
     // ── 2. Service-Specific Rule Engine & WhatsApp Generator ────────
     function getServiceRules(serviceType, tours, isLarge, taxiCount) {
         serviceType = serviceType || 'sightseeing';
@@ -1628,18 +1664,23 @@
             + '</div>'
             + '<div id="amtVoucherContent" class="amt-voucher"></div>'
             + '<div id="amtDesktopQrContainer"></div>'
-            + '<div class="amt-voucher-actions" style="margin-top:6px;">'
-            + '<button type="button" id="amtWaBtn" class="amt-btn-next amt-btn-confirm" style="width:100%;padding:10px 12px;font-size:0.90rem;font-weight:800;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;box-shadow:0 4px 14px rgba(16,185,129,0.35);background:#10b981;color:#ffffff;border:none;cursor:pointer;">'
-            + '<div style="display:flex;align-items:center;gap:8px;"><i class="fa-brands fa-whatsapp" style="font-size:1.2rem;"></i> OPEN WHATSAPP TO DISPATCH CAB</div>'
-            + '<span id="amtWaBtnSubtext" style="font-size:0.68rem;font-weight:600;opacity:0.95;">Locks your driver dispatch instantly &bull; Pay driver after trip</span>'
-            + '</button>'
-            + '<div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:5px;margin-top:6px;">'
-            + '<button type="button" id="amtDownloadPdfBtn" class="amt-btn-back amt-btn-pdf" style="padding:7px 2px;border:1px solid #0891b2;background:#f0fdf4;color:#0e7490;border-radius:6px;font-weight:700;cursor:pointer;font-size:0.72rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;"><i class="fa-solid fa-file-arrow-down" style="color:#0891b2;font-size:0.85rem;"></i><span>PDF</span></button>'
-            + '<button type="button" id="amtPrintBtn" class="amt-btn-back" style="padding:7px 2px;border:1px solid #cbd5e1;background:#ffffff;color:#334155;border-radius:6px;font-weight:700;cursor:pointer;font-size:0.72rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;"><i class="fa-solid fa-print" style="font-size:0.85rem;"></i><span>Print</span></button>'
-            + '<a id="amtCallBtn" href="tel:+919922882044" style="padding:7px 2px;border:1px solid #0284c7;background:#f0f9ff;color:#0369a1;border-radius:6px;font-weight:700;text-decoration:none;font-size:0.72rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;"><i class="fa-solid fa-phone" style="font-size:0.85rem;"></i><span>Call</span></a>'
-            + '<button type="button" id="amtShareFamilyBtn" class="amt-v-link-btn" style="padding:7px 2px;border:1px solid #cbd5e1;background:#ffffff;color:#10b981;border-radius:6px;font-size:0.72rem;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;"><i class="fa-solid fa-share-nodes" style="font-size:0.85rem;"></i><span>Share</span></button>'
+            + '<div class="amt-dispatch-tracker" style="display:flex;align-items:center;justify-content:space-between;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:4px 10px;margin-top:5px;margin-bottom:5px;box-sizing:border-box;width:100%;">'
+            + '<div class="amt-dt-step completed" style="display:flex;flex-direction:column;align-items:center;gap:1px;text-align:center;"><div class="amt-dt-icon" style="width:18px;height:18px;border-radius:50%;background:#10b981;color:#fff;font-size:0.55rem;display:flex;align-items:center;justify-content:center;"><i class="fa-solid fa-check"></i></div><div class="amt-dt-label" style="font-size:0.62rem;font-weight:700;color:#0f2b48;white-space:nowrap;">1. Voucher Issued</div></div>'
+            + '<div class="amt-dt-line" style="flex:1 1 0;height:2px;background:#10b981;margin:0 4px 10px 4px;"></div>'
+            + '<div class="amt-dt-step active" style="display:flex;flex-direction:column;align-items:center;gap:1px;text-align:center;"><div class="amt-dt-icon" style="width:18px;height:18px;border-radius:50%;background:#0284c7;color:#fff;font-size:0.55rem;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px rgba(2,132,199,0.25);"><i class="fa-brands fa-whatsapp"></i></div><div class="amt-dt-label" style="font-size:0.62rem;font-weight:700;color:#0284c7;white-space:nowrap;">2. WhatsApp Dispatch</div></div>'
+            + '<div class="amt-dt-line" style="flex:1 1 0;height:2px;background:#cbd5e1;margin:0 4px 10px 4px;"></div>'
+            + '<div class="amt-dt-step" style="display:flex;flex-direction:column;align-items:center;gap:1px;text-align:center;"><div class="amt-dt-icon" style="width:18px;height:18px;border-radius:50%;background:#cbd5e1;color:#fff;font-size:0.55rem;display:flex;align-items:center;justify-content:center;"><i class="fa-solid fa-hotel"></i></div><div class="amt-dt-label" style="font-size:0.62rem;font-weight:700;color:#64748b;white-space:nowrap;">3. Porch Pickup</div></div>'
             + '</div>'
-            + '<button type="button" id="amtEditTripBtn" class="amt-btn-back" style="width:100%;margin-top:6px;padding:6px;font-size:0.74rem;border:1px solid #cbd5e1;background:#f8fafc;color:#475569;border-radius:6px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;"><i class="fa-solid fa-arrow-left"></i> Change Tour Selection / Edit Trip</button>'
+            + '<div class="amt-voucher-actions" style="margin-top:4px;">'
+            + '<button type="button" id="amtWaBtn" class="amt-btn-next amt-btn-confirm" style="width:100%;padding:9px 12px;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;box-shadow:0 4px 14px rgba(16,185,129,0.35);background:#10b981;color:#ffffff;border:none;cursor:pointer;"><div class="amt-wa-btn-title" style="display:inline-flex;align-items:center;justify-content:center;gap:7px;font-size:0.88rem;font-weight:800;letter-spacing:0.3px;width:100%;white-space:nowrap;"><i class="fa-brands fa-whatsapp" style="font-size:1.15rem;"></i> <span>OPEN WHATSAPP TO DISPATCH CAB</span></div><span id="amtWaBtnSubtext" style="font-size:0.64rem;font-weight:600;opacity:0.95;line-height:1.25;text-align:center;display:block;padding:0 4px;box-sizing:border-box;width:100%;">Send transfer details on WhatsApp to confirm driver & advance schedule</span></button>'
+            + '<div style="display:grid;grid-template-columns:repeat(5, 1fr);gap:4px;margin-top:5px;">'
+            + '<button type="button" id="amtDownloadPdfBtn" class="amt-btn-back amt-btn-pdf" style="padding:6px 2px;border:1px solid #0891b2;background:#f0fdf4;color:#0e7490;border-radius:6px;font-weight:700;cursor:pointer;font-size:0.68rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;"><i class="fa-solid fa-file-arrow-down" style="color:#0891b2;font-size:0.80rem;"></i><span>PDF</span></button>'
+            + '<button type="button" id="amtPrintBtn" class="amt-btn-back" style="padding:6px 2px;border:1px solid #cbd5e1;background:#ffffff;color:#334155;border-radius:6px;font-weight:700;cursor:pointer;font-size:0.68rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;"><i class="fa-solid fa-print" style="font-size:0.80rem;"></i><span>Print</span></button>'
+            + '<a id="amtCallBtn" href="tel:+919922882044" style="padding:6px 2px;border:1px solid #0284c7;background:#f0f9ff;color:#0369a1;border-radius:6px;font-weight:700;text-decoration:none;font-size:0.68rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;"><i class="fa-solid fa-phone" style="font-size:0.80rem;"></i><span>Call</span></a>'
+            + '<button type="button" id="amtShareFamilyBtn" class="amt-v-link-btn" style="padding:6px 2px;border:1px solid #cbd5e1;background:#ffffff;color:#10b981;border-radius:6px;font-size:0.68rem;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;"><i class="fa-solid fa-share-nodes" style="font-size:0.80rem;"></i><span>Share</span></button>'
+            + '<button type="button" id="amtCalendarBtn" class="amt-btn-back" style="padding:6px 2px;border:1px solid #cbd5e1;background:#ffffff;color:#6366f1;border-radius:6px;font-size:0.68rem;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;"><i class="fa-regular fa-calendar-plus" style="font-size:0.80rem;color:#6366f1;"></i><span>Calendar</span></button>'
+            + '</div>'
+            + '<button type="button" id="amtEditTripBtn" class="amt-btn-back" style="width:100%;margin-top:5px;padding:5px;font-size:0.72rem;border:1px solid #cbd5e1;background:#f8fafc;color:#475569;border-radius:6px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;"><i class="fa-solid fa-arrow-left"></i> Change Tour Selection / Edit Trip</button>'
             + '</div>'
             + '</div>'
 
@@ -2530,7 +2571,7 @@
             var origText = btn ? btn.innerHTML : '';
             if (btn) {
                 btn.disabled = true;
-                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Opening Voucher...';
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" style="color:#0891b2;font-size:0.80rem;"></i><span>PDF...</span>';
             }
 
             function resetBtn() {
@@ -2599,6 +2640,30 @@
         }
 
         // Edit Trip Details button on Voucher screen
+        
+        // Copy Pass ID
+        document.addEventListener('click', function (e) {
+            var btn = e.target.closest('#amtCopyPassIdBtn');
+            if (btn) {
+                e.preventDefault();
+                var pId = (bookingState.bookingId || 'AMT-REQ').trim();
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(pId);
+                }
+                var orig = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-solid fa-check" style="color:#10b981;"></i>';
+                setTimeout(function () { btn.innerHTML = orig; }, 1800);
+            }
+        });
+
+        // Calendar button
+        var calBtn = document.getElementById('amtCalendarBtn');
+        if (calBtn) {
+            calBtn.addEventListener('click', function () {
+                addBookingToGoogleCalendar();
+            });
+        }
+
         var editTripBtn = document.getElementById('amtEditTripBtn');
         if (editTripBtn) {
             editTripBtn.addEventListener('click', function () {
@@ -2670,7 +2735,7 @@
                     + "🏨 *Pickup:* " + (b.pickup || 'Hotel Porch') + "\n"
                     + "🚗 *Tour:* " + tourName + "\n"
                     + "📍 *Viewpoints: *\n" + pointsList + "\n\n"
-                    + "💰 *Total Fare:* ₹" + (t ? t.fare : '1,200') + " (Zero Advance • Pay driver after tour)\n"
+                    + "💰 *Total Fare:* ₹" + (t ? t.fare : '1,200') + ((b.service === 'outstation' || (t && t.category === 'outstation')) ? " (Nominal Fuel Advance • Balance to Driver)\n" : " (Zero Advance • Pay driver after trip)\n")
                     + "📞 Helpline: +91 99228 82044";
 
                 if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -2679,7 +2744,7 @@
 
                 function showShareSuccess() {
                     var origText = shareFamilyBtn.innerHTML;
-                    shareFamilyBtn.innerHTML = '<i class="fa-solid fa-check"></i> Shared!';
+                    shareFamilyBtn.innerHTML = '<i class="fa-solid fa-check" style="color:#10b981;font-size:0.80rem;"></i><span>Done!</span>';
                     setTimeout(function () { shareFamilyBtn.innerHTML = origText; }, 2500);
                 }
 
@@ -4014,14 +4079,14 @@
                 + '  </div>'
                 + '  <div class="amt-v-hdr-right">'
                 + '    <div class="amt-v-badge" style="background:' + sRules.badgeBg + ';color:' + sRules.badgeColor + ';border-color:' + sRules.badgeBorder + ';">' + sRules.badgeText + '</div>'
-                + '    <div class="amt-v-ref-box"><span class="amt-v-ref-lbl">Pass ID:</span> <strong class="amt-v-ref-val">' + escapeHtml(bookingState.bookingId || 'AMT-REQ') + '</strong></div>'
+                + '    <div class="amt-v-ref-box"><span class="amt-v-ref-lbl">Pass ID:</span> <strong class="amt-v-ref-val" id="amtPassIdVal">' + escapeHtml(bookingState.bookingId || 'AMT-REQ') + '</strong><button type="button" class="amt-v-copy-btn" id="amtCopyPassIdBtn" title="Copy Pass ID" aria-label="Copy Pass ID"><i class="fa-regular fa-copy"></i></button></div>'
                 + '  </div>'
                 + '</div>'
 
                 + '<div class="amt-v-grid">'
                 + '  <div class="amt-v-cell">'
                 + '    <span class="amt-v-lbl">Lead Passenger</span>'
-                + '    <span class="amt-v-val"><strong>' + escapeHtml(bookingState.name || 'Guest') + '</strong>' + (bookingState.phone ? ' (' + escapeHtml(bookingState.phone) + ')' : '') + '</span>'
+                + '    <span class="amt-v-val"><strong style="text-transform:capitalize;">' + escapeHtml(formatSafeTitleCase(bookingState.name || 'Guest')) + '</strong>' + (bookingState.phone ? ' (' + escapeHtml(bookingState.phone) + ')' : '') + '</span>'
                 + '  </div>'
                 + '  <div class="amt-v-cell">'
                 + '    <span class="amt-v-lbl">Travel Schedule</span>'
@@ -4029,12 +4094,13 @@
                 + '  </div>'
                 + '  <div class="amt-v-cell" style="grid-column:1/-1;">'
                 + '    <span class="amt-v-lbl">Pickup Location</span>'
-                + '    <span class="amt-v-val"><strong>' + escapeHtml(bookingState.pickup || 'Mahabaleshwar') + '</strong> (Doorstep Porch)</span>'
+                + '    <span class="amt-v-val"><strong style="text-transform:capitalize;">' + escapeHtml(formatSafeTitleCase(bookingState.pickup || 'Mahabaleshwar')) + '</strong> (Doorstep Porch)</span>'
                 + '  </div>'
                 + '  <div class="amt-v-cell amt-v-vehicle-cell">'
                 + '    <div class="amt-v-vehicle-wrap">'
                 + '      <span class="amt-v-vehicle-lbl">🚕 Cab:</span>'
                 + '      <strong class="amt-v-vehicle-val">' + escapeHtml(sRules.vehicleDesc) + '</strong>'
+                + '      <span class="amt-v-fleet-tag"><i class="fa-solid fa-circle-check" style="color:#10b981;"></i> Union Fleet</span>'
                 + '    </div>'
                 + '  </div>'
                 + '</div>'
