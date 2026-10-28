@@ -1668,12 +1668,12 @@
             + '</div>'
             + '<div id="amtVoucherContent" class="amt-voucher"></div>'
             + '<div id="amtDesktopQrContainer"></div>'
-            + '<div class="amt-dispatch-tracker" style="display:flex;align-items:center;justify-content:space-between;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:4px 10px;margin-top:5px;margin-bottom:5px;box-sizing:border-box;width:100%;">'
-            + '<div class="amt-dt-step completed" style="display:flex;flex-direction:column;align-items:center;gap:1px;text-align:center;"><div class="amt-dt-icon" style="width:18px;height:18px;border-radius:50%;background:#10b981;color:#fff;font-size:0.55rem;display:flex;align-items:center;justify-content:center;"><i class="fa-solid fa-check"></i></div><div class="amt-dt-label" style="font-size:0.62rem;font-weight:700;color:#0f2b48;white-space:nowrap;">1. Voucher Issued</div></div>'
-            + '<div class="amt-dt-line" style="flex:1 1 0;height:2px;background:#10b981;margin:0 4px 10px 4px;"></div>'
-            + '<div class="amt-dt-step active" style="display:flex;flex-direction:column;align-items:center;gap:1px;text-align:center;"><div class="amt-dt-icon" style="width:18px;height:18px;border-radius:50%;background:#0284c7;color:#fff;font-size:0.55rem;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px rgba(2,132,199,0.25);"><i class="fa-brands fa-whatsapp"></i></div><div class="amt-dt-label" style="font-size:0.62rem;font-weight:700;color:#0284c7;white-space:nowrap;">2. WhatsApp Dispatch</div></div>'
-            + '<div class="amt-dt-line" style="flex:1 1 0;height:2px;background:#cbd5e1;margin:0 4px 10px 4px;"></div>'
-            + '<div class="amt-dt-step" style="display:flex;flex-direction:column;align-items:center;gap:1px;text-align:center;"><div class="amt-dt-icon" style="width:18px;height:18px;border-radius:50%;background:#cbd5e1;color:#fff;font-size:0.55rem;display:flex;align-items:center;justify-content:center;"><i class="fa-solid fa-hotel"></i></div><div class="amt-dt-label" style="font-size:0.62rem;font-weight:700;color:#64748b;white-space:nowrap;">3. Porch Pickup</div></div>'
+            + '<div class="amt-dispatch-tracker" style="display:flex;align-items:flex-start;justify-content:space-between;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:6px 12px 5px;margin-top:5px;margin-bottom:5px;box-sizing:border-box;width:100%;">'
+            + '<div class="amt-dt-step completed" style="display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;"><div class="amt-dt-icon" style="width:18px;height:18px;border-radius:50%;background:#10b981;color:#fff;font-size:0.55rem;display:flex;align-items:center;justify-content:center;"><i class="fa-solid fa-check"></i></div><div class="amt-dt-label" style="font-size:0.62rem;font-weight:700;color:#0f2b48;white-space:nowrap;">1. Voucher Issued</div></div>'
+            + '<div class="amt-dt-line" style="flex:1 1 0;height:2px;background:#10b981;align-self:flex-start;margin-top:8px;margin-left:6px;margin-right:6px;"></div>'
+            + '<div class="amt-dt-step active" style="display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;"><div class="amt-dt-icon" style="width:18px;height:18px;border-radius:50%;background:#0284c7;color:#fff;font-size:0.55rem;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px rgba(2,132,199,0.25);"><i class="fa-brands fa-whatsapp"></i></div><div class="amt-dt-label" style="font-size:0.62rem;font-weight:700;color:#0284c7;white-space:nowrap;">2. WhatsApp Dispatch</div></div>'
+            + '<div class="amt-dt-line" style="flex:1 1 0;height:2px;background:#cbd5e1;align-self:flex-start;margin-top:8px;margin-left:6px;margin-right:6px;"></div>'
+            + '<div class="amt-dt-step" style="display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;"><div class="amt-dt-icon" style="width:18px;height:18px;border-radius:50%;background:#cbd5e1;color:#fff;font-size:0.55rem;display:flex;align-items:center;justify-content:center;"><i class="fa-solid fa-hotel"></i></div><div class="amt-dt-label" style="font-size:0.62rem;font-weight:700;color:#64748b;white-space:nowrap;">3. Porch Pickup</div></div>'
             + '</div>'
             + '<div class="amt-voucher-actions" style="margin-top:4px;">'
             + '<button type="button" id="amtWaBtn" class="amt-btn-next amt-btn-confirm" style="width:100%;padding:9px 12px;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;box-shadow:0 4px 14px rgba(16,185,129,0.35);background:#10b981;color:#ffffff;border:none;cursor:pointer;"><div class="amt-wa-btn-title" style="display:inline-flex;align-items:center;justify-content:center;gap:7px;font-size:0.88rem;font-weight:800;letter-spacing:0.3px;width:100%;white-space:nowrap;"><i class="fa-brands fa-whatsapp" style="font-size:1.15rem;"></i> <span>OPEN WHATSAPP TO DISPATCH CAB</span></div><span id="amtWaBtnSubtext" style="font-size:0.64rem;font-weight:600;opacity:0.95;line-height:1.25;text-align:center;display:block;padding:0 4px;box-sizing:border-box;width:100%;">Send transfer details on WhatsApp to confirm driver & advance schedule</span></button>'
@@ -3671,6 +3671,11 @@
         var pct = (step / totalSteps) * 100;
         var pFill = document.getElementById('amtProgressFill'); if (pFill) pFill.style.width = pct + '%';
         var sLbl = document.getElementById('amtStepLabel'); if (sLbl) sLbl.textContent = 'Step ' + step + ' of ' + totalSteps;
+        var hdrTitle = document.querySelector('.amt-header-title');
+        if (hdrTitle) {
+            if (step === 1) hdrTitle.textContent = 'Select Tour & Departure';
+            else if (step === 2) hdrTitle.textContent = 'Pickup Hotel & Guest Details';
+        }
         if (typeof updateStepper === 'function') updateStepper(step);
         if (typeof saveBookingDraft === 'function') saveBookingDraft();
         try { if (window.history && window.history.pushState) window.history.pushState({ amtStep: step }, '', '#step' + step); } catch (e) { }
@@ -3706,6 +3711,8 @@
 
         var pFill = document.getElementById('amtProgressFill'); if (pFill) pFill.style.width = '100%';
         var sLbl = document.getElementById('amtStepLabel'); if (sLbl) sLbl.textContent = 'Booking Voucher (Step 3 of 3)';
+        var hdrTitle = document.querySelector('.amt-header-title');
+        if (hdrTitle) hdrTitle.textContent = 'Official Booking Voucher';
         if (typeof updateStepper === 'function') updateStepper(3);
         try { if (window.history && window.history.pushState) window.history.pushState({ amtStep: 3 }, '', '#voucher'); } catch (e) { }
 
@@ -4143,8 +4150,11 @@
                 + '  </div>'
                 + '  <div class="amt-v-cell amt-v-vehicle-cell">'
                 + '    <div class="amt-v-vehicle-wrap">'
-                + '      <span class="amt-v-vehicle-lbl">🚕 Cab:</span>'
-                + '      <strong class="amt-v-vehicle-val">' + escapeHtml(sRules.vehicleDesc) + '</strong>'
+                + '      <div class="amt-v-vehicle-left">'
+                + '        <span class="amt-v-vehicle-lbl">🚕 Cab:</span>'
+                + '        <strong class="amt-v-vehicle-val">' + escapeHtml(sRules.vehicleDesc.replace(/\s*\(Arranged as per availability\)/i, '')) + '</strong>'
+                + '        <span class="amt-v-vehicle-sub">(As per availability)</span>'
+                + '      </div>'
                 + '      <span class="amt-v-fleet-tag"><i class="fa-solid fa-circle-check" style="color:#10b981;"></i> Union Fleet</span>'
                 + '    </div>'
                 + '  </div>'
@@ -4186,8 +4196,8 @@
                 + '</div>'
 
                 + '<div class="amt-v-ftr">'
-                + '  <span>Registered Taxi Union Member Cab &bull; Computer-Generated Voucher &bull; Aryan Taxi Mahabaleshwar</span>'
-                + '  <span>Helpline: +91 99228 82044</span>'
+                + '  <span><i class="fa-solid fa-shield-halved" style="color:#0284c7;"></i> Union Cab &bull; Computer Voucher</span>'
+                + '  <span><i class="fa-solid fa-phone" style="color:#10b981;"></i> Helpline: +91 99228 82044</span>'
                 + '</div>'
                 + '</div>';
 

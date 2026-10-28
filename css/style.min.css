@@ -5589,13 +5589,18 @@ body.modal-open {
     font-weight: 700;
 }
 .amt-v-ftr {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.63rem;
-    color: #64748b;
-    border-top: 1px dashed #cbd5e1;
-    padding-top: 4px;
-    line-height: 1.35;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    font-size: 0.64rem !important;
+    color: #64748b !important;
+    border-top: 1px dashed #cbd5e1 !important;
+    padding-top: 4px !important;
+    margin-top: 3px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    white-space: nowrap !important;
+    line-height: 1.25 !important;
 }
 
 /* Dark Mode Voucher On-Screen Overrides */
@@ -9668,12 +9673,12 @@ body.booking-portal-page .portal-card {
 
 @media (min-width: 768px) {
     .portal-booking-container {
-        max-width: 560px !important;
-        margin: 12px auto 28px !important;
+        max-width: 580px !important;
+        margin: 10px auto 24px !important;
         padding: 0 !important;
     }
     .portal-card, .amt-card, #amtBookingModal .amt-card {
-        max-width: 560px !important;
+        max-width: 580px !important;
         width: 100% !important;
         min-height: auto !important;
         height: auto !important;
@@ -9995,15 +10000,25 @@ body.booking-portal-page .portal-card {
 .amt-v-vehicle-wrap {
     display: flex !important;
     align-items: center !important;
+    justify-content: space-between !important;
     flex-wrap: nowrap !important;
-    gap: 4px !important;
+    gap: 6px !important;
     width: 100% !important;
     min-width: 0 !important;
+    box-sizing: border-box !important;
+}
+.amt-v-vehicle-left {
+    display: flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
     white-space: nowrap !important;
     overflow: hidden !important;
+    text-overflow: ellipsis !important;
 }
 .amt-v-vehicle-lbl {
-    font-size: clamp(0.58rem, 2.1vw, 0.65rem) !important;
+    font-size: clamp(0.60rem, 2.1vw, 0.66rem) !important;
     color: #64748b !important;
     text-transform: uppercase !important;
     font-weight: 700 !important;
@@ -10012,15 +10027,16 @@ body.booking-portal-page .portal-card {
     flex-shrink: 0 !important;
 }
 .amt-v-vehicle-val {
-    font-size: clamp(0.58rem, 2.1vw, 0.68rem) !important;
-    color: #0f2b48 !important;
+    font-size: clamp(0.62rem, 2.1vw, 0.70rem) !important;
+    color: #0369a1 !important;
     font-weight: 700 !important;
     white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    letter-spacing: -0.15px !important;
-    flex: 1 1 auto !important;
-    min-width: 0 !important;
+}
+.amt-v-vehicle-sub {
+    font-size: 0.60rem !important;
+    color: #64748b !important;
+    font-weight: 500 !important;
+    white-space: nowrap !important;
 }
 
 /* Item 5: WhatsApp Dispatch Section Alignment & Fit */
@@ -10260,11 +10276,36 @@ body.booking-portal-page .portal-card {
 .amt-dt-step.active .amt-dt-label {
     color: #0f2b48 !important;
 }
+.amt-dispatch-tracker {
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: space-between !important;
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    padding: 6px 12px 5px !important;
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+}
+.amt-dt-step {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 2px !important;
+    text-align: center !important;
+    flex-shrink: 0 !important;
+}
 .amt-dt-line {
     flex: 1 1 0 !important;
     height: 2px !important;
     background: #cbd5e1 !important;
-    margin: 0 4px 10px 4px !important;
+    align-self: flex-start !important;
+    margin-top: 8px !important;
+    margin-bottom: 0 !important;
+    margin-left: 6px !important;
+    margin-right: 6px !important;
 }
 
 /* Zero-Scroll Desktop Viewport Fit for Page 3 */
@@ -10285,21 +10326,22 @@ body.booking-portal-page .portal-card {
         gap: 4px !important;
     }
     .amt-desktop-qr-card {
-        padding: 4px 8px !important;
-        margin: 3px 0 !important;
-        gap: 8px !important;
+        padding: 6px 10px !important;
+        margin: 4px 0 !important;
+        gap: 10px !important;
         border-radius: 8px !important;
     }
     .amt-desktop-qr-card .amt-dqr-img {
-        width: 38px !important;
-        height: 38px !important;
+        width: 48px !important;
+        height: 48px !important;
     }
     .amt-dqr-title {
-        font-size: 0.72rem !important;
+        font-size: 0.76rem !important;
+        font-weight: 700 !important;
         line-height: 1.2 !important;
     }
     .amt-dqr-desc {
-        font-size: 0.62rem !important;
+        font-size: 0.64rem !important;
         line-height: 1.15 !important;
     }
 }
