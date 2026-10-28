@@ -10307,294 +10307,40 @@ body.booking-portal-page .portal-card {
     margin-right: 6px !important;
 }
 
-/* ============================================================
-   EQUAL HEIGHT & GUARANTEED BUTTON VISIBILITY (ALL 3 STEPS)
-   ============================================================ */
-.portal-card-header .amt-header-step-row {
-    display: none !important;
-}
-.portal-card-header {
-    flex-shrink: 0 !important;
-    min-height: 64px !important;
-    height: 64px !important;
-    padding: 10px 16px 8px !important;
-    box-sizing: border-box !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-    align-items: center !important;
-    text-align: center !important;
-}
-.portal-card-header .amt-header-title {
-    font-size: 0.96rem !important;
-    font-weight: 800 !important;
-    color: #ffffff !important;
-    margin: 0 auto 3px !important;
-    line-height: 1.2 !important;
-    text-align: center !important;
-    width: 100% !important;
-}
-.portal-card-header .amt-stepper {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 8px !important;
-    margin: 0 auto !important;
-}
-.portal-card-header .amt-step-item {
-    display: flex !important;
-    align-items: center !important;
-    gap: 4px !important;
-    opacity: 0.75 !important;
-}
-.portal-card-header .amt-step-item.active {
-    opacity: 1 !important;
-}
-.portal-card-header .amt-step-bubble {
-    width: 17px !important;
-    height: 17px !important;
-    font-size: 0.60rem !important;
-    font-weight: 800 !important;
-}
-.portal-card-header .amt-step-name {
-    font-size: 0.64rem !important;
-    font-weight: 700 !important;
-}
-
+/* Zero-Scroll Desktop Viewport Fit for Page 3 */
 @media (min-width: 768px) {
     .portal-booking-container {
-        max-width: 580px !important;
-        margin: 10px auto 20px !important;
-        padding: 0 !important;
+        margin: 8px auto 16px !important;
     }
     .portal-card, .amt-card, #amtBookingModal .amt-card {
-        min-height: 672px !important;
-        height: auto !important;
-        max-height: none !important;
-        display: flex !important;
-        flex-direction: column !important;
-        overflow: hidden !important;
-        border-radius: 14px !important;
-        box-sizing: border-box !important;
+        min-height: auto !important;
+        max-height: 94vh !important;
     }
     .portal-card-body, .amt-card-body {
-        flex: 1 1 auto !important;
-        min-height: calc(672px - 64px) !important;
-        height: auto !important;
-        max-height: none !important;
-        padding: 10px 14px 12px !important;
-        overflow-y: visible !important;
-        display: flex !important;
-        flex-direction: column !important;
-        box-sizing: border-box !important;
+        padding: 8px 14px 10px !important;
+        min-height: auto !important;
     }
-    #amtStep1, #amtStep2, #amtStepVoucher {
-        flex: 1 1 auto !important;
-        display: flex !important;
-        flex-direction: column !important;
-        min-height: 100% !important;
-        box-sizing: border-box !important;
-    }
-    #amtStep1[style*="display: none"],
-    #amtStep2[style*="display: none"],
-    #amtStepVoucher[style*="display: none"],
-    #amtStep1[style*="display:none"],
-    #amtStep2[style*="display:none"],
-    #amtStepVoucher[style*="display:none"] {
-        display: none !important;
-    }
-    #amtStep1:not([style*="display: none"]):not([style*="display:none"]),
-    #amtStep2:not([style*="display: none"]):not([style*="display:none"]),
-    #amtStepVoucher:not([style*="display: none"]):not([style*="display:none"]) {
-        display: flex !important;
-    }
-    #amtStep1 .amt-btn-row,
-    #amtStep2 .amt-btn-row,
-    #amtStepVoucher .amt-voucher-actions {
-        flex-shrink: 0 !important;
-        margin-top: auto !important;
-        padding-top: 8px !important;
-        box-sizing: border-box !important;
-        display: flex !important;
+    .amt-v-card-streamlined {
+        padding: 6px 10px !important;
+        gap: 4px !important;
     }
     .amt-desktop-qr-card {
-        display: flex !important;
-        align-items: center !important;
+        padding: 6px 10px !important;
+        margin: 4px 0 !important;
         gap: 10px !important;
-        padding: 4px 10px !important;
-        margin: 3px 0 !important;
-        background: #f0fdf4 !important;
-        border: 1px solid #bbf7d0 !important;
-        border-radius: 6px !important;
+        border-radius: 8px !important;
     }
     .amt-desktop-qr-card .amt-dqr-img {
-        width: 32px !important;
-        height: 32px !important;
+        width: 48px !important;
+        height: 48px !important;
     }
-    .amt-desktop-qr-card .amt-dqr-badge {
-        display: none !important;
-    }
-    .amt-desktop-qr-card .amt-dqr-title {
-        font-size: 0.72rem !important;
+    .amt-dqr-title {
+        font-size: 0.76rem !important;
         font-weight: 700 !important;
-        color: #166534 !important;
-        margin: 0 !important;
+        line-height: 1.2 !important;
     }
-    .amt-desktop-qr-card .amt-dqr-desc {
-        font-size: 0.65rem !important;
-        color: #15803d !important;
-        margin: 0 !important;
+    .amt-dqr-desc {
+        font-size: 0.64rem !important;
+        line-height: 1.15 !important;
     }
-}
-
-@media (max-width: 767px) {
-    .portal-booking-container {
-        margin: 4px auto 10px !important;
-        padding: 0 4px !important;
-        max-width: 100% !important;
-    }
-    .portal-card, .amt-card, #amtBookingModal .amt-card {
-        width: 100% !important;
-        max-width: 100% !important;
-        min-height: 560px !important;
-        height: auto !important;
-        max-height: none !important;
-        display: flex !important;
-        flex-direction: column !important;
-        border-radius: 14px !important;
-        overflow: visible !important;
-        box-sizing: border-box !important;
-    }
-    .portal-card-body, .amt-card-body {
-        flex: 1 1 auto !important;
-        min-height: 0 !important;
-        height: auto !important;
-        max-height: none !important;
-        overflow-y: visible !important;
-        padding: 8px 10px 12px !important;
-        display: flex !important;
-        flex-direction: column !important;
-        box-sizing: border-box !important;
-    }
-    #amtStep1, #amtStep2, #amtStepVoucher {
-        flex: 1 1 auto !important;
-        flex-direction: column !important;
-        min-height: 100% !important;
-        box-sizing: border-box !important;
-    }
-    #amtStep1[style*="display: none"],
-    #amtStep2[style*="display: none"],
-    #amtStepVoucher[style*="display: none"],
-    #amtStep1[style*="display:none"],
-    #amtStep2[style*="display:none"],
-    #amtStepVoucher[style*="display:none"] {
-        display: none !important;
-    }
-    #amtStep1:not([style*="display: none"]):not([style*="display:none"]),
-    #amtStep2:not([style*="display: none"]):not([style*="display:none"]),
-    #amtStepVoucher:not([style*="display: none"]):not([style*="display:none"]) {
-        display: flex !important;
-    }
-    #amtStep1 .amt-btn-row,
-    #amtStep2 .amt-btn-row,
-    #amtStepVoucher .amt-voucher-actions {
-        flex-shrink: 0 !important;
-        margin-top: auto !important;
-        padding-top: 6px !important;
-        box-sizing: border-box !important;
-        display: flex !important;
-    }
-    .amt-desktop-qr-card {
-        display: none !important;
-    }
-}
-
-/* Step 1 Union Assurance Strip */
-.amt-step1-assurance-strip {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 7px;
-    padding: 4px 8px !important;
-    margin: 3px 0 5px !important;
-    display: flex;
-    flex-direction: column;
-    gap: 2px !important;
-    font-size: 0.69rem !important;
-    color: #334155;
-    box-sizing: border-box;
-}
-
-#amtStep1 .amt-btn-next,
-#amtStep2 .amt-btn-confirm {
-    min-height: 40px !important;
-    height: 40px !important;
-    padding: 8px 14px !important;
-    box-sizing: border-box !important;
-    font-size: 0.92rem !important;
-    font-weight: 800 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    cursor: pointer !important;
-}
-.amt-s1-assure-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    line-height: 1.25;
-}
-[data-theme="dark"] .amt-step1-assurance-strip {
-    background: rgba(15, 23, 42, 0.6) !important;
-    border-color: #334155 !important;
-    color: #cbd5e1 !important;
-}
-
-/* Footer links strictly single line without wrap */
-.portal-footer-links {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    flex-wrap: nowrap !important;
-    white-space: nowrap !important;
-    gap: 4px 6px !important;
-    font-size: clamp(0.58rem, 2.6vw, 0.74rem) !important;
-    margin: 4px auto 0 !important;
-    max-width: 100% !important;
-    overflow-x: auto !important;
-    scrollbar-width: none !important;
-    -webkit-overflow-scrolling: touch !important;
-}
-.portal-footer-links::-webkit-scrollbar {
-    display: none !important;
-}
-.portal-footer-links a {
-    color: #38bdf8 !important;
-    text-decoration: none !important;
-    white-space: nowrap !important;
-    flex-shrink: 0 !important;
-    margin: 0 !important;
-}
-.portal-footer-links a:hover {
-    text-decoration: underline !important;
-}
-.portal-footer-sep {
-    color: #64748b !important;
-    font-size: 0.65rem !important;
-    flex-shrink: 0 !important;
-}
-
-/* Streamlined Step 3 Elements */
-.amt-voucher-screen-notice {
-    padding: 3px 8px !important;
-    margin-bottom: 3px !important;
-}
-.amt-voucher-screen-notice p {
-    display: none !important;
-}
-.amt-dispatch-tracker {
-    padding: 3px 8px !important;
-    margin: 3px 0 !important;
-}
-.amt-voucher-actions {
-    margin-top: auto !important;
 }
