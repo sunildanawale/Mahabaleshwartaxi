@@ -293,7 +293,7 @@
                 tariffLabel: 'OFFICIAL UNION DROP TARIFF',
                 advanceNote: 'Zero Advance Required (Standard Local Drop)',
                 paymentSettlement: '100% Cash / UPI to Driver directly after drop',
-                vehicleDesc: '4-Seater Tourist Cab, arranged as per availability.',
+                vehicleDesc: '4-Seater Dedicated Tourist Cab (Arranged as per availability)',
                 dispatchNotice: isSameDayAfternoon
                     ? '⚠️ Vehicle availability may be limited for same-day afternoon/evening bookings, especially during the tourist season. Your booking will be confirmed after vehicle availability is checked.'
                     : '⚠️ Local Point-to-Point Drop: Driver dispatch confirmed after final WhatsApp/phone check. Direct hotel porch pickup. ₹200 fee if cancelled after driver arrives.',
@@ -336,7 +336,7 @@
                 paymentSettlement: '100% Cash / UPI to Driver directly after tour completion',
                 vehicleDesc: isLarge
                     ? (taxiCount + 'x 4-Seater Tourist Cabs, arranged as per availability')
-                    : '4-Seater Tourist Cab, arranged as per availability.',
+                    : '4-Seater Dedicated Tourist Cab (Arranged as per availability)',
                 dispatchNotice: isSameDayAfternoon
                     ? '⚠️ Vehicle availability may be limited for same-day afternoon/evening bookings, especially during the tourist season. Your booking will be confirmed after vehicle availability is checked.'
                     : '⚠️ Full Day Combo Tour: Continuous full-day circuit (~7-9 hrs). Driver dispatch confirmed after final WhatsApp/phone reconfirmation.',
@@ -383,7 +383,7 @@
                 paymentSettlement: '100% Cash / UPI to Driver directly after tour completion',
                 vehicleDesc: isLarge
                     ? (taxiCount + 'x 4-Seater Tourist Cabs, arranged as per availability')
-                    : '4-Seater Tourist Cab, arranged as per availability.',
+                    : '4-Seater Dedicated Tourist Cab (Arranged as per availability)',
                 dispatchNotice: isSameDayAfternoon
                     ? '⚠️ Vehicle availability may be limited for same-day afternoon/evening bookings, especially during the tourist season. Your booking will be confirmed after vehicle availability is checked.'
                     : '⚠️ Express Single Tour: Driver dispatch confirmed after final WhatsApp/phone reconfirmation before departure.',
@@ -428,7 +428,7 @@
             paymentSettlement: '100% Cash / UPI to Driver directly after tour completion',
             vehicleDesc: isLarge
                 ? (taxiCount + 'x 4-Seater Tourist Cabs, arranged as per availability')
-                : '4-Seater Tourist Cab, arranged as per availability.',
+                : '4-Seater Dedicated Tourist Cab (Arranged as per availability)',
             dispatchNotice: isSameDayAfternoon
                 ? '⚠️ Vehicle availability may be limited for same-day afternoon/evening bookings, especially during the tourist season. Your booking will be confirmed after vehicle availability is checked.'
                 : (isMultiSightseeing
@@ -1570,18 +1570,18 @@
             + '  <span class="amt-trust-chip"><i class="fa-solid fa-shield-halved"></i> Pay Driver After Trip</span>'
             + '</div>'
             + '<div class="amt-cab-selector-wrap" style="margin-bottom:6px;">'
-            + '  <label class="amt-label">Cab Type (Standard 4-Seater Tourist Cab)</label>'
+            + '  <label class="amt-label">Cab Type</label>'
             + '  <div class="amt-cab-pill-grid" style="display:flex;flex-direction:column;gap:6px;margin-top:3px;width:100%;">'
             + '    <div class="amt-cab-pill active" data-cab="4-seater" style="width:100%;box-sizing:border-box;">'
             + '      <div class="amt-cab-pill-radio"></div>'
             + '      <div class="amt-cab-pill-info">'
             + '        <strong>🚖 4-Seater Dedicated Tourist Cab</strong>'
-            + '        <span>1 to 4 Guests &bull; Standard Union Private Cab</span>'
+            + '        <span>1 to 4 Guests &bull; Official Union Tariff &bull; Private Cab</span>'
             + '      </div>'
             + '    </div>'
 
             + '  </div>'
-            + '  <p class="amt-cab-subnote" style="margin-top:4px;"><i class="fa-solid fa-circle-check" style="color:#10b981;"></i> Dedicated private cab for your group &bull; Hotel porch pickup &bull; Zero advance</p>'
+            + '  <p class="amt-cab-subnote" style="margin-top:4px;"><i class="fa-solid fa-circle-check" style="color:#10b981;"></i> Dedicated private cab &bull; Hotel porch pickup</p>'
             + '  <select id="amtPax" style="display:none;"><option value="3-4" selected>3-4 Guests</option></select>'
             + '  '
             + '</div>'
@@ -1677,7 +1677,7 @@
         } else {
             zoneNotice.style.display = 'none';
             availBox.style.display = 'block';
-            availBox.innerHTML = '<i class="fa-solid fa-circle-check"></i> <strong>Mahabaleshwar Town Limits:</strong> Standard union sightseeing tariff applies. Zero advance.';
+            availBox.innerHTML = '<i class="fa-solid fa-circle-check"></i> <strong>Mahabaleshwar Town Limits:</strong> Standard union sightseeing tariff applies.';
             availBox.style.background = '#f0fdf4';
             availBox.style.color = '#166534';
             availBox.style.border = '1px solid #bbf7d0';
@@ -3715,14 +3715,14 @@
                 var p4 = pill4.querySelector('.amt-cab-pill-info');
                 if (p4) {
                     p4.innerHTML = '<strong>🚖 4-Seater Dedicated Tourist Cab</strong>'
-                        + '<span>1 to 4 Guests &bull; Official Union Tariff &bull; Private Cab for Your Group</span>';
+                        + '<span>1 to 4 Guests &bull; Official Union Tariff &bull; Private Cab</span>';
                 }
             }
             if (label) {
-                label.textContent = 'Cab Type (Standard 4-Seater Tourist Cab)';
+                label.textContent = 'Cab Type';
             }
             if (subnote) {
-                subnote.innerHTML = '<i class="fa-solid fa-circle-check" style="color:#10b981;"></i> Dedicated private cab for your group &bull; Hotel porch pickup &bull; Zero advance';
+                subnote.innerHTML = '<i class="fa-solid fa-circle-check" style="color:#10b981;"></i> Dedicated private cab &bull; Hotel porch pickup';
                 subnote.style.display = 'block';
             }
         });
@@ -4024,9 +4024,9 @@
             var waSub = document.getElementById('amtWaBtnSubtext');
             if (waSub) {
                 if (sRules.key === 'outstation') {
-                    waSub.textContent = 'Send outstation transfer details on WhatsApp to lock driver & advance schedule';
+                    waSub.textContent = 'Send outstation transfer details on WhatsApp to confirm the driver and advance payment.';
                 } else {
-                    waSub.textContent = 'Send travel details on WhatsApp to lock driver dispatch';
+                    waSub.textContent = 'Send tour details on WhatsApp to confirm driver dispatch and timing.';
                 }
             }
         } catch (err) {
