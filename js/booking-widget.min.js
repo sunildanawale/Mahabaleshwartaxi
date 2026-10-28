@@ -557,7 +557,11 @@
 
         var msg = 'Hello Aryan Taxi Mahabaleshwar 👋\n'
             + '🚕 *DIRECT TAXI BOOKING CONFIRMATION — ' + sRules.serviceTitle.toUpperCase() + '*\n'
-            + '_(Official Union Tariff • Zero Advance • Pay Driver After Trip)_\n\n'
+            + (sRules.key === 'outstation'
+                ? '_(Official Union Outstation Tariff • Nominal Fuel Advance • Balance to Driver)_\n\n'
+                : (sRules.key === 'local_drop'
+                    ? '_(Official Union Drop Tariff • Zero Advance • Pay Driver After Drop)_\n\n'
+                    : '_(Official Union Tariff • Zero Advance • Pay Driver After Trip)_\n\n'))
             + '🔖 *Booking Voucher ID:* ' + (b.bookingId || 'AMT-REQ') + '\n'
             + '👤 *Guest Name:* ' + b.name + (b.phone ? ' (' + b.phone + ')' : '') + '\n'
             + '🏨 *Pickup Location:* ' + pickupStr + '\n'
@@ -1523,7 +1527,7 @@
             + '</div>'
             + '<div class="amt-step-hdr-compact">'
             + '  <h3 class="amt-step-title">1. Service &amp; Departure</h3>'
-            + '  <span class="amt-trust-chip"><i class="fa-solid fa-shield-halved"></i> Fixed Rates &bull; Zero Advance</span>'
+            + '  <span class="amt-trust-chip" id="amtStep1TrustChip"><i class="fa-solid fa-shield-halved"></i> Fixed Rates &bull; Zero Advance</span>'
             + '</div>'
             + '<div class="amt-category-grid" role="radiogroup" aria-label="Select Service Category">'
             + '  <button type="button" class="amt-service-btn active" role="radio" aria-checked="true" data-service="sightseeing">'
@@ -1649,8 +1653,8 @@
             + '<div id="amtStep4PolicyBox" style="display:none;"></div>'
             + '  <div class="amt-btn-row" style="margin-top:8px;display:flex;flex-direction:column;gap:6px;">'
             + '    <button type="button" class="amt-btn-next amt-btn-confirm" id="amtConfirmBtn" style="width:100%;padding:10px 14px;background:linear-gradient(135deg, #10b981 0%, #059669 100%);color:#ffffff;border:none;border-radius:10px;font-weight:800;font-size:0.92rem;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;box-shadow:0 4px 14px rgba(16,185,129,0.35);">'
-            + '      <div style="display:flex;align-items:center;gap:6px;"><i class="fa-brands fa-whatsapp" style="font-size:1.15rem;"></i> CONFIRM BOOKING ON WHATSAPP</div>'
-            + '      <span style="font-size:0.68rem;font-weight:600;opacity:0.95;">Direct Local Driver Dispatch &bull; Pay Driver After Trip</span>'
+            + '      <div style="display:flex;align-items:center;gap:6px;"><i class="fa-solid fa-file-invoice"></i> GENERATE BOOKING VOUCHER &amp; REVIEW <i class="fa-solid fa-arrow-right"></i></div>'
+            + '      <span style="font-size:0.68rem;font-weight:600;opacity:0.95;">Review Official Voucher &amp; Tour Details &bull; Direct Driver Dispatch</span>'
             + '    </button>'
             + '    <button type="button" class="amt-btn-back" id="amtBackTo1" style="width:100%;padding:6px 12px;border:1px solid #cbd5e1;background:#ffffff;color:#475569;border-radius:8px;font-weight:700;font-size:0.75rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;"><i class="fa-solid fa-arrow-left"></i> Change Tour Selection</button>'
             + '  </div>'
@@ -2408,19 +2412,6 @@
 
                     renderVoucherScreen();
                     goToVoucher();
-
-                    // Instantly trigger WhatsApp within active user tap gesture
-                    var msg = buildConfirmedWhatsAppMessage(bookingState);
-                    var url = getWhatsAppUrl(encodeURIComponent(msg));
-                    var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-                    if (isMobile) {
-                        window.location.href = url;
-                    } else {
-                        var win = window.open(url, '_blank');
-                        if (!win || win.closed || typeof win.closed === 'undefined') {
-                            window.location.href = url;
-                        }
-                    }
                 } catch (e) {
                     console.error('Error generating voucher:', e);
                     try { renderVoucherScreen(); } catch (e2) { }
@@ -2428,7 +2419,13 @@
                 } finally {
                     bookingState.submitting = false;
                     confirmBtn.disabled = false;
-                    confirmBtn.innerHTML = '<i class="fa-brands fa-whatsapp"></i> CONFIRM BOOKING ON WHATSAPP';
+                    var isOut = bookingState.service === 'outstation';
+                    var isDrop = bookingState.service === 'local_drop';
+                    var subTxt = isOut
+                        ? 'Review Confirmed Tariff &amp; Driver Schedule &bull; Nominal Fuel Advance'
+                        : (isDrop ? 'Review Official Voucher &amp; Drop Details &bull; Pay Driver After Drop' : 'Review Official Voucher &amp; Tour Details &bull; Pay Driver After Trip');
+                    confirmBtn.innerHTML = '<div style="display:flex;align-items:center;gap:6px;"><i class="fa-solid fa-file-invoice"></i> GENERATE BOOKING VOUCHER &amp; REVIEW <i class="fa-solid fa-arrow-right"></i></div>'
+                        + '<span style="font-size:0.68rem;font-weight:600;opacity:0.95;">' + subTxt + '</span>';
                 }
             });
         }
@@ -2690,10 +2687,15 @@
                     + "Pickup: " + (b.pickup || 'Mahabaleshwar') + "\n"
                     + "Helpline: +91 99228 82044";
 
+                var isOut = (b.service === 'outstation' || (t && t.category === 'outstation'));
+                var isDrop = (b.service === 'local_drop' || (t && t.category === 'local_drop'));
+                var termLine = isOut ? "Nominal Fuel Advance • Balance to Driver" : (isDrop ? "Zero Advance • Pay driver after drop" : "Zero Advance • Pay driver after tour");
+                var headerTerm = isOut ? "Standard Taxi Union Tariffs Accepted • Nominal Fuel Advance" : "Standard Taxi Union Tariffs Accepted • Zero Advance";
+
                 // Full voucher details copied to clipboard for complete record
                 var fullDetails = "OFFICIAL TOURIST TAXI BOOKING CONFIRMATION & VOUCHER\n"
                     + "Aryan Taxi Mahabaleshwar | Explore Sahyadri\n"
-                    + "Standard Taxi Union Tariffs Accepted • Zero Advance\n\n"
+                    + headerTerm + "\n\n"
                     + "Booking Reference: " + bId + "\n"
                     + "Passenger Name: " + (b.name || 'Valued Guest') + "\n"
                     + "WhatsApp Mobile: +91 " + (b.phone || '9922882044') + "\n"
@@ -2701,7 +2703,7 @@
                     + "Pickup Time: " + (b.time || '09:00 AM') + "\n"
                     + "Pickup Hotel: " + (b.pickup || 'Mahabaleshwar') + "\n"
                     + "Tour Selected: " + tourName + "\n"
-                    + "Total Tariff: INR " + fare + " (Zero Advance • Pay driver after tour)\n"
+                    + "Total Tariff: INR " + fare + " (" + termLine + ")\n"
                     + "Helpline: +91 99228 82044";
 
                 if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -3231,7 +3233,7 @@
             '    <span><i class="fa-solid fa-clock"></i> ' + durText + '</span>' +
             (points.length > 0 ? '    <span><i class="fa-solid fa-binoculars"></i> ' + points.length + ' Viewpoints</span>' : '') +
             '    <span><i class="fa-solid fa-receipt"></i> ' + fareTerms + '</span>' +
-            '    <span><i class="fa-solid fa-shield-halved"></i> Zero Advance</span>' +
+            (isOutstation ? '    <span><i class="fa-solid fa-gas-pump"></i> Fuel Advance Required</span>' : '    <span><i class="fa-solid fa-shield-halved"></i> Zero Advance</span>') +
             '  </div>' +
             pointsHtml +
             '</div>';
@@ -3577,6 +3579,15 @@
         bookingState.service = service;
         bookingState.selectedTours = [{ id: targetId, date: bookingState.date, time: bookingState.time }];
 
+        var trustChip = document.getElementById('amtStep1TrustChip') || document.querySelector('.amt-trust-chip');
+        if (trustChip) {
+            if (service === 'outstation') {
+                trustChip.innerHTML = '<i class="fa-solid fa-gas-pump"></i> Locked Tariff &bull; Fuel Advance';
+            } else {
+                trustChip.innerHTML = '<i class="fa-solid fa-shield-halved"></i> Fixed Rates &bull; Zero Advance';
+            }
+        }
+
         if (typeof updateSelectedTourBanner === 'function') updateSelectedTourBanner(targetId);
         if (typeof updateTourInsight === 'function') updateTourInsight();
         if (typeof updateSmartTimeUI === 'function') updateSmartTimeUI();
@@ -3852,11 +3863,11 @@
             var btnSub = confirmBtn.querySelector('span');
             if (btnSub) {
                 if (isOutstation) {
-                    btnSub.innerHTML = 'Direct Local Driver Dispatch &bull; Nominal Fuel Advance';
+                    btnSub.innerHTML = 'Review Confirmed Tariff &amp; Driver Schedule &bull; Nominal Fuel Advance';
                 } else if (isLocalDrop) {
-                    btnSub.innerHTML = 'Direct Local Driver Dispatch &bull; Pay Driver After Drop';
+                    btnSub.innerHTML = 'Review Official Voucher &amp; Drop Details &bull; Pay Driver After Drop';
                 } else {
-                    btnSub.innerHTML = 'Direct Local Driver Dispatch &bull; Pay Driver After Tour';
+                    btnSub.innerHTML = 'Review Official Voucher &amp; Tour Details &bull; Pay Driver After Trip';
                 }
             }
         }

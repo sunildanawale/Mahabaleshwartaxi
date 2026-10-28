@@ -9675,7 +9675,7 @@ body.booking-portal-page .portal-card {
     .portal-card, .amt-card, #amtBookingModal .amt-card {
         max-width: 560px !important;
         width: 100% !important;
-        min-height: 680px !important;
+        min-height: auto !important;
         height: auto !important;
         max-height: none !important;
         box-sizing: border-box !important;
@@ -9693,7 +9693,7 @@ body.booking-portal-page .portal-card {
     }
     .portal-card-body, .amt-card-body {
         flex: 1 1 auto !important;
-        min-height: calc(680px - 72px) !important;
+        min-height: auto !important;
         height: auto !important;
         max-height: none !important;
         display: flex !important;

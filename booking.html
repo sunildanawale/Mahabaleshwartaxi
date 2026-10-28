@@ -28,8 +28,8 @@
     <meta name="twitter:image" content="https://sunildanawale.github.io/Mahabaleshwartaxi/images/mahabaleshwar-hero-hd.jpg">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/advanced-features.min.css?v=121.0">
-    <link rel="stylesheet" href="css/style.min.css?v=121.0">
+    <link rel="stylesheet" href="css/advanced-features.min.css?v=122.0">
+    <link rel="stylesheet" href="css/style.min.css?v=122.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
@@ -3065,8 +3065,8 @@ body.booking-portal-page .portal-card {
             }
         }
     .amt-selected-tour-banner:empty { display: none !important; }
-    .hero__booking-col .amt-card, body.booking-portal-page .amt-card, .portal-card { height: auto !important; min-height: 680px !important; max-height: none !important; overflow: hidden !important; }
-    .hero__booking-col .amt-card-body, body.booking-portal-page .amt-card-body, .portal-card-body { height: auto !important; min-height: calc(680px - 72px) !important; max-height: none !important; overflow-y: visible !important; }
+    .hero__booking-col .amt-card, body.booking-portal-page .amt-card, .portal-card { height: auto !important; min-height: auto !important; max-height: none !important; overflow: hidden !important; }
+    .hero__booking-col .amt-card-body, body.booking-portal-page .amt-card-body, .portal-card-body { height: auto !important; min-height: auto !important; max-height: none !important; overflow-y: visible !important; }
 </style>
 </head>
 <body class="booking-portal-page">
@@ -3103,7 +3103,7 @@ body.booking-portal-page .portal-card {
     <!-- Main Booking Engine Card -->
     <div class="portal-booking-container">
         <div id="amtBookingModal" class="amt-modal-overlay" style="display: flex !important; position: relative !important; inset: auto !important; width: 100% !important; height: auto !important; min-height: auto !important; background: transparent !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; padding: 0 !important; z-index: 10 !important; overflow: visible !important;">
-            <div class="amt-card portal-card" style="width: 100% !important; max-width: 100% !important; min-height: 680px !important; height: auto !important; max-height: none !important; overflow: hidden !important; margin: 0 auto !important;">
+            <div class="amt-card portal-card" style="width: 100% !important; max-width: 100% !important; min-height: auto !important; height: auto !important; max-height: none !important; overflow: hidden !important; margin: 0 auto !important;">
                 
                 <!-- Card Header -->
                 <div class="amt-card-header portal-card-header">
@@ -3145,7 +3145,7 @@ body.booking-portal-page .portal-card {
                         </div>
                         <div class="amt-step-hdr-compact">
                             <h3 class="amt-step-title">1. Service &amp; Departure</h3>
-                            <span class="amt-trust-chip"><i class="fa-solid fa-shield-halved"></i> Fixed Rates &bull; Zero Advance</span>
+                            <span class="amt-trust-chip" id="amtStep1TrustChip"><i class="fa-solid fa-shield-halved"></i> Fixed Rates &bull; Zero Advance</span>
                         </div>
                         <div class="amt-category-grid" role="radiogroup" aria-label="Select Service Category">
                             <button type="button" class="amt-service-btn active" role="radio" aria-checked="true" data-service="sightseeing">
@@ -3302,8 +3302,8 @@ body.booking-portal-page .portal-card {
                         <div id="amtStep4PolicyBox" style="display:none;"></div>
                         <div class="amt-btn-row" style="margin-top:8px;display:flex;flex-direction:column;gap:6px;">
                             <button type="button" class="amt-btn-next amt-btn-confirm" id="amtConfirmBtn" style="width:100%;padding:10px 14px;background:linear-gradient(135deg, #10b981 0%, #059669 100%);color:#ffffff;border:none;border-radius:10px;font-weight:800;font-size:0.92rem;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;box-shadow:0 4px 14px rgba(16,185,129,0.35);">
-                                <div style="display:flex;align-items:center;gap:6px;"><i class="fa-brands fa-whatsapp" style="font-size:1.15rem;"></i> CONFIRM BOOKING ON WHATSAPP</div>
-                                <span style="font-size:0.68rem;font-weight:600;opacity:0.95;">Direct Local Driver Dispatch &bull; Pay Driver After Trip</span>
+                                <div style="display:flex;align-items:center;gap:6px;"><i class="fa-solid fa-file-invoice"></i> GENERATE BOOKING VOUCHER &amp; REVIEW <i class="fa-solid fa-arrow-right"></i></div>
+                                <span style="font-size:0.68rem;font-weight:600;opacity:0.95;">Review Official Voucher &amp; Tour Details &bull; Direct Driver Dispatch</span>
                             </button>
                             <button type="button" class="amt-btn-back" id="amtBackTo1" style="width:100%;padding:6px 12px;border:1px solid #cbd5e1;background:#ffffff;color:#475569;border-radius:8px;font-weight:700;font-size:0.75rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;"><i class="fa-solid fa-arrow-left"></i> Change Tour Selection</button>
                         </div>
@@ -3361,8 +3361,8 @@ body.booking-portal-page .portal-card {
             <div class="portal-trust-item">
                 <i class="fa-solid fa-handshake-simple" style="color: #10b981;"></i>
                 <div>
-                    <h4>Zero Advance Payment for Sightseeing</h4>
-                    <p>No card or bank details needed. 100% of the tour fare is payable directly to your assigned local driver via Cash or UPI upon trip completion.</p>
+                    <h4>Zero Advance for Local Sightseeing &amp; Drops &bull; Nominal Fuel Advance for Outstation</h4>
+                    <p>Zero advance payment for all Mahabaleshwar local sightseeing tours and local drops &mdash; pay 100% of fare directly to your driver after the trip. For outstation transfers (Pune, Mumbai, etc.), a nominal fuel advance confirms vehicle dispatch with balance payable to driver upon drop.</p>
                 </div>
             </div>
             <div class="portal-trust-item">
@@ -3397,9 +3397,9 @@ body.booking-portal-page .portal-card {
     </footer>
 
     <!-- Scripts -->
-    <script src="js/tour-data.js?v=121.0"></script>
-    <script src="js/ai-assistant.js?v=121.0" defer></script>
-    <script src="js/booking-widget.min.js?v=121.0"></script>
+    <script src="js/tour-data.js?v=122.0"></script>
+    <script src="js/ai-assistant.js?v=122.0" defer></script>
+    <script src="js/booking-widget.min.js?v=122.0"></script>
     <script>
     (function() {
         var search = window.location.search || '';
