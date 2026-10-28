@@ -3838,11 +3838,11 @@
         }
         currentStep = step;
         if (step === 2) { try { updateCabSelector(); renderReviewCard(); } catch(e){} }
-        var s1 = document.getElementById('amtStep1'); if (s1) s1.style.display = step === 1 ? 'block' : 'none';
-        var s2 = document.getElementById('amtStep2'); if (s2) s2.style.display = step === 2 ? 'block' : 'none';
+        var s1 = document.getElementById('amtStep1'); if (s1) s1.style.setProperty('display', step === 1 ? 'flex' : 'none', 'important');
+        var s2 = document.getElementById('amtStep2'); if (s2) s2.style.setProperty('display', step === 2 ? 'flex' : 'none', 'important');
         var s3 = document.getElementById('amtStep3'); if (s3) s3.style.display = 'none';
         var s4 = document.getElementById('amtStep4'); if (s4) s4.style.display = 'none';
-        var sv = document.getElementById('amtStepVoucher'); if (sv) sv.style.display = step === 3 ? 'block' : 'none';
+        var sv = document.getElementById('amtStepVoucher'); if (sv) sv.style.setProperty('display', step === 3 ? 'flex' : 'none', 'important');
         var trustSec = document.querySelector('.portal-trust-section'); if (trustSec) trustSec.style.display = 'block';
 
         var pct = (step / totalSteps) * 100;
@@ -3879,11 +3879,11 @@
 
     function goToVoucher() {
         currentStep = 3;
-        var s1 = document.getElementById('amtStep1'); if (s1) s1.style.display = 'none';
-        var s2 = document.getElementById('amtStep2'); if (s2) s2.style.display = 'none';
+        var s1 = document.getElementById('amtStep1'); if (s1) s1.style.setProperty('display', 'none', 'important');
+        var s2 = document.getElementById('amtStep2'); if (s2) s2.style.setProperty('display', 'none', 'important');
         var s3 = document.getElementById('amtStep3'); if (s3) s3.style.display = 'none';
         var s4 = document.getElementById('amtStep4'); if (s4) s4.style.display = 'none';
-        var sv = document.getElementById('amtStepVoucher'); if (sv) sv.style.display = 'block';
+        var sv = document.getElementById('amtStepVoucher'); if (sv) sv.style.setProperty('display', 'flex', 'important');
         var trustSec = document.querySelector('.portal-trust-section'); if (trustSec) trustSec.style.display = 'none';
 
         var pFill = document.getElementById('amtProgressFill'); if (pFill) pFill.style.width = '100%';

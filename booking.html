@@ -28,8 +28,8 @@
     <meta name="twitter:image" content="https://sunildanawale.github.io/Mahabaleshwartaxi/images/mahabaleshwar-hero-hd.jpg">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/advanced-features.min.css?v=127.0">
-    <link rel="stylesheet" href="css/style.min.css?v=127.0">
+    <link rel="stylesheet" href="css/advanced-features.min.css?v=128.0">
+    <link rel="stylesheet" href="css/style.min.css?v=128.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
@@ -3083,15 +3083,21 @@ body.booking-portal-page .portal-card {
         }
         .portal-card-header, .amt-card-header {
             flex-shrink: 0 !important;
-            height: 58px !important;
-            padding: 8px 16px 6px !important;
+            min-height: 64px !important;
+            height: auto !important;
+            padding: 10px 16px 8px !important;
             box-sizing: border-box !important;
+        }
+        .amt-stepper {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 8px !important;
+            margin: 4px 0 0 !important;
         }
         .portal-card-body, .amt-card-body {
             flex: 1 1 auto !important;
-            height: calc(560px - 58px) !important;
-            max-height: calc(560px - 58px) !important;
-            padding: 10px 14px 12px !important;
+            padding: 12px 14px 12px !important;
             overflow-y: auto !important;
             display: flex !important;
             flex-direction: column !important;
@@ -3099,11 +3105,22 @@ body.booking-portal-page .portal-card {
         }
         #amtStep1, #amtStep2, #amtStepVoucher {
             flex: 1 1 auto !important;
-            display: flex !important;
             flex-direction: column !important;
             min-height: 100% !important;
-            height: 100% !important;
             box-sizing: border-box !important;
+        }
+        #amtStep1[style*="display: none"],
+        #amtStep2[style*="display: none"],
+        #amtStepVoucher[style*="display: none"],
+        #amtStep1[style*="display:none"],
+        #amtStep2[style*="display:none"],
+        #amtStepVoucher[style*="display:none"] {
+            display: none !important;
+        }
+        #amtStep1:not([style*="display: none"]):not([style*="display:none"]),
+        #amtStep2:not([style*="display: none"]):not([style*="display:none"]),
+        #amtStepVoucher:not([style*="display: none"]):not([style*="display:none"]) {
+            display: flex !important;
         }
         #amtStep1 .amt-btn-row,
         #amtStep2 .amt-btn-row,
@@ -3162,18 +3179,29 @@ body.booking-portal-page .portal-card {
             flex: 1 1 auto !important;
             overflow-y: auto !important;
             -webkit-overflow-scrolling: touch !important;
-            padding: 8px 10px !important;
+            padding: 10px 10px !important;
             display: flex !important;
             flex-direction: column !important;
             box-sizing: border-box !important;
         }
         #amtStep1, #amtStep2, #amtStepVoucher {
             flex: 1 1 auto !important;
-            display: flex !important;
             flex-direction: column !important;
             min-height: 100% !important;
-            height: 100% !important;
             box-sizing: border-box !important;
+        }
+        #amtStep1[style*="display: none"],
+        #amtStep2[style*="display: none"],
+        #amtStepVoucher[style*="display: none"],
+        #amtStep1[style*="display:none"],
+        #amtStep2[style*="display:none"],
+        #amtStepVoucher[style*="display:none"] {
+            display: none !important;
+        }
+        #amtStep1:not([style*="display: none"]):not([style*="display:none"]),
+        #amtStep2:not([style*="display: none"]):not([style*="display:none"]),
+        #amtStepVoucher:not([style*="display: none"]):not([style*="display:none"]) {
+            display: flex !important;
         }
         #amtStep1 .amt-btn-row,
         #amtStep2 .amt-btn-row,
@@ -3595,9 +3623,9 @@ body.booking-portal-page .portal-card {
     </footer>
 
     <!-- Scripts -->
-    <script src="js/tour-data.js?v=127.0"></script>
-    <script src="js/ai-assistant.js?v=127.0" defer></script>
-    <script src="js/booking-widget.min.js?v=127.0"></script>
+    <script src="js/tour-data.js?v=128.0"></script>
+    <script src="js/ai-assistant.js?v=128.0" defer></script>
+    <script src="js/booking-widget.min.js?v=128.0"></script>
     <script>
     (function() {
         var search = window.location.search || '';
