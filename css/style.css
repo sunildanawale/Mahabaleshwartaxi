@@ -10315,28 +10315,31 @@ body.booking-portal-page .portal-card {
 }
 .portal-card-header {
     flex-shrink: 0 !important;
-    height: 54px !important;
-    min-height: 54px !important;
-    max-height: 54px !important;
-    padding: 6px 14px 4px !important;
+    min-height: 64px !important;
+    height: 64px !important;
+    padding: 10px 16px 8px !important;
     box-sizing: border-box !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
 }
 .portal-card-header .amt-header-title {
-    font-size: 0.94rem !important;
+    font-size: 0.96rem !important;
     font-weight: 800 !important;
     color: #ffffff !important;
-    margin: 0 !important;
-    line-height: 1.15 !important;
+    margin: 0 auto 3px !important;
+    line-height: 1.2 !important;
+    text-align: center !important;
+    width: 100% !important;
 }
 .portal-card-header .amt-stepper {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     gap: 8px !important;
-    margin: 2px 0 0 !important;
+    margin: 0 auto !important;
 }
 .portal-card-header .amt-step-item {
     display: flex !important;
@@ -10365,9 +10368,9 @@ body.booking-portal-page .portal-card {
         padding: 0 !important;
     }
     .portal-card, .amt-card, #amtBookingModal .amt-card {
-        min-height: 585px !important;
-        max-height: 585px !important;
-        height: 585px !important;
+        min-height: 672px !important;
+        height: auto !important;
+        max-height: none !important;
         display: flex !important;
         flex-direction: column !important;
         overflow: hidden !important;
@@ -10376,17 +10379,18 @@ body.booking-portal-page .portal-card {
     }
     .portal-card-body, .amt-card-body {
         flex: 1 1 auto !important;
-        min-height: 0 !important;
-        height: calc(585px - 54px) !important;
-        max-height: calc(585px - 54px) !important;
-        padding: 10px 14px 10px !important;
-        overflow-y: auto !important;
+        min-height: calc(672px - 64px) !important;
+        height: auto !important;
+        max-height: none !important;
+        padding: 10px 14px 12px !important;
+        overflow-y: visible !important;
         display: flex !important;
         flex-direction: column !important;
         box-sizing: border-box !important;
     }
     #amtStep1, #amtStep2, #amtStepVoucher {
         flex: 1 1 auto !important;
+        display: flex !important;
         flex-direction: column !important;
         min-height: 100% !important;
         box-sizing: border-box !important;
@@ -10409,7 +10413,7 @@ body.booking-portal-page .portal-card {
     #amtStepVoucher .amt-voucher-actions {
         flex-shrink: 0 !important;
         margin-top: auto !important;
-        padding-top: 6px !important;
+        padding-top: 8px !important;
         box-sizing: border-box !important;
         display: flex !important;
     }
