@@ -9587,7 +9587,8 @@ body.booking-portal-page .portal-card {
     color: #0284c7 !important;
     font-weight: 700 !important;
     margin-top: 1px !important;
-    white-space: nowrap !important;
+    white-space: normal !important;
+    line-height: 1.25 !important;
 }
 .amt-v-hdr-right {
     display: flex !important;
@@ -10001,8 +10002,8 @@ body.booking-portal-page .portal-card {
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
-    flex-wrap: nowrap !important;
-    gap: 6px !important;
+    flex-wrap: wrap !important;
+    gap: 4px 8px !important;
     width: 100% !important;
     min-width: 0 !important;
     box-sizing: border-box !important;
@@ -10013,9 +10014,7 @@ body.booking-portal-page .portal-card {
     gap: 5px !important;
     min-width: 0 !important;
     flex: 1 1 auto !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
+    flex-wrap: wrap !important;
 }
 .amt-v-vehicle-lbl {
     font-size: clamp(0.60rem, 2.1vw, 0.66rem) !important;

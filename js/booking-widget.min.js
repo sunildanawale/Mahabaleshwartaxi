@@ -2441,81 +2441,242 @@
         // ── WORKING ACTION BUTTONS ON STEP 3 VOUCHER ────────────────────────
 
 
-        // ── Standalone Isolated Voucher Printing & PDF Generation ─────────
-        function buildStandaloneVoucherHtml(innerContent) {
-            return '<!DOCTYPE html>\n'
+        // ── Executive Standalone A4 Voucher Generator (Pixel-Perfect 1-Page Layout) ──
+        function buildExecutiveA4VoucherHtml(b) {
+            b = b || bookingState || {};
+            var db = window.TOUR_DATABASE || (typeof TOUR_DATABASE !== 'undefined' ? TOUR_DATABASE : null);
+            var bId = b.bookingId || ('AMT-' + Date.now().toString().slice(-6));
+
+            var tours = [];
+            if (db) {
+                (b.selectedTours || []).forEach(function (st) {
+                    var t = db.getTourById(st.id);
+                    if (t) {
+                        tours.push({
+                            tour: t,
+                            date: (b.differentSchedule && st.date) ? st.date : b.date,
+                            time: (b.differentSchedule && st.time) ? st.time : b.time
+                        });
+                    }
+                });
+                if (tours.length === 0 && db.tours && db.tours.length > 0) {
+                    var fb = (b.tourId && db.getTourById(b.tourId)) || db.tours[0];
+                    tours.push({ tour: fb, date: b.date, time: b.time });
+                }
+            }
+
+            var isMulti = tours.length > 1;
+            var baseFare = tours.reduce(function (acc, item) { return acc + (item.tour.fare || 0); }, 0);
+            var isLarge = false;
+            var taxiCount = 1;
+            var totalFare = baseFare;
+            var sRules = getServiceRules(b.service || b.serviceType, tours, isLarge, taxiCount);
+
+            var isCombo = sRules.key === 'combo';
+            var isOutstation = sRules.key === 'outstation';
+            var isLocalDrop = sRules.key === 'local_drop';
+            var aiObj = getAIAdvisory(tours.map(function (it) { return it.tour; }), isOutstation, isLocalDrop, isCombo);
+
+            var guestName = formatSafeTitleCase(b.name || 'Guest Passenger');
+            var guestPhone = b.phone ? escapeHtml(b.phone) : '';
+            var dateSummaryStr = b.differentSchedule
+                ? 'Multi-Day Tour (Itemized Below)'
+                : (formatSafeDisplayDate(b.date || 'Scheduled') + ' at ' + formatPickupTime(b.time || '09:00'));
+            var pickupLoc = formatSafeTitleCase(b.pickup || 'Mahabaleshwar') + ' (Doorstep Porch)';
+            var vehicleText = (sRules.vehicleDesc || '4-Seater Dedicated Tourist Cab').replace(/\s*\(Arranged as per availability\)/i, '');
+
+            // Build Tour details HTML
+            var toursHtml = '';
+            tours.forEach(function (item, idx) {
+                var t = item.tour;
+                var tourPoints = t.points || [];
+                var tourHiddenPts = t.hidden_points || [];
+
+                var pointsChips = '';
+                if (sRules.key === 'sightseeing' || sRules.key === 'combo') {
+                    if (tourPoints.length > 0) {
+                        pointsChips += '<div style="margin-top:4px;">'
+                            + '<div style="font-size:9px;font-weight:800;color:#0369a1;text-transform:uppercase;margin-bottom:3px;letter-spacing:0.2px;"><i class="fa-solid fa-location-dot"></i> Included Sightseeing Circuit (' + tourPoints.length + ' Viewpoints):</div>'
+                            + '<div style="display:flex;flex-wrap:wrap;gap:3.5px;">'
+                            + tourPoints.map(function (p) {
+                                return '<span style="background:#ffffff;border:1px solid #cbd5e1;border-radius:3.5px;padding:1.5px 5.5px;font-size:8.5px;font-weight:600;color:#334155;">' + escapeHtml(p) + '</span>';
+                            }).join('')
+                            + '</div></div>';
+                    }
+                    if (tourHiddenPts.length > 0 && !isMulti) {
+                        pointsChips += '<div style="margin-top:3px;">'
+                            + '<div style="font-size:8.5px;font-weight:800;color:#92400e;text-transform:uppercase;margin-bottom:2px;letter-spacing:0.2px;"><i class="fa-solid fa-star"></i> Optional / Seasonal Points:</div>'
+                            + '<div style="display:flex;flex-wrap:wrap;gap:3.5px;">'
+                            + tourHiddenPts.map(function (p) {
+                                return '<span style="background:#fffbeb;border:1px solid #fde68a;border-radius:3.5px;padding:1.5px 5.5px;font-size:8px;font-weight:600;color:#92400e;">' + escapeHtml(p) + '</span>';
+                            }).join('')
+                            + '</div></div>';
+                    }
+                } else if (sRules.key === 'outstation') {
+                    pointsChips = '<div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:9.5px;font-weight:600;color:#1e293b;margin-top:4px;background:#ffffff;padding:4px 8px;border:1px solid #cbd5e1;border-radius:4px;">'
+                        + '<span style="color:#0284c7;"><i class="fa-solid fa-route"></i> Route:</span>'
+                        + '<span>Hotel Pickup</span> <span style="color:#0284c7;font-weight:800;">&rarr;</span> '
+                        + '<span>Pasarni / Wai Ghat</span> <span style="color:#0284c7;font-weight:800;">&rarr;</span> '
+                        + '<span>NH-48 Expressway</span> <span style="color:#0284c7;font-weight:800;">&rarr;</span> '
+                        + '<span>' + escapeHtml(t.name || 'Destination Drop') + '</span>'
+                        + '</div>';
+                } else if (sRules.key === 'local_drop') {
+                    pointsChips = '<div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:9.5px;font-weight:600;color:#1e293b;margin-top:4px;background:#ffffff;padding:4px 8px;border:1px solid #cbd5e1;border-radius:4px;">'
+                        + '<span style="color:#0284c7;"><i class="fa-solid fa-location-dot"></i> Transfer:</span>'
+                        + '<span>Hotel Porch</span> <span style="color:#0284c7;font-weight:800;">&rarr;</span> '
+                        + '<span>Direct Point-to-Point Transfer</span> <span style="color:#0284c7;font-weight:800;">&rarr;</span> '
+                        + '<span>' + escapeHtml(t.name || 'Destination') + '</span>'
+                        + '</div>';
+                }
+
+                toursHtml += '<div style="border:1.2px solid #bae6fd;background:#f0f9ff;border-radius:6px;padding:6px 10px;margin-bottom:4px;">'
+                    + '<div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #bae6fd;padding-bottom:3px;margin-bottom:3px;">'
+                    + '  <span style="font-size:12px;font-weight:800;color:#0369a1;"><i class="fa-solid fa-mountain-sun"></i> ' + escapeHtml(formatTourDisplayName(t, idx, isMulti)) + '</span>'
+                    + '  <span style="font-size:10px;font-weight:700;background:#e0f2fe;color:#0284c7;padding:2px 7px;border-radius:8px;"><i class="fa-solid fa-clock"></i> ' + escapeHtml(t.duration) + ' &bull; ₹' + t.fare + '</span>'
+                    + '</div>'
+                    + (isMulti && b.differentSchedule ? ('<div style="font-size:9px;color:#0369a1;font-weight:600;margin-bottom:3px;">📅 Schedule: ' + escapeHtml(formatSafeDisplayDate(item.date)) + ' at ' + escapeHtml(formatPickupTime(item.time)) + '</div>') : '')
+                    + pointsChips
+                    + '</div>';
+            });
+
+            var specialNotesHtml = '';
+            if (b.notes && b.notes.trim()) {
+                specialNotesHtml = '<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:5px;padding:4px 8px;font-size:9px;color:#166534;margin-top:2px;">'
+                    + '<strong>📝 Special Request:</strong> ' + escapeHtml(b.notes.trim())
+                    + '</div>';
+            }
+
+            var termsListHtml = sRules.terms.map(function (item) {
+                return '<li style="margin-bottom:1.5px;"><strong>' + escapeHtml(item.title) + ':</strong> ' + escapeHtml(item.desc) + '</li>';
+            }).join('');
+
+            var advisoryHtml = '';
+            if (aiObj && aiObj.text) {
+                advisoryHtml = '<div style="background:linear-gradient(135deg, #f0fdf4 0%, #ecfeff 100%);border:1px solid #a7f3d0;border-left:3.5px solid #10b981;border-radius:5px;padding:5px 8px;display:flex;align-items:center;gap:6px;">'
+                    + '<span style="background:#dcfce7;color:#065f46;border:1px solid #86efac;font-size:8.5px;font-weight:800;padding:1.5px 5px;border-radius:4px;text-transform:uppercase;white-space:nowrap;"><i class="fa-solid fa-sparkles"></i> ' + escapeHtml(aiObj.badge) + '</span>'
+                    + '<span style="font-size:9px;color:#065f46;font-weight:600;line-height:1.35;">' + aiObj.text + '</span>'
+                    + '</div>';
+            }
+
+            var issueDate = formatSafeDisplayDate(new Date().toISOString().slice(0, 10));
+
+            return '<div id="amtA4Document" style="width:750px;margin:0 auto;background:#ffffff;border:1.5px solid #0f2b48;border-radius:8px;padding:14px 18px;font-family:-apple-system,BlinkMacSystemFont,\'Segoe UI\',Roboto,Arial,sans-serif;color:#0f172a;box-sizing:border-box;display:flex;flex-direction:column;gap:7px;">'
+                // Header
+                + '<div style="display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #0f2b48;padding-bottom:8px;">'
+                + '  <div style="display:flex;align-items:center;gap:10px;">'
+                + '    <img src="' + ARYAN_LOGO_DATA_URI + '" alt="Aryan Taxi Logo" style="width:42px;height:42px;object-fit:contain;flex-shrink:0;">'
+                + '    <div>'
+                + '      <div style="font-size:16.5px;font-weight:900;color:#0f2b48;letter-spacing:0.4px;line-height:1.15;">ARYAN TAXI MAHABALESHWAR</div>'
+                + '      <div style="font-size:10px;font-weight:700;color:#0284c7;margin-top:2px;">' + escapeHtml(sRules.serviceTitle) + ' &bull; Explore Sahyadri &bull; Union Tariffs Accepted</div>'
+                + '      <div style="font-size:8.5px;color:#64748b;">Direct Local Owner-Driver Cab Service &bull; 24/7 Dispatch</div>'
+                + '    </div>'
+                + '  </div>'
+                + '  <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;text-align:right;">'
+                + '    <div style="background:' + sRules.badgeBg + ';color:' + sRules.badgeColor + ';border:1.2px solid ' + sRules.badgeBorder + ';padding:2.5px 8px;border-radius:14px;font-size:9.5px;font-weight:800;">'
+                + '      <i class="fa-solid fa-circle-check"></i> ' + sRules.badgeText
+                + '    </div>'
+                + '    <div style="font-size:10.5px;color:#475569;">Pass ID: <strong style="font-family:monospace;color:#0284c7;font-size:12px;">' + escapeHtml(bId) + '</strong></div>'
+                + '    <div style="font-size:8px;color:#64748b;">Issued on ' + escapeHtml(issueDate) + '</div>'
+                + '  </div>'
+                + '</div>'
+
+                // Banner
+                + '<div style="background:#0f2b48;color:#ffffff;padding:5px 10px;border-radius:4px;display:flex;justify-content:space-between;align-items:center;font-size:10px;font-weight:800;letter-spacing:0.4px;text-transform:uppercase;">'
+                + '  <span><i class="fa-solid fa-file-invoice"></i> Official Tourist Cab Booking Voucher &amp; Trip Pass</span>'
+                + '  <span style="color:#38bdf8;font-size:9px;font-weight:600;text-transform:none;">' + (isOutstation ? 'Doorstep Intercity Pickup' : 'Doorstep Hotel Porch Pickup') + '</span>'
+                + '</div>'
+
+                // Passenger Grid
+                + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px 12px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:7px 10px;font-size:10.5px;">'
+                + '  <div>'
+                + '    <div style="font-size:8.5px;font-weight:800;color:#64748b;text-transform:uppercase;letter-spacing:0.3px;">Lead Passenger</div>'
+                + '    <div style="font-size:11.5px;font-weight:700;color:#0f172a;margin-top:1px;">' + guestName + (guestPhone ? ' (' + guestPhone + ')' : '') + '</div>'
+                + '  </div>'
+                + '  <div>'
+                + '    <div style="font-size:8.5px;font-weight:800;color:#64748b;text-transform:uppercase;letter-spacing:0.3px;">Travel Schedule</div>'
+                + '    <div style="font-size:11.5px;font-weight:700;color:#0f172a;margin-top:1px;">' + dateSummaryStr + '</div>'
+                + '  </div>'
+                + '  <div style="grid-column:1/-1;border-top:1px dashed #cbd5e1;padding-top:4px;margin-top:1px;">'
+                + '    <div style="font-size:8.5px;font-weight:800;color:#64748b;text-transform:uppercase;letter-spacing:0.3px;">Pickup Location</div>'
+                + '    <div style="font-size:11.5px;font-weight:700;color:#0f172a;margin-top:1px;">' + pickupLoc + '</div>'
+                + '  </div>'
+                + '  <div style="grid-column:1/-1;border-top:1px dashed #cbd5e1;padding-top:4px;display:flex;justify-content:space-between;align-items:center;">'
+                + '    <div>'
+                + '      <span style="font-size:8.5px;font-weight:800;color:#64748b;text-transform:uppercase;">🚕 Cab Requirement:</span>'
+                + '      <strong style="font-size:11px;font-weight:700;color:#0369a1;margin-left:4px;">' + escapeHtml(vehicleText) + '</strong>'
+                + '      <span style="font-size:8.5px;color:#64748b;margin-left:3px;">(Arranged as per availability)</span>'
+                + '    </div>'
+                + '    <span style="background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0;padding:1.5px 6px;border-radius:4px;font-size:8.5px;font-weight:800;">'
+                + '      <i class="fa-solid fa-circle-check" style="color:#10b981;"></i> Union Fleet'
+                + '    </span>'
+                + '  </div>'
+                + '</div>'
+
+                + specialNotesHtml
+                + toursHtml
+                + advisoryHtml
+
+                // Fare bar
+                + '<div style="display:flex;justify-content:space-between;align-items:center;background:#f8fafc;border:1.5px solid #cbd5e1;border-radius:6px;padding:6px 10px;">'
+                + '  <div>'
+                + '    <div style="font-size:8px;font-weight:800;color:#64748b;text-transform:uppercase;letter-spacing:0.4px;">' + escapeHtml(sRules.tariffLabel) + '</div>'
+                + '    <div style="font-size:18px;font-weight:900;color:#0e7490;line-height:1.1;">₹' + totalFare + '</div>'
+                + (isMulti ? '<div style="font-size:7.5px;color:#64748b;">(' + tours.map(function (it) { return '₹' + it.tour.fare; }).join(' + ') + ')</div>' : '')
+                + '  </div>'
+                + '  <div style="text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:1px;">'
+                + '    <div style="font-size:10px;font-weight:800;color:' + sRules.paymentColor + ';"><i class="fa-solid fa-check"></i> ' + escapeHtml(sRules.paymentBadge) + '</div>'
+                + '    <div style="font-size:8.5px;color:#64748b;">' + (isOutstation ? 'Official Intercity Tariff &bull; Direct Settlement with Operating Driver' : 'Approved Taxi Union Rate &bull; Cash or UPI to Operating Driver Upon Completion') + '</div>'
+                + '  </div>'
+                + '</div>'
+
+                // Guidelines
+                + '<div style="background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:6px 10px;">'
+                + '  <div style="font-size:8.5px;font-weight:800;color:#92400e;text-transform:uppercase;margin-bottom:2px;letter-spacing:0.3px;">'
+                + '    <i class="fa-solid fa-shield-halved"></i> ' + escapeHtml(sRules.termsTitle) + ':'
+                + '  </div>'
+                + '  <ul style="margin:0;padding-left:14px;font-size:8.5px;color:#78350f;line-height:1.35;">'
+                + termsListHtml
+                + '  </ul>'
+                + '</div>'
+
+                // Dispatch Acknowledgment Slip
+                + '<div style="border:1.5px dashed #94a3b8;background:#f8fafc;border-radius:6px;padding:5px 10px;display:flex;justify-content:space-between;align-items:center;font-size:8.5px;color:#334155;">'
+                + '  <div><i class="fa-solid fa-file-signature"></i> <strong>Driver Dispatch Acknowledgment:</strong> Reporting at porch on schedule</div>'
+                + '  <div style="display:flex;gap:16px;">'
+                + '    <span>Driver Ack: ____________________</span>'
+                + '    <span>Guest Ack: ____________________</span>'
+                + '  </div>'
+                + '</div>'
+
+                // Footer
+                + '<div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid #cbd5e1;padding-top:4px;font-size:8px;color:#64748b;">'
+                + '  <span>Aryan Taxi Mahabaleshwar &bull; Registered Taxi Union Member Cab Network</span>'
+                + '  <span>24/7 Helpline: +91 99228 82044 &bull; Web: sunildanawale.github.io/Mahabaleshwartaxi</span>'
+                + '</div>'
+
+                + '</div>';
+        }
+
+        function printVoucherDocument() {
+            var a4Html = buildExecutiveA4VoucherHtml(bookingState);
+            var printContent = '<!DOCTYPE html>\n'
                 + '<html lang="en">\n'
                 + '<head>\n'
                 + '  <meta charset="utf-8">\n'
                 + '  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n'
                 + '  <title>Aryan Taxi Mahabaleshwar - Official Booking Voucher</title>\n'
+                + '  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">\n'
                 + '  <style>\n'
                 + '    @page { size: A4 portrait; margin: 4mm 5mm; }\n'
                 + '    * { box-sizing: border-box !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }\n'
-                + '    body { margin: 0; padding: 6px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; background: #ffffff !important; color: #0f172a !important; font-size: 11px; }\n'
-                + '    .amt-v-card-streamlined { border: 1.5px solid #0f2b48 !important; border-radius: 8px !important; padding: 10px 12px !important; max-width: 760px; margin: 0 auto; background: #ffffff !important; color: #0f172a !important; display: flex; flex-direction: column; gap: 5px; box-sizing: border-box; }\n'
-                + '    .amt-v-hdr { display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 5px; margin-bottom: 4px; }\n'
-                + '    .amt-v-hdr-left { display: flex; align-items: center; gap: 8px; }\n'
-                + '    .amt-v-brand { font-size: 13px; font-weight: 800; color: #0f2b48; letter-spacing: 0.5px; }\n'
-                + '    .amt-v-sub { font-size: 10px; color: #64748b; font-weight: 600; }\n'
-                + '    .amt-v-hdr-right { display: flex; flex-direction: column; align-items: flex-end; text-align: right; gap: 2px; }\n'
-                + '    .amt-v-badge { display: inline-block; padding: 2px 7px; border-radius: 12px; font-size: 9px; font-weight: 800; background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }\n'
-                + '    .amt-v-ref-box { font-size: 10px; color: #334155; }\n'
-                + '    .amt-v-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 10px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 7px; padding: 6px 9px; margin-bottom: 4px; font-size: 10.5px; }\n'
-                + '    .amt-v-cell { display: flex; flex-direction: column; gap: 1.5px; }\n'
-                + '    .amt-v-lbl { font-size: 8.5px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.3px; }\n'
-                + '    .amt-v-val { font-size: 10.5px; font-weight: 700; color: #0f172a; }\n'
-                + '    .amt-v-vehicle-cell { border-top: 1px dashed #e2e8f0; padding-top: 3px; grid-column: 1 / -1; }\n'
-                + '    .amt-v-vehicle-wrap { display: flex; align-items: center; gap: 4px; font-size: 10px; color: #0f172a; }\n'
-                + '    .amt-v-vehicle-lbl { font-size: 8.5px; font-weight: 700; color: #64748b; text-transform: uppercase; }\n'
-                + '    .amt-v-vehicle-val { font-weight: 700; color: #0369a1; }\n'
-                + '    .amt-v-tour-strip { border: 1px solid #bae6fd; background: #f0f9ff; border-radius: 7px; padding: 6px 9px; margin-bottom: 4px; }\n'
-                + '    .amt-v-tour-hdr { display: flex; justify-content: space-between; align-items: center; font-weight: 800; font-size: 11px; color: #0369a1; border-bottom: 1px solid #bae6fd; padding-bottom: 3px; margin-bottom: 3px; }\n'
-                + '    .amt-v-tour-dur { font-size: 9px; color: #0284c7; font-weight: 700; background: #e0f2fe; padding: 1.5px 6px; border-radius: 8px; }\n'
-                + '    .amt-v-tour-meta { font-size: 9.5px; color: #0f2b48; margin-bottom: 3px; }\n'
-                + '    .amt-v-points-box { margin-top: 3px; }\n'
-                + '    .amt-v-points-head { font-size: 8.5px; font-weight: 800; color: #0369a1; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.2px; }\n'
-                + '    .amt-v-chips-wrap { display: flex; flex-wrap: wrap; gap: 3px; }\n'
-                + '    .amt-v-chip { display: inline-block; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 3px; padding: 1px 5px; font-size: 8.5px; color: #334155; font-weight: 600; }\n'
-                + '    .amt-v-route-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; font-size: 9.5px; font-weight: 600; color: #1e293b; margin-top: 3px; }\n'
-                + '    .amt-v-route-step { background: #ffffff; border: 1px solid #cbd5e1; padding: 1.5px 5px; border-radius: 3px; }\n'
-                + '    .amt-v-route-arrow { color: #0284c7; font-weight: 800; }\n'
-                + '    .amt-v-ai-advisory { background: linear-gradient(135deg, #f0fdf4 0%, #ecfeff 100%) !important; border: 1px solid #a7f3d0 !important; border-left: 3px solid #10b981 !important; border-radius: 5px !important; padding: 4px 7px !important; margin: 3px 0 !important; display: flex !important; align-items: center !important; gap: 6px !important; box-sizing: border-box !important; }\n'
-                + '    .amt-v-ai-badge { display: inline-flex !important; align-items: center !important; gap: 3px !important; background: #dcfce7 !important; color: #047857 !important; border: 1px solid #86efac !important; font-size: 8px !important; font-weight: 800 !important; padding: 1.5px 5px !important; border-radius: 3px !important; text-transform: uppercase !important; letter-spacing: 0.3px !important; white-space: nowrap !important; flex-shrink: 0 !important; }\n'
-                + '    .amt-v-ai-text { font-size: 9.5px !important; line-height: 1.35 !important; color: #065f46 !important; font-weight: 500 !important; }\n'
-                + '    .amt-v-fare-bar { display: flex !important; justify-content: space-between !important; align-items: center !important; background: #f8fafc !important; border: 1.2px solid #cbd5e1 !important; border-radius: 6px !important; padding: 4px 8px !important; margin: 3px 0 !important; box-sizing: border-box !important; }\n'
-                + '    .amt-v-fare-left { display: flex !important; flex-direction: column !important; }\n'
-                + '    .amt-v-fare-lbl { font-size: 8px !important; color: #64748b !important; font-weight: 800 !important; text-transform: uppercase !important; letter-spacing: 0.3px !important; }\n'
-                + '    .amt-v-fare-amt { font-size: 13.5px !important; font-weight: 900 !important; color: #0e7490 !important; line-height: 1.1 !important; }\n'
-                + '    .amt-v-fare-breakdown { font-size: 7.5px !important; color: #64748b !important; }\n'
-                + '    .amt-v-fare-right { text-align: right !important; display: flex !important; flex-direction: column !important; align-items: flex-end !important; }\n'
-                + '    .amt-v-pay-badge { font-size: 8.5px !important; font-weight: 800 !important; color: #15803d !important; }\n'
-                + '    .amt-v-pay-note { font-size: 7.5px !important; color: #64748b !important; }\n'
-                + '    .amt-v-terms-compact { background: #fffbeb; border: 1px solid #fde68a; border-radius: 6px; padding: 5px 8px; font-size: 8.5px; margin-bottom: 2px; }\n'
-                + '    .amt-v-terms-title { font-weight: 800; color: #92400e; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.2px; font-size: 8px; }\n'
-                + '    .amt-v-terms-list { margin: 0; padding-left: 12px; color: #78350f; }\n'
-                + '    .amt-v-terms-list li { margin-bottom: 1px; font-size: 8px; line-height: 1.3; }\n'
-                + '    .amt-v-notes-chip { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 5px; padding: 3px 6px; font-size: 9px; color: #166534; margin-bottom: 3px; }\n'
-                + '    .amt-v-print-slip { display: block !important; margin-top: 3px !important; border: 1px dashed #cbd5e1 !important; border-radius: 5px !important; padding: 4px 7px !important; background: #f8fafc !important; font-size: 8.5px !important; color: #475569 !important; }\n'
-                + '    .amt-v-ftr { display: flex; justify-content: space-between; font-size: 8px; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 3px; margin-top: 2px; }\n'
+                + '    body { margin: 0; padding: 0; background: #ffffff !important; color: #0f172a !important; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; display: flex; justify-content: center; }\n'
                 + '    @media print { body { padding: 0 !important; } }\n'
                 + '  </style>\n'
                 + '</head>\n'
                 + '<body>\n'
-                + innerContent
+                + a4Html
                 + '\n</body>\n'
                 + '</html>';
-        }
-
-        function printVoucherDocument() {
-            var voucherEl = document.getElementById('amtVoucherContent');
-            if (!voucherEl || !voucherEl.innerHTML || voucherEl.innerHTML.trim() === '') {
-                try { renderVoucherScreen(); } catch (e) { }
-                voucherEl = document.getElementById('amtVoucherContent');
-            }
-            if (!voucherEl) return;
-
-            var printContent = buildStandaloneVoucherHtml(voucherEl.innerHTML);
 
             var iframe = document.getElementById('amtVoucherPrintFrame');
             if (iframe) {
@@ -2556,18 +2717,12 @@
         }
 
         function downloadVoucherPdf() {
-            var voucherEl = document.getElementById('amtVoucherContent');
-            if (!voucherEl || !voucherEl.innerHTML || voucherEl.innerHTML.trim() === '') {
-                try { renderVoucherScreen(); } catch (e) { }
-                voucherEl = document.getElementById('amtVoucherContent');
-            }
-            if (!voucherEl) return;
             var bId = bookingState.bookingId || ('AMT-' + Date.now().toString().slice(-6));
             var btn = document.getElementById('amtDownloadPdfBtn');
             var origText = btn ? btn.innerHTML : '';
             if (btn) {
                 btn.disabled = true;
-                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" style="color:#0891b2;font-size:0.80rem;"></i><span>Saving PDF...</span>';
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" style="color:#0891b2;font-size:0.80rem;"></i><span>Saving A4 PDF...</span>';
             }
 
             function resetBtn() {
@@ -2579,8 +2734,23 @@
 
             function fallbackDownloadHtml() {
                 try {
-                    var innerHtml = voucherEl.innerHTML;
-                    var standaloneHtml = buildStandaloneVoucherHtml(innerHtml);
+                    var standaloneHtml = '<!DOCTYPE html>\n'
+                        + '<html lang="en">\n'
+                        + '<head>\n'
+                        + '  <meta charset="utf-8">\n'
+                        + '  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n'
+                        + '  <title>Aryan Taxi Mahabaleshwar - Official Booking Voucher</title>\n'
+                        + '  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">\n'
+                        + '  <style>\n'
+                        + '    @page { size: A4 portrait; margin: 4mm 5mm; }\n'
+                        + '    * { box-sizing: border-box !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }\n'
+                        + '    body { margin: 0; padding: 0; background: #ffffff !important; display: flex; justify-content: center; }\n'
+                        + '  </style>\n'
+                        + '</head>\n'
+                        + '<body>\n'
+                        + buildExecutiveA4VoucherHtml(bookingState)
+                        + '\n</body>\n'
+                        + '</html>';
                     var blob = new Blob([standaloneHtml], { type: 'text/html;charset=utf-8' });
                     var url = URL.createObjectURL(blob);
                     var a = document.createElement('a');
@@ -2598,35 +2768,46 @@
 
             function executePdfGeneration() {
                 try {
-                    // Temporarily open details sections on the visible voucher for full capture
-                    var detailsList = voucherEl.querySelectorAll('details');
-                    var wasOpen = [];
-                    detailsList.forEach(function (d, i) {
-                        wasOpen[i] = d.hasAttribute('open');
-                        d.setAttribute('open', '');
-                    });
+                    var wrapper = document.createElement('div');
+                    wrapper.id = 'amtA4PdfCaptureContainer';
+                    wrapper.style.position = 'fixed';
+                    wrapper.style.top = '0';
+                    wrapper.style.left = '0';
+                    wrapper.style.width = '750px';
+                    wrapper.style.zIndex = '-99999';
+                    wrapper.style.background = '#ffffff';
+                    wrapper.style.padding = '0';
+                    wrapper.style.margin = '0';
+                    wrapper.innerHTML = buildExecutiveA4VoucherHtml(bookingState);
+                    document.body.appendChild(wrapper);
 
                     var opt = {
-                        margin: [6, 6, 6, 6],
+                        margin: [4, 4, 4, 4],
                         filename: 'AryanTaxi-Voucher-' + bId + '.pdf',
                         image: { type: 'jpeg', quality: 0.98 },
-                        html2canvas: { scale: 2, useCORS: true, logging: false },
+                        html2canvas: {
+                            scale: 2,
+                            useCORS: true,
+                            logging: false,
+                            width: 750,
+                            windowWidth: 750,
+                            scrollX: 0,
+                            scrollY: 0,
+                            x: 0,
+                            y: 0
+                        },
                         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
                     };
 
-                    html2pdf().set(opt).from(voucherEl).save().then(function () {
-                        detailsList.forEach(function (d, i) {
-                            if (!wasOpen[i]) d.removeAttribute('open');
-                        });
+                    html2pdf().set(opt).from(wrapper.firstElementChild || wrapper).save().then(function () {
+                        try { document.body.removeChild(wrapper); } catch (e) { }
                         if (btn) {
                             btn.innerHTML = '<i class="fa-solid fa-check"></i> PDF Saved!';
                             setTimeout(resetBtn, 3000);
                         }
                     }).catch(function (err) {
                         console.warn('html2pdf generation error, falling back:', err);
-                        detailsList.forEach(function (d, i) {
-                            if (!wasOpen[i]) d.removeAttribute('open');
-                        });
+                        try { document.body.removeChild(wrapper); } catch (e) { }
                         fallbackDownloadHtml();
                     });
                 } catch (ePdf) {
@@ -4181,7 +4362,7 @@
 
                 + termsHtml
 
-                + '<div class="amt-v-print-slip" style="display:block; margin-top:8px; padding:6px 10px; background:#f8fafc; border:1px dashed #cbd5e1; border-radius:6px; font-size:10px; color:#475569;">'
+                + '<div class="amt-v-print-slip">'
                 + '  <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">'
                 + '    <span><i class="fa-solid fa-file-signature"></i> <strong>Driver Dispatch Acknowledgment:</strong> Reporting at porch on schedule</span>'
                 + '    <div style="display:flex; gap:16px;">'
