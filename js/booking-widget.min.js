@@ -2598,21 +2598,13 @@
 
             function executePdfGeneration() {
                 try {
-                    // Create an offscreen clone with all details sections expanded for full voucher capture
-                    var clone = voucherEl.cloneNode(true);
-                    var detailsList = clone.querySelectorAll('details');
-                    detailsList.forEach(function (d) {
+                    // Temporarily open details sections on the visible voucher for full capture
+                    var detailsList = voucherEl.querySelectorAll('details');
+                    var wasOpen = [];
+                    detailsList.forEach(function (d, i) {
+                        wasOpen[i] = d.hasAttribute('open');
                         d.setAttribute('open', '');
                     });
-                    clone.style.width = '700px';
-                    clone.style.maxWidth = '700px';
-                    clone.style.background = '#ffffff';
-                    clone.style.padding = '12px';
-                    clone.style.boxSizing = 'border-box';
-                    clone.style.position = 'absolute';
-                    clone.style.left = '-9999px';
-                    clone.style.top = '0';
-                    document.body.appendChild(clone);
 
                     var opt = {
                         margin: [6, 6, 6, 6],
@@ -2622,15 +2614,19 @@
                         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
                     };
 
-                    html2pdf().set(opt).from(clone).save().then(function () {
-                        try { document.body.removeChild(clone); } catch (e) { }
+                    html2pdf().set(opt).from(voucherEl).save().then(function () {
+                        detailsList.forEach(function (d, i) {
+                            if (!wasOpen[i]) d.removeAttribute('open');
+                        });
                         if (btn) {
                             btn.innerHTML = '<i class="fa-solid fa-check"></i> PDF Saved!';
                             setTimeout(resetBtn, 3000);
                         }
                     }).catch(function (err) {
                         console.warn('html2pdf generation error, falling back:', err);
-                        try { document.body.removeChild(clone); } catch (e) { }
+                        detailsList.forEach(function (d, i) {
+                            if (!wasOpen[i]) d.removeAttribute('open');
+                        });
                         fallbackDownloadHtml();
                     });
                 } catch (ePdf) {
