@@ -568,7 +568,7 @@
                     : '_(Official Union Tariff • Zero Advance • Pay Driver After Trip)_\n\n'))
             + '🔖 *Booking Voucher ID:* ' + (b.bookingId || 'AMT-REQ') + '\n'
             + '👤 *Guest Name:* ' + b.name + (b.phone ? ' (' + b.phone + ')' : '') + '\n'
-            + '📧 *Guest Email:* ' + (b.email || 'N/A') + '\n'
+            + '📧 *Guest Email:* ' + (b.email ? b.email.toLowerCase() : 'N/A') + '\n'
             + '🏨 *Pickup Location:* ' + pickupStr + '\n'
             + '👥 *Cab Requirement:* ' + sRules.vehicleDesc + '\n\n'
             + '🚖 *Confirmed Tour' + (isMulti ? 's (' + tours.length + ' Tours):*' : ':*') + '\n'
@@ -1671,21 +1671,21 @@
 
             // STEP 3: DIGITAL CONFIRMED VOUCHER SCREEN
             + '<div id="amtStepVoucher" style="display:none;">'
-            + '<div id="amtVoucherNotice" class="amt-voucher-screen-notice" style="background:#ecfdf5;border:1px solid #a7f3d0;border-radius:8px;padding:6px 10px;margin-bottom:8px;text-align:left;box-sizing:border-box;">'
-            + '  <div style="display:flex;align-items:center;gap:6px;color:#065f46;font-size:0.80rem;font-weight:800;margin-bottom:1px;"><i class="fa-solid fa-circle-check" style="color:#10b981;"></i> Booking Voucher Generated &bull; Union Rate Locked</div>'
-            + '  <p id="amtVoucherNoticeSub" style="margin:0;font-size:0.72rem;color:#047857;line-height:1.25;font-weight:500;">Your trip reference is saved. Tap below to send details on WhatsApp for immediate cab dispatch. Pay driver after trip.</p>'
+            + '<div id="amtVoucherNotice" class="amt-voucher-screen-notice" style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:6px 10px;margin-bottom:6px;text-align:left;box-sizing:border-box;">'
+            + '  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:4px;"><div style="display:flex;align-items:center;gap:6px;color:#166534;font-size:0.76rem;font-weight:800;"><i class="fa-solid fa-circle-check" style="color:#16a34a;"></i> <span>Booking Request Registered &bull; Tariff Locked</span></div><span class="amt-v-live-tag" style="background:#dcfce7;color:#15803d;font-size:0.62rem;font-weight:700;padding:1px 6px;border-radius:4px;border:1px solid #86efac;">Zero Advance Required</span></div>'
+            + '  <p id="amtVoucherNoticeSub" style="margin:3px 0 0;font-size:0.67rem;color:#166534;line-height:1.3;font-weight:500;">✉️ Official voucher emailed to passenger. Dedicated tourist cab assignment is in progress. Driver details will be confirmed before pickup. Pay 100% after trip completion.</p>'
             + '</div>'
             + '<div id="amtVoucherContent" class="amt-voucher"></div>'
             + '<div id="amtDesktopQrContainer"></div>'
             + '<div class="amt-dispatch-tracker" style="display:flex;align-items:flex-start;justify-content:space-between;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:6px 12px 5px;margin-top:5px;margin-bottom:5px;box-sizing:border-box;width:100%;">'
-            + '<div class="amt-dt-step completed" style="display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;"><div class="amt-dt-icon" style="width:18px;height:18px;border-radius:50%;background:#10b981;color:#fff;font-size:0.55rem;display:flex;align-items:center;justify-content:center;"><i class="fa-solid fa-check"></i></div><div class="amt-dt-label" style="font-size:0.62rem;font-weight:700;color:#0f2b48;white-space:nowrap;">1. Voucher Issued</div></div>'
+            + '<div class="amt-dt-step completed" style="display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;"><div class="amt-dt-icon" style="width:18px;height:18px;border-radius:50%;background:#10b981;color:#fff;font-size:0.55rem;display:flex;align-items:center;justify-content:center;"><i class="fa-solid fa-check"></i></div><div class="amt-dt-label" style="font-size:0.62rem;font-weight:700;color:#0f2b48;white-space:nowrap;">1. Request Registered</div></div>'
             + '<div class="amt-dt-line" style="flex:1 1 0;height:2px;background:#10b981;align-self:flex-start;margin-top:8px;margin-left:6px;margin-right:6px;"></div>'
-            + '<div class="amt-dt-step active" style="display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;"><div class="amt-dt-icon" style="width:18px;height:18px;border-radius:50%;background:#0284c7;color:#fff;font-size:0.55rem;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px rgba(2,132,199,0.25);"><i class="fa-brands fa-whatsapp"></i></div><div class="amt-dt-label" style="font-size:0.62rem;font-weight:700;color:#0284c7;white-space:nowrap;">2. WhatsApp Dispatch</div></div>'
+            + '<div class="amt-dt-step active" style="display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;"><div class="amt-dt-icon" style="width:18px;height:18px;border-radius:50%;background:#0284c7;color:#fff;font-size:0.55rem;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px rgba(2,132,199,0.25);"><i class="fa-solid fa-taxi"></i></div><div class="amt-dt-label" style="font-size:0.62rem;font-weight:700;color:#0284c7;white-space:nowrap;">2. Cab Assignment</div></div>'
             + '<div class="amt-dt-line" style="flex:1 1 0;height:2px;background:#cbd5e1;align-self:flex-start;margin-top:8px;margin-left:6px;margin-right:6px;"></div>'
             + '<div class="amt-dt-step" style="display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;"><div class="amt-dt-icon" style="width:18px;height:18px;border-radius:50%;background:#cbd5e1;color:#fff;font-size:0.55rem;display:flex;align-items:center;justify-content:center;"><i class="fa-solid fa-hotel"></i></div><div class="amt-dt-label" style="font-size:0.62rem;font-weight:700;color:#64748b;white-space:nowrap;">3. Porch Pickup</div></div>'
             + '</div>'
             + '<div class="amt-voucher-actions" style="margin-top:4px;">'
-            + '<button type="button" id="amtWaBtn" class="amt-btn-next amt-btn-confirm" style="width:100%;padding:9px 12px;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;box-shadow:0 4px 14px rgba(16,185,129,0.35);background:#10b981;color:#ffffff;border:none;cursor:pointer;"><div class="amt-wa-btn-title" style="display:inline-flex;align-items:center;justify-content:center;gap:7px;font-size:0.88rem;font-weight:800;letter-spacing:0.3px;width:100%;white-space:nowrap;"><i class="fa-brands fa-whatsapp" style="font-size:1.15rem;"></i> <span>OPEN WHATSAPP TO DISPATCH CAB</span></div><span id="amtWaBtnSubtext" style="font-size:0.64rem;font-weight:600;opacity:0.95;line-height:1.25;text-align:center;display:block;padding:0 4px;box-sizing:border-box;width:100%;">Send transfer details on WhatsApp to confirm driver & advance schedule</span></button>'
+            + '<button type="button" id="amtWaBtn" class="amt-btn-next amt-btn-confirm" style="width:100%;padding:9px 12px;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;box-shadow:0 4px 14px rgba(16,185,129,0.35);background:#10b981;color:#ffffff;border:none;cursor:pointer;"><div class="amt-wa-btn-title" style="display:inline-flex;align-items:center;justify-content:center;gap:7px;font-size:0.88rem;font-weight:800;letter-spacing:0.3px;width:100%;white-space:nowrap;"><i class="fa-brands fa-whatsapp" style="font-size:1.15rem;"></i> <span>CONNECT ON WHATSAPP FOR INSTANT CONFIRMATION</span></div><span id="amtWaBtnSubtext" style="font-size:0.64rem;font-weight:600;opacity:0.95;line-height:1.25;text-align:center;display:block;padding:0 4px;box-sizing:border-box;width:100%;">Fastest Option &bull; Chat directly with 24/7 Operations Desk (Zero Advance &bull; Pay After Tour)</span></button>'
             + '<div style="display:grid;grid-template-columns:repeat(5, 1fr);gap:4px;margin-top:5px;">'
             + '<button type="button" id="amtDownloadPdfBtn" class="amt-btn-back amt-btn-pdf" style="padding:6px 2px;border:1px solid #0891b2;background:#f0fdf4;color:#0e7490;border-radius:6px;font-weight:700;cursor:pointer;font-size:0.68rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;"><i class="fa-solid fa-file-arrow-down" style="color:#0891b2;font-size:0.80rem;"></i><span>PDF</span></button>'
             + '<button type="button" id="amtPrintBtn" class="amt-btn-back" style="padding:6px 2px;border:1px solid #cbd5e1;background:#ffffff;color:#334155;border-radius:6px;font-weight:700;cursor:pointer;font-size:0.68rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;"><i class="fa-solid fa-print" style="font-size:0.80rem;"></i><span>Print</span></button>'
@@ -4345,7 +4345,7 @@
                 + '<div class="amt-v-grid">'
                 + '  <div class="amt-v-cell">'
                 + '    <span class="amt-v-lbl">Lead Passenger</span>'
-                + '    <span class="amt-v-val"><strong style="text-transform:capitalize;">' + escapeHtml(formatSafeTitleCase(bookingState.name || 'Guest')) + '</strong>' + (bookingState.phone ? ' (' + escapeHtml(bookingState.phone) + ')' : '') + (bookingState.email ? '<br><span style="font-size:0.64rem;color:#64748b;font-weight:normal;">✉️ ' + escapeHtml(bookingState.email) + '</span>' : '') + '</span>'
+                + '    <span class="amt-v-val"><strong style="text-transform:capitalize;">' + escapeHtml(formatSafeTitleCase(bookingState.name || 'Guest')) + '</strong>' + (bookingState.phone ? ' (' + escapeHtml(bookingState.phone) + ')' : '') + (bookingState.email ? '<br><span class="amt-v-email" style="font-size:0.64rem;color:#0284c7;font-weight:600;text-transform:lowercase!important;">✉️ ' + escapeHtml(bookingState.email.toLowerCase()) + '</span>' : '') + '</span>'
                 + '  </div>'
                 + '  <div class="amt-v-cell">'
                 + '    <span class="amt-v-lbl">Travel Schedule</span>'
@@ -4366,6 +4366,11 @@
                 + '    </div>'
                 + '  </div>'
                 + '</div>'
+
+                + (bookingState.email ? ('<div class="amt-v-email-status-chip">'
+                    + '  <i class="fa-solid fa-envelope-circle-check" style="color:#16a34a;font-size:0.85rem;flex-shrink:0;"></i>'
+                    + '  <span><strong>Voucher Emailed:</strong> A copy with Pass ID <strong>' + escapeHtml(bookingState.bookingId || 'AMT-REQ') + '</strong> has been sent to <span class="amt-v-email" style="text-decoration:underline;text-transform:lowercase!important;font-weight:700;">' + escapeHtml(bookingState.email.toLowerCase()) + '</span>. Driver assignment in progress.</span>'
+                    + '</div>') : '')
 
                 + notesHtml
 
@@ -4430,17 +4435,24 @@
 
             var noticeSub = document.getElementById('amtVoucherNoticeSub');
             if (noticeSub) {
-                noticeSub.textContent = sRules.dispatchNotice;
+                var emailStr = bookingState.email ? (' to <strong class="amt-v-email" style="text-transform:lowercase!important;">' + escapeHtml(bookingState.email.toLowerCase()) + '</strong>') : '';
+                if (sRules.key === 'outstation') {
+                    noticeSub.innerHTML = '✉️ Digital voucher emailed' + emailStr + '. Nominal fuel advance confirms outstation vehicle dispatch. Balance payable upon destination drop.';
+                } else if (sRules.key === 'local_drop') {
+                    noticeSub.innerHTML = '✉️ Digital voucher emailed' + emailStr + '. Point-to-point drop cab assigned as per schedule. Zero advance — pay driver after drop.';
+                } else {
+                    noticeSub.innerHTML = '✉️ Digital voucher emailed' + emailStr + '. Dedicated tourist cab assignment in progress. Zero advance — pay 100% of tariff to driver after tour.';
+                }
             }
 
             var waSub = document.getElementById('amtWaBtnSubtext');
             if (waSub) {
                 if (sRules.key === 'outstation') {
-                    waSub.textContent = 'Send transfer details on WhatsApp to confirm driver & advance schedule';
+                    waSub.textContent = 'Fastest Option • Chat with Operations to reconfirm outstation cab & advance schedule';
                 } else if (sRules.key === 'local_drop') {
-                    waSub.textContent = 'Send drop details on WhatsApp to confirm driver dispatch';
+                    waSub.textContent = 'Fastest Option • Chat with Operations for immediate point-to-point drop cab assignment';
                 } else {
-                    waSub.textContent = 'Send tour details on WhatsApp to confirm driver dispatch & timing';
+                    waSub.textContent = 'Fastest Option • Chat directly with 24/7 Operations Desk (Zero Advance • Pay After Tour)';
                 }
             }
         } catch (err) {

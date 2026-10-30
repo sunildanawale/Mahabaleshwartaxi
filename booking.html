@@ -28,8 +28,8 @@
     <meta name="twitter:image" content="https://sunildanawale.github.io/Mahabaleshwartaxi/images/mahabaleshwar-hero-hd.jpg">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/advanced-features.min.css?v=128.0">
-    <link rel="stylesheet" href="css/style.min.css?v=128.0">
+    <link rel="stylesheet" href="css/advanced-features.min.css?v=129.0">
+    <link rel="stylesheet" href="css/style.min.css?v=129.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
@@ -2440,12 +2440,13 @@ body.booking-portal-page .portal-card {
         [data-theme="dark"] #amtBookingModal .amt-tour-insight-box { background:#0e3d54 !important; border-color:#06b6d4 !important; color:#67e8f9 !important; }
         [data-theme="dark"] #amtBookingModal .amt-stb-union-disclaimer { background:rgba(245,158,11,0.18) !important; border-color:rgba(245,158,11,0.45) !important; color:#fde68a !important; }
         .amt-v-card-streamlined { background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; box-sizing: border-box; width: 100%; text-align: left; }
-        .amt-v-hdr { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 6px; gap: 8px; }
-        .amt-v-hdr-left { display: flex; align-items: center; gap: 10px; }
-        .amt-v-brand { font-size: 0.98rem; font-weight: 800; color: #0f2b48; letter-spacing: 0.4px; line-height: 1.2; white-space: nowrap !important; }
-        .amt-v-sub { font-size: 0.72rem; color: #0284c7; font-weight: 700; margin-top: 1px; }
-        .amt-v-hdr-right { text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex-shrink: 0; }
-        .amt-v-badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 0.68rem; font-weight: 800; border: 1px solid; text-transform: uppercase; }
+        .amt-v-hdr { display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 6px; gap: 8px; overflow: visible; }
+        .amt-v-hdr-left { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1 1 auto; }
+        .amt-v-brand { font-size: clamp(0.72rem, 2.5vw, 0.85rem) !important; font-weight: 800; color: #0f2b48; letter-spacing: normal; line-height: 1.2; white-space: nowrap !important; }
+        .amt-v-sub { font-size: 0.65rem; color: #0284c7; font-weight: 700; margin-top: 1px; }
+        .amt-v-hdr-right { text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 3px; flex-shrink: 0; max-width: 52%; }
+        .amt-v-badge { display: inline-flex; align-items: center; gap: 3px; padding: 2px 5px; border-radius: 5px; font-size: 0.58rem; font-weight: 800; border: 1px solid; text-transform: uppercase; white-space: nowrap; }
+        .amt-v-email, .amt-v-val .amt-v-email, .amt-v-email-status-chip .amt-v-email { text-transform: lowercase !important; }
         .amt-v-ref { font-size: 0.73rem; color: #64748b; margin-top: 2px; }
         .amt-v-ref strong { color: #0284c7; font-family: monospace; font-size: 0.84rem; }
         .amt-v-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 10px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 8px 10px; box-sizing: border-box; }
@@ -3357,9 +3358,16 @@ body.booking-portal-page .portal-card {
 
                     <!-- STEP 3: DIGITAL CONFIRMED VOUCHER -->
                     <div id="amtStepVoucher" style="display:none;">
-                        <div class="amt-voucher-screen-notice" style="background:#fffbeb; border:1px solid #fde68a; border-radius:6px; padding:4px 8px; margin-bottom:5px; text-align:left; box-sizing:border-box;">
-                            <div style="display:flex; align-items:center; gap:6px; color:#92400e; font-size:0.74rem; font-weight:800;"><i class="fa-solid fa-clock" style="color:#d97706;"></i> Booking Request Registered &bull; Tariff Locked (Pending Availability)</div>
-                            <p id="amtVoucherNoticeSub" style="margin:2px 0 0; font-size:0.67rem; color:#b45309; line-height:1.2; font-weight:500;">Your Union rate is locked. Final taxi confirmation is subject to operator availability approval. Tap below to reconfirm on WhatsApp.</p>
+                        <div class="amt-voucher-screen-notice" style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; padding:6px 10px; margin-bottom:6px; text-align:left; box-sizing:border-box;">
+                            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:4px;">
+                                <div style="display:flex; align-items:center; gap:6px; color:#166534; font-size:0.76rem; font-weight:800;">
+                                    <i class="fa-solid fa-circle-check" style="color:#16a34a;"></i> <span>Booking Request Registered &bull; Tariff Locked</span>
+                                </div>
+                                <span class="amt-v-live-tag" style="background:#dcfce7; color:#15803d; font-size:0.62rem; font-weight:700; padding:1px 6px; border-radius:4px; border:1px solid #86efac;">Zero Advance Required</span>
+                            </div>
+                            <p id="amtVoucherNoticeSub" style="margin:3px 0 0; font-size:0.67rem; color:#166534; line-height:1.3; font-weight:500;">
+                                ✉️ Official voucher emailed to passenger. Dedicated tourist cab assignment is in progress. Driver details will be confirmed before pickup. Pay 100% after trip completion.
+                            </p>
                         </div>
                         <div id="amtVoucherContent" class="amt-voucher"></div>
                         <div id="amtDesktopQrContainer"></div>
@@ -3370,8 +3378,8 @@ body.booking-portal-page .portal-card {
                             </div>
                             <div class="amt-dt-line" style="flex:1 1 0; height:2px; background:#10b981; align-self:flex-start; margin-top:8px; margin-left:6px; margin-right:6px;"></div>
                             <div class="amt-dt-step active" style="display:flex; flex-direction:column; align-items:center; gap:2px; text-align:center;">
-                                <div class="amt-dt-icon" style="width:18px; height:18px; border-radius:50%; background:#0284c7; color:#fff; font-size:0.55rem; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 2px rgba(2,132,199,0.25);"><i class="fa-brands fa-whatsapp"></i></div>
-                                <div class="amt-dt-label" style="font-size:0.62rem; font-weight:700; color:#0284c7; white-space:nowrap;">2. WhatsApp Dispatch</div>
+                                <div class="amt-dt-icon" style="width:18px; height:18px; border-radius:50%; background:#0284c7; color:#fff; font-size:0.55rem; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 2px rgba(2,132,199,0.25);"><i class="fa-solid fa-taxi"></i></div>
+                                <div class="amt-dt-label" style="font-size:0.62rem; font-weight:700; color:#0284c7; white-space:nowrap;">2. Cab Assignment</div>
                             </div>
                             <div class="amt-dt-line" style="flex:1 1 0; height:2px; background:#cbd5e1; align-self:flex-start; margin-top:8px; margin-left:6px; margin-right:6px;"></div>
                             <div class="amt-dt-step" style="display:flex; flex-direction:column; align-items:center; gap:2px; text-align:center;">
@@ -3381,8 +3389,8 @@ body.booking-portal-page .portal-card {
                         </div>
                         <div class="amt-voucher-actions" style="margin-top:4px;">
                             <button type="button" id="amtWaBtn" class="amt-btn-next amt-btn-confirm" style="width:100%; padding:9px 12px; border-radius:10px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; box-shadow:0 4px 14px rgba(16,185,129,0.35); background:#10b981; color:#ffffff; border:none; cursor:pointer;">
-                                <div class="amt-wa-btn-title" style="display:inline-flex; align-items:center; justify-content:center; gap:7px; font-size:0.88rem; font-weight:800; letter-spacing:0.3px; width:100%; white-space:nowrap;"><i class="fa-brands fa-whatsapp" style="font-size:1.15rem;"></i> <span>OPEN WHATSAPP TO DISPATCH CAB</span></div>
-                                <span id="amtWaBtnSubtext" style="font-size:0.64rem; font-weight:600; opacity:0.95; line-height:1.25; text-align:center; display:block; padding:0 4px; box-sizing:border-box; width:100%;">Send transfer details on WhatsApp to confirm driver & advance schedule</span>
+                                <div class="amt-wa-btn-title" style="display:inline-flex; align-items:center; justify-content:center; gap:7px; font-size:0.88rem; font-weight:800; letter-spacing:0.3px; width:100%; white-space:nowrap;"><i class="fa-brands fa-whatsapp" style="font-size:1.15rem;"></i> <span>CONNECT ON WHATSAPP FOR INSTANT CONFIRMATION</span></div>
+                                <span id="amtWaBtnSubtext" style="font-size:0.64rem; font-weight:600; opacity:0.95; line-height:1.25; text-align:center; display:block; padding:0 4px; box-sizing:border-box; width:100%;">Fastest Option &bull; Chat directly with 24/7 Operations Desk (Zero Advance &bull; Pay After Tour)</span>
                             </button>
                             <div style="display:grid; grid-template-columns:repeat(5, 1fr); gap:4px; margin-top:5px;">
                                 <button type="button" id="amtDownloadPdfBtn" class="amt-btn-back amt-btn-pdf" style="padding:6px 2px; border:1px solid #0891b2; background:#f0fdf4; color:#0e7490; border-radius:6px; font-weight:700; cursor:pointer; font-size:0.68rem; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><i class="fa-solid fa-file-arrow-down" style="color:#0891b2; font-size:0.80rem;"></i><span>PDF</span></button>
@@ -3445,9 +3453,9 @@ body.booking-portal-page .portal-card {
     </footer>
 
     <!-- Scripts -->
-    <script src="js/tour-data.js?v=128.0"></script>
-    <script src="js/ai-assistant.js?v=128.0" defer></script>
-    <script src="js/booking-widget.min.js?v=128.0"></script>
+    <script src="js/tour-data.js?v=129.0"></script>
+    <script src="js/ai-assistant.js?v=129.0" defer></script>
+    <script src="js/booking-widget.min.js?v=129.0"></script>
     <script>
     (function() {
         var search = window.location.search || '';

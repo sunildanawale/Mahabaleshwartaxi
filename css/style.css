@@ -9559,7 +9559,7 @@ body.booking-portal-page .portal-card {
     gap: 8px !important;
     width: 100% !important;
     box-sizing: border-box !important;
-    overflow: hidden !important;
+    overflow: visible !important;
 }
 .amt-v-hdr-left {
     display: flex !important;
@@ -9575,15 +9575,15 @@ body.booking-portal-page .portal-card {
     flex-shrink: 0 !important;
 }
 .amt-v-brand {
-    font-size: 0.88rem !important;
+    font-size: clamp(0.72rem, 2.5vw, 0.85rem) !important;
     font-weight: 800 !important;
     color: #0f2b48 !important;
-    letter-spacing: 0.3px !important;
+    letter-spacing: normal !important;
     line-height: 1.2 !important;
     white-space: nowrap !important;
 }
 .amt-v-sub {
-    font-size: 0.67rem !important;
+    font-size: 0.65rem !important;
     color: #0284c7 !important;
     font-weight: 700 !important;
     margin-top: 1px !important;
@@ -9598,23 +9598,23 @@ body.booking-portal-page .portal-card {
     gap: 3px !important;
     flex-shrink: 0 !important;
     text-align: right !important;
-    max-width: 48% !important;
+    max-width: 52% !important;
     box-sizing: border-box !important;
 }
 .amt-v-badge {
     display: inline-flex !important;
     align-items: center !important;
     gap: 3px !important;
-    padding: 2px 7px !important;
+    padding: 2px 5px !important;
     border-radius: 5px !important;
-    font-size: 0.64rem !important;
+    font-size: 0.58rem !important;
     font-weight: 800 !important;
     border: 1px solid #86efac !important;
     background: #f0fdf4 !important;
     color: #166534 !important;
     text-transform: uppercase !important;
     white-space: nowrap !important;
-    letter-spacing: 0.2px !important;
+    letter-spacing: 0.1px !important;
     line-height: 1.2 !important;
     box-sizing: border-box !important;
 }
@@ -10186,6 +10186,31 @@ body.booking-portal-page .portal-card {
 .amt-v-val strong,
 .amt-v-val {
     text-transform: capitalize !important;
+}
+
+/* Ensure customer email addresses stay lowercase */
+.amt-v-email,
+.amt-v-val .amt-v-email,
+.amt-v-email-status-chip .amt-v-email {
+    text-transform: lowercase !important;
+}
+
+.amt-v-email-status-chip {
+    background: #f0fdf4 !important;
+    border: 1px solid #bbf7d0 !important;
+    border-radius: 6px !important;
+    padding: 5px 8px !important;
+    margin: 5px 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    font-size: 0.68rem !important;
+    color: #166534 !important;
+}
+[data-theme="dark"] #amtBookingModal .amt-v-email-status-chip {
+    background: rgba(16, 185, 129, 0.12) !important;
+    border-color: rgba(16, 185, 129, 0.3) !important;
+    color: #a7f3d0 !important;
 }
 
 /* 1-Click Copy Pass ID Button */
