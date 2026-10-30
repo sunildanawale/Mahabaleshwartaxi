@@ -147,7 +147,8 @@ function doPost(e) {
     
     // Dynamic 1-Click Approval Link
     var webAppUrl = getCleanWebAppUrl();
-    var approveUrl = webAppUrl + "?action=approve&id=" + encodeURIComponent(bookingId);
+    // 1-Click Approval Link (Hosted on website to eliminate Android Gmail multi-account Drive errors)
+    var approveUrl = "https://sunildanawale.github.io/Mahabaleshwartaxi/approve.html?id=" + encodeURIComponent(bookingId) + "&name=" + encodeURIComponent(name) + "&fare=" + encodeURIComponent(fare) + "&tour=" + encodeURIComponent(tour);
     
     var waUrl = "https://wa.me/91" + cleanPhone + "?text=" + encodeURIComponent(
       "Hello " + name + ", this is Aryan Taxi Mahabaleshwar regarding your booking request " + bookingId + " for " + tour + ". Your tariff is locked at ₹" + fare + ". Let us confirm your pickup schedule."

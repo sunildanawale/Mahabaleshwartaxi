@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Approval | Aryan Taxi Mahabaleshwar</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚕</text></svg>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0891b2;
+            --success: #16a34a;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .approval-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            box-shadow: 0 12px 35px -8px rgba(0,0,0,0.08);
+            max-width: 520px;
+            width: 100%;
+            overflow: hidden;
+            text-align: center;
+        }
+        .card-header {
+            background: linear-gradient(135deg, #0e2b48 0%, #0891b2 100%);
+            color: #ffffff;
+            padding: 24px 20px 20px;
+        }
+        .card-header h1 {
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+        .card-header p {
+            font-size: 0.80rem;
+            opacity: 0.9;
+        }
+        .card-body {
+            padding: 28px 24px;
+        }
+        .status-icon {
+            font-size: 3.2rem;
+            margin-bottom: 14px;
+            color: var(--success);
+            display: inline-block;
+        }
+        .status-badge {
+            display: inline-block;
+            background: #dcfce7;
+            color: #15803d;
+            border: 1px solid #bbf7d0;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.78rem;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+        h2 {
+            font-size: 1.35rem;
+            color: #14532d;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+        .subtitle {
+            font-size: 0.90rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        .details-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 14px 16px;
+            text-align: left;
+            margin-bottom: 20px;
+            font-size: 0.88rem;
+        }
+        .details-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .details-row:last-child {
+            border-bottom: none;
+        }
+        .details-label {
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        .details-val {
+            font-weight: 700;
+            color: var(--text-main);
+        }
+        .action-banner {
+            background: #f0fdf4;
+            border: 1px solid #dcfce7;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 0.84rem;
+            color: #166534;
+            line-height: 1.45;
+            margin-bottom: 22px;
+            text-align: left;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .action-banner i {
+            margin-top: 2px;
+            color: var(--success);
+            font-size: 1rem;
+        }
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-direction: column;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 13px 20px;
+            border-radius: 8px;
+            font-size: 0.92rem;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .btn-primary {
+            background: var(--success);
+            color: #ffffff;
+            border: 1px solid #15803d;
+        }
+        .btn-primary:hover {
+            background: #15803d;
+        }
+        .btn-outline {
+            background: #ffffff;
+            color: #334155;
+            border: 1px solid #cbd5e1;
+        }
+        .btn-outline:hover {
+            background: #f1f5f9;
+        }
+        .loading-spinner {
+            display: inline-block;
+            width: 44px;
+            height: 44px;
+            border: 4px solid #e2e8f0;
+            border-top-color: var(--success);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 20px 0;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="approval-card">
+        <div class="card-header">
+            <h1>Aryan Taxi Mahabaleshwar</h1>
+            <p>24/7 Fleet Operations &bull; Direct Cab Dispatch Desk</p>
+        </div>
+
+        <div class="card-body">
+            <!-- Loading State -->
+            <div id="loadingState">
+                <div class="loading-spinner"></div>
+                <h2>Confirming Booking...</h2>
+                <p class="subtitle">Connecting to Google Sheet and dispatching customer confirmation voucher...</p>
+            </div>
+
+            <!-- Success State -->
+            <div id="successState" style="display:none;">
+                <div class="status-icon"><i class="fa-solid fa-circle-check"></i></div>
+                <div class="status-badge"><i class="fa-solid fa-shield-halved"></i> BOOKING CONFIRMED &amp; CAB RESERVED</div>
+                <h2>Booking Successfully Approved!</h2>
+                <p class="subtitle">Booking status is updated to <strong>CONFIRMED</strong> in your Sheet.</p>
+
+                <div class="details-box">
+                    <div class="details-row">
+                        <span class="details-label">Pass Reference ID:</span>
+                        <span class="details-val" id="dispId" style="color:#0284c7;">--</span>
+                    </div>
+                    <div class="details-row" id="dispNameRow" style="display:none;">
+                        <span class="details-label">Lead Passenger:</span>
+                        <span class="details-val" id="dispName">--</span>
+                    </div>
+                    <div class="details-row" id="dispTourRow" style="display:none;">
+                        <span class="details-label">Selected Tour:</span>
+                        <span class="details-val" id="dispTour">--</span>
+                    </div>
+                    <div class="details-row" id="dispFareRow" style="display:none;">
+                        <span class="details-label">Locked Union Fare:</span>
+                        <span class="details-val" id="dispFare" style="color:#16a34a;">--</span>
+                    </div>
+                    <div class="details-row">
+                        <span class="details-label">Approval Timestamp:</span>
+                        <span class="details-val" id="dispTime">--</span>
+                    </div>
+                </div>
+
+                <div class="action-banner">
+                    <i class="fa-solid fa-envelope-circle-check"></i>
+                    <div>
+                        <strong>Customer Notified:</strong> The official Confirmed Travel Voucher has been automatically sent to the guest. A private tourist cab is reserved for doorstep porch pickup.
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <a href="https://docs.google.com/spreadsheets/d/1gV95JLpRO2FZTsXeKCKcnbfBSNsYKju_aPZemQuL2pQ/edit" target="_blank" rel="noopener" class="btn btn-primary">
+                        <i class="fa-solid fa-table"></i> Open Google Sheet
+                    </a>
+                    <button type="button" onclick="window.close()" class="btn btn-outline">
+                        <i class="fa-solid fa-xmark"></i> Close Window
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden Iframe to Trigger Apps Script Webhook -->
+    <iframe id="approvalFrame" style="display:none;"></iframe>
+
+    <script>
+    (function () {
+        var params = new URLSearchParams(window.location.search);
+        var bookingId = params.get('id') || params.get('bookingId') || '';
+        var name = params.get('name') || '';
+        var tour = params.get('tour') || '';
+        var fare = params.get('fare') || '';
+
+        var WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbykfjAMr2FYrYCD2xOkPj4Aba86_BKERKQUQLsZcickCaYIQWR4ly-prjYzzWdCzyM-ew/exec';
+
+        if (bookingId) {
+            document.getElementById('dispId').textContent = bookingId;
+            if (name) {
+                document.getElementById('dispName').textContent = name;
+                document.getElementById('dispNameRow').style.display = 'flex';
+            }
+            if (tour) {
+                document.getElementById('dispTour').textContent = tour;
+                document.getElementById('dispTourRow').style.display = 'flex';
+            }
+            if (fare) {
+                document.getElementById('dispFare').textContent = '₹' + fare.replace(/[^0-9]/g, '');
+                document.getElementById('dispFareRow').style.display = 'flex';
+            }
+            document.getElementById('dispTime').textContent = new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
+
+            var triggerUrl = WEBHOOK_URL + '?action=approve&id=' + encodeURIComponent(bookingId);
+
+            // Method 1: Hidden iframe request (handles 302 redirects natively across mobile)
+            try {
+                var frame = document.getElementById('approvalFrame');
+                if (frame) frame.src = triggerUrl;
+            } catch (e) { }
+
+            // Method 2: Fetch ping as secondary guarantee
+            try {
+                if (typeof fetch !== 'undefined') {
+                    fetch(triggerUrl, { method: 'GET', mode: 'no-cors', cache: 'no-cache' }).catch(function () { });
+                }
+            } catch (e2) { }
+
+            setTimeout(function () {
+                document.getElementById('loadingState').style.display = 'none';
+                document.getElementById('successState').style.display = 'block';
+            }, 900);
+        } else {
+            document.getElementById('loadingState').innerHTML = '<div style="font-size:3rem;color:#ef4444;margin-bottom:12px;"><i class="fa-solid fa-circle-exclamation"></i></div>'
+                + '<h2 style="color:#b91c1c;">No Booking ID Provided</h2>'
+                + '<p class="subtitle">Please click the approval button directly from your booking alert email.</p>';
+        }
+    })();
+    </script>
+</body>
+</html>
