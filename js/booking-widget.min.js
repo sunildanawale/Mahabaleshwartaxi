@@ -130,63 +130,76 @@
                 timestamp: new Date().toISOString()
             });
 
-            // Single Delivery Pipeline: Use fetch if available; ONLY fallback to iframe if fetch is unsupported
-            if (typeof fetch !== 'undefined') {
-                fetch(webhookUrl, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    keepalive: true,
-                    headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
-                    body: payload
-                }).catch(function () { });
-            } else {
-                // Fallback for legacy browsers without fetch
-                try {
-                    var iframeName = 'amt_post_iframe_' + Date.now();
-                    var iframe = document.createElement('iframe');
-                    iframe.name = iframeName;
-                    iframe.style.display = 'none';
-                    document.body.appendChild(iframe);
+            var dispatched = false;
 
-                    var form = document.createElement('form');
-                    form.method = 'POST';
-                    form.action = webhookUrl;
-                    form.target = iframeName;
-                    form.style.display = 'none';
+            // Method 1 (Primary): Hidden Iframe Form POST
+            // 100% reliable across all mobile browsers (Android Chrome, iOS Safari) and desktop browsers.
+            // Bypasses CORS restrictions and natively follows Google Apps Script 302 redirects.
+            try {
+                var iframeName = 'amt_post_iframe_' + Date.now();
+                var iframe = document.createElement('iframe');
+                iframe.name = iframeName;
+                iframe.style.display = 'none';
+                document.body.appendChild(iframe);
 
-                    var fields = {
-                        bookingId: bId,
-                        name: bName,
-                        email: bEmail,
-                        phone: bPhone,
-                        date: bDate,
-                        time: bTime,
-                        pickup: bPickup,
-                        tour: bTour,
-                        fare: bFare,
-                        pax: bPax,
-                        notes: bNotes,
-                        status: bStatus || 'Pending Approval'
-                    };
+                var form = document.createElement('form');
+                form.method = 'POST';
+                form.action = webhookUrl;
+                form.target = iframeName;
+                form.style.display = 'none';
 
-                    for (var key in fields) {
-                        if (fields.hasOwnProperty(key)) {
-                            var input = document.createElement('input');
-                            input.type = 'hidden';
-                            input.name = key;
-                            input.value = fields[key];
-                            form.appendChild(input);
-                        }
+                var fields = {
+                    bookingId: bId,
+                    name: bName,
+                    email: bEmail,
+                    phone: bPhone,
+                    date: bDate,
+                    time: bTime,
+                    pickup: bPickup,
+                    tour: bTour,
+                    fare: bFare,
+                    pax: bPax,
+                    notes: bNotes,
+                    status: bStatus || 'Pending Approval',
+                    payload: payload
+                };
+
+                for (var key in fields) {
+                    if (fields.hasOwnProperty(key)) {
+                        var input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = key;
+                        input.value = fields[key];
+                        form.appendChild(input);
                     }
+                }
 
-                    document.body.appendChild(form);
-                    form.submit();
+                document.body.appendChild(form);
+                form.submit();
+                dispatched = true;
 
-                    setTimeout(function () {
-                        try { document.body.removeChild(form); } catch (e) { }
-                        try { document.body.removeChild(iframe); } catch (e) { }
-                    }, 4000);
-                } catch (eForm) { }
+                setTimeout(function () {
+                    try { document.body.removeChild(form); } catch (e) { }
+                    try { document.body.removeChild(iframe); } catch (e) { }
+                }, 8000);
+            } catch (eForm) {
+                console.warn('Iframe form dispatch failed:', eForm);
+            }
+
+            // Fallback: ONLY if iframe creation failed
+            if (!dispatched) {
+                if (navigator.sendBeacon) {
+                    var blob = new Blob([payload], { type: 'text/plain;charset=UTF-8' });
+                    navigator.sendBeacon(webhookUrl, blob);
+                } else if (typeof fetch !== 'undefined') {
+                    fetch(webhookUrl, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        keepalive: true,
+                        headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+                        body: payload
+                    }).catch(function () { });
+                }
             }
         } catch (e) {
             console.warn('Could not dispatch booking remotely:', e);
