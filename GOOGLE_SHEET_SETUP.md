@@ -75,6 +75,16 @@ function doPost(e) {
     var notes = data.notes || 'None';
     var status = "Pending Approval";
 
+    // Deduplication Lock: Prevent duplicate entries and duplicate emails
+    var existingData = sheet.getDataRange().getValues();
+    for (var i = 1; i < existingData.length; i++) {
+      if (existingData[i][1] && String(existingData[i][1]).trim() === String(bookingId).trim()) {
+        // Already recorded! Return success immediately without duplicate row or duplicate emails
+        return ContentService.createTextOutput(JSON.stringify({ result: "already_registered", bookingId: bookingId }))
+          .setMimeType(ContentService.MimeType.JSON);
+      }
+    }
+
     // 1. Log Booking into Google Sheet
     sheet.appendRow([
       timestamp,

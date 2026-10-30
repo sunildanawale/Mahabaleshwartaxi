@@ -86,12 +86,22 @@
 
     var DEFAULT_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbyqsWM2u-X-dqLIkac9REiWQoA3KWyMnteZtHjlI3sNEQgdQk8JeT5-p7CW0T_TLA2s/exec';
 
+    var _dispatchedBookingIds = {};
+
     function dispatchBookingRemote(bookingData) {
         try {
             var webhookUrl = window.AMT_LEAD_WEBHOOK_URL || (typeof localStorage !== 'undefined' ? localStorage.getItem('amt_lead_webhook_url') : '') || DEFAULT_WEBHOOK_URL;
             if (!webhookUrl) return;
 
             var bId = bookingData.bookingId || bookingData.id || ('AMT-' + Date.now().toString().slice(-6));
+
+            // Strict Deduplication Lock: Prevent duplicate dispatch of identical booking ID within 60s
+            var now = Date.now();
+            if (_dispatchedBookingIds[bId] && (now - _dispatchedBookingIds[bId] < 60000)) {
+                return;
+            }
+            _dispatchedBookingIds[bId] = now;
+
             var bName = bookingData.name || 'Guest';
             var bPhone = bookingData.phone || '';
             var bEmail = bookingData.email || '';
@@ -120,7 +130,7 @@
                 timestamp: new Date().toISOString()
             });
 
-            // Method 1: Fetch with keepalive
+            // Single Delivery Pipeline: Use fetch if available; ONLY fallback to iframe if fetch is unsupported
             if (typeof fetch !== 'undefined') {
                 fetch(webhookUrl, {
                     method: 'POST',
@@ -129,55 +139,55 @@
                     headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
                     body: payload
                 }).catch(function () { });
-            }
+            } else {
+                // Fallback for legacy browsers without fetch
+                try {
+                    var iframeName = 'amt_post_iframe_' + Date.now();
+                    var iframe = document.createElement('iframe');
+                    iframe.name = iframeName;
+                    iframe.style.display = 'none';
+                    document.body.appendChild(iframe);
 
-            // Method 2: Hidden iframe form post (guaranteed browser form submit to Google Apps Script)
-            try {
-                var iframeName = 'amt_post_iframe_' + Date.now();
-                var iframe = document.createElement('iframe');
-                iframe.name = iframeName;
-                iframe.style.display = 'none';
-                document.body.appendChild(iframe);
+                    var form = document.createElement('form');
+                    form.method = 'POST';
+                    form.action = webhookUrl;
+                    form.target = iframeName;
+                    form.style.display = 'none';
 
-                var form = document.createElement('form');
-                form.method = 'POST';
-                form.action = webhookUrl;
-                form.target = iframeName;
-                form.style.display = 'none';
+                    var fields = {
+                        bookingId: bId,
+                        name: bName,
+                        email: bEmail,
+                        phone: bPhone,
+                        date: bDate,
+                        time: bTime,
+                        pickup: bPickup,
+                        tour: bTour,
+                        fare: bFare,
+                        pax: bPax,
+                        notes: bNotes,
+                        status: bStatus || 'Pending Approval'
+                    };
 
-                var fields = {
-                    bookingId: bId,
-                    name: bName,
-                    email: bEmail,
-                    phone: bPhone,
-                    date: bDate,
-                    time: bTime,
-                    pickup: bPickup,
-                    tour: bTour,
-                    fare: bFare,
-                    pax: bPax,
-                    notes: bNotes,
-                    status: bStatus || 'Pending Approval'
-                };
-
-                for (var key in fields) {
-                    if (fields.hasOwnProperty(key)) {
-                        var input = document.createElement('input');
-                        input.type = 'hidden';
-                        input.name = key;
-                        input.value = fields[key];
-                        form.appendChild(input);
+                    for (var key in fields) {
+                        if (fields.hasOwnProperty(key)) {
+                            var input = document.createElement('input');
+                            input.type = 'hidden';
+                            input.name = key;
+                            input.value = fields[key];
+                            form.appendChild(input);
+                        }
                     }
-                }
 
-                document.body.appendChild(form);
-                form.submit();
+                    document.body.appendChild(form);
+                    form.submit();
 
-                setTimeout(function () {
-                    try { document.body.removeChild(form); } catch (e) { }
-                    try { document.body.removeChild(iframe); } catch (e) { }
-                }, 4000);
-            } catch (eForm) { }
+                    setTimeout(function () {
+                        try { document.body.removeChild(form); } catch (e) { }
+                        try { document.body.removeChild(iframe); } catch (e) { }
+                    }, 4000);
+                } catch (eForm) { }
+            }
         } catch (e) {
             console.warn('Could not dispatch booking remotely:', e);
         }
