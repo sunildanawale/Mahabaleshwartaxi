@@ -48,7 +48,7 @@ This guide walks you through connecting your website (`Mahabaleshwartaxi`) to **
  */
 
 var SPREADSHEET_ID = "1gV95JLpRO2FZTsXeKCKcnbfBSNsYKju_aPZemQuL2pQ";
-var DEFAULT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyqsWM2u-X-dqLIkac9REiWQoA3KWyMnteZtHjlI3sNEQgdQk8JeT5-p7CW0T_TLA2s/exec";
+var DEFAULT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbykfjAMr2FYrYCD2xOkPj4Aba86_BKERKQUQLsZcickCaYIQWR4ly-prjYzzWdCzyM-ew/exec";
 
 function getBookingsSheet() {
   try {

@@ -84,7 +84,7 @@
         return 'AMT-' + y + '-' + num;
     }
 
-    var DEFAULT_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbyqsWM2u-X-dqLIkac9REiWQoA3KWyMnteZtHjlI3sNEQgdQk8JeT5-p7CW0T_TLA2s/exec';
+    var DEFAULT_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbykfjAMr2FYrYCD2xOkPj4Aba86_BKERKQUQLsZcickCaYIQWR4ly-prjYzzWdCzyM-ew/exec';
 
     var _dispatchedBookingIds = {};
 
