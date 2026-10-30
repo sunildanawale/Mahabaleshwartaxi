@@ -24,6 +24,7 @@
         pickup: '',
         name: '',
         phone: '',
+        email: '',
         notes: '',
         bookingId: '',
         idempotencyKey: '',
@@ -93,6 +94,7 @@
             var bId = bookingData.bookingId || bookingData.id || ('AMT-' + Date.now().toString().slice(-6));
             var bName = bookingData.name || 'Guest';
             var bPhone = bookingData.phone || '';
+            var bEmail = bookingData.email || '';
             var bDate = bookingData.date || '';
             var bTime = bookingData.time || '';
             var bPickup = bookingData.pickup || '';
@@ -105,6 +107,7 @@
             var payload = JSON.stringify({
                 bookingId: bId,
                 name: bName,
+                email: bEmail,
                 phone: bPhone,
                 date: bDate,
                 time: bTime,
@@ -113,7 +116,7 @@
                 fare: bFare,
                 pax: bPax,
                 notes: bNotes,
-                status: bStatus,
+                status: bStatus || 'Pending Approval',
                 timestamp: new Date().toISOString()
             });
 
@@ -145,6 +148,7 @@
                 var fields = {
                     bookingId: bId,
                     name: bName,
+                    email: bEmail,
                     phone: bPhone,
                     date: bDate,
                     time: bTime,
@@ -153,7 +157,7 @@
                     fare: bFare,
                     pax: bPax,
                     notes: bNotes,
-                    status: bStatus
+                    status: bStatus || 'Pending Approval'
                 };
 
                 for (var key in fields) {
@@ -180,7 +184,7 @@
     }
 
     function saveBookingToLedger(booking) {
-        if (booking && !booking.status) booking.status = 'pending';
+        if (booking && !booking.status) booking.status = 'Pending Approval';
         try {
             var ledger = JSON.parse(localStorage.getItem('amt_bookings') || '[]');
             ledger.unshift(booking);
@@ -279,7 +283,7 @@
             return {
                 key: 'outstation',
                 serviceTitle: 'Outstation Drop Transfer',
-                badgeText: isSameDayAfternoon ? 'OUTSTATION INQUIRY (AVAILABILITY CONFIRMATION REQUIRED)' : '✓ BOOKING CONFIRMED',
+                badgeText: isSameDayAfternoon ? 'OUTSTATION INQUIRY (AVAILABILITY CONFIRMATION REQUIRED)' : '⏳ PENDING APPROVAL (RATE LOCKED)',
                 badgeBg: '#e0f2fe',
                 badgeColor: '#0369a1',
                 badgeBorder: '#bae6fd',
@@ -320,7 +324,7 @@
             return {
                 key: 'local_drop',
                 serviceTitle: 'Local Point-to-Point Drop',
-                badgeText: isSameDayAfternoon ? 'LOCAL DROP INQUIRY (AVAILABILITY CONFIRMATION REQUIRED)' : '✓ BOOKING CONFIRMED',
+                badgeText: isSameDayAfternoon ? 'LOCAL DROP INQUIRY (AVAILABILITY CONFIRMATION REQUIRED)' : '⏳ PENDING APPROVAL (RATE LOCKED)',
                 badgeBg: '#f0fdf4',
                 badgeColor: '#166534',
                 badgeBorder: '#86efac',
@@ -361,7 +365,7 @@
             return {
                 key: 'combo',
                 serviceTitle: 'Full Day Combined Tour',
-                badgeText: isSameDayAfternoon ? 'COMBO TOUR INQUIRY (AVAILABILITY CONFIRMATION REQUIRED)' : '✓ BOOKING CONFIRMED',
+                badgeText: isSameDayAfternoon ? 'COMBO TOUR INQUIRY (AVAILABILITY CONFIRMATION REQUIRED)' : '⏳ PENDING APPROVAL (RATE LOCKED)',
                 badgeBg: '#f0fdf4',
                 badgeColor: '#166534',
                 badgeBorder: '#bbf7d0',
@@ -408,7 +412,7 @@
             return {
                 key: 'sightseeing',
                 serviceTitle: 'Express Single Tour (Budget Option)',
-                badgeText: isSameDayAfternoon ? 'SINGLE TOUR INQUIRY (AVAILABILITY CHECK REQUIRED)' : '✓ BOOKING CONFIRMED',
+                badgeText: isSameDayAfternoon ? 'SINGLE TOUR INQUIRY (AVAILABILITY CHECK REQUIRED)' : '⏳ PENDING APPROVAL (RATE LOCKED)',
                 badgeBg: '#f0fdf4',
                 badgeColor: '#166534',
                 badgeBorder: '#86efac',
@@ -452,8 +456,8 @@
             key: 'sightseeing',
             serviceTitle: isMultiSightseeing ? 'Combined Sightseeing Packages' : 'Local Sightseeing',
             badgeText: isMultiSightseeing
-                ? (isSameDayAfternoon ? 'MULTI-TOUR INQUIRY (AVAILABILITY CONFIRMATION REQUIRED)' : '✓ BOOKING CONFIRMED')
-                : (isSameDayAfternoon ? 'SIGHTSEEING INQUIRY (AVAILABILITY CONFIRMATION REQUIRED)' : '✓ BOOKING CONFIRMED'),
+                ? (isSameDayAfternoon ? 'MULTI-TOUR INQUIRY (AVAILABILITY CONFIRMATION REQUIRED)' : '⏳ PENDING APPROVAL (RATE LOCKED)')
+                : (isSameDayAfternoon ? 'SIGHTSEEING INQUIRY (AVAILABILITY CONFIRMATION REQUIRED)' : '⏳ PENDING APPROVAL (RATE LOCKED)'),
             badgeBg: '#f0fdf4',
             badgeColor: '#166534',
             badgeBorder: '#86efac',
@@ -564,6 +568,7 @@
                     : '_(Official Union Tariff • Zero Advance • Pay Driver After Trip)_\n\n'))
             + '🔖 *Booking Voucher ID:* ' + (b.bookingId || 'AMT-REQ') + '\n'
             + '👤 *Guest Name:* ' + b.name + (b.phone ? ' (' + b.phone + ')' : '') + '\n'
+            + '📧 *Guest Email:* ' + (b.email || 'N/A') + '\n'
             + '🏨 *Pickup Location:* ' + pickupStr + '\n'
             + '👥 *Cab Requirement:* ' + sRules.vehicleDesc + '\n\n'
             + '🚖 *Confirmed Tour' + (isMulti ? 's (' + tours.length + ' Tours):*' : ':*') + '\n'
@@ -1646,6 +1651,10 @@
             + '  </div>'
             + '</div>'
             + '<div style="margin-bottom:10px;">'
+            + '  <label class="amt-label" for="amtEmail">Email Address (For Booking Voucher &amp; Status Alert) *</label>'
+            + '  <input type="email" id="amtEmail" class="amt-input" placeholder="e.g. yourname@gmail.com" required autocomplete="email">'
+            + '</div>'
+            + '<div style="margin-bottom:10px;">'
             + '  <label class="amt-label" for="amtNotes">Special Notes <span style="font-weight:400;color:#64748b;font-size:0.72rem;">(Optional)</span></label>'
             + '  <input type="text" id="amtNotes" class="amt-input" placeholder="Any special notes (luggage count, senior citizen, etc.)?" maxlength="120">'
             + '</div>'
@@ -1903,6 +1912,12 @@
                 bookingState.phone = prof.phone;
                 restored = true;
             }
+            var emailEl = document.getElementById('amtEmail');
+            if (emailEl && !emailEl.value && prof.email) {
+                emailEl.value = prof.email;
+                bookingState.email = prof.email;
+                restored = true;
+            }
             if (pickEl && !pickEl.value && prof.pickup) {
                 pickEl.value = prof.pickup;
                 bookingState.pickup = prof.pickup;
@@ -1934,6 +1949,7 @@
                 id: state.bookingId || ('AMT-' + Date.now().toString().slice(-6)),
                 bookingId: state.bookingId || ('AMT-' + Date.now().toString().slice(-6)),
                 name: state.name || '',
+                email: state.email || '',
                 phone: state.phone || '',
                 service: state.service || 'sightseeing',
                 tour: tourTitle || 'Mahabaleshwar Sightseeing',
@@ -1943,7 +1959,7 @@
                 time: state.time || '',
                 pax: state.pax || '3-4',
                 notes: state.notes || '',
-                status: 'inquiry',
+                status: 'Pending Approval',
                 createdAt: new Date().toISOString()
             };
             list.unshift(entry);
@@ -1953,12 +1969,13 @@
         } catch (e) { }
     }
 
-    function saveGuestProfile(name, phone, pickup) {
+    function saveGuestProfile(name, phone, pickup, email) {
         try {
-            if (name || phone) {
+            if (name || phone || email) {
                 localStorage.setItem('amt_guest_profile', JSON.stringify({
                     name: name || '',
                     phone: phone || '',
+                    email: email || '',
                     pickup: pickup || '',
                     time: new Date().toISOString()
                 }));
@@ -2126,6 +2143,17 @@
                     return;
                 }
                 bookingState.phone = validatedPhone;
+
+                var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!bookingState.email || !emailPattern.test(bookingState.email)) {
+                    alert('Please enter a valid email address (e.g. name@gmail.com) to receive your booking voucher and status updates.');
+                    if (emailEl) {
+                        emailEl.focus();
+                        emailEl.style.borderColor = '#ef4444';
+                        setTimeout(function () { emailEl.style.borderColor = ''; }, 3000);
+                    }
+                    return;
+                }
 
                 if (!bookingState.bookingId) bookingState.bookingId = generateBookingId();
                 renderVoucherScreen();
@@ -2343,12 +2371,14 @@
                 var pickInput = document.getElementById('amtPickup');
                 var nameEl = document.getElementById('amtName');
                 var phoneEl = document.getElementById('amtPhone');
+                var emailEl = document.getElementById('amtEmail');
                 var notesEl = document.getElementById('amtNotes');
                 var paxSel = document.getElementById('amtPax');
 
                 bookingState.pickup = pickInput ? pickInput.value.trim() : '';
                 bookingState.name = nameEl ? nameEl.value.trim() : '';
                 bookingState.phone = phoneEl ? phoneEl.value.trim() : '';
+                bookingState.email = emailEl ? emailEl.value.trim() : '';
                 bookingState.notes = notesEl ? notesEl.value.trim() : '';
                 bookingState.pax = paxSel ? paxSel.value : '3-4';
 
@@ -2406,7 +2436,7 @@
 
                 try {
                     bookingState.bookingId = generateBookingId();
-                    saveGuestProfile(bookingState.name, bookingState.phone, bookingState.pickup);
+                    saveGuestProfile(bookingState.name, bookingState.phone, bookingState.pickup, bookingState.email);
                     try { saveInquiryToLedger(bookingState); } catch (eLedger) { }
                     if (typeof clearBookingDraft === 'function') clearBookingDraft();
 
@@ -3611,7 +3641,7 @@
     }
 
     function initDraftAutoSave() {
-        var inputIds = ['amtName', 'amtPhone', 'amtNotes', 'amtDate', 'amtTime', 'amtPax', 'amtPickup'];
+        var inputIds = ['amtName', 'amtPhone', 'amtEmail', 'amtNotes', 'amtDate', 'amtTime', 'amtPax', 'amtPickup'];
         inputIds.forEach(function (id) {
             var el = document.getElementById(id);
             if (el) {
@@ -4315,7 +4345,7 @@
                 + '<div class="amt-v-grid">'
                 + '  <div class="amt-v-cell">'
                 + '    <span class="amt-v-lbl">Lead Passenger</span>'
-                + '    <span class="amt-v-val"><strong style="text-transform:capitalize;">' + escapeHtml(formatSafeTitleCase(bookingState.name || 'Guest')) + '</strong>' + (bookingState.phone ? ' (' + escapeHtml(bookingState.phone) + ')' : '') + '</span>'
+                + '    <span class="amt-v-val"><strong style="text-transform:capitalize;">' + escapeHtml(formatSafeTitleCase(bookingState.name || 'Guest')) + '</strong>' + (bookingState.phone ? ' (' + escapeHtml(bookingState.phone) + ')' : '') + (bookingState.email ? '<br><span style="font-size:0.64rem;color:#64748b;font-weight:normal;">✉️ ' + escapeHtml(bookingState.email) + '</span>' : '') + '</span>'
                 + '  </div>'
                 + '  <div class="amt-v-cell">'
                 + '    <span class="amt-v-lbl">Travel Schedule</span>'
