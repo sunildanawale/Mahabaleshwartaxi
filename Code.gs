@@ -287,18 +287,18 @@ function doPost(e) {
             "<tr><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;'><strong>Selected Tour / Route:</strong></td><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;'><strong>" + tour + "</strong></td></tr>" +
             "<tr><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;'><strong>Travel Schedule:</strong></td><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;'>" + date + " at " + time + "</td></tr>" +
             "<tr><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;'><strong>Pickup Hotel Details:</strong></td><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;'>" + hotelDetails + " (Doorstep Hotel Porch)</td></tr>" +
-            "<tr><td style='padding:9px 12px;color:#64748b;'><strong>Locked Union Fare:</strong></td><td style='padding:9px 12px;font-size:16px;color:#16a34a;font-weight:bold;'>₹" + fare + " <span style='font-size:12px;color:#64748b;font-weight:normal;'>(Zero Advance • Pay Driver After Trip)</span></td></tr>" +
+            "<tr><td style='padding:9px 12px;color:#64748b;'><strong>Booking Tariff:</strong></td><td style='padding:9px 12px;font-size:16px;color:#16a34a;font-weight:bold;'>₹" + fare + " <span style='font-size:12px;color:#64748b;font-weight:normal;'>(Pay as per service policy)</span></td></tr>" +
           "</table>" +
           
-          "<div style='background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:12px;margin-top:16px;'>" +
-            "<p style='margin:0;color:#166534;font-size:12.5px;line-height:1.4;'><strong>🛡️ Mountain Fleet Assurance:</strong> All tours are operated strictly by registered 4-seater tourist cabs driven by licensed, hill-experienced local drivers native to Sahyadri ghats. Official Taxi Union tariffs apply with zero hidden surges.</p>" +
+          "<div style='background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px;margin-top:16px;'>" +
+            "<p style='margin:0;color:#334155;font-size:12px;line-height:1.5;'><strong>Sightseeing Guidelines:</strong> Local sightseeing includes hotel pickup and drop-off within Mahabaleshwar town, as per existing arrangements. Outside Mahabaleshwar town, extra charges may apply depending on location and distance. The tour operator will communicate applicable extra charges during booking confirmation. Local sightseeing &amp; drops require zero advance (pay driver directly); outstation drops require advance as per schedule. All bookings and vehicle assignments are subject to vehicle availability and operator confirmation.</p>" +
           "</div>" +
           
           "<p style='font-size:13px;color:#64748b;margin-top:20px;line-height:1.5;'>Need immediate assistance or wish to reconfirm pickup early? Feel free to contact our 24/7 operations desk at <strong>+91 99228 82044</strong> or reply to this email.</p>" +
           
           "<div style='text-align:center;margin-top:24px;padding-top:16px;border-top:1px solid #e2e8f0;'>" +
             "<p style='font-size:12px;color:#64748b;margin:0;'>Aryan Taxi Mahabaleshwar • Direct Local Tourist Cab Network</p>" +
-            "<p style='font-size:11px;color:#94a3b8;margin:4px 0 0;'>Official Union Tariff Locked • No Hidden Mountain Charges</p>" +
+            "<p style='font-size:11px;color:#94a3b8;margin:4px 0 0;'>Aryan Taxi Mahabaleshwar • Fixed Tariffs &amp; Professional Service</p>" +
           "</div>" +
         "</div>";
 
@@ -513,12 +513,12 @@ function handleExecuteConfirm(bookingId, token, format, callback) {
             "<tr><td style='padding:9px 12px;color:#64748b;'><strong>Confirmed Tariff:</strong></td><td style='padding:9px 12px;font-size:16px;color:#16a34a;font-weight:bold;'>" + fare + " <span style='font-size:12px;color:#64748b;font-weight:normal;'>(Zero Advance • Pay Driver After Trip)</span></td></tr>" +
           "</table>" +
           
-          "<div style='background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:14px;margin-top:16px;'>" +
-            "<h4 style='color:#166534;margin:0 0 6px;font-size:13.5px;'>Pickup &amp; Carriage Terms</h4>" +
-            "<ul style='margin:0;padding-left:18px;font-size:12.5px;color:#15803d;line-height:1.5;'>" +
-              "<li>Your assigned driver will reach your hotel reception/porch 10 minutes prior to pickup time.</li>" +
-              "<li>Present this digital pass or booking ID to your driver upon boarding.</li>" +
-              "<li>Pay 100% of the locked tariff directly to your driver upon completion of the tour via UPI or Cash.</li>" +
+          "<div style='background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:14px;margin-top:16px;'>" +
+            "<h4 style='color:#0f172a;margin:0 0 6px;font-size:13.5px;'>Pickup &amp; Booking Guidelines</h4>" +
+            "<ul style='margin:0;padding-left:18px;font-size:12.5px;color:#334155;line-height:1.5;'>" +
+              "<li>Local sightseeing includes hotel pickup and drop-off within Mahabaleshwar town, as per existing arrangements. Outside Mahabaleshwar town, extra charges may apply depending on location and distance, communicated during booking confirmation.</li>" +
+              "<li>Local sightseeing &amp; drops require zero advance (pay directly to driver upon completion). Outstation drop transfers require advance as per schedule.</li>" +
+              "<li>All vehicle assignments and timings are subject to vehicle availability and operator confirmation.</li>" +
             "</ul>" +
           "</div>" +
           

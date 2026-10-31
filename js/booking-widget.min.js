@@ -330,9 +330,9 @@
                 badgeBorder: '#bae6fd',
                 paymentBadge: 'Nominal Fuel Advance • Balance to Driver',
                 paymentColor: '#b45309',
-                tariffLabel: 'LOCKED OUTSTATION TARIFF',
-                advanceNote: 'Nominal Fuel Advance • Balance to Driver upon Drop',
-                paymentSettlement: 'Nominal fuel lock advance via link; balance to driver upon drop',
+                tariffLabel: 'OUTSTATION TARIFF',
+                advanceNote: 'Advance Required as per Calculation • Balance to Driver upon Drop',
+                paymentSettlement: 'Advance payment via link; balance to driver upon drop',
                 vehicleDesc: '4-Seater Dedicated Tourist Cab (Arranged as per availability)',
                 dispatchNotice: isSameDayAfternoon
                     ? '⚠️ Vehicle availability may be limited for same-day afternoon/evening bookings, especially during the tourist season. Your booking will be confirmed after vehicle availability is checked.'
@@ -371,7 +371,7 @@
                 badgeBorder: '#86efac',
                 paymentBadge: 'Zero Advance Required • Pay Driver After Drop',
                 paymentColor: '#15803d',
-                tariffLabel: 'OFFICIAL UNION DROP TARIFF',
+                tariffLabel: 'LOCAL POINT DROP TARIFF',
                 advanceNote: 'Zero Advance Required (Standard Local Drop)',
                 paymentSettlement: '100% Cash / UPI to Driver directly after drop',
                 vehicleDesc: '4-Seater Dedicated Tourist Cab (Arranged as per availability)',
@@ -412,8 +412,8 @@
                 badgeBorder: '#bbf7d0',
                 paymentBadge: 'Zero Advance Required • Pay Driver After Tour',
                 paymentColor: '#15803d',
-                tariffLabel: isLarge ? 'ESTIMATED GROUP COMBO TARIFF' : 'LOCKED UNION COMBO TARIFF',
-                advanceNote: 'Zero Advance Required (Approved Union Combo)',
+                tariffLabel: isLarge ? 'ESTIMATED GROUP COMBO TARIFF' : 'FULL DAY COMBO TARIFF',
+                advanceNote: 'Zero Advance Required (Full Day Combo)',
                 paymentSettlement: '100% Cash / UPI to Driver directly after tour completion',
                 vehicleDesc: isLarge
                     ? (taxiCount + 'x 4-Seater Tourist Cabs, arranged as per availability')
@@ -488,7 +488,7 @@
                 whatsappTariffNote: function (fare) {
                     return '💰 *Tour Fare:* ₹' + fare + ' (Special Single Tour Rate' + (isLarge ? ' • ' + taxiCount + ' Cabs' : '') + ')\n_Zero advance required • Pay driver after tour_\nℹ️ *Note:* Single tour (₹800) is an independent budget option offered directly by Aryan Taxi (not part of the official Taxi Union rate card).\n\n';
                 },
-                whatsappReadiness: 'I confirm this direct single tour booking. Please dispatch the cab driver for my tour as per schedule.'
+                whatsappReadiness: 'I would like to book this single tour. Please confirm vehicle availability and driver schedule.'
             };
         }
 
@@ -504,7 +504,7 @@
             badgeBorder: '#86efac',
             paymentBadge: 'Zero Advance Required • Pay Driver After Tour',
             paymentColor: '#15803d',
-            tariffLabel: isLarge ? 'ESTIMATED GROUP SIGHTSEEING TARIFF' : (isMultiSightseeing ? 'LOCKED UNION TARIFF (COMBINED)' : 'LOCKED UNION TARIFF'),
+            tariffLabel: isLarge ? 'ESTIMATED SIGHTSEEING TARIFF' : (isMultiSightseeing ? 'STANDARD COMBINED TARIFF' : 'STANDARD SIGHTSEEING TARIFF'),
             advanceNote: 'Zero Advance Required (Standard Local Sightseeing)',
             paymentSettlement: '100% Cash / UPI to Driver directly after tour completion',
             vehicleDesc: isLarge
@@ -603,10 +603,10 @@
         var msg = 'Hello Aryan Taxi Mahabaleshwar 👋\n'
             + '🚕 *DIRECT TAXI BOOKING CONFIRMATION — ' + sRules.serviceTitle.toUpperCase() + '*\n'
             + (sRules.key === 'outstation'
-                ? '_(Official Union Outstation Tariff • Nominal Fuel Advance • Balance to Driver)_\n\n'
+                ? '_(Outstation Tariff • Advance Required as per Schedule • Balance to Driver)_\n\n'
                 : (sRules.key === 'local_drop'
-                    ? '_(Official Union Drop Tariff • Zero Advance • Pay Driver After Drop)_\n\n'
-                    : '_(Official Union Tariff • Zero Advance • Pay Driver After Trip)_\n\n'))
+                    ? '_(Local Drop Tariff • Zero Advance • Pay Driver After Drop)_\n\n'
+                    : '_(Local Sightseeing Tariff • Zero Advance • Pay Driver After Trip)_\n\n'))
             + '🔖 *Booking Voucher ID:* ' + (b.bookingId || 'AMT-REQ') + '\n'
             + '👤 *Guest Name:* ' + b.name + (b.phone ? ' (' + b.phone + ')' : '') + '\n'
             + '📧 *Guest Email:* ' + (b.email ? b.email.toLowerCase() : 'N/A') + '\n'
@@ -2226,7 +2226,7 @@
                 // Check terms checkbox
                 var termsBox = document.getElementById('amtTermsCheckbox');
                 if (termsBox && !termsBox.checked) {
-                    alert('Please agree to the Taxi Union tour guidelines to continue.');
+                    alert('Please agree to the tour booking guidelines to continue.');
                     termsBox.focus();
                     return;
                 }
@@ -3075,7 +3075,7 @@
                 var isOut = (b.service === 'outstation' || (t && t.category === 'outstation'));
                 var isDrop = (b.service === 'local_drop' || (t && t.category === 'local_drop'));
                 var termLine = isOut ? "Nominal Fuel Advance • Balance to Driver" : (isDrop ? "Zero Advance • Pay driver after drop" : "Zero Advance • Pay driver after tour");
-                var headerTerm = isOut ? "Standard Taxi Union Tariffs Accepted • Nominal Fuel Advance" : "Standard Taxi Union Tariffs Accepted • Zero Advance";
+                var headerTerm = isOut ? "Outstation Transfers • Advance Required" : "Local Sightseeing & Drops • Zero Advance";
 
                 // Full voucher details copied to clipboard for complete record
                 var fullDetails = "OFFICIAL TOURIST TAXI BOOKING CONFIRMATION & VOUCHER\n"
@@ -3573,7 +3573,7 @@
             badgeText = '⭐ Full Day Combo';
             badgeClass = 'amt-badge-combo';
             fareTitle = '₹3,000';
-            fareTerms = 'Union Tariff';
+            fareTerms = 'Standard Tariff';
             durText = '8-9 Hrs.'; // Compact duration to prevent meta row wrapping
         } else if (isOutstation) {
             badgeText = '✈️ Outstation Route';
@@ -3589,7 +3589,7 @@
             badgeText = '🛡️ Union Sightseeing';
             badgeClass = 'amt-badge-union';
             fareTitle = '₹' + Number(t.fare).toLocaleString('en-IN');
-            fareTerms = 'Official Union Tariff';
+            fareTerms = 'Standard Tariff';
         }
 
         var points = t.points || [];
@@ -4662,7 +4662,7 @@
                 + '        <strong class="amt-v-vehicle-val">' + escapeHtml(taxiCount === 1 ? '1x 4-Seater Dedicated Tourist Cab' : (taxiCount + 'x 4-Seater Dedicated Tourist Cabs (' + taxiCount + ' Cabs)')) + '</strong>'
                 + '        <span class="amt-v-vehicle-sub">(As per availability)</span>'
                 + '      </div>'
-                + '      <span class="amt-v-fleet-tag"><i class="fa-solid fa-circle-check" style="color:#10b981;"></i> Union Fleet</span>'
+                + '      <span class="amt-v-fleet-tag"><i class="fa-solid fa-taxi" style="color:#0284c7;"></i> Tourist Cab</span>'
                 + '    </div>'
                 + '  </div>'
                 + '</div>'
@@ -4691,7 +4691,7 @@
                 + '  </div>'
                 + '  <div class="amt-v-fare-right">'
                 + '    <span class="amt-v-pay-badge" style="color:' + sRules.paymentColor + ';">✓ ' + escapeHtml(sRules.paymentBadge) + '</span>'
-                + '    <span class="amt-v-pay-note">Official Union Tariff Rate &bull; No Hidden Surcharges</span>'
+                + '    <span class="amt-v-pay-note">Fixed Tariff &bull; Pay as per booking policy</span>'
                 + '  </div>'
                 + '</div>'
 

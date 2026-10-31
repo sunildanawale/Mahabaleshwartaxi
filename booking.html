@@ -3222,12 +3222,12 @@ body.booking-portal-page .portal-card {
                             <button type="button" class="amt-service-btn active" role="radio" aria-checked="true" data-service="sightseeing">
                                 <span class="amt-cat-icon">🚖</span>
                                 <strong class="amt-cat-name">Sightseeing</strong>
-                                <span class="amt-cat-tag">Union Rates</span>
+                                <span class="amt-cat-tag">Union Rate Card</span>
                             </button>
                             <button type="button" class="amt-service-btn" role="radio" aria-checked="false" data-service="express">
                                 <span class="amt-cat-icon">⚡</span>
                                 <strong class="amt-cat-name">Express ₹800</strong>
-                                <span class="amt-cat-tag amt-tag-green">Budget Flat</span>
+                                <span class="amt-cat-tag amt-tag-green">Budget Single Tour</span>
                             </button>
                             <button type="button" class="amt-service-btn" role="radio" aria-checked="false" data-service="combo">
                                 <span class="amt-cat-icon">🌟</span>
@@ -3266,7 +3266,7 @@ body.booking-portal-page .portal-card {
                         <div id="amtSelectedTourBanner" class="amt-selected-tour-banner" style="display:block !important;">
                             <div class="amt-stb-card">
                                 <div class="amt-stb-top-row">
-                                    <span class="amt-stb-badge amt-badge-union">🚕 Union Sightseeing</span>
+                                    <span class="amt-stb-badge amt-badge-union"><i class="fa-solid fa-compass"></i> Sightseeing Tour</span>
                                     <div class="amt-stb-fare-box">
                                         <span class="amt-stb-fare-val">₹1,200</span>
                                     </div>
@@ -3274,7 +3274,7 @@ body.booking-portal-page .portal-card {
                                 <div class="amt-stb-meta-row">
                                     <span><i class="fa-solid fa-clock"></i> 3.5 Hours</span>
                                     <span><i class="fa-solid fa-binoculars"></i> 5 Viewpoints</span>
-                                    <span><i class="fa-solid fa-receipt"></i> Official Union Tariff</span>
+                                    <span><i class="fa-solid fa-receipt"></i> Standard Tour Tariff</span>
                                     <span><i class="fa-solid fa-shield-halved"></i> Zero Advance</span>
                                 </div>
                                 <div class="amt-stb-points-wrap">
@@ -3321,12 +3321,15 @@ body.booking-portal-page .portal-card {
                             <label class="amt-label" for="amtDropLocation">Drop Destination / Landmark *</label>
                             <input type="text" id="amtDropLocation" class="amt-input" placeholder="e.g. Pune Airport, Mumbai CST, Satara Bus Stand, Panchgani Market...">
                         </div>
+                        <p style="font-size:0.76rem;color:#475569;margin:2px 0 8px;line-height:1.45;background:#f8fafc;border:1px solid #e2e8f0;padding:6px 10px;border-radius:8px;">
+                            <i class="fa-solid fa-circle-info" style="color:#0284c7;"></i> Local sightseeing includes hotel pickup and drop-off within Mahabaleshwar town, as per existing arrangements. Outside Mahabaleshwar town, extra charges may apply depending on location and distance. The tour operator will communicate applicable extra charges during booking confirmation.
+                        </p>
 
                         <!-- Passengers (PAX) & Auto-Calculated Tourist Cabs (Section 5) -->
                         <div class="amt-pax-box" style="background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:12px;padding:12px;margin:8px 0;">
                             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
                                 <label class="amt-label" for="amtPaxInput" style="margin-bottom:0;color:#0f172a;font-weight:700;">Total Passengers (PAX) *</label>
-                                <span class="amt-trust-chip" style="font-size:0.70rem;background:#e0f2fe;color:#0284c7;padding:2px 8px;border-radius:12px;font-weight:700;"><i class="fa-solid fa-shield-halved"></i> 4-Seater Union Fleet</span>
+                                <span class="amt-trust-chip" style="font-size:0.70rem;background:#e0f2fe;color:#0284c7;padding:2px 8px;border-radius:12px;font-weight:700;"><i class="fa-solid fa-taxi"></i> 4-Seater Tourist Cab</span>
                             </div>
                             <div class="amt-pax-input-row" style="display:flex;align-items:center;gap:12px;margin-top:4px;">
                                 <button type="button" id="amtPaxMinusBtn" class="amt-pax-step-btn" style="width:38px;height:38px;border-radius:8px;border:1px solid #cbd5e1;background:#ffffff;font-size:1.3rem;font-weight:700;color:#0284c7;cursor:pointer;display:flex;align-items:center;justify-content:center;">&minus;</button>
@@ -3382,7 +3385,7 @@ body.booking-portal-page .portal-card {
                     <div id="amtStep2" style="display:none;">
                         <div class="amt-step-hdr-compact">
                             <h3 class="amt-step-title">2. Schedule &amp; Fare Breakdown</h3>
-                            <span class="amt-trust-chip"><i class="fa-solid fa-shield-halved"></i> Official Union Tariff</span>
+                            <span class="amt-trust-chip"><i class="fa-solid fa-tag"></i> Standard Tariff</span>
                         </div>
 
                         <!-- Selected Tour & Route Summary -->
@@ -3411,10 +3414,10 @@ body.booking-portal-page .portal-card {
                         <div class="amt-fare-breakdown-card" style="background:#ffffff;border:1.5px solid #e2e8f0;border-radius:12px;padding:14px;margin:12px 0;">
                             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding-bottom:6px;border-bottom:1px dashed #e2e8f0;">
                                 <strong style="font-size:0.92rem;color:#0f172a;"><i class="fa-solid fa-calculator" style="color:#0891b2;"></i> Transparent Tariff Calculation</strong>
-                                <span style="font-size:0.70rem;color:#166534;background:#dcfce7;font-weight:700;padding:2px 8px;border-radius:12px;">Official Union Tariff</span>
+                                <span style="font-size:0.70rem;color:#166534;background:#dcfce7;font-weight:700;padding:2px 8px;border-radius:12px;">Standard Tariff</span>
                             </div>
                             <div style="display:flex;justify-content:space-between;font-size:0.86rem;margin-bottom:6px;color:#475569;">
-                                <span id="amtFareBaseLabel">Union Base Rate:</span>
+                                <span id="amtFareBaseLabel">Base Rate:</span>
                                 <strong id="amtFareBaseVal" style="color:#0f172a;">₹1,200</strong>
                             </div>
                             <div id="amtFareMultiCabRow" style="display:none;justify-content:space-between;font-size:0.86rem;margin-bottom:6px;color:#475569;">
@@ -3434,15 +3437,16 @@ body.booking-portal-page .portal-card {
                             </div>
                         </div>
 
-                        <!-- Official Conditions & Booking Terms -->
-                        <div class="amt-conditions-card" style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:10px 12px;margin-bottom:14px;font-size:0.78rem;color:#166534;line-height:1.45;">
-                            <div style="font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:6px;">
-                                <i class="fa-solid fa-shield-halved"></i> Official Union Booking Conditions
+                        <!-- Sightseeing & Travel Guidelines -->
+                        <div class="amt-conditions-card" style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:10px 12px;margin-bottom:14px;font-size:0.78rem;color:#334155;line-height:1.45;">
+                            <div style="font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:6px;color:#0f172a;">
+                                <i class="fa-solid fa-circle-info" style="color:#0284c7;"></i> Sightseeing &amp; Travel Guidelines
                             </div>
                             <ul style="margin:0 0 0 16px;padding:0;">
-                                <li><strong>Zero advance required online</strong> &ndash; 100% tariff payable directly to your driver after completing your tour.</li>
-                                <li>All sightseeing taxis are private, clean 4-seater tourist cabs with licensed hill drivers.</li>
-                                <li>Toll, parking, and viewpoint entrance fees (if applicable) are paid directly as per actual receipts.</li>
+                                <li><strong>Pickup &amp; Drop:</strong> Local sightseeing includes hotel pickup and drop-off within Mahabaleshwar town, as per existing arrangements. Outside Mahabaleshwar town, extra charges may apply depending on location and distance. The tour operator will communicate applicable extra charges during booking confirmation.</li>
+                                <li><strong>Payment Terms:</strong> Local sightseeing &amp; local drops require zero advance (pay 100% directly to your driver after completing your tour). Outstation drop transfers require advance as per existing calculation.</li>
+                                <li><strong>Tolls &amp; Fees:</strong> Toll, parking, and viewpoint entrance fees (if applicable) are paid directly as per actual receipts.</li>
+                                <li><strong>Vehicle Assignment:</strong> All taxi bookings are for private 4-seater tourist cabs and are subject to vehicle availability and operator confirmation.</li>
                             </ul>
                         </div>
 
@@ -3489,7 +3493,7 @@ body.booking-portal-page .portal-card {
                         <div style="margin:12px 0 8px;display:flex;align-items:flex-start;gap:8px;">
                             <input type="checkbox" id="amtTermsCheckbox" checked style="margin-top:3px;cursor:pointer;">
                             <label for="amtTermsCheckbox" style="font-size:0.78rem;color:#475569;cursor:pointer;line-height:1.4;">
-                                I agree to the Taxi Union tour guidelines. I understand no online advance is collected and 100% payment will be made directly to the driver after my trip.
+                                I agree to the tour booking guidelines. Local sightseeing &amp; local drops require zero advance (pay driver after trip); outstation drops require advance as per schedule. All bookings are subject to vehicle availability and operator confirmation.
                             </label>
                         </div>
 
@@ -3561,22 +3565,22 @@ body.booking-portal-page .portal-card {
             <div class="portal-trust-item">
                 <i class="fa-solid fa-handshake-simple" style="color: #10b981;"></i>
                 <div>
-                    <h4>Zero Advance for Local Sightseeing &amp; Drops &bull; Nominal Fuel Advance for Outstation</h4>
-                    <p>Zero advance payment for all Mahabaleshwar local sightseeing tours and local drops &mdash; pay 100% of fare directly to your driver after the trip. For outstation transfers (Pune, Mumbai, etc.), a nominal fuel advance confirms vehicle dispatch with balance payable to driver upon drop.</p>
+                    <h4>Zero Advance for Local Sightseeing &amp; Drops &bull; Advance for Outstation</h4>
+                    <p>Zero advance payment for all Mahabaleshwar local sightseeing tours and local drops &mdash; pay 100% of fare directly to your driver after the trip. For outstation transfers, advance payment confirms vehicle dispatch with balance payable to driver upon drop.</p>
                 </div>
             </div>
             <div class="portal-trust-item">
                 <i class="fa-solid fa-scale-balanced" style="color: #38bdf8;"></i>
                 <div>
-                    <h4>Standard Taxi Union Tariffs Accepted</h4>
-                    <p>All rates follow Mahabaleshwar Taxi Union tariffs. Zero hidden surge fees, holiday markups, or middleman commission.</p>
+                    <h4>Transparent Package Rates</h4>
+                    <p>Fixed tariffs with zero hidden surge fees or middleman markups. Sightseeing tours follow official tariff guidelines.</p>
                 </div>
             </div>
             <div class="portal-trust-item">
                 <i class="fa-solid fa-taxi" style="color: #f59e0b;"></i>
                 <div>
-                    <h4>Mountain-Experienced Local Drivers</h4>
-                    <p>Licensed hill drivers native to Sahyadri ghats. Prompt doorstep hotel pickup, clean tourist cabs, and safe ghat driving.</p>
+                    <h4>Experienced Local Drivers</h4>
+                    <p>Local hill drivers native to Sahyadri ghats. Prompt doorstep hotel pickup, clean 4-seater tourist cabs, and safe driving.</p>
                 </div>
             </div>
         </div>
@@ -3602,7 +3606,7 @@ body.booking-portal-page .portal-card {
     <!-- Scripts -->
     <script src="js/tour-data.js?v=134.1"></script>
     <script src="js/ai-assistant.js?v=134.1" defer></script>
-    <script src="js/booking-widget.min.js?v=134.2"></script>
+    <script src="js/booking-widget.min.js?v=134.3"></script>
     <script>
     (function() {
         var search = window.location.search || '';
