@@ -921,6 +921,26 @@
     border-top: 1.5px solid #bae6fd !important;
 }
 
+/* Explicit compact styling for Pickup Area dropdown to fit cleanly */
+select#amtPickupArea.amt-select,
+select#amtPickupArea.amt-input,
+#amtPickupArea {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    padding: 2px 4px !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    line-height: normal !important;
+    letter-spacing: -0.2px !important;
+    white-space: nowrap !important;
+}
+select#amtPickupArea option,
+#amtPickupArea option {
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    padding: 3px 5px !important;
+}
+
 /* Banner Top Row: Spacious & Luxurious */
 .amt-stb-card {
     padding: 5px 8px !important;
@@ -1623,6 +1643,15 @@ body.booking-portal-page .portal-card {
 [data-theme="dark"] #amtTourSelect optgroup {
     background: #0f172a !important;
     color: #38bdf8 !important;
+}
+
+[data-theme="dark"] select#amtPickupArea,
+[data-theme="dark"] #amtPickupArea {
+    font-size: 11px !important;
+}
+[data-theme="dark"] select#amtPickupArea option,
+[data-theme="dark"] #amtPickupArea option {
+    font-size: 11px !important;
 }
 
 /* Tour Showcase Banner in Dark Mode */
@@ -3266,8 +3295,8 @@ body.booking-portal-page .portal-card {
                             </div>
                             <div>
                                 <label class="amt-label" for="amtPickupArea">Pickup Area / Locality *</label>
-                                <select id="amtPickupArea" class="amt-input amt-select" style="width:100%;font-size:11px;min-height:36px;height:36px;padding:4px 6px;letter-spacing:-0.1px;text-overflow:ellipsis;white-space:nowrap;">
-                                    <option value="Mahabaleshwar Market & Central" selected>Mahabaleshwar (Market &amp; Central)</option>
+                                <select id="amtPickupArea" class="amt-input amt-select" style="width:100%;font-size:11px !important;min-height:32px;height:32px;padding:2px 4px;letter-spacing:-0.2px;">
+                                    <option value="Mahabaleshwar Market & Central" selected>Mahabaleshwar (Market/Town)</option>
                                     <option value="Metgutad / Panchgani Road">Metgutad / Panchgani Rd</option>
                                     <option value="Kate's Point / Duchess Road">Kate's Point / Duchess Rd</option>
                                     <option value="Old Mahabaleshwar">Old Mahabaleshwar</option>
@@ -3573,7 +3602,7 @@ body.booking-portal-page .portal-card {
     <!-- Scripts -->
     <script src="js/tour-data.js?v=134.1"></script>
     <script src="js/ai-assistant.js?v=134.1" defer></script>
-    <script src="js/booking-widget.min.js?v=134.1"></script>
+    <script src="js/booking-widget.min.js?v=134.2"></script>
     <script>
     (function() {
         var search = window.location.search || '';

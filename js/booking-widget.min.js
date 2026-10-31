@@ -1748,7 +1748,7 @@
     // ── 5. Bind Engine Interactivity ───────────────────────────────────
 
     function updateZoneNotice() {
-        var pickupVal = (document.getElementById('amtPickup') || {}).value || '';
+        var pickupVal = (document.getElementById('amtPickupHotel') || {}).value || (document.getElementById('amtPickup') || {}).value || bookingState.hotelDetails || bookingState.pickup || '';
         var zoneNotice = document.getElementById('amtZoneNotice');
         var availBox = document.getElementById('amtAvailabilityBox');
         if (!zoneNotice || !availBox) return;
@@ -1959,9 +1959,13 @@
                 bookingState.email = prof.email;
                 restored = true;
             }
-            if (pickEl && !pickEl.value && prof.pickup) {
-                pickEl.value = prof.pickup;
+            if (prof.pickup) {
+                var hotelEl = document.getElementById('amtPickupHotel');
+                var hiddenPick = document.getElementById('amtPickup');
+                if (hotelEl && !hotelEl.value) hotelEl.value = prof.pickup;
+                if (hiddenPick && !hiddenPick.value) hiddenPick.value = prof.pickup;
                 bookingState.pickup = prof.pickup;
+                bookingState.hotelDetails = prof.pickup;
                 if (typeof updateZoneNotice === 'function') updateZoneNotice();
                 restored = true;
             }
@@ -1986,6 +1990,7 @@
                 if (t) tourTitle = t.name;
             }
             var calculatedFare = state.totalFare || state.fare || (t ? t.fare : 0);
+            var resolvedPickup = state.pickup || state.hotelDetails || '';
             var entry = {
                 id: state.bookingId || ('AMT-' + Date.now().toString().slice(-6)),
                 bookingId: state.bookingId || ('AMT-' + Date.now().toString().slice(-6)),
@@ -1995,10 +2000,13 @@
                 service: state.service || 'sightseeing',
                 tour: tourTitle || 'Mahabaleshwar Sightseeing',
                 fare: calculatedFare,
-                pickup: state.pickup || '',
+                pickup: resolvedPickup,
+                hotelDetails: resolvedPickup,
                 date: state.date || '',
                 time: state.time || '',
-                pax: state.pax || '3-4',
+                pax: state.paxNum || state.pax || '2',
+                paxNum: state.paxNum || 2,
+                taxiCount: state.taxiCount || 1,
                 notes: state.notes || '',
                 status: 'Pending Approval',
                 createdAt: new Date().toISOString()
@@ -2071,7 +2079,7 @@
         });
 
         // Autocomplete on Pickup field & Clear Button
-        var pickInput = document.getElementById('amtPickup');
+        var pickInput = document.getElementById('amtPickupHotel') || document.getElementById('amtPickup');
         var autoList = document.getElementById('amtAutocompleteList') || document.getElementById('amtAutoList');
         var pickClear = document.getElementById('amtPickupClear');
         if (pickInput && autoList) {
@@ -2080,7 +2088,10 @@
                 pickClear.addEventListener('click', function (e) {
                     e.stopPropagation();
                     pickInput.value = '';
+                    var hPick = document.getElementById('amtPickup');
+                    if (hPick) hPick.value = '';
                     bookingState.pickup = '';
+                    bookingState.hotelDetails = '';
                     pickClear.style.display = 'none';
                     autoList.style.display = 'none';
                     updateZoneNotice();
@@ -2090,6 +2101,10 @@
 
             pickInput.addEventListener('input', function () {
                 var val = pickInput.value.trim();
+                var hPick = document.getElementById('amtPickup');
+                if (hPick) hPick.value = val;
+                bookingState.pickup = val;
+                bookingState.hotelDetails = val;
                 if (pickClear) pickClear.style.display = val ? 'block' : 'none';
                 var results = window.TOUR_DATABASE ? window.TOUR_DATABASE.searchLocations(val) : [];
                 if (results.length > 0) {
@@ -2107,8 +2122,12 @@
             autoList.addEventListener('click', function (e) {
                 var item = e.target.closest('.amt-autocomplete-item');
                 if (item) {
-                    pickInput.value = item.getAttribute('data-val');
-                    bookingState.pickup = pickInput.value;
+                    var chosen = item.getAttribute('data-val');
+                    pickInput.value = chosen;
+                    var hPick = document.getElementById('amtPickup');
+                    if (hPick) hPick.value = chosen;
+                    bookingState.pickup = chosen;
+                    bookingState.hotelDetails = chosen;
                     autoList.style.display = 'none';
                     if (pickClear) pickClear.style.display = 'block';
                     updateZoneNotice();
@@ -2157,19 +2176,27 @@
         var prevVoucherBtn = document.getElementById('amtPreviewVoucherBtn');
         if (prevVoucherBtn) {
             prevVoucherBtn.addEventListener('click', function () {
+                var hotelEl = document.getElementById('amtPickupHotel');
                 var pickInput = document.getElementById('amtPickup');
                 var nameEl = document.getElementById('amtName');
                 var phoneEl = document.getElementById('amtPhone');
                 var notesEl = document.getElementById('amtNotes');
 
-                bookingState.pickup = pickInput ? pickInput.value.trim() : '';
-                bookingState.name = nameEl ? nameEl.value.trim() : '';
-                bookingState.phone = phoneEl ? phoneEl.value.trim() : '';
-                bookingState.notes = notesEl ? notesEl.value.trim() : '';
+                var resolvedHotel = (hotelEl ? hotelEl.value.trim() : '') || (pickInput ? pickInput.value.trim() : '') || bookingState.hotelDetails || bookingState.pickup || '';
 
-                if (!bookingState.pickup || bookingState.pickup.length < 3) {
+                bookingState.pickup = resolvedHotel;
+                bookingState.hotelDetails = resolvedHotel;
+                if (pickInput) pickInput.value = resolvedHotel;
+                if (hotelEl && !hotelEl.value) hotelEl.value = resolvedHotel;
+
+                bookingState.name = nameEl ? nameEl.value.trim() : (bookingState.name || '');
+                bookingState.phone = phoneEl ? phoneEl.value.trim() : (bookingState.phone || '');
+                bookingState.notes = notesEl ? notesEl.value.trim() : (bookingState.notes || '');
+
+                if (!resolvedHotel || resolvedHotel.length < 2) {
                     alert('Please enter your pickup hotel, resort, or landmark in Mahabaleshwar / Panchgani.');
-                    if (pickInput) pickInput.focus();
+                    goToStep(1);
+                    if (hotelEl) hotelEl.focus();
                     return;
                 }
                 if (!bookingState.name || bookingState.name.length < 2) {
@@ -2367,10 +2394,15 @@
         // Hotel name input
         var hotelInp = document.getElementById('amtPickupHotel');
         if (hotelInp) {
-            hotelInp.addEventListener('input', function () {
-                bookingState.hotelDetails = this.value.trim();
-                bookingState.pickup = this.value.trim();
-            });
+            var syncHotel = function () {
+                var val = hotelInp.value.trim();
+                bookingState.hotelDetails = val;
+                bookingState.pickup = val;
+                var hPick = document.getElementById('amtPickup');
+                if (hPick) hPick.value = val;
+            };
+            hotelInp.addEventListener('input', syncHotel);
+            hotelInp.addEventListener('change', syncHotel);
         }
 
         var toStep2 = document.getElementById('amtToStep2');
@@ -2410,8 +2442,8 @@
                 }
 
                 var hotelEl = document.getElementById('amtPickupHotel');
-                var hVal = hotelEl ? hotelEl.value.trim() : '';
-                if (!hVal) {
+                var hVal = (hotelEl ? hotelEl.value.trim() : '') || bookingState.hotelDetails || bookingState.pickup || '';
+                if (!hVal || hVal.length < 2) {
                     alert('Please enter your pickup hotel / resort name.');
                     if (hotelEl) hotelEl.focus();
                     return;
@@ -2431,6 +2463,8 @@
                 bookingState.date = dVal;
                 bookingState.hotelDetails = hVal;
                 bookingState.pickup = hVal;
+                var hPick = document.getElementById('amtPickup');
+                if (hPick) hPick.value = hVal;
 
                 updatePaxAndTaxis(bookingState.paxNum || 2);
                 goToStep(2);
@@ -2468,36 +2502,40 @@
 
 // Static legacy handlers removed for clean 3-step navigation
 
-        // Confirm Booking (Step 2 -> Step 3 Voucher)
+        // Confirm Booking (Step 3 -> Voucher Screen)
         var confirmBtn = document.getElementById('amtConfirmBtn');
         if (confirmBtn) {
             confirmBtn.addEventListener('click', function () {
                 if (bookingState.submitting) return;
 
+                var hotelEl = document.getElementById('amtPickupHotel');
                 var pickInput = document.getElementById('amtPickup');
                 var nameEl = document.getElementById('amtName');
                 var phoneEl = document.getElementById('amtPhone');
                 var emailEl = document.getElementById('amtEmail');
                 var notesEl = document.getElementById('amtNotes');
-                var paxSel = document.getElementById('amtPax');
 
-                bookingState.pickup = pickInput ? pickInput.value.trim() : '';
-                bookingState.name = nameEl ? nameEl.value.trim() : '';
-                bookingState.phone = phoneEl ? phoneEl.value.trim() : '';
-                bookingState.email = emailEl ? emailEl.value.trim() : '';
-                bookingState.notes = notesEl ? notesEl.value.trim() : '';
-                bookingState.pax = paxSel ? paxSel.value : '3-4';
+                var resolvedHotel = (hotelEl ? hotelEl.value.trim() : '') || (pickInput ? pickInput.value.trim() : '') || bookingState.hotelDetails || bookingState.pickup || '';
 
-                if (bookingState.pax === '5+') {
-                    var tc = document.getElementById('amtTaxiCount');
-                    bookingState.taxiCount = tc ? parseInt(tc.value, 10) : 2;
-                } else {
-                    bookingState.taxiCount = 1;
-                }
+                bookingState.pickup = resolvedHotel;
+                bookingState.hotelDetails = resolvedHotel;
+                if (pickInput) pickInput.value = resolvedHotel;
+                if (hotelEl && !hotelEl.value) hotelEl.value = resolvedHotel;
 
-                if (!bookingState.pickup || bookingState.pickup.length < 3) {
+                bookingState.name = nameEl ? nameEl.value.trim() : (bookingState.name || '');
+                bookingState.phone = phoneEl ? phoneEl.value.trim() : (bookingState.phone || '');
+                bookingState.email = emailEl ? emailEl.value.trim() : (bookingState.email || '');
+                bookingState.notes = notesEl ? notesEl.value.trim() : (bookingState.notes || '');
+
+                var pCount = bookingState.paxNum || 2;
+                bookingState.paxNum = pCount;
+                bookingState.pax = String(pCount);
+                bookingState.taxiCount = Math.ceil(pCount / 4);
+
+                if (!resolvedHotel || resolvedHotel.length < 2) {
                     alert('Please enter your pickup hotel, resort, or landmark in Mahabaleshwar / Panchgani.');
-                    if (pickInput) pickInput.focus();
+                    goToStep(1);
+                    if (hotelEl) hotelEl.focus();
                     return;
                 }
 
@@ -3626,7 +3664,7 @@
             if (typeof localStorage === 'undefined') return;
             var nameInput = document.getElementById('amtName');
             var phoneInput = document.getElementById('amtPhone');
-            var hotelInput = document.getElementById('amtPickup');
+            var hotelInput = document.getElementById('amtPickupHotel') || document.getElementById('amtPickup');
             var dateInput = document.getElementById('amtDate');
             var timeInput = document.getElementById('amtTime');
             var notesInput = document.getElementById('amtNotes');
@@ -3703,9 +3741,12 @@
             }
 
             if (draft.hotel) {
-                var hEl = document.getElementById('amtPickup');
+                var hEl = document.getElementById('amtPickupHotel') || document.getElementById('amtPickup');
                 if (hEl) hEl.value = draft.hotel;
+                var hPick = document.getElementById('amtPickup');
+                if (hPick) hPick.value = draft.hotel;
                 bookingState.pickup = draft.hotel;
+                bookingState.hotelDetails = draft.hotel;
             }
 
             if (draft.name) {
@@ -3747,7 +3788,7 @@
     }
 
     function initDraftAutoSave() {
-        var inputIds = ['amtName', 'amtPhone', 'amtEmail', 'amtNotes', 'amtDate', 'amtTime', 'amtPax', 'amtPickup'];
+        var inputIds = ['amtName', 'amtPhone', 'amtEmail', 'amtNotes', 'amtDate', 'amtTime', 'amtPax', 'amtPickup', 'amtPickupHotel'];
         inputIds.forEach(function (id) {
             var el = document.getElementById(id);
             if (el) {
@@ -3763,11 +3804,13 @@
                 var nameEl = document.getElementById('amtName'); if (nameEl) nameEl.value = '';
                 var phoneEl = document.getElementById('amtPhone'); if (phoneEl) phoneEl.value = '';
                 var notesEl = document.getElementById('amtNotes'); if (notesEl) notesEl.value = '';
+                var hotelEl = document.getElementById('amtPickupHotel'); if (hotelEl) hotelEl.value = '';
                 var pickupEl = document.getElementById('amtPickup'); if (pickupEl) pickupEl.value = '';
                 bookingState.name = '';
                 bookingState.phone = '';
                 bookingState.notes = '';
                 bookingState.pickup = '';
+                bookingState.hotelDetails = '';
                 var banner = document.getElementById('amtDraftBanner');
                 if (banner) banner.style.display = 'none';
             });
@@ -4887,6 +4930,7 @@
             if (document.getElementById('amtPhone')) document.getElementById('amtPhone').value = phone;
             if (document.getElementById('amtDate')) document.getElementById('amtDate').value = date;
             if (document.getElementById('amtTime')) document.getElementById('amtTime').value = time;
+            if (document.getElementById('amtPickupHotel')) document.getElementById('amtPickupHotel').value = pickup;
             if (document.getElementById('amtPickup')) document.getElementById('amtPickup').value = pickup;
 
             bookingState.name = name;
@@ -4894,6 +4938,7 @@
             bookingState.date = date;
             bookingState.time = time;
             bookingState.pickup = pickup;
+            bookingState.hotelDetails = pickup;
 
             updateZoneNotice();
             renderReviewCard();
