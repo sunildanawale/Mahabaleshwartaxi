@@ -3178,7 +3178,7 @@ body.booking-portal-page .portal-card {
                 
                 <!-- Card Header -->
                 <div class="amt-card-header portal-card-header">
-                    <button class="amt-close-btn" id="amtCloseBtn" style="display:none;" aria-label="Close">&times;</button>
+                    <button class="amt-close-btn" id="amtCloseBtn" aria-label="Close & Return to Website" title="Close & Return to Website">&times;</button>
                     <div class="amt-header-brand">Aryan Taxi Mahabaleshwar</div>
                     <h2 class="amt-header-title" style="margin: 0; font-size: inherit; font-weight: inherit; line-height: inherit;">Select Tour &amp; Confirm Booking</h2>
                     <div class="amt-stepper" id="amtStepper">
@@ -3550,7 +3550,19 @@ body.booking-portal-page .portal-card {
                                 <button type="button" id="amtShareFamilyBtn" class="amt-v-link-btn" style="padding:6px 2px; border:1px solid #cbd5e1; background:#ffffff; color:#10b981; border-radius:6px; font-size:0.68rem; font-weight:700; cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><i class="fa-solid fa-share-nodes" style="font-size:0.80rem;"></i><span>Share</span></button>
                                 <button type="button" id="amtCalendarBtn" class="amt-btn-back" style="padding:6px 2px; border:1px solid #cbd5e1; background:#ffffff; color:#6366f1; border-radius:6px; font-size:0.68rem; font-weight:700; cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><i class="fa-regular fa-calendar-plus" style="font-size:0.80rem; color:#6366f1;"></i><span>Calendar</span></button>
                             </div>
-                            <button type="button" id="amtEditTripBtn" class="amt-btn-back" style="width:100%; margin-top:5px; padding:5px; font-size:0.72rem; border:1px solid #cbd5e1; background:#f8fafc; color:#475569; border-radius:6px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:5px;"><i class="fa-solid fa-arrow-left"></i> Change Tour Selection / Edit Trip</button>
+                            <div class="amt-voucher-footer-actions" style="margin-top:8px; display:flex; flex-direction:column; gap:6px;">
+                                <button type="button" id="amtCloseVoucherBtn" class="amt-btn-done" style="width:100%; padding:11px 14px; background:#0f2b48; color:#ffffff; border:1px solid #1e40af; border-radius:8px; font-weight:800; font-size:0.88rem; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 3px 12px rgba(15,43,72,0.35);">
+                                    <i class="fa-solid fa-circle-check" style="color:#22c55e;"></i> <span>Booking Complete &bull; Close &amp; Return to Home</span>
+                                </button>
+                                <div style="display:flex; gap:6px;">
+                                    <button type="button" id="amtBookAnotherBtn" style="flex:1; padding:8px 10px; font-size:0.76rem; border:1.5px solid #0284c7; background:#f0f9ff; color:#0369a1; border-radius:6px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:5px;">
+                                        <i class="fa-solid fa-plus-circle"></i> Book Another Taxi
+                                    </button>
+                                    <button type="button" id="amtEditTripBtn" class="amt-btn-back" style="flex:1; padding:8px 10px; font-size:0.76rem; border:1px solid #cbd5e1; background:#f8fafc; color:#475569; border-radius:6px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:5px;">
+                                        <i class="fa-solid fa-arrow-left"></i> Edit Details
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -3606,7 +3618,7 @@ body.booking-portal-page .portal-card {
     <!-- Scripts -->
     <script src="js/tour-data.js?v=134.1"></script>
     <script src="js/ai-assistant.js?v=134.1" defer></script>
-    <script src="js/booking-widget.min.js?v=134.3"></script>
+    <script src="js/booking-widget.min.js?v=134.4"></script>
     <script>
     (function() {
         var search = window.location.search || '';

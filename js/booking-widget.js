@@ -1734,7 +1734,13 @@
             + '<button type="button" id="amtShareFamilyBtn" class="amt-v-link-btn" style="padding:6px 2px;border:1px solid #cbd5e1;background:#ffffff;color:#10b981;border-radius:6px;font-size:0.68rem;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;"><i class="fa-solid fa-share-nodes" style="font-size:0.80rem;"></i><span>Share</span></button>'
             + '<button type="button" id="amtCalendarBtn" class="amt-btn-back" style="padding:6px 2px;border:1px solid #cbd5e1;background:#ffffff;color:#6366f1;border-radius:6px;font-size:0.68rem;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;"><i class="fa-regular fa-calendar-plus" style="font-size:0.80rem;color:#6366f1;"></i><span>Calendar</span></button>'
             + '</div>'
-            + '<button type="button" id="amtEditTripBtn" class="amt-btn-back" style="width:100%;margin-top:5px;padding:5px;font-size:0.72rem;border:1px solid #cbd5e1;background:#f8fafc;color:#475569;border-radius:6px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;"><i class="fa-solid fa-arrow-left"></i> Change Tour Selection / Edit Trip</button>'
+            + '<div class="amt-voucher-footer-actions" style="margin-top:8px;display:flex;flex-direction:column;gap:6px;">'
+            + '  <button type="button" id="amtCloseVoucherBtn" class="amt-btn-done" style="width:100%;padding:11px 14px;background:#0f2b48;color:#ffffff;border:1px solid #1e40af;border-radius:8px;font-weight:800;font-size:0.88rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 3px 12px rgba(15,43,72,0.35);"><i class="fa-solid fa-circle-check" style="color:#22c55e;"></i> <span>Booking Complete &bull; Close &amp; Return to Home</span></button>'
+            + '  <div style="display:flex;gap:6px;">'
+            + '    <button type="button" id="amtBookAnotherBtn" style="flex:1;padding:8px 10px;font-size:0.76rem;border:1.5px solid #0284c7;background:#f0f9ff;color:#0369a1;border-radius:6px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;"><i class="fa-solid fa-plus-circle"></i> Book Another Taxi</button>'
+            + '    <button type="button" id="amtEditTripBtn" class="amt-btn-back" style="flex:1;padding:8px 10px;font-size:0.76rem;border:1px solid #cbd5e1;background:#f8fafc;color:#475569;border-radius:6px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;"><i class="fa-solid fa-arrow-left"></i> Edit Details</button>'
+            + '  </div>'
+            + '</div>'
             + '</div>'
             + '</div>'
 
@@ -3052,6 +3058,25 @@
                 goToStep(2);
             });
         }
+
+        var closeVoucherBtn = document.getElementById('amtCloseVoucherBtn');
+        if (closeVoucherBtn) {
+            closeVoucherBtn.addEventListener('click', function () {
+                window.closeBookingModal();
+            });
+        }
+
+        var bookAnotherBtn = document.getElementById('amtBookAnotherBtn');
+        if (bookAnotherBtn) {
+            bookAnotherBtn.addEventListener('click', function () {
+                bookingState.bookingId = null;
+                bookingState.submitting = false;
+                if (typeof clearBookingDraft === 'function') clearBookingDraft();
+                var nameEl = document.getElementById('amtName'); if (nameEl) nameEl.value = '';
+                var notesEl = document.getElementById('amtNotes'); if (notesEl) notesEl.value = '';
+                goToStep(1);
+            });
+        }
         // 3. Email Voucher to Guest (Concise mailto + Clipboard copy fallback)
         var emailVoucherBtn = document.getElementById('amtEmailVoucherBtn');
         if (emailVoucherBtn) {
@@ -4074,6 +4099,12 @@
         var sLbl = document.getElementById('amtStepLabel'); if (sLbl) sLbl.textContent = 'Booking Voucher (Step 3 of 3)';
         var hdrTitle = document.querySelector('.amt-header-title');
         if (hdrTitle) hdrTitle.textContent = 'Official Booking Voucher';
+        var cBtn = document.getElementById('amtCloseBtn');
+        if (cBtn) {
+            cBtn.style.display = 'flex';
+            cBtn.setAttribute('title', 'Close Voucher and Return to Website');
+            cBtn.setAttribute('aria-label', 'Close Voucher');
+        }
         if (typeof updateStepper === 'function') updateStepper(3);
         try { if (window.history && window.history.pushState) window.history.pushState({ amtStep: 3 }, '', '#voucher'); } catch (e) { }
 
@@ -4790,8 +4821,8 @@
     window.getBookingState = function() { return bookingState; };
 
     window.closeBookingModal = function () {
-        // Do not force redirect to index.html on portal pages; preserve current state
         if (document.body && document.body.classList.contains('booking-portal-page')) {
+            window.location.href = 'index.html';
             return;
         }
         var modal = document.getElementById('amtBookingModal');
