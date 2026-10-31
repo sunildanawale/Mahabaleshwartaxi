@@ -254,16 +254,18 @@ function doPost(e) {
  * 1-CLICK APPROVAL HANDLER
  * Triggered when owner clicks [ ✔ 1-CLICK APPROVE & CONFIRM BOOKING ] in alert email
  */
-function handleOneClickApproval(bookingId) {
+function handleOneClickApproval(bookingId, format) {
   try {
     var sheet = getBookingsSheet();
     var data = sheet.getDataRange().getValues();
     var foundRow = -1;
     var rowData = null;
     
-    // Find row by Booking ID (Column B = index 1)
+    // Flexible case-insensitive search by Booking ID (Column B = index 1)
+    var cleanSearchId = String(bookingId || "").trim().toUpperCase();
     for (var i = 1; i < data.length; i++) {
-      if (data[i][1] && String(data[i][1]).trim() === String(bookingId).trim()) {
+      var cellVal = String(data[i][1] || "").trim().toUpperCase();
+      if (cellVal && (cellVal === cleanSearchId || cellVal.indexOf(cleanSearchId) !== -1 || cleanSearchId.indexOf(cellVal) !== -1)) {
         foundRow = i + 1;
         rowData = data[i];
         break;
@@ -271,6 +273,10 @@ function handleOneClickApproval(bookingId) {
     }
     
     if (foundRow === -1) {
+      if (format === "json") {
+        return ContentService.createTextOutput(JSON.stringify({ result: "not_found", bookingId: bookingId }))
+          .setMimeType(ContentService.MimeType.JSON);
+      }
       return HtmlService.createHtmlOutput(
         "<!DOCTYPE html><html><head><meta name='viewport' content='width=device-width, initial-scale=1'>" +
         "<title>Booking Not Found | Aryan Taxi</title>" +
@@ -286,6 +292,7 @@ function handleOneClickApproval(bookingId) {
         "<p style='font-size:12px;color:#94a3b8;margin-top:20px;'>Aryan Taxi Mahabaleshwar • 24/7 Operations Desk</p>" +
         "</div></body></html>"
       ).setTitle("Booking Not Found - Aryan Taxi Mahabaleshwar")
+       .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL)
        .addMetaTag("viewport", "width=device-width, initial-scale=1");
     }
     
@@ -301,6 +308,10 @@ function handleOneClickApproval(bookingId) {
 
     // If already confirmed, don't duplicate customer email
     if (String(currentStatus).toUpperCase() === "CONFIRMED") {
+      if (format === "json") {
+        return ContentService.createTextOutput(JSON.stringify({ result: "already_confirmed", status: "CONFIRMED", bookingId: bookingId, name: name }))
+          .setMimeType(ContentService.MimeType.JSON);
+      }
       return HtmlService.createHtmlOutput(
         "<!DOCTYPE html><html><head><meta name='viewport' content='width=device-width, initial-scale=1'>" +
         "<title>Already Confirmed | Aryan Taxi</title>" +
@@ -319,6 +330,7 @@ function handleOneClickApproval(bookingId) {
         "<p style='font-size:12px;color:#94a3b8;margin-top:20px;'>Aryan Taxi Mahabaleshwar • 24/7 Operations Desk</p>" +
         "</div></body></html>"
       ).setTitle("Already Confirmed - Aryan Taxi Mahabaleshwar")
+       .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL)
        .addMetaTag("viewport", "width=device-width, initial-scale=1");
     }
 
@@ -377,6 +389,17 @@ function handleOneClickApproval(bookingId) {
       });
     }
     
+    if (format === "json") {
+      return ContentService.createTextOutput(JSON.stringify({
+        result: "success",
+        status: "CONFIRMED",
+        bookingId: bookingId,
+        name: name,
+        tour: tour,
+        fare: fare
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+
     // Return Clean Success Screen to the Owner
     return HtmlService.createHtmlOutput(
       "<!DOCTYPE html><html><head><meta name='viewport' content='width=device-width, initial-scale=1'>" +
@@ -419,12 +442,49 @@ function handleOneClickApproval(bookingId) {
   }
 }
 
+function handleGetBookings() {
+  try {
+    var sheet = getBookingsSheet();
+    var data = sheet.getDataRange().getValues();
+    var list = [];
+    for (var i = 1; i < data.length; i++) {
+      if (data[i][1]) {
+        list.push({
+          timestamp: data[i][0],
+          bookingId: data[i][1],
+          name: data[i][2],
+          email: data[i][3],
+          phone: data[i][4],
+          date: data[i][5],
+          time: data[i][6],
+          pickup: data[i][7],
+          tour: data[i][8],
+          fare: data[i][9],
+          notes: data[i][10],
+          status: data[i][11]
+        });
+      }
+    }
+    return ContentService.createTextOutput(JSON.stringify({ result: "success", bookings: list }))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch (err) {
+    return ContentService.createTextOutput(JSON.stringify({ result: "error", message: err.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
 function doGet(e) {
   var action = e && e.parameter && e.parameter.action;
+  var format = e && e.parameter && e.parameter.format;
   
   // 1-Click Approve Booking Link
   if (action === "approve" && e.parameter.id) {
-    return handleOneClickApproval(e.parameter.id);
+    return handleOneClickApproval(e.parameter.id, format);
+  }
+  
+  // Live Bookings Fetch for Operator Dashboard
+  if (action === "get_bookings") {
+    return handleGetBookings();
   }
   
   if (action === "gemini_trip_planner" && e.parameter.prompt) {

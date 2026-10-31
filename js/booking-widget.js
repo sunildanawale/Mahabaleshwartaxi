@@ -4066,46 +4066,43 @@
         var db = window.TOUR_DATABASE;
         var t = (bookingState.tourId && db && db.getTourById) ? db.getTourById(bookingState.tourId) : (db && db.tours ? db.tours[0] : null);
         var tours = t ? [{ tour: t, date: bookingState.date, time: bookingState.time }] : [];
-        var sRules = getServiceRules(bookingState.service || bookingState.serviceType, tours, false, 1);
+        var sRules = getServiceRules(bookingState.service || bookingState.serviceType, tours, isLarge, taxiCount);
         var isOutstation = (sRules.key === 'outstation');
         var isLocalDrop = (sRules.key === 'local_drop');
 
-        var wraps = document.querySelectorAll('.amt-cab-selector-wrap');
-        wraps.forEach(function (wrap) {
-            var pill4 = wrap.querySelector('.amt-cab-pill[data-cab="4-seater"]');
-            var pill67 = wrap.querySelector('.amt-cab-pill[data-cab="6-7-seater"]');
-            var label = wrap.querySelector('.amt-label');
-            var subnote = wrap.querySelector('.amt-cab-subnote');
+        var paxCards = document.querySelectorAll('.amt-pax-card');
+        paxCards.forEach(function (card) {
+            card.onclick = function () {
+                var paxVal = this.getAttribute('data-pax') || '1-4';
+                paxCards.forEach(function (c) {
+                    c.classList.remove('active');
+                    c.style.borderColor = '#cbd5e1';
+                    c.style.background = '#ffffff';
+                    var b = c.querySelector('.amt-pax-badge');
+                    if (b) { b.style.background = '#64748b'; }
+                });
+                this.classList.add('active');
+                this.style.borderColor = '#0284c7';
+                this.style.background = '#f0f9ff';
+                var badge = this.querySelector('.amt-pax-badge');
+                if (badge) { badge.style.background = '#0284c7'; }
 
-            if (pill67) {
-                pill67.remove(); // Completely removed from DOM
-            }
-            if (pill4) {
-                pill4.style.display = 'flex';
-                pill4.style.width = '100%';
-                pill4.style.boxSizing = 'border-box';
-                pill4.style.cursor = 'default';
-                pill4.classList.add('active');
-                var p4 = pill4.querySelector('.amt-cab-pill-info');
-                if (p4) {
-                    p4.innerHTML = '<strong>🚖 4-Seater Dedicated Tourist Cab</strong>'
-                        + '<span>1 to 4 Guests &bull; Official Union Tariff &bull; Private Cab</span>';
+                var paxInput = document.getElementById('amtPax');
+                if (paxInput) paxInput.value = paxVal;
+                bookingState.pax = paxVal;
+                bookingState.taxiCount = (paxVal === '5-8' ? 2 : 1);
+
+                var subnote = document.getElementById('amtPaxSubnote');
+                if (subnote) {
+                    if (paxVal === '5-8') {
+                        subnote.innerHTML = '<i class="fa-solid fa-circle-check" style="color:#0284c7;"></i> <strong>2 Dedicated 4-Seater Cabs</strong> (Dzire / Etios) allocated. <em>Strict Union Rule: Mahabaleshwar sightseeing operated strictly by private 4-seater tourist cabs.</em>';
+                    } else {
+                        subnote.innerHTML = '<i class="fa-solid fa-circle-check" style="color:#10b981;"></i> <strong>1 Dedicated 4-Seater Tourist Cab</strong> (Dzire / Etios) reserved exclusively for your family.';
+                    }
                 }
-            }
-            if (label) {
-                label.textContent = 'Cab Type';
-            }
-            if (subnote) {
-                if (isOutstation) {
-                    subnote.innerHTML = '<i class="fa-solid fa-circle-check" style="color:#0284c7;"></i> Dedicated private cab &bull; Hotel porch pickup &bull; Direct highway transit';
-                } else {
-                    subnote.innerHTML = '<i class="fa-solid fa-circle-check" style="color:#10b981;"></i> Dedicated private cab &bull; Hotel porch pickup';
-                }
-                subnote.style.display = 'block';
-            }
+                renderReviewCard();
+            };
         });
-        var paxSel = document.getElementById('amtPax');
-        if (paxSel) paxSel.value = '3-4';
 
         // Update Step 2 Header Trust Chip
         var trustChips = document.querySelectorAll('#amtStep2 .amt-trust-chip');
@@ -4156,9 +4153,12 @@
         var t = (bookingState.tourId && db.getTourById(bookingState.tourId)) || db.tours[0];
         if (!t) return;
 
-        var isLarge = false;
-        var taxiCount = 1;
-        var cabLabel = '4-Seater Dedicated Tourist Cab (1 Cab)';
+        var paxVal = (document.getElementById('amtPax') ? document.getElementById('amtPax').value : bookingState.pax) || '1-4';
+        var taxiCount = (paxVal === '5-8' || bookingState.taxiCount === 2) ? 2 : 1;
+        var isLarge = (taxiCount === 2);
+        bookingState.taxiCount = taxiCount;
+        bookingState.pax = paxVal;
+        var cabLabel = taxiCount === 2 ? '2x 4-Seater Dedicated Tourist Cabs (2 Cabs)' : '4-Seater Dedicated Tourist Cab (1 Cab)';
 
         var selectedTours = bookingState.selectedTours || [];
         var totalFare = 0;
@@ -4172,6 +4172,8 @@
             totalFare = t.fare || 0;
         }
         totalFare = totalFare * taxiCount;
+        bookingState.totalFare = totalFare;
+        bookingState.fare = totalFare;
 
         var fareDisplay = '₹' + Number(totalFare).toLocaleString('en-IN') + (taxiCount > 1 ? ' <small style="font-size:0.75rem;font-weight:600;opacity:0.85;">(2 Cabs)</small>' : '');
         var tourTitle = t.name;
@@ -4180,7 +4182,7 @@
         var tStr = formatPickupTime(bookingState.time);
 
         var tours = [{ tour: t, date: bookingState.date, time: bookingState.time }];
-        var sRules = getServiceRules(bookingState.service || bookingState.serviceType, tours, false, 1);
+        var sRules = getServiceRules(bookingState.service || bookingState.serviceType, tours, isLarge, taxiCount);
         var isOutstation = (sRules.key === 'outstation');
         var isLocalDrop = (sRules.key === 'local_drop');
 
@@ -4211,6 +4213,24 @@
         el.innerHTML = html;
         var policyBox = document.getElementById('amtStep4PolicyBox');
         if (policyBox) policyBox.innerHTML = '';
+
+        var confirmBtn = document.getElementById('amtConfirmBtn');
+        if (confirmBtn) {
+            var btnText = document.getElementById('amtConfirmBtnText');
+            if (btnText) {
+                btnText.innerHTML = 'CONFIRM BOOKING REQUEST (₹' + Number(totalFare).toLocaleString('en-IN') + ')';
+            }
+            var btnSub = document.getElementById('amtConfirmBtnSub') || confirmBtn.querySelector('span');
+            if (btnSub) {
+                if (isOutstation) {
+                    btnSub.innerHTML = 'Nominal Fuel Advance &bull; Balance to Driver at Drop &bull; Instant Pass';
+                } else if (isLocalDrop) {
+                    btnSub.innerHTML = 'Zero Advance Required &bull; Pay Driver After Drop &bull; Instant Pass';
+                } else {
+                    btnSub.innerHTML = 'Zero Advance Required &bull; Pay Driver After Tour &bull; Instant Pass';
+                }
+            }
+        }
     }
 
     function renderVoucherScreen() {
@@ -4244,9 +4264,14 @@
 
             var isMulti = tours.length > 1;
             var baseFare = tours.reduce(function (acc, item) { return acc + item.tour.fare; }, 0);
-            var isLarge = false;
-            var taxiCount = 1;
-            var totalFare = baseFare;
+            var paxVal = (document.getElementById('amtPax') ? document.getElementById('amtPax').value : bookingState.pax) || '1-4';
+            var taxiCount = (paxVal === '5-8' || bookingState.taxiCount === 2) ? 2 : 1;
+            var isLarge = (taxiCount === 2);
+            bookingState.taxiCount = taxiCount;
+            bookingState.pax = paxVal;
+            var totalFare = baseFare * taxiCount;
+            bookingState.totalFare = totalFare;
+            bookingState.fare = totalFare;
 
             var sRules = getServiceRules(bookingState.service || bookingState.serviceType, tours, isLarge, taxiCount);
 

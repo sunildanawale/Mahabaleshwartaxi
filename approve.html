@@ -199,8 +199,8 @@
             <div id="successState" style="display:none;">
                 <div class="status-icon"><i class="fa-solid fa-circle-check"></i></div>
                 <div class="status-badge"><i class="fa-solid fa-shield-halved"></i> BOOKING CONFIRMED &amp; CAB RESERVED</div>
-                <h2>Booking Successfully Approved!</h2>
-                <p class="subtitle">Booking status is updated to <strong>CONFIRMED</strong> in your Sheet.</p>
+                <h2 id="statusHeading">Booking Successfully Approved!</h2>
+                <p class="subtitle" id="statusSub">Booking status is updated to <strong>CONFIRMED</strong> in your Sheet.</p>
 
                 <div class="details-box">
                     <div class="details-row">
@@ -275,23 +275,33 @@
 
             var triggerUrl = WEBHOOK_URL + '?action=approve&id=' + encodeURIComponent(bookingId);
 
-            // Method 1: Hidden iframe request (handles 302 redirects natively across mobile)
+            // Channel 1: Hidden iframe request (handles 302 redirects natively across mobile)
             try {
                 var frame = document.getElementById('approvalFrame');
                 if (frame) frame.src = triggerUrl;
             } catch (e) { }
 
-            // Method 2: Fetch ping as secondary guarantee
+            // Channel 2: Fetch ping with format=json for instant verification
             try {
                 if (typeof fetch !== 'undefined') {
-                    fetch(triggerUrl, { method: 'GET', mode: 'no-cors', cache: 'no-cache' }).catch(function () { });
+                    fetch(triggerUrl + '&format=json', { method: 'GET', cache: 'no-cache' })
+                        .then(function(res) { return res.json(); })
+                        .then(function(data) {
+                            if (data && data.result === 'already_confirmed') {
+                                document.getElementById('statusHeading').textContent = 'Booking Already Approved';
+                                document.getElementById('statusSub').innerHTML = 'Pass ID <strong>' + bookingId + '</strong> was already confirmed previously.';
+                            }
+                        })
+                        .catch(function () {
+                            fetch(triggerUrl, { method: 'GET', mode: 'no-cors', cache: 'no-cache' }).catch(function () { });
+                        });
                 }
             } catch (e2) { }
 
             setTimeout(function () {
                 document.getElementById('loadingState').style.display = 'none';
                 document.getElementById('successState').style.display = 'block';
-            }, 900);
+            }, 800);
         } else {
             document.getElementById('loadingState').innerHTML = '<div style="font-size:3rem;color:#ef4444;margin-bottom:12px;"><i class="fa-solid fa-circle-exclamation"></i></div>'
                 + '<h2 style="color:#b91c1c;">No Booking ID Provided</h2>'

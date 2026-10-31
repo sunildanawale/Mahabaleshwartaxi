@@ -28,8 +28,8 @@
     <meta name="twitter:image" content="https://sunildanawale.github.io/Mahabaleshwartaxi/images/mahabaleshwar-hero-hd.jpg">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/advanced-features.min.css?v=132.0">
-    <link rel="stylesheet" href="css/style.min.css?v=132.0">
+    <link rel="stylesheet" href="css/advanced-features.min.css?v=133.0">
+    <link rel="stylesheet" href="css/style.min.css?v=133.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
@@ -3300,21 +3300,31 @@ body.booking-portal-page .portal-card {
                             <h3 class="amt-step-title">2. Pickup Hotel &amp; Cab Details</h3>
                             <span class="amt-trust-chip"><i class="fa-solid fa-shield-halved"></i> Official Union Tariff</span>
                         </div>
-                        <div class="amt-cab-selector-wrap" style="margin-bottom:6px;">
-                            <label class="amt-label">Cab Type</label>
-                            <div class="amt-cab-pill-grid" style="display:flex;flex-direction:column;gap:0;margin-top:3px;width:100%;">
-                                <div class="amt-cab-pill active" data-cab="4-seater" style="width:100%;box-sizing:border-box;">
-                                    <div class="amt-cab-pill-radio"></div>
-                                    <div class="amt-cab-pill-info">
-                                        <strong>🚖 4-Seater Dedicated Tourist Cab</strong>
-                                        <span>1 to 4 Guests &bull; Official Union Tariff &bull; Private Cab</span>
-                                    </div>
-                                </div>
-
+                        <div class="amt-cab-selector-wrap" style="margin-bottom:8px;">
+                            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+                                <label class="amt-label" style="margin-bottom:0;">Group Size &amp; Cabs Required *</label>
+                                <span class="amt-trust-chip" style="font-size:0.68rem;color:#0284c7;background:#e0f2fe;padding:2px 8px;border-radius:12px;font-weight:700;"><i class="fa-solid fa-shield-halved"></i> Union Regulated</span>
                             </div>
-                            <p class="amt-cab-subnote"><i class="fa-solid fa-circle-check" style="color:#10b981;"></i> Dedicated private cab &bull; Hotel porch pickup</p>
-                            <select id="amtPax" style="display:none;"><option value="3-4" selected>3-4 Guests</option></select>
-                            
+                            <div class="amt-pax-toggle-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px;">
+                                <div class="amt-pax-card active" id="amtPaxCard1" data-pax="1-4" style="border:2px solid #0284c7;background:#f0f9ff;border-radius:10px;padding:8px 10px;cursor:pointer;transition:all 0.15s ease;">
+                                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:3px;">
+                                        <strong style="color:#0f2b48;font-size:0.86rem;"><i class="fa-solid fa-users" style="color:#0284c7;"></i> 1 to 4 Guests</strong>
+                                        <span class="amt-pax-badge" style="background:#0284c7;color:#fff;font-size:0.68rem;font-weight:700;padding:2px 6px;border-radius:10px;">1 Cab</span>
+                                    </div>
+                                    <p style="font-size:0.74rem;color:#475569;margin:0;line-height:1.3;">1x Dedicated 4-Seater Cab<br><strong style="color:#16a34a;">Standard Union Fare</strong></p>
+                                </div>
+                                <div class="amt-pax-card" id="amtPaxCard2" data-pax="5-8" style="border:1.5px solid #cbd5e1;background:#ffffff;border-radius:10px;padding:8px 10px;cursor:pointer;transition:all 0.15s ease;">
+                                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:3px;">
+                                        <strong style="color:#0f2b48;font-size:0.86rem;"><i class="fa-solid fa-people-group" style="color:#64748b;"></i> 5 to 8 Guests</strong>
+                                        <span class="amt-pax-badge" style="background:#64748b;color:#fff;font-size:0.68rem;font-weight:700;padding:2px 6px;border-radius:10px;">2 Cabs</span>
+                                    </div>
+                                    <p style="font-size:0.74rem;color:#475569;margin:0;line-height:1.3;">2x Dedicated 4-Seater Cabs<br><strong style="color:#64748b;">2x Fare &bull; Union Rule</strong></p>
+                                </div>
+                            </div>
+                            <input type="hidden" id="amtPax" value="1-4">
+                            <p class="amt-cab-subnote" id="amtPaxSubnote" style="margin-top:6px;font-size:0.74rem;color:#475569;line-height:1.35;">
+                                <i class="fa-solid fa-circle-check" style="color:#10b981;"></i> <strong>1 Dedicated 4-Seater Tourist Cab</strong> (Dzire / Etios) reserved exclusively for your family.
+                            </p>
                         </div>
                         <div style="position:relative;margin-bottom:6px;">
                             <label class="amt-label" for="amtPickup">Pickup Hotel / Landmark in Mahabaleshwar / Panchgani *</label>
@@ -3347,9 +3357,9 @@ body.booking-portal-page .portal-card {
                         <div id="amtReviewCard" class="amt-compact-review-bar"></div>
                         <div id="amtStep4PolicyBox" style="display:none;"></div>
                         <div class="amt-btn-row" style="margin-top:8px;display:flex;flex-direction:column;gap:6px;">
-                            <button type="button" class="amt-btn-next amt-btn-confirm" id="amtConfirmBtn" style="width:100%;padding:10px 14px;background:linear-gradient(135deg, #10b981 0%, #059669 100%);color:#ffffff;border:none;border-radius:10px;font-weight:800;font-size:0.92rem;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;box-shadow:0 4px 14px rgba(16,185,129,0.35);">
-                                <div style="display:flex;align-items:center;gap:6px;"><i class="fa-solid fa-file-invoice"></i> GENERATE BOOKING VOUCHER &amp; REVIEW <i class="fa-solid fa-arrow-right"></i></div>
-                                <span style="font-size:0.68rem;font-weight:600;opacity:0.95;">Review Official Voucher &amp; Tour Details &bull; Direct Driver Dispatch</span>
+                            <button type="button" class="amt-btn-next amt-btn-confirm" id="amtConfirmBtn" style="width:100%;padding:12px 14px;background:linear-gradient(135deg, #10b981 0%, #059669 100%);color:#ffffff;border:none;border-radius:10px;font-weight:800;font-size:0.92rem;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;box-shadow:0 4px 14px rgba(16,185,129,0.35);">
+                                <div style="display:flex;align-items:center;gap:6px;"><i class="fa-solid fa-circle-check"></i> <span id="amtConfirmBtnText">CONFIRM BOOKING REQUEST &amp; LOCK TARIFF</span> <i class="fa-solid fa-arrow-right"></i></div>
+                                <span id="amtConfirmBtnSub" style="font-size:0.70rem;font-weight:600;opacity:0.95;">Zero Advance Required &bull; Pay Driver After Tour &bull; Instant Voucher Pass</span>
                             </button>
                             <button type="button" class="amt-btn-back" id="amtBackTo1" style="width:100%;padding:6px 12px;border:1px solid #cbd5e1;background:#ffffff;color:#475569;border-radius:8px;font-weight:700;font-size:0.75rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;"><i class="fa-solid fa-arrow-left"></i> Change Tour Selection</button>
                         </div>
@@ -3453,9 +3463,9 @@ body.booking-portal-page .portal-card {
     </footer>
 
     <!-- Scripts -->
-    <script src="js/tour-data.js?v=132.0"></script>
-    <script src="js/ai-assistant.js?v=132.0" defer></script>
-    <script src="js/booking-widget.min.js?v=132.0"></script>
+    <script src="js/tour-data.js?v=133.0"></script>
+    <script src="js/ai-assistant.js?v=133.0" defer></script>
+    <script src="js/booking-widget.min.js?v=133.0"></script>
     <script>
     (function() {
         var search = window.location.search || '';
