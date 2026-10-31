@@ -221,7 +221,7 @@ function doPost(e) {
             "<tr><td style='padding:9px 12px;color:#64748b;'><strong>Locked Union Fare:</strong></td><td style='padding:9px 12px;font-size:16px;color:#16a34a;font-weight:bold;'>₹" + fare + " <span style='font-size:12px;color:#64748b;font-weight:normal;'>(Zero Advance • Pay Driver After Trip)</span></td></tr>" +
           "</table>" +
           
-          "<div style='background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:12px;margin-top:16px;'>"" +
+          "<div style='background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:12px;margin-top:16px;'>" +
             "<p style='margin:0;color:#166534;font-size:12.5px;line-height:1.4;'><strong>🛡️ Aryan Taxi Mountain Assurance:</strong> Dedicated private 4-seater tourist cab, licensed local hill drivers native to Sahyadri ghats, and fixed Taxi Union tariffs with zero hidden surcharges.</p>" +
           "</div>" +
           
