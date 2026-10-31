@@ -1346,7 +1346,7 @@
                 { id: 'drv_1', name: 'Aryan Taxi Owner Driver', phone: '9922882044', vehicleNo: 'MH-11-BV-1234', model: 'Black & Yellow Tourist Taxi (Owner Cab)', status: 'Active' },
                 { id: 'drv_2', name: 'Santosh Shinde', phone: '9421463727', vehicleNo: 'MH-11-AX-5678', model: 'Maruti Suzuki Ritz (Tourist Cab)', status: 'Active' },
                 { id: 'drv_3', name: 'Ganesh Patil', phone: '9822334455', vehicleNo: 'MH-11-CK-3421', model: 'Tata Indigo (Black & Yellow)', status: 'Active' },
-                { id: 'drv_4', name: 'Nilesh Kadam', phone: '9850112233', vehicleNo: 'MH-11-DF-7890', model: 'Maruti Ertiga (7-Seater Outstation)', status: 'Active' }
+                { id: 'drv_4', name: 'Nilesh Kadam', phone: '9850112233', vehicleNo: 'MH-11-DF-7890', model: '4-Seater Dedicated Tourist Cab', status: 'Active' }
             ];
 
             // DOM Elements
@@ -1502,12 +1502,26 @@
                                     phone: row.phone || existing.phone || '',
                                     date: row.date || existing.date || '',
                                     time: row.time || existing.time || '',
-                                    pickup: row.pickup || existing.pickup || '',
+                                    pickup: row.hotelDetails || row.pickup || existing.hotelDetails || existing.pickup || '',
+                                    hotelDetails: row.hotelDetails || existing.hotelDetails || row.pickup || '',
+                                    dropLocation: row.dropLocation || existing.dropLocation || '',
                                     tour: row.tour || existing.tour || '',
                                     tourId: existing.tourId || '',
+                                    pax: row.pax || existing.pax || '2',
+                                    taxiCount: parseInt(row.taxiCount || existing.taxiCount || 1, 10),
+                                    vehicleCategory: row.vehicleCategory || existing.vehicleCategory || '4-Seater Tourist Cab',
                                     fare: row.fare ? String(row.fare).replace(/[^0-9]/g, '') : (existing.fare || '1200'),
                                     notes: row.notes || existing.notes || '',
-                                    status: (row.status && row.status.toUpperCase() === 'CONFIRMED') ? 'confirmed' : 'pending',
+                                    remarks: row.remarks || existing.remarks || '',
+                                    status: (function(st) {
+                                        if (!st) return 'pending';
+                                        var u = String(st).toUpperCase();
+                                        if (u === 'CONFIRMED') return 'confirmed';
+                                        if (u === 'REJECTED') return 'rejected';
+                                        if (u === 'CANCELLED') return 'cancelled';
+                                        if (u === 'COMPLETED') return 'completed';
+                                        return 'pending';
+                                    })(row.status || existing.status),
                                     createdAt: row.timestamp || existing.createdAt || new Date().toISOString()
                                 };
                             });

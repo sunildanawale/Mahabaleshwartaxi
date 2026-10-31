@@ -19,9 +19,18 @@
         differentSchedule: false,
         date: '',
         time: '09:00',
-        pax: '3-4',
+        paxNum: 2,
+        pax: '2',
         taxiCount: 1,
+        vehicleCategory: '4-Seater Tourist Cab',
+        pickupArea: 'Mahabaleshwar Market & Central',
+        hotelDetails: '',
+        dropLocation: '',
         pickup: '',
+        baseFare: 1200,
+        additionalCharges: 0,
+        totalFare: 1200,
+        fare: 1200,
         name: '',
         phone: '',
         email: '',
@@ -122,11 +131,20 @@
                 date: bDate,
                 time: bTime,
                 pickup: bPickup,
+                hotelDetails: bookingData.hotelDetails || bookingData.pickupHotel || bPickup,
+                dropLocation: bookingData.dropLocation || '',
                 tour: bTour,
+                serviceType: bookingData.serviceType || bookingData.service || 'sightseeing',
+                pax: bookingData.paxNum || bPax || 1,
+                taxiCount: bookingData.taxiCount || 1,
+                vehicleCategory: '4-Seater Tourist Cab',
+                baseFare: bookingData.baseFare || bFare,
+                additionalCharges: bookingData.additionalCharges || 0,
                 fare: bFare,
-                pax: bPax,
-                notes: bNotes,
-                status: bStatus || 'Pending Approval',
+                totalFare: bFare,
+                notes: bNotes || 'None',
+                status: 'PENDING CONFIRMATION',
+                paymentStatus: 'Unpaid (Pay Driver After Tour)',
                 timestamp: new Date().toISOString()
             });
 
@@ -2178,7 +2196,31 @@
                     return;
                 }
 
+                // Check terms checkbox
+                var termsBox = document.getElementById('amtTermsCheckbox');
+                if (termsBox && !termsBox.checked) {
+                    alert('Please agree to the Taxi Union tour guidelines to continue.');
+                    termsBox.focus();
+                    return;
+                }
+
                 if (!bookingState.bookingId) bookingState.bookingId = generateBookingId();
+                
+                // Ensure pickup & hotel details are populated
+                bookingState.pickup = bookingState.hotelDetails || (pickInput ? pickInput.value.trim() : '') || 'Mahabaleshwar Hotel Porch';
+                var pNum = bookingState.paxNum || parseInt(bookingState.pax, 10) || 2;
+                bookingState.paxNum = pNum;
+                bookingState.pax = String(pNum);
+                bookingState.taxiCount = Math.ceil(pNum / 4);
+                bookingState.vehicleCategory = '4-Seater Tourist Cab';
+
+                // Dispatch remotely to Google Sheets & trigger dual-email workflow
+                try {
+                    dispatchBookingRemote(bookingState);
+                } catch (eDispatch) {
+                    console.warn('Dispatch remote notice:', eDispatch);
+                }
+
                 renderVoucherScreen();
                 goToVoucher();
             });
@@ -2290,10 +2332,50 @@
         updateSmartTimeUI();
 
         // ── 3-Step Navigation & Working Action Buttons ──────────────────────
+        // Passengers (PAX) minus & plus buttons
+        var paxMinus = document.getElementById('amtPaxMinusBtn');
+        var paxPlus = document.getElementById('amtPaxPlusBtn');
+        var paxInp = document.getElementById('amtPaxInput');
+        if (paxMinus) {
+            paxMinus.addEventListener('click', function () {
+                updatePaxAndTaxis((bookingState.paxNum || 2) - 1);
+            });
+        }
+        if (paxPlus) {
+            paxPlus.addEventListener('click', function () {
+                updatePaxAndTaxis((bookingState.paxNum || 2) + 1);
+            });
+        }
+        if (paxInp) {
+            paxInp.addEventListener('input', function () {
+                updatePaxAndTaxis(this.value);
+            });
+            paxInp.addEventListener('change', function () {
+                updatePaxAndTaxis(this.value);
+            });
+        }
+
+        // Area selection change
+        var areaSelect = document.getElementById('amtPickupArea');
+        if (areaSelect) {
+            areaSelect.addEventListener('change', function () {
+                bookingState.pickupArea = this.value;
+                try { updateStep2SummaryAndFare(); } catch (e) {}
+            });
+        }
+
+        // Hotel name input
+        var hotelInp = document.getElementById('amtPickupHotel');
+        if (hotelInp) {
+            hotelInp.addEventListener('input', function () {
+                bookingState.hotelDetails = this.value.trim();
+                bookingState.pickup = this.value.trim();
+            });
+        }
+
         var toStep2 = document.getElementById('amtToStep2');
         if (toStep2) {
             toStep2.addEventListener('click', function () {
-                // Ensure tour selected
                 var tourEl = document.getElementById('amtTourSelect');
                 if (tourEl && tourEl.value) {
                     bookingState.tourId = tourEl.value;
@@ -2304,11 +2386,8 @@
                     return;
                 }
 
-                // Validate Date & Time
                 var dateEl = document.getElementById('amtDate');
-                var timeEl = document.getElementById('amtTime');
                 var dVal = dateEl ? dateEl.value : '';
-                var tVal = timeEl ? timeEl.value : '09:00';
 
                 var now = new Date();
                 var yyyy = now.getFullYear();
@@ -2330,32 +2409,52 @@
                     return;
                 }
 
-                bookingState.date = dVal;
-                bookingState.time = tVal || '09:00';
-
-                if (bookingState.differentSchedule) {
-                    var hasInvalidDate = false;
-                    (bookingState.selectedTours || []).forEach(function (st) {
-                        if (!st.date || st.date < todayStr) {
-                            hasInvalidDate = true;
-                        }
-                    });
-                    if (hasInvalidDate) {
-                        alert('One or more tours have an invalid or past date. Please verify all tour dates.');
-                        return;
-                    }
-                } else {
-                    syncSelectedToursFromPrimary();
-                    (bookingState.selectedTours || []).forEach(function (st) {
-                        st.date = dVal;
-                        st.time = tVal || '09:00';
-                    });
+                var hotelEl = document.getElementById('amtPickupHotel');
+                var hVal = hotelEl ? hotelEl.value.trim() : '';
+                if (!hVal) {
+                    alert('Please enter your pickup hotel / resort name.');
+                    if (hotelEl) hotelEl.focus();
+                    return;
                 }
 
-                renderMultiDayScheduleUI();
-                updateZoneNotice();
-                loadGuestProfile();
-                renderReviewCard();
+                var areaEl = document.getElementById('amtPickupArea');
+                if (areaEl) bookingState.pickupArea = areaEl.value;
+
+                var dropEl = document.getElementById('amtDropLocation');
+                if (dropEl && dropEl.offsetParent !== null && !dropEl.value.trim()) {
+                    alert('Please enter your drop destination.');
+                    dropEl.focus();
+                    return;
+                }
+                if (dropEl) bookingState.dropLocation = dropEl.value.trim();
+
+                bookingState.date = dVal;
+                bookingState.hotelDetails = hVal;
+                bookingState.pickup = hVal;
+
+                updatePaxAndTaxis(bookingState.paxNum || 2);
+                goToStep(2);
+            });
+        }
+
+        var toStep3 = document.getElementById('amtToStep3');
+        if (toStep3) {
+            toStep3.addEventListener('click', function () {
+                var timeEl = document.getElementById('amtTime');
+                var tVal = timeEl ? timeEl.value : '';
+                if (!tVal) {
+                    alert('Please select your preferred pickup time.');
+                    if (timeEl) timeEl.focus();
+                    return;
+                }
+                bookingState.time = tVal;
+                goToStep(3);
+            });
+        }
+
+        var backTo2 = document.getElementById('amtBackTo2');
+        if (backTo2) {
+            backTo2.addEventListener('click', function () {
                 goToStep(2);
             });
         }
@@ -3885,18 +3984,23 @@
     }
 
     function goToStep(step) {
-        if (step === 3) {
+        if (step === 4 || step === 'voucher') {
             goToVoucher();
             return;
         }
         currentStep = step;
-        if (step === 2) { try { updateCabSelector(); renderReviewCard(); } catch(e){} }
         var s1 = document.getElementById('amtStep1'); if (s1) s1.style.display = step === 1 ? 'block' : 'none';
         var s2 = document.getElementById('amtStep2'); if (s2) s2.style.display = step === 2 ? 'block' : 'none';
-        var s3 = document.getElementById('amtStep3'); if (s3) s3.style.display = 'none';
+        var s3 = document.getElementById('amtStep3'); if (s3) s3.style.display = step === 3 ? 'block' : 'none';
         var s4 = document.getElementById('amtStep4'); if (s4) s4.style.display = 'none';
-        var sv = document.getElementById('amtStepVoucher'); if (sv) sv.style.display = step === 3 ? 'block' : 'none';
+        var sv = document.getElementById('amtStepVoucher'); if (sv) sv.style.display = 'none';
         var trustSec = document.querySelector('.portal-trust-section'); if (trustSec) trustSec.style.display = 'block';
+
+        if (step === 2) {
+            try { updateStep2SummaryAndFare(); } catch (e) {}
+        } else if (step === 3) {
+            try { renderReviewCard(); } catch (e) {}
+        }
 
         var pct = (step / totalSteps) * 100;
         var pFill = document.getElementById('amtProgressFill'); if (pFill) pFill.style.width = pct + '%';
@@ -4058,6 +4162,125 @@
     }
 
     
+    
+    function updatePaxAndTaxis(pax) {
+        var p = parseInt(pax, 10);
+        if (isNaN(p) || p < 1) p = 1;
+        if (p > 20) p = 20;
+
+        var cabs = Math.ceil(p / 4);
+        bookingState.paxNum = p;
+        bookingState.pax = String(p);
+        bookingState.taxiCount = cabs;
+
+        var inputEl = document.getElementById('amtPaxInput');
+        if (inputEl && parseInt(inputEl.value, 10) !== p) {
+            inputEl.value = p;
+        }
+
+        var labelEl = document.getElementById('amtPaxDisplayLabel');
+        if (labelEl) {
+            labelEl.textContent = p + ' Passenger' + (p > 1 ? 's' : '');
+        }
+
+        var titleEl = document.getElementById('amtTaxiAllocTitle');
+        if (titleEl) {
+            titleEl.textContent = cabs + ' × 4-Seater Dedicated Tourist Cab' + (cabs > 1 ? 's' : '');
+        }
+
+        var noteEl = document.getElementById('amtTaxiAllocNote');
+        if (noteEl) {
+            if (cabs === 1) {
+                noteEl.textContent = '1 dedicated tourist cab reserved exclusively for your party of ' + p + ' passenger' + (p > 1 ? 's' : '') + '.';
+            } else {
+                noteEl.textContent = p + ' passengers require ' + cabs + ' separate 4-seater tourist cabs as per Mahabaleshwar Taxi Union rules. All cabs travel together in convoy.';
+            }
+        }
+
+        var legPax = document.getElementById('amtPax');
+        if (legPax) legPax.value = (cabs > 1 ? '5-8' : '1-4');
+
+        try { updateStep2SummaryAndFare(); } catch (e) {}
+    }
+
+    function updateStep2SummaryAndFare() {
+        var db = window.TOUR_DATABASE;
+        var t = (bookingState.tourId && db && db.getTourById) ? db.getTourById(bookingState.tourId) : (db && db.tours ? db.tours[0] : null);
+
+        var titleEl = document.getElementById('amtSummaryTourTitle');
+        if (titleEl && t) titleEl.textContent = t.name + (t.id ? ' (' + t.id + ')' : '');
+
+        var paxBadgeEl = document.getElementById('amtSummaryPaxBadge');
+        var pCount = bookingState.paxNum || 2;
+        var cCount = bookingState.taxiCount || 1;
+        if (paxBadgeEl) {
+            paxBadgeEl.textContent = pCount + ' PAX • ' + cCount + ' Cab' + (cCount > 1 ? 's' : '');
+        }
+
+        var dateEl = document.getElementById('amtSummaryDate');
+        if (dateEl) dateEl.textContent = formatSafeDisplayDate(bookingState.date || 'Today');
+
+        var taxisEl = document.getElementById('amtSummaryTaxis');
+        if (taxisEl) {
+            taxisEl.textContent = cCount + 'x 4-Seater Tourist Cab' + (cCount > 1 ? 's' : '');
+        }
+
+        var hotelEl = document.getElementById('amtSummaryHotel');
+        var hotelVal = bookingState.hotelDetails || bookingState.pickup || 'Mahabaleshwar Hotel Porch';
+        if (hotelEl) hotelEl.textContent = hotelVal;
+
+        var baseRate = (t && t.fare) ? t.fare : 1200;
+        var multiSubtotal = baseRate * cCount;
+        var surcharge = 0;
+        var pickupArea = bookingState.pickupArea || '';
+        if (pickupArea.indexOf('Panchgani') !== -1 || pickupArea.indexOf('Metgutad') !== -1) {
+            surcharge = 200;
+        } else if (pickupArea.indexOf('Tapola') !== -1) {
+            surcharge = 300;
+        }
+        var total = multiSubtotal + surcharge;
+
+        bookingState.baseFare = baseRate;
+        bookingState.additionalCharges = surcharge;
+        bookingState.totalFare = total;
+        bookingState.fare = total;
+
+        var baseValEl = document.getElementById('amtFareBaseVal');
+        if (baseValEl) baseValEl.textContent = '₹' + Number(baseRate).toLocaleString('en-IN');
+
+        var multiRow = document.getElementById('amtFareMultiCabRow');
+        var multiValEl = document.getElementById('amtFareMultiCabVal');
+        var multiLblEl = document.getElementById('amtFareMultiCabLabel');
+        if (multiRow && multiValEl) {
+            if (cCount > 1) {
+                multiRow.style.display = 'flex';
+                if (multiLblEl) multiLblEl.textContent = 'Taxis Required (' + cCount + ' Cabs × Base):';
+                multiValEl.textContent = '₹' + Number(multiSubtotal).toLocaleString('en-IN');
+            } else {
+                multiRow.style.display = 'none';
+            }
+        }
+
+        var surRow = document.getElementById('amtFareSurchargeRow');
+        var surValEl = document.getElementById('amtFareSurchargeVal');
+        if (surRow && surValEl) {
+            if (surcharge > 0) {
+                surRow.style.display = 'flex';
+                surValEl.textContent = '+ ₹' + Number(surcharge).toLocaleString('en-IN');
+            } else {
+                surRow.style.display = 'none';
+            }
+        }
+
+        var totalEl = document.getElementById('amtFareTotalDisplay');
+        if (totalEl) totalEl.textContent = '₹' + Number(total).toLocaleString('en-IN');
+
+        var confirmBtnText = document.getElementById('amtConfirmBtnText');
+        if (confirmBtnText) {
+            confirmBtnText.textContent = 'CONFIRM BOOKING REQUEST (₹' + Number(total).toLocaleString('en-IN') + ')';
+        }
+    }
+
     function updateCabSelector() {
         // Only 4-seater cab available - all updated rates apply to 4-seater cars only
         bookingState.pax = '3-4';
@@ -4095,9 +4318,9 @@
                 var subnote = document.getElementById('amtPaxSubnote');
                 if (subnote) {
                     if (paxVal === '5-8') {
-                        subnote.innerHTML = '<i class="fa-solid fa-circle-check" style="color:#0284c7;"></i> <strong>2 Dedicated 4-Seater Cabs</strong> (Dzire / Etios) allocated. <em>Strict Union Rule: Mahabaleshwar sightseeing operated strictly by private 4-seater tourist cabs.</em>';
+                        subnote.innerHTML = '<i class="fa-solid fa-circle-check" style="color:#0284c7;"></i> <strong>2 Dedicated 4-Seater Cabs</strong>  allocated. <em>Strict Union Rule: Mahabaleshwar sightseeing operated strictly by private 4-seater tourist cabs.</em>';
                     } else {
-                        subnote.innerHTML = '<i class="fa-solid fa-circle-check" style="color:#10b981;"></i> <strong>1 Dedicated 4-Seater Tourist Cab</strong> (Dzire / Etios) reserved exclusively for your family.';
+                        subnote.innerHTML = '<i class="fa-solid fa-circle-check" style="color:#10b981;"></i> <strong>1 Dedicated 4-Seater Tourist Cab</strong>  reserved exclusively for your family.';
                     }
                 }
                 renderReviewCard();
@@ -4264,12 +4487,13 @@
 
             var isMulti = tours.length > 1;
             var baseFare = tours.reduce(function (acc, item) { return acc + item.tour.fare; }, 0);
-            var paxVal = (document.getElementById('amtPax') ? document.getElementById('amtPax').value : bookingState.pax) || '1-4';
-            var taxiCount = (paxVal === '5-8' || bookingState.taxiCount === 2) ? 2 : 1;
-            var isLarge = (taxiCount === 2);
+            var pNum = bookingState.paxNum || parseInt(bookingState.pax, 10) || 2;
+            var taxiCount = bookingState.taxiCount || Math.ceil(pNum / 4);
+            var isLarge = (taxiCount > 1);
             bookingState.taxiCount = taxiCount;
-            bookingState.pax = paxVal;
-            var totalFare = baseFare * taxiCount;
+            bookingState.paxNum = pNum;
+            bookingState.pax = String(pNum);
+            var totalFare = (baseFare * taxiCount) + (bookingState.additionalCharges || 0);
             bookingState.totalFare = totalFare;
             bookingState.fare = totalFare;
 
@@ -4407,7 +4631,7 @@
                 + '    <div class="amt-v-vehicle-wrap">'
                 + '      <div class="amt-v-vehicle-left">'
                 + '        <span class="amt-v-vehicle-lbl">🚕 Cab:</span>'
-                + '        <strong class="amt-v-vehicle-val">' + escapeHtml(sRules.vehicleDesc.replace(/\s*\(Arranged as per availability\)/i, '')) + '</strong>'
+                + '        <strong class="amt-v-vehicle-val">' + escapeHtml(taxiCount === 1 ? '1x 4-Seater Dedicated Tourist Cab' : (taxiCount + 'x 4-Seater Dedicated Tourist Cabs (' + taxiCount + ' Cabs)')) + '</strong>'
                 + '        <span class="amt-v-vehicle-sub">(As per availability)</span>'
                 + '      </div>'
                 + '      <span class="amt-v-fleet-tag"><i class="fa-solid fa-circle-check" style="color:#10b981;"></i> Union Fleet</span>'

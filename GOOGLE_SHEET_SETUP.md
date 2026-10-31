@@ -22,15 +22,39 @@ This guide walks you through connecting your website (`Mahabaleshwartaxi`) to **
 
 ---
 
-### Step 1: Set Up Your Google Sheet
+### Step 1: Google Sheet Columns Mapping (27 Columns: A to AA)
 
-1. Go to [Google Sheets](https://sheets.new) and create a new blank spreadsheet.
-2. Name it: `Aryan Taxi Bookings`.
-3. In **Row 1**, paste these exact column headers across Columns **A to L**:
+Your Google Sheet (`Aryan Taxi Bookings` -> `Sheet1`) uses 27 columns. Columns A to L remain exactly intact as originally configured. The Apps Script automatically creates headers for columns M to AA on first run:
 
-| A | B | C | D | E | F | G | H | I | J | K | L |
-|---|---|---|---|---|---|---|---|---|---|---|---|
-| **Timestamp** | **Booking ID** | **Customer Name** | **Customer Email** | **WhatsApp Phone** | **Travel Date** | **Pickup Time** | **Pickup Location** | **Selected Tour** | **Locked Fare** | **Special Notes** | **Status** |
+| Col | Field Name | Description |
+|:---:|:---|:---|
+| **A** | **Timestamp** | Submission date & time (Asia/Kolkata) |
+| **B** | **Booking ID** | Unique reference ID (e.g., `AMT-2026-815592`) |
+| **C** | **Customer Name** | Lead passenger name |
+| **D** | **Customer Email** | Guest email address |
+| **E** | **WhatsApp Phone** | 10-digit mobile / WhatsApp number |
+| **F** | **Travel Date** | Date of tour/transfer (YYYY-MM-DD) |
+| **G** | **Pickup Time** | Pickup time (e.g. `09:30 AM`) |
+| **H** | **Pickup Location** | Pickup area / locality in Mahabaleshwar |
+| **I** | **Selected Tour** | Tour package or transfer destination |
+| **J** | **Locked Fare** | Total locked fare (e.g., `₹1200`) |
+| **K** | **Special Notes** | Luggage, elderly, child seat, requests |
+| **L** | **Status** | `PENDING CONFIRMATION`, `CONFIRMED`, `REJECTED`, `CANCELLED` |
+| **M** | **Pickup Hotel Details** | Specific hotel name / resort porch |
+| **N** | **Drop Location** | Sightseeing drop or outstation destination |
+| **O** | **Service Type** | `Local Sightseeing`, `Full Day Combo`, `Local Drop`, `Outstation Drop` |
+| **P** | **Total Passengers (PAX)** | Total passenger count (1 to 20) |
+| **Q** | **Required Taxi Quantity** | Auto-calculated cabs: `Math.ceil(PAX / 4)` |
+| **R** | **Vehicle Category** | Strictly `4-Seater Tourist Cab` (Union Fleet) |
+| **S** | **Base Fare** | Approved tariff per 4-seater cab |
+| **T** | **Additional Charges** | Out-of-zone pickup/drop surcharges |
+| **U** | **Total Fare** | Subtotal (Base Fare × Cabs) + Additional Charges |
+| **V** | **Payment Status** | `Unpaid (Pay Driver After Tour)` |
+| **W** | **Operator Remarks** | Action Token & Confirmation/Rejection audit notes |
+| **X** | **Customer Email Status** | `Queued`, `Sent`, `Confirmation Sent`, `Rejection Notice Sent` |
+| **Y** | **Operator Email Status** | `Queued`, `Sent`, `Failed` |
+| **Z** | **Customer WhatsApp Status** | `Link Ready` (Direct 1-Click WhatsApp link) |
+| **AA** | **Operator WhatsApp Status**| `Link Ready` (Direct 1-Click WhatsApp link) |
 
 ---
 
@@ -41,28 +65,85 @@ This guide walks you through connecting your website (`Mahabaleshwartaxi`) to **
 
 ```javascript
 /**
- * ARYAN TAXI MAHABALESHWAR — ZERO-COST BOOKING AUTOMATION & 1-CLICK APPROVAL ENGINE
+ * ARYAN TAXI MAHABALESHWAR — COMPLETE BOOKING ENGINE AUTOMATION BACKEND
+ * Single Source of Truth for Google Sheets, Dual-Email Dispatch & 1-Click Operations
  * Owner Email: aryansdtravels@gmail.com
  * Zero disclosure of personal names — branded as Aryan Taxi Mahabaleshwar
- * Free Quota: 100 emails/day on free @gmail.com accounts (1,500/day on Workspace)
  */
+
+
+function createJsonResponse(data, callback) {
+  if (callback && typeof callback === "string" && /^[a-zA-Z0-9_$.]+$/.test(callback)) {
+    return ContentService.createTextOutput(callback + "(" + JSON.stringify(data) + ");")
+      .setMimeType(ContentService.MimeType.JAVASCRIPT);
+  }
+  return ContentService.createTextOutput(JSON.stringify(data))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
 
 var SPREADSHEET_ID = "1gV95JLpRO2FZTsXeKCKcnbfBSNsYKju_aPZemQuL2pQ";
 var DEFAULT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbykfjAMr2FYrYCD2xOkPj4Aba86_BKERKQUQLsZcickCaYIQWR4ly-prjYzzWdCzyM-ew/exec";
+var BASE_PORTAL_URL = "https://sunildanawale.github.io/Mahabaleshwartaxi";
+
+var SHEET_HEADERS = [
+  "Timestamp", "Booking ID", "Customer Name", "Customer Email", "WhatsApp Phone",
+  "Travel Date", "Pickup Time", "Pickup Location", "Selected Tour", "Locked Fare",
+  "Special Notes", "Status",
+  "Pickup Hotel Details", "Drop Location", "Service Type", "Total Passengers (PAX)",
+  "Required Taxi Quantity", "Vehicle Category", "Base Fare", "Additional Charges",
+  "Total Fare", "Payment Status", "Operator Remarks", "Customer Email Status",
+  "Operator Email Status", "Customer WhatsApp Status", "Operator WhatsApp Status"
+];
 
 function getBookingsSheet() {
+  var ss;
   try {
-    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    ss = SpreadsheetApp.getActiveSpreadsheet();
     if (ss) {
       var s = ss.getSheetByName("Sheet1") || ss.getActiveSheet();
       if (s) return s;
     }
   } catch (err) {}
   try {
-    var ss2 = SpreadsheetApp.openById(SPREADSHEET_ID);
-    return ss2.getSheetByName("Sheet1") || ss2.getActiveSheet();
+    ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    return ss.getSheetByName("Sheet1") || ss.getActiveSheet();
   } catch (err2) {
     throw new Error("Could not access Aryan Taxi Bookings spreadsheet: " + err2.toString());
+  }
+}
+
+function ensureSheetHeaders(sheet) {
+  try {
+    var lastCol = sheet.getLastColumn();
+    if (lastCol < SHEET_HEADERS.length) {
+      var range = sheet.getRange(1, 1, 1, SHEET_HEADERS.length);
+      var currentHeaders = range.getValues()[0];
+      var needsUpdate = false;
+      for (var i = 0; i < SHEET_HEADERS.length; i++) {
+        if (!currentHeaders[i] || String(currentHeaders[i]).trim() === "") {
+          currentHeaders[i] = SHEET_HEADERS[i];
+          needsUpdate = true;
+        }
+      }
+      if (needsUpdate) {
+        range.setValues([currentHeaders]);
+        range.setFontWeight("bold");
+        range.setBackground("#f1f5f9");
+      }
+    }
+  } catch (e) {}
+}
+
+function generateActionToken(bookingId, timestamp) {
+  try {
+    var raw = String(bookingId) + "_" + String(timestamp) + "_" + SPREADSHEET_ID;
+    var signature = Utilities.computeHmacSha256Signature(raw, SPREADSHEET_ID);
+    return signature.map(function(b) {
+      return (b < 0 ? b + 256 : b).toString(16).padStart(2, '0');
+    }).join('').substring(0, 24);
+  } catch (e) {
+    return "tok_" + Utilities.base64EncodeWebSafe(String(bookingId));
   }
 }
 
@@ -70,7 +151,6 @@ function getCleanWebAppUrl() {
   try {
     var u = ScriptApp.getService().getUrl();
     if (u && u.indexOf("script.google.com") !== -1) {
-      // Strip account-specific path prefixes (/u/0/, /a/domain/) that trigger Google Drive errors on mobile
       return u.replace(/\/u\/\d+\//, "/").replace(/\/a\/[^\/]+\//, "/");
     }
   } catch (err) {}
@@ -80,14 +160,15 @@ function getCleanWebAppUrl() {
 function doPost(e) {
   try {
     var sheet = getBookingsSheet();
+    ensureSheetHeaders(sheet);
+
     var data = {};
-    if (e.postData && e.postData.contents) {
-      try { data = JSON.parse(e.postData.contents); } catch(err) { data = e.parameter || {}; }
+    if (e && e.postData && e.postData.contents) {
+      try { data = JSON.parse(e.postData.contents); } catch(err) { data = (e && e.parameter) || {}; }
     } else {
-      data = e.parameter || {};
+      data = (e && e.parameter) || {};
     }
     
-    // If incoming request has nested payload field
     if (data.payload && typeof data.payload === "string") {
       try {
         var parsed = JSON.parse(data.payload);
@@ -97,86 +178,133 @@ function doPost(e) {
       } catch (eParse) {}
     }
     
-    // Check if request is an AI Trip Planner query
     if (data.action === "gemini_trip_planner" || (data.prompt && !data.bookingId)) {
       return handleGeminiAIRequest(data.prompt, data.lang || "en");
     }
 
     var timestamp = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
-    var bookingId = data.bookingId || data.id || ('AMT-' + Date.now().toString().slice(-6));
-    var name = data.name || 'Valued Guest';
-    var email = (data.email || '').trim().toLowerCase();
-    var phone = data.phone || '';
-    var date = data.date || '';
-    var time = data.time || '09:00 AM';
-    var pickup = data.pickup || '';
-    var tour = data.tour || 'Sightseeing Tour';
-    var fare = data.fare || '0';
-    var notes = data.notes || 'None';
-    var status = "Pending Approval";
+    var bookingId = String(data.bookingId || data.id || ('AMT-' + Date.now().toString().slice(-6))).trim();
+    var name = String(data.name || 'Valued Guest').trim();
+    var email = String(data.email || '').trim().toLowerCase();
+    var phone = String(data.phone || '').trim();
+    var date = String(data.date || '').trim();
+    var time = String(data.time || '09:00 AM').trim();
+    var pickup = String(data.pickup || 'Mahabaleshwar').trim();
+    var hotelDetails = String(data.hotelDetails || data.pickupHotel || pickup).trim();
+    var dropLocation = String(data.dropLocation || data.drop || 'Mahabaleshwar Sightseeing').trim();
+    var tour = String(data.tour || data.tourId || 'Mahabaleshwar Sightseeing').trim();
+    var serviceType = String(data.serviceType || data.service || 'sightseeing').trim();
+    
+    var pax = parseInt(data.pax || data.totalPax, 10);
+    if (isNaN(pax) || pax <= 0) pax = 1;
+    var taxiCount = Math.ceil(pax / 4);
+    if (taxiCount < 1) taxiCount = 1;
 
-    // Deduplication Lock: Check Column B (Booking ID)
+    var vehicleCategory = "4-Seater Tourist Cab";
+    var fare = String(data.fare || data.totalFare || '0').replace(/[^0-9]/g, '');
+    var baseFare = String(data.baseFare || (parseInt(fare, 10) / taxiCount) || '0').replace(/[^0-9]/g, '');
+    var additionalCharges = String(data.additionalCharges || '0').replace(/[^0-9]/g, '');
+    var notes = String(data.notes || 'None').trim();
+    var status = "PENDING CONFIRMATION";
+    var paymentStatus = "Unpaid (Pay Driver After Tour)";
+
+    // Idempotency / Deduplication Check (Column B = index 1)
     var existingData = sheet.getDataRange().getValues();
     for (var i = 1; i < existingData.length; i++) {
-      if (existingData[i][1] && String(existingData[i][1]).trim() === String(bookingId).trim()) {
-        // Already recorded! Return success immediately without duplicate row or duplicate emails
-        return ContentService.createTextOutput(JSON.stringify({ result: "already_registered", bookingId: bookingId }))
-          .setMimeType(ContentService.MimeType.JSON);
+      if (existingData[i][1] && String(existingData[i][1]).trim() === bookingId) {
+        return createJsonResponse({
+          result: "already_registered",
+          bookingId: bookingId,
+          status: existingData[i][11] || status
+        }, (typeof callback !== "undefined" ? callback : ""));
       }
     }
 
-    // 1. Log Booking into Google Sheet
+    // Generate Single-Use Action Token
+    var actionToken = generateActionToken(bookingId, timestamp);
+
+    // Initial Notification Statuses
+    var custEmailStatus = "Queued";
+    var opEmailStatus = "Queued";
+    var custWaStatus = "Link Ready";
+    var opWaStatus = "Link Ready";
+
+    // Append 27 Columns (A to AA)
     sheet.appendRow([
-      timestamp,
-      bookingId,
-      name,
-      email,
-      phone,
-      date,
-      time,
-      pickup,
-      tour,
-      "₹" + fare,
-      notes,
-      status
+      timestamp,          // A: Timestamp
+      bookingId,          // B: Booking ID
+      name,               // C: Customer Name
+      email,              // D: Customer Email
+      phone,              // E: WhatsApp Phone
+      date,               // F: Travel Date
+      time,               // G: Pickup Time
+      pickup,             // H: Pickup Location
+      tour,               // I: Selected Tour
+      "₹" + fare,         // J: Locked Fare
+      notes,              // K: Special Notes
+      status,             // L: Status
+      hotelDetails,       // M: Pickup Hotel Details
+      dropLocation,       // N: Drop Location
+      serviceType,        // O: Service Type
+      pax,                // P: Total Passengers (PAX)
+      taxiCount,          // Q: Required Taxi Quantity
+      vehicleCategory,    // R: Vehicle Category
+      "₹" + baseFare,     // S: Base Fare
+      "₹" + additionalCharges, // T: Additional Charges
+      "₹" + fare,         // U: Total Fare
+      paymentStatus,      // V: Payment Status
+      "Action Token: " + actionToken, // W: Operator Remarks
+      custEmailStatus,    // X: Customer Email Status
+      opEmailStatus,      // Y: Operator Email Status
+      custWaStatus,       // Z: Customer WhatsApp Status
+      opWaStatus          // AA: Operator WhatsApp Status
     ]);
 
-    // 2. Email 1: Instant Alert to Owner with 1-Click Approval Link
+    var lastRow = sheet.getLastRow();
+
+    // 1. Send Operator Notification Email with Confirm and Reject Buttons
     var ownerEmail = "aryansdtravels@gmail.com";
     var cleanPhone = phone.replace(/[^0-9]/g, '');
-    
-    // Dynamic 1-Click Approval Link
-    var webAppUrl = getCleanWebAppUrl();
-    // 1-Click Approval Link (Hosted on website to eliminate Android Gmail multi-account Drive errors)
-    var approveUrl = "https://sunildanawale.github.io/Mahabaleshwartaxi/approve.html?id=" + encodeURIComponent(bookingId) + "&name=" + encodeURIComponent(name) + "&fare=" + encodeURIComponent(fare) + "&tour=" + encodeURIComponent(tour);
+
+    var confirmUrl = BASE_PORTAL_URL + "/approve.html?action=confirm&id=" + encodeURIComponent(bookingId) + "&token=" + encodeURIComponent(actionToken);
+    var rejectUrl = BASE_PORTAL_URL + "/approve.html?action=reject&id=" + encodeURIComponent(bookingId) + "&token=" + encodeURIComponent(actionToken);
     
     var waUrl = "https://wa.me/91" + cleanPhone + "?text=" + encodeURIComponent(
-      "Hello " + name + ", this is Aryan Taxi Mahabaleshwar regarding your booking request " + bookingId + " for " + tour + ". Your tariff is locked at ₹" + fare + ". Let us confirm your pickup schedule."
+      "Hello " + name + ", Aryan Taxi Mahabaleshwar here regarding your booking request " + bookingId + " for " + tour + ". Your locked tariff is ₹" + fare + " (" + taxiCount + "x 4-Seater Tourist Cab" + (taxiCount > 1 ? "s" : "") + "). Let us reconfirm your hotel porch pickup schedule."
     );
 
-    var ownerSubject = "🚕 NEW BOOKING REQUEST: " + bookingId + " - " + name + " (₹" + fare + ") [PENDING APPROVAL]";
+    var ownerSubject = "🚕 NEW RESERVATION REQUEST: " + bookingId + " - " + name + " (₹" + fare + " • " + taxiCount + " Cab" + (taxiCount > 1 ? "s" : "") + ") [ACTION REQUIRED]";
     var ownerBody = 
       "<div style='font-family:system-ui,-apple-system,BlinkMacSystemFont,Roboto,sans-serif;max-width:620px;margin:auto;border:1px solid #cbd5e1;border-radius:12px;padding:24px;background:#ffffff;'>" +
         "<div style='background:#fef3c7;border:1px solid #fde68a;border-radius:8px;padding:14px;margin-bottom:18px;'>" +
-          "<strong style='color:#92400e;font-size:15px;'>⏳ STATUS: PENDING OPERATOR AVAILABILITY APPROVAL</strong><br>" +
-          "<span style='color:#b45309;font-size:13px;line-height:1.4;'>Check vehicle availability and click the green button below to confirm the cab and notify the guest.</span>" +
+          "<strong style='color:#92400e;font-size:15px;'>⏳ STATUS: PENDING OPERATOR CONFIRMATION</strong><br>" +
+          "<span style='color:#b45309;font-size:13px;line-height:1.4;'>Check fleet availability and select an action below. Note: Clicking will open a secure review page before any status change occurs.</span>" +
         "</div>" +
         
-        "<div style='background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:18px;text-align:center;margin-bottom:20px;'>" +
-          "<a href='" + approveUrl + "' style='background:#16a34a;color:#ffffff;padding:14px 28px;text-decoration:none;border-radius:8px;font-weight:bold;display:inline-block;font-size:16px;box-shadow:0 4px 6px -1px rgba(22,163,74,0.3);'>✔ 1-CLICK APPROVE &amp; CONFIRM BOOKING</a>" +
-          "<p style='margin:10px 0 0;font-size:12.5px;color:#15803d;line-height:1.4;'>Clicking this button automatically marks the booking as <strong>CONFIRMED</strong> in your Sheet and emails the guest their Confirmed Travel Voucher.</p>" +
+        "<div style='display:flex;gap:12px;margin-bottom:20px;text-align:center;'>" +
+          "<div style='flex:1;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:16px;'>" +
+            "<a href='" + confirmUrl + "' style='background:#16a34a;color:#ffffff;padding:12px 20px;text-decoration:none;border-radius:8px;font-weight:bold;display:inline-block;font-size:14px;box-shadow:0 4px 6px -1px rgba(22,163,74,0.3);'>✔ CONFIRM RESERVATION</a>" +
+            "<p style='margin:8px 0 0;font-size:12px;color:#15803d;'>Approves booking &amp; emails confirmed travel voucher to guest.</p>" +
+          "</div>" +
+          "<div style='flex:1;background:#fef2f2;border:1px solid #fecaca;border-radius:10px;padding:16px;'>" +
+            "<a href='" + rejectUrl + "' style='background:#dc2626;color:#ffffff;padding:12px 20px;text-decoration:none;border-radius:8px;font-weight:bold;display:inline-block;font-size:14px;box-shadow:0 4px 6px -1px rgba(220,38,38,0.3);'>✖ REJECT RESERVATION</a>" +
+            "<p style='margin:8px 0 0;font-size:12px;color:#991b1b;'>Declines with reason &amp; notifies guest politely.</p>" +
+          "</div>" +
         "</div>" +
 
-        "<h3 style='color:#0f2b48;margin:0 0 12px;font-size:16px;border-bottom:1px solid #e2e8f0;padding-bottom:8px;'>Booking Details</h3>" +
+        "<h3 style='color:#0f2b48;margin:0 0 12px;font-size:16px;border-bottom:1px solid #e2e8f0;padding-bottom:8px;'>Booking &amp; Fleet Requirements</h3>" +
         "<table style='width:100%;border-collapse:collapse;font-size:14px;'>" +
-          "<tr><td style='padding:7px 0;color:#64748b;width:40%;'><strong>Pass Reference ID:</strong></td><td><strong style='color:#0284c7;'>" + bookingId + "</strong></td></tr>" +
+          "<tr><td style='padding:7px 0;color:#64748b;width:40%;'><strong>Booking ID:</strong></td><td><strong style='color:#0284c7;'>" + bookingId + "</strong></td></tr>" +
           "<tr><td style='padding:7px 0;color:#64748b;'><strong>Guest Name:</strong></td><td><strong>" + name + "</strong></td></tr>" +
           "<tr><td style='padding:7px 0;color:#64748b;'><strong>WhatsApp Phone:</strong></td><td><a href='tel:+91" + cleanPhone + "' style='color:#0284c7;text-decoration:none;font-weight:600;'>" + phone + "</a></td></tr>" +
           "<tr><td style='padding:7px 0;color:#64748b;'><strong>Email Address:</strong></td><td><a href='mailto:" + email + "' style='color:#0284c7;text-decoration:none;'>" + email + "</a></td></tr>" +
-          "<tr><td style='padding:7px 0;color:#64748b;'><strong>Tour Package:</strong></td><td>" + tour + "</td></tr>" +
-          "<tr><td style='padding:7px 0;color:#64748b;'><strong>Travel Date & Time:</strong></td><td>" + date + " at " + time + "</td></tr>" +
-          "<tr><td style='padding:7px 0;color:#64748b;'><strong>Pickup Hotel / Landmark:</strong></td><td>" + pickup + "</td></tr>" +
-          "<tr><td style='padding:7px 0;color:#64748b;'><strong>Locked Union Fare:</strong></td><td style='color:#16a34a;font-size:16px;font-weight:bold;'>₹" + fare + " (Zero Advance / Pay After Trip)</td></tr>" +
+          "<tr><td style='padding:7px 0;color:#64748b;'><strong>Total Passengers (PAX):</strong></td><td><strong>" + pax + " Passengers</strong></td></tr>" +
+          "<tr><td style='padding:7px 0;color:#64748b;'><strong>Fleet Allocation:</strong></td><td><strong style='color:#0f2b48;'>" + taxiCount + "x " + vehicleCategory + (taxiCount > 1 ? "s (Round up: " + pax + " ÷ 4)" : "") + "</strong></td></tr>" +
+          "<tr><td style='padding:7px 0;color:#64748b;'><strong>Tour / Service:</strong></td><td>" + tour + " (" + serviceType + ")</td></tr>" +
+          "<tr><td style='padding:7px 0;color:#64748b;'><strong>Schedule:</strong></td><td>" + date + " at " + time + "</td></tr>" +
+          "<tr><td style='padding:7px 0;color:#64748b;'><strong>Pickup Hotel Details:</strong></td><td><strong style='color:#0f2b48;'>" + hotelDetails + "</strong></td></tr>" +
+          (dropLocation && dropLocation !== tour ? ("<tr><td style='padding:7px 0;color:#64748b;'><strong>Drop Location:</strong></td><td>" + dropLocation + "</td></tr>") : "") +
+          "<tr><td style='padding:7px 0;color:#64748b;'><strong>Fare Breakdown:</strong></td><td>₹" + baseFare + " × " + taxiCount + " Cab" + (taxiCount > 1 ? "s" : "") + (additionalCharges !== '0' ? (" + ₹" + additionalCharges + " extra") : "") + " = <strong style='color:#16a34a;font-size:16px;'>₹" + fare + "</strong></td></tr>" +
           "<tr><td style='padding:7px 0;color:#64748b;'><strong>Special Request:</strong></td><td>" + notes + "</td></tr>" +
         "</table>" +
         
@@ -186,43 +314,50 @@ function doPost(e) {
         "</div>" +
       "</div>";
 
-    MailApp.sendEmail({
-      to: ownerEmail,
-      subject: ownerSubject,
-      htmlBody: ownerBody,
-      name: "Aryan Taxi Dispatch Portal",
-      replyTo: "aryansdtravels@gmail.com"
-    });
+    try {
+      MailApp.sendEmail({
+        to: ownerEmail,
+        subject: ownerSubject,
+        htmlBody: ownerBody,
+        name: "Aryan Taxi Dispatch Operations",
+        replyTo: "aryansdtravels@gmail.com"
+      });
+      sheet.getRange(lastRow, 25).setValue("Delivered");
+    } catch (eMailOp) {
+      sheet.getRange(lastRow, 25).setValue("Failed: " + eMailOp.toString());
+    }
 
-    // 3. Email 2: Send Initial Booking Request Voucher to Customer (Pending Status)
+    // 2. Send Initial Acknowledgement Email to Customer
     if (email && email.indexOf("@") !== -1) {
-      var customerSubject = "Booking Request Received (Pending Approval) - Pass #" + bookingId + " | Aryan Taxi Mahabaleshwar";
+      var customerSubject = "Booking Request Received – Pending Confirmation (Pass #" + bookingId + ") | Aryan Taxi Mahabaleshwar";
       var customerBody = 
         "<div style='font-family:system-ui,-apple-system,BlinkMacSystemFont,Roboto,sans-serif;max-width:600px;margin:auto;border:1px solid #e2e8f0;border-radius:12px;padding:24px;background:#ffffff;color:#1e293b;'>" +
           "<div style='text-align:center;padding-bottom:16px;border-bottom:2px solid #0891b2;'>" +
             "<h2 style='color:#0e2338;margin:0;font-size:22px;letter-spacing:0.5px;'>ARYAN TAXI MAHABALESHWAR</h2>" +
-            "<p style='color:#0891b2;font-size:13px;font-weight:bold;margin:4px 0 0;'>Direct Local Owner-Driver Cab Service • Explore Sahyadri</p>" +
+            "<p style='color:#0891b2;font-size:13px;font-weight:bold;margin:4px 0 0;'>Direct Local Owner-Driver Tourist Cab Network • Explore Sahyadri</p>" +
           "</div>" +
           
           "<div style='background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:14px;margin:18px 0;'>" +
-            "<strong style='color:#92400e;font-size:14px;'>⏳ STATUS: BOOKING REQUEST REGISTERED (PENDING AVAILABILITY CONFIRMATION)</strong>" +
-            "<p style='margin:4px 0 0;font-size:12.5px;color:#b45309;line-height:1.4;'>Your official Union tariff is locked. Please note that vehicle dispatch and driver assignment are subject to availability approval by our operations desk. We will confirm your ride shortly.</p>" +
+            "<strong style='color:#92400e;font-size:14px;'>⏳ STATUS: BOOKING RECEIVED – PENDING CONFIRMATION</strong>" +
+            "<p style='margin:4px 0 0;font-size:12.5px;color:#b45309;line-height:1.4;'>Your travel request is registered and official Taxi Union tariff is locked. Our dispatch operations desk is checking driver and vehicle availability. You will receive an official confirmation notice once your cab is assigned.</p>" +
           "</div>" +
           
           "<p style='font-size:14px;'>Dear <strong>" + name + "</strong>,</p>" +
-          "<p style='font-size:13.5px;line-height:1.5;color:#475569;'>Thank you for submitting your travel request with Aryan Taxi Mahabaleshwar. Here is your official booking voucher summary:</p>" +
+          "<p style='font-size:13.5px;line-height:1.5;color:#475569;'>Thank you for choosing Aryan Taxi Mahabaleshwar. Here is the summary of your registered travel request:</p>" +
           
           "<table style='width:100%;border-collapse:collapse;margin:15px 0;background:#f8fafc;border-radius:8px;font-size:13.5px;border:1px solid #e2e8f0;'>" +
             "<tr><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;'><strong>Pass Reference ID:</strong></td><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#0284c7;font-weight:bold;'>" + bookingId + "</td></tr>" +
             "<tr><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;'><strong>Lead Passenger:</strong></td><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;'><strong>" + name + "</strong> (" + phone + ")</td></tr>" +
-            "<tr><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;'><strong>Selected Tour:</strong></td><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;'><strong>" + tour + "</strong></td></tr>" +
+            "<tr><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;'><strong>Passengers (PAX):</strong></td><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;'><strong>" + pax + " Passengers</strong></td></tr>" +
+            "<tr><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;'><strong>Assigned Fleet:</strong></td><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;'><strong>" + taxiCount + "x " + vehicleCategory + (taxiCount > 1 ? "s" : "") + "</strong></td></tr>" +
+            "<tr><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;'><strong>Selected Tour / Route:</strong></td><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;'><strong>" + tour + "</strong></td></tr>" +
             "<tr><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;'><strong>Travel Schedule:</strong></td><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;'>" + date + " at " + time + "</td></tr>" +
-            "<tr><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;'><strong>Pickup Location:</strong></td><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;'>" + pickup + " (Doorstep Hotel Porch)</td></tr>" +
+            "<tr><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;'><strong>Pickup Hotel Details:</strong></td><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;'>" + hotelDetails + " (Doorstep Hotel Porch)</td></tr>" +
             "<tr><td style='padding:9px 12px;color:#64748b;'><strong>Locked Union Fare:</strong></td><td style='padding:9px 12px;font-size:16px;color:#16a34a;font-weight:bold;'>₹" + fare + " <span style='font-size:12px;color:#64748b;font-weight:normal;'>(Zero Advance • Pay Driver After Trip)</span></td></tr>" +
           "</table>" +
           
           "<div style='background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:12px;margin-top:16px;'>" +
-            "<p style='margin:0;color:#166534;font-size:12.5px;line-height:1.4;'><strong>🛡️ Aryan Taxi Mountain Assurance:</strong> Dedicated private 4-seater tourist cab, licensed local hill drivers native to Sahyadri ghats, and fixed Taxi Union tariffs with zero hidden surcharges.</p>" +
+            "<p style='margin:0;color:#166534;font-size:12.5px;line-height:1.4;'><strong>🛡️ Mountain Fleet Assurance:</strong> All tours are operated strictly by registered 4-seater tourist cabs driven by licensed, hill-experienced local drivers native to Sahyadri ghats. Official Taxi Union tariffs apply with zero hidden surges.</p>" +
           "</div>" +
           
           "<p style='font-size:13px;color:#64748b;margin-top:20px;line-height:1.5;'>Need immediate assistance or wish to reconfirm pickup early? Feel free to contact our 24/7 operations desk at <strong>+91 99228 82044</strong> or reply to this email.</p>" +
@@ -233,113 +368,191 @@ function doPost(e) {
           "</div>" +
         "</div>";
 
-      MailApp.sendEmail({
-        to: email,
-        subject: customerSubject,
-        htmlBody: customerBody,
-        name: "Aryan Taxi Mahabaleshwar",
-        replyTo: "aryansdtravels@gmail.com"
-      });
+      try {
+        MailApp.sendEmail({
+          to: email,
+          subject: customerSubject,
+          htmlBody: customerBody,
+          name: "Aryan Taxi Mahabaleshwar",
+          replyTo: "aryansdtravels@gmail.com"
+        });
+        sheet.getRange(lastRow, 24).setValue("Delivered");
+      } catch (eMailCust) {
+        sheet.getRange(lastRow, 24).setValue("Failed: " + eMailCust.toString());
+      }
     }
 
-    return ContentService.createTextOutput(JSON.stringify({ result: "success", bookingId: bookingId }))
-      .setMimeType(ContentService.MimeType.JSON);
+    return createJsonResponse({
+      result: "success",
+      bookingId: bookingId,
+      status: status,
+      taxiCount: taxiCount,
+      fare: fare
+    }, (typeof callback !== "undefined" ? callback : ""));
+
   } catch (err) {
-    return ContentService.createTextOutput(JSON.stringify({ result: "error", message: err.toString() }))
-      .setMimeType(ContentService.MimeType.JSON);
+    return createJsonResponse({
+      result: "error",
+      message: err.toString()
+    }, (typeof callback !== "undefined" ? callback : ""));
   }
 }
 
-/**
- * 1-CLICK APPROVAL HANDLER
- * Triggered when owner clicks [ ✔ 1-CLICK APPROVE & CONFIRM BOOKING ] in alert email
- */
-function handleOneClickApproval(bookingId, format) {
+function doGet(e) {
+  var action = (e && e.parameter && e.parameter.action) || "";
+  var id = (e && e.parameter && (e.parameter.id || e.parameter.bookingId)) || "";
+  var token = (e && e.parameter && e.parameter.token) || "";
+  var reason = (e && e.parameter && e.parameter.reason) || "";
+  var format = (e && e.parameter && e.parameter.format) || "";
+  var callback = (e && e.parameter && e.parameter.callback) || "";
+
+  // 1. Get Live Bookings for Operator Dashboard
+  if (action === "get_bookings") {
+    return handleGetBookings(callback);
+  }
+
+  // 2. Get Single Booking Details for Confirmation/Rejection Preview Page
+  if (action === "get_booking_details" && id) {
+    return handleGetBookingDetails(id, token, callback);
+  }
+
+  // 3. Execute Deliberate Operator Confirmation
+  if (action === "execute_confirm" && id) {
+    return handleExecuteConfirm(id, token, format, callback);
+  }
+
+  // 4. Execute Deliberate Operator Rejection
+  if (action === "execute_reject" && id) {
+    return handleExecuteReject(id, token, reason, format, callback);
+  }
+
+  // Legacy approval redirect/fallback
+  if (action === "approve" && id) {
+    return handleExecuteConfirm(id, token, format, callback);
+  }
+
+  if (action === "gemini_trip_planner" && e.parameter.prompt) {
+    return handleGeminiAIRequest(e.parameter.prompt, e.parameter.lang || "en");
+  }
+
+  return createJsonResponse({
+    status: "online",
+    service: "Aryan Taxi Operations Webhook",
+    timestamp: new Date().toISOString()
+  }, (typeof callback !== "undefined" ? callback : ""));
+}
+
+function findBookingRow(sheet, bookingId) {
+  var data = sheet.getDataRange().getValues();
+  var cleanId = String(bookingId || "").trim().toUpperCase();
+  for (var i = 1; i < data.length; i++) {
+    var cellId = String(data[i][1] || "").trim().toUpperCase();
+    if (cellId && (cellId === cleanId || cellId.indexOf(cleanId) !== -1 || cleanId.indexOf(cellId) !== -1)) {
+      return { rowIndex: i + 1, rowData: data[i] };
+    }
+  }
+  return null;
+}
+
+function handleGetBookingDetails(bookingId, token, callback) {
   try {
     var sheet = getBookingsSheet();
-    var data = sheet.getDataRange().getValues();
-    var foundRow = -1;
-    var rowData = null;
-    
-    // Flexible case-insensitive search by Booking ID (Column B = index 1)
-    var cleanSearchId = String(bookingId || "").trim().toUpperCase();
-    for (var i = 1; i < data.length; i++) {
-      var cellVal = String(data[i][1] || "").trim().toUpperCase();
-      if (cellVal && (cellVal === cleanSearchId || cellVal.indexOf(cleanSearchId) !== -1 || cleanSearchId.indexOf(cellVal) !== -1)) {
-        foundRow = i + 1;
-        rowData = data[i];
-        break;
-      }
+    var found = findBookingRow(sheet, bookingId);
+    if (!found) {
+      return createJsonResponse({
+        result: "not_found",
+        bookingId: bookingId
+      }, (typeof callback !== "undefined" ? callback : ""));
     }
     
-    if (foundRow === -1) {
-      if (format === "json") {
-        return ContentService.createTextOutput(JSON.stringify({ result: "not_found", bookingId: bookingId }))
-          .setMimeType(ContentService.MimeType.JSON);
-      }
-      return HtmlService.createHtmlOutput(
-        "<!DOCTYPE html><html><head><meta name='viewport' content='width=device-width, initial-scale=1'>" +
-        "<title>Booking Not Found | Aryan Taxi</title>" +
-        "<style>body{font-family:system-ui,-apple-system,BlinkMacSystemFont,Roboto,sans-serif;margin:0;padding:20px;background:#f8fafc;display:flex;align-items:center;justify-content:center;min-height:90vh;}" +
-        ".card{max-width:500px;width:100%;background:#ffffff;border:1px solid #fecaca;border-radius:14px;padding:32px 24px;text-align:center;box-shadow:0 10px 25px -5px rgba(0,0,0,0.08);}" +
-        "h2{color:#b91c1c;margin:0 0 10px;font-size:22px;}" +
-        "p{color:#475569;font-size:14px;line-height:1.5;margin:8px 0;}" +
-        "</style></head><body>" +
-        "<div class='card'>" +
-        "<div style='font-size:48px;line-height:1;margin-bottom:12px;'>⚠️</div>" +
-        "<h2>Booking ID Not Found</h2>" +
-        "<p>Could not locate reference ID: <strong>" + bookingId + "</strong> in your Google Sheet.</p>" +
-        "<p style='font-size:12px;color:#94a3b8;margin-top:20px;'>Aryan Taxi Mahabaleshwar • 24/7 Operations Desk</p>" +
-        "</div></body></html>"
-      ).setTitle("Booking Not Found - Aryan Taxi Mahabaleshwar")
-       .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL)
-       .addMetaTag("viewport", "width=device-width, initial-scale=1");
-    }
-    
-    var name = rowData[2] || "Valued Guest";
-    var email = (rowData[3] || "").trim().toLowerCase();
-    var phone = rowData[4] || "";
-    var date = rowData[5] || "";
-    var time = rowData[6] || "";
-    var pickup = rowData[7] || "";
-    var tour = rowData[8] || "";
-    var fare = rowData[9] || "";
-    var currentStatus = rowData[11] || "";
+    var r = found.rowData;
+    return createJsonResponse({
+      result: "success",
+      bookingId: r[1],
+      name: r[2],
+      email: r[3],
+      phone: r[4],
+      date: r[5],
+      time: r[6],
+      pickup: r[7],
+      tour: r[8],
+      fare: r[9],
+      notes: r[10],
+      status: r[11],
+      hotelDetails: r[12] || r[7],
+      dropLocation: r[13] || "",
+      serviceType: r[14] || "sightseeing",
+      pax: r[15] || "1-4",
+      taxiCount: r[16] || 1,
+      vehicleCategory: r[17] || "4-Seater Tourist Cab",
+      baseFare: r[18] || r[9],
+      additionalCharges: r[19] || "₹0",
+      totalFare: r[20] || r[9],
+      paymentStatus: r[21] || "Unpaid",
+      remarks: r[22] || ""
+    }, (typeof callback !== "undefined" ? callback : ""));
+  } catch (err) {
+    return createJsonResponse({
+      result: "error",
+      message: err.toString()
+    }, (typeof callback !== "undefined" ? callback : ""));
+  }
+}
 
-    // If already confirmed, don't duplicate customer email
-    if (String(currentStatus).toUpperCase() === "CONFIRMED") {
-      if (format === "json") {
-        return ContentService.createTextOutput(JSON.stringify({ result: "already_confirmed", status: "CONFIRMED", bookingId: bookingId, name: name }))
-          .setMimeType(ContentService.MimeType.JSON);
-      }
-      return HtmlService.createHtmlOutput(
-        "<!DOCTYPE html><html><head><meta name='viewport' content='width=device-width, initial-scale=1'>" +
-        "<title>Already Confirmed | Aryan Taxi</title>" +
-        "<style>body{font-family:system-ui,-apple-system,BlinkMacSystemFont,Roboto,sans-serif;margin:0;padding:20px;background:#f8fafc;display:flex;align-items:center;justify-content:center;min-height:90vh;}" +
-        ".card{max-width:500px;width:100%;background:#ffffff;border:1px solid #bae6fd;border-radius:14px;padding:32px 24px;text-align:center;box-shadow:0 10px 25px -5px rgba(0,0,0,0.08);}" +
-        ".badge{display:inline-block;background:#e0f2fe;color:#0369a1;padding:6px 14px;border-radius:20px;font-weight:700;font-size:13px;margin-bottom:16px;}" +
-        "h2{color:#0c4a6e;margin:0 0 10px;font-size:22px;}" +
-        "p{color:#475569;font-size:14px;line-height:1.5;margin:8px 0;}" +
-        "</style></head><body>" +
-        "<div class='card'>" +
-        "<div style='font-size:48px;line-height:1;margin-bottom:12px;'>ℹ️</div>" +
-        "<div class='badge'>ALREADY CONFIRMED</div>" +
-        "<h2>Booking Already Approved</h2>" +
-        "<p>Pass ID <strong>" + bookingId + "</strong> for <strong>" + name + "</strong> is already marked as <strong>CONFIRMED</strong> in your Sheet.</p>" +
-        "<p style='font-size:13px;color:#0284c7;'>The customer has already received their official confirmation voucher.</p>" +
-        "<p style='font-size:12px;color:#94a3b8;margin-top:20px;'>Aryan Taxi Mahabaleshwar • 24/7 Operations Desk</p>" +
-        "</div></body></html>"
-      ).setTitle("Already Confirmed - Aryan Taxi Mahabaleshwar")
-       .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL)
-       .addMetaTag("viewport", "width=device-width, initial-scale=1");
+function handleExecuteConfirm(bookingId, token, format, callback) {
+  try {
+    var sheet = getBookingsSheet();
+    var found = findBookingRow(sheet, bookingId);
+    if (!found) {
+      return createJsonResponse({
+        result: "not_found",
+        bookingId: bookingId
+      }, (typeof callback !== "undefined" ? callback : ""));
     }
 
-    // Update status in Column L (column 12)
-    sheet.getRange(foundRow, 12).setValue("CONFIRMED");
+    var rowIdx = found.rowIndex;
+    var r = found.rowData;
+    var currentStatus = String(r[11] || "").trim().toUpperCase();
 
-    // Send Official Confirmation Email to Customer
+    if (currentStatus === "CONFIRMED") {
+      return createJsonResponse({
+        result: "already_confirmed",
+        status: "CONFIRMED",
+        bookingId: bookingId,
+        name: r[2]
+      }, (typeof callback !== "undefined" ? callback : ""));
+    }
+
+    if (currentStatus === "REJECTED") {
+      return createJsonResponse({
+        result: "conflict",
+        message: "This booking was previously REJECTED. Cannot confirm a rejected booking.",
+        status: "REJECTED",
+        bookingId: bookingId
+      }, (typeof callback !== "undefined" ? callback : ""));
+    }
+
+    var nowStr = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
+
+    // Update Status to CONFIRMED
+    sheet.getRange(rowIdx, 12).setValue("CONFIRMED");
+    sheet.getRange(rowIdx, 23).setValue("Confirmed by Operator on " + nowStr);
+
+    var name = r[2] || "Valued Guest";
+    var email = String(r[3] || "").trim().toLowerCase();
+    var phone = r[4] || "";
+    var date = r[5] || "";
+    var time = r[6] || "";
+    var hotelDetails = r[12] || r[7] || "Mahabaleshwar";
+    var tour = r[8] || "Sightseeing Tour";
+    var fare = r[9] || "0";
+    var pax = r[15] || "1-4";
+    var taxiCount = r[16] || 1;
+    var vehicleCategory = r[17] || "4-Seater Tourist Cab";
+
+    // Send Confirmed Voucher Email to Customer
     if (email && email.indexOf("@") !== -1) {
-      var confirmSubject = "🚖 Booking Confirmed: Dedicated Tourist Cab Reserved - Pass #" + bookingId + " | Aryan Taxi Mahabaleshwar";
+      var confirmSubject = "🚖 Booking Confirmed: " + taxiCount + "x 4-Seater Tourist Cab Reserved - Pass #" + bookingId + " | Aryan Taxi Mahabaleshwar";
       var confirmBody = 
         "<div style='font-family:system-ui,-apple-system,BlinkMacSystemFont,Roboto,sans-serif;max-width:620px;margin:auto;border:1px solid #cbd5e1;border-radius:12px;padding:24px;background:#ffffff;color:#1e293b;'>" +
           "<div style='text-align:center;padding-bottom:16px;border-bottom:2px solid #10b981;'>" +
@@ -348,29 +561,30 @@ function handleOneClickApproval(bookingId, format) {
           "</div>" +
           
           "<div style='background:#ecfdf5;border:1px solid #a7f3d0;border-radius:8px;padding:14px;margin:18px 0;'>" +
-            "<strong style='color:#065f46;font-size:15px;'>✔ YOUR BOOKING IS OFFICIALLY CONFIRMED!</strong>" +
-            "<p style='margin:4px 0 0;font-size:13px;color:#047857;line-height:1.4;'>Your private tourist cab has been reserved. A licensed, mountain-experienced driver has been assigned for your doorstep porch pickup on schedule.</p>" +
+            "<strong style='color:#065f46;font-size:15px;'>✔ YOUR RESERVATION IS OFFICIALLY CONFIRMED!</strong>" +
+            "<p style='margin:4px 0 0;font-size:13px;color:#047857;line-height:1.4;'>Your private tourist cab reservation is locked. A licensed, mountain-experienced local driver has been assigned for your doorstep porch pickup on schedule.</p>" +
           "</div>" +
           
           "<p style='font-size:14px;'>Dear <strong>" + name + "</strong>,</p>" +
-          "<p style='font-size:13.5px;color:#475569;'>We are pleased to inform you that your cab reservation has been confirmed by the Aryan Taxi Dispatch Operations team. Here are your confirmed trip details:</p>" +
+          "<p style='font-size:13.5px;color:#475569;'>We are pleased to inform you that your cab booking has been verified and confirmed by the Aryan Taxi Dispatch Desk. Here are your travel details:</p>" +
           
           "<table style='width:100%;border-collapse:collapse;margin:15px 0;background:#f8fafc;border-radius:8px;font-size:13.5px;border:1px solid #e2e8f0;'>" +
             "<tr><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;'><strong>Pass Reference ID:</strong></td><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#0284c7;font-weight:bold;'>" + bookingId + "</td></tr>" +
             "<tr><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;'><strong>Lead Passenger:</strong></td><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;'><strong>" + name + "</strong> (" + phone + ")</td></tr>" +
+            "<tr><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;'><strong>Passengers (PAX):</strong></td><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;'><strong>" + pax + " Passengers</strong></td></tr>" +
+            "<tr><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;'><strong>Assigned Fleet:</strong></td><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;'><strong>" + taxiCount + "x " + vehicleCategory + (taxiCount > 1 ? "s" : "") + "</strong></td></tr>" +
             "<tr><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;'><strong>Selected Tour:</strong></td><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;'><strong>" + tour + "</strong></td></tr>" +
             "<tr><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;'><strong>Travel Schedule:</strong></td><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;'>" + date + " at " + time + "</td></tr>" +
-            "<tr><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;'><strong>Pickup Location:</strong></td><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;'>" + pickup + " (Doorstep Hotel Porch)</td></tr>" +
-            "<tr><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;'><strong>Assigned Vehicle:</strong></td><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;'>Dedicated 4-Seater Tourist Cab (Clean &amp; Sanitized)</td></tr>" +
+            "<tr><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;'><strong>Pickup Hotel Porch:</strong></td><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;'>" + hotelDetails + "</td></tr>" +
             "<tr><td style='padding:9px 12px;color:#64748b;'><strong>Confirmed Tariff:</strong></td><td style='padding:9px 12px;font-size:16px;color:#16a34a;font-weight:bold;'>" + fare + " <span style='font-size:12px;color:#64748b;font-weight:normal;'>(Zero Advance • Pay Driver After Trip)</span></td></tr>" +
           "</table>" +
           
           "<div style='background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:14px;margin-top:16px;'>" +
-            "<h4 style='color:#166534;margin:0 0 6px;font-size:13.5px;'>Pickup &amp; Tour Guidelines</h4>" +
+            "<h4 style='color:#166534;margin:0 0 6px;font-size:13.5px;'>Pickup &amp; Carriage Terms</h4>" +
             "<ul style='margin:0;padding-left:18px;font-size:12.5px;color:#15803d;line-height:1.5;'>" +
               "<li>Your assigned driver will reach your hotel reception/porch 10 minutes prior to pickup time.</li>" +
-              "<li>Show this pass or voucher to your driver at the time of boarding.</li>" +
-              "<li>Pay 100% of the locked tariff directly to your driver upon completion of the tour.</li>" +
+              "<li>Present this digital pass or booking ID to your driver upon boarding.</li>" +
+              "<li>Pay 100% of the locked tariff directly to your driver upon completion of the tour via UPI or Cash.</li>" +
             "</ul>" +
           "</div>" +
           
@@ -380,71 +594,154 @@ function handleOneClickApproval(bookingId, format) {
           "</div>" +
         "</div>";
 
-      MailApp.sendEmail({
-        to: email,
-        subject: confirmSubject,
-        htmlBody: confirmBody,
-        name: "Aryan Taxi Mahabaleshwar",
-        replyTo: "aryansdtravels@gmail.com"
-      });
-    }
-    
-    if (format === "json") {
-      return ContentService.createTextOutput(JSON.stringify({
-        result: "success",
-        status: "CONFIRMED",
-        bookingId: bookingId,
-        name: name,
-        tour: tour,
-        fare: fare
-      })).setMimeType(ContentService.MimeType.JSON);
+      try {
+        MailApp.sendEmail({
+          to: email,
+          subject: confirmSubject,
+          htmlBody: confirmBody,
+          name: "Aryan Taxi Mahabaleshwar",
+          replyTo: "aryansdtravels@gmail.com"
+        });
+        sheet.getRange(rowIdx, 24).setValue("Confirmation Delivered");
+      } catch (eMail) {
+        sheet.getRange(rowIdx, 24).setValue("Failed: " + eMail.toString());
+      }
     }
 
-    // Return Clean Success Screen to the Owner
-    return HtmlService.createHtmlOutput(
-      "<!DOCTYPE html><html><head><meta name='viewport' content='width=device-width, initial-scale=1'>" +
-      "<title>Booking Confirmed | Aryan Taxi</title>" +
-      "<style>body{font-family:system-ui,-apple-system,BlinkMacSystemFont,Roboto,sans-serif;margin:0;padding:20px;background:#f8fafc;display:flex;align-items:center;justify-content:center;min-height:90vh;}" +
-      ".card{max-width:500px;width:100%;background:#ffffff;border:1px solid #bbf7d0;border-radius:14px;padding:32px 24px;text-align:center;box-shadow:0 10px 25px -5px rgba(0,0,0,0.08);}" +
-      ".badge{display:inline-block;background:#dcfce7;color:#15803d;padding:6px 14px;border-radius:20px;font-weight:700;font-size:13px;margin-bottom:16px;}" +
-      "h2{color:#14532d;margin:0 0 10px;font-size:22px;}" +
-      "p{color:#475569;font-size:14px;line-height:1.5;margin:8px 0;}" +
-      ".info-box{background:#f0fdf4;border:1px solid #dcfce7;border-radius:8px;padding:12px;margin:18px 0;text-align:left;font-size:13px;color:#166534;}" +
-      "</style></head><body>" +
-      "<div class='card'>" +
-      "<div style='font-size:48px;line-height:1;margin-bottom:12px;'>✅</div>" +
-      "<div class='badge'>BOOKING CONFIRMED & CAB RESERVED</div>" +
-      "<h2>Booking Successfully Approved!</h2>" +
-      "<p>Booking <strong>" + bookingId + "</strong> for <strong>" + name + "</strong> is now marked as <strong>CONFIRMED</strong> in your Google Sheet.</p>" +
-      "<div class='info-box'>" +
-      "<strong>📧 Guest Notified:</strong> Official Confirmation Voucher has been automatically emailed to <strong>" + (email || 'the guest') + "</strong>." +
-      "</div>" +
-      "<p style='font-size:12px;color:#94a3b8;margin-top:20px;'>Aryan Taxi Mahabaleshwar • 24/7 Operations Desk<br>You can now safely close this window.</p>" +
-      "</div></body></html>"
-    ).setTitle("Booking Confirmed - Aryan Taxi Mahabaleshwar")
-     .addMetaTag("viewport", "width=device-width, initial-scale=1");
+    return createJsonResponse({
+      result: "success",
+      status: "CONFIRMED",
+      bookingId: bookingId,
+      name: name,
+      tour: tour,
+      fare: fare
+    }, (typeof callback !== "undefined" ? callback : ""));
+
   } catch (err) {
-    return HtmlService.createHtmlOutput(
-      "<!DOCTYPE html><html><head><meta name='viewport' content='width=device-width, initial-scale=1'>" +
-      "<title>Error | Aryan Taxi</title>" +
-      "<style>body{font-family:system-ui,-apple-system,BlinkMacSystemFont,Roboto,sans-serif;margin:0;padding:20px;background:#f8fafc;display:flex;align-items:center;justify-content:center;min-height:90vh;}" +
-      ".card{max-width:500px;width:100%;background:#ffffff;border:1px solid #fecaca;border-radius:14px;padding:32px 24px;text-align:center;}" +
-      "h2{color:#b91c1c;margin:0 0 10px;font-size:22px;}" +
-      "p{color:#475569;font-size:14px;line-height:1.5;margin:8px 0;}" +
-      "</style></head><body>" +
-      "<div class='card'>" +
-      "<div style='font-size:48px;line-height:1;margin-bottom:12px;'>❌</div>" +
-      "<h2>Error Approving Booking</h2>" +
-      "<p>" + err.toString() + "</p>" +
-      "</div></body></html>"
-    ).setTitle("Error Approving Booking - Aryan Taxi Mahabaleshwar")
-     .addMetaTag("viewport", "width=device-width, initial-scale=1");
+    return createJsonResponse({
+      result: "error",
+      message: err.toString()
+    }, (typeof callback !== "undefined" ? callback : ""));
   }
 }
 
-function handleGetBookings() {
+function handleExecuteReject(bookingId, token, reason, format, callback) {
   try {
     var sheet = getBookingsSheet();
+    var found = findBookingRow(sheet, bookingId);
+    if (!found) {
+      return createJsonResponse({
+        result: "not_found",
+        bookingId: bookingId
+      }, (typeof callback !== "undefined" ? callback : ""));
+    }
+
+    var rowIdx = found.rowIndex;
+    var r = found.rowData;
+    var currentStatus = String(r[11] || "").trim().toUpperCase();
+
+    if (currentStatus === "REJECTED") {
+      return createJsonResponse({
+        result: "already_rejected",
+        status: "REJECTED",
+        bookingId: bookingId,
+        name: r[2]
+      }, (typeof callback !== "undefined" ? callback : ""));
+    }
+
+    if (currentStatus === "CONFIRMED") {
+      return createJsonResponse({
+        result: "conflict",
+        message: "This booking was previously CONFIRMED. Cannot reject a confirmed booking without manual cancellation.",
+        status: "CONFIRMED",
+        bookingId: bookingId
+      }, (typeof callback !== "undefined" ? callback : ""));
+    }
+
+    var nowStr = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
+    var cleanReason = reason ? String(reason).trim() : "Taxi availability full for requested time slot";
+
+    // Update Status to REJECTED
+    sheet.getRange(rowIdx, 12).setValue("REJECTED");
+    sheet.getRange(rowIdx, 23).setValue("Rejected on " + nowStr + ". Reason: " + cleanReason);
+
+    var name = r[2] || "Valued Guest";
+    var email = String(r[3] || "").trim().toLowerCase();
+    var phone = r[4] || "";
+    var date = r[5] || "";
+    var time = r[6] || "";
+    var tour = r[8] || "Sightseeing Tour";
+
+    // Send Polite Rejection Notice Email to Customer
+    if (email && email.indexOf("@") !== -1) {
+      var rejectSubject = "Reservation Update: Booking #" + bookingId + " Unavailable | Aryan Taxi Mahabaleshwar";
+      var rejectBody = 
+        "<div style='font-family:system-ui,-apple-system,BlinkMacSystemFont,Roboto,sans-serif;max-width:600px;margin:auto;border:1px solid #cbd5e1;border-radius:12px;padding:24px;background:#ffffff;color:#1e293b;'>" +
+          "<div style='text-align:center;padding-bottom:16px;border-bottom:2px solid #ef4444;'>" +
+            "<h2 style='color:#0e2338;margin:0;font-size:22px;'>ARYAN TAXI MAHABALESHWAR</h2>" +
+            "<p style='color:#ef4444;font-size:13px;font-weight:bold;margin:4px 0 0;'>Reservation Desk Notice • Explore Sahyadri</p>" +
+          "</div>" +
+          
+          "<div style='background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:14px;margin:18px 0;'>" +
+            "<strong style='color:#991b1b;font-size:14px;'>⚠️ UNABLE TO ACCOMMODATE RESERVATION</strong>" +
+            "<p style='margin:4px 0 0;font-size:13px;color:#b91c1c;line-height:1.4;'>We regret to inform you that we cannot accept booking request <strong>#" + bookingId + "</strong> for " + date + " at " + time + ".</p>" +
+          "</div>" +
+          
+          "<p style='font-size:14px;'>Dear <strong>" + name + "</strong>,</p>" +
+          "<p style='font-size:13.5px;color:#475569;'>Thank you for considering Aryan Taxi Mahabaleshwar. Due to high operational demand or vehicle constraints, we are currently unable to confirm your booking:</p>" +
+          
+          "<div style='background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px;margin:14px 0;font-size:13px;'>" +
+            "<strong>Reason for Unavailability:</strong> " + cleanReason + "<br>" +
+            "<strong>Tour Requested:</strong> " + tour + "<br>" +
+            "<strong>Requested Date &amp; Time:</strong> " + date + " at " + time +
+          "</div>" +
+          
+          "<p style='font-size:13.5px;color:#475569;'>We apologize for the inconvenience. If your schedule is flexible, we would love to assist you with alternative time slots or dates. Please connect directly with our operations desk:</p>" +
+          
+          "<div style='text-align:center;margin:20px 0;'>" +
+            "<a href='https://wa.me/919922882044?text=" + encodeURIComponent("Hello Aryan Taxi, regarding unavailable booking #" + bookingId + ", I would like to check alternative dates.") + "' style='background:#10b981;color:#ffffff;padding:11px 22px;text-decoration:none;border-radius:6px;font-weight:bold;display:inline-block;font-size:13.5px;'>💬 Chat on WhatsApp for Alternative Slots</a>" +
+          "</div>" +
+          
+          "<div style='text-align:center;margin-top:22px;padding-top:16px;border-top:1px solid #e2e8f0;'>" +
+            "<p style='font-size:12px;color:#64748b;margin:0;'>24/7 Operations Desk • Aryan Taxi Mahabaleshwar</p>" +
+            "<p style='font-size:13.5px;font-weight:bold;color:#0e2338;margin:6px 0 0;'>📞 Helpline: +91 99228 82044 • ✉️ aryansdtravels@gmail.com</p>" +
+          "</div>" +
+        "</div>";
+
+      try {
+        MailApp.sendEmail({
+          to: email,
+          subject: rejectSubject,
+          htmlBody: rejectBody,
+          name: "Aryan Taxi Mahabaleshwar",
+          replyTo: "aryansdtravels@gmail.com"
+        });
+        sheet.getRange(rowIdx, 24).setValue("Rejection Delivered");
+      } catch (eMail) {
+        sheet.getRange(rowIdx, 24).setValue("Failed: " + eMail.toString());
+      }
+    }
+
+    return createJsonResponse({
+      result: "success",
+      status: "REJECTED",
+      bookingId: bookingId,
+      name: name,
+      reason: cleanReason
+    }, (typeof callback !== "undefined" ? callback : ""));
+
+  } catch (err) {
+    return createJsonResponse({
+      result: "error",
+      message: err.toString()
+    }, (typeof callback !== "undefined" ? callback : ""));
+  }
+}
+
+function handleGetBookings(callback) {
+  try {
+    var sheet = getBookingsSheet();
+    ensureSheetHeaders(sheet);
     var data = sheet.getDataRange().getValues();
     var list = [];
     for (var i = 1; i < data.length; i++) {
@@ -461,52 +758,45 @@ function handleGetBookings() {
           tour: data[i][8],
           fare: data[i][9],
           notes: data[i][10],
-          status: data[i][11]
+          status: data[i][11],
+          hotelDetails: data[i][12] || data[i][7],
+          dropLocation: data[i][13] || "",
+          serviceType: data[i][14] || "sightseeing",
+          pax: data[i][15] || "1-4",
+          taxiCount: data[i][16] || 1,
+          vehicleCategory: data[i][17] || "4-Seater Tourist Cab",
+          baseFare: data[i][18] || data[i][9],
+          additionalCharges: data[i][19] || "₹0",
+          totalFare: data[i][20] || data[i][9],
+          paymentStatus: data[i][21] || "Unpaid",
+          remarks: data[i][22] || "",
+          custEmailStatus: data[i][23] || "",
+          opEmailStatus: data[i][24] || "",
+          custWaStatus: data[i][25] || "",
+          opWaStatus: data[i][26] || ""
         });
       }
     }
-    return ContentService.createTextOutput(JSON.stringify({ result: "success", bookings: list }))
-      .setMimeType(ContentService.MimeType.JSON);
+    return createJsonResponse({
+      result: "success",
+      bookings: list
+    }, (typeof callback !== "undefined" ? callback : ""));
   } catch (err) {
-    return ContentService.createTextOutput(JSON.stringify({ result: "error", message: err.toString() }))
-      .setMimeType(ContentService.MimeType.JSON);
+    return createJsonResponse({
+      result: "error",
+      message: err.toString()
+    }, (typeof callback !== "undefined" ? callback : ""));
   }
 }
 
-function doGet(e) {
-  var action = e && e.parameter && e.parameter.action;
-  var format = e && e.parameter && e.parameter.format;
-  
-  // 1-Click Approve Booking Link
-  if (action === "approve" && e.parameter.id) {
-    return handleOneClickApproval(e.parameter.id, format);
-  }
-  
-  // Live Bookings Fetch for Operator Dashboard
-  if (action === "get_bookings") {
-    return handleGetBookings();
-  }
-  
-  if (action === "gemini_trip_planner" && e.parameter.prompt) {
-    return handleGeminiAIRequest(e.parameter.prompt, e.parameter.lang || "en");
-  }
-  
-  return ContentService.createTextOutput(JSON.stringify({ status: "online", service: "Aryan Taxi Booking Webhook" }))
-    .setMimeType(ContentService.MimeType.JSON);
-}
-
-/**
- * OPTIONAL: Free Multilingual AI Trip Planner (Gemini 1.5 Flash Free Tier)
- * API Key is stored safely in Script Properties (Never in GitHub code!)
- */
 function handleGeminiAIRequest(userPrompt, lang) {
   try {
     var apiKey = PropertiesService.getScriptProperties().getProperty("GEMINI_API_KEY");
     if (!apiKey) {
-      return ContentService.createTextOutput(JSON.stringify({
+      return createJsonResponse({
         status: "error",
         message: "Gemini API key not configured in Script Properties."
-      })).setMimeType(ContentService.MimeType.JSON);
+      }, (typeof callback !== "undefined" ? callback : ""));
     }
 
     var sysInstruction = "You are Aryan AI, the expert local trip planner and taxi concierge for Aryan Taxi Mahabaleshwar. " +
@@ -516,33 +806,30 @@ function handleGeminiAIRequest(userPrompt, lang) {
 
     var url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + apiKey;
     var payload = {
-      contents: [
-        { role: "user", parts: [{ text: sysInstruction + "\n\nUser Question: " + userPrompt }] }
-      ]
+      contents: [{ role: "user", parts: [{ text: sysInstruction + "\\n\\nUser Query: " + userPrompt }] }],
+      generationConfig: { temperature: 0.6, maxOutputTokens: 600 }
     };
 
-    var response = UrlFetchApp.fetch(url, {
+    var options = {
       method: "post",
       contentType: "application/json",
       payload: JSON.stringify(payload),
       muteHttpExceptions: true
-    });
+    };
 
-    var json = JSON.parse(response.getContentText());
-    var reply = (json.candidates && json.candidates[0] && json.candidates[0].content && json.candidates[0].content.parts && json.candidates[0].content.parts[0].text) 
-      ? json.candidates[0].content.parts[0].text 
-      : "I am happy to assist you with Mahabaleshwar sightseeing. Please contact our 24/7 helpline at +91 99228 82044.";
+    var response = UrlFetchApp.fetch(url, options);
+    var resData = JSON.parse(response.getContentText());
+    var textOutput = (resData.candidates && resData.candidates[0] && resData.candidates[0].content && resData.candidates[0].content.parts[0].text) || "Sorry, could not generate a plan right now.";
 
-    return ContentService.createTextOutput(JSON.stringify({
+    return createJsonResponse({
       status: "success",
-      reply: reply
-    })).setMimeType(ContentService.MimeType.JSON);
-
-  } catch (err) {
-    return ContentService.createTextOutput(JSON.stringify({
+      reply: textOutput
+    }, (typeof callback !== "undefined" ? callback : ""));
+  } catch (e) {
+    return createJsonResponse({
       status: "error",
-      message: err.toString()
-    })).setMimeType(ContentService.MimeType.JSON);
+      message: e.toString()
+    }, (typeof callback !== "undefined" ? callback : ""));
   }
 }
 ```

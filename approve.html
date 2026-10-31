@@ -2,20 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booking Approval | Aryan Taxi Mahabaleshwar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Operator Decision Portal | Aryan Taxi Mahabaleshwar</title>
     <meta name="robots" content="noindex, nofollow">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚕</text></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #0891b2;
+            --primary-dark: #0e2b48;
             --success: #16a34a;
-            --bg: #f8fafc;
+            --danger: #dc2626;
+            --warning: #d97706;
+            --bg: #f1f5f9;
             --card-bg: #ffffff;
             --text-main: #0f172a;
             --text-muted: #64748b;
             --border: #e2e8f0;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
         body {
@@ -27,287 +31,831 @@
             justify-content: center;
             padding: 16px;
         }
-        .approval-card {
+        .container {
+            width: 100%;
+            max-width: 580px;
+            margin: 0 auto;
+        }
+        .portal-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 16px;
-            box-shadow: 0 12px 35px -8px rgba(0,0,0,0.08);
-            max-width: 520px;
-            width: 100%;
+            box-shadow: var(--shadow);
             overflow: hidden;
+        }
+        .portal-header {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, #0369a1 100%);
+            color: #ffffff;
+            padding: 22px 20px 18px;
             text-align: center;
         }
-        .card-header {
-            background: linear-gradient(135deg, #0e2b48 0%, #0891b2 100%);
-            color: #ffffff;
-            padding: 24px 20px 20px;
-        }
-        .card-header h1 {
+        .portal-header .brand {
             font-size: 1.15rem;
-            letter-spacing: 0.5px;
-            margin-bottom: 4px;
-            text-transform: uppercase;
-        }
-        .card-header p {
-            font-size: 0.80rem;
-            opacity: 0.9;
-        }
-        .card-body {
-            padding: 28px 24px;
-        }
-        .status-icon {
-            font-size: 3.2rem;
-            margin-bottom: 14px;
-            color: var(--success);
-            display: inline-block;
-        }
-        .status-badge {
-            display: inline-block;
-            background: #dcfce7;
-            color: #15803d;
-            border: 1px solid #bbf7d0;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 0.78rem;
-            letter-spacing: 0.5px;
-            margin-bottom: 16px;
-        }
-        h2 {
-            font-size: 1.35rem;
-            color: #14532d;
-            margin-bottom: 10px;
             font-weight: 800;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
-        .subtitle {
-            font-size: 0.90rem;
+        .portal-header .subtitle {
+            font-size: 0.82rem;
+            opacity: 0.9;
+            margin-top: 4px;
+        }
+        .portal-body {
+            padding: 24px 20px;
+        }
+        /* States */
+        .state-section {
+            display: none;
+            text-align: center;
+        }
+        .state-section.active {
+            display: block;
+        }
+        /* Spinner */
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid var(--border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 24px auto 16px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        
+        .state-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+        .state-desc {
+            font-size: 0.88rem;
             color: var(--text-muted);
             line-height: 1.5;
             margin-bottom: 20px;
         }
-        .details-box {
+        
+        /* Summary Box */
+        .summary-box {
             background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 14px 16px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
             text-align: left;
             margin-bottom: 20px;
             font-size: 0.88rem;
         }
-        .details-row {
+        .summary-header {
             display: flex;
             justify-content: space-between;
-            padding: 6px 0;
-            border-bottom: 1px solid #f1f5f9;
+            align-items: center;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed var(--border);
+            margin-bottom: 12px;
         }
-        .details-row:last-child {
-            border-bottom: none;
+        .pass-tag {
+            font-size: 0.88rem;
+            font-weight: 800;
+            color: #0284c7;
+            font-family: monospace, monospace;
+            background: #e0f2fe;
+            padding: 4px 8px;
+            border-radius: 6px;
         }
-        .details-label {
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .badge-pending {
+            background: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fde68a;
+        }
+        .badge-confirmed {
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+        .badge-rejected {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 14px;
+        }
+        @media (max-width: 480px) {
+            .info-grid { grid-template-columns: 1fr; }
+        }
+        .info-item {
+            display: flex;
+            flex-direction: column;
+        }
+        .info-label {
+            font-size: 0.75rem;
             color: var(--text-muted);
-            font-weight: 500;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 2px;
         }
-        .details-val {
+        .info-val {
+            font-size: 0.90rem;
             font-weight: 700;
             color: var(--text-main);
+            word-break: break-word;
         }
-        .action-banner {
+        .info-item.full-width {
+            grid-column: 1 / -1;
+        }
+        .tariff-highlight {
             background: #f0fdf4;
-            border: 1px solid #dcfce7;
+            border: 1px solid #bbf7d0;
             border-radius: 8px;
-            padding: 12px;
-            font-size: 0.84rem;
-            color: #166534;
-            line-height: 1.45;
-            margin-bottom: 22px;
-            text-align: left;
+            padding: 10px 12px;
+            margin-top: 10px;
             display: flex;
-            align-items: flex-start;
-            gap: 10px;
+            justify-content: space-between;
+            align-items: center;
         }
-        .action-banner i {
-            margin-top: 2px;
+        .tariff-amount {
+            font-size: 1.25rem;
+            font-weight: 800;
             color: var(--success);
-            font-size: 1rem;
         }
-        .btn-group {
+        
+        /* Action Panels */
+        .action-panel {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 16px;
+            text-align: left;
+        }
+        .action-panel.confirm-mode {
+            border: 2px solid #bbf7d0;
+            background: #f0fdf4;
+        }
+        .action-panel.reject-mode {
+            border: 2px solid #fecaca;
+            background: #fef2f2;
+        }
+        .action-title {
+            font-size: 1.05rem;
+            font-weight: 800;
+            margin-bottom: 6px;
             display: flex;
-            gap: 10px;
+            align-items: center;
+            gap: 8px;
+        }
+        .action-panel.confirm-mode .action-title { color: #166534; }
+        .action-panel.reject-mode .action-title { color: #991b1b; }
+        .action-instruction {
+            font-size: 0.84rem;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+            line-height: 1.45;
+        }
+        
+        /* Form fields */
+        .form-group {
+            margin-bottom: 14px;
+        }
+        .form-label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--text-main);
+        }
+        .form-select, .form-textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            background: #ffffff;
+            color: var(--text-main);
+        }
+        .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.15);
+        }
+        
+        /* Buttons */
+        .btn-stack {
+            display: flex;
             flex-direction: column;
+            gap: 10px;
+            margin-top: 14px;
         }
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            padding: 13px 20px;
-            border-radius: 8px;
-            font-size: 0.92rem;
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-size: 0.95rem;
             font-weight: 700;
             text-decoration: none;
             cursor: pointer;
+            border: none;
             transition: all 0.2s ease;
+            width: 100%;
         }
-        .btn-primary {
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .btn-confirm {
             background: var(--success);
             color: #ffffff;
-            border: 1px solid #15803d;
         }
-        .btn-primary:hover {
+        .btn-confirm:hover:not(:disabled) {
             background: #15803d;
+        }
+        .btn-reject {
+            background: var(--danger);
+            color: #ffffff;
+        }
+        .btn-reject:hover:not(:disabled) {
+            background: #b91c1c;
         }
         .btn-outline {
             background: #ffffff;
-            color: #334155;
-            border: 1px solid #cbd5e1;
+            color: var(--text-main);
+            border: 1px solid var(--border);
         }
         .btn-outline:hover {
-            background: #f1f5f9;
+            background: #f8fafc;
         }
-        .loading-spinner {
+        .switch-link {
             display: inline-block;
-            width: 44px;
-            height: 44px;
-            border: 4px solid #e2e8f0;
-            border-top-color: var(--success);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin: 20px 0;
+            font-size: 0.84rem;
+            color: var(--text-muted);
+            text-decoration: underline;
+            cursor: pointer;
+            margin-top: 12px;
+            text-align: center;
+            width: 100%;
         }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        
+        /* Banner Alerts */
+        .alert-box {
+            padding: 12px 14px;
+            border-radius: 10px;
+            font-size: 0.84rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            text-align: left;
+            margin-bottom: 16px;
+            line-height: 1.45;
+        }
+        .alert-info {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            color: #1e40af;
+        }
+        .alert-success {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #166534;
+        }
+        .alert-danger {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #991b1b;
+        }
+        
+        /* Success / Completed Hero */
+        .hero-icon {
+            font-size: 3.5rem;
+            margin-bottom: 14px;
+        }
+        .hero-icon.confirmed { color: var(--success); }
+        .hero-icon.rejected { color: var(--danger); }
+        .hero-icon.already { color: var(--warning); }
+        
+        .footer-note {
+            margin-top: 24px;
+            padding-top: 14px;
+            border-top: 1px solid var(--border);
+            font-size: 0.76rem;
+            color: var(--text-muted);
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
-    <div class="approval-card">
-        <div class="card-header">
-            <h1>Aryan Taxi Mahabaleshwar</h1>
-            <p>24/7 Fleet Operations &bull; Direct Cab Dispatch Desk</p>
+<div class="container">
+    <div class="portal-card">
+        <div class="portal-header">
+            <div class="brand"><i class="fa-solid fa-taxi"></i> Aryan Taxi Mahabaleshwar</div>
+            <div class="subtitle">24/7 Fleet Operations &bull; Operator Dispatch &amp; Reservation Management</div>
         </div>
 
-        <div class="card-body">
-            <!-- Loading State -->
-            <div id="loadingState">
-                <div class="loading-spinner"></div>
-                <h2>Confirming Booking...</h2>
-                <p class="subtitle">Connecting to Google Sheet and dispatching customer confirmation voucher...</p>
+        <div class="portal-body">
+            <!-- 1. LOADING STATE -->
+            <div id="stateLoading" class="state-section active">
+                <div class="spinner"></div>
+                <h2 class="state-title">Retrieving Booking Data...</h2>
+                <p class="state-desc">Connecting to Google Sheet and verifying security credentials...</p>
             </div>
 
-            <!-- Success State -->
-            <div id="successState" style="display:none;">
-                <div class="status-icon"><i class="fa-solid fa-circle-check"></i></div>
-                <div class="status-badge"><i class="fa-solid fa-shield-halved"></i> BOOKING CONFIRMED &amp; CAB RESERVED</div>
-                <h2 id="statusHeading">Booking Successfully Approved!</h2>
-                <p class="subtitle" id="statusSub">Booking status is updated to <strong>CONFIRMED</strong> in your Sheet.</p>
+            <!-- 2. DECISION STATE: CONFIRM OR REJECT -->
+            <div id="stateDecision" class="state-section">
+                <!-- Summary Card -->
+                <div class="summary-box">
+                    <div class="summary-header">
+                        <div>
+                            <span class="info-label">Pass Reference</span>
+                            <div class="pass-tag" id="dispId">--</div>
+                        </div>
+                        <div>
+                            <span class="info-label">Current Status</span>
+                            <div id="dispStatusBadge" class="badge badge-pending">PENDING CONFIRMATION</div>
+                        </div>
+                    </div>
 
-                <div class="details-box">
-                    <div class="details-row">
-                        <span class="details-label">Pass Reference ID:</span>
-                        <span class="details-val" id="dispId" style="color:#0284c7;">--</span>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="info-label">Lead Passenger</span>
+                            <span class="info-val" id="dispName">--</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Mobile Number</span>
+                            <span class="info-val">
+                                <a id="dispPhoneLink" href="#" style="color:var(--primary); text-decoration:none;">--</a>
+                            </span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Travel Date</span>
+                            <span class="info-val" id="dispDate">--</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Pickup Time</span>
+                            <span class="info-val" id="dispTime">--</span>
+                        </div>
+                        <div class="info-item full-width">
+                            <span class="info-label">Pickup Hotel / Porch</span>
+                            <span class="info-val" id="dispHotel">--</span>
+                        </div>
+                        <div class="info-item full-width">
+                            <span class="info-label">Selected Tour / Route</span>
+                            <span class="info-val" id="dispTour">--</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">PAX / Capacity</span>
+                            <span class="info-val" id="dispPax">--</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Assigned Fleet</span>
+                            <span class="info-val" id="dispTaxis">--</span>
+                        </div>
+                        <div class="info-item full-width" id="dispNotesRow" style="display:none;">
+                            <span class="info-label">Guest Remarks / Luggage</span>
+                            <span class="info-val" id="dispNotes" style="font-weight:normal; font-style:italic;">--</span>
+                        </div>
                     </div>
-                    <div class="details-row" id="dispNameRow" style="display:none;">
-                        <span class="details-label">Lead Passenger:</span>
-                        <span class="details-val" id="dispName">--</span>
-                    </div>
-                    <div class="details-row" id="dispTourRow" style="display:none;">
-                        <span class="details-label">Selected Tour:</span>
-                        <span class="details-val" id="dispTour">--</span>
-                    </div>
-                    <div class="details-row" id="dispFareRow" style="display:none;">
-                        <span class="details-label">Locked Union Fare:</span>
-                        <span class="details-val" id="dispFare" style="color:#16a34a;">--</span>
-                    </div>
-                    <div class="details-row">
-                        <span class="details-label">Approval Timestamp:</span>
-                        <span class="details-val" id="dispTime">--</span>
+
+                    <div class="tariff-highlight">
+                        <div>
+                            <div class="info-label">Locked Union Fare</div>
+                            <small style="color:var(--text-muted);">Zero Advance &bull; Collect from guest after trip</small>
+                        </div>
+                        <div class="tariff-amount" id="dispFare">₹0</div>
                     </div>
                 </div>
 
-                <div class="action-banner">
-                    <i class="fa-solid fa-envelope-circle-check"></i>
-                    <div>
-                        <strong>Customer Notified:</strong> The official Confirmed Travel Voucher has been automatically sent to the guest. A private tourist cab is reserved for doorstep porch pickup.
+                <!-- Action Panel: CONFIRM MODE -->
+                <div id="panelConfirm" class="action-panel confirm-mode">
+                    <div class="action-title"><i class="fa-solid fa-circle-check"></i> Step: Confirm Reservation</div>
+                    <p class="action-instruction">
+                        Clicking the button below will immediately update the Google Sheet status to <strong>CONFIRMED</strong> and email the guest their official <strong>Confirmed Travel Voucher</strong>.
+                    </p>
+                    <div class="btn-stack">
+                        <button type="button" id="btnExecuteConfirm" class="btn btn-confirm">
+                            <i class="fa-solid fa-check-double"></i> Confirm Reservation &amp; Dispatch Cab
+                        </button>
+                    </div>
+                    <span class="switch-link" id="linkSwitchToReject">Need to reject or cancel this request instead?</span>
+                </div>
+
+                <!-- Action Panel: REJECT MODE -->
+                <div id="panelReject" class="action-panel reject-mode" style="display:none;">
+                    <div class="action-title"><i class="fa-solid fa-circle-xmark"></i> Step: Reject Reservation</div>
+                    <p class="action-instruction">
+                        Select a reason below. This will mark the booking as <strong>REJECTED</strong> and send a polite operational notice to the guest.
+                    </p>
+
+                    <div class="form-group">
+                        <label class="form-label" for="rejectReasonSelect">Operational Rejection Reason:</label>
+                        <select id="rejectReasonSelect" class="form-select">
+                            <option value="Taxi unavailable for requested schedule">Taxi unavailable for requested schedule</option>
+                            <option value="Selected date fully booked (High Season Rush)">Selected date fully booked (High Season Rush)</option>
+                            <option value="Pickup location beyond operating territory">Pickup location beyond operating territory</option>
+                            <option value="Invalid contact details provided">Invalid contact details provided</option>
+                            <option value="Other operational reason">Other operational reason</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="rejectCustomNotes">Additional Internal Note (Optional):</label>
+                        <textarea id="rejectCustomNotes" class="form-textarea" rows="2" placeholder="Notes for sheet audit log..."></textarea>
+                    </div>
+
+                    <div class="btn-stack">
+                        <button type="button" id="btnExecuteReject" class="btn btn-reject">
+                            <i class="fa-solid fa-triangle-exclamation"></i> Confirm Rejection &amp; Notify Guest
+                        </button>
+                    </div>
+                    <span class="switch-link" id="linkSwitchToConfirm">&larr; Back to Confirm Mode</span>
+                </div>
+            </div>
+
+            <!-- 3. COMPLETED / SUCCESS STATE -->
+            <div id="stateCompleted" class="state-section">
+                <div id="completedHeroIcon" class="hero-icon confirmed"><i class="fa-solid fa-circle-check"></i></div>
+                <h2 class="state-title" id="completedTitle">Booking Successfully Confirmed!</h2>
+                <p class="state-desc" id="completedDesc">The booking status is updated to CONFIRMED and the customer voucher has been emailed.</p>
+
+                <div class="alert-box alert-success" id="completedAlert">
+                    <i class="fa-solid fa-circle-info" style="font-size:1.1rem; margin-top:2px;"></i>
+                    <div id="completedAlertText">
+                        Google Sheet row updated. Customer travel voucher dispatched automatically.
                     </div>
                 </div>
 
-                <div class="btn-group">
-                    <a href="https://docs.google.com/spreadsheets/d/1gV95JLpRO2FZTsXeKCKcnbfBSNsYKju_aPZemQuL2pQ/edit" target="_blank" rel="noopener" class="btn btn-primary">
+                <div class="btn-stack">
+                    <a id="linkGoogleSheet" href="https://docs.google.com/spreadsheets/d/1gV95JLpRO2FZTsXeKCKcnbfBSNsYKju_aPZemQuL2pQ/edit" target="_blank" rel="noopener" class="btn btn-outline">
                         <i class="fa-solid fa-table"></i> Open Google Sheet
+                    </a>
+                    <a id="linkWhatsAppGuest" href="#" target="_blank" rel="noopener" class="btn btn-confirm" style="display:none;">
+                        <i class="fa-brands fa-whatsapp"></i> Chat with Guest on WhatsApp
                     </a>
                     <button type="button" onclick="window.close()" class="btn btn-outline">
                         <i class="fa-solid fa-xmark"></i> Close Window
                     </button>
                 </div>
             </div>
+
+            <!-- 4. ERROR STATE -->
+            <div id="stateError" class="state-section">
+                <div class="hero-icon" style="color:var(--danger);"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                <h2 class="state-title" id="errorTitle">Action Verification Notice</h2>
+                <p class="state-desc" id="errorDesc">Unable to verify booking authorization or booking not found.</p>
+
+                <div class="alert-box alert-danger" id="errorBox">
+                    <i class="fa-solid fa-shield-halved" style="font-size:1.1rem; margin-top:2px;"></i>
+                    <div id="errorDetails">Invalid or missing action parameters.</div>
+                </div>
+
+                <div class="btn-stack">
+                    <a href="https://docs.google.com/spreadsheets/d/1gV95JLpRO2FZTsXeKCKcnbfBSNsYKju_aPZemQuL2pQ/edit" target="_blank" rel="noopener" class="btn btn-outline">
+                        <i class="fa-solid fa-table"></i> Check Google Sheet Directly
+                    </a>
+                    <button type="button" onclick="location.reload()" class="btn btn-outline">
+                        <i class="fa-solid fa-rotate-right"></i> Try Again
+                    </button>
+                </div>
+            </div>
+
+            <div class="footer-note">
+                Aryan Taxi Mahabaleshwar Operations Desk &bull; Secured with HMAC Single-Use Action Tokens
+            </div>
         </div>
     </div>
+</div>
 
-    <!-- Hidden Iframe to Trigger Apps Script Webhook -->
-    <iframe id="approvalFrame" style="display:none;"></iframe>
+<script>
+(function() {
+    // Backend Web App URL
+    var WEB_APP_URL = "https://script.google.com/macros/s/AKfycbykfjAMr2FYrYCD2xOkPj4Aba86_BKERKQUQLsZcickCaYIQWR4ly-prjYzzWdCzyM-ew/exec";
 
-    <script>
-    (function () {
-        var params = new URLSearchParams(window.location.search);
-        var bookingId = params.get('id') || params.get('bookingId') || '';
-        var name = params.get('name') || '';
-        var tour = params.get('tour') || '';
-        var fare = params.get('fare') || '';
+    // Parse URL Query Parameters
+    var params = new URLSearchParams(window.location.search);
+    var action = (params.get("action") || "confirm").toLowerCase();
+    var bookingId = params.get("id") || params.get("bookingId") || "";
+    var token = params.get("token") || "";
 
-        var WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbykfjAMr2FYrYCD2xOkPj4Aba86_BKERKQUQLsZcickCaYIQWR4ly-prjYzzWdCzyM-ew/exec';
+    // DOM Elements
+    var stateLoading = document.getElementById("stateLoading");
+    var stateDecision = document.getElementById("stateDecision");
+    var stateCompleted = document.getElementById("stateCompleted");
+    var stateError = document.getElementById("stateError");
 
-        if (bookingId) {
-            document.getElementById('dispId').textContent = bookingId;
-            if (name) {
-                document.getElementById('dispName').textContent = name;
-                document.getElementById('dispNameRow').style.display = 'flex';
-            }
-            if (tour) {
-                document.getElementById('dispTour').textContent = tour;
-                document.getElementById('dispTourRow').style.display = 'flex';
-            }
-            if (fare) {
-                document.getElementById('dispFare').textContent = '₹' + fare.replace(/[^0-9]/g, '');
-                document.getElementById('dispFareRow').style.display = 'flex';
-            }
-            document.getElementById('dispTime').textContent = new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
+    var panelConfirm = document.getElementById("panelConfirm");
+    var panelReject = document.getElementById("panelReject");
+    var linkSwitchToReject = document.getElementById("linkSwitchToReject");
+    var linkSwitchToConfirm = document.getElementById("linkSwitchToConfirm");
 
-            var triggerUrl = WEBHOOK_URL + '?action=approve&id=' + encodeURIComponent(bookingId);
+    var btnExecuteConfirm = document.getElementById("btnExecuteConfirm");
+    var btnExecuteReject = document.getElementById("btnExecuteReject");
+    var rejectReasonSelect = document.getElementById("rejectReasonSelect");
+    var rejectCustomNotes = document.getElementById("rejectCustomNotes");
 
-            // Channel 1: Hidden iframe request (handles 302 redirects natively across mobile)
-            try {
-                var frame = document.getElementById('approvalFrame');
-                if (frame) frame.src = triggerUrl;
-            } catch (e) { }
+    var dispId = document.getElementById("dispId");
+    var dispStatusBadge = document.getElementById("dispStatusBadge");
+    var dispName = document.getElementById("dispName");
+    var dispPhoneLink = document.getElementById("dispPhoneLink");
+    var dispDate = document.getElementById("dispDate");
+    var dispTime = document.getElementById("dispTime");
+    var dispHotel = document.getElementById("dispHotel");
+    var dispTour = document.getElementById("dispTour");
+    var dispPax = document.getElementById("dispPax");
+    var dispTaxis = document.getElementById("dispTaxis");
+    var dispFare = document.getElementById("dispFare");
+    var dispNotes = document.getElementById("dispNotes");
+    var dispNotesRow = document.getElementById("dispNotesRow");
 
-            // Channel 2: Fetch ping with format=json for instant verification
-            try {
-                if (typeof fetch !== 'undefined') {
-                    fetch(triggerUrl + '&format=json', { method: 'GET', cache: 'no-cache' })
-                        .then(function(res) { return res.json(); })
-                        .then(function(data) {
-                            if (data && data.result === 'already_confirmed') {
-                                document.getElementById('statusHeading').textContent = 'Booking Already Approved';
-                                document.getElementById('statusSub').innerHTML = 'Pass ID <strong>' + bookingId + '</strong> was already confirmed previously.';
-                            }
-                        })
-                        .catch(function () {
-                            fetch(triggerUrl, { method: 'GET', mode: 'no-cors', cache: 'no-cache' }).catch(function () { });
-                        });
-                }
-            } catch (e2) { }
+    var completedHeroIcon = document.getElementById("completedHeroIcon");
+    var completedTitle = document.getElementById("completedTitle");
+    var completedDesc = document.getElementById("completedDesc");
+    var completedAlert = document.getElementById("completedAlert");
+    var completedAlertText = document.getElementById("completedAlertText");
+    var linkWhatsAppGuest = document.getElementById("linkWhatsAppGuest");
 
-            setTimeout(function () {
-                document.getElementById('loadingState').style.display = 'none';
-                document.getElementById('successState').style.display = 'block';
-            }, 800);
-        } else {
-            document.getElementById('loadingState').innerHTML = '<div style="font-size:3rem;color:#ef4444;margin-bottom:12px;"><i class="fa-solid fa-circle-exclamation"></i></div>'
-                + '<h2 style="color:#b91c1c;">No Booking ID Provided</h2>'
-                + '<p class="subtitle">Please click the approval button directly from your booking alert email.</p>';
+    var currentBookingData = null;
+
+    function showState(section) {
+        stateLoading.classList.remove("active");
+        stateDecision.classList.remove("active");
+        stateCompleted.classList.remove("active");
+        stateError.classList.remove("active");
+        section.classList.add("active");
+    }
+
+    function showError(title, msg) {
+        document.getElementById("errorTitle").textContent = title;
+        document.getElementById("errorDesc").textContent = msg;
+        document.getElementById("errorDetails").textContent = msg;
+        showState(stateError);
+    }
+
+    if (!bookingId) {
+        showError("Missing Booking Reference", "No booking ID was provided in the link. Please open the confirmation link from your operator email.");
+        return;
+    }
+
+    // JSONP Helper for bulletproof cross-domain calls
+    function callBackendJsonp(urlParams, callback) {
+        var callbackName = "cb_" + Math.round(100000 * Math.random());
+        window[callbackName] = function(data) {
+            delete window[callbackName];
+            if (script && script.parentNode) script.parentNode.removeChild(script);
+            callback(null, data);
+        };
+        var script = document.createElement("script");
+        script.src = WEB_APP_URL + "?" + urlParams + "&callback=" + callbackName;
+        script.onerror = function() {
+            delete window[callbackName];
+            if (script && script.parentNode) script.parentNode.removeChild(script);
+            callback(new Error("Network connection error to Apps Script Webhook"));
+        };
+        document.body.appendChild(script);
+    }
+
+    // Fetch booking details
+    function loadBookingDetails() {
+        showState(stateLoading);
+        var q = "action=get_booking_details&id=" + encodeURIComponent(bookingId) + "&token=" + encodeURIComponent(token);
+        
+        // Try fetch first, fallback to JSONP
+        fetch(WEB_APP_URL + "?" + q)
+            .then(function(res) { return res.json(); })
+            .then(function(data) { handleDetailsLoaded(data); })
+            .catch(function() {
+                callBackendJsonp(q, function(err, data) {
+                    if (err) {
+                        showError("Connection Failed", "Unable to retrieve booking details from Google Sheets. Please check your internet connection.");
+                    } else {
+                        handleDetailsLoaded(data);
+                    }
+                });
+            });
+    }
+
+    function handleDetailsLoaded(data) {
+        if (!data || data.result === "not_found") {
+            showError("Booking Not Found", "Booking ID " + bookingId + " could not be found in your Google Sheet.");
+            return;
         }
-    })();
-    </script>
+
+        currentBookingData = data;
+        renderDetails(data);
+
+        var st = String(data.status || "").trim().toUpperCase();
+        if (st === "CONFIRMED") {
+            renderAlreadyHandled("CONFIRMED", data);
+            return;
+        }
+        if (st === "REJECTED" || st === "CANCELLED") {
+            renderAlreadyHandled("REJECTED", data);
+            return;
+        }
+
+        // Show decision form
+        showState(stateDecision);
+        if (action === "reject") {
+            showRejectPanel();
+        } else {
+            showConfirmPanel();
+        }
+    }
+
+    function renderDetails(d) {
+        dispId.textContent = d.bookingId || bookingId;
+        dispName.textContent = d.name || "Valued Guest";
+        
+        var cleanPhone = String(d.phone || "").replace(/[^0-9]/g, "");
+        if (cleanPhone) {
+            dispPhoneLink.textContent = "+91 " + cleanPhone.slice(-10);
+            dispPhoneLink.href = "tel:+91" + cleanPhone.slice(-10);
+        } else {
+            dispPhoneLink.textContent = "--";
+            dispPhoneLink.removeAttribute("href");
+        }
+
+        dispDate.textContent = d.date || "--";
+        dispTime.textContent = d.time || "--";
+        dispHotel.textContent = d.hotelDetails || d.pickup || "Mahabaleshwar";
+        dispTour.textContent = d.tour || "Local Sightseeing";
+        
+        var paxNum = parseInt(d.pax, 10) || 1;
+        var cabsNum = parseInt(d.taxiCount, 10) || Math.ceil(paxNum / 4);
+        dispPax.textContent = paxNum + " Passenger" + (paxNum > 1 ? "s" : "");
+        dispTaxis.textContent = cabsNum + " x 4-Seater Tourist Cab" + (cabsNum > 1 ? "s" : "");
+        
+        var fareStr = String(d.fare || "0");
+        if (!fareStr.startsWith("₹")) fareStr = "₹" + fareStr;
+        dispFare.textContent = fareStr;
+
+        if (d.notes && d.notes !== "None") {
+            dispNotes.textContent = d.notes;
+            dispNotesRow.style.display = "flex";
+        } else {
+            dispNotesRow.style.display = "none";
+        }
+
+        var st = String(d.status || "PENDING CONFIRMATION").trim().toUpperCase();
+        dispStatusBadge.textContent = st;
+        if (st === "CONFIRMED") {
+            dispStatusBadge.className = "badge badge-confirmed";
+        } else if (st === "REJECTED" || st === "CANCELLED") {
+            dispStatusBadge.className = "badge badge-rejected";
+        } else {
+            dispStatusBadge.className = "badge badge-pending";
+        }
+    }
+
+    function showConfirmPanel() {
+        panelConfirm.style.display = "block";
+        panelReject.style.display = "none";
+    }
+
+    function showRejectPanel() {
+        panelConfirm.style.display = "none";
+        panelReject.style.display = "block";
+    }
+
+    linkSwitchToReject.addEventListener("click", showRejectPanel);
+    linkSwitchToConfirm.addEventListener("click", showConfirmPanel);
+
+    function renderAlreadyHandled(statusType, d) {
+        showState(stateCompleted);
+        if (statusType === "CONFIRMED") {
+            completedHeroIcon.className = "hero-icon confirmed";
+            completedHeroIcon.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+            completedTitle.textContent = "Booking Already Confirmed";
+            completedDesc.textContent = "This booking was previously confirmed. The private cab has been scheduled and customer notified.";
+            completedAlert.className = "alert-box alert-success";
+            completedAlertText.textContent = "Status is CONFIRMED in your Google Sheet. No further action needed.";
+        } else {
+            completedHeroIcon.className = "hero-icon rejected";
+            completedHeroIcon.innerHTML = '<i class="fa-solid fa-circle-xmark"></i>';
+            completedTitle.textContent = "Booking Already Rejected / Cancelled";
+            completedDesc.textContent = "This reservation was previously marked as rejected or cancelled.";
+            completedAlert.className = "alert-box alert-danger";
+            completedAlertText.textContent = "Status is REJECTED in your Google Sheet. The customer was notified.";
+        }
+        setupWhatsAppButton(d);
+    }
+
+    function setupWhatsAppButton(d) {
+        var cleanPhone = String((d && d.phone) || "").replace(/[^0-9]/g, "");
+        if (cleanPhone) {
+            linkWhatsAppGuest.href = "https://wa.me/91" + cleanPhone.slice(-10) + "?text=" + encodeURIComponent("Hello " + (d.name || "Guest") + ", this is Aryan Taxi Mahabaleshwar regarding your booking " + bookingId + ".");
+            linkWhatsAppGuest.style.display = "inline-flex";
+        } else {
+            linkWhatsAppGuest.style.display = "none";
+        }
+    }
+
+    // DELIBERATE CONFIRMATION
+    btnExecuteConfirm.addEventListener("click", function() {
+        btnExecuteConfirm.disabled = true;
+        btnExecuteConfirm.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Confirming in Google Sheet...';
+
+        var q = "action=execute_confirm&id=" + encodeURIComponent(bookingId) + "&token=" + encodeURIComponent(token);
+        
+        fetch(WEB_APP_URL + "?" + q)
+            .then(function(res) { return res.json(); })
+            .then(function(res) { handleConfirmResult(res); })
+            .catch(function() {
+                callBackendJsonp(q, function(err, res) {
+                    if (err) {
+                        alert("Could not reach backend. Please verify your connection.");
+                        btnExecuteConfirm.disabled = false;
+                        btnExecuteConfirm.innerHTML = '<i class="fa-solid fa-check-double"></i> Confirm Reservation & Dispatch Cab';
+                    } else {
+                        handleConfirmResult(res);
+                    }
+                });
+            });
+    });
+
+    function handleConfirmResult(res) {
+        if (res && (res.result === "success" || res.result === "already_confirmed" || res.status === "CONFIRMED")) {
+            showState(stateCompleted);
+            completedHeroIcon.className = "hero-icon confirmed";
+            completedHeroIcon.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+            completedTitle.textContent = "Reservation Confirmed & Cab Dispatched!";
+            completedDesc.textContent = "Google Sheet updated to CONFIRMED. The official Confirmed Travel Voucher has been sent to the guest.";
+            completedAlert.className = "alert-box alert-success";
+            completedAlertText.textContent = "Customer notified via email. A 4-seater tourist cab is reserved for porch pickup.";
+            setupWhatsAppButton(currentBookingData);
+        } else {
+            showError("Approval Error", (res && res.message) || "Could not complete confirmation. Please check Google Sheet directly.");
+        }
+    }
+
+    // DELIBERATE REJECTION
+    btnExecuteReject.addEventListener("click", function() {
+        var chosenReason = rejectReasonSelect.value;
+        var custom = (rejectCustomNotes.value || "").trim();
+        var fullReason = chosenReason + (custom ? " (" + custom + ")" : "");
+
+        if (!confirm("Are you sure you want to REJECT booking " + bookingId + "? This will notify the guest.")) {
+            return;
+        }
+
+        btnExecuteReject.disabled = true;
+        btnExecuteReject.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Recording Rejection...';
+
+        var q = "action=execute_reject&id=" + encodeURIComponent(bookingId) + "&token=" + encodeURIComponent(token) + "&reason=" + encodeURIComponent(fullReason);
+
+        fetch(WEB_APP_URL + "?" + q)
+            .then(function(res) { return res.json(); })
+            .then(function(res) { handleRejectResult(res); })
+            .catch(function() {
+                callBackendJsonp(q, function(err, res) {
+                    if (err) {
+                        alert("Could not reach backend. Please verify your connection.");
+                        btnExecuteReject.disabled = false;
+                        btnExecuteReject.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Confirm Rejection & Notify Guest';
+                    } else {
+                        handleRejectResult(res);
+                    }
+                });
+            });
+    });
+
+    function handleRejectResult(res) {
+        if (res && (res.result === "success" || res.result === "already_rejected" || res.status === "REJECTED")) {
+            showState(stateCompleted);
+            completedHeroIcon.className = "hero-icon rejected";
+            completedHeroIcon.innerHTML = '<i class="fa-solid fa-circle-xmark"></i>';
+            completedTitle.textContent = "Reservation Rejected";
+            completedDesc.textContent = "Google Sheet updated to REJECTED. A polite notice was sent to the guest.";
+            completedAlert.className = "alert-box alert-danger";
+            completedAlertText.textContent = "Status is REJECTED in your Google Sheet. Reason: " + (rejectReasonSelect.value);
+            setupWhatsAppButton(currentBookingData);
+        } else {
+            showError("Rejection Error", (res && res.message) || "Could not complete rejection. Please check Google Sheet directly.");
+        }
+    }
+
+    // Start loading
+    loadBookingDetails();
+})();
+</script>
+
 </body>
 </html>
