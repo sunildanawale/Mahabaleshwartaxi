@@ -2466,23 +2466,7 @@
             });
         }
 
-        // Backward compatibility handlers for any static step 3/4 buttons
-        var toStep3 = document.getElementById('amtToStep3');
-        if (toStep3) {
-            toStep3.addEventListener('click', function () { goToStep(2); });
-        }
-        var backTo2 = document.getElementById('amtBackTo2');
-        if (backTo2) {
-            backTo2.addEventListener('click', function () { goToStep(1); });
-        }
-        var toStep4 = document.getElementById('amtToStep4');
-        if (toStep4) {
-            toStep4.addEventListener('click', function () { goToStep(2); });
-        }
-        var backTo3 = document.getElementById('amtBackTo3');
-        if (backTo3) {
-            backTo3.addEventListener('click', function () { goToStep(1); });
-        }
+// Static legacy handlers removed for clean 3-step navigation
 
         // Confirm Booking (Step 2 -> Step 3 Voucher)
         var confirmBtn = document.getElementById('amtConfirmBtn');
@@ -4376,25 +4360,26 @@
         var t = (bookingState.tourId && db.getTourById(bookingState.tourId)) || db.tours[0];
         if (!t) return;
 
-        var paxVal = (document.getElementById('amtPax') ? document.getElementById('amtPax').value : bookingState.pax) || '1-4';
-        var taxiCount = (paxVal === '5-8' || bookingState.taxiCount === 2) ? 2 : 1;
-        var isLarge = (taxiCount === 2);
+        var pNum = bookingState.paxNum || parseInt(bookingState.pax, 10) || 2;
+        var taxiCount = bookingState.taxiCount || Math.ceil(pNum / 4);
+        var isLarge = (taxiCount > 1);
         bookingState.taxiCount = taxiCount;
-        bookingState.pax = paxVal;
-        var cabLabel = taxiCount === 2 ? '2x 4-Seater Dedicated Tourist Cabs (2 Cabs)' : '4-Seater Dedicated Tourist Cab (1 Cab)';
+        bookingState.paxNum = pNum;
+        bookingState.pax = String(pNum);
+        var cabLabel = taxiCount === 1 ? '1x 4-Seater Dedicated Tourist Cab' : (taxiCount + 'x 4-Seater Dedicated Tourist Cabs (' + taxiCount + ' Cabs)');
 
         var selectedTours = bookingState.selectedTours || [];
-        var totalFare = 0;
+        var baseTourFare = 0;
         if (selectedTours.length > 0) {
             selectedTours.forEach(function (st) {
                 var tourObj = db.getTourById(st.id);
-                if (tourObj) totalFare += (tourObj.fare || 0);
+                if (tourObj) baseTourFare += (tourObj.fare || 0);
             });
         }
-        if (totalFare === 0) {
-            totalFare = t.fare || 0;
+        if (baseTourFare === 0) {
+            baseTourFare = t.fare || 1200;
         }
-        totalFare = totalFare * taxiCount;
+        var totalFare = (baseTourFare * taxiCount) + (bookingState.additionalCharges || 0);
         bookingState.totalFare = totalFare;
         bookingState.fare = totalFare;
 
