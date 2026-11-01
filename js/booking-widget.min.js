@@ -3648,7 +3648,7 @@
             pointsHtml +
             '</div>';
         banner.style.display = 'block';
-    }
+
         var pickNoteEl = document.getElementById('amtPickupLocalityNote');
         if (pickNoteEl) {
             var isOut = (bookingState.service === 'outstation' || (t && t.category === 'outstation'));
@@ -3661,6 +3661,7 @@
                 pickNoteEl.innerHTML = '<i class="fa-solid fa-circle-info" style="color:#0284c7;"></i> Local sightseeing includes hotel pickup and drop-off within Mahabaleshwar town, as per existing arrangements. Outside Mahabaleshwar town, extra charges may apply depending on location and distance. The tour operator will communicate applicable extra charges during booking confirmation.';
             }
         }
+    }
 
 
     function renderVisualTourCards(service, filtered) {
