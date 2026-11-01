@@ -4238,7 +4238,7 @@
 
         var labelEl = document.getElementById('amtPaxDisplayLabel');
         if (labelEl) {
-            labelEl.textContent = p + ' Passenger' + (p > 1 ? 's' : '');
+            labelEl.textContent = (cabs === 1 ? 'Fits in 1 Tourist Cab' : 'Requires ' + cabs + ' Tourist Cabs');
         }
 
         var titleEl = document.getElementById('amtTaxiAllocTitle');

@@ -10432,3 +10432,5 @@ body.booking-portal-page .portal-card {
         gap: 2px 4px !important;
     }
 }
+
+.amt-grid2{display:flex!important;flex-direction:column!important;width:100%!important;gap:10px!important}.amt-grid2>div{width:100%!important}.amt-btn-sub{text-wrap:balance!important;font-size:11px!important}input[type=checkbox]#amtTermsCheckbox,.amt-checkbox{width:18px!important;height:18px!important;min-width:18px!important;min-height:18px!important}
