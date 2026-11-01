@@ -4251,7 +4251,7 @@
             if (cabs === 1) {
                 noteEl.textContent = '1 dedicated tourist cab reserved exclusively for your party of ' + p + ' passenger' + (p > 1 ? 's' : '') + '.';
             } else {
-                noteEl.textContent = p + ' passengers require ' + cabs + ' separate 4-seater tourist cabs as per Mahabaleshwar Taxi Union rules. All cabs travel together in convoy.';
+                noteEl.textContent = p + ' passengers require ' + cabs + ' separate 4-seater tourist cabs as per standard vehicle capacity guidelines. All cabs travel together in convoy.';
             }
         }
 
@@ -4266,7 +4266,7 @@
         var t = (bookingState.tourId && db && db.getTourById) ? db.getTourById(bookingState.tourId) : (db && db.tours ? db.tours[0] : null);
 
         var titleEl = document.getElementById('amtSummaryTourTitle');
-        if (titleEl && t) titleEl.textContent = t.name + (t.id ? ' (' + t.id + ')' : '');
+        if (titleEl && t) titleEl.textContent = t.name;
 
         var paxBadgeEl = document.getElementById('amtSummaryPaxBadge');
         var pCount = bookingState.paxNum || 2;

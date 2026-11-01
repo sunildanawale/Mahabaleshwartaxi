@@ -6118,7 +6118,7 @@ body.modal-open {
         grid-template-columns: 1fr !important;
     }
     .amt-btn-row {
-        flex-direction: column-reverse !important;
+        flex-direction: column !important;
         gap: 8px !important;
     }
     .amt-btn-row .amt-btn-back,

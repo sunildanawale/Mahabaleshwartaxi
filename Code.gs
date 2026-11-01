@@ -1,8 +1,8 @@
 /**
- * ARYAN TAXI MAHABALESHWAR — COMPLETE BOOKING ENGINE AUTOMATION BACKEND
+ * ARYAN TAXI MAHABALESHWAR  -  COMPLETE BOOKING ENGINE AUTOMATION BACKEND
  * Single Source of Truth for Google Sheets, Dual-Email Dispatch & 1-Click Operations
  * Owner Email: aryansdtravels@gmail.com
- * Zero disclosure of personal names — branded as Aryan Taxi Mahabaleshwar
+ * Zero disclosure of personal names  -  branded as Aryan Taxi Mahabaleshwar
  */
 
 
@@ -174,7 +174,7 @@ function doPost(e) {
       time,               // G: Pickup Time
       pickup,             // H: Pickup Location
       tour,               // I: Selected Tour
-      "₹" + fare,         // J: Locked Fare
+      "\u20B9" + fare,         // J: Locked Fare
       notes,              // K: Special Notes
       status,             // L: Status
       hotelDetails,       // M: Pickup Hotel Details
@@ -183,9 +183,9 @@ function doPost(e) {
       pax,                // P: Total Passengers (PAX)
       taxiCount,          // Q: Required Taxi Quantity
       vehicleCategory,    // R: Vehicle Category
-      "₹" + baseFare,     // S: Base Fare
-      "₹" + additionalCharges, // T: Additional Charges
-      "₹" + fare,         // U: Total Fare
+      "\u20B9" + baseFare,     // S: Base Fare
+      "\u20B9" + additionalCharges, // T: Additional Charges
+      "\u20B9" + fare,         // U: Total Fare
       paymentStatus,      // V: Payment Status
       "Action Token: " + actionToken, // W: Operator Remarks
       custEmailStatus,    // X: Customer Email Status
@@ -204,24 +204,24 @@ function doPost(e) {
     var rejectUrl = BASE_PORTAL_URL + "/approve.html?action=reject&id=" + encodeURIComponent(bookingId) + "&token=" + encodeURIComponent(actionToken);
     
     var waUrl = "https://wa.me/91" + cleanPhone + "?text=" + encodeURIComponent(
-      "Hello " + name + ", Aryan Taxi Mahabaleshwar here regarding your booking request " + bookingId + " for " + tour + ". Your locked tariff is ₹" + fare + " (" + taxiCount + "x 4-Seater Tourist Cab" + (taxiCount > 1 ? "s" : "") + "). Let us reconfirm your hotel porch pickup schedule."
+      "Hello " + name + ", Aryan Taxi Mahabaleshwar here regarding your booking request " + bookingId + " for " + tour + ". Your locked tariff is \u20B9" + fare + " (" + taxiCount + "x 4-Seater Tourist Cab" + (taxiCount > 1 ? "s" : "") + "). Let us reconfirm your hotel porch pickup schedule."
     );
 
-    var ownerSubject = "🚕 NEW RESERVATION REQUEST: " + bookingId + " - " + name + " (₹" + fare + " • " + taxiCount + " Cab" + (taxiCount > 1 ? "s" : "") + ") [ACTION REQUIRED]";
+    var ownerSubject = "\uD83D\uDE95 NEW RESERVATION REQUEST: " + bookingId + " - " + name + " (\u20B9" + fare + " &bull; " + taxiCount + " Cab" + (taxiCount > 1 ? "s" : "") + ") [ACTION REQUIRED]";
     var ownerBody = 
       "<div style='font-family:system-ui,-apple-system,BlinkMacSystemFont,Roboto,sans-serif;max-width:620px;margin:auto;border:1px solid #cbd5e1;border-radius:12px;padding:24px;background:#ffffff;'>" +
         "<div style='background:#fef3c7;border:1px solid #fde68a;border-radius:8px;padding:14px;margin-bottom:18px;'>" +
-          "<strong style='color:#92400e;font-size:15px;'>⏳ STATUS: PENDING OPERATOR CONFIRMATION</strong><br>" +
+          "<strong style='color:#92400e;font-size:15px;'>\u23F3 STATUS: PENDING OPERATOR CONFIRMATION</strong><br>" +
           "<span style='color:#b45309;font-size:13px;line-height:1.4;'>Check fleet availability and select an action below. Note: Clicking will open a secure review page before any status change occurs.</span>" +
         "</div>" +
         
         "<div style='display:flex;gap:12px;margin-bottom:20px;text-align:center;'>" +
           "<div style='flex:1;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:16px;'>" +
-            "<a href='" + confirmUrl + "' style='background:#16a34a;color:#ffffff;padding:12px 20px;text-decoration:none;border-radius:8px;font-weight:bold;display:inline-block;font-size:14px;box-shadow:0 4px 6px -1px rgba(22,163,74,0.3);'>✔ CONFIRM RESERVATION</a>" +
+            "<a href='" + confirmUrl + "' style='background:#16a34a;color:#ffffff;padding:12px 20px;text-decoration:none;border-radius:8px;font-weight:bold;display:inline-block;font-size:14px;box-shadow:0 4px 6px -1px rgba(22,163,74,0.3);'>\u2714 CONFIRM RESERVATION</a>" +
             "<p style='margin:8px 0 0;font-size:12px;color:#15803d;'>Approves booking &amp; emails confirmed travel voucher to guest.</p>" +
           "</div>" +
           "<div style='flex:1;background:#fef2f2;border:1px solid #fecaca;border-radius:10px;padding:16px;'>" +
-            "<a href='" + rejectUrl + "' style='background:#dc2626;color:#ffffff;padding:12px 20px;text-decoration:none;border-radius:8px;font-weight:bold;display:inline-block;font-size:14px;box-shadow:0 4px 6px -1px rgba(220,38,38,0.3);'>✖ REJECT RESERVATION</a>" +
+            "<a href='" + rejectUrl + "' style='background:#dc2626;color:#ffffff;padding:12px 20px;text-decoration:none;border-radius:8px;font-weight:bold;display:inline-block;font-size:14px;box-shadow:0 4px 6px -1px rgba(220,38,38,0.3);'>\u2716 REJECT RESERVATION</a>" +
             "<p style='margin:8px 0 0;font-size:12px;color:#991b1b;'>Declines with reason &amp; notifies guest politely.</p>" +
           "</div>" +
         "</div>" +
@@ -233,18 +233,18 @@ function doPost(e) {
           "<tr><td style='padding:7px 0;color:#64748b;'><strong>WhatsApp Phone:</strong></td><td><a href='tel:+91" + cleanPhone + "' style='color:#0284c7;text-decoration:none;font-weight:600;'>" + phone + "</a></td></tr>" +
           "<tr><td style='padding:7px 0;color:#64748b;'><strong>Email Address:</strong></td><td><a href='mailto:" + email + "' style='color:#0284c7;text-decoration:none;'>" + email + "</a></td></tr>" +
           "<tr><td style='padding:7px 0;color:#64748b;'><strong>Total Passengers (PAX):</strong></td><td><strong>" + pax + " Passengers</strong></td></tr>" +
-          "<tr><td style='padding:7px 0;color:#64748b;'><strong>Fleet Allocation:</strong></td><td><strong style='color:#0f2b48;'>" + taxiCount + "x " + vehicleCategory + (taxiCount > 1 ? "s (Round up: " + pax + " ÷ 4)" : "") + "</strong></td></tr>" +
+          "<tr><td style='padding:7px 0;color:#64748b;'><strong>Fleet Allocation:</strong></td><td><strong style='color:#0f2b48;'>" + taxiCount + "x " + vehicleCategory + (taxiCount > 1 ? "s (Round up: " + pax + " / 4)" : "") + "</strong></td></tr>" +
           "<tr><td style='padding:7px 0;color:#64748b;'><strong>Tour / Service:</strong></td><td>" + tour + " (" + serviceType + ")</td></tr>" +
           "<tr><td style='padding:7px 0;color:#64748b;'><strong>Schedule:</strong></td><td>" + date + " at " + time + "</td></tr>" +
           "<tr><td style='padding:7px 0;color:#64748b;'><strong>Pickup Hotel Details:</strong></td><td><strong style='color:#0f2b48;'>" + hotelDetails + "</strong></td></tr>" +
           (dropLocation && dropLocation !== tour ? ("<tr><td style='padding:7px 0;color:#64748b;'><strong>Drop Location:</strong></td><td>" + dropLocation + "</td></tr>") : "") +
-          "<tr><td style='padding:7px 0;color:#64748b;'><strong>Fare Breakdown:</strong></td><td>₹" + baseFare + " × " + taxiCount + " Cab" + (taxiCount > 1 ? "s" : "") + (additionalCharges !== '0' ? (" + ₹" + additionalCharges + " extra") : "") + " = <strong style='color:#16a34a;font-size:16px;'>₹" + fare + "</strong></td></tr>" +
+          "<tr><td style='padding:7px 0;color:#64748b;'><strong>Fare Breakdown:</strong></td><td>\u20B9" + baseFare + " x " + taxiCount + " Cab" + (taxiCount > 1 ? "s" : "") + (additionalCharges !== '0' ? (" + \u20B9" + additionalCharges + " extra") : "") + " = <strong style='color:#16a34a;font-size:16px;'>\u20B9" + fare + "</strong></td></tr>" +
           "<tr><td style='padding:7px 0;color:#64748b;'><strong>Special Request:</strong></td><td>" + notes + "</td></tr>" +
         "</table>" +
         
         "<div style='margin-top:22px;padding-top:16px;border-top:1px solid #e2e8f0;display:flex;gap:12px;'>" +
-          "<a href='" + waUrl + "' style='background:#10b981;color:#ffffff;padding:10px 18px;text-decoration:none;border-radius:6px;font-weight:bold;display:inline-block;font-size:13px;margin-right:8px;'>💬 WhatsApp Customer</a>" +
-          "<a href='tel:+91" + cleanPhone + "' style='background:#0284c7;color:#ffffff;padding:10px 18px;text-decoration:none;border-radius:6px;font-weight:bold;display:inline-block;font-size:13px;'>📞 Call Customer</a>" +
+          "<a href='" + waUrl + "' style='background:#10b981;color:#ffffff;padding:10px 18px;text-decoration:none;border-radius:6px;font-weight:bold;display:inline-block;font-size:13px;margin-right:8px;'>\uD83D\uDCAC WhatsApp Customer</a>" +
+          "<a href='tel:+91" + cleanPhone + "' style='background:#0284c7;color:#ffffff;padding:10px 18px;text-decoration:none;border-radius:6px;font-weight:bold;display:inline-block;font-size:13px;'>\uD83D\uDCDE Call Customer</a>" +
         "</div>" +
       "</div>";
 
@@ -263,16 +263,16 @@ function doPost(e) {
 
     // 2. Send Initial Acknowledgement Email to Customer
     if (email && email.indexOf("@") !== -1) {
-      var customerSubject = "Booking Request Received – Pending Confirmation (Pass #" + bookingId + ") | Aryan Taxi Mahabaleshwar";
+      var customerSubject = "Booking Request Received  -  Pending Confirmation (Pass #" + bookingId + ") | Aryan Taxi Mahabaleshwar";
       var customerBody = 
         "<div style='font-family:system-ui,-apple-system,BlinkMacSystemFont,Roboto,sans-serif;max-width:600px;margin:auto;border:1px solid #e2e8f0;border-radius:12px;padding:24px;background:#ffffff;color:#1e293b;'>" +
           "<div style='text-align:center;padding-bottom:16px;border-bottom:2px solid #0891b2;'>" +
             "<h2 style='color:#0e2338;margin:0;font-size:22px;letter-spacing:0.5px;'>ARYAN TAXI MAHABALESHWAR</h2>" +
-            "<p style='color:#0891b2;font-size:13px;font-weight:bold;margin:4px 0 0;'>Direct Local Owner-Driver Tourist Cab Network • Explore Sahyadri</p>" +
+            "<p style='color:#0891b2;font-size:13px;font-weight:bold;margin:4px 0 0;'>Direct Local Owner-Driver Tourist Cab Network &bull; Explore Sahyadri</p>" +
           "</div>" +
           
           "<div style='background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:14px;margin:18px 0;'>" +
-            "<strong style='color:#92400e;font-size:14px;'>⏳ STATUS: BOOKING RECEIVED – PENDING CONFIRMATION</strong>" +
+            "<strong style='color:#92400e;font-size:14px;'>\u23F3 STATUS: BOOKING RECEIVED  -  PENDING CONFIRMATION</strong>" +
             "<p style='margin:4px 0 0;font-size:12.5px;color:#b45309;line-height:1.4;'>Your travel request is registered and official Taxi Union tariff is locked. Our dispatch operations desk is checking driver and vehicle availability. You will receive an official confirmation notice once your cab is assigned.</p>" +
           "</div>" +
           
@@ -287,7 +287,7 @@ function doPost(e) {
             "<tr><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;'><strong>Selected Tour / Route:</strong></td><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;'><strong>" + tour + "</strong></td></tr>" +
             "<tr><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;'><strong>Travel Schedule:</strong></td><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;'>" + date + " at " + time + "</td></tr>" +
             "<tr><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;'><strong>Pickup Hotel Details:</strong></td><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;'>" + hotelDetails + " (Doorstep Hotel Porch)</td></tr>" +
-            "<tr><td style='padding:9px 12px;color:#64748b;'><strong>Booking Tariff:</strong></td><td style='padding:9px 12px;font-size:16px;color:#16a34a;font-weight:bold;'>₹" + fare + " <span style='font-size:12px;color:#64748b;font-weight:normal;'>(Pay as per service policy)</span></td></tr>" +
+            "<tr><td style='padding:9px 12px;color:#64748b;'><strong>Booking Tariff:</strong></td><td style='padding:9px 12px;font-size:16px;color:#16a34a;font-weight:bold;'>\u20B9" + fare + " <span style='font-size:12px;color:#64748b;font-weight:normal;'>(Pay as per service policy)</span></td></tr>" +
           "</table>" +
           
           "<div style='background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px;margin-top:16px;'>" +
@@ -297,8 +297,8 @@ function doPost(e) {
           "<p style='font-size:13px;color:#64748b;margin-top:20px;line-height:1.5;'>Need immediate assistance or wish to reconfirm pickup early? Feel free to contact our 24/7 operations desk at <strong>+91 99228 82044</strong> or reply to this email.</p>" +
           
           "<div style='text-align:center;margin-top:24px;padding-top:16px;border-top:1px solid #e2e8f0;'>" +
-            "<p style='font-size:12px;color:#64748b;margin:0;'>Aryan Taxi Mahabaleshwar • Direct Local Tourist Cab Network</p>" +
-            "<p style='font-size:11px;color:#94a3b8;margin:4px 0 0;'>Aryan Taxi Mahabaleshwar • Fixed Tariffs &amp; Professional Service</p>" +
+            "<p style='font-size:12px;color:#64748b;margin:0;'>Aryan Taxi Mahabaleshwar &bull; Direct Local Tourist Cab Network</p>" +
+            "<p style='font-size:11px;color:#94a3b8;margin:4px 0 0;'>Aryan Taxi Mahabaleshwar &bull; Fixed Tariffs &amp; Professional Service</p>" +
           "</div>" +
         "</div>";
 
@@ -420,7 +420,7 @@ function handleGetBookingDetails(bookingId, token, callback) {
       taxiCount: r[16] || 1,
       vehicleCategory: r[17] || "4-Seater Tourist Cab",
       baseFare: r[18] || r[9],
-      additionalCharges: r[19] || "₹0",
+      additionalCharges: r[19] || "\u20B90",
       totalFare: r[20] || r[9],
       paymentStatus: r[21] || "Unpaid",
       remarks: r[22] || ""
@@ -486,16 +486,16 @@ function handleExecuteConfirm(bookingId, token, format, callback) {
 
     // Send Confirmed Voucher Email to Customer
     if (email && email.indexOf("@") !== -1) {
-      var confirmSubject = "🚖 Booking Confirmed: " + taxiCount + "x 4-Seater Tourist Cab Reserved - Pass #" + bookingId + " | Aryan Taxi Mahabaleshwar";
+      var confirmSubject = "\uD83D\uDE96 Booking Confirmed: " + taxiCount + "x 4-Seater Tourist Cab Reserved - Pass #" + bookingId + " | Aryan Taxi Mahabaleshwar";
       var confirmBody = 
         "<div style='font-family:system-ui,-apple-system,BlinkMacSystemFont,Roboto,sans-serif;max-width:620px;margin:auto;border:1px solid #cbd5e1;border-radius:12px;padding:24px;background:#ffffff;color:#1e293b;'>" +
           "<div style='text-align:center;padding-bottom:16px;border-bottom:2px solid #10b981;'>" +
             "<h2 style='color:#0e2338;margin:0;font-size:22px;'>ARYAN TAXI MAHABALESHWAR</h2>" +
-            "<p style='color:#10b981;font-size:13px;font-weight:bold;margin:4px 0 0;'>Official Sightseeing &amp; Transfer Voucher • Explore Sahyadri</p>" +
+            "<p style='color:#10b981;font-size:13px;font-weight:bold;margin:4px 0 0;'>Official Sightseeing &amp; Transfer Voucher &bull; Explore Sahyadri</p>" +
           "</div>" +
           
           "<div style='background:#ecfdf5;border:1px solid #a7f3d0;border-radius:8px;padding:14px;margin:18px 0;'>" +
-            "<strong style='color:#065f46;font-size:15px;'>✔ YOUR RESERVATION IS OFFICIALLY CONFIRMED!</strong>" +
+            "<strong style='color:#065f46;font-size:15px;'>\u2714 YOUR RESERVATION IS OFFICIALLY CONFIRMED!</strong>" +
             "<p style='margin:4px 0 0;font-size:13px;color:#047857;line-height:1.4;'>Your private tourist cab reservation is locked. A licensed, mountain-experienced local driver has been assigned for your doorstep porch pickup on schedule.</p>" +
           "</div>" +
           
@@ -510,7 +510,7 @@ function handleExecuteConfirm(bookingId, token, format, callback) {
             "<tr><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;'><strong>Selected Tour:</strong></td><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;'><strong>" + tour + "</strong></td></tr>" +
             "<tr><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;'><strong>Travel Schedule:</strong></td><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;'>" + date + " at " + time + "</td></tr>" +
             "<tr><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;'><strong>Pickup Hotel Porch:</strong></td><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;'>" + hotelDetails + "</td></tr>" +
-            "<tr><td style='padding:9px 12px;color:#64748b;'><strong>Confirmed Tariff:</strong></td><td style='padding:9px 12px;font-size:16px;color:#16a34a;font-weight:bold;'>" + fare + " <span style='font-size:12px;color:#64748b;font-weight:normal;'>(Zero Advance • Pay Driver After Trip)</span></td></tr>" +
+            "<tr><td style='padding:9px 12px;color:#64748b;'><strong>Confirmed Tariff:</strong></td><td style='padding:9px 12px;font-size:16px;color:#16a34a;font-weight:bold;'>" + fare + " <span style='font-size:12px;color:#64748b;font-weight:normal;'>(Zero Advance &bull; Pay Driver After Trip)</span></td></tr>" +
           "</table>" +
           
           "<div style='background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:14px;margin-top:16px;'>" +
@@ -523,8 +523,8 @@ function handleExecuteConfirm(bookingId, token, format, callback) {
           "</div>" +
           
           "<div style='text-align:center;margin-top:22px;padding-top:16px;border-top:1px solid #e2e8f0;'>" +
-            "<p style='font-size:12px;color:#64748b;margin:0;'>24/7 Operations Desk • Aryan Taxi Mahabaleshwar</p>" +
-            "<p style='font-size:13.5px;font-weight:bold;color:#0e2338;margin:6px 0 0;'>📞 Helpline: +91 99228 82044 • ✉️ aryansdtravels@gmail.com</p>" +
+            "<p style='font-size:12px;color:#64748b;margin:0;'>24/7 Operations Desk &bull; Aryan Taxi Mahabaleshwar</p>" +
+            "<p style='font-size:13.5px;font-weight:bold;color:#0e2338;margin:6px 0 0;'>\uD83D\uDCDE Helpline: +91 99228 82044 &bull; \u2709\uFE0F aryansdtravels@gmail.com</p>" +
           "</div>" +
         "</div>";
 
@@ -613,11 +613,11 @@ function handleExecuteReject(bookingId, token, reason, format, callback) {
         "<div style='font-family:system-ui,-apple-system,BlinkMacSystemFont,Roboto,sans-serif;max-width:600px;margin:auto;border:1px solid #cbd5e1;border-radius:12px;padding:24px;background:#ffffff;color:#1e293b;'>" +
           "<div style='text-align:center;padding-bottom:16px;border-bottom:2px solid #ef4444;'>" +
             "<h2 style='color:#0e2338;margin:0;font-size:22px;'>ARYAN TAXI MAHABALESHWAR</h2>" +
-            "<p style='color:#ef4444;font-size:13px;font-weight:bold;margin:4px 0 0;'>Reservation Desk Notice • Explore Sahyadri</p>" +
+            "<p style='color:#ef4444;font-size:13px;font-weight:bold;margin:4px 0 0;'>Reservation Desk Notice &bull; Explore Sahyadri</p>" +
           "</div>" +
           
           "<div style='background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:14px;margin:18px 0;'>" +
-            "<strong style='color:#991b1b;font-size:14px;'>⚠️ UNABLE TO ACCOMMODATE RESERVATION</strong>" +
+            "<strong style='color:#991b1b;font-size:14px;'>\u26A0\uFE0F UNABLE TO ACCOMMODATE RESERVATION</strong>" +
             "<p style='margin:4px 0 0;font-size:13px;color:#b91c1c;line-height:1.4;'>We regret to inform you that we cannot accept booking request <strong>#" + bookingId + "</strong> for " + date + " at " + time + ".</p>" +
           "</div>" +
           
@@ -633,12 +633,12 @@ function handleExecuteReject(bookingId, token, reason, format, callback) {
           "<p style='font-size:13.5px;color:#475569;'>We apologize for the inconvenience. If your schedule is flexible, we would love to assist you with alternative time slots or dates. Please connect directly with our operations desk:</p>" +
           
           "<div style='text-align:center;margin:20px 0;'>" +
-            "<a href='https://wa.me/919922882044?text=" + encodeURIComponent("Hello Aryan Taxi, regarding unavailable booking #" + bookingId + ", I would like to check alternative dates.") + "' style='background:#10b981;color:#ffffff;padding:11px 22px;text-decoration:none;border-radius:6px;font-weight:bold;display:inline-block;font-size:13.5px;'>💬 Chat on WhatsApp for Alternative Slots</a>" +
+            "<a href='https://wa.me/919922882044?text=" + encodeURIComponent("Hello Aryan Taxi, regarding unavailable booking #" + bookingId + ", I would like to check alternative dates.") + "' style='background:#10b981;color:#ffffff;padding:11px 22px;text-decoration:none;border-radius:6px;font-weight:bold;display:inline-block;font-size:13.5px;'>\uD83D\uDCAC Chat on WhatsApp for Alternative Slots</a>" +
           "</div>" +
           
           "<div style='text-align:center;margin-top:22px;padding-top:16px;border-top:1px solid #e2e8f0;'>" +
-            "<p style='font-size:12px;color:#64748b;margin:0;'>24/7 Operations Desk • Aryan Taxi Mahabaleshwar</p>" +
-            "<p style='font-size:13.5px;font-weight:bold;color:#0e2338;margin:6px 0 0;'>📞 Helpline: +91 99228 82044 • ✉️ aryansdtravels@gmail.com</p>" +
+            "<p style='font-size:12px;color:#64748b;margin:0;'>24/7 Operations Desk &bull; Aryan Taxi Mahabaleshwar</p>" +
+            "<p style='font-size:13.5px;font-weight:bold;color:#0e2338;margin:6px 0 0;'>\uD83D\uDCDE Helpline: +91 99228 82044 &bull; \u2709\uFE0F aryansdtravels@gmail.com</p>" +
           "</div>" +
         "</div>";
 
@@ -700,7 +700,7 @@ function handleGetBookings(callback) {
           taxiCount: data[i][16] || 1,
           vehicleCategory: data[i][17] || "4-Seater Tourist Cab",
           baseFare: data[i][18] || data[i][9],
-          additionalCharges: data[i][19] || "₹0",
+          additionalCharges: data[i][19] || "\u20B90",
           totalFare: data[i][20] || data[i][9],
           paymentStatus: data[i][21] || "Unpaid",
           remarks: data[i][22] || "",
@@ -735,7 +735,7 @@ function handleGeminiAIRequest(userPrompt, lang) {
 
     var sysInstruction = "You are Aryan AI, the expert local trip planner and taxi concierge for Aryan Taxi Mahabaleshwar. " +
       "Help tourists plan sightseeing in Mahabaleshwar and Panchgani. " +
-      "Official rates: Tour 1 (Arthur Seat & Kate's Point) = ₹1,200 (3.5 hrs), Tour 2 (Lingmala Waterfall & Sunset) = ₹1,200 (3.5 hrs), Tour 7 (Full Day Combo) = ₹3,000 (9 hrs). " +
+      "Official rates: Tour 1 (Arthur Seat & Kate's Point) = \u20B91,200 (3.5 hrs), Tour 2 (Lingmala Waterfall & Sunset) = \u20B91,200 (3.5 hrs), Tour 7 (Full Day Combo) = \u20B93,000 (9 hrs). " +
       "Answer warmly and concisely in " + (lang === "mr" ? "Marathi" : (lang === "hi" ? "Hindi" : "English")) + ".";
 
     var url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + apiKey;

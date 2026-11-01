@@ -6118,7 +6118,7 @@ body.modal-open {
         grid-template-columns: 1fr !important;
     }
     .amt-btn-row {
-        flex-direction: column-reverse !important;
+        flex-direction: column !important;
         gap: 8px !important;
     }
     .amt-btn-row .amt-btn-back,
@@ -9918,37 +9918,35 @@ body.booking-portal-page .portal-card {
 .amt-crb-row {
     display: flex !important;
     justify-content: space-between !important;
-    align-items: center !important;
-    gap: 6px !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
     width: 100% !important;
-    min-width: 0 !important;
+    box-sizing: border-box !important;
 }
 .amt-crb-item {
     flex: 1 1 auto !important;
     min-width: 0 !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    font-size: clamp(0.68rem, 2.5vw, 0.75rem) !important;
+    font-size: 0.84rem !important;
     color: #0f172a !important;
     font-weight: 700 !important;
     display: flex !important;
-    align-items: center !important;
-    gap: 4px !important;
+    align-items: flex-start !important;
+    gap: 6px !important;
+    line-height: 1.35 !important;
 }
 .amt-crb-item strong {
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    min-width: 0 !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    word-break: break-word !important;
 }
 .amt-crb-fare {
     flex-shrink: 0 !important;
-    font-size: 0.95rem !important;
+    font-size: 1.05rem !important;
     font-weight: 900 !important;
     color: #0284c7 !important;
     white-space: nowrap !important;
-    margin-left: 6px !important;
+    text-align: right !important;
 }
 
 /* Item 3: Page 3 Tour Name Guaranteed Single Line Without Wrapping */
