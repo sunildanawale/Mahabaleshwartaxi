@@ -8462,13 +8462,19 @@ body.booking-portal-page .amt-header-brand {
         width: 100% !important;
     }
     .amt-btn-row {
-        margin-top: 6px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+        margin-top: 12px !important;
+        margin-bottom: 8px !important;
+        width: 100% !important;
     }
-    .amt-btn-next {
-        height: 38px !important;
-        min-height: 38px !important;
-        padding: 8px 12px !important;
-        font-size: 0.82rem !important;
+    .amt-btn-next,
+    .amt-btn-confirm {
+        height: auto !important;
+        min-height: 48px !important;
+        padding: 10px 10px !important;
+        box-sizing: border-box !important;
     }
 }
 .portal-hero-strip {
@@ -10563,7 +10569,7 @@ select#amtPickupArea option,
 .amt-btn-next,
 .amt-btn-confirm {
     width: 100% !important;
-    padding: 13px 18px !important;
+    padding: 11px 14px !important;
     border-radius: 10px !important;
     cursor: pointer !important;
     text-align: center !important;
@@ -10571,34 +10577,48 @@ select#amtPickupArea option,
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 3px !important;
+    gap: 2px !important;
     box-shadow: 0 4px 14px rgba(2, 132, 199, 0.3) !important;
     border: none !important;
     box-sizing: border-box !important;
+    min-height: 48px !important;
+    height: auto !important;
 }
 .amt-btn-confirm {
+    background: linear-gradient(135deg, #16a34a 0%, #15803d 100%) !important;
     box-shadow: 0 4px 14px rgba(22, 163, 74, 0.35) !important;
 }
 .amt-btn-next .amt-btn-main,
 .amt-btn-confirm .amt-btn-main {
-    font-size: 15px !important;
+    font-size: 14.5px !important;
     font-weight: 800 !important;
-    letter-spacing: 0.2px !important;
+    letter-spacing: 0.1px !important;
     line-height: 1.25 !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
     gap: 6px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+}
+.amt-btn-next .amt-btn-main span,
+.amt-btn-confirm .amt-btn-main span {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
 }
 .amt-btn-sub {
     font-size: 11px !important;
     font-weight: 600 !important;
     opacity: 0.95 !important;
-    line-height: 1.35 !important;
+    line-height: 1.25 !important;
     text-align: center !important;
     text-wrap: balance !important;
-    max-width: 96% !important;
-    margin: 2px auto 0 !important;
+    max-width: 98% !important;
+    margin: 1px auto 0 !important;
     display: block !important;
 }
 
@@ -10894,15 +10914,49 @@ input[type="checkbox"]#amtTermsCheckbox,
 }
 @media (max-width: 640px) {
     .amt-grid2,
+    .amt-guest-grid,
     .amt-form-row {
         display: flex !important;
         flex-direction: column !important;
         grid-template-columns: 1fr !important;
-        gap: 10px !important;
+        gap: 8px !important;
         width: 100% !important;
     }
     .amt-grid2 > div,
+    .amt-guest-grid > div,
     .amt-form-row > div {
         width: 100% !important;
+    }
+    .amt-btn-row {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+        margin-top: 12px !important;
+        margin-bottom: 8px !important;
+        width: 100% !important;
+    }
+    .amt-btn-next,
+    .amt-btn-confirm {
+        height: auto !important;
+        min-height: 48px !important;
+        padding: 10px 8px !important;
+        box-sizing: border-box !important;
+    }
+    .amt-btn-next .amt-btn-main,
+    .amt-btn-confirm .amt-btn-main {
+        font-size: 13.5px !important;
+        gap: 4px !important;
+        white-space: nowrap !important;
+    }
+    .amt-btn-next .amt-btn-main i,
+    .amt-btn-confirm .amt-btn-main i {
+        font-size: 12px !important;
+    }
+    .amt-btn-sub {
+        font-size: 10.5px !important;
+        line-height: 1.25 !important;
+        margin-top: 2px !important;
+        max-width: 100% !important;
+        text-align: center !important;
     }
 }
