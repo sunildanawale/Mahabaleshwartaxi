@@ -10434,3 +10434,5 @@ body.booking-portal-page .portal-card {
 }
 
 .amt-grid2{display:flex!important;flex-direction:column!important;width:100%!important;gap:10px!important}.amt-grid2>div{width:100%!important}.amt-btn-sub{text-wrap:balance!important;font-size:11px!important}input[type=checkbox]#amtTermsCheckbox,.amt-checkbox{width:18px!important;height:18px!important;min-width:18px!important;min-height:18px!important}
+
+@media(min-width:768px){.portal-booking-container{max-width:680px!important;margin:20px auto 32px!important}.amt-card,.portal-card{max-width:660px!important}.portal-card-body{padding:20px 24px!important}.amt-grid2{display:grid!important;grid-template-columns:1fr 1fr!important;gap:14px!important}}

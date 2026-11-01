@@ -10842,3 +10842,67 @@ input[type="checkbox"]#amtTermsCheckbox,
         box-sizing: border-box !important;
     }
 }
+
+
+
+/* Desktop & Tablet Sizing: Spacious 660px Card for Professional Layout */
+@media (min-width: 768px) {
+    .portal-booking-container {
+        max-width: 680px !important;
+        margin: 20px auto 32px !important;
+        padding: 0 16px !important;
+    }
+    .amt-card,
+    #amtBookingModal .amt-card,
+    .portal-card {
+        max-width: 660px !important;
+        border-radius: 16px !important;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45) !important;
+    }
+    .portal-card-body {
+        padding: 20px 24px 24px !important;
+    }
+    .amt-grid2 {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 14px !important;
+        margin-top: 6px !important;
+        margin-bottom: 8px !important;
+        width: 100% !important;
+    }
+    .amt-grid2 > div {
+        width: 100% !important;
+    }
+}
+@media (max-width: 767px) {
+    .portal-booking-container {
+        max-width: 100% !important;
+        width: 100% !important;
+        margin: 6px auto 12px !important;
+        padding: 0 6px !important;
+    }
+    .amt-card,
+    #amtBookingModal .amt-card,
+    .portal-card {
+        max-width: 100% !important;
+        width: 100% !important;
+        border-radius: 12px !important;
+    }
+    .portal-card-body {
+        padding: 8px 12px 14px !important;
+    }
+}
+@media (max-width: 640px) {
+    .amt-grid2,
+    .amt-form-row {
+        display: flex !important;
+        flex-direction: column !important;
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+        width: 100% !important;
+    }
+    .amt-grid2 > div,
+    .amt-form-row > div {
+        width: 100% !important;
+    }
+}

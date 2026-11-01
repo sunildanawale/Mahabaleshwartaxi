@@ -3649,6 +3649,19 @@
             '</div>';
         banner.style.display = 'block';
     }
+        var pickNoteEl = document.getElementById('amtPickupLocalityNote');
+        if (pickNoteEl) {
+            var isOut = (bookingState.service === 'outstation' || (t && t.category === 'outstation'));
+            var isDrop = (bookingState.service === 'local_drop' || (t && t.category === 'local_drop'));
+            if (isOut) {
+                pickNoteEl.innerHTML = '<i class="fa-solid fa-plane-departure" style="color:#0284c7;"></i> <strong>Outstation Doorstep Pickup:</strong> Doorstep pickup from any hotel, resort, or private porch in Mahabaleshwar &amp; Panchgani included. Direct private tourist cab to your destination with no co-passengers.';
+            } else if (isDrop) {
+                pickNoteEl.innerHTML = '<i class="fa-solid fa-location-crosshairs" style="color:#0284c7;"></i> <strong>Local Point-to-Point Drop:</strong> Direct doorstep pickup from your hotel or resort. Fixed point-to-point drop tariff applies.';
+            } else {
+                pickNoteEl.innerHTML = '<i class="fa-solid fa-circle-info" style="color:#0284c7;"></i> Local sightseeing includes hotel pickup and drop-off within Mahabaleshwar town, as per existing arrangements. Outside Mahabaleshwar town, extra charges may apply depending on location and distance. The tour operator will communicate applicable extra charges during booking confirmation.';
+            }
+        }
+
 
     function renderVisualTourCards(service, filtered) {
         var container = document.getElementById('amtVisualTourCards');
@@ -4059,8 +4072,9 @@
         var sLbl = document.getElementById('amtStepLabel'); if (sLbl) sLbl.textContent = 'Step ' + step + ' of ' + totalSteps;
         var hdrTitle = document.querySelector('.amt-header-title');
         if (hdrTitle) {
-            if (step === 1) hdrTitle.textContent = 'Select Tour & Departure';
-            else if (step === 2) hdrTitle.textContent = 'Pickup Hotel & Guest Details';
+            if (step === 1) hdrTitle.textContent = 'Select Tour & Cab Requirements';
+            else if (step === 2) hdrTitle.textContent = 'Pickup Schedule & Fare Breakdown';
+            else if (step === 3) hdrTitle.textContent = 'Guest Details & Final Review';
         }
         if (typeof updateStepper === 'function') updateStepper(step);
         if (typeof saveBookingDraft === 'function') saveBookingDraft();
@@ -4336,6 +4350,31 @@
         var confirmBtnText = document.getElementById('amtConfirmBtnText');
         if (confirmBtnText) {
             confirmBtnText.textContent = 'CONFIRM BOOKING REQUEST (₹' + Number(total).toLocaleString('en-IN') + ')';
+        }
+
+        var isOutstation = (bookingState.service === 'outstation' || (t && t.category === 'outstation'));
+        var isLocalDrop = (bookingState.service === 'local_drop' || (t && t.category === 'local_drop'));
+
+        var adviceEl = document.getElementById('amtDepartureAdvice');
+        if (adviceEl) {
+            if (isOutstation) {
+                adviceEl.innerHTML = '<i class="fa-solid fa-plane-departure" style="color:#0284c7;"></i> <strong>Direct Doorstep Transfer:</strong> Choose departure time based on flight/train schedule. Mahabaleshwar to Pune is ~3.5 hrs; Mumbai is ~5.5-6 hrs.';
+            } else if (isLocalDrop) {
+                adviceEl.innerHTML = '<i class="fa-solid fa-circle-info" style="color:#0284c7;"></i> Select preferred departure time. Private tourist cab arrives at your porch 5-10 minutes prior.';
+            } else {
+                adviceEl.innerHTML = '<i class="fa-solid fa-circle-info" style="color:#0284c7;"></i> Recommended morning departure: <strong style="white-space:nowrap;">09:00 AM – 10:00 AM</strong> for clear valley viewpoints before afternoon mist.';
+            }
+        }
+
+        var fareSubEl = document.getElementById('amtFareAdvanceSub');
+        if (fareSubEl) {
+            if (isOutstation) {
+                fareSubEl.innerHTML = '<i class="fa-solid fa-gas-pump" style="color:#d97706;"></i> <span style="color:#b45309;font-weight:700;">Nominal Fuel Advance &bull; Balance to Driver at Drop</span>';
+            } else if (isLocalDrop) {
+                fareSubEl.innerHTML = '<i class="fa-solid fa-check" style="color:#16a34a;"></i> <span style="color:#16a34a;font-weight:700;">Zero Advance Required &bull; Pay Driver After Drop</span>';
+            } else {
+                fareSubEl.innerHTML = '<i class="fa-solid fa-check" style="color:#16a34a;"></i> <span style="color:#16a34a;font-weight:700;">Zero Advance Required &bull; Pay Driver After Tour</span>';
+            }
         }
     }
 
