@@ -4857,6 +4857,29 @@
     window.populateTourDropdownByService = populateTourDropdownByService;
     window.updateSelectedTourBanner = updateSelectedTourBanner;
     window.goToStep = goToStep;
+
+    // Expose Global Accordion Toggle for Guidelines
+    window.toggleGuidelinesAccordion = function(e) {
+        if (e && e.preventDefault) e.preventDefault();
+        var body = document.getElementById('amtGuidelinesBody');
+        var chevron = document.getElementById('amtGuidelinesChevron');
+        var text = document.getElementById('amtGuidelinesToggleText');
+        var btn = document.getElementById('amtGuidelinesToggle');
+        if (!body) return;
+        var isHidden = (body.style.display === 'none' || body.style.display === '');
+        if (isHidden) {
+            body.style.display = 'block';
+            if (btn) btn.setAttribute('aria-expanded', 'true');
+            if (chevron) chevron.style.transform = 'rotate(180deg)';
+            if (text) text.textContent = 'Hide';
+        } else {
+            body.style.display = 'none';
+            if (btn) btn.setAttribute('aria-expanded', 'false');
+            if (chevron) chevron.style.transform = 'rotate(0deg)';
+            if (text) text.textContent = 'Tap to View';
+        }
+    };
+
     window.renderReviewCard = renderReviewCard;
     window.getBookingState = function() { return bookingState; };
 

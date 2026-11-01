@@ -3994,7 +3994,7 @@ input[type="checkbox"]#amtTermsCheckbox,
 
                         <!-- Sightseeing & Travel Guidelines Accordion (Collapsed by Default) -->
                         <div class="amt-guidelines-accordion" style="background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:10px;margin-bottom:14px;overflow:hidden;box-sizing:border-box;width:100%;">
-                            <button type="button" id="amtGuidelinesToggle" class="amt-accordion-header" aria-expanded="false" style="width:100%;padding:10px 12px;background:none;border:none;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-weight:700;font-size:0.84rem;color:#0f172a;text-align:left;box-sizing:border-box;">
+                            <button type="button" id="amtGuidelinesToggle" class="amt-accordion-header" onclick="window.toggleGuidelinesAccordion && window.toggleGuidelinesAccordion(event)" aria-expanded="false" style="width:100%;padding:10px 12px;background:none;border:none;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-weight:700;font-size:0.84rem;color:#0f172a;text-align:left;box-sizing:border-box;">
                                 <div style="display:flex;align-items:center;gap:7px;">
                                     <i class="fa-solid fa-circle-info" style="color:#0284c7;font-size:0.95rem;"></i>
                                     <span>Sightseeing &amp; Travel Guidelines</span>
@@ -4195,7 +4195,7 @@ input[type="checkbox"]#amtTermsCheckbox,
     <!-- Scripts -->
     <script src="js/tour-data.js?v=134.1"></script>
     <script src="js/ai-assistant.js?v=134.1" defer></script>
-    <script src="js/booking-widget.min.js?v=134.8"></script>
+    <script src="js/booking-widget.min.js?v=134.9"></script>
     <script>
     (function() {
         var search = window.location.search || '';
@@ -4265,6 +4265,28 @@ input[type="checkbox"]#amtTermsCheckbox,
                 if (p) p.value = phoneParam;
             }
         }
+
+        // Global Sightseeing & Travel Guidelines Accordion Toggle
+        window.toggleGuidelinesAccordion = function(e) {
+            if (e && e.preventDefault) e.preventDefault();
+            var body = document.getElementById('amtGuidelinesBody');
+            var chevron = document.getElementById('amtGuidelinesChevron');
+            var text = document.getElementById('amtGuidelinesToggleText');
+            var btn = document.getElementById('amtGuidelinesToggle');
+            if (!body) return;
+            var isHidden = (body.style.display === 'none' || body.style.display === '');
+            if (isHidden) {
+                body.style.display = 'block';
+                if (btn) btn.setAttribute('aria-expanded', 'true');
+                if (chevron) chevron.style.transform = 'rotate(180deg)';
+                if (text) text.textContent = 'Hide';
+            } else {
+                body.style.display = 'none';
+                if (btn) btn.setAttribute('aria-expanded', 'false');
+                if (chevron) chevron.style.transform = 'rotate(0deg)';
+                if (text) text.textContent = 'Tap to View';
+            }
+        };
 
         if ('scrollRestoration' in history) {
             history.scrollRestoration = 'manual';
