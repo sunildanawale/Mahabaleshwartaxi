@@ -144,7 +144,15 @@
                 totalFare: bFare,
                 notes: bNotes || 'None',
                 status: 'PENDING CONFIRMATION',
-                paymentStatus: 'Unpaid (Pay Driver After Tour)',
+                paymentStatus: (function() {
+                    var sType = String(bookingData.serviceType || bookingData.service || 'sightseeing').toLowerCase();
+                    if (sType === 'outstation' || sType.indexOf('outstation') !== -1) {
+                        return 'Advance Required (Nominal Fuel Advance \u2022 Balance to Driver at Drop)';
+                    } else if (sType === 'local_drop' || sType.indexOf('local_drop') !== -1) {
+                        return 'Unpaid (Pay Driver After Drop)';
+                    }
+                    return 'Unpaid (Pay Driver After Tour)';
+                })(),
                 timestamp: new Date().toISOString()
             });
 
@@ -4358,6 +4366,17 @@
         var isOutstation = (bookingState.service === 'outstation' || (t && t.category === 'outstation'));
         var isLocalDrop = (bookingState.service === 'local_drop' || (t && t.category === 'local_drop'));
 
+        var guideTitleEl = document.getElementById('amtGuidelinesTitleText');
+        if (guideTitleEl) {
+            if (isOutstation) {
+                guideTitleEl.textContent = 'Outstation & Travel Guidelines';
+            } else if (isLocalDrop) {
+                guideTitleEl.textContent = 'Local Drop & Travel Guidelines';
+            } else {
+                guideTitleEl.textContent = 'Sightseeing & Travel Guidelines';
+            }
+        }
+
         var adviceEl = document.getElementById('amtDepartureAdvice');
         if (adviceEl) {
             if (isOutstation) {
@@ -4448,17 +4467,17 @@
             }
         });
 
-        // Update Step 2 Confirm Button Subtext
+        // Update Step 2 / 3 Confirm Button Subtext
         var confirmBtn = document.getElementById('amtConfirmBtn');
         if (confirmBtn) {
-            var btnSub = confirmBtn.querySelector('span');
+            var btnSub = document.getElementById('amtConfirmBtnSub');
             if (btnSub) {
                 if (isOutstation) {
-                    btnSub.innerHTML = 'Review Confirmed Tariff &amp; Driver Schedule &bull; Nominal Fuel Advance';
+                    btnSub.innerHTML = 'Fuel Advance &bull; Balance at Drop &bull; Instant Pass';
                 } else if (isLocalDrop) {
-                    btnSub.innerHTML = 'Review Official Voucher &amp; Drop Details &bull; Pay Driver After Drop';
+                    btnSub.innerHTML = 'Zero Advance &bull; Pay Driver After Drop &bull; Instant Pass';
                 } else {
-                    btnSub.innerHTML = 'Review Official Voucher &amp; Tour Details &bull; Pay Driver After Trip';
+                    btnSub.innerHTML = 'Zero Advance &bull; Pay Driver After Tour &bull; Instant Pass';
                 }
             }
         }
@@ -4527,9 +4546,9 @@
             + '  <div class="amt-crb-fare">' + fareDisplay + '</div>'
             + '</div>'
             + '<div class="amt-crb-meta">'
-            + '  <span>⏱️ ' + escapeHtml(t.duration) + '</span>'
-            + '  <span>📅 ' + escapeHtml(dStr) + ' at ' + escapeHtml(tStr) + '</span>'
-            + '  <span>🚕 ' + cabLabel + '</span>'
+            + '  <span><i class="fa-solid fa-clock" style="color:#0284c7;"></i> ' + escapeHtml(t.duration) + '</span>'
+            + '  <span><i class="fa-regular fa-calendar" style="color:#0284c7;"></i> ' + escapeHtml(dStr) + ' at ' + escapeHtml(tStr) + '</span>'
+            + '  <span><i class="fa-solid fa-taxi" style="color:#0284c7;"></i> ' + cabLabel + '</span>'
             + '  ' + payBadgeHtml
             + '</div>'
             + '</div>';
@@ -4804,6 +4823,26 @@
                     + '  <div class="amt-dqr-desc">Scan to launch WhatsApp with pre-filled booking details.</div>'
                     + '</div>'
                     + '</div>';
+            }
+
+            var liveTag = document.getElementById('amtVoucherLiveTag');
+            if (liveTag) {
+                if (sRules.key === 'outstation') {
+                    liveTag.textContent = 'Nominal Fuel Advance';
+                    liveTag.style.background = '#fef3c7';
+                    liveTag.style.color = '#92400e';
+                    liveTag.style.borderColor = '#fde68a';
+                } else if (sRules.key === 'local_drop') {
+                    liveTag.textContent = 'Zero Advance Required';
+                    liveTag.style.background = '#dcfce7';
+                    liveTag.style.color = '#15803d';
+                    liveTag.style.borderColor = '#86efac';
+                } else {
+                    liveTag.textContent = 'Zero Advance Required';
+                    liveTag.style.background = '#dcfce7';
+                    liveTag.style.color = '#15803d';
+                    liveTag.style.borderColor = '#86efac';
+                }
             }
 
             var noticeSub = document.getElementById('amtVoucherNoticeSub');

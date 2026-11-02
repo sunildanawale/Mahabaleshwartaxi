@@ -140,7 +140,16 @@ function doPost(e) {
     var additionalCharges = String(data.additionalCharges || '0').replace(/[^0-9]/g, '');
     var notes = String(data.notes || 'None').trim();
     var status = "PENDING CONFIRMATION";
+    
+    var isOutstationTrip = (serviceType.toLowerCase() === 'outstation' || serviceType.toLowerCase().indexOf('outstation') !== -1 || tour.toLowerCase().indexOf('pune') !== -1 || tour.toLowerCase().indexOf('mumbai') !== -1 || (tour.toLowerCase().indexOf('drop') !== -1 && tour.toLowerCase().indexOf('airport') !== -1));
+    var isLocalDropTrip = (serviceType.toLowerCase() === 'local_drop' || serviceType.toLowerCase().indexOf('local_drop') !== -1);
+    
     var paymentStatus = "Unpaid (Pay Driver After Tour)";
+    if (isOutstationTrip) {
+      paymentStatus = "Advance Required (Nominal Fuel Advance \u2022 Balance to Driver at Drop)";
+    } else if (isLocalDropTrip) {
+      paymentStatus = "Unpaid (Pay Driver After Drop)";
+    }
 
     // Idempotency / Deduplication Check (Column B = index 1)
     var existingData = sheet.getDataRange().getValues();
@@ -203,9 +212,10 @@ function doPost(e) {
     var confirmUrl = BASE_PORTAL_URL + "/approve.html?action=confirm&id=" + encodeURIComponent(bookingId) + "&token=" + encodeURIComponent(actionToken);
     var rejectUrl = BASE_PORTAL_URL + "/approve.html?action=reject&id=" + encodeURIComponent(bookingId) + "&token=" + encodeURIComponent(actionToken);
     
-    var waUrl = "https://wa.me/91" + cleanPhone + "?text=" + encodeURIComponent(
-      "Hello " + name + ", Aryan Taxi Mahabaleshwar here regarding your booking request " + bookingId + " for " + tour + ". Your locked tariff is \u20B9" + fare + " (" + taxiCount + "x 4-Seater Tourist Cab" + (taxiCount > 1 ? "s" : "") + "). Let us reconfirm your hotel porch pickup schedule."
-    );
+    var waText = isOutstationTrip
+      ? ("Hello " + name + ", Aryan Taxi Mahabaleshwar here regarding your outstation booking request " + bookingId + " for " + tour + ". Your locked tariff is \u20B9" + fare + " (" + taxiCount + "x 4-Seater Tourist Cab" + (taxiCount > 1 ? "s" : "") + "). Nominal fuel advance applies to confirm dispatch with balance payable at drop. Let us reconfirm your pickup schedule.")
+      : ("Hello " + name + ", Aryan Taxi Mahabaleshwar here regarding your booking request " + bookingId + " for " + tour + ". Your locked tariff is \u20B9" + fare + " (" + taxiCount + "x 4-Seater Tourist Cab" + (taxiCount > 1 ? "s" : "") + "). Let us reconfirm your hotel porch pickup schedule.");
+    var waUrl = "https://wa.me/91" + cleanPhone + "?text=" + encodeURIComponent(waText);
 
     var ownerSubject = "\uD83D\uDE95 NEW RESERVATION REQUEST: " + bookingId + " - " + name + " (\u20B9" + fare + " &bull; " + taxiCount + " Cab" + (taxiCount > 1 ? "s" : "") + ") [ACTION REQUIRED]";
     var ownerBody = 
@@ -239,6 +249,7 @@ function doPost(e) {
           "<tr><td style='padding:7px 0;color:#64748b;'><strong>Pickup Hotel Details:</strong></td><td><strong style='color:#0f2b48;'>" + hotelDetails + "</strong></td></tr>" +
           (dropLocation && dropLocation !== tour ? ("<tr><td style='padding:7px 0;color:#64748b;'><strong>Drop Location:</strong></td><td>" + dropLocation + "</td></tr>") : "") +
           "<tr><td style='padding:7px 0;color:#64748b;'><strong>Fare Breakdown:</strong></td><td>\u20B9" + baseFare + " x " + taxiCount + " Cab" + (taxiCount > 1 ? "s" : "") + (additionalCharges !== '0' ? (" + \u20B9" + additionalCharges + " extra") : "") + " = <strong style='color:#16a34a;font-size:16px;'>\u20B9" + fare + "</strong></td></tr>" +
+          "<tr><td style='padding:7px 0;color:#64748b;'><strong>Payment Terms:</strong></td><td><strong style='color:" + (isOutstationTrip ? "#b45309" : "#16a34a") + ";'>" + (isOutstationTrip ? "Nominal Fuel Advance Required (Balance to Driver at Drop)" : (isLocalDropTrip ? "Zero Advance Required (Pay Driver After Drop)" : "Zero Advance Required (Pay Driver After Tour)")) + "</strong></td></tr>" +
           "<tr><td style='padding:7px 0;color:#64748b;'><strong>Special Request:</strong></td><td>" + notes + "</td></tr>" +
         "</table>" +
         
@@ -273,7 +284,7 @@ function doPost(e) {
           
           "<div style='background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:14px;margin:18px 0;'>" +
             "<strong style='color:#92400e;font-size:14px;'>\u23F3 STATUS: BOOKING RECEIVED  -  PENDING CONFIRMATION</strong>" +
-            "<p style='margin:4px 0 0;font-size:12.5px;color:#b45309;line-height:1.4;'>Your travel request is registered and official Taxi Union tariff is locked. Our dispatch operations desk is checking driver and vehicle availability. You will receive an official confirmation notice once your cab is assigned.</p>" +
+            "<p style='margin:4px 0 0;font-size:12.5px;color:#b45309;line-height:1.4;'>" + (isOutstationTrip ? "Your outstation drop transfer request is registered and official route tariff is locked. Our dispatch operations desk will verify cab availability and contact you with nominal fuel advance details to confirm vehicle dispatch. Remaining balance is payable upon destination drop." : (isLocalDropTrip ? "Your point-to-point local drop request is registered and Taxi Union tariff is locked. Our dispatch desk is assigning a nearby driver. Zero advance required \u2014 pay driver directly after drop." : "Your travel request is registered and official Taxi Union tariff is locked. Our dispatch operations desk is checking driver and vehicle availability. Zero advance required \u2014 pay driver after completing your tour.")) + "</p>" +
           "</div>" +
           
           "<p style='font-size:14px;'>Dear <strong>" + name + "</strong>,</p>" +
@@ -287,11 +298,11 @@ function doPost(e) {
             "<tr><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;'><strong>Selected Tour / Route:</strong></td><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;'><strong>" + tour + "</strong></td></tr>" +
             "<tr><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;'><strong>Travel Schedule:</strong></td><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;'>" + date + " at " + time + "</td></tr>" +
             "<tr><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;'><strong>Pickup Hotel Details:</strong></td><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;'>" + hotelDetails + " (Doorstep Hotel Porch)</td></tr>" +
-            "<tr><td style='padding:9px 12px;color:#64748b;'><strong>Booking Tariff:</strong></td><td style='padding:9px 12px;font-size:16px;color:#16a34a;font-weight:bold;'>\u20B9" + fare + " <span style='font-size:12px;color:#64748b;font-weight:normal;'>(Pay as per service policy)</span></td></tr>" +
+            "<tr><td style='padding:9px 12px;color:#64748b;'><strong>Booking Tariff:</strong></td><td style='padding:9px 12px;font-size:16px;color:#16a34a;font-weight:bold;'>\u20B9" + fare + " <span style='font-size:12px;color:#0f2b48;font-weight:600;'>" + (isOutstationTrip ? "(Nominal Fuel Advance Required &bull; Balance to Driver at Drop)" : (isLocalDropTrip ? "(Zero Advance Required &bull; Pay Driver After Drop)" : "(Zero Advance Required &bull; Pay Driver After Tour)")) + "</span></td></tr>" +
           "</table>" +
           
           "<div style='background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px;margin-top:16px;'>" +
-            "<p style='margin:0;color:#334155;font-size:12px;line-height:1.5;'><strong>Sightseeing Guidelines:</strong> Local sightseeing includes hotel pickup and drop-off within Mahabaleshwar town, as per existing arrangements. Outside Mahabaleshwar town, extra charges may apply depending on location and distance. The tour operator will communicate applicable extra charges during booking confirmation. Local sightseeing &amp; drops require zero advance (pay driver directly); outstation drops require advance as per schedule. All bookings and vehicle assignments are subject to vehicle availability and operator confirmation.</p>" +
+            "<p style='margin:0;color:#334155;font-size:12px;line-height:1.5;'><strong>" + (isOutstationTrip ? "Outstation Travel Guidelines:</strong> Outstation transfers include doorstep hotel/porch pickup in Mahabaleshwar and direct drop to your destination terminal or address. Toll, parking, and state permit charges (if applicable) are paid directly as per actual receipts. Outstation drop transfers require a nominal fuel advance to confirm vehicle dispatch, with the remaining balance payable directly to your driver upon destination drop. All bookings and vehicle assignments are subject to vehicle availability and operator confirmation." : (isLocalDropTrip ? "Local Drop Guidelines:</strong> Direct point-to-point transfer from your hotel porch to destination. Zero advance required \u2014 pay 100% of tariff directly to driver after drop via UPI or Cash. All bookings are subject to vehicle availability and operator confirmation." : "Sightseeing Guidelines:</strong> Local sightseeing includes hotel pickup and drop-off within Mahabaleshwar town, as per existing arrangements. Outside Mahabaleshwar town, extra charges may apply depending on location and distance. The tour operator will communicate applicable extra charges during booking confirmation. Local sightseeing requires zero advance (pay driver directly after tour completion). All bookings and vehicle assignments are subject to vehicle availability and operator confirmation.")) + "</p>" +
           "</div>" +
           
           "<p style='font-size:13px;color:#64748b;margin-top:20px;line-height:1.5;'>Need immediate assistance or wish to reconfirm pickup early? Feel free to contact our 24/7 operations desk at <strong>+91 99228 82044</strong> or reply to this email.</p>" +
@@ -483,6 +494,9 @@ function handleExecuteConfirm(bookingId, token, format, callback) {
     var pax = r[15] || "1-4";
     var taxiCount = r[16] || 1;
     var vehicleCategory = r[17] || "4-Seater Tourist Cab";
+    var serviceType = String(r[14] || "").trim().toLowerCase();
+    var isOutstationTrip = (serviceType === 'outstation' || serviceType.indexOf('outstation') !== -1 || tour.toLowerCase().indexOf('pune') !== -1 || tour.toLowerCase().indexOf('mumbai') !== -1 || (tour.toLowerCase().indexOf('drop') !== -1 && tour.toLowerCase().indexOf('airport') !== -1));
+    var isLocalDropTrip = (serviceType === 'local_drop' || serviceType.indexOf('local_drop') !== -1);
 
     // Send Confirmed Voucher Email to Customer
     if (email && email.indexOf("@") !== -1) {
@@ -496,7 +510,7 @@ function handleExecuteConfirm(bookingId, token, format, callback) {
           
           "<div style='background:#ecfdf5;border:1px solid #a7f3d0;border-radius:8px;padding:14px;margin:18px 0;'>" +
             "<strong style='color:#065f46;font-size:15px;'>\u2714 YOUR RESERVATION IS OFFICIALLY CONFIRMED!</strong>" +
-            "<p style='margin:4px 0 0;font-size:13px;color:#047857;line-height:1.4;'>Your private tourist cab reservation is locked. A licensed, mountain-experienced local driver has been assigned for your doorstep porch pickup on schedule.</p>" +
+            "<p style='margin:4px 0 0;font-size:13px;color:#047857;line-height:1.4;'>" + (isOutstationTrip ? "Your private tourist cab reservation for outstation transfer is locked. A licensed local driver has been assigned for your doorstep pickup. Our operations desk will coordinate the nominal fuel advance to dispatch vehicle; balance is payable to the driver at destination drop." : (isLocalDropTrip ? "Your private tourist cab reservation is locked. A licensed local driver has been assigned for your doorstep porch pickup. Zero advance required \u2014 pay driver after drop." : "Your private tourist cab reservation is locked. A licensed, mountain-experienced local driver has been assigned for your doorstep porch pickup on schedule. Zero advance required \u2014 pay driver after completing your tour.")) + "</p>" +
           "</div>" +
           
           "<p style='font-size:14px;'>Dear <strong>" + name + "</strong>,</p>" +
@@ -510,15 +524,26 @@ function handleExecuteConfirm(bookingId, token, format, callback) {
             "<tr><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;'><strong>Selected Tour:</strong></td><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;'><strong>" + tour + "</strong></td></tr>" +
             "<tr><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;'><strong>Travel Schedule:</strong></td><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;'>" + date + " at " + time + "</td></tr>" +
             "<tr><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;'><strong>Pickup Hotel Porch:</strong></td><td style='padding:9px 12px;border-bottom:1px solid #e2e8f0;'>" + hotelDetails + "</td></tr>" +
-            "<tr><td style='padding:9px 12px;color:#64748b;'><strong>Confirmed Tariff:</strong></td><td style='padding:9px 12px;font-size:16px;color:#16a34a;font-weight:bold;'>" + fare + " <span style='font-size:12px;color:#64748b;font-weight:normal;'>(Zero Advance &bull; Pay Driver After Trip)</span></td></tr>" +
+            "<tr><td style='padding:9px 12px;color:#64748b;'><strong>Confirmed Tariff:</strong></td><td style='padding:9px 12px;font-size:16px;color:#16a34a;font-weight:bold;'>" + fare + " <span style='font-size:12px;color:#0f2b48;font-weight:600;'>" + (isOutstationTrip ? "(Nominal Fuel Advance Required &bull; Balance to Driver at Drop)" : (isLocalDropTrip ? "(Zero Advance Required &bull; Pay Driver After Drop)" : "(Zero Advance Required &bull; Pay Driver After Tour)")) + "</span></td></tr>" +
           "</table>" +
           
           "<div style='background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:14px;margin-top:16px;'>" +
-            "<h4 style='color:#0f172a;margin:0 0 6px;font-size:13.5px;'>Pickup &amp; Booking Guidelines</h4>" +
+            "<h4 style='color:#0f172a;margin:0 0 6px;font-size:13.5px;'>" + (isOutstationTrip ? "Outstation Travel Guidelines" : (isLocalDropTrip ? "Local Drop Guidelines" : "Pickup &amp; Booking Guidelines")) + "</h4>" +
             "<ul style='margin:0;padding-left:18px;font-size:12.5px;color:#334155;line-height:1.5;'>" +
-              "<li>Local sightseeing includes hotel pickup and drop-off within Mahabaleshwar town, as per existing arrangements. Outside Mahabaleshwar town, extra charges may apply depending on location and distance, communicated during booking confirmation.</li>" +
-              "<li>Local sightseeing &amp; drops require zero advance (pay directly to driver upon completion). Outstation drop transfers require advance as per schedule.</li>" +
-              "<li>All vehicle assignments and timings are subject to vehicle availability and operator confirmation.</li>" +
+              (isOutstationTrip ? (
+                "<li>Doorstep hotel porch pickup in Mahabaleshwar and direct transfer to your destination address or terminal.</li>" +
+                "<li><strong>Payment Terms:</strong> Outstation drop transfers require a nominal fuel advance to confirm vehicle dispatch. The remaining balance is payable directly to your driver upon destination drop.</li>" +
+                "<li>Toll, parking, and state permit charges (if applicable) are paid directly as per actual receipts.</li>" +
+                "<li>All vehicle assignments are subject to vehicle availability and operator confirmation.</li>"
+              ) : (isLocalDropTrip ? (
+                "<li>Direct point-to-point transfer from hotel porch to destination.</li>" +
+                "<li><strong>Payment Terms:</strong> Zero advance required \u2014 pay 100% directly to your driver after drop via UPI or Cash.</li>" +
+                "<li>All bookings are subject to vehicle availability and operator confirmation.</li>"
+              ) : (
+                "<li>Local sightseeing includes hotel pickup and drop-off within Mahabaleshwar town, as per existing arrangements. Outside Mahabaleshwar town, extra charges may apply depending on location and distance.</li>" +
+                "<li><strong>Payment Terms:</strong> Zero advance required \u2014 pay 100% directly to your driver after completing your tour via UPI or Cash.</li>" +
+                "<li>All vehicle assignments and timings are subject to vehicle availability and operator confirmation.</li>"
+              ))) +
             "</ul>" +
           "</div>" +
           
