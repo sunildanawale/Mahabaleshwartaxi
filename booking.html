@@ -29,7 +29,7 @@
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/advanced-features.min.css?v=134.1">
-    <link rel="stylesheet" href="css/style.min.css?v=134.1">
+    <link rel="stylesheet" href="css/style.min.css?v=135.2">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
@@ -1560,10 +1560,11 @@ body.booking-portal-page .portal-card {
 .amt-cab-subnote { font-size: 0.62rem !important; color: #475569 !important; margin: 4px 0 0 !important; line-height: 1.25 !important; display: block !important; }
 .amt-compact-review-box, .amt-compact-review-bar {
     background: #f8fafc !important;
-    border: 1px solid #e2e8f0 !important;
-    border-radius: 8px !important;
-    padding: 5px 8px !important;
-    margin-bottom: 5px !important;
+    border: 1.5px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    padding: 12px 14px !important;
+    margin: 10px 0 12px !important;
+    box-sizing: border-box !important;
 }
 .amt-crb-row {
     display: flex !important;
@@ -1572,13 +1573,16 @@ body.booking-portal-page .portal-card {
     gap: 10px !important;
     width: 100% !important;
     box-sizing: border-box !important;
+    padding-bottom: 6px !important;
+    border-bottom: 1px dashed #cbd5e1 !important;
+    margin-bottom: 6px !important;
 }
 .amt-crb-item {
     flex: 1 1 auto !important;
     min-width: 0 !important;
-    font-size: 0.84rem !important;
+    font-size: 0.92rem !important;
     color: #0f172a !important;
-    font-weight: 700 !important;
+    font-weight: 800 !important;
     display: flex !important;
     align-items: flex-start !important;
     gap: 6px !important;
@@ -1592,14 +1596,35 @@ body.booking-portal-page .portal-card {
 }
 .amt-crb-fare {
     flex-shrink: 0 !important;
-    font-size: 1.05rem !important;
+    font-size: 1.15rem !important;
     font-weight: 900 !important;
     color: #0284c7 !important;
     white-space: nowrap !important;
     text-align: right !important;
 }
-.amt-crb-meta { display: flex !important; flex-wrap: wrap !important; gap: 5px !important; font-size: 0.63rem !important; color: #64748b !important; margin-top: 1px !important; }
-.amt-crb-zero { color: #15803d !important; font-weight: 700 !important; }
+.amt-crb-meta {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px 14px !important;
+    font-size: 12px !important;
+    color: #475569 !important;
+    margin-top: 4px !important;
+    line-height: 1.4 !important;
+}
+.amt-crb-meta span {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+}
+.amt-crb-zero {
+    font-size: 12px !important;
+    color: #15803d !important;
+    font-weight: 700 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+    margin-top: 4px !important;
+}
 .amt-btn-confirm {
     background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
     color: #ffffff !important;
@@ -3405,11 +3430,40 @@ select#amtPickupArea option,
     margin: 1px auto 0 !important;
     display: block !important;
 }
-@media (max-width: 480px) {
+@media (max-width: 640px) {
+    .amt-step-hdr-compact .amt-step-title {
+        font-size: 0.90rem !important;
+    }
+    .amt-label {
+        font-size: 12.5px !important;
+        margin-bottom: 4px !important;
+    }
+    .amt-input,
+    .amt-select,
+    select.amt-input,
+    input[type="text"].amt-input,
+    input[type="tel"].amt-input,
+    input[type="email"].amt-input,
+    input[type="date"].amt-input,
+    input[type="time"].amt-input,
+    #amtTourSelect,
+    #amtPickupArea,
+    #amtPickupHotel,
+    #amtDate,
+    #amtTime,
+    #amtName,
+    #amtPhone,
+    #amtEmail,
+    #amtNotes {
+        height: 40px !important;
+        min-height: 40px !important;
+        font-size: 13.5px !important;
+        padding: 7px 10px !important;
+    }
     .amt-btn-next,
     .amt-btn-confirm {
-        padding: 9px 8px !important;
-        min-height: 46px !important;
+        padding: 10px 12px !important;
+        min-height: 48px !important;
     }
     .amt-btn-next .amt-btn-main,
     .amt-btn-confirm .amt-btn-main {
@@ -3422,20 +3476,29 @@ select#amtPickupArea option,
         font-size: 12px !important;
     }
     .amt-btn-sub {
-        font-size: 10px !important;
-        line-height: 1.2 !important;
+        font-size: 10.5px !important;
+        line-height: 1.25 !important;
         margin: 1px auto 0 !important;
         max-width: 100% !important;
     }
+    .amt-btn-back {
+        font-size: 12.5px !important;
+        min-height: 38px !important;
+        padding: 7px 12px !important;
+    }
     .amt-guest-grid,
-    .amt-grid2 {
+    .amt-grid2,
+    .amt-form-row {
         display: flex !important;
         flex-direction: column !important;
         width: 100% !important;
-        gap: 8px !important;
+        gap: 10px !important;
+        margin-top: 4px !important;
+        margin-bottom: 8px !important;
     }
     .amt-guest-grid > div,
-    .amt-grid2 > div {
+    .amt-grid2 > div,
+    .amt-form-row > div {
         width: 100% !important;
     }
 }
@@ -3755,6 +3818,7 @@ input[type="checkbox"]#amtTermsCheckbox,
 }
 @media (max-width: 640px) {
     .amt-grid2,
+    .amt-guest-grid,
     .amt-form-row {
         display: flex !important;
         flex-direction: column !important;
@@ -3763,6 +3827,7 @@ input[type="checkbox"]#amtTermsCheckbox,
         width: 100% !important;
     }
     .amt-grid2 > div,
+    .amt-guest-grid > div,
     .amt-form-row > div {
         width: 100% !important;
     }
@@ -3876,7 +3941,7 @@ input[type="checkbox"]#amtTermsCheckbox,
                                 <span id="amtTourSelectLabel">Select Sightseeing Tour *</span>
                                 <span id="amtTourCountBadge" class="amt-count-badge">6 Tours</span>
                             </label>
-                            <select id="amtTourSelect" class="amt-select" style="width:100%;font-weight:700;font-size:12px;min-height:36px;height:36px;">
+                            <select id="amtTourSelect" class="amt-select">
                                 <option value="T1" selected>T1: Mahabaleshwar Darshan (Arthur Seat) • ₹1,200 (3.5 Hrs)</option>
                                 <option value="T2">T2: Wilson Point Sunrise &amp; Old Heritage • ₹1,200 (3.5 Hrs)</option>
                                 <option value="T3">T3: Pratapgad Fort Heritage Tour • ₹1,600 (3.5 Hrs)</option>
@@ -3921,7 +3986,7 @@ input[type="checkbox"]#amtTermsCheckbox,
                             </div>
                             <div>
                                 <label class="amt-label" for="amtPickupArea">Pickup Area / Locality *</label>
-                                <select id="amtPickupArea" class="amt-input amt-select" style="width:100%;font-size:11px !important;min-height:32px;height:32px;padding:2px 4px;letter-spacing:-0.2px;">
+                                <select id="amtPickupArea" class="amt-input amt-select">
                                     <option value="Mahabaleshwar Market & Central" selected>Mahabaleshwar Market & Town Center</option>
                                     <option value="Metgutad / Panchgani Road">Metgutad / Panchgani Road</option>
                                     <option value="Kate's Point / Duchess Road">Kate's Point / Duchess Road</option>
@@ -4042,7 +4107,7 @@ input[type="checkbox"]#amtTermsCheckbox,
                         <!-- Pickup Time Selection (Section 6: Clean Time Picker, No Fixed Pills) -->
                         <div class="amt-form-group" style="margin-bottom:12px;">
                             <label class="amt-label" for="amtTime">Select Preferred Pickup Time *</label>
-                            <input type="time" id="amtTime" class="amt-input" value="09:00" required style="font-size:1.05rem;font-weight:700;">
+                            <input type="time" id="amtTime" class="amt-input" value="09:00" required>
                             <p id="amtDepartureAdvice" style="font-size:0.78rem;color:#64748b;margin-top:4px;line-height:1.4;">
                                 <i class="fa-solid fa-circle-info" style="color:#0284c7;"></i> Recommended morning departure: <strong style="white-space:nowrap;">09:00&nbsp;AM &ndash; 10:00&nbsp;AM</strong> for clear valley viewpoints before afternoon mist.
                             </p>
@@ -4282,7 +4347,7 @@ input[type="checkbox"]#amtTermsCheckbox,
     <!-- Scripts -->
     <script src="js/tour-data.js?v=134.1"></script>
     <script src="js/ai-assistant.js?v=134.1" defer></script>
-    <script src="js/booking-widget.min.js?v=135.1"></script>
+    <script src="js/booking-widget.min.js?v=135.2"></script>
     <script>
     (function() {
         var search = window.location.search || '';

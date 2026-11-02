@@ -8981,16 +8981,65 @@ body.booking-portal-page .portal-card {
 .amt-cab-subnote { font-size: 0.62rem !important; color: #475569 !important; margin: 3px 0 0 !important; }
 .amt-compact-review-box, .amt-compact-review-bar {
     background: #f8fafc !important;
-    border: 1px solid #e2e8f0 !important;
-    border-radius: 8px !important;
-    padding: 5px 8px !important;
-    margin-bottom: 5px !important;
+    border: 1.5px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    padding: 12px 14px !important;
+    margin: 10px 0 12px !important;
+    box-sizing: border-box !important;
 }
-.amt-crb-row { display: flex !important; justify-content: space-between !important; align-items: center !important; }
-.amt-crb-item { font-size: 0.72rem !important; color: #0f172a !important; font-weight: 700 !important; }
-.amt-crb-fare { font-size: 0.95rem !important; font-weight: 900 !important; color: #0284c7 !important; }
-.amt-crb-meta { display: flex !important; flex-wrap: wrap !important; gap: 5px !important; font-size: 0.63rem !important; color: #64748b !important; margin-top: 1px !important; }
-.amt-crb-zero { color: #15803d !important; font-weight: 700 !important; }
+.amt-crb-row {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding-bottom: 6px !important;
+    border-bottom: 1px dashed #cbd5e1 !important;
+    margin-bottom: 6px !important;
+}
+.amt-crb-item {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    font-size: 0.92rem !important;
+    color: #0f172a !important;
+    font-weight: 800 !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 6px !important;
+    line-height: 1.35 !important;
+}
+.amt-crb-fare {
+    flex-shrink: 0 !important;
+    font-size: 1.15rem !important;
+    font-weight: 900 !important;
+    color: #0284c7 !important;
+    white-space: nowrap !important;
+    text-align: right !important;
+}
+.amt-crb-meta {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px 14px !important;
+    font-size: 12px !important;
+    color: #475569 !important;
+    margin-top: 4px !important;
+    line-height: 1.4 !important;
+}
+.amt-crb-meta span {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+}
+.amt-crb-zero {
+    font-size: 12px !important;
+    color: #15803d !important;
+    font-weight: 700 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+    margin-top: 4px !important;
+}
 .amt-btn-confirm {
     background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
     color: #ffffff !important;
