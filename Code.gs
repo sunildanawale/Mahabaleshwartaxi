@@ -141,8 +141,19 @@ function doPost(e) {
     var notes = String(data.notes || 'None').trim();
     var status = "PENDING CONFIRMATION";
     
-    var isOutstationTrip = (serviceType.toLowerCase() === 'outstation' || serviceType.toLowerCase().indexOf('outstation') !== -1 || tour.toLowerCase().indexOf('pune') !== -1 || tour.toLowerCase().indexOf('mumbai') !== -1 || (tour.toLowerCase().indexOf('drop') !== -1 && tour.toLowerCase().indexOf('airport') !== -1));
-    var isLocalDropTrip = (serviceType.toLowerCase() === 'local_drop' || serviceType.toLowerCase().indexOf('local_drop') !== -1);
+    var isOutstationTrip = (
+      serviceType.toLowerCase() === 'outstation' ||
+      serviceType.toLowerCase().indexOf('outstation') !== -1 ||
+      tour.toLowerCase().indexOf('tr_') !== -1 ||
+      /pune|mumbai|satara|airport|outstation|transfer|kas pathar|sajjangad|poladpur|mahad|raigad|matheran|ganpatipule|wathar/i.test(tour)
+    );
+    var isLocalDropTrip = (
+      !isOutstationTrip && (
+        serviceType.toLowerCase() === 'local_drop' ||
+        serviceType.toLowerCase().indexOf('local_drop') !== -1 ||
+        tour.toLowerCase().indexOf('drop_') !== -1
+      )
+    );
     
     var paymentStatus = "Unpaid (Pay Driver After Tour)";
     if (isOutstationTrip) {
@@ -495,8 +506,19 @@ function handleExecuteConfirm(bookingId, token, format, callback) {
     var taxiCount = r[16] || 1;
     var vehicleCategory = r[17] || "4-Seater Tourist Cab";
     var serviceType = String(r[14] || "").trim().toLowerCase();
-    var isOutstationTrip = (serviceType === 'outstation' || serviceType.indexOf('outstation') !== -1 || tour.toLowerCase().indexOf('pune') !== -1 || tour.toLowerCase().indexOf('mumbai') !== -1 || (tour.toLowerCase().indexOf('drop') !== -1 && tour.toLowerCase().indexOf('airport') !== -1));
-    var isLocalDropTrip = (serviceType === 'local_drop' || serviceType.indexOf('local_drop') !== -1);
+    var isOutstationTrip = (
+      serviceType === 'outstation' ||
+      serviceType.indexOf('outstation') !== -1 ||
+      tour.toLowerCase().indexOf('tr_') !== -1 ||
+      /pune|mumbai|satara|airport|outstation|transfer|kas pathar|sajjangad|poladpur|mahad|raigad|matheran|ganpatipule|wathar/i.test(tour)
+    );
+    var isLocalDropTrip = (
+      !isOutstationTrip && (
+        serviceType === 'local_drop' ||
+        serviceType.indexOf('local_drop') !== -1 ||
+        tour.toLowerCase().indexOf('drop_') !== -1
+      )
+    );
 
     // Send Confirmed Voucher Email to Customer
     if (email && email.indexOf("@") !== -1) {
