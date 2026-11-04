@@ -4268,7 +4268,7 @@ img {
 
 /* 9. Next-Gen Mobile Floating Micro-Dock (iOS/Android Glass Capsule) */
 .mobile-cta {
-    display: none;
+    display: none !important;
     position: fixed !important;
     bottom: 16px !important;
     bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
@@ -4277,7 +4277,6 @@ img {
     margin-left: auto !important;
     margin-right: auto !important;
     transform: none !important;
-    display: flex !important;
     justify-content: center !important;
     align-items: center !important;
     gap: 10px !important;

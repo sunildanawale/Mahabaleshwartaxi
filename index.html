@@ -78,9 +78,9 @@
 
     <meta name="theme-color" content="#0891b2"> <!-- Preload Critical Resources --> <link rel="preload" as="image" href="images/mahabaleshwar-hero-hd.jpg">
 
-    <link rel="preload" href="css/style.min.css?v=135.6" as="style"> <!-- Stylesheets --> <link rel="stylesheet" href="css/advanced-features.min.css?v=134.1">
+    <link rel="preload" href="css/style.min.css?v=135.7" as="style"> <!-- Stylesheets --> <link rel="stylesheet" href="css/advanced-features.min.css?v=134.1">
 
-    <link rel="stylesheet" href="css/style.min.css?v=135.6">
+    <link rel="stylesheet" href="css/style.min.css?v=135.7">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -1397,7 +1397,7 @@ html, body {
     }
 }
 .mobile-cta {
-    display: none;
+    display: none !important;
     position: fixed !important;
     bottom: 16px !important;
     bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
@@ -1406,7 +1406,6 @@ html, body {
     margin-left: auto !important;
     margin-right: auto !important;
     transform: none !important;
-    display: flex !important;
     justify-content: center !important;
     align-items: center !important;
     gap: 10px !important;
