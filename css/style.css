@@ -11282,39 +11282,41 @@ input[type="checkbox"]#amtTermsCheckbox,
     outline: none !important;
 }
 
-/* Passenger Stepper Alignment */
+/* Passenger Stepper Alignment (Harmonized 38px) */
 .amt-pax-box {
     background: #f8fafc !important;
-    border: 1.5px solid #e2e8f0 !important;
-    border-radius: 12px !important;
-    padding: 12px 14px !important;
-    margin: 10px 0 !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    padding: 10px 12px !important;
+    margin: 6px 0 8px !important;
     box-sizing: border-box !important;
+    width: 100% !important;
 }
 .amt-pax-input-row {
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
-    gap: 12px !important;
-    margin-top: 6px !important;
+    gap: 10px !important;
+    margin-top: 4px !important;
     width: 100% !important;
+    box-sizing: border-box !important;
 }
 .amt-pax-stepper-group {
     display: inline-flex !important;
     align-items: center !important;
     border: 1.5px solid #cbd5e1 !important;
-    border-radius: 8px !important;
+    border-radius: 6px !important;
     background: #ffffff !important;
     overflow: hidden !important;
-    height: 42px !important;
-    flex-shrink: 0 !important;
+    height: 38px !important;
+    box-sizing: border-box !important;
 }
 .amt-pax-step-btn {
-    width: 42px !important;
-    height: 42px !important;
+    width: 36px !important;
+    height: 38px !important;
     border: none !important;
     background: transparent !important;
-    font-size: 1.2rem !important;
+    font-size: 1.15rem !important;
     font-weight: 700 !important;
     color: #0284c7 !important;
     cursor: pointer !important;
@@ -11322,30 +11324,38 @@ input[type="checkbox"]#amtTermsCheckbox,
     align-items: center !important;
     justify-content: center !important;
     padding: 0 !important;
+    transition: background 0.15s ease !important;
 }
 #amtPaxInput {
-    width: 50px !important;
-    height: 42px !important;
+    width: 46px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    line-height: 38px !important;
     border: none !important;
     border-left: 1px solid #e2e8f0 !important;
     border-right: 1px solid #e2e8f0 !important;
     text-align: center !important;
-    font-size: 1.12rem !important;
-    font-weight: 800 !important;
+    font-size: 1.05rem !important;
+    font-weight: 700 !important;
     color: #0f172a !important;
     padding: 0 !important;
     background: transparent !important;
-    border-radius: 0 !important;
+    box-sizing: border-box !important;
 }
 #amtPaxDisplayLabel {
-    font-size: 12px !important;
+    font-size: 0.74rem !important;
     font-weight: 700 !important;
     color: #0284c7 !important;
     background: #e0f2fe !important;
+    padding: 4px 8px !important;
+    border-radius: 6px !important;
     border: 1px solid #bae6fd !important;
-    padding: 4px 10px !important;
-    border-radius: 12px !important;
     white-space: nowrap !important;
+    height: 28px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
 }
 
 /* Guidelines Accordion */
@@ -11435,5 +11445,352 @@ input[type="checkbox"]#amtTermsCheckbox,
     .container {
         padding-left: 12px !important;
         padding-right: 12px !important;
+    }
+}
+
+
+/* ============================================================
+   28. STREAMLINED COMPACT RESPONSIVE DESIGN SYSTEM (2026 AUDIT)
+   Eliminates unnecessary vertical scrolling, optimizes screen
+   real estate, preserves all content, touch targets >= 42px.
+   ============================================================ */
+
+:root {
+    --container-max: 1280px !important;
+    --space-8: 1.25rem !important;
+    --space-10: 1.5rem !important;
+    --space-12: 1.75rem !important;
+    --space-16: 2rem !important;
+    --space-20: 2.25rem !important;
+    --space-24: 2.75rem !important;
+}
+
+/* Container Optimization Across Viewports */
+.container {
+    width: 100% !important;
+    max-width: var(--container-max) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    box-sizing: border-box !important;
+}
+@media (max-width: 640px) {
+    .container {
+        padding-left: 14px !important;
+        padding-right: 14px !important;
+    }
+}
+@media (max-width: 360px) {
+    .container {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+}
+
+/* Section Rhythm & Vertical Spacing */
+.section {
+    padding: 24px 0 !important;
+}
+.section--lg {
+    padding: 30px 0 !important;
+}
+@media (max-width: 992px) {
+    .section {
+        padding: 18px 0 !important;
+    }
+    .section--lg {
+        padding: 22px 0 !important;
+    }
+}
+@media (max-width: 640px) {
+    .section {
+        padding: 14px 0 !important;
+    }
+    .section--lg {
+        padding: 18px 0 !important;
+    }
+}
+
+/* Section Headers & Labels Rhythm */
+.section-header[style*="margin-bottom"],
+.text-center[style*="margin-bottom"],
+.section > .container > .text-center {
+    margin-bottom: 18px !important;
+}
+@media (max-width: 640px) {
+    .section-header[style*="margin-bottom"],
+    .text-center[style*="margin-bottom"],
+    .section > .container > .text-center {
+        margin-bottom: 12px !important;
+    }
+}
+.section-label {
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 1.5px !important;
+    margin-bottom: 4px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+}
+.section-title {
+    font-size: clamp(1.2rem, 2.4vw, 1.8rem) !important;
+    font-weight: 800 !important;
+    line-height: 1.25 !important;
+    margin-top: 2px !important;
+    margin-bottom: 5px !important;
+    color: var(--text-primary) !important;
+}
+.section-subtitle {
+    font-size: clamp(0.82rem, 1.4vw, 0.92rem) !important;
+    line-height: 1.45 !important;
+    color: var(--text-secondary) !important;
+    margin-bottom: 8px !important;
+}
+
+/* Main Hero Desktop/Mobile Compactness */
+@media (min-width: 969px) {
+    .hero--world-class {
+        min-height: 82vh !important;
+        max-height: 750px !important;
+        padding-top: 86px !important;
+        padding-bottom: 30px !important;
+    }
+}
+@media (max-width: 968px) {
+    .hero--world-class {
+        min-height: auto !important;
+        max-height: none !important;
+        padding-top: 68px !important;
+        padding-bottom: 18px !important;
+    }
+    .hero__text-col h1.hero__title {
+        font-size: clamp(1.3rem, 5.2vw, 1.65rem) !important;
+        line-height: 1.2 !important;
+        margin-bottom: 4px !important;
+    }
+    .hero__text-col .hero__subtitle {
+        font-size: 0.86rem !important;
+        line-height: 1.35 !important;
+        margin-bottom: 6px !important;
+    }
+    .hero__text-col p.hero__desc {
+        font-size: 0.8rem !important;
+        line-height: 1.35 !important;
+        margin-bottom: 8px !important;
+    }
+    .hero__text-col .hero__actions {
+        display: none !important;
+    }
+    .hero__trust-badges {
+        gap: 6px !important;
+        margin-bottom: 8px !important;
+    }
+    .hero__trust-badge, .hero__trust-chip {
+        font-size: 0.72rem !important;
+        padding: 4px 8px !important;
+    }
+    .hero__booking-col {
+        margin-top: 4px !important;
+    }
+}
+
+/* Subpage Inner Hero Banner Compactness */
+.hero--inner {
+    min-height: 18vh !important;
+    padding: 30px 0 20px !important;
+}
+@media (max-width: 768px) {
+    .hero--inner {
+        min-height: 14vh !important;
+        padding: 22px 0 14px !important;
+    }
+    .hero--inner h1 {
+        font-size: 1.4rem !important;
+        margin-bottom: 4px !important;
+    }
+    .hero--inner p {
+        font-size: 0.84rem !important;
+        margin-bottom: 4px !important;
+    }
+}
+
+/* Grids & Columns */
+.grid {
+    gap: 18px !important;
+}
+@media (max-width: 768px) {
+    .grid {
+        gap: 12px !important;
+    }
+}
+
+/* Side-by-side Trust / Feature Cards on Mobile (>= 360px) */
+@media (min-width: 360px) and (max-width: 768px) {
+    #why-us .grid,
+    .features-grid,
+    .trust-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+    }
+    .trust-card {
+        padding: 12px 10px !important;
+        border-radius: 10px !important;
+    }
+    .trust-card__icon {
+        width: 44px !important;
+        height: 44px !important;
+        font-size: 1.15rem !important;
+        margin: 0 auto 8px !important;
+    }
+    .trust-card__title {
+        font-size: 0.82rem !important;
+        margin-bottom: 4px !important;
+    }
+    .trust-card__desc {
+        font-size: 0.72rem !important;
+        line-height: 1.3 !important;
+        margin: 0 !important;
+    }
+}
+
+/* Destination Cards Compactness */
+.dest-card {
+    border-radius: 12px !important;
+    overflow: hidden !important;
+}
+@media (max-width: 768px) {
+    .dest-card__img {
+        height: 135px !important;
+    }
+    .dest-card__content, .dest-card__body {
+        padding: 10px 12px !important;
+    }
+    .dest-card__title {
+        font-size: 0.95rem !important;
+        margin-bottom: 4px !important;
+    }
+    .dest-card__desc {
+        font-size: 0.78rem !important;
+        line-height: 1.35 !important;
+        margin-bottom: 6px !important;
+    }
+}
+
+/* Tour Cards Compactness */
+.tour-card {
+    margin-bottom: 8px !important;
+    border-radius: 10px !important;
+}
+.tour-header {
+    padding: 10px 14px !important;
+    min-height: auto !important;
+}
+.tour-name {
+    font-size: 0.88rem !important;
+    font-weight: 700 !important;
+}
+.tour-price {
+    font-size: 0.95rem !important;
+    font-weight: 800 !important;
+}
+.tour-details {
+    padding: 10px 14px 12px !important;
+}
+.badge-row {
+    gap: 6px !important;
+    margin-bottom: 6px !important;
+}
+.badge {
+    font-size: 0.72rem !important;
+    padding: 3px 7px !important;
+}
+
+/* FAQ Accordion Items */
+.faq-item {
+    margin-bottom: 8px !important;
+    border-radius: 8px !important;
+}
+.faq-item summary {
+    padding: 10px 14px !important;
+    font-size: 0.88rem !important;
+    font-weight: 700 !important;
+}
+.faq-item .faq-answer, .faq-item > p, .faq-item > div:not(summary) {
+    padding: 8px 14px 12px !important;
+    font-size: 0.82rem !important;
+    line-height: 1.45 !important;
+}
+
+/* Fleet Cards */
+.fleet-card {
+    padding: 12px 14px !important;
+    border-radius: 10px !important;
+}
+.fleet-card__header {
+    margin-bottom: 6px !important;
+}
+
+/* Step Cards (How It Works) */
+.step-card {
+    padding: 14px 12px !important;
+    border-radius: 10px !important;
+}
+
+/* Footer Overhaul & Extreme Height Reduction */
+.footer {
+    padding: 20px 0 calc(72px + env(safe-area-inset-bottom, 0px)) 0 !important;
+}
+.footer__reassurance {
+    margin-bottom: 16px !important;
+    gap: 10px !important;
+}
+@media (min-width: 360px) and (max-width: 768px) {
+    .footer__reassurance {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px !important;
+    }
+    .footer__reassurance-item {
+        padding: 8px 10px !important;
+        gap: 8px !important;
+    }
+    .footer__reassurance-icon {
+        width: 30px !important;
+        height: 30px !important;
+        min-width: 30px !important;
+        font-size: 0.85rem !important;
+    }
+    .footer__reassurance-title {
+        font-size: 0.78rem !important;
+    }
+    .footer__reassurance-desc {
+        font-size: 0.68rem !important;
+    }
+    .footer__grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 16px 12px !important;
+        margin-bottom: 16px !important;
+    }
+    .footer__col h4 {
+        font-size: 0.82rem !important;
+        margin-bottom: 8px !important;
+    }
+    .footer__links li {
+        margin-bottom: 4px !important;
+    }
+    .footer__links a {
+        font-size: 0.76rem !important;
+        line-height: 1.3 !important;
+        padding: 2px 0 !important;
+    }
+    .footer__directory-hub {
+        margin-top: 14px !important;
+        padding-top: 12px !important;
+    }
+    .footer__bottom {
+        padding-top: 12px !important;
+        margin-top: 12px !important;
+        font-size: 0.74rem !important;
     }
 }
