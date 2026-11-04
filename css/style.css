@@ -10744,21 +10744,124 @@ select#amtPickupArea option,
     color: #cbd5e1 !important;
 }
 
-/* Passenger Stepper Alignment */
+/* Unified Symmetrical Alignment for Travel Date & Pickup Area Row */
+.amt-grid2 {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 12px !important;
+    width: 100% !important;
+    margin-top: 6px !important;
+    margin-bottom: 8px !important;
+    align-items: start !important;
+    box-sizing: border-box !important;
+}
+.amt-grid2 > div {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+}
+.amt-grid2 label.amt-label {
+    display: flex !important;
+    align-items: center !important;
+    height: 18px !important;
+    margin-bottom: 4px !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+[data-theme="dark"] .amt-grid2 label.amt-label {
+    color: #f8fafc !important;
+}
+.amt-grid2 #amtDate,
+.amt-grid2 #amtPickupArea,
+select#amtPickupArea.amt-select,
+select#amtPickupArea.amt-input,
+#amtPickupArea,
+#amtDate {
+    width: 100% !important;
+    height: 42px !important;
+    min-height: 42px !important;
+    max-height: 42px !important;
+    padding: 8px 12px !important;
+    font-size: 13.5px !important;
+    font-weight: 600 !important;
+    line-height: 1.4 !important;
+    border: 1.5px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+    background: #ffffff !important;
+    color: #0f172a !important;
+    box-sizing: border-box !important;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
+}
+[data-theme="dark"] select#amtPickupArea,
+[data-theme="dark"] #amtPickupArea,
+[data-theme="dark"] #amtDate {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+    color: #f8fafc !important;
+}
+select#amtPickupArea option,
+#amtPickupArea option {
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    padding: 6px 10px !important;
+    background: #ffffff !important;
+    color: #0f172a !important;
+}
+[data-theme="dark"] select#amtPickupArea option,
+[data-theme="dark"] #amtPickupArea option {
+    background: #1e293b !important;
+    color: #f8fafc !important;
+}
+
+/* Harmonized Component Sizing for Total Passengers (PAX) */
 .amt-pax-box {
     background: #f8fafc !important;
-    border: 1.5px solid #e2e8f0 !important;
-    border-radius: 12px !important;
-    padding: 12px 14px !important;
-    margin: 10px 0 !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    padding: 10px 12px !important;
+    margin: 6px 0 8px !important;
     box-sizing: border-box !important;
+    width: 100% !important;
+}
+[data-theme="dark"] .amt-pax-box {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+    color: #f8fafc !important;
+}
+.amt-pax-box label.amt-label {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+    margin-bottom: 0 !important;
+}
+[data-theme="dark"] .amt-pax-box label.amt-label {
+    color: #f8fafc !important;
+}
+.amt-pax-box .amt-trust-chip {
+    font-size: 10.5px !important;
+    background: #e0f2fe !important;
+    color: #0284c7 !important;
+    padding: 2px 7px !important;
+    border-radius: 5px !important;
+    font-weight: 700 !important;
+}
+[data-theme="dark"] .amt-pax-box .amt-trust-chip {
+    background: #0369a1 !important;
+    color: #f8fafc !important;
 }
 .amt-pax-input-row {
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
-    gap: 12px !important;
-    margin-top: 6px !important;
+    gap: 10px !important;
+    margin-top: 4px !important;
     width: 100% !important;
     box-sizing: border-box !important;
 }
@@ -10766,10 +10869,10 @@ select#amtPickupArea option,
     display: inline-flex !important;
     align-items: center !important;
     border: 1.5px solid #cbd5e1 !important;
-    border-radius: 8px !important;
+    border-radius: 6px !important;
     background: #ffffff !important;
     overflow: hidden !important;
-    height: 42px !important;
+    height: 38px !important;
     box-sizing: border-box !important;
 }
 [data-theme="dark"] .amt-pax-stepper-group {
@@ -10777,11 +10880,11 @@ select#amtPickupArea option,
     border-color: #334155 !important;
 }
 .amt-pax-step-btn {
-    width: 42px !important;
-    height: 42px !important;
+    width: 36px !important;
+    height: 38px !important;
     border: none !important;
     background: transparent !important;
-    font-size: 1.25rem !important;
+    font-size: 1.15rem !important;
     font-weight: 700 !important;
     color: #0284c7 !important;
     cursor: pointer !important;
@@ -10794,18 +10897,24 @@ select#amtPickupArea option,
 .amt-pax-step-btn:hover {
     background: #f0f9ff !important;
 }
+[data-theme="dark"] .amt-pax-step-btn {
+    color: #38bdf8 !important;
+}
 [data-theme="dark"] .amt-pax-step-btn:hover {
     background: #0f172a !important;
 }
 input#amtPaxInput {
-    width: 52px !important;
-    height: 42px !important;
+    width: 46px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    line-height: 38px !important;
     border: none !important;
     border-left: 1px solid #e2e8f0 !important;
     border-right: 1px solid #e2e8f0 !important;
     text-align: center !important;
-    font-size: 1.15rem !important;
-    font-weight: 800 !important;
+    font-size: 1.05rem !important;
+    font-weight: 700 !important;
     color: #0f172a !important;
     padding: 0 !important;
     background: transparent !important;
@@ -10821,6 +10930,57 @@ input#amtPaxInput::-webkit-outer-spin-button,
 input#amtPaxInput::-webkit-inner-spin-button {
     -webkit-appearance: none !important;
     margin: 0 !important;
+}
+#amtPaxDisplayLabel {
+    font-size: 0.74rem !important;
+    font-weight: 700 !important;
+    color: #0284c7 !important;
+    background: #e0f2fe !important;
+    padding: 4px 8px !important;
+    border-radius: 6px !important;
+    border: 1px solid #bae6fd !important;
+    white-space: nowrap !important;
+    height: 28px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
+}
+[data-theme="dark"] #amtPaxDisplayLabel {
+    background: #0369a1 !important;
+    color: #f8fafc !important;
+    border-color: #0284c7 !important;
+}
+#amtTaxiAllocationCard {
+    margin-top: 8px !important;
+    background: #f0f9ff !important;
+    border: 1px solid #bae6fd !important;
+    border-radius: 6px !important;
+    padding: 8px 10px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2px !important;
+    box-sizing: border-box !important;
+}
+[data-theme="dark"] #amtTaxiAllocationCard {
+    background: #0f2b3e !important;
+    border-color: #0369a1 !important;
+}
+#amtTaxiAllocTitle {
+    color: #0369a1 !important;
+    font-size: 0.86rem !important;
+    font-weight: 700 !important;
+}
+[data-theme="dark"] #amtTaxiAllocTitle {
+    color: #38bdf8 !important;
+}
+#amtTaxiAllocNote {
+    font-size: 0.74rem !important;
+    color: #475569 !important;
+    margin: 2px 0 0 !important;
+    line-height: 1.35 !important;
+}
+[data-theme="dark"] #amtTaxiAllocNote {
+    color: #94a3b8 !important;
 }
 
 /* Tour Card Typography Polish */

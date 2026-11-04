@@ -29,7 +29,7 @@
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/advanced-features.min.css?v=134.1">
-    <link rel="stylesheet" href="css/style.min.css?v=135.7">
+    <link rel="stylesheet" href="css/style.min.css?v=135.8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
@@ -918,25 +918,80 @@
     border-top: 1.5px solid #bae6fd !important;
 }
 
-/* Explicit compact styling for Pickup Area dropdown to fit cleanly */
+/* Unified Symmetrical Alignment for Travel Date & Pickup Area Row */
+.amt-grid2 {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 12px !important;
+    width: 100% !important;
+    margin-top: 6px !important;
+    margin-bottom: 8px !important;
+    align-items: start !important;
+    box-sizing: border-box !important;
+}
+.amt-grid2 > div {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+}
+.amt-grid2 label.amt-label {
+    display: flex !important;
+    align-items: center !important;
+    height: 18px !important;
+    margin-bottom: 4px !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+[data-theme="dark"] .amt-grid2 label.amt-label {
+    color: #f8fafc !important;
+}
+.amt-grid2 #amtDate,
+.amt-grid2 #amtPickupArea,
 select#amtPickupArea.amt-select,
 select#amtPickupArea.amt-input,
-#amtPickupArea {
-    font-size: 13px !important;
-    font-weight: 600 !important;
-    padding: 6px 8px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    line-height: normal !important;
-    letter-spacing: -0.1px !important;
+#amtPickupArea,
+#amtDate {
     width: 100% !important;
+    height: 42px !important;
+    min-height: 42px !important;
+    max-height: 42px !important;
+    padding: 8px 12px !important;
+    font-size: 13.5px !important;
+    font-weight: 600 !important;
+    line-height: 1.4 !important;
+    border: 1.5px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+    background: #ffffff !important;
+    color: #0f172a !important;
     box-sizing: border-box !important;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
+}
+[data-theme="dark"] select#amtPickupArea,
+[data-theme="dark"] #amtPickupArea,
+[data-theme="dark"] #amtDate {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+    color: #f8fafc !important;
 }
 select#amtPickupArea option,
 #amtPickupArea option {
-    font-size: 11px !important;
+    font-size: 13px !important;
     font-weight: 500 !important;
-    padding: 3px 5px !important;
+    padding: 6px 10px !important;
+    background: #ffffff !important;
+    color: #0f172a !important;
+}
+[data-theme="dark"] select#amtPickupArea option,
+[data-theme="dark"] #amtPickupArea option {
+    background: #1e293b !important;
+    color: #f8fafc !important;
 }
 
 /* Banner Top Row: Spacious & Luxurious */
@@ -4276,30 +4331,30 @@ input[type="checkbox"]#amtTermsCheckbox,
                         </p>
 
                         <!-- Passengers (PAX) & Auto-Calculated Tourist Cabs (Section 5) -->
-                        <div class="amt-pax-box" style="background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:12px;padding:12px 14px;margin:10px 0;">
+                        <div class="amt-pax-box">
                             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-                                <label class="amt-label" for="amtPaxInput" style="margin-bottom:0;color:#0f172a;font-weight:700;">Total Passengers (PAX) *</label>
-                                <span class="amt-trust-chip" style="font-size:11px;background:#e0f2fe;color:#0284c7;padding:3px 8px;border-radius:6px;font-weight:700;"><i class="fa-solid fa-taxi"></i> 4-Seater Cab Fleet</span>
+                                <label class="amt-label" for="amtPaxInput" style="margin-bottom:0;color:#0f172a;font-weight:700;font-size:13px;">Total Passengers (PAX) *</label>
+                                <span class="amt-trust-chip" style="font-size:10.5px;background:#e0f2fe;color:#0284c7;padding:2px 7px;border-radius:5px;font-weight:700;"><i class="fa-solid fa-taxi"></i> 4-Seater Cab Fleet</span>
                             </div>
-                            <div class="amt-pax-input-row" style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:6px;width:100%;">
-                                <div class="amt-pax-stepper-group" style="display:inline-flex;align-items:center;border:1.5px solid #cbd5e1;border-radius:8px;background:#ffffff;overflow:hidden;height:42px;">
-                                    <button type="button" id="amtPaxMinusBtn" class="amt-pax-step-btn" aria-label="Decrease passenger count" style="width:42px;height:42px;border:none;background:transparent;font-size:1.25rem;font-weight:700;color:#0284c7;cursor:pointer;display:flex;align-items:center;justify-content:center;">&minus;</button>
-                                    <input type="number" id="amtPaxInput" class="amt-input" min="1" max="20" value="2" required style="width:52px;height:42px;border:none;border-left:1px solid #e2e8f0;border-right:1px solid #e2e8f0;text-align:center;font-size:1.15rem;font-weight:800;color:#0f172a;padding:0;background:transparent;">
-                                    <button type="button" id="amtPaxPlusBtn" class="amt-pax-step-btn" aria-label="Increase passenger count" style="width:42px;height:42px;border:none;background:transparent;font-size:1.25rem;font-weight:700;color:#0284c7;cursor:pointer;display:flex;align-items:center;justify-content:center;">&plus;</button>
+                            <div class="amt-pax-input-row">
+                                <div class="amt-pax-stepper-group">
+                                    <button type="button" id="amtPaxMinusBtn" class="amt-pax-step-btn" aria-label="Decrease passenger count">&minus;</button>
+                                    <input type="number" id="amtPaxInput" class="amt-input" min="1" max="20" value="2" required>
+                                    <button type="button" id="amtPaxPlusBtn" class="amt-pax-step-btn" aria-label="Increase passenger count">&plus;</button>
                                 </div>
-                                <span id="amtPaxDisplayLabel" style="font-size:0.78rem;font-weight:700;color:#0284c7;background:#e0f2fe;padding:4px 10px;border-radius:12px;white-space:nowrap;">Fits in 1 Tourist Cab</span>
+                                <span id="amtPaxDisplayLabel">Fits in 1 Tourist Cab</span>
                             </div>
                             
                             <!-- Dynamic Auto-Calculated Tourist Cab Badge (No model names, strictly 4-Seater Tourist Cab) -->
-                            <div id="amtTaxiAllocationCard" class="amt-taxi-alloc-card" style="margin-top:10px;background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:3px;">
+                            <div id="amtTaxiAllocationCard" class="amt-taxi-alloc-card">
                                 <div style="display:flex;align-items:center;justify-content:space-between;">
                                     <div style="display:flex;align-items:center;gap:8px;">
-                                        <i class="fa-solid fa-taxi" style="color:#0284c7;font-size:1.05rem;"></i>
-                                        <strong id="amtTaxiAllocTitle" style="color:#0369a1;font-size:0.92rem;">1 &times; 4-Seater Dedicated Tourist Cab</strong>
+                                        <i class="fa-solid fa-taxi" style="color:#0284c7;font-size:1rem;"></i>
+                                        <strong id="amtTaxiAllocTitle" style="color:#0369a1;font-size:0.86rem;font-weight:700;">1 &times; 4-Seater Dedicated Tourist Cab</strong>
                                     </div>
-                                    <span style="font-size:0.68rem;font-weight:700;color:#166534;background:#dcfce7;padding:2px 6px;border-radius:6px;">AUTO-CALCULATED</span>
+                                    <span style="font-size:0.65rem;font-weight:700;color:#166534;background:#dcfce7;padding:2px 6px;border-radius:4px;">AUTO-CALCULATED</span>
                                 </div>
-                                <p id="amtTaxiAllocNote" style="font-size:0.78rem;color:#475569;margin:2px 0 0;line-height:1.4;">
+                                <p id="amtTaxiAllocNote" style="font-size:0.74rem;color:#475569;margin:2px 0 0;line-height:1.35;">
                                     1 dedicated tourist cab reserved exclusively for your party of 2 passengers.
                                 </p>
                             </div>
@@ -4606,7 +4661,7 @@ input[type="checkbox"]#amtTermsCheckbox,
     <!-- Scripts -->
     <script src="js/tour-data.js?v=134.1"></script>
     <script src="js/ai-assistant.js?v=134.1" defer></script>
-    <script src="js/booking-widget.min.js?v=135.3"></script>
+    <script src="js/booking-widget.min.js?v=135.4"></script>
     <script>
     (function() {
         var search = window.location.search || '';

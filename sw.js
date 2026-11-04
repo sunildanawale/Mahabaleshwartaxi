@@ -3,7 +3,7 @@
    Caches Rate Card & Emergency Taxi Contact for Sahyadri Ghats
    ============================================================ */
 
-const CACHE_NAME = 'aryan-taxi-offline-v4';
+const CACHE_NAME = 'aryan-taxi-offline-v5';
 const PRECACHE_ASSETS = [
     './',
     'index.html',
