@@ -1,416 +1,1588 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head> <!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-WHLEE16BK7"></script> <script> window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-WHLEE16BK7'); </script> <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="manifest" href="manifest.json">
-        <link rel="icon" type="image/svg+xml" href="images/aryan-taxi-logo.svg">
-        <link rel="alternate icon" type="image/png" href="images/aryan-tours-logo.png">
-        <title>Interactive Route Planner & Sightseeing Map | Mahabaleshwar Taxi</title>
-        <meta name="description" content="Interactive Mahabaleshwar and Panchgani sightseeing map. Plan your route, view live distances, and explore union taxi tour coverage.">
-        <meta name="keywords" content="Mahabaleshwar taxi, Mahabaleshwar sightseeing taxi, taxi in Mahabaleshwar, cab service Mahabaleshwar, Panchgani taxi, Mahabaleshwar cab booking, Mahabaleshwar local taxi, Pune to Mahabaleshwar taxi, Mumbai to Mahabaleshwar taxi, Mahabaleshwar tourist taxi">
-        <link rel="canonical" href="https://sunildanawale.github.io/Mahabaleshwartaxi/sightseeing-map.html">
-        <meta name="google-site-verification" content="vgxygrRXU1Mfj8n1f4MScB54ETLgl9MgBTK5O4WamCg" />
-        <meta name="robots" content="index, follow"> <!-- Geo Tags --> <meta name="geo.region" content="IN-MH">
-        <meta name="geo.placename" content="Mahabaleshwar">
-        <meta name="geo.position" content="17.9237;73.6586">
-        <meta name="ICBM" content="17.9237, 73.6586"> <!-- Open Graph --> <meta property="og:title" content="Interactive Sightseeing Route Planner Map Mahabaleshwar Taxi">
-        <meta property="og:description" content="Plan your Mahabaleshwar and Panchgani sightseeing route on an interactive map. View live distances, attraction coverage, and union taxi tours.">
-        <meta property="og:type" content="website">
-        <meta property="og:url" content="https://sunildanawale.github.io/Mahabaleshwartaxi/sightseeing-map.html">
-        <meta property="og:image" content="https://sunildanawale.github.io/Mahabaleshwartaxi/images/mahabaleshwar-hero.jpg">
-        <meta property="og:locale" content="en_IN">
-        <meta property="og:site_name" content="Mahabaleshwar Sightseeing Taxi"> <!-- Twitter Card --> <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="Interactive Sightseeing Route Planner Map Mahabaleshwar Taxi">
-        <meta name="twitter:description" content="Plan your Mahabaleshwar and Panchgani sightseeing route on an interactive map. View distances and book your taxi.">
-        <meta name="twitter:image" content="https://sunildanawale.github.io/Mahabaleshwartaxi/images/mahabaleshwar-hero.jpg">
-        <meta name="theme-color" content="#0891b2"> <!-- Preload Critical Resources --> <link rel="preload" as="image" href="images/mahabaleshwar.jpg">
-        <link rel="preload" href="css/style.min.css?v=136.1" as="style"> <!-- Leaflet CSS --> <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-        <style> .custom-pin { width: 30px; height: 30px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.3); } .leaflet-routing-container { display: none !important; } /* Hide default OSRM UI */ 
-        /* Upgraded Custom Map Pins (No Cluster Blobs, Clear High-Contrast Icons) */
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WHLEE16BK7"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-WHLEE16BK7');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/svg+xml" href="images/aryan-taxi-logo.svg">
+    <link rel="alternate icon" type="image/png" href="images/aryan-tours-logo.png">
+    <title>Interactive Route Planner &amp; Sightseeing Map | Mahabaleshwar Taxi</title>
+    <meta name="description" content="Interactive Mahabaleshwar &amp; Panchgani sightseeing route planner. Real-time point-to-point taxi fares, road distances, custom multi-stop tour itineraries, and 100% verified mountain GPS routing.">
+    <meta name="keywords" content="Mahabaleshwar taxi, Mahabaleshwar sightseeing taxi, taxi in Mahabaleshwar, cab service Mahabaleshwar, Panchgani taxi, Mahabaleshwar route planner, Mahabaleshwar taxi fare, point to point taxi Mahabaleshwar">
+    <link rel="canonical" href="https://sunildanawale.github.io/Mahabaleshwartaxi/sightseeing-map.html">
+    <meta name="google-site-verification" content="vgxygrRXU1Mfj8n1f4MScB54ETLgl9MgBTK5O4WamCg">
+    <meta name="robots" content="index, follow">
+    <!-- Geo Tags -->
+    <meta name="geo.region" content="IN-MH">
+    <meta name="geo.placename" content="Mahabaleshwar">
+    <meta name="geo.position" content="17.9237;73.6586">
+    <meta name="ICBM" content="17.9237, 73.6586">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Interactive Sightseeing Route Planner Map | Mahabaleshwar Taxi">
+    <meta property="og:description" content="Calculate real driving distances, official union taxi tariffs, and custom sightseeing itineraries across Mahabaleshwar and Panchgani.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sunildanawale.github.io/Mahabaleshwartaxi/sightseeing-map.html">
+    <meta property="og:image" content="https://sunildanawale.github.io/Mahabaleshwartaxi/images/mahabaleshwar-hero.jpg">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:site_name" content="Mahabaleshwar Sightseeing Taxi">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Interactive Sightseeing Route Planner Map | Mahabaleshwar Taxi">
+    <meta name="twitter:description" content="Plan your Mahabaleshwar &amp; Panchgani sightseeing route. View live road distances, union tariffs, and book cabs.">
+    <meta name="twitter:image" content="https://sunildanawale.github.io/Mahabaleshwartaxi/images/mahabaleshwar-hero.jpg">
+    <meta name="theme-color" content="#0891b2">
+    <!-- Preload Critical Resources -->
+    <link rel="preload" as="image" href="images/mahabaleshwar.jpg">
+    <link rel="preload" href="css/style.min.css?v=136.1" as="style">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+    <style>
+        /* ============================================================
+           INTERACTIVE MAP & POINT-TO-POINT ROUTE PLANNER STYLES
+           ============================================================ */
+        .map-section {
+            padding: var(--space-4, 16px) 0 var(--space-8, 32px);
+            background: #f8fafc;
+        }
+
+        /* Outer Container */
+        .map-wrapper {
+            display: flex;
+            background: #ffffff;
+            border: 1px solid var(--gray-200, #e2e8f0);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+            position: relative;
+            min-height: 680px;
+        }
+
+        /* Sidebar Container */
+        .map-sidebar {
+            width: 440px;
+            min-width: 440px;
+            display: flex;
+            flex-direction: column;
+            background: #ffffff;
+            border-right: 1px solid var(--gray-200, #e2e8f0);
+            z-index: 10;
+            overflow: hidden;
+        }
+
+        /* Map Container */
+        .map-container {
+            flex: 1;
+            height: 100%;
+            min-height: 680px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Tab Switcher */
+        .map-tabs {
+            display: flex;
+            background: #f1f5f9;
+            padding: 6px;
+            gap: 6px;
+            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 20;
+        }
+        .map-tab-btn {
+            flex: 1;
+            padding: 10px 6px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 8px;
+            background: transparent;
+            color: #64748b;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+        }
+        .map-tab-btn:hover {
+            color: #0f172a;
+            background: rgba(255, 255, 255, 0.6);
+        }
+        .map-tab-btn.active {
+            background: #ffffff;
+            color: #0284c7;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+        .map-tab-btn .tab-badge {
+            background: #0284c7;
+            color: #ffffff;
+            padding: 2px 7px;
+            border-radius: 12px;
+            font-size: 0.72rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        /* Tab Panels */
+        .map-tab-panel {
+            display: none;
+            flex: 1;
+            flex-direction: column;
+            overflow-y: auto;
+            background: #ffffff;
+        }
+        .map-tab-panel.active {
+            display: flex;
+        }
+
+        /* ==================== TAB 1: POINT-TO-POINT ==================== */
+        .p2p-panel-inner {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .p2p-selectors-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            position: relative;
+        }
+        .p2p-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .p2p-input-label {
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .p2p-select {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1.5px solid #cbd5e1;
+            background: #ffffff;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #0f172a;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+        .p2p-select:focus {
+            border-color: #0284c7;
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+        }
+        .p2p-swap-wrap {
+            display: flex;
+            justify-content: center;
+            margin: -6px 0;
+            z-index: 2;
+        }
+        .p2p-swap-btn {
+            background: #0284c7;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(2, 132, 199, 0.35);
+            transition: transform 0.25s ease, background 0.2s;
+        }
+        .p2p-swap-btn:hover {
+            transform: scale(1.12);
+            background: #0369a1;
+        }
+        .p2p-swap-btn.rotating {
+            transform: rotate(180deg) scale(1.15);
+        }
+
+        /* Trip Mode Selector */
+        .p2p-trip-type {
+            display: flex;
+            background: #e2e8f0;
+            padding: 3px;
+            border-radius: 8px;
+            gap: 3px;
+        }
+        .p2p-type-label {
+            flex: 1;
+            text-align: center;
+            padding: 7px 4px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #475569;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            transition: all 0.2s;
+        }
+        .p2p-type-label input {
+            display: none;
+        }
+        .p2p-type-label:has(input:checked) {
+            background: #ffffff;
+            color: #0284c7;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Route Calculation Result Card */
+        .p2p-result-box {
+            background: linear-gradient(145deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 1.5px solid #bae6fd;
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0 4px 14px rgba(2, 132, 199, 0.08);
+        }
+        .p2p-result-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .p2p-badge-union {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #0284c7;
+            color: #ffffff;
+            font-size: 0.68rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 3px 8px;
+            border-radius: 12px;
+        }
+        .p2p-route-title {
+            margin: 6px 0 0;
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #0f172a;
+            line-height: 1.3;
+        }
+        .p2p-metrics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+            background: #ffffff;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #bae6fd;
+            text-align: center;
+        }
+        .p2p-metric-item {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .p2p-metric-item.metric-item--fare {
+            border-left: 1.5px dashed #bae6fd;
+            padding-left: 6px;
+        }
+        .metric-label {
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: #64748b;
+        }
+        .metric-val {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #0f172a;
+        }
+        .metric-item--fare .metric-val {
+            color: #16a34a;
+            font-size: 1.25rem;
+        }
+        .p2p-guarantee-strip {
+            font-size: 0.76rem;
+            line-height: 1.4;
+            color: #334155;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 7px 10px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .p2p-action-row {
+            display: flex;
+            gap: 8px;
+        }
+        .p2p-book-btn {
+            flex: 1;
+            padding: 10px 14px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(22, 163, 74, 0.25);
+        }
+        .p2p-zoom-btn {
+            background: #ffffff;
+            color: #0284c7;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 0 12px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .p2p-zoom-btn:hover {
+            background: #f1f5f9;
+            border-color: #0284c7;
+        }
+
+        /* ==================== TAB 2: CUSTOM ITINERARY ==================== */
+        .itinerary-panel-inner {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .it-summary-stats {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 1.5px solid #bbf7d0;
+            border-radius: 12px;
+            padding: 12px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .it-stat-col {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .it-stat-label {
+            font-size: 0.65rem;
+            font-weight: 800;
+            color: #166534;
+            text-transform: uppercase;
+        }
+        .it-stat-num {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #14532d;
+        }
+        .it-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+        }
+        .it-btn-pill {
+            background: none;
+            border: 1px solid #cbd5e1;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #475569;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+        }
+        .it-btn-pill:hover {
+            background: #f1f5f9;
+            color: #0f172a;
+        }
+
+        /* Stops List */
+        .it-stops-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 380px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+        .it-stop-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 8px 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .it-stop-card:hover {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+        .it-stop-seq {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #0284c7;
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .it-stop-thumb {
+            width: 44px;
+            height: 44px;
+            border-radius: 6px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .it-stop-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .it-stop-name {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #0f172a;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .it-stop-actions {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .it-btn-reorder, .it-btn-remove {
+            background: none;
+            border: none;
+            padding: 6px;
+            color: #94a3b8;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+        .it-btn-reorder:hover:not(:disabled) {
+            color: #0284c7;
+            background: #f1f5f9;
+        }
+        .it-btn-reorder:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+        .it-btn-remove:hover {
+            color: #ef4444;
+            background: #fee2e2;
+        }
+
+        /* Empty State */
+        .it-empty-box {
+            padding: 30px 16px;
+            text-align: center;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 1.5px dashed #cbd5e1;
+        }
+        .it-empty-icon {
+            font-size: 2.2rem;
+            color: #cbd5e1;
+            margin-bottom: 8px;
+        }
+        .preset-buttons-row {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-top: 14px;
+        }
+        .btn-preset {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #0284c7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s;
+        }
+        .btn-preset:hover {
+            border-color: #0284c7;
+            background: #f0f9ff;
+            transform: translateX(2px);
+        }
+
+        /* ==================== TAB 3: PLACES DIRECTORY ==================== */
+        .places-panel-inner {
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            height: 100%;
+        }
+        .places-search-bar {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            font-size: 0.88rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .places-search-bar:focus {
+            border-color: #0284c7;
+        }
+        .places-filter-row {
+            display: flex;
+            gap: 8px;
+        }
+        .places-tour-select {
+            flex: 1;
+            padding: 8px 10px;
+            border-radius: 6px;
+            border: 1px solid #cbd5e1;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: #ffffff;
+            cursor: pointer;
+        }
+        .btn-nearby-me {
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #0284c7;
+            background: #f0f9ff;
+            color: #0284c7;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+        }
+        .btn-nearby-me:hover {
+            background: #0284c7;
+            color: #ffffff;
+        }
+        .cat-pills-row {
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            padding-bottom: 2px;
+        }
+        .cat-pill {
+            padding: 4px 10px;
+            border-radius: 14px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            border: 1px solid #cbd5e1;
+            background: #ffffff;
+            color: #475569;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+        .cat-pill.active {
+            background: #0284c7;
+            color: #ffffff;
+            border-color: #0284c7;
+        }
+
+        /* Locations Cards List */
+        .locations-list {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding-right: 2px;
+        }
+        .location-card {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 10px;
+            border: 1px solid #e2e8f0;
+            cursor: pointer;
+            display: flex;
+            gap: 10px;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .location-card:hover, .location-card.active {
+            border-color: #0284c7;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.12);
+        }
+        .location-card.card-added {
+            border-color: #16a34a !important;
+            background: #f0fdf4 !important;
+        }
+        .location-card img {
+            width: 72px;
+            height: 72px;
+            border-radius: 8px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .loc-details {
+            flex: 1;
+            min-width: 0;
+        }
+        .loc-details h3 {
+            margin: 2px 0 3px;
+            font-size: 0.95rem;
+            color: #0f172a;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .loc-details p {
+            margin: 0 0 6px;
+            font-size: 0.78rem;
+            color: #64748b;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .card-action-bar {
+            display: flex;
+            gap: 6px;
+            margin-top: 4px;
+        }
+        .card-btn-route {
+            background: #f0f9ff;
+            color: #0284c7;
+            border: 1px solid #bae6fd;
+            border-radius: 4px;
+            padding: 3px 8px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .card-btn-route:hover {
+            background: #0284c7;
+            color: #ffffff;
+        }
+        .card-btn-add {
+            background: #f8fafc;
+            color: #334155;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            padding: 3px 8px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .card-btn-add:hover {
+            background: #e2e8f0;
+        }
+        .card-btn-add.added {
+            background: #16a34a;
+            color: #ffffff;
+            border-color: #16a34a;
+        }
+
+        /* Tour Badges */
+        .badge {
+            display: inline-block;
+            padding: 2px 7px;
+            font-size: 0.68rem;
+            border-radius: 10px;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+        .b-tour1 { background: #e0f2fe; color: #0284c7; }
+        .b-tour2 { background: #dcfce7; color: #16a34a; }
+        .b-tour3 { background: #fef08a; color: #a16207; }
+        .b-tour4 { background: #fce7f3; color: #db2777; }
+        .b-tour5 { background: #ede9fe; color: #7c3aed; }
+        .b-tour6 { background: #ffedd5; color: #ea580c; }
+        .b-tour7 { background: #fef3c7; color: #b45309; }
+
+        /* ==================== MAP PIN ICONS ==================== */
         .map-marker-pin-wrap { background: transparent !important; border: none !important; }
-        .map-pin { width: 36px; height: 36px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35); border: 2.5px solid #ffffff; cursor: pointer; transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease; }
-        .map-pin i { transform: rotate(45deg); color: #ffffff; font-size: 15px; }
-        .map-pin:hover { transform: rotate(-45deg) scale(1.22); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); z-index: 99999 !important; }
-        .map-pin.is-added { background-color: #16a34a !important; border-color: #fef08a !important; box-shadow: 0 0 14px rgba(22, 163, 74, 0.85) !important; }
-        .map-pin-shadow { width: 16px; height: 5px; background: rgba(0, 0, 0, 0.28); border-radius: 50%; margin: 2px auto 0; }
-        .location-card.card-added { border-color: #16a34a !important; background: #f0fdf4 !important; }
-        .map-popup-inner { border-radius: 10px; overflow: hidden; background: #ffffff; }
-        .map-popup-inner .popup-img { width: 100%; height: 110px; object-fit: cover; display: block; }
-        .map-popup-inner .popup-body { padding: 12px; text-align: center; }
-        .map-popup-inner .popup-title { font-size: 0.95rem; font-weight: 700; color: #0f172a; margin: 0 0 4px 0; }
-        </style> <style> /* Map Layout */ .map-wrapper { display: flex; height: 80vh; min-height: 600px; margin: var(--space-6) 0; border: 1px solid var(--gray-200); border-radius: 12px; overflow: hidden; background: #fff; box-shadow: 0 10px 25px rgba(0,0,0,0.05); position: relative;} .sidebar { width: 400px; display: flex; flex-direction: column; border-right: 1px solid var(--gray-200); background: #f8fafc; z-index: 1000;} .map-container { flex: 1; z-index: 1;} /* Mobile Layout */ @media (max-width: 968px) { .map-wrapper { flex-direction: column; height: 85vh; margin: 0; border-radius: 0; border: none; } .map-container { height: 100%; width: 100%; flex: 1;} .sidebar { position: absolute; bottom: 0; left: 0; width: 100%; height: 60vh; background: white; border-top-left-radius: 20px; border-top-right-radius: 20px; transform: translateY(100%); transition: transform 0.3s ease; box-shadow: 0 -5px 25px rgba(0,0,0,0.15); z-index: 2000; } .sidebar.open { transform: translateY(0); } .mobile-drag-handle { width: 40px; height: 5px; background: #cbd5e1; border-radius: 5px; margin: 10px auto; cursor: pointer;} } /* Sidebar Controls */ .sidebar-controls { padding: 15px; background: white; border-bottom: 1px solid var(--gray-200); z-index: 2;} .search-box { width: 100%; padding: 10px 15px; border-radius: 8px; border: 1px solid var(--gray-300); margin-bottom: 10px; font-size: 0.95rem; } .filter-row { display: flex; gap: 10px; margin-bottom: 10px; flex-wrap: wrap;} .filter-select { padding: 8px; border-radius: 6px; border: 1px solid var(--gray-300); font-size: 0.85rem; flex: 1; min-width: 120px;} .btn-nearby { padding: 8px 12px; border-radius: 6px; border: 1px solid var(--primary); background: var(--bg-secondary); color: var(--primary); font-size: 0.85rem; cursor: pointer; transition: 0.2s;} .btn-nearby:hover { background: var(--primary); color: white; } /* Sidebar List */ .locations-list { flex: 1; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; gap: 12px; } .location-card { background: var(--bg-primary); border-radius: 8px; padding: 12px; border: 1px solid var(--gray-200); cursor: pointer; display: flex; gap: 12px; transition: all 0.2s; position: relative;} .location-card:hover, .location-card.active { border-color: var(--primary); box-shadow: 0 4px 12px rgba(8, 145, 178, 0.1); } .location-card img { width: 80px; height: 80px; border-radius: 6px; object-fit: cover; flex-shrink: 0; } .loc-details h3 { margin: 0 0 4px 0; font-size: 1.05rem; color: var(--text-primary); } .loc-details p { margin: 0 0 8px 0; font-size: 0.8rem; color: var(--gray-500); line-height: 1.3; } /* Tour Badges */ .badge { display: inline-block; padding: 2px 8px; font-size: 0.7rem; border-radius: 12px; font-weight: 600; margin-bottom: 4px; } .b-tour1 { background: #e0f2fe; color: #0284c7; } .b-tour2 { background: #dcfce7; color: #16a34a; } .b-tour3 { background: #fef08a; color: #a16207; } .b-tour4 { background: #fce7f3; color: #db2777; } .b-tour5 { background: #ede9fe; color: #7c3aed; } .b-tour6 { background: #ffedd5; color: #ea580c; } .b-tour7 { background: #fef3c7; color: #b45309; } /* Add to Plan Button */ .add-to-plan { position: absolute; bottom: 12px; right: 12px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 4px; padding: 4px 8px; font-size: 0.75rem; font-weight: 600; color: var(--text-primary); cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 5px; } .add-to-plan:hover { background: #e2e8f0; } .add-to-plan.added { background: var(--success); color: white; border-color: var(--success); } /* Custom Markers & Pulse */ .custom-marker svg { filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.3)); transition: transform 0.2s;} .custom-marker:hover svg, .custom-marker.pulse svg { transform: scale(1.2); } @keyframes pulse-ring { 0% { transform: scale(0.8); opacity: 0.5; } 100% { transform: scale(2.5); opacity: 0; } } .custom-marker.pulse::after { content: ''; width: 30px; height: 30px; background: var(--primary); border-radius: 50%; position: absolute; top: -5px; left: -5px; animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite; z-index: -1; } /* Popups */ .leaflet-popup-content-wrapper { padding: 0; overflow: hidden; border-radius: 12px; } .leaflet-popup-content { margin: 0; width: 240px !important; } .popup-img { width: 100%; height: 130px; object-fit: cover; } .popup-body { padding: 15px; text-align: center; } .popup-title { font-weight: 700; font-size: 1rem; margin: 0 0 5px 0; color: #0f172a; } .popup-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; } .p-btn { padding: 6px; font-size: 0.75rem; font-weight: 600; border-radius: 4px; text-decoration: none; cursor: pointer; border: none; } .p-btn-dir { background: #f1f5f9; color: #334155; } .p-btn-dir:hover { background: #e2e8f0; } .p-btn-add { background: var(--primary); color: white; } .p-btn-add.added { background: var(--success); } /* Itinerary Drawer */ .itinerary-drawer { position: absolute; bottom: 20px; right: 20px; width: 300px; background: white; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); z-index: 1000; display: none; flex-direction: column; overflow: hidden; border: 1px solid var(--gray-200);} .itinerary-drawer.active { display: flex; } .it-header { background: var(--secondary); color: white; padding: 12px 15px; font-weight: 600; display: flex; justify-content: space-between; align-items: center;} .it-body { padding: 15px; font-size: 0.9rem; } .it-stats { display: flex; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid var(--gray-200); padding-bottom: 10px;} .it-stops { max-height: 150px; overflow-y: auto; margin-bottom: 15px; } .it-stop-item { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 0.85rem; } .it-stop-item i { color: var(--primary); font-size: 0.7rem; } @media (max-width: 968px) { .itinerary-drawer { bottom: 80px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 350px; } } /* Mobile Trigger */ .mobile-map-btn { display: none; position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 1500; background: var(--secondary); color: white; padding: 10px 20px; border-radius: 20px; font-weight: 600; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: none;} @media (max-width: 968px) { .mobile-map-btn { display: block; } } /* Scrollbar */ .locations-list::-webkit-scrollbar, .it-stops::-webkit-scrollbar { width: 5px; } .locations-list::-webkit-scrollbar-track, .it-stops::-webkit-scrollbar-track { background: #f1f5f9; } .locations-list::-webkit-scrollbar-thumb, .it-stops::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; } </style> <!-- Stylesheets --> <link rel="stylesheet" href="css/advanced-features.min.css?v=98.0">
-        <link rel="stylesheet" href="css/style.min.css?v=136.1">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> <!-- Auto-Injected JSON-LD SEO Schema --> <script type="application/ld+json"> [ { "@context": "https://schema.org", "@type": "TaxiService", "name": "Mahabaleshwar Sightseeing Taxi", "alternateName": "Aryan Taxi Mahabaleshwar", "image": "https://sunildanawale.github.io/Mahabaleshwartaxi/images/mahabaleshwar.jpg", "telephone": "+919922882044", "email": "aryansdtravels@gmail.com", "url": "https://sunildanawale.github.io/Mahabaleshwartaxi/", "priceRange": "₹1200 - ₹18000", "areaServed": [ { "@type": "City", "name": "Mahabaleshwar" }, { "@type": "City", "name": "Panchgani" }, { "@type": "City", "name": "Pune" }, { "@type": "City", "name": "Mumbai" } ] }, { "@context": "https://schema.org", "@type": "TouristAttraction", "name": "Advanced Route Planner Map", "provider": { "@type": "TaxiService", "name": "Mahabaleshwar Sightseeing Taxi" } } ] </script> </head>
-        <body>
-            <a href="#main-content" class="skip-link">Skip to main content</a> <!-- Top Bar --> <div class="top-bar" role="banner">
-            <div class="top-bar__item">
-                <i class="fa-solid fa-phone">
-            </i>
+        .map-pin {
+            width: 36px;
+            height: 36px;
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+            border: 2.5px solid #ffffff;
+            cursor: pointer;
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+        }
+        .map-pin i, .map-pin span {
+            transform: rotate(45deg);
+            color: #ffffff;
+            font-size: 14px;
+        }
+        .map-pin:hover {
+            transform: rotate(-45deg) scale(1.22);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            z-index: 99999 !important;
+        }
+        .map-pin.is-added {
+            background-color: #16a34a !important;
+            border-color: #fef08a !important;
+            box-shadow: 0 0 14px rgba(22, 163, 74, 0.85) !important;
+        }
+        .map-pin-shadow {
+            width: 16px;
+            height: 5px;
+            background: rgba(0, 0, 0, 0.28);
+            border-radius: 50%;
+            margin: 2px auto 0;
+        }
+
+        /* Start (A) & End (B) Route Pins */
+        .p2p-route-marker-wrap { background: transparent !important; border: none !important; }
+        .p2p-pin {
+            width: 34px;
+            height: 34px;
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2.5px solid #ffffff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            font-weight: 900;
+        }
+        .p2p-pin span {
+            transform: rotate(45deg);
+            color: #ffffff;
+            font-size: 14px;
+        }
+        .p2p-pin-start { background: #16a34a !important; }
+        .p2p-pin-end   { background: #dc2626 !important; }
+
+        /* Leaflet Popups */
+        .custom-map-popup .leaflet-popup-content-wrapper {
+            padding: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        .custom-map-popup .leaflet-popup-content {
+            margin: 0;
+            width: 250px !important;
+        }
+        .map-popup-inner .popup-img {
+            width: 100%;
+            height: 115px;
+            object-fit: cover;
+            display: block;
+        }
+        .map-popup-inner .popup-body {
+            padding: 12px;
+            text-align: center;
+        }
+        .map-popup-inner .popup-title {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin: 0 0 4px 0;
+        }
+
+        /* Floating Controls on Map */
+        .map-floating-layer-switcher {
+            position: absolute;
+            top: 12px;
+            right: 54px;
+            z-index: 1000;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+            display: flex;
+            overflow: hidden;
+            border: 1px solid #cbd5e1;
+        }
+        .layer-btn {
+            background: transparent;
+            border: none;
+            padding: 6px 11px;
+            font-size: 0.74rem;
+            font-weight: 700;
+            color: #475569;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .layer-btn.active {
+            background: #0284c7;
+            color: #ffffff;
+        }
+        .map-route-pill {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            z-index: 1000;
+            background: #ffffff;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #0f172a;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+            border: 1.5px solid #0284c7;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            gap: 6px;
+            max-width: 280px;
+        }
+        .map-floating-actions {
+            position: absolute;
+            bottom: 20px;
+            right: 14px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .map-action-btn {
+            background: #ffffff;
+            color: #0f172a;
+            border: 1px solid #cbd5e1;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        .map-action-btn:hover {
+            background: #f1f5f9;
+            border-color: #0284c7;
+            color: #0284c7;
+        }
+
+        /* ============================================================
+           MOBILE RESPONSIVE OVERHAUL (100% VISIBILITY GUARANTEE)
+           ============================================================ */
+        @media (max-width: 968px) {
+            .map-section {
+                padding: 0 0 24px 0;
+            }
+            .map-section .container {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                max-width: 100% !important;
+            }
+            .map-wrapper {
+                flex-direction: column;
+                min-height: auto;
+                border-radius: 0;
+                border: none;
+                box-shadow: none;
+                background: #f8fafc;
+            }
+            .map-container {
+                width: 100%;
+                height: 46vh;
+                min-height: 310px;
+                max-height: 420px;
+                position: sticky;
+                top: 54px;
+                z-index: 15;
+                transition: height 0.3s ease;
+                border-bottom: 2px solid #e2e8f0;
+            }
+            .map-wrapper.map-expanded .map-container {
+                height: 82vh;
+                max-height: none;
+            }
+            .map-sidebar {
+                width: 100%;
+                min-width: 100%;
+                border-right: none;
+                border-top: none;
+                background: #ffffff;
+                box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+                border-radius: 18px 18px 0 0;
+                margin-top: -10px;
+                position: relative;
+                z-index: 25;
+            }
+            .map-tabs {
+                border-radius: 18px 18px 0 0;
+                padding: 6px 4px;
+                position: sticky;
+                top: 0;
+                background: #f8fafc;
+                border-bottom: 2px solid #e2e8f0;
+            }
+            .map-tab-btn {
+                font-size: 0.78rem;
+                padding: 9px 4px;
+            }
+            .map-tab-panel {
+                min-height: 360px;
+            }
+            .p2p-panel-inner, .itinerary-panel-inner, .places-panel-inner {
+                padding: 14px;
+            }
+            .map-floating-layer-switcher {
+                top: 8px;
+                right: 48px;
+            }
+            .map-route-pill {
+                top: 8px;
+                left: 8px;
+                font-size: 0.72rem;
+                padding: 5px 10px;
+                max-width: 220px;
+            }
+            .map-floating-actions {
+                bottom: 14px;
+                right: 8px;
+            }
+        }
+    </style>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/advanced-features.min.css?v=98.0">
+    <link rel="stylesheet" href="css/style.min.css?v=136.1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Auto-Injected JSON-LD SEO Schema -->
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "TaxiService",
+        "name": "Mahabaleshwar Sightseeing Taxi",
+        "alternateName": "Aryan Taxi Mahabaleshwar",
+        "image": "https://sunildanawale.github.io/Mahabaleshwartaxi/images/mahabaleshwar.jpg",
+        "telephone": "+919922882044",
+        "email": "aryansdtravels@gmail.com",
+        "url": "https://sunildanawale.github.io/Mahabaleshwartaxi/",
+        "priceRange": "₹100 - ₹3000",
+        "areaServed": [
+          { "@type": "City", "name": "Mahabaleshwar" },
+          { "@type": "City", "name": "Panchgani" },
+          { "@type": "City", "name": "Pune" },
+          { "@type": "City", "name": "Mumbai" }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "TouristAttraction",
+        "name": "Mahabaleshwar Sightseeing Map & Route Planner",
+        "description": "Interactive point-to-point taxi route planner and sightseeing map with real road distances and official taxi union tariffs.",
+        "provider": {
+          "@type": "TaxiService",
+          "name": "Mahabaleshwar Sightseeing Taxi"
+        }
+      }
+    ]
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Top Bar -->
+    <div class="top-bar" role="banner">
+        <div class="top-bar__item">
+            <i class="fa-solid fa-phone"></i>
             <a href="tel:+919922882044">+91 99228 82044</a>
         </div>
-        <div class="top-bar__divider" aria-hidden="true">
-        </div>
+        <div class="top-bar__divider" aria-hidden="true"></div>
         <div class="top-bar__item">
-            <i class="fa-brands fa-whatsapp">
-        </i>
-        <a href="https://api.whatsapp.com/send?phone=919922882044&text=Hello%20Aryan%20Taxi%20Mahabaleshwar%20%F0%9F%91%8B%0AExplore%20Sahyadri%20%E2%80%A2%20Taxi%20Booking%20Request%0A%0A%E2%80%A2%20Tour%3A%20Mahabaleshwar%20Sightseeing%20Taxi%0A%E2%80%A2%20Date%3A%20%5BPlease%20enter%20travel%20date%5D%0A%E2%80%A2%20Pickup%20Hotel%3A%20%5BPlease%20enter%20hotel%20name%5D%0A%E2%80%A2%20Total%20Guests%3A%20%5BPlease%20enter%20passenger%20count%5D%0A%0A%E2%9C%85%20Official%20Union%20Rate%20accepted.%20Pay%20driver%20directly%20after%20trip.%0A%F0%9F%91%89%20Please%20confirm%20cab%20availability." target="_blank" rel="noopener">WhatsApp Us</a>
-    </div>
-    <div class="top-bar__divider" aria-hidden="true">
-    </div>
-    <div class="top-bar__item">
-        <i class="fa-solid fa-clock">
-    </i>
-    <span>Available 24/7</span>
-</div>
-</div> <!-- Navigation --> <nav class="navbar" role="navigation" aria-label="Main navigation">
-<div class="navbar__inner">
-    <a href="index.html" class="navbar__logo" aria-label="Mahabaleshwar Taxi by Aryan Taxi Mahabaleshwar — Explore Sahyadri">
-    <img src="images/aryan-taxi-logo.svg" alt="Aryan Taxi Mahabaleshwar Logo" width="42" height="42" loading="eager">
-    <div class="navbar__logo-text">
-        <span class="navbar__brand">Mahabaleshwar Taxi</span>
-        <span class="navbar__sub">by Aryan Taxi Mahabaleshwar</span>
-    </div>
-</a>
-<div class="nav-overlay" aria-hidden="true">
-</div>
-<ul class="navbar__menu" id="navMenu">
-    <li>
-        <a href="index.html" class="navbar__link">Home</a>
-    </li>
-    <li>
-        <a href="places-to-visit-in-mahabaleshwar.html" class="navbar__link">Places to Visit</a>
-    </li>
-    <li>
-        <a href="tour-packages.html" class="navbar__link">Tours</a>
-    </li>
-    <li>
-        <a href="sightseeing-map.html" class="navbar__link">Map</a>
-    </li>
-    <li>
-        <a href="taxi-fare.html" class="navbar__link">Fares</a>
-    </li>
-    <li>
-        <a href="ai-trip-planner.html" class="navbar__link">
-        <i class="fa-solid fa-wand-magic-sparkles" style="color: var(--accent);">
-    </i> AI Planner</a>
-</li>
-<li>
-    <a href="travel-guide.html" class="navbar__link">Travel Guide</a>
-</li>
-<li>
-    <a href="about.html" class="navbar__link">About</a>
-</li>
-<li>
-    <a href="faq.html" class="navbar__link">FAQ</a>
-</li>
-<li>
-    <a href="booking.html" class="navbar__link navbar__link--cta">Book Now</a>
-</li>
-<li>
-    <button class="theme-toggle" aria-label="Toggle dark mode">
-        <span class="icon-moon">🌙</span>
-        <span class="icon-sun">☀️</span>
-    </button>
-</li>
-</ul>
-<button class="navbar__toggle" aria-label="Open menu" aria-expanded="false">
-    <span>
-</span>
-<span>
-</span>
-<span>
-</span>
-</button>
-</div>
-</nav>
-<main id="main-content">
-    <section class="hero--inner" style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.88) 0%, rgba(30, 58, 95, 0.82) 60%, rgba(15, 23, 42, 0.78) 100%), url('images/sightseeing-map-hero.jpg') center/cover no-repeat;">
-        <div class="hero__content text-center" style="position: relative; z-index: 2; padding: 0; max-width: 860px; margin: 0 auto;">
-            <h1 class="hero__title">Sightseeing Route Planner</h1>
-            <p class="hero__subtitle">Build your custom itinerary - Add points to your plan and we'll calculate the route</p>
+            <i class="fa-brands fa-whatsapp"></i>
+            <a href="https://api.whatsapp.com/send?phone=919922882044&text=Hello%20Aryan%20Taxi%20Mahabaleshwar%20%F0%9F%91%8B%0AExplore%20Sahyadri%20%E2%80%A2%20Taxi%20Booking%20Request%0A%0A%E2%80%A2%20Tour%3A%20Mahabaleshwar%20Sightseeing%20Taxi%0A%E2%80%A2%20Date%3A%20%5BPlease%20enter%20travel%20date%5D%0A%E2%80%A2%20Pickup%20Hotel%3A%20%5BPlease%20enter%20hotel%20name%5D%0A%E2%80%A2%20Total%20Guests%3A%20%5BPlease%20enter%20passenger%20count%5D%0A%0A%E2%9C%85%20Official%20Union%20Rate%20accepted.%20Pay%20driver%20directly%20after%20trip.%0A%F0%9F%91%89%20Please%20confirm%20cab%20availability." target="_blank" rel="noopener">WhatsApp Us</a>
         </div>
-    </section>
-    <!-- Breadcrumbs -->
-    <div style="padding: var(--space-3) 0; background: var(--bg-secondary); border-bottom: 1px solid var(--border-color);">
-        <div class="container" style="font-size: var(--text-sm); color: var(--text-secondary);">
-            <a href="index.html" style="color: var(--primary);">Home</a> &raquo; <span>Sightseeing Map &amp; Route Planner</span>
+        <div class="top-bar__divider" aria-hidden="true"></div>
+        <div class="top-bar__item">
+            <i class="fa-solid fa-clock"></i>
+            <span>Available 24/7</span>
         </div>
     </div>
-    <section class="container" style="padding-top: var(--space-8); padding-bottom: var(--space-8);">
-        <div class="map-wrapper"> <!-- Sidebar --> <div class="sidebar" id="sidebar">
-            <div class="mobile-drag-handle" id="mobileDragHandle" aria-hidden="true">
-            </div>
-            <div class="sidebar-controls">
-                <input type="text" id="searchInput" class="search-box" placeholder="Search places (e.g. Waterfall, Arthur)" aria-label="Search destinations">
-                <div class="filter-row">
-                    <select id="tourFilter" class="filter-select" aria-label="Filter by Tour">
-                        <option value="all">All Tours &amp; Attractions</option>
-                        <option value="Tour 1">Tour 1: Mahabaleshwar Darshan (Arthur Seat &amp; Temples)</option>
-                        <option value="Tour 2">Tour 2: Waterfall &amp; Sunset (Lingmala, Wilson, Lodwick)</option>
-                        <option value="Tour 3">Tour 3: Pratapgad Fort Citadel</option>
-                        <option value="Tour 4">Tour 4: Panchgani Darshan (Table Land &amp; Parsi Point)</option>
-                        <option value="Tour 5">Tour 5: Wai Heritage &amp; Dhom Dam</option>
-                        <option value="Tour 6">Tour 6: Tapola (Mini Kashmir &amp; Lake)</option>
-                        <option value="Tour 7">Tour 7: Full Day Mahabaleshwar &amp; Panchgani Combo</option>
-                    </select>
-                    <button id="btnNearby" class="btn-nearby" aria-label="Find places near me">
-                        <i class="fa-solid fa-location-crosshairs">
-                    </i> Nearby Me</button>
-                    <button id="btnAiPlan" class="btn-nearby" style="border-color:var(--accent); color:var(--accent);">
-                        <i class="fa-solid fa-wand-magic-sparkles">
-                    </i> Plan with AI</button>
+
+    <!-- Navigation -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="navbar__inner">
+            <a href="index.html" class="navbar__logo" aria-label="Mahabaleshwar Taxi by Aryan Taxi Mahabaleshwar — Explore Sahyadri">
+                <img src="images/aryan-taxi-logo.svg" alt="Aryan Taxi Mahabaleshwar Logo" width="42" height="42" loading="eager">
+                <div class="navbar__logo-text">
+                    <span class="navbar__brand">Mahabaleshwar Taxi</span>
+                    <span class="navbar__sub">by Aryan Taxi Mahabaleshwar</span>
                 </div>
-                <div class="category-filters" id="categoryFilters" style="padding: 10px 0; display:flex; gap:8px; overflow-x:auto;">
-                    <button class="badge" data-cat="all" style="background:var(--primary);color:white;border:none;">All</button>
-                    <button class="badge" data-cat="viewpoint" style="background:#e0f2fe;color:#0284c7;border:1px solid #0284c7;">Viewpoints</button>
-                    <button class="badge" data-cat="waterfall" style="background:#dcfce7;color:#16a34a;border:1px solid #16a34a;">Waterfalls</button>
-                    <button class="badge" data-cat="lake" style="background:#ffedd5;color:#ea580c;border:1px solid #ea580c;">Lakes</button>
-                    <button class="badge" data-cat="fort" style="background:#fef08a;color:#a16207;border:1px solid #a16207;">Forts</button>
+            </a>
+            <div class="nav-overlay" aria-hidden="true"></div>
+            <ul class="navbar__menu" id="navMenu">
+                <li><a href="index.html" class="navbar__link">Home</a></li>
+                <li><a href="places-to-visit-in-mahabaleshwar.html" class="navbar__link">Places to Visit</a></li>
+                <li><a href="tour-packages.html" class="navbar__link">Tours</a></li>
+                <li><a href="sightseeing-map.html" class="navbar__link active">Map</a></li>
+                <li><a href="taxi-fare.html" class="navbar__link">Fares</a></li>
+                <li>
+                    <a href="ai-trip-planner.html" class="navbar__link">
+                        <i class="fa-solid fa-wand-magic-sparkles" style="color: var(--accent);"></i> AI Planner
+                    </a>
+                </li>
+                <li><a href="travel-guide.html" class="navbar__link">Travel Guide</a></li>
+                <li><a href="about.html" class="navbar__link">About</a></li>
+                <li><a href="faq.html" class="navbar__link">FAQ</a></li>
+                <li><a href="booking.html" class="navbar__link navbar__link--cta">Book Now</a></li>
+                <li>
+                    <button class="theme-toggle" aria-label="Toggle dark mode">
+                        <span class="icon-moon">🌙</span>
+                        <span class="icon-sun">☀️</span>
+                    </button>
+                </li>
+            </ul>
+            <button class="navbar__toggle" aria-label="Open menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero--inner" style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.88) 0%, rgba(30, 58, 95, 0.82) 60%, rgba(15, 23, 42, 0.78) 100%), url('images/sightseeing-map-hero.jpg') center/cover no-repeat;">
+            <div class="hero__content text-center" style="position: relative; z-index: 2; padding: 0; max-width: 860px; margin: 0 auto;">
+                <h1 class="hero__title">Sightseeing Route Planner</h1>
+                <p class="hero__subtitle">Point-to-Point Taxi Routing &bull; Custom Itinerary Calculator &bull; Official Union Fares</p>
+            </div>
+        </section>
+
+        <!-- Breadcrumbs -->
+        <div style="padding: var(--space-3) 0; background: var(--bg-secondary); border-bottom: 1px solid var(--border-color);">
+            <div class="container" style="font-size: var(--text-sm); color: var(--text-secondary);">
+                <a href="index.html" style="color: var(--primary);">Home</a> &raquo; <span>Sightseeing Map &amp; Route Planner</span>
+            </div>
+        </div>
+
+        <!-- Main Interactive Map & Route Planner Section -->
+        <section class="map-section">
+            <div class="container">
+                <div class="map-wrapper">
+                    <!-- Sidebar with Unified 3-Tab Controller -->
+                    <div class="map-sidebar" id="mapControlPanel">
+                        <!-- Navigation Tabs (Always Visible) -->
+                        <div class="map-tabs" role="tablist">
+                            <button class="map-tab-btn active" data-tab="p2p" id="tabBtnP2p" role="tab" aria-selected="true">
+                                <i class="fa-solid fa-route"></i> <span>Point-to-Point</span>
+                            </button>
+                            <button class="map-tab-btn" data-tab="itinerary" id="tabBtnItinerary" role="tab" aria-selected="false">
+                                <i class="fa-solid fa-map-location-dot"></i> <span>Custom Plan</span>
+                                <span class="tab-badge" id="itTabBadge" style="display:none;">0</span>
+                            </button>
+                            <button class="map-tab-btn" data-tab="places" id="tabBtnPlaces" role="tab" aria-selected="false">
+                                <i class="fa-solid fa-list-check"></i> <span>All Places</span>
+                            </button>
+                        </div>
+
+                        <!-- TAB 1: POINT-TO-POINT ROUTE PANEL -->
+                        <div class="map-tab-panel active" id="panel-p2p" role="tabpanel">
+                            <div class="p2p-panel-inner">
+                                <div class="p2p-selectors-box">
+                                    <!-- Origin Selector -->
+                                    <div class="p2p-input-group">
+                                        <label for="p2pOrigin" class="p2p-input-label">
+                                            <i class="fa-solid fa-location-dot" style="color:#16a34a;"></i> Pickup / Start Location
+                                        </label>
+                                        <select id="p2pOrigin" class="p2p-select" aria-label="Select pickup origin">
+                                            <!-- Dynamically populated by JS -->
+                                        </select>
+                                    </div>
+
+                                    <!-- Swap Button -->
+                                    <div class="p2p-swap-wrap">
+                                        <button id="btnP2pSwap" class="p2p-swap-btn" title="Swap Start and Destination" aria-label="Swap Start and Destination">
+                                            <i class="fa-solid fa-arrow-up-down"></i>
+                                        </button>
+                                    </div>
+
+                                    <!-- Destination Selector -->
+                                    <div class="p2p-input-group">
+                                        <label for="p2pDest" class="p2p-input-label">
+                                            <i class="fa-solid fa-flag-checkered" style="color:#dc2626;"></i> Drop / Destination
+                                        </label>
+                                        <select id="p2pDest" class="p2p-select" aria-label="Select destination">
+                                            <!-- Dynamically populated by JS -->
+                                        </select>
+                                    </div>
+
+                                    <!-- Trip Mode Radios -->
+                                    <div class="p2p-trip-type" role="radiogroup" aria-label="Trip mode selection">
+                                        <label class="p2p-type-label">
+                                            <input type="radio" name="p2pTripType" value="oneway" checked>
+                                            <i class="fa-solid fa-arrow-right"></i> One-Way Drop
+                                        </label>
+                                        <label class="p2p-type-label">
+                                            <input type="radio" name="p2pTripType" value="return">
+                                            <i class="fa-solid fa-arrows-rotate"></i> Round-Trip (With Wait)
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Dynamic Route Result Card -->
+                                <div id="p2pRouteCard">
+                                    <!-- Injected dynamically by calculatePointToPoint() -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TAB 2: CUSTOM ITINERARY (MULTI-STOP TOUR ROUTE) -->
+                        <div class="map-tab-panel" id="panel-itinerary" role="tabpanel">
+                            <div class="itinerary-panel-inner">
+                                <!-- Summary Stats Bar -->
+                                <div class="it-summary-stats" id="itSummaryStats" style="display:none;">
+                                    <div class="it-stat-col">
+                                        <span class="it-stat-label">TOTAL STOPS</span>
+                                        <span class="it-stat-num" id="itBadge">0 Stops</span>
+                                    </div>
+                                    <div class="it-stat-col">
+                                        <span class="it-stat-label">ROAD DISTANCE</span>
+                                        <span class="it-stat-num" id="itDistVal">0 km</span>
+                                    </div>
+                                    <div class="it-stat-col">
+                                        <span class="it-stat-label">EST. TIME</span>
+                                        <span class="it-stat-num" id="itTimeVal">0 mins</span>
+                                    </div>
+                                    <div class="it-stat-col">
+                                        <span class="it-stat-label">EST. TARIFF</span>
+                                        <span class="it-stat-num" id="itTariffVal" style="color:#16a34a; font-size:0.82rem;">Custom</span>
+                                    </div>
+                                </div>
+
+                                <!-- Toolbar -->
+                                <div class="it-toolbar">
+                                    <div style="font-size:0.78rem; font-weight:800; color:#0f172a; text-transform:uppercase;">
+                                        <i class="fa-solid fa-list-ol" style="color:#0284c7;"></i> Stops Sequence
+                                    </div>
+                                    <div style="display:flex; gap:6px;">
+                                        <button id="btnAiPlan" class="it-btn-pill" style="border-color:#f59e0b; color:#d97706;">
+                                            <i class="fa-solid fa-wand-magic-sparkles"></i> AI Plan
+                                        </button>
+                                        <button id="btnClearItinerary" class="it-btn-pill" title="Clear All Stops">
+                                            <i class="fa-solid fa-rotate-left"></i> Reset
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Stops List -->
+                                <div class="it-stops-list" id="itStopsList" role="list" style="display:none;">
+                                    <!-- Injected dynamically by JS -->
+                                </div>
+
+                                <!-- Empty State with Popular Tour Presets -->
+                                <div class="it-empty-box" id="itEmptyState">
+                                    <i class="fa-solid fa-route it-empty-icon"></i>
+                                    <h4 style="margin:0 0 4px; font-size:1rem; color:#0f172a;">Your Custom Plan is Empty</h4>
+                                    <p style="margin:0; font-size:0.8rem; color:#64748b;">
+                                        Tap any attraction on the map or list and click <strong>"+ Add to Plan"</strong>, or pick a popular tour below:
+                                    </p>
+                                    <div class="preset-buttons-row">
+                                        <button onclick="window.loadTourPreset('tour1')" class="btn-preset">
+                                            <span><i class="fa-solid fa-mountain-sun"></i> Tour 1: Arthur Seat &amp; Temples</span>
+                                            <span style="color:#16a34a;">₹1,200</span>
+                                        </button>
+                                        <button onclick="window.loadTourPreset('tour2')" class="btn-preset">
+                                            <span><i class="fa-solid fa-water"></i> Tour 2: Waterfall &amp; Sunset</span>
+                                            <span style="color:#16a34a;">₹1,200</span>
+                                        </button>
+                                        <button onclick="window.loadTourPreset('tour7')" class="btn-preset">
+                                            <span><i class="fa-solid fa-star"></i> Tour 7: Full Day Combo</span>
+                                            <span style="color:#16a34a;">₹3,000</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- WhatsApp CTA Button -->
+                                <div id="itCtaContainer" style="display:none;">
+                                    <button id="btnBookItinerary" class="btn btn--whatsapp" style="width:100%; padding:12px; font-size:0.9rem; font-weight:700; border-radius:8px; display:flex; align-items:center; justify-content:center; gap:8px;">
+                                        <i class="fa-brands fa-whatsapp"></i> Book This Custom Route
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TAB 3: PLACES DIRECTORY -->
+                        <div class="map-tab-panel" id="panel-places" role="tabpanel">
+                            <div class="places-panel-inner">
+                                <input type="text" id="searchInput" class="places-search-bar" placeholder="Search 29 places (e.g. Waterfall, Arthur, Mapro)..." aria-label="Search destinations">
+                                <div class="places-filter-row">
+                                    <select id="tourFilter" class="places-tour-select" aria-label="Filter by Tour">
+                                        <option value="all">All Tours &amp; Attractions (29)</option>
+                                        <option value="Tour 1">Tour 1: Mahabaleshwar Darshan (7 Points)</option>
+                                        <option value="Tour 2">Tour 2: Waterfall &amp; Sunset Circuit</option>
+                                        <option value="Tour 3">Tour 3: Pratapgad Fort Citadel</option>
+                                        <option value="Tour 4">Tour 4: Panchgani Darshan</option>
+                                        <option value="Tour 5">Tour 5: Wai Heritage &amp; Dhom Dam</option>
+                                        <option value="Tour 6">Tour 6: Tapola (Mini Kashmir)</option>
+                                        <option value="Tour 7">Tour 7: Full Day Combo</option>
+                                    </select>
+                                    <button id="btnNearby" class="btn-nearby-me" aria-label="Find places near me">
+                                        <i class="fa-solid fa-location-crosshairs"></i> Nearby Me
+                                    </button>
+                                </div>
+                                <div class="cat-pills-row">
+                                    <button class="cat-pill active" data-cat="all">All</button>
+                                    <button class="cat-pill" data-cat="viewpoint">Viewpoints</button>
+                                    <button class="cat-pill" data-cat="waterfall">Waterfalls</button>
+                                    <button class="cat-pill" data-cat="lake">Lakes</button>
+                                    <button class="cat-pill" data-cat="fort">Forts</button>
+                                    <button class="cat-pill" data-cat="heritage">Temples</button>
+                                    <button class="cat-pill" data-cat="garden">Agro</button>
+                                </div>
+                                <div class="locations-list" id="locationsList" role="list">
+                                    <!-- Cards dynamically injected by JS -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Leaflet Map Container -->
+                    <div class="map-container" id="map" aria-label="Interactive sightseeing map">
+                        <!-- Floating Route Status Pill (Top-Left) -->
+                        <div id="mapRouteStatusPill" class="map-route-pill" title="Click to view full route details">
+                            <!-- Injected by JS -->
+                        </div>
+
+                        <!-- Floating Layer Switcher (Top-Right) -->
+                        <div class="map-floating-layer-switcher" role="toolbar" aria-label="Map Layer Toggle">
+                            <button id="layerBtnStreet" class="layer-btn active" onclick="window.toggleMapLayer('streets')">
+                                <i class="fa-solid fa-road"></i> Street
+                            </button>
+                            <button id="layerBtnSat" class="layer-btn" onclick="window.toggleMapLayer('satellite')">
+                                <i class="fa-solid fa-satellite"></i> Satellite
+                            </button>
+                        </div>
+
+                        <!-- Floating Map Action Buttons (Bottom-Right) -->
+                        <div class="map-floating-actions">
+                            <button id="btnExpandMap" class="map-action-btn" title="Toggle full-screen map">
+                                <i class="fa-solid fa-expand"></i> <span>Full Map</span>
+                            </button>
+                            <button id="btnLocateMe" class="map-action-btn" title="Locate my position">
+                                <i class="fa-solid fa-location-crosshairs"></i> <span>Locate Me</span>
+                            </button>
+                            <button id="btnRecenter" class="map-action-btn" title="Fit map to active route or center">
+                                <i class="fa-solid fa-arrows-to-circle"></i> <span>Center</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="locations-list" id="locationsList" role="list"> <!-- Cards injected by JS --> </div>
-        </div> <!-- Map Container --> <div class="map-container" id="map" aria-label="Interactive sightseeing map">
-    </div>
-    <button class="mobile-map-btn" id="mobileMapBtn">
-        <i class="fa-solid fa-list">
-    </i> Show List</button> <!-- AI Planner Drawer --> <div class="itinerary-drawer" id="aiDrawer" style="display:none; bottom:20px; left:20px; right:auto;">
-    <div class="it-header" style="background:var(--accent);">
-        <span>
-        <i class="fa-solid fa-wand-magic-sparkles">
-    </i> AI Trip Planner</span>
-    <button id="closeAiBtn" style="background:none;border:none;color:white;cursor:pointer;">
-        <i class="fa-solid fa-xmark">
-    </i>
-</button>
-</div>
-<div class="it-body" style="display:flex; flex-direction:column; gap:10px;">
-    <p style="font-size:0.85rem; color:var(--gray-600); margin:0;">Describe your ideal trip, and AI will build a custom route for you!</p>
-    <textarea id="aiPrompt" rows="3" style="width:100%; padding:8px; border-radius:6px; border:1px solid var(--gray-300); font-size:0.85rem; font-family:inherit;" placeholder="e.g. 1 day trip, love waterfalls and minimal walking">
-    </textarea>
-    <button id="submitAiBtn" class="btn" style="width:100%; background:var(--accent);">
-        <i class="fa-solid fa-sparkles">
-    </i> Generate Itinerary</button>
-    <div id="aiLoading" style="display:none; text-align:center; font-size:0.85rem; color:var(--accent);">
-        <i class="fa-solid fa-spinner fa-spin">
-    </i> AI is thinking</div>
-    <div id="aiResponse" style="font-size:0.85rem; color:var(--gray-700); max-height:100px; overflow-y:auto;">
-    </div>
-</div>
-</div> <!-- Itinerary Drawer --> <div class="itinerary-drawer" id="itineraryDrawer" aria-live="polite">
-<div class="it-header">
-    <span>My Custom Plan</span>
-    <span id="itBadge" style="background: var(--bg-primary); color: var(--text-primary); border: 1px solid var(--border-color); padding: 2px 8px; border-radius: 12px; font-size: 0.75rem;">0 Stops</span>
-</div>
-<div class="it-body">
-    <div class="it-stats">
-        <div>
-            <strong style="color:var(--gray-500); font-size:0.75rem; display:block;">EST. DISTANCE</strong>
-            <span id="itDist">0 km</span>
+        </section>
+
+        <!-- AI Trip Planner Modal Drawer -->
+        <div class="itinerary-drawer" id="aiDrawer" style="display:none; position:fixed; bottom:20px; right:20px; z-index:9999; max-width:340px; background:#ffffff; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,0.25); border:1.5px solid #0284c7; overflow:hidden;">
+            <div style="background:#0284c7; color:#ffffff; padding:12px 14px; font-weight:700; display:flex; justify-content:space-between; align-items:center;">
+                <span><i class="fa-solid fa-wand-magic-sparkles"></i> AI Route Planner</span>
+                <button id="closeAiBtn" style="background:none; border:none; color:#ffffff; cursor:pointer; font-size:1rem;" aria-label="Close AI Planner">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div style="padding:14px; display:flex; flex-direction:column; gap:10px;">
+                <p style="font-size:0.82rem; color:#475569; margin:0;">Describe your ideal trip (e.g. 1 day with waterfalls, romantic sunset, or historic forts):</p>
+                <textarea id="aiPrompt" rows="2" style="width:100%; padding:8px 10px; border-radius:6px; border:1px solid #cbd5e1; font-size:0.85rem; font-family:inherit;" placeholder="e.g. Want waterfalls &amp; strawberries, minimal walking"></textarea>
+                <button id="submitAiBtn" class="btn btn--primary" style="width:100%; padding:8px; font-size:0.85rem; font-weight:700;">
+                    <i class="fa-solid fa-sparkles"></i> Generate Itinerary
+                </button>
+                <div id="aiLoading" style="display:none; text-align:center; font-size:0.85rem; color:#0284c7;">
+                    <i class="fa-solid fa-spinner fa-spin"></i> Crafting custom route...
+                </div>
+                <div id="aiResponse" style="font-size:0.82rem; color:#334155;"></div>
+            </div>
         </div>
-        <div style="text-align: right;">
-            <strong style="color:var(--gray-500); font-size:0.75rem; display:block;">EST. TIME</strong>
-            <span id="itTime">0 mins</span>
+    </main>
+
+    <!-- ============================================================ FOOTER ============================================================ -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <!-- Top Reassurance Trust Strip -->
+            <div class="footer__reassurance">
+                <div class="footer__reassurance-item">
+                    <div class="footer__reassurance-icon">
+                        <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                    </div>
+                    <div>
+                        <span class="footer__reassurance-title">Union-Fixed Tariffs</span>
+                        <span class="footer__reassurance-desc">Official 2026 govt rates &bull; Zero hidden charges</span>
+                    </div>
+                </div>
+                <div class="footer__reassurance-item">
+                    <div class="footer__reassurance-icon">
+                        <i class="fa-solid fa-car-side" aria-hidden="true"></i>
+                    </div>
+                    <div>
+                        <span class="footer__reassurance-title">4-Seater Tourist Cabs</span>
+                        <span class="footer__reassurance-desc">Registered tourist cabs for local sightseeing</span>
+                    </div>
+                </div>
+                <div class="footer__reassurance-item">
+                    <div class="footer__reassurance-icon">
+                        <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                    </div>
+                    <div>
+                        <span class="footer__reassurance-title">Doorstep Hotel Pickup</span>
+                        <span class="footer__reassurance-desc">Mahabaleshwar town &amp; surrounding resorts</span>
+                    </div>
+                </div>
+                <div class="footer__reassurance-item">
+                    <div class="footer__reassurance-icon">
+                        <i class="fa-solid fa-handshake-angle" aria-hidden="true"></i>
+                    </div>
+                    <div>
+                        <span class="footer__reassurance-title">Zero Advance Needed</span>
+                        <span class="footer__reassurance-desc">Pay driver directly after trip completion</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Footer 4-Column Grid -->
+            <div class="footer__grid">
+                <!-- Column 1: Brand & Contact -->
+                <div class="footer__col footer__col--brand">
+                    <a href="index.html" class="footer__brand">
+                        <img src="images/aryan-taxi-logo.svg" alt="Aryan Taxi Mahabaleshwar Logo" width="46" height="46" loading="lazy">
+                        <div>
+                            <span class="footer__brand-name">Mahabaleshwar Taxi</span>
+                            <span class="footer__brand-sub">by Aryan Taxi Mahabaleshwar</span>
+                        </div>
+                    </a>
+                    <p class="footer__desc">
+                        Registered tourist taxi service operated by local mountain drivers. Providing verified 4-seater sightseeing cabs and outstation transfers across Mahabaleshwar, Panchgani, Pune, and Mumbai.
+                    </p>
+                    <div class="footer__contact-card">
+                        <span class="footer__contact-badge"><i class="fa-solid fa-phone"></i> Direct Driver Booking</span>
+                        <a href="tel:+919922882044" class="footer__phone">+91 99228 82044</a>
+                        <a href="mailto:aryansdtravels@gmail.com" class="footer__email"><i class="fa-regular fa-envelope"></i> aryansdtravels@gmail.com</a>
+                    </div>
+                    <a href="https://api.whatsapp.com/send?phone=919922882044&amp;text=Hello%20Aryan%20Taxi%20Mahabaleshwar%20%F0%9F%91%8B%0AExplore%20Sahyadri%20%E2%80%A2%20Taxi%20Booking%20Request%0A%0A%E2%80%A2%20Tour%3A%20Mahabaleshwar%20Sightseeing%20Taxi%0A%E2%80%A2%20Date%3A%20%5BPlease%20enter%20travel%20date%5D%0A%E2%80%A2%20Pickup%20Hotel%3A%20%5BPlease%20enter%20hotel%20name%5D%0A%E2%80%A2%20Total%20Guests%3A%20%5BPlease%20enter%20passenger%20count%5D%0A%0A%E2%9C%85%20Official%20Union%20Rate%20accepted.%20Pay%20driver%20directly%20after%20trip.%0A%F0%9F%91%89%20Please%20confirm%20cab%20availability." target="_blank" rel="noopener" class="btn btn--whatsapp footer__wa-btn">
+                        <i class="fa-brands fa-whatsapp"></i> Book Taxi on WhatsApp
+                    </a>
+                </div>
+
+                <!-- Column 2: Sightseeing Tours (Union Rates) -->
+                <div class="footer__col">
+                    <h3 class="footer__heading">Sightseeing Tours</h3>
+                    <nav class="footer__links" aria-label="Footer sightseeing tours">
+                        <a href="mahabaleshwar-sightseeing.html" class="footer__link">
+                            <span>Mahabaleshwar Darshan (7 Pts)</span>
+                            <span class="footer__rate-pill">&#8377;1,200</span>
+                        </a>
+                        <a href="panchgani-sightseeing.html" class="footer__link">
+                            <span>Panchgani Darshan Tour</span>
+                            <span class="footer__rate-pill">&#8377;1,200</span>
+                        </a>
+                        <a href="pratapgad-fort.html" class="footer__link">
+                            <span>Pratapgad Fort Darshan</span>
+                            <span class="footer__rate-pill">&#8377;1,600</span>
+                        </a>
+                        <a href="tapola-taxi.html" class="footer__link">
+                            <span>Tapola "Mini Kashmir" Tour</span>
+                            <span class="footer__rate-pill">&#8377;1,450</span>
+                        </a>
+                        <a href="wai-taxi.html" class="footer__link">
+                            <span>Wai &amp; Dhom Dam Tour</span>
+                            <span class="footer__rate-pill">&#8377;2,500</span>
+                        </a>
+                        <a href="tour-packages.html" class="footer__link">
+                            <span>Full Day Combo Packages</span>
+                            <span class="footer__rate-pill">From &#8377;3,000</span>
+                        </a>
+                        <a href="venna-lake.html" class="footer__link">
+                            <span>Venna Lake &amp; Town Drops</span>
+                            <span class="footer__rate-pill">&#8377;300+</span>
+                        </a>
+                        <a href="tour-packages.html" class="footer__link footer__link--highlight">
+                            <span>View All Tour Packages &rarr;</span>
+                        </a>
+                    </nav>
+                </div>
+
+                <!-- Column 3: Routes & Transfers -->
+                <div class="footer__col">
+                    <h3 class="footer__heading">Popular Routes &amp; Transfers</h3>
+                    <nav class="footer__links" aria-label="Footer popular routes">
+                        <a href="mahabaleshwar-to-pune-taxi.html" class="footer__link">
+                            <span>Mahabaleshwar to Pune Cab</span>
+                            <span class="footer__rate-pill">&#8377;3,500</span>
+                        </a>
+                        <a href="pune-to-mahabaleshwar-taxi.html" class="footer__link">
+                            <span>Pune to Mahabaleshwar Taxi</span>
+                            <span class="footer__rate-pill">&#8377;3,500</span>
+                        </a>
+                        <a href="mahabaleshwar-to-mumbai-taxi.html" class="footer__link">
+                            <span>Mahabaleshwar to Mumbai Cab</span>
+                            <span class="footer__rate-pill">&#8377;6,000</span>
+                        </a>
+                        <a href="mumbai-to-mahabaleshwar-taxi.html" class="footer__link">
+                            <span>Mumbai to Mahabaleshwar Taxi</span>
+                            <span class="footer__rate-pill">&#8377;6,000</span>
+                        </a>
+                        <a href="airport-transfer.html" class="footer__link">
+                            <span>Pune &amp; Mumbai Airport Drops</span>
+                            <span class="footer__rate-pill">24/7</span>
+                        </a>
+                        <a href="taxi-fare.html" class="footer__link">
+                            <span>Official 2026 Taxi Fare Card</span>
+                            <span class="footer__rate-pill">Verified</span>
+                        </a>
+                        <a href="sightseeing-map.html" class="footer__link">
+                            <span>Interactive Sightseeing Map</span>
+                        </a>
+                        <a href="places-to-visit-in-mahabaleshwar.html" class="footer__link footer__link--highlight">
+                            <span>25+ Places to Visit Directory &rarr;</span>
+                        </a>
+                    </nav>
+                </div>
+
+                <!-- Column 4: Coverage Areas & Quick Tools -->
+                <div class="footer__col">
+                    <h3 class="footer__heading">Pickup Areas &amp; Tools</h3>
+                    <div class="footer__pills-cloud">
+                        <span class="footer__service-pill">Mahabaleshwar</span>
+                        <span class="footer__service-pill">Panchgani</span>
+                        <span class="footer__service-pill">Tapola</span>
+                        <span class="footer__service-pill">Pratapgad</span>
+                        <span class="footer__service-pill">Mapro Garden</span>
+                        <span class="footer__service-pill">Bhilar</span>
+                        <span class="footer__service-pill">Bhose</span>
+                        <span class="footer__service-pill">Metgutad</span>
+                        <span class="footer__service-pill">Avkali</span>
+                        <span class="footer__service-pill">Bondarwadi</span>
+                        <span class="footer__service-pill">Gureghar</span>
+                        <span class="footer__service-pill">Kaswand</span>
+                        <span class="footer__service-pill">Wai</span>
+                        <span class="footer__service-pill">Satara</span>
+                    </div>
+                    <nav class="footer__quick-tools" aria-label="Footer travel tools">
+                        <a href="ai-trip-planner.html" class="footer__tool-link">
+                            <i class="fa-solid fa-wand-magic-sparkles" style="color: #38bdf8;"></i> AI Itinerary Planner
+                        </a>
+                        <a href="travel-guide.html" class="footer__tool-link">
+                            <i class="fa-solid fa-book-open" style="color: #fbbf24;"></i> Mahabaleshwar Travel Guide 2026
+                        </a>
+                        <a href="about.html" class="footer__tool-link">
+                            <i class="fa-solid fa-user-check" style="color: #34d399;"></i> About Driver &amp; Cab Network
+                        </a>
+                        <a href="faq.html" class="footer__tool-link">
+                            <i class="fa-solid fa-circle-question" style="color: #94a3b8;"></i> FAQs &amp; Tour Rules
+                        </a>
+                        <a href="admin.html" class="footer__tool-link" style="color: #f59e0b;">
+                            <i class="fa-solid fa-lock"></i> Owner / Driver Login
+                        </a>
+                    </nav>
+                    <div class="footer__union-strip">
+                        <i class="fa-solid fa-shield-halved" style="color: #0284c7;"></i>
+                        <span>Registered Mahabaleshwar Taxi Union Member</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="footer__bottom">
+                <div class="footer__bottom-left">
+                    <p>&copy; 2026 Mahabaleshwar Taxi by Aryan Taxi Mahabaleshwar. All Rights Reserved.</p>
+                </div>
+                <div class="footer__bottom-center">
+                    <span><i class="fa-solid fa-circle-check" style="color: #10b981;"></i> RTO Registered Tourist Cabs</span>
+                    <span class="footer__dot">&#8226;</span>
+                    <span>Zero Advance for Local Sightseeing</span>
+                    <span class="footer__dot">&#8226;</span>
+                    <span>Fixed Union Tariffs</span>
+                </div>
+                <div class="footer__bottom-right">
+                    <span>Direct Local Owner-Driver</span>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="it-stops" id="itStopsList"> <!-- Stops list --> </div>
-    <button id="bookItineraryBtn" class="btn btn--whatsapp" style="width: 100%;">
-        <i class="fa-brands fa-whatsapp">
-    </i> Book This Route</button>
-</div>
-</div>
-</div>
-</section>
-</main> <!-- ============================================================ FOOTER ============================================================ --> <footer class="footer" id="contact">
-<div class="container"> <!-- Top Reassurance Trust Strip --> <div class="footer__reassurance">
-    <div class="footer__reassurance-item">
-        <div class="footer__reassurance-icon">
-            <i class="fa-solid fa-shield-halved" aria-hidden="true">
-        </i>
-    </div>
-    <div>
-        <span class="footer__reassurance-title">Union-Fixed Tariffs</span>
-        <span class="footer__reassurance-desc">Official 2026 govt rates Zero hidden charges</span>
-    </div>
-</div>
-<div class="footer__reassurance-item">
-    <div class="footer__reassurance-icon">
-        <i class="fa-solid fa-car-side" aria-hidden="true">
-    </i>
-</div>
-<div>
-    <span class="footer__reassurance-title">4-Seater Tourist Cabs</span>
-    <span class="footer__reassurance-desc">Registered tourist cabs for local sightseeing</span>
-</div>
-</div>
-<div class="footer__reassurance-item">
-    <div class="footer__reassurance-icon">
-        <i class="fa-solid fa-location-dot" aria-hidden="true">
-    </i>
-</div>
-<div>
-    <span class="footer__reassurance-title">Doorstep Hotel Pickup</span>
-    <span class="footer__reassurance-desc">Mahabaleshwar town &amp; surrounding resorts</span>
-</div>
-</div>
-<div class="footer__reassurance-item">
-    <div class="footer__reassurance-icon">
-        <i class="fa-solid fa-handshake-angle" aria-hidden="true">
-    </i>
-</div>
-<div>
-    <span class="footer__reassurance-title">Zero Advance Needed</span>
-    <span class="footer__reassurance-desc">Pay driver directly after trip completion</span>
-</div>
-</div>
-</div> <!-- Main Footer 4-Column Grid --> <div class="footer__grid"> <!-- Column 1: Brand & Contact --> <div class="footer__col footer__col--brand">
-<a href="index.html" class="footer__brand">
-<img src="images/aryan-taxi-logo.svg" alt="Aryan Taxi Mahabaleshwar Logo" width="46" height="46" loading="lazy">
-<div>
-    <span class="footer__brand-name">Mahabaleshwar Taxi</span>
-    <span class="footer__brand-sub">by Aryan Taxi Mahabaleshwar</span>
-</div>
-</a>
-<p class="footer__desc"> Registered tourist taxi service operated by local mountain drivers. Providing verified 4-seater sightseeing cabs and outstation transfers across Mahabaleshwar, Panchgani, Pune, and Mumbai. </p>
-<div class="footer__contact-card">
-    <span class="footer__contact-badge">
-    <i class="fa-solid fa-phone">
-</i> Direct Driver Booking</span>
-<a href="tel:+919922882044" class="footer__phone">+91 99228 82044</a>
-<a href="mailto:aryansdtravels@gmail.com" class="footer__email">
-<i class="fa-regular fa-envelope">
-</i> aryansdtravels@gmail.com</a>
-</div>
-<a href="https://api.whatsapp.com/send?phone=919922882044&amp;text=Hello%20Aryan%20Taxi%20Mahabaleshwar%20%F0%9F%91%8B%0AExplore%20Sahyadri%20%E2%80%A2%20Taxi%20Booking%20Request%0A%0A%E2%80%A2%20Tour%3A%20Mahabaleshwar%20Sightseeing%20Taxi%0A%E2%80%A2%20Date%3A%20%5BPlease%20enter%20travel%20date%5D%0A%E2%80%A2%20Pickup%20Hotel%3A%20%5BPlease%20enter%20hotel%20name%5D%0A%E2%80%A2%20Total%20Guests%3A%20%5BPlease%20enter%20passenger%20count%5D%0A%0A%E2%9C%85%20Official%20Union%20Rate%20accepted.%20Pay%20driver%20directly%20after%20trip.%0A%F0%9F%91%89%20Please%20confirm%20cab%20availability." target="_blank" rel="noopener" class="btn btn--whatsapp footer__wa-btn">
-<i class="fa-brands fa-whatsapp">
-</i> Book Taxi on WhatsApp</a>
-</div> <!-- Column 2: Sightseeing Tours (Union Rates) --> <div class="footer__col">
-<h3 class="footer__heading">Sightseeing Tours</h3>
-<nav class="footer__links" aria-label="Footer sightseeing tours">
-    <a href="mahabaleshwar-sightseeing.html" class="footer__link">
-    <span>Mahabaleshwar Darshan (7 Pts)</span>
-    <span class="footer__rate-pill">&#8377;1,200</span>
-</a>
-<a href="panchgani-sightseeing.html" class="footer__link">
-<span>Panchgani Darshan Tour</span>
-<span class="footer__rate-pill">&#8377;1,200</span>
-</a>
-<a href="pratapgad-fort.html" class="footer__link">
-<span>Pratapgad Fort Darshan</span>
-<span class="footer__rate-pill">&#8377;1,600</span>
-</a>
-<a href="tapola-taxi.html" class="footer__link">
-<span>Tapola "Mini Kashmir" Tour</span>
-<span class="footer__rate-pill">&#8377;1,450</span>
-</a>
-<a href="wai-taxi.html" class="footer__link">
-<span>Wai &amp; Dhom Dam Tour</span>
-<span class="footer__rate-pill">&#8377;2,500</span>
-</a>
-<a href="tour-packages.html" class="footer__link">
-<span>Full Day Combo Packages</span>
-<span class="footer__rate-pill">From &#8377;3,000</span>
-</a>
-<a href="venna-lake.html" class="footer__link">
-<span>Venna Lake &amp; Town Drops</span>
-<span class="footer__rate-pill">&#8377;300+</span>
-</a>
-<a href="tour-packages.html" class="footer__link footer__link--highlight">
-<span>View All Tour Packages &rarr;</span>
-</a>
-</nav>
-</div> <!-- Column 3: Routes & Transfers --> <div class="footer__col">
-<h3 class="footer__heading">Popular Routes &amp; Transfers</h3>
-<nav class="footer__links" aria-label="Footer popular routes">
-    <a href="mahabaleshwar-to-pune-taxi.html" class="footer__link">
-    <span>Mahabaleshwar to Pune Cab</span>
-    <span class="footer__rate-pill">&#8377;3,500</span>
-</a>
-<a href="pune-to-mahabaleshwar-taxi.html" class="footer__link">
-<span>Pune to Mahabaleshwar Taxi</span>
-<span class="footer__rate-pill">&#8377;3,500</span>
-</a>
-<a href="mahabaleshwar-to-mumbai-taxi.html" class="footer__link">
-<span>Mahabaleshwar to Mumbai Cab</span>
-<span class="footer__rate-pill">&#8377;6,000</span>
-</a>
-<a href="mumbai-to-mahabaleshwar-taxi.html" class="footer__link">
-<span>Mumbai to Mahabaleshwar Taxi</span>
-<span class="footer__rate-pill">&#8377;6,000</span>
-</a>
-<a href="airport-transfer.html" class="footer__link">
-<span>Pune &amp; Mumbai Airport Drops</span>
-<span class="footer__rate-pill">24/7</span>
-</a>
-<a href="taxi-fare.html" class="footer__link">
-<span>Official 2026 Taxi Fare Card</span>
-<span class="footer__rate-pill">Verified</span>
-</a>
-<a href="sightseeing-map.html" class="footer__link">
-<span>Interactive Sightseeing Map</span>
-</a>
-<a href="places-to-visit-in-mahabaleshwar.html" class="footer__link footer__link--highlight">
-<span>25+ Places to Visit Directory &rarr;</span>
-</a>
-</nav>
-</div> <!-- Column 4: Coverage Areas & Quick Tools --> <div class="footer__col">
-<h3 class="footer__heading">Pickup Areas &amp; Tools</h3>
-<div class="footer__pills-cloud">
-    <span class="footer__service-pill">Mahabaleshwar</span>
-    <span class="footer__service-pill">Panchgani</span>
-    <span class="footer__service-pill">Tapola</span>
-    <span class="footer__service-pill">Pratapgad</span>
-    <span class="footer__service-pill">Mapro Garden</span>
-    <span class="footer__service-pill">Bhilar</span>
-    <span class="footer__service-pill">Bhose</span>
-    <span class="footer__service-pill">Metgutad</span>
-    <span class="footer__service-pill">Avkali</span>
-    <span class="footer__service-pill">Bondarwadi</span>
-    <span class="footer__service-pill">Gureghar</span>
-    <span class="footer__service-pill">Kaswand</span>
-    <span class="footer__service-pill">Wai</span>
-    <span class="footer__service-pill">Satara</span>
-</div>
-<nav class="footer__quick-tools" aria-label="Footer travel tools">
-    <a href="ai-trip-planner.html" class="footer__tool-link">
-    <i class="fa-solid fa-wand-magic-sparkles" style="color: #38bdf8;">
-</i> AI Itinerary Planner </a>
-<a href="travel-guide.html" class="footer__tool-link">
-<i class="fa-solid fa-book-open" style="color: #fbbf24;">
-</i> Mahabaleshwar Travel Guide 2026 </a>
-<a href="about.html" class="footer__tool-link">
-<i class="fa-solid fa-user-check" style="color: #34d399;">
-</i> About Driver &amp; Cab Network </a>
-<a href="faq.html" class="footer__tool-link">
-<i class="fa-solid fa-circle-question" style="color: #94a3b8;">
-</i> FAQs &amp; Tour Rules </a>
-<a href="admin.html" class="footer__tool-link" style="color: #f59e0b;">
-<i class="fa-solid fa-lock">
-</i> Owner / Driver Login </a>
-</nav>
-<div class="footer__union-strip">
-    <i class="fa-solid fa-shield-halved" style="color: #0284c7;">
-</i>
-<span>Registered Mahabaleshwar Taxi Union Member</span>
-</div>
-</div>
-</div> <!-- Bottom Bar --> <div class="footer__bottom">
-<div class="footer__bottom-left">
-    <p>&copy; 2026 Mahabaleshwar Taxi by Aryan Taxi Mahabaleshwar. All Rights Reserved.</p>
-</div>
-<div class="footer__bottom-center">
-    <span>
-    <i class="fa-solid fa-circle-check" style="color: #10b981;">
-</i> RTO Registered Tourist Cabs</span>
-<span class="footer__dot">&#8226;</span>
-<span>Zero Advance for Local Sightseeing</span>
-<span class="footer__dot">&#8226;</span>
-<span>Fixed Union Tariffs</span>
-</div>
-<div class="footer__bottom-right">
-    <span>Direct Local Owner-Driver</span>
-</div>
-</div>
-</div>
-</footer> <!-- Scripts --> <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script> <script src="js/places-data.js?v=112.0" defer></script> <script src="js/map-app.js?v=112.0" defer></script> <script src="js/main.min.js?v=134.4" defer></script> <script src="js/tour-data.js?v=98.0" defer></script> <script src="js/ai-assistant.js?v=98.0" defer></script> <script src="js/booking-widget.min.js?v=135.4" defer></script> <script src="js/advanced-features.js?v=98.0" defer></script> <script>(function(){function autoOpenBooking(){var h=(window.location.hash||"").toLowerCase();var s=window.location.search||"";var b=/[?&](book|booking)=/i.test(s)||h==="#booking"||h==="#book";var tm=s.match(/[?&]tour=([^&#]*)/i);var th=tm?decodeURIComponent(tm[1].replace(/\+/g," ")):"";if(b||th){var t=0;var ti=setInterval(function(){t++;if(window.openBookingModal){clearInterval(ti);window.openBookingModal(th||"");}else if(t>30){clearInterval(ti);}},100);}}if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",autoOpenBooking);}else{autoOpenBooking();}window.addEventListener("hashchange",autoOpenBooking);})();</script>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+    <script src="js/places-data.js?v=137.0" defer></script>
+    <script src="js/map-app.js?v=137.0" defer></script>
+    <script src="js/main.min.js?v=134.4" defer></script>
+    <script src="js/tour-data.js?v=98.0" defer></script>
+    <script src="js/ai-assistant.js?v=98.0" defer></script>
+    <script src="js/booking-widget.min.js?v=135.4" defer></script>
+    <script src="js/advanced-features.js?v=98.0" defer></script>
+    <script>
+    (function(){
+        function autoOpenBooking(){
+            var h = (window.location.hash || "").toLowerCase();
+            var s = window.location.search || "";
+            var b = /[?&](book|booking)=/i.test(s) || h === "#booking" || h === "#book";
+            var tm = s.match(/[?&]tour=([^&#]*)/i);
+            var th = tm ? decodeURIComponent(tm[1].replace(/\+/g, " ")) : "";
+            if (b || th) {
+                var t = 0;
+                var ti = setInterval(function(){
+                    t++;
+                    if (window.openBookingModal) {
+                        clearInterval(ti);
+                        window.openBookingModal(th || "");
+                    } else if (t > 30) {
+                        clearInterval(ti);
+                    }
+                }, 100);
+            }
+        }
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", autoOpenBooking);
+        } else {
+            autoOpenBooking();
+        }
+        window.addEventListener("hashchange", autoOpenBooking);
+    })();
+    </script>
 </body>
 </html>
