@@ -1999,9 +1999,9 @@ tr:hover td {
    ============================================================ */
 .whatsapp-float {
     position: fixed;
-    bottom: var(--space-8);
-    right: var(--space-6);
-    z-index: var(--z-fixed);
+    bottom: 24px;
+    right: 24px;
+    z-index: 9995;
     transition: all var(--transition-base);
 }
 
@@ -2184,8 +2184,9 @@ tr:hover td {
    ============================================================ */
 .back-to-top {
     position: fixed;
-    bottom: var(--space-24);
-    right: var(--space-6);
+    bottom: 24px;
+    left: 24px;
+    right: auto;
     width: 44px;
     height: 44px;
     background: var(--bg-primary);
@@ -2199,8 +2200,8 @@ tr:hover td {
     opacity: 0;
     visibility: hidden;
     transition: all var(--transition-base);
-    z-index: var(--z-fixed);
-    box-shadow: var(--shadow-md);
+    z-index: 9990;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
 }
 
 .back-to-top.visible {
@@ -11962,3 +11963,242 @@ input[type="checkbox"]#amtTermsCheckbox,
         white-space: nowrap !important;
     }
 }
+
+/* ============================================================
+   29. FLOATING ACTIONS SEPARATION (ZERO OVERLAP SYSTEM)
+   Guarantees Back-to-Top (bottom-left) and WhatsApp (bottom-right)
+   never collide, keeping Ask Aryan AI neatly above WhatsApp.
+   ============================================================ */
+.whatsapp-float {
+    position: fixed !important;
+    bottom: 24px !important;
+    right: 24px !important;
+    left: auto !important;
+    z-index: 9995 !important;
+}
+
+.whatsapp-float__btn {
+    width: 58px !important;
+    height: 58px !important;
+    font-size: 1.75rem !important;
+}
+
+.back-to-top {
+    position: fixed !important;
+    bottom: 24px !important;
+    left: 24px !important;
+    right: auto !important;
+    width: 44px !important;
+    height: 44px !important;
+    background: var(--bg-primary, #ffffff) !important;
+    color: var(--primary, #0891b2) !important;
+    border: 2px solid var(--border-color, #e2e8f0) !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.2s ease, background-color 0.2s ease !important;
+    z-index: 9990 !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15) !important;
+}
+
+.back-to-top.visible {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.back-to-top:hover {
+    background: var(--primary, #0891b2) !important;
+    color: #ffffff !important;
+    border-color: var(--primary, #0891b2) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 6px 20px rgba(8, 145, 178, 0.35) !important;
+}
+
+[data-theme="dark"] .back-to-top {
+    background: var(--gray-800, #1e293b) !important;
+    color: var(--primary-light, #22d3ee) !important;
+    border-color: var(--gray-700, #334155) !important;
+}
+
+[data-theme="dark"] .back-to-top:hover {
+    background: var(--primary, #0891b2) !important;
+    color: #ffffff !important;
+}
+
+@media (max-width: 768px) {
+    .whatsapp-float,
+    .back-to-top {
+        display: none !important;
+    }
+}
+
+/* ============================================================
+   30. ULTRA-COMPACT MODERN BANNERS (ELIMINATES EXCESSIVE SCROLLING)
+   Compacts hero banners, inner headers, and CTA/tariff cards
+   to maximize content visibility across desktop, tablet, and mobile.
+   ============================================================ */
+
+/* Main Homepage Hero Compactness */
+@media (min-width: 969px) {
+    .hero--world-class {
+        min-height: auto !important;
+        max-height: 560px !important;
+        padding-top: 50px !important;
+        padding-bottom: 18px !important;
+    }
+    .hero__text-col h1.hero__title {
+        font-size: clamp(1.85rem, 2.8vw, 2.4rem) !important;
+        line-height: 1.15 !important;
+        margin-bottom: 4px !important;
+    }
+    .hero__text-col .hero__subtitle {
+        font-size: 0.92rem !important;
+        line-height: 1.35 !important;
+        margin-bottom: 6px !important;
+    }
+    .hero__text-col p.hero__desc {
+        font-size: 0.84rem !important;
+        line-height: 1.35 !important;
+        margin-bottom: 10px !important;
+    }
+    .hero__trust-badges {
+        margin-bottom: 10px !important;
+    }
+}
+
+/* Subpage Inner Hero Banners (Sightseeing Map, Tour Packages, Rate Card, Destinations, etc.) */
+.hero--inner {
+    min-height: auto !important;
+    padding: 16px 0 12px !important;
+}
+.hero--inner .hero__content {
+    padding: 0 16px !important;
+}
+.hero--inner .hero__title,
+.hero--inner h1 {
+    font-size: clamp(1.25rem, 2.5vw, 1.7rem) !important;
+    margin-bottom: 3px !important;
+    line-height: 1.2 !important;
+}
+.hero--inner .hero__subtitle,
+.hero--inner p {
+    font-size: clamp(0.82rem, 1.2vw, 0.9rem) !important;
+    margin-bottom: 3px !important;
+    max-width: 680px !important;
+    line-height: 1.35 !important;
+}
+.hero--inner .breadcrumbs {
+    padding: 2px 0 !important;
+    font-size: 0.78rem !important;
+}
+
+@media (max-width: 768px) {
+    .hero--inner {
+        min-height: auto !important;
+        padding: 12px 0 8px !important;
+    }
+    .hero--inner h1,
+    .hero--inner .hero__title {
+        font-size: 1.2rem !important;
+        margin-bottom: 2px !important;
+    }
+    .hero--inner p,
+    .hero--inner .hero__subtitle {
+        font-size: 0.8rem !important;
+        margin-bottom: 2px !important;
+    }
+}
+
+/* CTA Banners & Tariff Guarantee Banners Across All 25+ Pages */
+.cta-banner {
+    padding: 22px 28px !important;
+    border-radius: 16px !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    box-shadow: 0 10px 30px -10px rgba(8, 145, 178, 0.25) !important;
+}
+
+.cta-banner > div:first-child[style*="border-radius"] {
+    margin-bottom: 6px !important;
+    padding: 3px 12px !important;
+    font-size: 0.7rem !important;
+    letter-spacing: 1px !important;
+}
+
+.cta-banner__title {
+    font-size: clamp(1.25rem, 2.2vw, 1.6rem) !important;
+    font-weight: 800 !important;
+    margin-bottom: 6px !important;
+    line-height: 1.25 !important;
+}
+
+.cta-banner__text {
+    font-size: clamp(0.85rem, 1.15vw, 0.92rem) !important;
+    max-width: 760px !important;
+    margin-bottom: 12px !important;
+    line-height: 1.42 !important;
+    opacity: 0.92 !important;
+}
+
+.cta-banner__actions {
+    gap: 10px !important;
+}
+
+.cta-banner__actions .btn,
+.cta-banner .btn {
+    padding: 9px 22px !important;
+    font-size: 0.88rem !important;
+    min-height: 38px !important;
+    border-radius: 9999px !important;
+}
+
+/* Sections Wrapping CTA Banners */
+#tariff-guarantee,
+#cta-section,
+section#tariff-guarantee,
+section#cta-section {
+    padding: 16px 0 !important;
+}
+
+@media (max-width: 768px) {
+    .cta-banner {
+        padding: 16px 14px !important;
+        border-radius: 14px !important;
+    }
+    .cta-banner > div:first-child[style*="border-radius"] {
+        margin-bottom: 4px !important;
+        padding: 2px 10px !important;
+        font-size: 0.68rem !important;
+    }
+    .cta-banner__title {
+        font-size: 1.18rem !important;
+        margin-bottom: 4px !important;
+    }
+    .cta-banner__text {
+        font-size: 0.82rem !important;
+        margin-bottom: 10px !important;
+        line-height: 1.35 !important;
+    }
+    .cta-banner__actions {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 8px !important;
+    }
+    .cta-banner__actions .btn,
+    .cta-banner .btn {
+        width: 100% !important;
+        max-width: 290px !important;
+        justify-content: center !important;
+    }
+    #tariff-guarantee,
+    #cta-section,
+    section#tariff-guarantee,
+    section#cta-section {
+        padding: 12px 0 !important;
+    }
+}
+
