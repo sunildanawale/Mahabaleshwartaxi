@@ -78,9 +78,9 @@
 
     <meta name="theme-color" content="#0891b2"> <!-- Preload Critical Resources --> <link rel="preload" as="image" href="images/mahabaleshwar-hero-hd.jpg">
 
-    <link rel="preload" href="css/style.min.css?v=135.4" as="style"> <!-- Stylesheets --> <link rel="stylesheet" href="css/advanced-features.min.css?v=134.1">
+    <link rel="preload" href="css/style.min.css?v=135.5" as="style"> <!-- Stylesheets --> <link rel="stylesheet" href="css/advanced-features.min.css?v=134.1">
 
-    <link rel="stylesheet" href="css/style.min.css?v=135.4">
+    <link rel="stylesheet" href="css/style.min.css?v=135.5">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -1370,6 +1370,92 @@ function bridgeHomeForm() {
     window.location.href = 'booking.html' + (q.length ? '?' + q.join('&') : '');
 }
 </script>
+<style id="mobile-cta-critical">
+.mobile-cta {
+    display: none;
+    position: fixed !important;
+    bottom: 16px !important;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    transform: none !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 10px !important;
+    width: max-content !important;
+    max-width: calc(100vw - 32px) !important;
+    z-index: 99999 !important;
+    background: rgba(15, 23, 42, 0.94) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+    border-radius: 9999px !important;
+    box-shadow: 0 14px 34px -4px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.08) inset !important;
+    padding: 6px 8px !important;
+    box-sizing: border-box !important;
+}
+@media (max-width: 768px) {
+    .mobile-cta {
+        display: flex !important;
+        position: fixed !important;
+        bottom: 16px !important;
+        bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
+        left: 0 !important;
+        right: 0 !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        transform: none !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 10px !important;
+        width: max-content !important;
+        max-width: calc(100vw - 32px) !important;
+        z-index: 99999 !important;
+    }
+}
+.mobile-cta .btn, .mobile-cta a {
+    flex: 1 1 0 !important;
+    min-width: 120px !important;
+    height: 44px !important;
+    border-radius: 9999px !important;
+    font-weight: 700 !important;
+    font-size: 0.9rem !important;
+    letter-spacing: 0.01em !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    padding: 10px 18px !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+    box-sizing: border-box !important;
+    border: none !important;
+}
+.mobile-cta .btn--accent, .mobile-cta .btn--dark, .mobile-cta a[href^="tel:"] {
+    flex: 1 1 0 !important;
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%) !important;
+    border: 1px solid rgba(245, 158, 11, 0.45) !important;
+    color: #f8fafc !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3) !important;
+}
+.mobile-cta .btn--whatsapp, .mobile-cta a[href*="whatsapp"] {
+    flex: 1 1 0 !important;
+    background: linear-gradient(135deg, #25D366 0%, #16a34a 100%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.35) !important;
+    color: #ffffff !important;
+    box-shadow: 0 6px 20px -2px rgba(37, 211, 102, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+@media (max-width: 360px) {
+    .mobile-cta { gap: 6px !important; padding: 5px 6px !important; max-width: calc(100vw - 20px) !important; }
+    .mobile-cta .btn, .mobile-cta a { min-width: 100px !important; padding: 9px 12px !important; font-size: 0.82rem !important; height: 42px !important; }
+}
+body.modal-open .mobile-cta { display: none !important; }
+</style>
 </head>
 
     <body>

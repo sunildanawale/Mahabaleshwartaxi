@@ -3,7 +3,7 @@
    Caches Rate Card & Emergency Taxi Contact for Sahyadri Ghats
    ============================================================ */
 
-const CACHE_NAME = 'aryan-taxi-offline-v1';
+const CACHE_NAME = 'aryan-taxi-offline-v2';
 const PRECACHE_ASSETS = [
     './',
     'index.html',
@@ -72,7 +72,23 @@ self.addEventListener('fetch', (event) => {
         return;
     }
 
-    // For CSS, JS, Images: Cache first, update in background (Stale-While-Revalidate)
+    // For CSS and JS with versions: Network first, fall back to cache
+    if (url.pathname.endsWith('.css') || url.pathname.endsWith('.js')) {
+        event.respondWith(
+            fetch(event.request)
+                .then((networkResponse) => {
+                    if (networkResponse && networkResponse.status === 200) {
+                        const copy = networkResponse.clone();
+                        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+                    }
+                    return networkResponse;
+                })
+                .catch(() => caches.match(event.request))
+        );
+        return;
+    }
+
+    // For Images & static assets: Cache first, update in background (Stale-While-Revalidate)
     event.respondWith(
         caches.match(event.request).then((cachedResponse) => {
             const fetchPromise = fetch(event.request).then((networkResponse) => {
