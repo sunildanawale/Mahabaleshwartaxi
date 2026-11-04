@@ -96,6 +96,7 @@
             this.toggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
             const navbar = this.toggle.closest('.navbar');
             if (navbar) navbar.classList.toggle('nav-open', isOpen);
+            document.body.classList.toggle('nav-open', isOpen);
             document.body.style.overflow = isOpen ? 'hidden' : '';
         },
 
@@ -107,6 +108,7 @@
             this.toggle.setAttribute('aria-label', 'Open menu');
             const navbar = this.toggle.closest('.navbar');
             if (navbar) navbar.classList.remove('nav-open');
+            document.body.classList.remove('nav-open');
             document.body.style.overflow = '';
         }
     };

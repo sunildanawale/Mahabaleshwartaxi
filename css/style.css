@@ -698,19 +698,20 @@ h4 {
 /* Mobile Nav */
 @media (max-width: 968px) {
     .navbar {
-        z-index: 1000000;
+        z-index: 1000000 !important;
         overflow-x: clip;
     }
 
     .navbar.nav-open {
+        z-index: 1000000 !important;
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
     }
 
     .navbar__toggle {
         display: flex;
-        z-index: 1000005;
-        position: relative;
+        z-index: 1000020 !important;
+        position: relative !important;
     }
 
     .navbar__menu {
@@ -724,7 +725,7 @@ h4 {
         max-width: 85vw;
         height: 100vh;
         height: 100dvh;
-        background: var(--bg-primary);
+        background: var(--bg-primary) !important;
         flex-direction: column;
         align-items: stretch;
         padding-top: 92px !important;
@@ -734,7 +735,7 @@ h4 {
         gap: 6px;
         box-shadow: -8px 0 32px rgba(0, 0, 0, 0.25);
         transition: transform var(--transition-base), visibility var(--transition-base);
-        z-index: 1000002;
+        z-index: 1000010 !important;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
     }
@@ -780,12 +781,18 @@ h4 {
         background: rgba(15, 23, 42, 0.65);
         backdrop-filter: blur(4px);
         -webkit-backdrop-filter: blur(4px);
-        z-index: 999990;
+        z-index: 999990 !important;
         cursor: pointer;
     }
 
     .nav-overlay.active {
         display: block;
+    }
+
+    body.nav-open .mobile-cta,
+    .navbar.nav-open ~ .mobile-cta,
+    .nav-open ~ .mobile-cta {
+        display: none !important;
     }
 }
 
