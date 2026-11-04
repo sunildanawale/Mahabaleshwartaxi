@@ -2043,29 +2043,30 @@ tr:hover td {
 .mobile-cta {
     display: none;
     position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: var(--z-fixed);
-    background: var(--gray-950);
-    padding: var(--space-3) var(--space-4) calc(var(--space-3) + env(safe-area-inset-bottom, 4px));
-    border-top: 1px solid var(--gray-800);
-    gap: var(--space-3);
+    bottom: 16px;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    left: 50%;
+    transform: translateX(-50%);
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: max-content;
+    max-width: calc(100vw - 32px);
+    z-index: 9999;
 }
 
 @media (max-width: 768px) {
     .mobile-cta {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+        display: flex;
     }
 }
 
 .mobile-cta .btn {
-    border-radius: var(--radius-md);
-    padding: var(--space-3);
-    font-size: var(--text-sm);
-    font-weight: 800;
-    box-shadow: none;
+    border-radius: 9999px;
+    padding: 10px 18px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    white-space: nowrap;
 }
 
 /* ============================================================
@@ -4253,21 +4254,25 @@ img {
 /* 9. Next-Gen Mobile Floating Micro-Dock (iOS/Android Glass Capsule) */
 .mobile-cta {
     display: none;
-    position: fixed;
-    bottom: calc(12px + env(safe-area-inset-bottom, 8px));
-    left: 12px;
-    right: 12px;
-    max-width: 440px;
-    margin: 0 auto;
-    z-index: 99999;
-    background: rgba(15, 23, 42, 0.92);
+    position: fixed !important;
+    bottom: 16px !important;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 10px !important;
+    width: max-content !important;
+    max-width: calc(100vw - 32px) !important;
+    z-index: 9999 !important;
+    background: rgba(15, 23, 42, 0.94);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.16);
-    border-radius: 20px;
-    box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
-    padding: 7px 8px;
-    gap: 8px;
+    border-radius: 9999px;
+    box-shadow: 0 14px 34px -4px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+    padding: 6px 8px;
     box-sizing: border-box;
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
 }
@@ -4275,8 +4280,17 @@ img {
 @media (max-width: 768px) {
     .mobile-cta {
         display: flex !important;
+        position: fixed !important;
+        bottom: 16px !important;
+        bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        justify-content: center !important;
         align-items: center !important;
-        justify-content: space-between !important;
+        gap: 10px !important;
+        width: max-content !important;
+        max-width: calc(100vw - 32px) !important;
+        z-index: 9999 !important;
     }
     body {
         padding-bottom: calc(88px + env(safe-area-inset-bottom, 8px)) !important;
@@ -4285,15 +4299,18 @@ img {
 
 .mobile-cta .btn,
 .mobile-cta a {
-    height: 46px !important;
-    border-radius: 14px !important;
+    flex: 1 1 0 !important;
+    min-width: 120px !important;
+    height: 44px !important;
+    border-radius: 9999px !important;
     font-weight: 700 !important;
     font-size: 0.9rem !important;
     letter-spacing: 0.01em !important;
-    display: flex !important;
+    display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 7px !important;
+    gap: 8px !important;
+    padding: 10px 18px !important;
     text-decoration: none !important;
     white-space: nowrap !important;
     box-sizing: border-box !important;
@@ -4308,11 +4325,11 @@ img {
     transform: scale(0.96) !important;
 }
 
-/* Call Button - Sleek Dark Slate with Warm Amber Border & Icon */
+/* Call Button - Sleek Dark Slate with Warm Amber Border & Icon (Equal Balance) */
 .mobile-cta .btn--accent,
 .mobile-cta .btn--dark,
 .mobile-cta a[href^="tel:"] {
-    flex: 1 1 40% !important;
+    flex: 1 1 0 !important;
     background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%) !important;
     border: 1px solid rgba(245, 158, 11, 0.45) !important;
     color: #f8fafc !important;
@@ -4326,10 +4343,10 @@ img {
     font-size: 0.95rem !important;
 }
 
-/* WhatsApp Button - High-Conversion Spotlight with Sheen & Online Pulse */
+/* WhatsApp Button - High-Conversion Spotlight with Sheen & Online Pulse (Equal Balance) */
 .mobile-cta .btn--whatsapp,
 .mobile-cta a[href*="whatsapp"] {
-    flex: 1.35 1 60% !important;
+    flex: 1 1 0 !important;
     background: linear-gradient(135deg, #25D366 0%, #16a34a 100%) !important;
     border: 1px solid rgba(255, 255, 255, 0.35) !important;
     color: #ffffff !important;
@@ -4384,17 +4401,25 @@ img {
     100% { left: 160%; }
 }
 
-/* Optional 3rd Fares / Rates Button */
-.mobile-cta .mobile-cta__fares {
-    flex: 0.9 1 28% !important;
-    background: linear-gradient(135deg, rgba(30, 41, 59, 0.92) 0%, rgba(15, 23, 42, 0.96) 100%) !important;
-    border: 1px solid rgba(56, 189, 248, 0.45) !important;
-    color: #f8fafc !important;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3) !important;
-}
-.mobile-cta .mobile-cta__fares i {
-    color: #38bdf8 !important;
-    font-size: 0.9rem !important;
+/* Responsive Scaling on Ultra-Compact Mobile Viewports (<= 360px) */
+@media (max-width: 360px) {
+    .mobile-cta {
+        gap: 6px !important;
+        padding: 5px 6px !important;
+        max-width: calc(100vw - 20px) !important;
+    }
+    .mobile-cta .btn,
+    .mobile-cta a {
+        min-width: 100px !important;
+        padding: 9px 12px !important;
+        font-size: 0.82rem !important;
+        gap: 6px !important;
+        height: 42px !important;
+    }
+    .mobile-cta a[href*="whatsapp"] i,
+    .mobile-cta .btn--whatsapp i {
+        font-size: 1rem !important;
+    }
 }
 
 /* 10. Eradicate Stale/Legacy Cached Bottom Bars & Elements */
