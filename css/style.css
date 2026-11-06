@@ -12311,3 +12311,251 @@ select#routeSelect optgroup {
         padding-right: 26px !important;
     }
 }
+
+/* ============================================================
+   31. COMPREHENSIVE UI/UX HARMONIZATION & RESPONSIVE GRID SYSTEM
+   - Standardizes equal-height cards & aligned buttons across all pages
+   - Compacts vertical padding to eliminate excessive blank scrolling
+   - Enforces uniform image aspect ratios and prevents image distortion
+   - Optimizes tables and controls on mobile (320px–480px)
+   - Guarantees zero-overlap floating controls and modal bounds safety
+   ============================================================ */
+
+/* 1. Equal-Height Cards and Horizontal Button Alignment */
+.grid > .card,
+.grid > .dest-card,
+.grid > .trust-card,
+.grid > .fleet-card,
+.grid > .tour-card,
+.grid > .kpi-card,
+.grid > .guide-info-card,
+.grid--2 > div,
+.grid--3 > div,
+.grid--4 > div,
+.dest-grid > div,
+.tours-grid > div,
+.places-grid > div {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.card__body,
+.dest-card__body,
+.dest-card__content,
+.card-body,
+.trust-card__body {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.card__text,
+.dest-card__text,
+.dest-card__desc,
+.trust-card__text,
+.trust-card__desc,
+.card-desc {
+    flex: 1 1 auto !important;
+    margin-bottom: 12px !important;
+    line-height: 1.5 !important;
+}
+
+.dest-card__link,
+.card-actions-row,
+.tour-card-cta-row,
+.card__footer,
+.card > .btn,
+.card > a.btn,
+.dest-card > .btn,
+.dest-card > a.btn,
+.trust-card > .btn {
+    margin-top: auto !important;
+}
+
+/* Card Visual Consistency */
+.card,
+.dest-card,
+.trust-card,
+.fleet-card {
+    border-radius: 12px !important;
+    border: 1px solid var(--border-color) !important;
+    background: var(--bg-primary) !important;
+    box-shadow: var(--shadow-sm) !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease !important;
+}
+
+.card:hover,
+.dest-card:hover,
+.trust-card:hover,
+.fleet-card:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: var(--shadow-md) !important;
+    border-color: var(--primary-light) !important;
+}
+
+/* 2. Consistent Image Aspect Ratios and Object Fit */
+.dest-card__img,
+.card__img,
+.place-card__img {
+    width: 100% !important;
+    aspect-ratio: 16 / 10 !important;
+    height: auto !important;
+    max-height: 200px !important;
+    overflow: hidden !important;
+    position: relative !important;
+    border-radius: 12px 12px 0 0 !important;
+}
+
+.dest-card__img img,
+.card__img img,
+.place-card__img img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+    transition: transform 0.35s ease !important;
+}
+
+.dest-card:hover .dest-card__img img {
+    transform: scale(1.04) !important;
+}
+
+@media (max-width: 640px) {
+    .dest-card__img,
+    .card__img,
+    .place-card__img {
+        aspect-ratio: 16 / 9 !important;
+        max-height: 165px !important;
+    }
+}
+
+/* 3. Site-Wide Compact Vertical Spacing (Eliminates Excessive Scrolling) */
+.section {
+    padding: 38px 0 !important;
+}
+
+@media (max-width: 768px) {
+    .section {
+        padding: 22px 0 !important;
+    }
+    .section-title {
+        font-size: 1.28rem !important;
+        margin-bottom: 4px !important;
+        line-height: 1.25 !important;
+    }
+    .section-subtitle {
+        font-size: 0.85rem !important;
+        margin-bottom: 16px !important;
+        line-height: 1.35 !important;
+    }
+    .section-label {
+        font-size: 0.72rem !important;
+        margin-bottom: 4px !important;
+        letter-spacing: 0.75px !important;
+    }
+    .hero--inner {
+        min-height: 200px !important;
+        padding: 28px 16px !important;
+    }
+}
+
+/* 4. Table Responsiveness & Mobile Fitting */
+.table-wrap,
+.table-responsive,
+.guide-tariff-table-wrap {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    border-radius: 10px !important;
+    box-sizing: border-box !important;
+}
+
+@media (max-width: 640px) {
+    .table-wrap table,
+    .table-responsive table,
+    .guide-tariff-table {
+        min-width: 440px !important;
+        font-size: 0.82rem !important;
+    }
+    .table-wrap th,
+    .table-wrap td,
+    .table-responsive th,
+    .table-responsive td,
+    .guide-tariff-table th,
+    .guide-tariff-table td {
+        padding: 8px 10px !important;
+    }
+    .table-wrap .btn,
+    .table-responsive .btn,
+    .guide-tariff-table .btn {
+        padding: 5px 10px !important;
+        font-size: 0.78rem !important;
+        white-space: nowrap !important;
+    }
+}
+
+/* 5. Mobile & Desktop Floating Controls Zero-Overlap Separation */
+@media (min-width: 769px) {
+    .back-to-top {
+        left: 24px !important;
+        right: auto !important;
+        bottom: 24px !important;
+        z-index: 9990 !important;
+    }
+    .whatsapp-float {
+        right: 24px !important;
+        left: auto !important;
+        bottom: 24px !important;
+        z-index: 9995 !important;
+    }
+    .ask-aryan-float,
+    #askAryanBtn,
+    .ai-chat-launcher {
+        right: 24px !important;
+        left: auto !important;
+        bottom: 96px !important;
+        z-index: 9992 !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .mobile-cta {
+        position: fixed !important;
+        bottom: 12px !important;
+        bottom: calc(12px + env(safe-area-inset-bottom, 0px)) !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        margin: 0 !important;
+        z-index: 99999 !important;
+        width: auto !important;
+        max-width: calc(100vw - 24px) !important;
+        display: flex !important;
+    }
+    .whatsapp-float,
+    .back-to-top {
+        display: none !important;
+    }
+}
+
+/* 6. Screen Boundary & Input Width Protection */
+input, select, textarea {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.modal,
+.modal-dialog,
+.modal__content,
+.booking-modal,
+.bottom-sheet {
+    max-width: 95vw !important;
+    max-height: 90vh !important;
+    max-height: 90dvh !important;
+    overflow-y: auto !important;
+    box-sizing: border-box !important;
+}
