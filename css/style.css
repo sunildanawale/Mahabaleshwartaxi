@@ -12647,3 +12647,95 @@ input, select, textarea {
     overflow-y: auto !important;
     box-sizing: border-box !important;
 }
+
+/* 7. Why Choose Our Taxi Service / Trust Info-Boxes inside Grids */
+.grid--3 > .info-box,
+.grid > .info-box,
+.info-box[style*="text-align: center"],
+.section--bg .grid .info-box {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    text-align: center !important;
+    margin: 0 !important;
+    padding: 22px 18px !important;
+    background: var(--bg-primary, #ffffff) !important;
+    border: 1px solid var(--border-color, #e2e8f0) !important;
+    border-radius: 14px !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
+    gap: 10px !important;
+    height: 100% !important;
+    box-sizing: border-box !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease !important;
+}
+.grid--3 > .info-box:hover,
+.grid > .info-box:hover,
+.info-box[style*="text-align: center"]:hover,
+.section--bg .grid .info-box:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08) !important;
+    border-color: var(--primary-light, #38bdf8) !important;
+}
+[data-theme="dark"] .grid--3 > .info-box,
+[data-theme="dark"] .grid > .info-box,
+[data-theme="dark"] .info-box[style*="text-align: center"],
+[data-theme="dark"] .section--bg .grid .info-box {
+    background: var(--bg-secondary, #1e293b) !important;
+    border-color: var(--border-color, #334155) !important;
+}
+.grid--3 > .info-box i,
+.grid > .info-box i,
+.info-box[style*="text-align: center"] i,
+.section--bg .grid .info-box i {
+    margin: 0 auto 8px auto !important;
+    width: 52px !important;
+    height: 52px !important;
+    border-radius: 50% !important;
+    background: rgba(8, 145, 178, 0.12) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.35rem !important;
+    color: var(--primary, #0891b2) !important;
+    flex-shrink: 0 !important;
+}
+[data-theme="dark"] .grid--3 > .info-box i,
+[data-theme="dark"] .grid > .info-box i,
+[data-theme="dark"] .info-box[style*="text-align: center"] i,
+[data-theme="dark"] .section--bg .grid .info-box i {
+    background: rgba(56, 189, 248, 0.15) !important;
+    color: var(--primary-light, #38bdf8) !important;
+}
+.grid--3 > .info-box h3,
+.grid > .info-box h3,
+.info-box[style*="text-align: center"] h3,
+.section--bg .grid .info-box h3 {
+    width: 100% !important;
+    text-align: center !important;
+    margin: 0 0 6px 0 !important;
+    font-size: 1.15rem !important;
+    font-weight: 700 !important;
+    color: var(--text-primary) !important;
+}
+.grid--3 > .info-box p,
+.grid > .info-box p,
+.info-box[style*="text-align: center"] p,
+.section--bg .grid .info-box p {
+    width: 100% !important;
+    text-align: center !important;
+    margin: 0 !important;
+    color: var(--text-secondary) !important;
+    font-size: 0.88rem !important;
+    line-height: 1.55 !important;
+    flex: 1 1 auto !important;
+}
+@media (max-width: 640px) {
+    .grid--3 > .info-box,
+    .grid > .info-box,
+    .info-box[style*="text-align: center"],
+    .section--bg .grid .info-box {
+        padding: 18px 14px !important;
+        gap: 8px !important;
+    }
+}
