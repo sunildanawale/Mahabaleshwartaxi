@@ -4308,10 +4308,10 @@ img {
 
 @media (max-width: 768px) {
     .mobile-cta {
-        display: flex !important;
+        display: inline-flex !important;
         position: fixed !important;
-        bottom: 16px !important;
-        bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
+        bottom: 14px !important;
+        bottom: calc(14px + env(safe-area-inset-bottom, 0px)) !important;
         left: 0 !important;
         right: 0 !important;
         margin-left: auto !important;
@@ -4319,37 +4319,55 @@ img {
         transform: none !important;
         justify-content: center !important;
         align-items: center !important;
-        gap: 10px !important;
+        gap: 8px !important;
+        width: -moz-fit-content !important;
+        width: fit-content !important;
         width: max-content !important;
-        max-width: calc(100vw - 32px) !important;
+        max-width: calc(100vw - 20px) !important;
         z-index: 99999 !important;
+        padding: 6px 8px !important;
+        box-sizing: border-box !important;
     }
     body {
-        padding-bottom: calc(88px + env(safe-area-inset-bottom, 8px)) !important;
+        padding-bottom: calc(96px + env(safe-area-inset-bottom, 16px)) !important;
     }
 }
 
 .mobile-cta .btn,
 .mobile-cta a {
-    flex: 1 1 0 !important;
-    min-width: 120px !important;
-    height: 44px !important;
+    flex: 0 0 auto !important;
+    width: auto !important;
+    min-width: 108px !important;
+    height: 42px !important;
     border-radius: 9999px !important;
     font-weight: 700 !important;
-    font-size: 0.9rem !important;
+    font-size: 0.86rem !important;
     letter-spacing: 0.01em !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 8px !important;
-    padding: 10px 18px !important;
+    gap: 6px !important;
+    padding: 8px 14px !important;
     text-decoration: none !important;
     white-space: nowrap !important;
     box-sizing: border-box !important;
     border: none !important;
+    line-height: 1 !important;
+    vertical-align: middle !important;
     transition: transform 0.15s ease, box-shadow 0.2s ease, opacity 0.2s ease !important;
     user-select: none !important;
     -webkit-tap-highlight-color: transparent !important;
+}
+
+.mobile-cta a i,
+.mobile-cta .btn i {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    vertical-align: middle !important;
+    line-height: 1 !important;
+    margin: 0 !important;
+    font-size: 0.95rem !important;
 }
 
 .mobile-cta a:active,
@@ -12526,19 +12544,89 @@ select#routeSelect optgroup {
 @media (max-width: 768px) {
     .mobile-cta {
         position: fixed !important;
-        bottom: 12px !important;
-        bottom: calc(12px + env(safe-area-inset-bottom, 0px)) !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-        margin: 0 !important;
+        bottom: 14px !important;
+        bottom: calc(14px + env(safe-area-inset-bottom, 0px)) !important;
+        left: 0 !important;
+        right: 0 !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        transform: none !important;
         z-index: 99999 !important;
+        width: -moz-fit-content !important;
+        width: fit-content !important;
+        width: max-content !important;
+        max-width: calc(100vw - 20px) !important;
+        display: inline-flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 8px !important;
+        padding: 6px 8px !important;
+        box-sizing: border-box !important;
+        background: rgba(15, 23, 42, 0.94) !important;
+        border: 1px solid rgba(255, 255, 255, 0.16) !important;
+        border-radius: 9999px !important;
+        box-shadow: 0 14px 34px -4px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.08) inset !important;
+    }
+    .mobile-cta .btn,
+    .mobile-cta a {
+        flex: 0 0 auto !important;
         width: auto !important;
-        max-width: calc(100vw - 24px) !important;
-        display: flex !important;
+        min-width: 108px !important;
+        height: 42px !important;
+        padding: 8px 14px !important;
+        box-sizing: border-box !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        line-height: 1 !important;
+        gap: 6px !important;
+        font-size: 0.86rem !important;
+        border-radius: 9999px !important;
+        white-space: nowrap !important;
+        border: none !important;
+    }
+    .mobile-cta a i,
+    .mobile-cta .btn i {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        vertical-align: middle !important;
+        line-height: 1 !important;
+        margin: 0 !important;
+        font-size: 0.95rem !important;
     }
     .whatsapp-float,
     .back-to-top {
         display: none !important;
+    }
+    body {
+        padding-bottom: calc(96px + env(safe-area-inset-bottom, 16px)) !important;
+    }
+    .card div:has(> .badge),
+    .card-header-row {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        gap: 10px !important;
+    }
+    .card .badge,
+    span.badge {
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 4px 10px !important;
+        font-size: 0.75rem !important;
+        font-weight: 700 !important;
+        line-height: 1.2 !important;
+        border-radius: 9999px !important;
+        height: fit-content !important;
+    }
+    .card > img[src*="images/"] {
+        height: 180px !important;
+        max-height: 180px !important;
+        object-fit: cover !important;
     }
 }
 

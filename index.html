@@ -78,9 +78,9 @@
 
     <meta name="theme-color" content="#0891b2"> <!-- Preload Critical Resources --> <link rel="preload" as="image" href="images/mahabaleshwar-hero-hd.jpg">
 
-    <link rel="preload" href="css/style.min.css?v=140.0" as="style"> <!-- Stylesheets --> <link rel="stylesheet" href="css/advanced-features.min.css?v=134.1">
+    <link rel="preload" href="css/style.min.css?v=141.0" as="style"> <!-- Stylesheets --> <link rel="stylesheet" href="css/advanced-features.min.css?v=134.1">
 
-    <link rel="stylesheet" href="css/style.min.css?v=140.0">
+    <link rel="stylesheet" href="css/style.min.css?v=141.0">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -1448,10 +1448,10 @@ html, body {
 }
 @media (max-width: 768px) {
     .mobile-cta {
-        display: flex !important;
+        display: inline-flex !important;
         position: fixed !important;
-        bottom: 16px !important;
-        bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
+        bottom: 14px !important;
+        bottom: calc(14px + env(safe-area-inset-bottom, 0px)) !important;
         left: 0 !important;
         right: 0 !important;
         margin-left: auto !important;
@@ -1459,39 +1459,53 @@ html, body {
         transform: none !important;
         justify-content: center !important;
         align-items: center !important;
-        gap: 10px !important;
+        gap: 8px !important;
+        width: -moz-fit-content !important;
+        width: fit-content !important;
         width: max-content !important;
-        max-width: calc(100vw - 32px) !important;
+        max-width: calc(100vw - 20px) !important;
         z-index: 99999 !important;
+        padding: 6px 8px !important;
+        box-sizing: border-box !important;
     }
 }
 .mobile-cta .btn, .mobile-cta a {
-    flex: 1 1 0 !important;
-    min-width: 120px !important;
-    height: 44px !important;
+    flex: 0 0 auto !important;
+    width: auto !important;
+    min-width: 108px !important;
+    height: 42px !important;
     border-radius: 9999px !important;
     font-weight: 700 !important;
-    font-size: 0.9rem !important;
+    font-size: 0.86rem !important;
     letter-spacing: 0.01em !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 8px !important;
-    padding: 10px 18px !important;
+    gap: 6px !important;
+    padding: 8px 14px !important;
     text-decoration: none !important;
     white-space: nowrap !important;
     box-sizing: border-box !important;
     border: none !important;
+    line-height: 1 !important;
+    vertical-align: middle !important;
+}
+.mobile-cta a i, .mobile-cta .btn i {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    vertical-align: middle !important;
+    line-height: 1 !important;
+    margin: 0 !important;
+    font-size: 0.95rem !important;
 }
 .mobile-cta .btn--accent, .mobile-cta .btn--dark, .mobile-cta a[href^="tel:"] {
-    flex: 1 1 0 !important;
     background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%) !important;
     border: 1px solid rgba(245, 158, 11, 0.45) !important;
     color: #f8fafc !important;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3) !important;
 }
 .mobile-cta .btn--whatsapp, .mobile-cta a[href*="whatsapp"] {
-    flex: 1 1 0 !important;
     background: linear-gradient(135deg, #25D366 0%, #16a34a 100%) !important;
     border: 1px solid rgba(255, 255, 255, 0.35) !important;
     color: #ffffff !important;
@@ -1500,8 +1514,8 @@ html, body {
     overflow: hidden !important;
 }
 @media (max-width: 360px) {
-    .mobile-cta { gap: 6px !important; padding: 5px 6px !important; max-width: calc(100vw - 20px) !important; }
-    .mobile-cta .btn, .mobile-cta a { min-width: 100px !important; padding: 9px 12px !important; font-size: 0.82rem !important; height: 42px !important; }
+    .mobile-cta { gap: 6px !important; padding: 5px 6px !important; max-width: calc(100vw - 16px) !important; }
+    .mobile-cta .btn, .mobile-cta a { min-width: 100px !important; padding: 8px 12px !important; font-size: 0.82rem !important; height: 42px !important; }
 }
 body.modal-open .mobile-cta { display: none !important; }
 </style>
