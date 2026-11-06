@@ -21,7 +21,7 @@
         <text y=%22.9em%22 font-size=%2290%22>🚕</text>
     </svg>">
     <meta name="theme-color" content="#0891b2">
-    <link rel="stylesheet" href="css/style.min.css?v=142.0">
+    <link rel="stylesheet" href="css/style.min.css?v=143.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> <script type="application/ld+json"> {"@context": "https://schema.org","@graph": [{"@type": "TaxiService","name": "Mahabaleshwar Sightseeing Taxi","alternateName": ["Aryan Taxi Mahabaleshwar", "Sarpanch Taxi", "Sarpanch Taxi Mahabaleshwar", "Sarpanch Cab Service"],"founder": {"@type": "Person", "name": "Sunil Danawale", "jobTitle": "Sarpanch & Veteran Hill Taxi Driver", "alternateName": "Sarpanch Taxi"},"telephone": "+919922882044","email": "aryansdtravels@gmail.com","areaServed": ["Mahabaleshwar", "Panchgani", "Tapola", "Pratapgad"],"priceRange": "₹1200 - ₹18000"},{"@type": "BreadcrumbList","itemListElement": [{"@type": "ListItem","position": 1,"name": "Home","item": "https://sunildanawale.github.io/Mahabaleshwartaxi/"},{"@type": "ListItem","position": 2,"name": "About","item": "https://sunildanawale.github.io/Mahabaleshwartaxi/about.html"}]}]} </script> <link rel="stylesheet" href="css/advanced-features.min.css?v=98.0">
     <style>
         /* About Hero Section Precision Alignment */
@@ -70,7 +70,7 @@
             display: block;
         }
 
-        /* Direct Booking Advantage Box */
+        /* Direct Booking Advantage Box & Cards */
         .about-advantage-box {
             background: var(--bg-secondary);
             padding: var(--space-8);
@@ -78,6 +78,124 @@
             border: 1px solid var(--border-color);
             box-shadow: var(--shadow-sm);
             margin-top: var(--space-6);
+        }
+        .about-advantage-card {
+            background: var(--bg-primary);
+            padding: 24px 22px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow-sm);
+            box-sizing: border-box;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+        .about-advantage-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-light);
+        }
+        .about-advantage-card__header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+        .about-advantage-card__icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(8, 145, 178, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(8, 145, 178, 0.2);
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        [data-theme="dark"] .about-advantage-card__icon {
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--primary-light);
+            border-color: rgba(56, 189, 248, 0.25);
+        }
+        .about-advantage-card__title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0;
+            line-height: 1.3;
+        }
+        .about-advantage-card__desc {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 0.92rem;
+            margin: 0 0 16px 0;
+            flex-grow: 1;
+        }
+        .about-advantage-card__list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 0.88rem;
+            color: var(--text-primary);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .about-advantage-card__item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            line-height: 1.45;
+        }
+        .about-advantage-card__item i {
+            color: #10b981;
+            font-size: 0.95rem;
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+        .about-advantage-card__item span {
+            flex: 1 1 auto;
+        }
+
+        /* Disclosure Pills inside Owner Badge */
+        .disclosure-pill {
+            padding: 5px 12px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        .disclosure-pill--success {
+            background: #dcfce7;
+            color: #15803d;
+        }
+        .disclosure-pill--primary {
+            background: #e0f2fe;
+            color: #0369a1;
+        }
+        .disclosure-pill--warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        [data-theme="dark"] .disclosure-pill--success {
+            background: rgba(16, 185, 129, 0.18);
+            color: #34d399;
+        }
+        [data-theme="dark"] .disclosure-pill--primary {
+            background: rgba(56, 189, 248, 0.18);
+            color: #38bdf8;
+        }
+        [data-theme="dark"] .disclosure-pill--warning {
+            background: rgba(245, 158, 11, 0.18);
+            color: #fbbf24;
+        }
+        [data-theme="dark"] .owner-disclosure-badge .disclosure-icon-wrap {
+            background: rgba(56, 189, 248, 0.15) !important;
+            color: #38bdf8 !important;
         }
 
         /* Verified Driver Box & Credentials */
@@ -226,7 +344,44 @@
                 border-radius: var(--radius-lg);
             }
             .about-advantage-box {
-                padding: 18px 12px;
+                padding: 16px 12px;
+            }
+            .about-advantage-box > div:first-child {
+                margin-bottom: 14px !important;
+            }
+            .about-advantage-box .grid--2 {
+                gap: 12px !important;
+            }
+            .about-advantage-card {
+                padding: 16px 14px;
+            }
+            .about-advantage-card__header {
+                gap: 10px;
+                margin-bottom: 10px;
+            }
+            .about-advantage-card__icon {
+                width: 38px;
+                height: 38px;
+                font-size: 1.1rem;
+            }
+            .about-advantage-card__title {
+                font-size: 1.05rem;
+            }
+            .about-advantage-card__desc {
+                font-size: 0.86rem;
+                line-height: 1.55;
+                margin-bottom: 12px;
+            }
+            .about-advantage-card__list {
+                gap: 8px;
+                font-size: 0.84rem;
+            }
+            .about-advantage-card__item {
+                gap: 8px;
+            }
+            .about-advantage-card__item i {
+                margin-top: 2px;
+                font-size: 0.9rem;
             }
             .verified-driver-box {
                 padding: 18px 12px;
@@ -405,53 +560,57 @@
     <div style="text-align: center; max-width: 680px; margin: 0 auto var(--space-8);">
         <span style="display: inline-flex; align-items: center; gap: 6px; margin-bottom: var(--space-2); color: var(--primary); font-weight: 700; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">
         <i class="fa-solid fa-star"></i> Why Book Direct</span>
-    <h3 style="font-size: var(--text-2xl); font-weight: 800; color: var(--text-primary); margin: 0 0 var(--space-2);">The Direct Booking Advantage</h3>
-    <p style="color: var(--text-secondary); font-size: 0.95rem; margin: 0;">Direct connection with our local operator ensures transparent pricing and genuine mountain hospitality.</p>
-</div>
-<div class="grid grid--2" style="gap: var(--space-6); align-items: stretch;">
-    <div style="background: var(--bg-primary); padding: var(--space-6); border-radius: var(--radius-lg); border: 1px solid var(--border-color); display: flex; flex-direction: column;">
-        <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4);">
-            <div style="width: 44px; height: 44px; border-radius: 12px; background: var(--bg-tertiary); color: var(--primary); border: 1px solid var(--border-color); font-size: 1.25rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                <i class="fa-solid fa-handshake">
-            </i>
+        <h3 style="font-size: var(--text-2xl); font-weight: 800; color: var(--text-primary); margin: 0 0 var(--space-2);">The Direct Booking Advantage</h3>
+        <p style="color: var(--text-secondary); font-size: 0.95rem; margin: 0;">Direct connection with our local operator ensures transparent pricing and genuine mountain hospitality.</p>
+    </div>
+    <div class="grid grid--2" style="gap: var(--space-6); align-items: stretch;">
+        <div class="about-advantage-card">
+            <div class="about-advantage-card__header">
+                <div class="about-advantage-card__icon">
+                    <i class="fa-solid fa-handshake"></i>
+                </div>
+                <h4 class="about-advantage-card__title">Union Tariff &amp; Transparency</h4>
+            </div>
+            <p class="about-advantage-card__desc">Booking your sightseeing tours directly ensures complete transparency. You receive the official Mahabaleshwar Taxi Union rates with zero hidden charges, commissions, or surge fees. This direct approach supports the local mountain driver community and provides an honest, unhurried sightseeing experience.</p>
+            <ul class="about-advantage-card__list">
+                <li class="about-advantage-card__item">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>Taxi Union tariff rates locked upfront</span>
+                </li>
+                <li class="about-advantage-card__item">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>Zero advance for Mahabaleshwar sightseeing</span>
+                </li>
+                <li class="about-advantage-card__item">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>Direct operator support (+91 99228 82044)</span>
+                </li>
+            </ul>
         </div>
-        <h4 style="font-size: var(--text-lg); font-weight: 700; color: var(--text-primary); margin: 0;">Union Tariff &amp; Transparency</h4>
+        <div class="about-advantage-card">
+            <div class="about-advantage-card__header">
+                <div class="about-advantage-card__icon">
+                    <i class="fa-solid fa-mountain-sun"></i>
+                </div>
+                <h4 class="about-advantage-card__title">Local Guides &amp; Mountain Expertise</h4>
+            </div>
+            <p class="about-advantage-card__desc">Our commitment goes beyond driving. Our seasoned local mountain drivers act as your knowledgeable guides — offering historical context at Pratapgad Fort, sharing sacred stories at Panchganga Temple, and helping your family capture the best viewpoint photos. Every taxi is clean, well-maintained, and perfectly suited for the Sahyadri hill roads.</p>
+            <ul class="about-advantage-card__list">
+                <li class="about-advantage-card__item">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>100% Sahyadri mountain driving experience</span>
+                </li>
+                <li class="about-advantage-card__item">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>Registered Non-AC tourist cabs</span>
+                </li>
+                <li class="about-advantage-card__item">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>Patient, family &amp; senior-citizen friendly pace</span>
+                </li>
+            </ul>
+        </div>
     </div>
-    <p style="color: var(--text-secondary); line-height: 1.7; font-size: 0.92rem; margin-bottom: var(--space-4); flex-grow: 1;"> Booking your sightseeing tours directly ensures complete transparency. You receive the official Mahabaleshwar Taxi Union rates with zero hidden charges, commissions, or surge fees. This direct approach supports the local mountain driver community and provides an honest, unhurried sightseeing experience. </p>
-    <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85rem; color: var(--text-primary); display: flex; flex-direction: column; gap: 8px;">
-        <li style="display: flex; align-items: center; gap: 8px;">
-            <i class="fa-solid fa-circle-check" style="color: #10b981;">
-        </i> Taxi Union tariff rates locked upfront</li>
-        <li style="display: flex; align-items: center; gap: 8px;">
-            <i class="fa-solid fa-circle-check" style="color: #10b981;">
-        </i> Zero advance for Mahabaleshwar sightseeing</li>
-        <li style="display: flex; align-items: center; gap: 8px;">
-            <i class="fa-solid fa-circle-check" style="color: #10b981;">
-        </i> Direct operator support (+91 99228 82044)</li>
-    </ul>
-</div>
-<div style="background: var(--bg-primary); padding: var(--space-6); border-radius: var(--radius-lg); border: 1px solid var(--border-color); display: flex; flex-direction: column;">
-    <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4);">
-        <div style="width: 44px; height: 44px; border-radius: 12px; background: var(--bg-tertiary); color: var(--primary); border: 1px solid var(--border-color); font-size: 1.25rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-            <i class="fa-solid fa-mountain-sun">
-        </i>
-    </div>
-    <h4 style="font-size: var(--text-lg); font-weight: 700; color: var(--text-primary); margin: 0;">Local Guides &amp; Mountain Expertise</h4>
-</div>
-<p style="color: var(--text-secondary); line-height: 1.7; font-size: 0.92rem; margin-bottom: var(--space-4); flex-grow: 1;"> Our commitment goes beyond driving. Our seasoned local mountain drivers act as your knowledgeable guides — offering historical context at Pratapgad Fort, sharing sacred stories at Panchganga Temple, and helping your family capture the best viewpoint photos. Every taxi is clean, well-maintained, and perfectly suited for the Sahyadri hill roads. </p>
-<ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85rem; color: var(--text-primary); display: flex; flex-direction: column; gap: 8px;">
-    <li style="display: flex; align-items: center; gap: 8px;">
-        <i class="fa-solid fa-circle-check" style="color: #10b981;">
-    </i> 100% Sahyadri mountain driving experience</li>
-    <li style="display: flex; align-items: center; gap: 8px;">
-        <i class="fa-solid fa-circle-check" style="color: #10b981;">
-    </i> Registered Non-AC tourist cabs</li>
-    <li style="display: flex; align-items: center; gap: 8px;">
-        <i class="fa-solid fa-circle-check" style="color: #10b981;">
-    </i> Patient, family &amp; senior-citizen friendly pace</li>
-</ul>
-</div>
-</div>
 </div>
 </div>
 </section>
@@ -504,26 +663,24 @@
             </div>
         </div> <!-- Direct Local Owner & Union Driver Network Commitment Badge --> <div class="reveal owner-disclosure-badge" style="max-width: 1000px; margin: 24px auto; text-align: left; background: var(--bg-primary); border: 1.5px solid var(--border-color); border-left: 5px solid #0891b2; border-radius: 16px; padding: 22px 24px; box-shadow: var(--shadow-sm);">
 <div style="display: flex; align-items: flex-start; gap: 16px; flex-wrap: wrap;">
-    <div style="width: 46px; height: 46px; border-radius: 12px; background: #e0f2fe; color: #0284c7; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; flex-shrink: 0; margin-top: 2px;">
-        <i class="fa-solid fa-taxi">
-    </i>
-</div>
-<div style="flex: 1; min-width: 260px;">
-    <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--text-primary); margin: 0 0 6px;">Local Operator &amp; Union Cab Network</h3>
-    <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.65; margin: 0 0 12px;"> Aryan Taxi Mahabaleshwar coordinates registered tourist cabs (Official Black &amp; Yellow 4-seater tourist taxis) through the Mahabaleshwar Taxi Union circle as per vehicle availability. For local sightseeing circuits in Mahabaleshwar and Panchgani, 4-seater tourist cabs are standard. If your family or group has 5 or more guests, multiple 4-seater cabs are arranged (e.g. 2 cabs for 5–8 guests). For outstation journeys (Pune / Mumbai airport and city transfers), larger vehicles (Ertiga / Innova / Sedans) are available on request. <strong>Please confirm all tour details with the taxi driver before starting your sightseeing.</strong> </p>
-    <div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 0.8rem; font-weight: 700;">
-        <span style="background: #dcfce7; color: #15803d; padding: 5px 12px; border-radius: 20px; display: inline-flex; align-items: center; gap: 5px;">
-        <i class="fa-solid fa-circle-check">
-    </i> Official Fixed Union Tariffs</span>
-    <span style="background: #e0f2fe; color: #0369a1; padding: 5px 12px; border-radius: 20px; display: inline-flex; align-items: center; gap: 5px;">
-    <i class="fa-solid fa-ban">
-</i> Zero Advance for Local Sightseeing</span>
-<span style="background: #fef3c7; color: #92400e; padding: 5px 12px; border-radius: 20px; display: inline-flex; align-items: center; gap: 5px;">
-<i class="fa-solid fa-car-side">
-</i> 4-Seater Cabs for Local Sightseeing</span>
-
-</div>
-</div>
+    <div class="disclosure-icon-wrap" style="width: 46px; height: 46px; border-radius: 12px; background: rgba(8, 145, 178, 0.12); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.35rem; flex-shrink: 0; margin-top: 2px;">
+        <i class="fa-solid fa-taxi"></i>
+    </div>
+    <div style="flex: 1; min-width: 260px;">
+        <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--text-primary); margin: 0 0 6px;">Local Operator &amp; Union Cab Network</h3>
+        <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.65; margin: 0 0 12px;"> Aryan Taxi Mahabaleshwar coordinates registered tourist cabs (Official Black &amp; Yellow 4-seater tourist taxis) through the Mahabaleshwar Taxi Union circle as per vehicle availability. For local sightseeing circuits in Mahabaleshwar and Panchgani, 4-seater tourist cabs are standard. If your family or group has 5 or more guests, multiple 4-seater cabs are arranged (e.g. 2 cabs for 5–8 guests). For outstation journeys (Pune / Mumbai airport and city transfers), larger vehicles (Ertiga / Innova / Sedans) are available on request. <strong>Please confirm all tour details with the taxi driver before starting your sightseeing.</strong> </p>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span class="disclosure-pill disclosure-pill--success">
+                <i class="fa-solid fa-circle-check"></i> Official Fixed Union Tariffs
+            </span>
+            <span class="disclosure-pill disclosure-pill--primary">
+                <i class="fa-solid fa-ban"></i> Zero Advance for Local Sightseeing
+            </span>
+            <span class="disclosure-pill disclosure-pill--warning">
+                <i class="fa-solid fa-car-side"></i> 4-Seater Cabs for Local Sightseeing
+            </span>
+        </div>
+    </div>
 </div>
 </div>
 </div>
