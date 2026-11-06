@@ -12275,3 +12275,39 @@ section#cta-section {
     border-color: rgba(52, 211, 153, 0.35) !important;
     color: #34d399 !important;
 }
+
+/* ============================================================
+   SELECT TOUR / ROUTE DROPDOWN & MODAL SINGLE-LINE HARMONY
+   ============================================================ */
+#routeSelect,
+.hero-dark-input.form-select,
+select#routeSelect {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+    cursor: pointer !important;
+    line-height: 1.25 !important;
+}
+
+#routeSelect option,
+select#routeSelect option {
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+}
+
+#routeSelect optgroup,
+select#routeSelect optgroup {
+    white-space: nowrap !important;
+}
+
+@media (max-width: 640px) {
+    #routeSelect,
+    select#routeSelect {
+        font-size: 12px !important;
+        padding-left: 28px !important;
+        padding-right: 26px !important;
+    }
+}

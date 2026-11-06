@@ -3973,7 +3973,8 @@
                 s = s.replace(/\s*\/\s*Khandala/i, '');
                 s = s.replace(/Raigadh/i, 'Raigad');
                 s = s.replace(/Matheran Drop/i, 'Matheran');
-                if (t.id === 'TR_MUM_VASHI') s = 'Mumbai Vashi';
+                if (t.id === 'TR_MUM_VASHI') s = 'Mumbai (Vashi)';
+                if (t.id === 'TR_LONAVALA') s = 'Lonavala (Khandala)';
                 return s.trim();
             }
 
