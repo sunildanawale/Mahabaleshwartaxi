@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // 1. Mobile sticky bar handled natively by .mobile-cta in HTML/CSS with zero name disclosure
 
     // 2. Weather & Hill Station Season Advisory
-    var topBarLeft = document.querySelector('.top-bar__left');
-    if (topBarLeft && !document.querySelector('.weather-widget')) {
+    var topBar = document.querySelector('.top-bar__left') || document.querySelector('.top-bar');
+    if (topBar && !document.querySelector('.weather-widget')) {
         var month = new Date().getMonth();
         var temp = 20;
         var cond = "Pleasant";
@@ -21,11 +21,14 @@ document.addEventListener('DOMContentLoaded', function () {
         else if (month >= 6 && month <= 9) { temp = 19; cond = "Rain / Mist"; icon = "fa-cloud-showers-heavy"; }
         else { temp = 16; cond = "Crisp & Cool"; icon = "fa-snowflake"; }
 
-        var weatherWidgetHTML = '<div class="weather-widget">'
-            + '<i class="fa-solid ' + icon + '"></i>'
+        var weatherWidgetHTML = '<div class="weather-widget" id="amtTopWeatherWidget" title="Loading live weather...">'
+            + '<i class="fa-solid ' + icon + '" id="amtWeatherIcon"></i>'
             + '<span id="weatherText">Mahabaleshwar: ' + temp + '°C (' + cond + ')</span>'
             + '</div>';
-        topBarLeft.insertAdjacentHTML('afterbegin', weatherWidgetHTML);
+        topBar.insertAdjacentHTML('afterbegin', weatherWidgetHTML);
+
+        // Fetch Live Weather (Open-Meteo API with 30m sessionStorage cache)
+        updateLiveWeather();
     }
 
     // 3. Dynamic Hill Station Season Advisory Banner
@@ -34,6 +37,67 @@ document.addEventListener('DOMContentLoaded', function () {
     // 4. Inject Language Selector into top bar & navbar if not present
     injectLanguageSelector();
 });
+
+// Live Weather Engine (Open-Meteo Integration with Session Cache)
+function updateLiveWeather() {
+    var CACHE_KEY = 'amt_live_weather_cache';
+    var CACHE_TTL = 30 * 60 * 1000; // 30 minutes
+
+    function applyWeather(data) {
+        if (!data || !data.current_weather) return;
+        var t = Math.round(data.current_weather.temperature);
+        var code = data.current_weather.weathercode;
+        var isDay = data.current_weather.is_day !== 0;
+
+        var cond = "Clear";
+        var icon = isDay ? "fa-sun" : "fa-moon";
+
+        if (code === 0) { cond = isDay ? "Sunny" : "Clear Sky"; icon = isDay ? "fa-sun" : "fa-moon"; }
+        else if (code >= 1 && code <= 3) { cond = "Partly Cloudy"; icon = isDay ? "fa-cloud-sun" : "fa-cloud-moon"; }
+        else if (code === 45 || code === 48) { cond = "Misty / Fog"; icon = "fa-smog"; }
+        else if ((code >= 51 && code <= 67) || (code >= 80 && code <= 82)) { cond = "Rain Showers"; icon = "fa-cloud-showers-heavy"; }
+        else if (code >= 71 && code <= 77) { cond = "Cold Breeze"; icon = "fa-snowflake"; }
+        else if (code >= 95) { cond = "Thunderstorm"; icon = "fa-bolt"; }
+
+        var textEl = document.getElementById('weatherText');
+        var iconEl = document.getElementById('amtWeatherIcon');
+        var widget = document.getElementById('amtTopWeatherWidget');
+        var liveTemp = document.getElementById('live-temp');
+
+        if (textEl) textEl.textContent = 'Mahabaleshwar: ' + t + '°C (' + cond + ')';
+        if (iconEl) iconEl.className = 'fa-solid ' + icon;
+        if (liveTemp) liveTemp.innerHTML = t + '&deg;C';
+
+        if (data.daily && data.daily.sunrise && data.daily.sunset && widget) {
+            var sr = data.daily.sunrise[0] ? data.daily.sunrise[0].split('T')[1] : '';
+            var ss = data.daily.sunset[0] ? data.daily.sunset[0].split('T')[1] : '';
+            widget.setAttribute('title', 'Live Mahabaleshwar Weather • Sunrise: ' + sr + ' • Sunset: ' + ss);
+        }
+    }
+
+    try {
+        var cached = sessionStorage.getItem(CACHE_KEY);
+        if (cached) {
+            var parsed = JSON.parse(cached);
+            if (Date.now() - parsed.ts < CACHE_TTL) {
+                applyWeather(parsed.data);
+                return;
+            }
+        }
+    } catch (e) {}
+
+    fetch('https://api.open-meteo.com/v1/forecast?latitude=17.9237&longitude=73.6586&current_weather=true&daily=sunrise,sunset&timezone=Asia%2FKolkata')
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+            if (data && data.current_weather) {
+                try {
+                    sessionStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), data: data }));
+                } catch (e) {}
+                applyWeather(data);
+            }
+        })
+        .catch(function () {});
+}
 
 // Dynamic Season Banner Render
 function renderSeasonAdvisory() {
@@ -133,7 +197,7 @@ window.switchLanguage = function (lang, btnEl) {
 };
 
 function injectLanguageSelector() {
-    var topBarRight = document.querySelector('.top-bar__right');
+    var topBarRight = document.querySelector('.top-bar__right') || document.querySelector('.top-bar');
     if (topBarRight && !document.querySelector('.lang-switcher')) {
         var langHtml = '<div class="lang-switcher">'
             + '<button type="button" class="lang-btn active" data-lang="en" onclick="window.switchLanguage(\'en\', this)" title="English">EN</button>'

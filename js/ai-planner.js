@@ -15,16 +15,16 @@
 
     var currentPlan = null;
     var allTourOptions = [
-        { id: 'M1', label: 'Tour 01: Arthur Seat Circuit (2.5h • ₹800)' },
-        { id: 'M2', label: 'Tour 02: Kate\'s Point & Strawberry (2.5h • ₹800)' },
-        { id: 'M3', label: 'Tour 03: Wilson Point & Lingmala (2.5h • ₹800)' },
-        { id: 'T1', label: 'Tour 1: Mahabaleshwar Darshan (3.5h • ₹1,200)' },
-        { id: 'T2', label: 'Tour 2: Waterfall & Sunset (3.5h • ₹1,200)' },
-        { id: 'T3', label: 'Tour 3: Pratapgadh Darshan (3.5h • ₹1,600)' },
-        { id: 'T4', label: 'Tour 4: Panchgani Darshan (3h • ₹1,200)' },
-        { id: 'T5', label: 'Tour 5: Wai Darshan (6h • ₹2,500)' },
-        { id: 'T6', label: 'Tour 6: Tapola Mini Kashmir (3.5h • ₹1,450)' },
-        { id: 'T7', label: 'Tour 7: Full Day Combo (8-9h • ₹3,000)' }
+        { id: 'M1', label: 'Tour 01: Arthur Seat Circuit (2.5h • ₹800)', fare: 800, name: 'Tour 01: Arthur Seat Circuit' },
+        { id: 'M2', label: 'Tour 02: Kate\'s Point & Strawberry (2.5h • ₹800)', fare: 800, name: 'Tour 02: Kate\'s Point & Strawberry' },
+        { id: 'M3', label: 'Tour 03: Wilson Point & Lingmala (2.5h • ₹800)', fare: 800, name: 'Tour 03: Wilson Point & Lingmala' },
+        { id: 'T1', label: 'Tour 1: Mahabaleshwar Darshan (3.5h • ₹1,200)', fare: 1200, name: 'Tour 1: Mahabaleshwar Darshan' },
+        { id: 'T2', label: 'Tour 2: Waterfall & Sunset (3.5h • ₹1,200)', fare: 1200, name: 'Tour 2: Waterfall & Sunset' },
+        { id: 'T3', label: 'Tour 3: Pratapgadh Darshan (3.5h • ₹1,600)', fare: 1600, name: 'Tour 3: Pratapgadh Darshan' },
+        { id: 'T4', label: 'Tour 4: Panchgani Darshan (3h • ₹1,200)', fare: 1200, name: 'Tour 4: Panchgani Darshan' },
+        { id: 'T5', label: 'Tour 5: Wai Darshan (6h • ₹2,500)', fare: 2500, name: 'Tour 5: Wai Darshan' },
+        { id: 'T6', label: 'Tour 6: Tapola Mini Kashmir (3.5h • ₹1,450)', fare: 1450, name: 'Tour 6: Tapola Mini Kashmir' },
+        { id: 'T7', label: 'Tour 7: Full Day Combo (8-9h • ₹3,000)', fare: 3000, name: 'Tour 7: Full Day Combo' }
     ];
 
     var driverTips = {
@@ -478,10 +478,21 @@
                 return '<span class="ai-point-tag"><i class="fa-solid fa-location-dot"></i> ' + escapeHtml(p) + '</span>';
             }).join('');
 
-            // Build Options Dropdown for In-Place Tour Swapping
+            // Build Options Dropdown for In-Place Tour Swapping with Fare Deltas
             var swapOptions = allTourOptions.map(function (opt) {
                 var selected = (opt.id === t.id) ? ' selected' : '';
-                return '<option value="' + opt.id + '"' + selected + '>' + opt.label + '</option>';
+                var delta = (opt.fare || 0) - (t.fare || 0);
+                var deltaStr = '';
+                if (opt.id === t.id) {
+                    deltaStr = ' (Selected • ₹' + (opt.fare || 0).toLocaleString('en-IN') + ')';
+                } else if (delta === 0) {
+                    deltaStr = ' (Same Fare • ₹' + (opt.fare || 0).toLocaleString('en-IN') + ')';
+                } else if (delta > 0) {
+                    deltaStr = ' (+₹' + delta.toLocaleString('en-IN') + ' • ₹' + (opt.fare || 0).toLocaleString('en-IN') + ')';
+                } else {
+                    deltaStr = ' (-₹' + Math.abs(delta).toLocaleString('en-IN') + ' • ₹' + (opt.fare || 0).toLocaleString('en-IN') + ')';
+                }
+                return '<option value="' + opt.id + '"' + selected + '>' + escapeHtml(opt.name || opt.label) + deltaStr + '</option>';
             }).join('');
 
             var tip = driverTips[t.id] || 'Confirm sightseeing sequence with your local driver for the best sunlight and clear mountain views.';
@@ -531,6 +542,9 @@
             + '    </button>'
             + '    <button type="button" class="btn btn--outline btn--lg ai-btn-online" onclick="window.aiPlannerBookOnline()">'
             + '      <i class="fa-solid fa-calendar-check"></i> Book Online with Digital Voucher'
+            + '    </button>'
+            + '    <button type="button" class="btn btn--outline btn--lg ai-btn-print" onclick="window.aiPlannerPrintItinerary()" style="border-color:#0284c7;color:#0284c7;">'
+            + '      <i class="fa-solid fa-print"></i> Print / Save PDF Itinerary'
             + '    </button>'
             + '    <button type="button" class="btn btn--ghost ai-btn-copy" onclick="window.aiPlannerCopyItinerary()">'
             + '      <i class="fa-regular fa-copy"></i> Copy Itinerary to Share'
@@ -665,6 +679,17 @@
             document.body.removeChild(ta);
             showToast("Itinerary copied to clipboard! Share on WhatsApp.");
         }
+    };
+
+    /**
+     * Triggers clean printable / PDF layout of custom plan
+     */
+    window.aiPlannerPrintItinerary = function () {
+        if (!currentPlan) {
+            showToast("Please generate a trip plan first.");
+            return;
+        }
+        window.print();
     };
 
     function showToast(msg) {

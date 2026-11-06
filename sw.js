@@ -1,19 +1,23 @@
 /* ============================================================
    ARYAN TAXI MAHABALESHWAR — Offline & Low-Signal Service Worker
-   Caches Rate Card & Emergency Taxi Contact for Sahyadri Ghats
+   Caches Rate Card, Booking & Emergency Taxi Contact for Sahyadri Ghats
    ============================================================ */
 
-const CACHE_NAME = 'aryan-taxi-offline-v8';
+const CACHE_NAME = 'aryan-taxi-offline-v145';
 const PRECACHE_ASSETS = [
     './',
     'index.html',
     'mahabaleshwar-taxi-rate-card.html',
+    'booking.html',
+    'travel-guide.html',
     'taxi-fare.html',
     'contact.html',
-    'css/style.min.css?v=59.0',
-    'css/advanced-features.min.css?v=59.0',
-    'js/main.min.js?v=59.0',
-    'js/tour-data.js?v=59.0',
+    'css/style.min.css?v=145.0',
+    'css/advanced-features.min.css?v=134.1',
+    'js/main.min.js?v=134.4',
+    'js/tour-data.js?v=134.1',
+    'js/booking-widget.min.js?v=139.0',
+    'js/advanced-features.js?v=134.1',
     'images/aryan-taxi-logo.svg'
 ];
 
@@ -50,7 +54,7 @@ self.addEventListener('fetch', (event) => {
     if (!url.protocol.startsWith('http')) return;
     if (url.origin !== self.location.origin) return;
 
-    // For HTML documents: Network first, fall back to cached Rate Card / Homepage if offline
+    // For HTML documents: Network first, fall back to cached Rate Card / Booking / Homepage if offline
     if (event.request.mode === 'navigate' || event.request.destination === 'document') {
         event.respondWith(
             fetch(event.request)
@@ -62,17 +66,19 @@ self.addEventListener('fetch', (event) => {
                     return networkResponse;
                 })
                 .catch(async () => {
-                    const cachedResponse = await caches.match(event.request);
+                    const cachedResponse = await caches.match(event.request, { ignoreSearch: true });
                     if (cachedResponse) return cachedResponse;
-                    const rateCard = await caches.match('mahabaleshwar-taxi-rate-card.html');
+                    const bookingPage = await caches.match('booking.html', { ignoreSearch: true });
+                    if (bookingPage) return bookingPage;
+                    const rateCard = await caches.match('mahabaleshwar-taxi-rate-card.html', { ignoreSearch: true });
                     if (rateCard) return rateCard;
-                    return caches.match('index.html');
+                    return caches.match('index.html', { ignoreSearch: true });
                 })
         );
         return;
     }
 
-    // For CSS and JS with versions: Network first, fall back to cache
+    // For CSS and JS with versions: Network first, fall back to cache (ignoreSearch for query versions)
     if (url.pathname.endsWith('.css') || url.pathname.endsWith('.js')) {
         event.respondWith(
             fetch(event.request)
@@ -83,14 +89,14 @@ self.addEventListener('fetch', (event) => {
                     }
                     return networkResponse;
                 })
-                .catch(() => caches.match(event.request))
+                .catch(() => caches.match(event.request, { ignoreSearch: true }))
         );
         return;
     }
 
-    // For Images & static assets: Cache first, update in background (Stale-While-Revalidate)
+    // For Images & static assets: Cache first, update in background (Stale-While-Revalidate with ignoreSearch)
     event.respondWith(
-        caches.match(event.request).then((cachedResponse) => {
+        caches.match(event.request, { ignoreSearch: true }).then((cachedResponse) => {
             const fetchPromise = fetch(event.request).then((networkResponse) => {
                 if (networkResponse && networkResponse.status === 200) {
                     const copy = networkResponse.clone();

@@ -1812,11 +1812,12 @@
         }
 
         var zone = db.getPickupZone(pickupVal);
-        var isOutside = zone && !zone.isStandardTariffZone && (zone.id === 'PANCHGANI' || zone.id === 'TAPOLA_VALLEY' || zone.id === 'WAI');
+        var isOutside = zone && !zone.isStandardTariffZone;
         if (isOutside) {
             availBox.style.display = 'none';
             zoneNotice.style.display = 'block';
-            zoneNotice.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> <strong>Outside Town Limits (' + escapeHtml(zone.name || 'Selected Location') + '):</strong> Standard sightseeing tariff applies + nominal distance charge confirmed by driver.';
+            var chargeMsg = (zone && (zone.chargeRule || zone.notes)) ? (zone.chargeRule || zone.notes) : 'Standard sightseeing tariff applies + nominal distance charge confirmed by driver.';
+            zoneNotice.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> <strong>Outside Town Limits (' + escapeHtml(zone.name || 'Selected Location') + '):</strong> ' + escapeHtml(chargeMsg);
         } else {
             zoneNotice.style.display = 'none';
             availBox.style.display = 'block';
@@ -3854,7 +3855,19 @@
             }
 
             var banner = document.getElementById('amtDraftBanner');
-            if (banner) banner.style.display = 'flex';
+            if (banner) {
+                var tourName = draft.tourId || 'Selected Tour';
+                var db = window.TOUR_DATABASE;
+                if (db && db.getTourById && draft.tourId) {
+                    var tObj = db.getTourById(draft.tourId);
+                    if (tObj && tObj.name) tourName = tObj.name;
+                }
+                var span = banner.querySelector('span');
+                if (span) {
+                    span.innerHTML = '<i class="fa-solid fa-clock-rotate-left"></i> Restored: <strong>' + escapeHtml(tourName) + '</strong>' + (draft.date ? ' for <strong>' + escapeHtml(draft.date) + '</strong>' : '');
+                }
+                banner.style.display = 'flex';
+            }
 
             var activeSvc = draft.service || 'sightseeing';
             var db = window.TOUR_DATABASE;

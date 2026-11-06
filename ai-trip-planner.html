@@ -18,7 +18,7 @@
         <meta property="og:locale" content="en_IN">
         <meta property="og:site_name" content="Mahabaleshwar Taxi">
         <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:image" content="https://sunildanawale.github.io/Mahabaleshwartaxi/images/mahabaleshwar-hero.jpg"> <script type="application/ld+json"> { "@context": "https://schema.org", "@type": "WebPage", "name": "AI Trip Planner Mahabaleshwar Sightseeing Taxi", "description": "Use our smart AI trip planner to instantly generate a custom Mahabaleshwar sightseeing itinerary and get accurate taxi fare estimates.", "url": "https://sunildanawale.github.io/Mahabaleshwartaxi/ai-trip-planner.html" } </script> <link rel="stylesheet" href="css/style.min.css?v=144.0">
+        <meta name="twitter:image" content="https://sunildanawale.github.io/Mahabaleshwartaxi/images/mahabaleshwar-hero.jpg"> <script type="application/ld+json"> { "@context": "https://schema.org", "@type": "WebPage", "name": "AI Trip Planner Mahabaleshwar Sightseeing Taxi", "description": "Use our smart AI trip planner to instantly generate a custom Mahabaleshwar sightseeing itinerary and get accurate taxi fare estimates.", "url": "https://sunildanawale.github.io/Mahabaleshwartaxi/ai-trip-planner.html" } </script> <link rel="stylesheet" href="css/style.min.css?v=145.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <link rel="icon" type="image/png" href="images/aryan-tours-logo.png" sizes="32x32">
         <link rel="stylesheet" href="css/advanced-features.min.css?v=98.0">
@@ -412,6 +412,43 @@
 [data-theme="dark"] .ai-day-card__price,
 [data-theme="dark"] .ai-summary-price {
     color: #4ade80;
+}
+
+/* Print & PDF Layout for Custom Itinerary */
+@media print {
+    .top-bar, .navbar, .mobile-cta, .whatsapp-float, .back-to-top, .site-footer,
+    .ai-planner-hero, .ai-form-card, .ai-swap-wrap, .ai-actions-panel, .aai-float-btn,
+    .btn, .skip-link, .lang-switcher {
+        display: none !important;
+    }
+    body {
+        background: #ffffff !important;
+        color: #0f172a !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    .ai-results-wrapper {
+        display: block !important;
+        max-width: 100% !important;
+        padding: 10px !important;
+    }
+    .ai-summary-card {
+        border: 2px solid #0284c7 !important;
+        box-shadow: none !important;
+        margin-bottom: 20px !important;
+    }
+    .ai-day-card {
+        page-break-inside: avoid;
+        border: 1px solid #cbd5e1 !important;
+        box-shadow: none !important;
+        margin-bottom: 16px !important;
+    }
+    .ai-day-pill {
+        background: #0284c7 !important;
+        color: #ffffff !important;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
 }
         </style>
     </head>
