@@ -11523,6 +11523,42 @@ input[type="checkbox"]#amtTermsCheckbox,
     line-height: 1.45 !important;
     box-sizing: border-box !important;
 }
+#amtPickupLocalityNote {
+    font-size: 0.78rem !important;
+    color: #334155 !important;
+    background: #f0f9ff !important;
+    border: 1px solid #bae6fd !important;
+    padding: 9px 12px !important;
+    border-radius: 8px !important;
+    margin: 4px 0 10px !important;
+    line-height: 1.45 !important;
+    box-sizing: border-box !important;
+}
+[data-theme="dark"] #amtPickupLocalityNote {
+    background: rgba(2, 132, 199, 0.12) !important;
+    border-color: rgba(56, 189, 248, 0.3) !important;
+    color: #e2e8f0 !important;
+}
+[data-theme="dark"] .amt-guidelines-accordion {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+}
+[data-theme="dark"] .amt-accordion-header {
+    color: #f8fafc !important;
+}
+[data-theme="dark"] .amt-accordion-header:hover {
+    background: #334155 !important;
+}
+[data-theme="dark"] .amt-accordion-content {
+    border-top-color: #334155 !important;
+    color: #cbd5e1 !important;
+}
+[data-theme="dark"] .amt-accordion-content strong {
+    color: #f8fafc !important;
+}
+[data-theme="dark"] .amt-accordion-content span {
+    color: #94a3b8 !important;
+}
 
 /* Consent Checkbox & Terms Alignment */
 input[type="checkbox"]#amtTermsCheckbox,

@@ -539,6 +539,7 @@
                 : 'Please review all included viewpoints, pickup hotel, and fixed Union fare below.',
             termsTitle: isMultiSightseeing ? 'Important Combined Sightseeing Guidelines & Terms' : 'Important Sightseeing Guidelines & Carriage Terms',
             terms: [
+                { title: 'Pickup & Drop Policy', desc: 'Complimentary pickup and drop are available for hotels located within a 2 km radius of Mahabaleshwar town. For locations beyond 2 km, additional pickup and drop charges will apply.' },
                 { title: 'Cab Dispatch', desc: '4-Seater Tourist Cab allocated through Mahabaleshwar Taxi Union network, arranged as per availability. Dispatch confirmed after phone/WhatsApp check.' },
                 { title: 'Sightseeing Sequence', desc: 'Operating driver arranges route sequence based on viewpoint visibility. Viewpoint halts and visits are subject to weather, mountain fog, road conditions, and police regulations.' },
                 { title: 'Locked Union Tariff', desc: 'Approved official Taxi Union tariff. Zero advance required for Mahabaleshwar hotel porch pickup — pay driver directly after tour via UPI or Cash.' },
@@ -1804,7 +1805,7 @@
         if (!db || !db.getPickupZone || !pickupVal.trim()) {
             zoneNotice.style.display = 'none';
             availBox.style.display = 'block';
-            availBox.innerHTML = '<i class="fa-solid fa-info-circle"></i> <strong>Mahabaleshwar Town Standard Fare.</strong> Pickups outside town limits (Panchgani/villages) have an additional charge.';
+            availBox.innerHTML = '<i class="fa-solid fa-info-circle"></i> <strong>Pickup Policy:</strong> Complimentary pickup and drop are available for hotels located within a 2 km radius of Mahabaleshwar town. For locations beyond 2 km, additional pickup and drop charges will apply.';
             availBox.style.background = '#eff6ff';
             availBox.style.color = '#1e40af';
             availBox.style.border = '1px solid #bfdbfe';
@@ -3708,7 +3709,7 @@
             } else if (isDrop) {
                 pickNoteEl.innerHTML = '<i class="fa-solid fa-location-crosshairs" style="color:#0284c7;"></i> <strong>Local Point-to-Point Drop:</strong> Direct doorstep pickup from your hotel or resort. Fixed point-to-point drop tariff applies.';
             } else {
-                pickNoteEl.innerHTML = '<i class="fa-solid fa-circle-info" style="color:#0284c7;"></i> Local sightseeing includes hotel pickup and drop-off within Mahabaleshwar town, as per existing arrangements. Outside Mahabaleshwar town, extra charges may apply depending on location and distance. The tour operator will communicate applicable extra charges during booking confirmation.';
+                pickNoteEl.innerHTML = '<i class="fa-solid fa-circle-info" style="color:#0284c7;margin-right:4px;"></i> Complimentary pickup and drop are available for hotels located within a 2 km radius of Mahabaleshwar town. For locations beyond 2 km, additional pickup and drop charges will apply.';
             }
         }
     }
@@ -4963,6 +4964,12 @@
     // Expose Global Accordion Toggle for Guidelines
     window.toggleGuidelinesAccordion = function(e) {
         if (e && e.preventDefault) e.preventDefault();
+        if (e && e.stopPropagation) e.stopPropagation();
+        if (window._amtLastGuidelinesToggle && (Date.now() - window._amtLastGuidelinesToggle < 250)) {
+            return;
+        }
+        window._amtLastGuidelinesToggle = Date.now();
+
         var body = document.getElementById('amtGuidelinesBody');
         var chevron = document.getElementById('amtGuidelinesChevron');
         var text = document.getElementById('amtGuidelinesToggleText');
