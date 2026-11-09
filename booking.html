@@ -4401,30 +4401,18 @@ input[type="checkbox"]#amtTermsCheckbox,
                             </div>
                         </div>
 
-                        <!-- Travel Date & Pickup Location Area -->
-                        <div class="amt-grid2" style="margin-top:6px;margin-bottom:6px;">
-                            <div>
-                                <label class="amt-label" for="amtDate">Travel Date *</label>
-                                <input type="date" id="amtDate" class="amt-input" required>
-                            </div>
-                            <div>
-                                <label class="amt-label" for="amtPickupArea">Pickup Area / Locality *</label>
-                                <select id="amtPickupArea" class="amt-input amt-select">
-                                    <option value="Mahabaleshwar Market & Central" selected>Mahabaleshwar Market & Town Center</option>
-                                    <option value="Metgutad / Panchgani Road">Metgutad / Panchgani Road</option>
-                                    <option value="Kate's Point / Duchess Road">Kate's Point / Duchess Road</option>
-                                    <option value="Old Mahabaleshwar">Old Mahabaleshwar</option>
-                                    <option value="Tapola Road Outskirts">Tapola Road Outskirts</option>
-                                    <option value="Panchgani Town">Panchgani Town</option>
-                                </select>
-                            </div>
+                        <!-- Travel Date -->
+                        <div style="margin-top:8px;margin-bottom:10px;">
+                            <label class="amt-label" for="amtDate">Travel Date *</label>
+                            <input type="date" id="amtDate" class="amt-input" required>
+                            <input type="hidden" id="amtPickupArea" value="Mahabaleshwar Market & Central">
                         </div>
 
-                        <!-- Hotel Name & Porch Details (Moved to Page 1 as requested!) -->
-                        <div style="position:relative;margin-bottom:8px;">
+                        <!-- Hotel Name & Porch Details -->
+                        <div style="position:relative;margin-bottom:10px;">
                             <label class="amt-label" for="amtPickupHotel">Hotel / Resort Porch Pickup Details *</label>
                             <div style="position:relative;">
-                                <input type="text" id="amtPickupHotel" class="amt-input" placeholder="Enter hotel or resort name" autocomplete="off" required>
+                                <input type="text" id="amtPickupHotel" class="amt-input" placeholder="Enter hotel or resort name (e.g. Saket Plaza, Brightland, Evershine...)" autocomplete="off" required>
                                 <span id="amtPickupClear" style="display:none;position:absolute;right:10px;top:50%;transform:translateY(-50%);cursor:pointer;color:#94a3b8;font-size:1.1rem;padding:4px;">&times;</span>
                             </div>
                             <div id="amtAutocompleteList" class="amt-autocomplete-dropdown" style="display:none;"></div>
@@ -4759,7 +4747,7 @@ input[type="checkbox"]#amtTermsCheckbox,
     <!-- Scripts -->
     <script src="js/tour-data.js?v=134.1"></script>
     <script src="js/ai-assistant.js?v=134.1" defer></script>
-    <script src="js/booking-widget.min.js?v=152.0"></script>
+    <script src="js/booking-widget.min.js?v=153.0"></script>
     <script>
     (function() {
         var search = window.location.search || '';

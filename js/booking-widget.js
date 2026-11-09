@@ -2162,6 +2162,14 @@
                     if (hPick) hPick.value = chosen;
                     bookingState.pickup = chosen;
                     bookingState.hotelDetails = chosen;
+                    if (window.TOUR_DATABASE && window.TOUR_DATABASE.getPickupZone) {
+                        var pz = window.TOUR_DATABASE.getPickupZone(chosen);
+                        if (pz && pz.name) {
+                            bookingState.pickupArea = pz.name;
+                            var hArea = document.getElementById('amtPickupArea');
+                            if (hArea) hArea.value = pz.name;
+                        }
+                    }
                     autoList.style.display = 'none';
                     if (pickClear) pickClear.style.display = 'block';
                     updateZoneNotice();
@@ -2418,7 +2426,7 @@
 
         // Area selection change
         var areaSelect = document.getElementById('amtPickupArea');
-        if (areaSelect) {
+        if (areaSelect && areaSelect.tagName === 'SELECT') {
             areaSelect.addEventListener('change', function () {
                 bookingState.pickupArea = this.value;
                 try { updateStep2SummaryAndFare(); } catch (e) {}
@@ -2434,6 +2442,14 @@
                 bookingState.pickup = val;
                 var hPick = document.getElementById('amtPickup');
                 if (hPick) hPick.value = val;
+                if (window.TOUR_DATABASE && window.TOUR_DATABASE.getPickupZone && val.length >= 3) {
+                    var pz = window.TOUR_DATABASE.getPickupZone(val);
+                    if (pz && pz.name) {
+                        bookingState.pickupArea = pz.name;
+                        var hArea = document.getElementById('amtPickupArea');
+                        if (hArea) hArea.value = pz.name;
+                    }
+                }
             };
             hotelInp.addEventListener('input', syncHotel);
             hotelInp.addEventListener('change', syncHotel);
@@ -2484,7 +2500,12 @@
                 }
 
                 var areaEl = document.getElementById('amtPickupArea');
-                if (areaEl) bookingState.pickupArea = areaEl.value;
+                if (areaEl && areaEl.value) {
+                    bookingState.pickupArea = areaEl.value;
+                } else if (window.TOUR_DATABASE && window.TOUR_DATABASE.getPickupZone && hVal) {
+                    var pz = window.TOUR_DATABASE.getPickupZone(hVal);
+                    bookingState.pickupArea = (pz && pz.name) ? pz.name : 'Mahabaleshwar Market & Central';
+                }
 
                 var dropEl = document.getElementById('amtDropLocation');
                 if (dropEl && dropEl.offsetParent !== null && !dropEl.value.trim()) {
