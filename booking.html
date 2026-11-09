@@ -715,74 +715,7 @@
             padding: 18px 16px;
         }
         .portal-trust-section {
-            max-width: 780px;
-            margin: 16px auto 30px;
-            padding: 0 14px;
-            box-sizing: border-box;
-        }
-        .portal-trust-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 10px;
-        }
-        .portal-trust-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            padding: 12px 14px;
-        }
-        .portal-trust-item i {
-            font-size: 1.2rem;
-            color: #38bdf8;
-            margin-top: 2px;
-            flex-shrink: 0;
-        }
-        .portal-trust-item h4 {
-            font-size: 0.86rem;
-            font-weight: 700;
-            color: #f8fafc;
-            margin: 0 0 3px;
-        }
-        .portal-trust-item p {
-            font-size: 0.76rem;
-            color: #94a3b8;
-            margin: 0;
-            line-height: 1.4;
-        }
-        @media (min-width: 768px) {
-            .portal-trust-section {
-                max-width: 780px !important;
-                margin: 20px auto 36px !important;
-                padding: 0 16px !important;
-                display: block !important;
-            }
-            .portal-trust-grid {
-                grid-template-columns: repeat(3, 1fr) !important;
-                gap: 14px !important;
-            }
-            .portal-trust-item {
-                flex-direction: column !important;
-                align-items: flex-start !important;
-                gap: 8px !important;
-                padding: 14px 16px !important;
-                background: rgba(255, 255, 255, 0.04) !important;
-                border: 1px solid rgba(255, 255, 255, 0.09) !important;
-            }
-            .portal-trust-item i {
-                font-size: 1.35rem !important;
-                margin-top: 0 !important;
-            }
-            .portal-trust-item h4 {
-                font-size: 0.84rem !important;
-                line-height: 1.3 !important;
-            }
-            .portal-trust-item p {
-                font-size: 0.73rem !important;
-                line-height: 1.42 !important;
-            }
+            display: none !important;
         }
         .portal-hero-strip {
             display: none !important;
@@ -4804,32 +4737,7 @@ input[type="checkbox"]#amtTermsCheckbox,
         </div>
     </div>
 
-    <!-- Trust & Transparency Features -->
-    <div class="portal-trust-section">
-        <div class="portal-trust-grid">
-            <div class="portal-trust-item">
-                <i class="fa-solid fa-handshake-simple" style="color: #10b981;"></i>
-                <div>
-                    <h4>Zero Advance for Local Sightseeing &amp; Drops &bull; Advance for Outstation</h4>
-                    <p>Zero advance payment for all Mahabaleshwar local sightseeing tours and local drops &mdash; pay 100% of fare directly to your driver after the trip. For outstation transfers, advance payment confirms vehicle dispatch with balance payable to driver upon drop.</p>
-                </div>
-            </div>
-            <div class="portal-trust-item">
-                <i class="fa-solid fa-scale-balanced" style="color: #38bdf8;"></i>
-                <div>
-                    <h4>Transparent Package Rates</h4>
-                    <p>Fixed tariffs with zero hidden surge fees or middleman markups. Sightseeing tours follow official tariff guidelines.</p>
-                </div>
-            </div>
-            <div class="portal-trust-item">
-                <i class="fa-solid fa-taxi" style="color: #f59e0b;"></i>
-                <div>
-                    <h4>Experienced Local Drivers</h4>
-                    <p>Local hill drivers native to Sahyadri ghats. Prompt doorstep hotel pickup, clean 4-seater tourist cabs, and safe driving.</p>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     <!-- Portal Minimal Footer -->
     <footer class="portal-footer">
@@ -4851,7 +4759,7 @@ input[type="checkbox"]#amtTermsCheckbox,
     <!-- Scripts -->
     <script src="js/tour-data.js?v=134.1"></script>
     <script src="js/ai-assistant.js?v=134.1" defer></script>
-    <script src="js/booking-widget.min.js?v=151.0"></script>
+    <script src="js/booking-widget.min.js?v=152.0"></script>
     <script>
     (function() {
         var search = window.location.search || '';
