@@ -134,7 +134,7 @@
                 hotelDetails: bookingData.hotelDetails || bookingData.pickupHotel || bPickup,
                 dropLocation: bookingData.dropLocation || '',
                 tour: bTour,
-                serviceType: (function() {
+                serviceType: (function () {
                     var sType = String(bookingData.serviceType || bookingData.service || '').toLowerCase();
                     var tourKey = String(bookingData.tour || bookingData.tourId || '').toUpperCase();
                     if (tourKey.indexOf('TR_') === 0 || /PUNE|MUMBAI|SATARA|AIRPORT|KAS PATHAR|SAJJANGAD|POLADPUR|MAHAD|RAIGAD|MATHERAN|GANPATIPULE|WATHAR/.test(tourKey)) {
@@ -154,7 +154,7 @@
                 totalFare: bFare,
                 notes: bNotes || 'None',
                 status: 'PENDING CONFIRMATION',
-                paymentStatus: (function() {
+                paymentStatus: (function () {
                     var sType = String(bookingData.serviceType || bookingData.service || 'sightseeing').toLowerCase();
                     var tourKey = String(bookingData.tour || bookingData.tourId || '').toUpperCase();
                     if (sType === 'outstation' || sType.indexOf('outstation') !== -1 || tourKey.indexOf('TR_') === 0 || /PUNE|MUMBAI|SATARA|AIRPORT|KAS PATHAR|SAJJANGAD|POLADPUR|MAHAD|RAIGAD|MATHERAN|GANPATIPULE|WATHAR/.test(tourKey)) {
@@ -271,7 +271,7 @@
         return isoDateStr;
     }
 
-    
+
     function formatSafeTitleCase(str) {
         if (!str) return '';
         return String(str).replace(/\b[a-z]/g, function (letter) {
@@ -1520,7 +1520,7 @@
             '}'
         ].join('');
         s.textContent += "\n.portal-header { padding: 6px 14px !important; } .portal-brand img { width: 28px !important; height: 28px !important; } .portal-brand-title { font-size: 0.88rem !important; line-height: 1.1 !important; } .portal-brand-sub { font-size: 0.62rem !important; line-height: 1 !important; } .portal-btn { padding: 5px 9px !important; font-size: 0.75rem !important; } .portal-hero-strip { padding: 4px 12px 2px !important; margin: 0 auto !important; text-align: center !important; } .portal-badge { padding: 2px 8px !important; font-size: 0.64rem !important; margin-bottom: 2px !important; line-height: 1.2 !important; } .portal-hero-strip h1 { font-size: 1.05rem !important; font-weight: 800 !important; margin: 0 0 1px !important; line-height: 1.2 !important; } .portal-hero-strip p { font-size: 0.72rem !important; line-height: 1.2 !important; margin: 0 !important; display: none !important; } @media (min-height: 800px) { .portal-hero-strip p { display: block !important; margin-top: 2px !important; } } .portal-booking-container { padding: 0 10px !important; margin: 6px auto 20px !important; max-width: 100% !important; width: 100% !important; box-sizing: border-box !important; } .amt-modal-overlay { position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important; background: rgba(15, 23, 42, 0.82) !important; backdrop-filter: blur(6px) !important; -webkit-backdrop-filter: blur(6px) !important; display: none; justify-content: center !important; align-items: center !important; z-index: 20000000 !important; padding: 6px !important; box-sizing: border-box !important; } .amt-card, #amtBookingModal .amt-card, .portal-card { background: #ffffff !important; border-radius: 14px !important; width: 100% !important; max-width: 100% !important; max-height: 96vh !important; display: flex !important; flex-direction: column !important; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45) !important; overflow: hidden !important; margin: 0 auto !important; border: 1.5px solid #cbd5e1 !important; box-sizing: border-box !important; font-family: system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif !important; } body.booking-portal-page .amt-card, body.booking-portal-page .portal-card { max-height: none !important; box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important; } .amt-card-header, .portal-card-header { background: linear-gradient(135deg, #0e2338 0%, #0891b2 100%) !important; color: #ffffff !important; padding: 7px 12px 6px !important; border-radius: 13px 13px 0 0 !important; position: relative !important; box-sizing: border-box !important; flex-shrink: 0 !important; } .amt-header-brand { font-size: 0.62rem !important; text-transform: uppercase !important; letter-spacing: 0.8px !important; color: #fbbf24 !important; font-weight: 700 !important; margin-bottom: 1px !important; line-height: 1 !important; } .amt-header-title { font-size: 1rem !important; font-weight: 800 !important; color: #ffffff !important; margin-bottom: 2px !important; letter-spacing: -0.2px !important; line-height: 1.15 !important; } .amt-stepper { display: flex !important; align-items: center !important; justify-content: center !important; gap: 6px !important; margin: 1px 0 0 !important; } .amt-step-item { display: flex !important; align-items: center !important; gap: 4px !important; opacity: 0.65 !important; transition: opacity 0.2s ease !important; } .amt-step-item.active { opacity: 1 !important; } .amt-step-item.completed { opacity: 0.9 !important; } .amt-step-bubble { width: 18px !important; height: 18px !important; border-radius: 50% !important; background: rgba(255, 255, 255, 0.25) !important; color: #ffffff !important; font-size: 0.62rem !important; font-weight: 800 !important; display: flex !important; align-items: center !important; justify-content: center !important; } .amt-step-item.active .amt-step-bubble { background: #38bdf8 !important; color: #0f172a !important; } .amt-step-item.completed .amt-step-bubble { background: #10b981 !important; color: #ffffff !important; } .amt-step-name { font-size: 0.66rem !important; font-weight: 700 !important; color: #e0f2fe !important; } .amt-step-divider { width: 16px !important; height: 2px !important; background: rgba(255, 255, 255, 0.25) !important; } .amt-step-divider.completed { background: #10b981 !important; } .amt-close-btn { position: absolute !important; top: 6px !important; right: 8px !important; background: rgba(255, 255, 255, 0.18) !important; border: none !important; color: #ffffff !important; min-width: 28px !important; min-height: 28px !important; width: 28px !important; height: 28px !important; border-radius: 50% !important; cursor: pointer !important; font-size: 15px !important; display: flex !important; align-items: center !important; justify-content: center !important; } .amt-card-body, .portal-card-body { padding: 7px 11px 9px !important; overflow-y: auto !important; -webkit-overflow-scrolling: touch !important; flex: 1 !important; box-sizing: border-box !important; } .amt-step-hdr-compact { display: flex !important; justify-content: space-between !important; align-items: center !important; flex-wrap: wrap !important; gap: 6px 8px !important; margin-bottom: 8px !important; width: 100% !important; box-sizing: border-box !important; } .amt-step-hdr-compact .amt-step-title { font-size: clamp(0.85rem, 3.2vw, 0.98rem) !important; font-weight: 800 !important; color: #0f172a !important; margin: 0 !important; line-height: 1.25 !important; flex: 0 1 auto !important; white-space: normal !important; } .amt-trust-chip { font-size: 11px !important; font-weight: 700 !important; color: #059669 !important; background: #ecfdf5 !important; padding: 2.5px 8px !important; border-radius: 6px !important; border: 1px solid #a7f3d0 !important; display: inline-flex !important; align-items: center !important; gap: 4px !important; line-height: 1.3 !important; white-space: normal !important; word-break: normal !important; max-width: 100% !important; box-sizing: border-box !important; flex-shrink: 0 !important; } .amt-category-grid { display: grid !important; width: 100% !important; box-sizing: border-box !important; margin-bottom: 5px !important; } @media (max-width: 767px) { .amt-category-grid { grid-template-columns: repeat(6, 1fr) !important; gap: 4px !important; } .amt-category-grid .amt-service-btn:nth-child(1), .amt-category-grid .amt-service-btn:nth-child(2), .amt-category-grid .amt-service-btn:nth-child(3) { grid-column: span 2 !important; } .amt-category-grid .amt-service-btn:nth-child(4), .amt-category-grid .amt-service-btn:nth-child(5) { grid-column: span 3 !important; } } @media (min-width: 768px) { .amt-category-grid { grid-template-columns: repeat(5, 1fr) !important; gap: 5px !important; } .amt-category-grid .amt-service-btn:nth-child(1), .amt-category-grid .amt-service-btn:nth-child(2), .amt-category-grid .amt-service-btn:nth-child(3), .amt-category-grid .amt-service-btn:nth-child(4), .amt-category-grid .amt-service-btn:nth-child(5) { grid-column: span 1 !important; } } .amt-category-grid .amt-service-btn { display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; padding: 4px 2px !important; border: 1.5px solid #cbd5e1 !important; background: #ffffff !important; border-radius: 8px !important; cursor: pointer !important; transition: all 0.15s ease-in-out !important; min-height: 42px !important; box-sizing: border-box !important; width: 100% !important; box-shadow: 0 1px 2px rgba(0,0,0,0.03) !important; -webkit-tap-highlight-color: transparent !important; text-align: center !important; } .amt-category-grid .amt-service-btn:hover { border-color: #0284c7 !important; background: #f0f9ff !important; } .amt-category-grid .amt-service-btn.active { background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important; border-color: #0284c7 !important; color: #ffffff !important; box-shadow: 0 2px 6px rgba(2, 132, 199, 0.3) !important; } .amt-category-grid .amt-service-btn .amt-cat-icon { font-size: 1rem !important; line-height: 1 !important; margin-bottom: 1px !important; display: block !important; } .amt-category-grid .amt-service-btn .amt-cat-name { display: block !important; font-size: 0.70rem !important; font-weight: 800 !important; color: #0f172a !important; line-height: 1.1 !important; white-space: nowrap !important; } .amt-category-grid .amt-service-btn.active .amt-cat-name { color: #ffffff !important; } .amt-category-grid .amt-service-btn .amt-cat-tag { display: block !important; font-size: 0.56rem !important; font-weight: 700 !important; color: #64748b !important; margin-top: 1px !important; line-height: 1 !important; white-space: nowrap !important; } .amt-category-grid .amt-service-btn.active .amt-cat-tag { color: #e0f2fe !important; } .amt-category-grid .amt-service-btn .amt-tag-green { color: #15803d !important; } .amt-category-grid .amt-service-btn.active .amt-tag-green { color: #bbf7d0 !important; } .amt-form-group { margin-bottom: 4px !important; } .amt-label { display: flex !important; justify-content: space-between !important; align-items: center !important; font-size: 0.71rem !important; font-weight: 700 !important; color: #334155 !important; margin-bottom: 2px !important; } .amt-count-badge { font-size: 0.60rem !important; font-weight: 700 !important; color: #0284c7 !important; background: #e0f2fe !important; border: 1px solid #bae6fd !important; padding: 1px 5px !important; border-radius: 6px !important; white-space: nowrap !important; } .amt-select, #amtTourSelect { width: 100% !important; padding: 5px 8px !important; border: 1.5px solid #0284c7 !important; border-radius: 8px !important; font-size: 12px !important; font-weight: 700 !important; background: #f8fafc !important; color: #0f172a !important; min-height: 34px !important; height: 34px !important; padding: 5px 8px !important; box-sizing: border-box !important; text-overflow: ellipsis !important; cursor: pointer !important; } .amt-select option, #amtTourSelect option { background: #ffffff !important; color: #0f172a !important; font-weight: 600 !important; font-size: 11.5px !important; padding: 4px 6px !important; } .amt-select optgroup, #amtTourSelect optgroup { background: #e0f2fe !important; background-color: #e0f2fe !important; color: #0369a1 !important; font-weight: 800 !important; font-size: 11px !important; padding: 6px 8px !important; letter-spacing: 0.6px !important; border-bottom: 1.5px solid #0284c7 !important; border-top: 1.5px solid #bae6fd !important; } .amt-stb-card { background: #ffffff !important; border: 1.5px solid #0284c7 !important; border-radius: 9px !important; padding: 5px 8px !important; margin: 3px 0 !important; box-sizing: border-box !important; box-shadow: 0 1px 4px rgba(2, 132, 199, 0.08) !important; } .amt-stb-top-row { display: flex !important; justify-content: space-between !important; align-items: center !important; margin-bottom: 2px !important; gap: 4px !important; } .amt-stb-badge { font-size: 0.60rem !important; font-weight: 800 !important; text-transform: uppercase !important; padding: 1px 5px !important; border-radius: 5px !important; white-space: nowrap !important; } .amt-stb-badge.amt-badge-union { background: #e0f2fe !important; color: #0369a1 !important; border: 1px solid #bae6fd !important; } .amt-stb-badge.amt-badge-express { background: #fef3c7 !important; color: #92400e !important; border: 1px solid #fde68a !important; } .amt-stb-badge.amt-badge-combo { background: #f3e8ff !important; color: #6b21a8 !important; border: 1px solid #e9d5ff !important; } .amt-stb-badge.amt-badge-outstation { background: #ecfeff !important; color: #0e7490 !important; border: 1px solid #a5f3fc !important; } .amt-stb-badge.amt-badge-local { background: #f0fdf4 !important; color: #166534 !important; border: 1px solid #bbf7d0 !important; } .amt-stb-fare-box { text-align: right !important; } .amt-stb-fare-val { font-size: 0.92rem !important; font-weight: 900 !important; color: #0284c7 !important; line-height: 1.1 !important; display: block !important; } .amt-stb-fare-sub { font-size: 0.58rem !important; color: #64748b !important; font-weight: 600 !important; } .amt-stb-meta-row { display: flex !important; align-items: center !important; flex-wrap: wrap !important; gap: 4px 8px !important; font-size: 0.66rem !important; color: #475569 !important; margin-top: 1px !important; line-height: 1.15 !important; } .amt-stb-points-wrap { display: flex !important; flex-wrap: wrap !important; gap: 3px !important; align-items: center !important; margin-top: 2px !important; padding-top: 2px !important; border-top: 1px dashed #e2e8f0 !important; } .amt-stb-points-lbl { font-size: 0.62rem !important; font-weight: 700 !important; color: #0f172a !important; } .amt-stb-point-chip { font-size: 0.58rem !important; background: #f1f5f9 !important; color: #334155 !important; padding: 1px 4px !important; border-radius: 4px !important; border: 1px solid #e2e8f0 !important; } .amt-chip-more { background: #e0f2fe !important; color: #0284c7 !important; font-weight: 700 !important; } @media (min-width: 641px) { .amt-grid2 { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 8px !important; margin-top: 4px !important; margin-bottom: 6px !important; } } @media (max-width: 640px) { .amt-grid2, .amt-guest-grid { display: flex !important; flex-direction: column !important; gap: 8px !important; width: 100% !important; margin-top: 4px !important; margin-bottom: 6px !important; } .amt-grid2 > div, .amt-guest-grid > div { width: 100% !important; } } .amt-input { width: 100% !important; padding: 5px 8px !important; border: 1.5px solid #cbd5e1 !important; border-radius: 8px !important; font-size: 13.5px !important; color: #0f172a !important; box-sizing: border-box !important; background: #ffffff !important; min-height: 35px !important; } .amt-input:focus, .amt-select:focus { outline: none !important; border-color: #0284c7 !important; box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.2) !important; } .amt-quick-time-chips { display: flex !important; gap: 4px !important; margin-top: 4px !important; width: 100% !important; box-sizing: border-box !important; } .amt-time-chip { flex: 1 1 0 !important; min-width: 0 !important; white-space: nowrap !important; height: auto !important; min-height: 24px !important; padding: 3px 2px !important; border-radius: 4px !important; border: 1px solid #cbd5e1 !important; background: #f8fafc !important; font-size: 0.60rem !important; line-height: 1.15 !important; font-weight: 700 !important; color: #475569 !important; cursor: pointer !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; text-align: center !important; overflow: visible !important; box-sizing: border-box !important; } .amt-time-chip:hover { border-color: #0284c7 !important; color: #0284c7 !important; } .amt-time-chip.active { background: #0284c7 !important; border-color: #0284c7 !important; color: #ffffff !important; } .amt-btn-row { display: flex !important; flex-direction: column !important; gap: 8px !important; margin-top: 10px !important; margin-bottom: 6px !important; width: 100% !important; } .amt-btn-next { width: 100% !important; padding: 9px 14px !important; background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important; color: #ffffff !important; border: none !important; border-radius: 9px !important; font-weight: 800 !important; font-size: 0.90rem !important; cursor: pointer !important; display: flex !important; align-items: center !important; justify-content: center !important; gap: 6px !important; box-shadow: 0 3px 8px rgba(2, 132, 199, 0.3) !important; min-height: 40px !important; box-sizing: border-box !important; } .amt-btn-next:hover { background: #0369a1 !important; } .amt-cab-selector-wrap { background: #f8fafc !important; border: 1px solid #e2e8f0 !important; border-radius: 8px !important; padding: 6px 10px !important; margin-bottom: 6px !important; box-sizing: border-box !important; width: 100% !important; } .amt-cab-pill-grid { display: flex !important; flex-direction: column !important; gap: 6px !important; width: 100% !important; box-sizing: border-box !important; margin-top: 3px !important; } .amt-cab-pill { display: flex !important; align-items: center !important; gap: 8px !important; padding: 7px 10px !important; border: 1.5px solid #cbd5e1 !important; border-radius: 8px !important; background: #ffffff !important; cursor: pointer !important; transition: all 0.15s ease !important; width: 100% !important; box-sizing: border-box !important; min-height: 44px !important; } .amt-cab-pill:hover { border-color: #0284c7 !important; background: #f0f9ff !important; } .amt-cab-pill.active { border-color: #0284c7 !important; background: #f0f9ff !important; box-shadow: 0 0 0 2px #0284c7 !important; } .amt-cab-pill-radio { width: 14px !important; height: 14px !important; border-radius: 50% !important; border: 2px solid #94a3b8 !important; flex-shrink: 0 !important; box-sizing: border-box !important; } .amt-cab-pill.active .amt-cab-pill-radio { border-color: #0284c7 !important; background: #0284c7 !important; } .amt-cab-pill-info { display: flex !important; flex-direction: column !important; text-align: left !important; flex: 1 1 auto !important; } .amt-cab-pill-info strong { font-size: 0.76rem !important; color: #0f172a !important; line-height: 1.2 !important; display: flex !important; align-items: center !important; gap: 4px !important; font-weight: 700 !important; } .amt-cab-pill-info span { font-size: 0.62rem !important; color: #64748b !important; margin-top: 1px !important; display: block !important; } .amt-cab-subnote { font-size: 0.62rem !important; color: #475569 !important; margin: 4px 0 0 !important; line-height: 1.25 !important; display: block !important; } .amt-compact-review-box, .amt-compact-review-bar { background: #f8fafc !important; border: 1.5px solid #e2e8f0 !important; border-radius: 12px !important; padding: 12px 14px !important; margin: 10px 0 12px !important; box-sizing: border-box !important; } .amt-crb-row { display: flex !important; justify-content: space-between !important; align-items: flex-start !important; gap: 10px !important; width: 100% !important; box-sizing: border-box !important; padding-bottom: 6px !important; border-bottom: 1px dashed #cbd5e1 !important; margin-bottom: 6px !important; } .amt-crb-item { flex: 1 1 auto !important; min-width: 0 !important; font-size: 0.92rem !important; color: #0f172a !important; font-weight: 800 !important; display: flex !important; align-items: flex-start !important; gap: 6px !important; line-height: 1.35 !important; } .amt-crb-fare { flex-shrink: 0 !important; font-size: 1.15rem !important; font-weight: 900 !important; color: #0284c7 !important; white-space: nowrap !important; text-align: right !important; } .amt-crb-meta { display: flex !important; flex-wrap: wrap !important; gap: 8px 14px !important; font-size: 12px !important; color: #475569 !important; margin-top: 4px !important; line-height: 1.4 !important; } .amt-crb-meta span { display: inline-flex !important; align-items: center !important; gap: 5px !important; } .amt-crb-zero { font-size: 12px !important; color: #15803d !important; font-weight: 700 !important; display: inline-flex !important; align-items: center !important; gap: 5px !important; margin-top: 4px !important; } .amt-btn-main { display: flex !important; align-items: center !important; justify-content: center !important; gap: 5px !important; width: 100% !important; font-size: 14.5px !important; font-weight: 800 !important; } .amt-btn-sub { font-size: 11px !important; font-weight: 500 !important; opacity: 0.95 !important; text-align: center !important; margin: 1px auto 0 !important; } @media (max-width: 640px) { .amt-btn-main { font-size: 13.5px !important; } .amt-btn-sub { font-size: 10.5px !important; } } .amt-btn-confirm { background: linear-gradient(135deg, #16a34a 0%, #15803d 100%) !important; color: #ffffff !important; height: auto !important; min-height: 48px !important; padding: 10px 12px !important; box-sizing: border-box !important; } .amt-btn-confirm:hover { background: #059669 !important; } [data-theme=\"dark\"] .amt-card, [data-theme=\"dark\"] #amtBookingModal .amt-card, [data-theme=\"dark\"] .portal-card { background: #0f172a !important; border-color: #334155 !important; color: #f8fafc !important; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7) !important; } [data-theme=\"dark\"] .amt-step-hdr-compact .amt-step-title { color: #f8fafc !important; } [data-theme=\"dark\"] .amt-label { color: #cbd5e1 !important; } [data-theme=\"dark\"] .amt-category-grid .amt-service-btn { background: #1e293b !important; border-color: #334155 !important; color: #f8fafc !important; } [data-theme=\"dark\"] .amt-category-grid .amt-service-btn:hover { background: #0f2b3e !important; border-color: #38bdf8 !important; } [data-theme=\"dark\"] .amt-category-grid .amt-service-btn .amt-cat-name { color: #f8fafc !important; } [data-theme=\"dark\"] .amt-category-grid .amt-service-btn .amt-cat-tag { color: #94a3b8 !important; } [data-theme=\"dark\"] .amt-category-grid .amt-service-btn .amt-tag-green { color: #4ade80 !important; } [data-theme=\"dark\"] .amt-category-grid .amt-service-btn.active { background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important; border-color: #38bdf8 !important; color: #ffffff !important; } [data-theme=\"dark\"] .amt-category-grid .amt-service-btn.active .amt-cat-name { color: #ffffff !important; } [data-theme=\"dark\"] .amt-category-grid .amt-service-btn.active .amt-cat-tag { color: #e0f2fe !important; } [data-theme=\"dark\"] .amt-category-grid .amt-service-btn.active .amt-tag-green { color: #bbf7d0 !important; } [data-theme=\"dark\"] .amt-count-badge { color: #38bdf8 !important; background: rgba(2, 132, 199, 0.2) !important; border-color: rgba(56, 189, 248, 0.35) !important; } [data-theme=\"dark\"] .amt-select, [data-theme=\"dark\"] #amtTourSelect { background: #1e293b !important; border-color: #38bdf8 !important; color: #f8fafc !important; color-scheme: dark !important; } [data-theme=\"dark\"] .amt-select option, [data-theme=\"dark\"] #amtTourSelect option { background: #1e293b !important; color: #f8fafc !important; } [data-theme=\"dark\"] .amt-select optgroup, [data-theme=\"dark\"] #amtTourSelect optgroup { background: #0f172a !important; color: #38bdf8 !important; } [data-theme=\"dark\"] .amt-stb-card { background: #1e293b !important; border-color: #0284c7 !important; color: #f8fafc !important; } [data-theme=\"dark\"] .amt-stb-badge.amt-badge-union { background: rgba(2,132,199,0.2) !important; color: #38bdf8 !important; border-color: rgba(56,189,248,0.4) !important; } [data-theme=\"dark\"] .amt-stb-badge.amt-badge-express { background: rgba(245,158,11,0.2) !important; color: #fbbf24 !important; border-color: rgba(245,158,11,0.4) !important; } [data-theme=\"dark\"] .amt-stb-badge.amt-badge-combo { background: rgba(139,92,246,0.2) !important; color: #c084fc !important; border-color: rgba(139,92,246,0.4) !important; } [data-theme=\"dark\"] .amt-stb-badge.amt-badge-outstation { background: rgba(14,116,144,0.2) !important; color: #22d3ee !important; border-color: rgba(34,211,238,0.4) !important; } [data-theme=\"dark\"] .amt-stb-badge.amt-badge-local { background: rgba(22,101,52,0.2) !important; color: #4ade80 !important; border-color: rgba(74,222,128,0.4) !important; } [data-theme=\"dark\"] .amt-stb-fare-val { color: #38bdf8 !important; } [data-theme=\"dark\"] .amt-stb-fare-sub { color: #94a3b8 !important; } [data-theme=\"dark\"] .amt-stb-tour-title { color: #ffffff !important; } [data-theme=\"dark\"] .amt-stb-meta-row { color: #cbd5e1 !important; border-bottom-color: #334155 !important; } [data-theme=\"dark\"] .amt-stb-points-wrap { border-top-color: #334155 !important; } [data-theme=\"dark\"] .amt-stb-points-lbl { color: #f8fafc !important; } [data-theme=\"dark\"] .amt-stb-point-chip { background: #0f172a !important; color: #cbd5e1 !important; border-color: #334155 !important; } [data-theme=\"dark\"] .amt-chip-more { background: rgba(2,132,199,0.2) !important; color: #38bdf8 !important; } [data-theme=\"dark\"] .amt-input, [data-theme=\"dark\"] input[type=\"text\"], [data-theme=\"dark\"] input[type=\"tel\"], [data-theme=\"dark\"] input[type=\"date\"], [data-theme=\"dark\"] input[type=\"time\"] { background: #1e293b !important; border-color: #334155 !important; color: #f8fafc !important; color-scheme: dark !important; } [data-theme=\"dark\"] .amt-input::placeholder { color: #64748b !important; } [data-theme=\"dark\"] .amt-time-chip { background: #1e293b !important; border-color: #334155 !important; color: #cbd5e1 !important; } [data-theme=\"dark\"] .amt-time-chip:hover { border-color: #38bdf8 !important; color: #38bdf8 !important; } [data-theme=\"dark\"] .amt-time-chip.active { background: #0284c7 !important; border-color: #38bdf8 !important; color: #ffffff !important; } [data-theme=\"dark\"] .amt-cab-selector-wrap { background: #1e293b !important; border-color: #334155 !important; } [data-theme=\"dark\"] .amt-cab-pill { background: #0f172a !important; border-color: #334155 !important; color: #f8fafc !important; } [data-theme=\"dark\"] .amt-cab-pill:hover { border-color: #38bdf8 !important; background: #0f2b3e !important; } [data-theme=\"dark\"] .amt-cab-pill.active { background: rgba(2, 132, 199, 0.25) !important; border-color: #38bdf8 !important; box-shadow: 0 0 0 2px #38bdf8 !important; } [data-theme=\"dark\"] .amt-cab-pill-info strong { color: #f8fafc !important; } [data-theme=\"dark\"] .amt-cab-pill-info span { color: #94a3b8 !important; } [data-theme=\"dark\"] .amt-cab-subnote { color: #94a3b8 !important; } [data-theme=\"dark\"] .amt-compact-review-box, [data-theme=\"dark\"] .amt-compact-review-bar { background: #1e293b !important; border-color: #334155 !important; } [data-theme=\"dark\"] .amt-crb-item { color: #f8fafc !important; } [data-theme=\"dark\"] .amt-crb-fare { color: #38bdf8 !important; } [data-theme=\"dark\"] .amt-crb-meta { color: #94a3b8 !important; } [data-theme=\"dark\"] .amt-autocomplete-dropdown, [data-theme=\"dark\"] .amt-autocomplete-list { background: #1e293b !important; border-color: #334155 !important; } [data-theme=\"dark\"] .amt-autocomplete-item { border-bottom-color: #334155 !important; color: #f8fafc !important; } [data-theme=\"dark\"] .amt-autocomplete-item:hover { background: #0f2b3e !important; color: #38bdf8 !important; } [data-theme=\"dark\"] .amt-btn-back { background: #1e293b !important; border-color: #334155 !important; color: #cbd5e1 !important; } [data-theme=\"dark\"] .amt-btn-back:hover { background: #334155 !important; color: #ffffff !important; } [data-theme=\"dark\"] .amt-voucher-screen-notice { background: rgba(245, 158, 11, 0.15) !important; border-color: rgba(245, 158, 11, 0.35) !important; } [data-theme=\"dark\"] .amt-voucher-screen-notice div { color: #fbbf24 !important; } [data-theme=\"dark\"] #amtVoucherNoticeSub { color: #fde68a !important; } [data-theme=\"dark\"] #amtDownloadPdfBtn { background: #064e3b !important; border-color: #10b981 !important; color: #6ee7b7 !important; } [data-theme=\"dark\"] #amtPrintBtn { background: #1e293b !important; border-color: #334155 !important; color: #cbd5e1 !important; } [data-theme=\"dark\"] .amt-v-link-btn { background: #1e293b !important; border-color: #334155 !important; color: #cbd5e1 !important; } [data-theme=\"dark\"] #amtEditTripBtn { background: #1e293b !important; border-color: #334155 !important; color: #cbd5e1 !important; }";
-                s.textContent += '\n/* Standardized Typography & Mobile Responsive Harmony */\n.amt-label { font-size: 13px !important; font-weight: 700 !important; color: #1e293b !important; margin-bottom: 4px !important; display: flex !important; align-items: center !important; justify-content: space-between !important; line-height: 1.3 !important; }\n.amt-input, .amt-select, #amtTourSelect, #amtDate, #amtTime, #amtPickupArea, #amtPickupHotel, #amtDropLocation, #amtName, #amtPhone, #amtEmail, #amtNotes { font-size: 14px !important; font-weight: 600 !important; color: #0f172a !important; height: 42px !important; min-height: 42px !important; padding: 8px 12px !important; border: 1.5px solid #cbd5e1 !important; border-radius: 8px !important; background: #ffffff !important; box-sizing: border-box !important; width: 100% !important; line-height: 1.4 !important; }\n#amtTourSelect { border-color: #0284c7 !important; background: #f0f9ff !important; }\n.amt-input:focus, .amt-select:focus, #amtTourSelect:focus { border-color: #0284c7 !important; box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15) !important; outline: none !important; }\n.amt-step-hdr-compact .amt-step-title { font-size: clamp(14px, 3.6vw, 15.5px) !important; font-weight: 800 !important; color: #0f172a !important; margin: 0 !important; line-height: 1.25 !important; }\n.amt-trust-chip { font-size: 11px !important; font-weight: 700 !important; color: #059669 !important; background: #ecfdf5 !important; border: 1px solid #a7f3d0 !important; padding: 2.5px 8px !important; border-radius: 6px !important; display: inline-flex !important; align-items: center !important; gap: 4px !important; line-height: 1.3 !important; white-space: normal !important; word-break: normal !important; max-width: 100% !important; box-sizing: border-box !important; flex-shrink: 0 !important; }\n.amt-pax-box { background: #f8fafc !important; border: 1px solid #e2e8f0 !important; border-radius: 8px !important; padding: 10px 12px !important; margin: 6px 0 8px !important; box-sizing: border-box !important; width: 100% !important; }\n.amt-pax-input-row { display: flex !important; align-items: center !important; justify-content: space-between !important; gap: 10px !important; margin-top: 4px !important; width: 100% !important; box-sizing: border-box !important; }\n.amt-pax-stepper-group { display: inline-flex !important; align-items: center !important; border: 1.5px solid #cbd5e1 !important; border-radius: 6px !important; background: #ffffff !important; overflow: hidden !important; height: 38px !important; flex-shrink: 0 !important; box-sizing: border-box !important; }\n.amt-pax-step-btn { width: 36px !important; height: 38px !important; border: none !important; background: transparent !important; font-size: 1.15rem !important; font-weight: 700 !important; color: #0284c7 !important; cursor: pointer !important; display: flex !important; align-items: center !important; justify-content: center !important; padding: 0 !important; }\n#amtPaxInput { width: 46px !important; height: 38px !important; min-height: 38px !important; max-height: 38px !important; line-height: 38px !important; border: none !important; border-left: 1px solid #e2e8f0 !important; border-right: 1px solid #e2e8f0 !important; text-align: center !important; font-size: 1.05rem !important; font-weight: 700 !important; color: #0f172a !important; padding: 0 !important; background: transparent !important; border-radius: 0 !important; box-sizing: border-box !important; }\n#amtPaxDisplayLabel { font-size: 0.74rem !important; font-weight: 700 !important; color: #0284c7 !important; background: #e0f2fe !important; border: 1px solid #bae6fd !important; padding: 4px 8px !important; border-radius: 6px !important; white-space: nowrap !important; height: 28px !important; display: inline-flex !important; align-items: center !important; box-sizing: border-box !important; }\n.amt-btn-next, .amt-btn-confirm { width: 100% !important; min-height: 50px !important; padding: 10px 12px !important; border-radius: 10px !important; border: none !important; cursor: pointer !important; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; gap: 3px !important; box-sizing: border-box !important; }\n.amt-btn-next { background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important; color: #ffffff !important; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3) !important; }\n.amt-btn-confirm { background: linear-gradient(135deg, #16a34a 0%, #15803d 100%) !important; color: #ffffff !important; box-shadow: 0 4px 14px rgba(22, 163, 74, 0.35) !important; }\n.amt-btn-main { display: flex !important; align-items: center !important; justify-content: center !important; gap: 6px !important; width: 100% !important; line-height: 1.25 !important; font-size: clamp(12.5px, 3.5vw, 14.5px) !important; font-weight: 800 !important; text-align: center !important; }\n.amt-btn-sub { font-size: clamp(10px, 2.7vw, 11px) !important; font-weight: 600 !important; line-height: 1.25 !important; opacity: 0.95 !important; text-align: center !important; white-space: normal !important; word-break: normal !important; max-width: 100% !important; display: block !important; }\n.amt-btn-back { width: 100% !important; padding: 9px 12px !important; border: 1px solid #cbd5e1 !important; background: #ffffff !important; color: #475569 !important; border-radius: 8px !important; font-weight: 700 !important; font-size: 13px !important; cursor: pointer !important; display: flex !important; align-items: center !important; justify-content: center !important; gap: 6px !important; box-sizing: border-box !important; min-height: 38px !important; }\ninput[type="checkbox"]#amtTermsCheckbox, .amt-checkbox { width: 18px !important; min-width: 18px !important; max-width: 18px !important; height: 18px !important; min-height: 18px !important; max-height: 18px !important; margin: 2px 8px 0 0 !important; cursor: pointer !important; accent-color: #0284c7 !important; flex-shrink: 0 !important; box-sizing: border-box !important; }\n.amt-consent-row { margin: 12px 0 10px !important; display: flex !important; align-items: flex-start !important; gap: 8px !important; }\n.amt-consent-row label { font-size: 12px !important; color: #475569 !important; cursor: pointer !important; line-height: 1.45 !important; margin: 0 !important; flex: 1 1 auto !important; font-weight: 500 !important; }\n.amt-crb-row { display: flex !important; justify-content: space-between !important; align-items: flex-start !important; gap: 10px !important; width: 100% !important; box-sizing: border-box !important; padding-bottom: 6px !important; border-bottom: 1px dashed #cbd5e1 !important; margin-bottom: 6px !important; }\n.amt-crb-item { flex: 1 1 auto !important; min-width: 0 !important; font-size: 13.5px !important; color: #0f172a !important; font-weight: 800 !important; display: flex !important; align-items: flex-start !important; gap: 6px !important; line-height: 1.35 !important; }\n.amt-crb-item strong { white-space: normal !important; overflow: visible !important; text-overflow: clip !important; word-break: break-word !important; }\n.amt-crb-fare { flex-shrink: 0 !important; font-size: 1.15rem !important; font-weight: 900 !important; color: #0284c7 !important; white-space: nowrap !important; text-align: right !important; }\n.amt-crb-meta { display: flex !important; flex-wrap: wrap !important; gap: 8px 14px !important; font-size: 12px !important; color: #475569 !important; margin-top: 4px !important; line-height: 1.4 !important; }\n.amt-crb-zero { font-size: 12px !important; color: #15803d !important; font-weight: 700 !important; display: inline-flex !important; align-items: center !important; gap: 5px !important; margin-top: 4px !important; }\n.amt-guidelines-accordion { background: #f8fafc !important; border: 1.5px solid #e2e8f0 !important; border-radius: 12px !important; margin: 12px 0 !important; overflow: hidden !important; box-sizing: border-box !important; width: 100% !important; }\n.amt-accordion-header { width: 100% !important; padding: 10px 12px !important; background: transparent !important; border: none !important; display: flex !important; align-items: center !important; justify-content: space-between !important; cursor: pointer !important; font-weight: 700 !important; font-size: 13px !important; color: #0f172a !important; text-align: left !important; box-sizing: border-box !important; }\n.amt-accordion-header:hover { background: #f1f5f9 !important; }\n#amtGuidelinesToggleText { font-size: 11px !important; color: #0284c7 !important; font-weight: 700 !important; background: #e0f2fe !important; padding: 2px 7px !important; border-radius: 10px !important; }\n.amt-accordion-content { padding: 10px 12px 12px !important; border-top: 1px dashed #cbd5e1 !important; font-size: 12px !important; color: #334155 !important; line-height: 1.45 !important; box-sizing: border-box !important; }\n@media (min-width: 992px) {\n    .portal-booking-container { max-width: 780px !important; margin: 22px auto 36px !important; padding: 0 16px !important; }\n    .amt-card, .portal-card, body.booking-portal-page .amt-card, body.booking-portal-page .portal-card { max-width: 780px !important; border-radius: 16px !important; box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.55), 0 0 40px -10px rgba(2, 132, 199, 0.2) !important; border: 1.5px solid rgba(255, 255, 255, 0.15) !important; }\n    .portal-card-body { padding: 22px 28px 26px !important; }\n    .amt-grid2 { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 14px !important; margin-top: 6px !important; margin-bottom: 8px !important; width: 100% !important; }\n    .amt-grid2 > div { width: 100% !important; }\n    .amt-category-grid { grid-template-columns: repeat(5, 1fr) !important; gap: 8px !important; }\n    .amt-category-grid .amt-service-btn { min-height: 52px !important; padding: 6px 4px !important; }\n    .amt-step2-grid { display: grid !important; grid-template-columns: 1.05fr 0.95fr !important; gap: 14px !important; align-items: stretch !important; margin-bottom: 8px !important; width: 100% !important; box-sizing: border-box !important; }\n    .amt-step2-col { display: flex !important; flex-direction: column !important; justify-content: space-between !important; height: 100% !important; box-sizing: border-box !important; }\n    .portal-trust-section { display: none !important; }\n}\n@media (min-width: 641px) and (max-width: 991px) {\n    .portal-booking-container { max-width: 660px !important; margin: 16px auto 26px !important; padding: 0 14px !important; }\n    .amt-card, .portal-card, body.booking-portal-page .amt-card, body.booking-portal-page .portal-card { max-width: 660px !important; border-radius: 14px !important; }\n    .portal-card-body { padding: 18px 20px 22px !important; }\n    .amt-grid2 { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 12px !important; width: 100% !important; }\n    .amt-grid2 > div { width: 100% !important; }\n    .amt-step2-grid { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 12px !important; align-items: stretch !important; width: 100% !important; box-sizing: border-box !important; }\n    .amt-step2-col { display: flex !important; flex-direction: column !important; justify-content: space-between !important; height: 100% !important; box-sizing: border-box !important; }\n    .portal-trust-section { display: none !important; }\n}\n@media (max-width: 640px) {\n    .portal-booking-container { max-width: 100% !important; width: 100% !important; margin: 6px auto 14px !important; padding: 0 8px !important; }\n    .amt-card, #amtBookingModal .amt-card, .portal-card { max-width: 100% !important; width: 100% !important; border-radius: 12px !important; }\n    .portal-card-body { padding: 12px 14px 16px !important; }\n    .amt-grid2, .amt-guest-grid, .amt-form-row, .amt-step2-grid { display: flex !important; flex-direction: column !important; grid-template-columns: 1fr !important; gap: 10px !important; width: 100% !important; margin-top: 4px !important; margin-bottom: 8px !important; box-sizing: border-box !important; }\n    .amt-grid2 > div, .amt-guest-grid > div, .amt-form-row > div, .amt-step2-col { width: 100% !important; box-sizing: border-box !important; }\n}\n@media (max-width: 380px) {\n    .portal-booking-container { padding: 0 4px !important; }\n    .portal-card-body { padding: 10px 10px 14px !important; }\n}\n';
+        s.textContent += '\n/* Standardized Typography & Mobile Responsive Harmony */\n.amt-label { font-size: 13px !important; font-weight: 700 !important; color: #1e293b !important; margin-bottom: 4px !important; display: flex !important; align-items: center !important; justify-content: space-between !important; line-height: 1.3 !important; }\n.amt-input, .amt-select, #amtTourSelect, #amtDate, #amtTime, #amtPickupArea, #amtPickupHotel, #amtDropLocation, #amtName, #amtPhone, #amtEmail, #amtNotes { font-size: 14px !important; font-weight: 600 !important; color: #0f172a !important; height: 42px !important; min-height: 42px !important; padding: 8px 12px !important; border: 1.5px solid #cbd5e1 !important; border-radius: 8px !important; background: #ffffff !important; box-sizing: border-box !important; width: 100% !important; line-height: 1.4 !important; }\n#amtTourSelect { border-color: #0284c7 !important; background: #f0f9ff !important; }\n.amt-input:focus, .amt-select:focus, #amtTourSelect:focus { border-color: #0284c7 !important; box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15) !important; outline: none !important; }\n.amt-step-hdr-compact .amt-step-title { font-size: clamp(14px, 3.6vw, 15.5px) !important; font-weight: 800 !important; color: #0f172a !important; margin: 0 !important; line-height: 1.25 !important; }\n.amt-trust-chip { font-size: 11px !important; font-weight: 700 !important; color: #059669 !important; background: #ecfdf5 !important; border: 1px solid #a7f3d0 !important; padding: 2.5px 8px !important; border-radius: 6px !important; display: inline-flex !important; align-items: center !important; gap: 4px !important; line-height: 1.3 !important; white-space: normal !important; word-break: normal !important; max-width: 100% !important; box-sizing: border-box !important; flex-shrink: 0 !important; }\n.amt-pax-box { background: #f8fafc !important; border: 1px solid #e2e8f0 !important; border-radius: 8px !important; padding: 10px 12px !important; margin: 6px 0 8px !important; box-sizing: border-box !important; width: 100% !important; }\n.amt-pax-input-row { display: flex !important; align-items: center !important; justify-content: space-between !important; gap: 10px !important; margin-top: 4px !important; width: 100% !important; box-sizing: border-box !important; }\n.amt-pax-stepper-group { display: inline-flex !important; align-items: center !important; border: 1.5px solid #cbd5e1 !important; border-radius: 6px !important; background: #ffffff !important; overflow: hidden !important; height: 38px !important; flex-shrink: 0 !important; box-sizing: border-box !important; }\n.amt-pax-step-btn { width: 36px !important; height: 38px !important; border: none !important; background: transparent !important; font-size: 1.15rem !important; font-weight: 700 !important; color: #0284c7 !important; cursor: pointer !important; display: flex !important; align-items: center !important; justify-content: center !important; padding: 0 !important; }\n#amtPaxInput { width: 46px !important; height: 38px !important; min-height: 38px !important; max-height: 38px !important; line-height: 38px !important; border: none !important; border-left: 1px solid #e2e8f0 !important; border-right: 1px solid #e2e8f0 !important; text-align: center !important; font-size: 1.05rem !important; font-weight: 700 !important; color: #0f172a !important; padding: 0 !important; background: transparent !important; border-radius: 0 !important; box-sizing: border-box !important; }\n#amtPaxDisplayLabel { font-size: 0.74rem !important; font-weight: 700 !important; color: #0284c7 !important; background: #e0f2fe !important; border: 1px solid #bae6fd !important; padding: 4px 8px !important; border-radius: 6px !important; white-space: nowrap !important; height: 28px !important; display: inline-flex !important; align-items: center !important; box-sizing: border-box !important; }\n.amt-btn-next, .amt-btn-confirm { width: 100% !important; min-height: 50px !important; padding: 10px 12px !important; border-radius: 10px !important; border: none !important; cursor: pointer !important; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; gap: 3px !important; box-sizing: border-box !important; }\n.amt-btn-next { background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important; color: #ffffff !important; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3) !important; }\n.amt-btn-confirm { background: linear-gradient(135deg, #16a34a 0%, #15803d 100%) !important; color: #ffffff !important; box-shadow: 0 4px 14px rgba(22, 163, 74, 0.35) !important; }\n.amt-btn-main { display: flex !important; align-items: center !important; justify-content: center !important; gap: 6px !important; width: 100% !important; line-height: 1.25 !important; font-size: clamp(12.5px, 3.5vw, 14.5px) !important; font-weight: 800 !important; text-align: center !important; }\n.amt-btn-sub { font-size: clamp(10px, 2.7vw, 11px) !important; font-weight: 600 !important; line-height: 1.25 !important; opacity: 0.95 !important; text-align: center !important; white-space: normal !important; word-break: normal !important; max-width: 100% !important; display: block !important; }\n.amt-btn-back { width: 100% !important; padding: 9px 12px !important; border: 1px solid #cbd5e1 !important; background: #ffffff !important; color: #475569 !important; border-radius: 8px !important; font-weight: 700 !important; font-size: 13px !important; cursor: pointer !important; display: flex !important; align-items: center !important; justify-content: center !important; gap: 6px !important; box-sizing: border-box !important; min-height: 38px !important; }\ninput[type="checkbox"]#amtTermsCheckbox, .amt-checkbox { width: 18px !important; min-width: 18px !important; max-width: 18px !important; height: 18px !important; min-height: 18px !important; max-height: 18px !important; margin: 2px 8px 0 0 !important; cursor: pointer !important; accent-color: #0284c7 !important; flex-shrink: 0 !important; box-sizing: border-box !important; }\n.amt-consent-row { margin: 12px 0 10px !important; display: flex !important; align-items: flex-start !important; gap: 8px !important; }\n.amt-consent-row label { font-size: 12px !important; color: #475569 !important; cursor: pointer !important; line-height: 1.45 !important; margin: 0 !important; flex: 1 1 auto !important; font-weight: 500 !important; }\n.amt-crb-row { display: flex !important; justify-content: space-between !important; align-items: flex-start !important; gap: 10px !important; width: 100% !important; box-sizing: border-box !important; padding-bottom: 6px !important; border-bottom: 1px dashed #cbd5e1 !important; margin-bottom: 6px !important; }\n.amt-crb-item { flex: 1 1 auto !important; min-width: 0 !important; font-size: 13.5px !important; color: #0f172a !important; font-weight: 800 !important; display: flex !important; align-items: flex-start !important; gap: 6px !important; line-height: 1.35 !important; }\n.amt-crb-item strong { white-space: normal !important; overflow: visible !important; text-overflow: clip !important; word-break: break-word !important; }\n.amt-crb-fare { flex-shrink: 0 !important; font-size: 1.15rem !important; font-weight: 900 !important; color: #0284c7 !important; white-space: nowrap !important; text-align: right !important; }\n.amt-crb-meta { display: flex !important; flex-wrap: wrap !important; gap: 8px 14px !important; font-size: 12px !important; color: #475569 !important; margin-top: 4px !important; line-height: 1.4 !important; }\n.amt-crb-zero { font-size: 12px !important; color: #15803d !important; font-weight: 700 !important; display: inline-flex !important; align-items: center !important; gap: 5px !important; margin-top: 4px !important; }\n.amt-guidelines-accordion { background: #f8fafc !important; border: 1.5px solid #e2e8f0 !important; border-radius: 12px !important; margin: 12px 0 !important; overflow: hidden !important; box-sizing: border-box !important; width: 100% !important; }\n.amt-accordion-header { width: 100% !important; padding: 10px 12px !important; background: transparent !important; border: none !important; display: flex !important; align-items: center !important; justify-content: space-between !important; cursor: pointer !important; font-weight: 700 !important; font-size: 13px !important; color: #0f172a !important; text-align: left !important; box-sizing: border-box !important; }\n.amt-accordion-header:hover { background: #f1f5f9 !important; }\n#amtGuidelinesToggleText { font-size: 11px !important; color: #0284c7 !important; font-weight: 700 !important; background: #e0f2fe !important; padding: 2px 7px !important; border-radius: 10px !important; }\n.amt-accordion-content { padding: 10px 12px 12px !important; border-top: 1px dashed #cbd5e1 !important; font-size: 12px !important; color: #334155 !important; line-height: 1.45 !important; box-sizing: border-box !important; }\n@media (min-width: 992px) {\n    .portal-booking-container { max-width: 780px !important; margin: 22px auto 36px !important; padding: 0 16px !important; }\n    .amt-card, .portal-card, body.booking-portal-page .amt-card, body.booking-portal-page .portal-card { max-width: 780px !important; border-radius: 16px !important; box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.55), 0 0 40px -10px rgba(2, 132, 199, 0.2) !important; border: 1.5px solid rgba(255, 255, 255, 0.15) !important; }\n    .portal-card-body { padding: 22px 28px 26px !important; }\n    .amt-grid2 { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 14px !important; margin-top: 6px !important; margin-bottom: 8px !important; width: 100% !important; }\n    .amt-grid2 > div { width: 100% !important; }\n    .amt-category-grid { grid-template-columns: repeat(5, 1fr) !important; gap: 8px !important; }\n    .amt-category-grid .amt-service-btn { min-height: 52px !important; padding: 6px 4px !important; }\n    .amt-step2-grid { display: grid !important; grid-template-columns: 1.05fr 0.95fr !important; gap: 14px !important; align-items: stretch !important; margin-bottom: 8px !important; width: 100% !important; box-sizing: border-box !important; }\n    .amt-step2-col { display: flex !important; flex-direction: column !important; justify-content: space-between !important; height: 100% !important; box-sizing: border-box !important; }\n    .portal-trust-section { display: none !important; }\n}\n@media (min-width: 641px) and (max-width: 991px) {\n    .portal-booking-container { max-width: 660px !important; margin: 16px auto 26px !important; padding: 0 14px !important; }\n    .amt-card, .portal-card, body.booking-portal-page .amt-card, body.booking-portal-page .portal-card { max-width: 660px !important; border-radius: 14px !important; }\n    .portal-card-body { padding: 18px 20px 22px !important; }\n    .amt-grid2 { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 12px !important; width: 100% !important; }\n    .amt-grid2 > div { width: 100% !important; }\n    .amt-step2-grid { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 12px !important; align-items: stretch !important; width: 100% !important; box-sizing: border-box !important; }\n    .amt-step2-col { display: flex !important; flex-direction: column !important; justify-content: space-between !important; height: 100% !important; box-sizing: border-box !important; }\n    .portal-trust-section { display: none !important; }\n}\n@media (max-width: 640px) {\n    .portal-booking-container { max-width: 100% !important; width: 100% !important; margin: 6px auto 14px !important; padding: 0 8px !important; }\n    .amt-card, #amtBookingModal .amt-card, .portal-card { max-width: 100% !important; width: 100% !important; border-radius: 12px !important; }\n    .portal-card-body { padding: 12px 14px 16px !important; }\n    .amt-grid2, .amt-guest-grid, .amt-form-row, .amt-step2-grid { display: flex !important; flex-direction: column !important; grid-template-columns: 1fr !important; gap: 10px !important; width: 100% !important; margin-top: 4px !important; margin-bottom: 8px !important; box-sizing: border-box !important; }\n    .amt-grid2 > div, .amt-guest-grid > div, .amt-form-row > div, .amt-step2-col { width: 100% !important; box-sizing: border-box !important; }\n}\n@media (max-width: 380px) {\n    .portal-booking-container { padding: 0 4px !important; }\n    .portal-card-body { padding: 10px 10px 14px !important; }\n}\n';
         document.head.appendChild(s);
     }
 
@@ -1731,7 +1731,7 @@
             + '      <i class="fa-solid fa-arrow-left"></i> Change Schedule &amp; Fare Selections'
             + '    </button>'
             + '  </div>'
-                        + '</div>'
+            + '</div>'
 
             // STEP 3: DIGITAL CONFIRMED VOUCHER SCREEN
             + '<div id="amtStepVoucher" style="display:none;">'
@@ -1780,52 +1780,97 @@
         var pickupVal = (document.getElementById('amtPickupHotel') || {}).value || (document.getElementById('amtPickup') || {}).value || bookingState.hotelDetails || bookingState.pickup || '';
         var zoneNotice = document.getElementById('amtZoneNotice');
         var availBox = document.getElementById('amtAvailabilityBox');
-        if (!zoneNotice || !availBox) return;
+        var pickNoteEl = document.getElementById('amtPickupLocalityNote');
 
         var db = window.TOUR_DATABASE;
-        var sType = bookingState.service || bookingState.serviceType;
-        var isOutstation = (sType === 'outstation') || (bookingState.tourId && String(bookingState.tourId).toLowerCase().indexOf('out_') === 0);
+        var sType = bookingState.service || bookingState.serviceType || 'sightseeing';
+        var isOutstation = (sType === 'outstation');
+        var isLocalDrop = (sType === 'local_drop');
+
         if (db && db.getTourById && bookingState.tourId) {
             var currT = db.getTourById(bookingState.tourId);
-            if (currT && (currT.category === 'outstation' || currT.type === 'transfer')) {
-                isOutstation = true;
+            if (currT) {
+                if (currT.category === 'outstation' || currT.type === 'transfer') {
+                    isOutstation = true;
+                } else if (currT.category === 'local_drop' || currT.type === 'local') {
+                    isLocalDrop = true;
+                } else if (currT.category === 'sightseeing' || currT.category === 'combo' || currT.sub_category === 'single_tour') {
+                    isOutstation = false;
+                    isLocalDrop = false;
+                }
+            }
+        }
+        if (sType === 'sightseeing' || sType === 'express' || sType === 'combo') {
+            isOutstation = false;
+            isLocalDrop = false;
+        }
+
+        // On dedicated portal page, hide redundant bottom boxes completely
+        var isPortal = document.body && document.body.classList.contains('booking-portal-page');
+        if (isPortal) {
+            if (zoneNotice) { zoneNotice.style.display = 'none'; zoneNotice.innerHTML = ''; }
+            if (availBox) { availBox.style.display = 'none'; availBox.innerHTML = ''; }
+        }
+
+        // Update dedicated pickup note under hotel input
+        if (pickNoteEl) {
+            if (isOutstation) {
+                pickNoteEl.style.display = 'block';
+                pickNoteEl.style.background = '#f0f9ff';
+                pickNoteEl.style.borderColor = '#bae6fd';
+                pickNoteEl.style.color = '#0369a1';
+                pickNoteEl.innerHTML = '<i class="fa-solid fa-plane-departure" style="color:#0284c7;margin-right:4px;"></i> <strong>Outstation Doorstep Pickup:</strong> Doorstep pickup from any hotel, resort, or private porch in Mahabaleshwar &amp; Panchgani included. Direct private tourist cab to your destination with no co-passengers.';
+            } else if (isLocalDrop) {
+                pickNoteEl.style.display = 'block';
+                pickNoteEl.style.background = '#f0fdf4';
+                pickNoteEl.style.borderColor = '#bbf7d0';
+                pickNoteEl.style.color = '#166534';
+                pickNoteEl.innerHTML = '<i class="fa-solid fa-location-crosshairs" style="color:#16a34a;margin-right:4px;"></i> <strong>Local Point-to-Point Drop:</strong> Direct doorstep pickup from your hotel or resort. Fixed point-to-point drop tariff applies.';
+            } else {
+                // Sightseeing, Express, Combo
+                pickNoteEl.style.display = 'block';
+                var zone = (db && db.getPickupZone && pickupVal.trim()) ? db.getPickupZone(pickupVal) : null;
+                var isOutside = zone && !zone.isStandardTariffZone;
+                if (isOutside) {
+                    pickNoteEl.style.background = '#fffbeb';
+                    pickNoteEl.style.borderColor = '#fde68a';
+                    pickNoteEl.style.color = '#92400e';
+                    var zName = (zone && zone.name) ? zone.name : (pickupVal.trim() || 'Selected Location');
+                    pickNoteEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation" style="color:#d97706;margin-right:4px;"></i> <strong>Outside 2 km Limits (' + escapeHtml(zName) + '):</strong> Complimentary pickup and drop are available for hotels located within a 2 km radius of Mahabaleshwar town. For locations beyond 2 km, additional pickup and drop charges will apply.';
+                } else {
+                    pickNoteEl.style.background = '#f0f9ff';
+                    pickNoteEl.style.borderColor = '#bae6fd';
+                    pickNoteEl.style.color = '#334155';
+                    pickNoteEl.innerHTML = '<i class="fa-solid fa-circle-info" style="color:#0284c7;margin-right:4px;"></i> Complimentary pickup and drop are available for hotels located within a 2 km radius of Mahabaleshwar town. For locations beyond 2 km, additional pickup and drop charges will apply.';
+                }
             }
         }
 
-        if (isOutstation) {
-            zoneNotice.style.display = 'none';
-            availBox.style.display = 'block';
-            availBox.innerHTML = '<i class="fa-solid fa-route" style="color:#0284c7;"></i> <strong>Outstation Doorstep Pickup:</strong> Hotel porch pickup across Mahabaleshwar & Panchgani. Fuel advance link shared via WhatsApp.';
-            availBox.style.background = '#f0f9ff';
-            availBox.style.color = '#0369a1';
-            availBox.style.border = '1px solid #bae6fd';
-            return;
-        }
-
-        if (!db || !db.getPickupZone || !pickupVal.trim()) {
-            zoneNotice.style.display = 'none';
-            availBox.style.display = 'block';
-            availBox.innerHTML = '<i class="fa-solid fa-info-circle"></i> <strong>Pickup Policy:</strong> Complimentary pickup and drop are available for hotels located within a 2 km radius of Mahabaleshwar town. For locations beyond 2 km, additional pickup and drop charges will apply.';
-            availBox.style.background = '#eff6ff';
-            availBox.style.color = '#1e40af';
-            availBox.style.border = '1px solid #bfdbfe';
-            return;
-        }
-
-        var zone = db.getPickupZone(pickupVal);
-        var isOutside = zone && !zone.isStandardTariffZone;
-        if (isOutside) {
-            availBox.style.display = 'none';
-            zoneNotice.style.display = 'block';
-            var chargeMsg = (zone && (zone.chargeRule || zone.notes)) ? (zone.chargeRule || zone.notes) : 'Standard sightseeing tariff applies + nominal distance charge confirmed by driver.';
-            zoneNotice.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> <strong>Outside Town Limits (' + escapeHtml(zone.name || 'Selected Location') + '):</strong> ' + escapeHtml(chargeMsg);
-        } else {
-            zoneNotice.style.display = 'none';
-            availBox.style.display = 'block';
-            availBox.innerHTML = '<i class="fa-solid fa-circle-check"></i> <strong>Mahabaleshwar Town Limits:</strong> Standard union sightseeing tariff applies.';
-            availBox.style.background = '#f0fdf4';
-            availBox.style.color = '#166534';
-            availBox.style.border = '1px solid #bbf7d0';
+        // For non-portal modal dialog fallback
+        if (!isPortal && availBox) {
+            if (isOutstation) {
+                if (zoneNotice) zoneNotice.style.display = 'none';
+                availBox.style.display = 'block';
+                availBox.innerHTML = '<i class="fa-solid fa-route" style="color:#0284c7;"></i> <strong>Outstation Doorstep Pickup:</strong> Hotel porch pickup across Mahabaleshwar & Panchgani. Fuel advance link shared via WhatsApp.';
+                availBox.style.background = '#f0f9ff';
+                availBox.style.color = '#0369a1';
+                availBox.style.border = '1px solid #bae6fd';
+            } else if (isLocalDrop) {
+                if (zoneNotice) zoneNotice.style.display = 'none';
+                availBox.style.display = 'none';
+            } else {
+                var mZone = (db && db.getPickupZone && pickupVal.trim()) ? db.getPickupZone(pickupVal) : null;
+                var mOutside = mZone && !mZone.isStandardTariffZone;
+                if (mOutside && zoneNotice) {
+                    availBox.style.display = 'none';
+                    zoneNotice.style.display = 'block';
+                    var chargeMsg = (mZone && (mZone.chargeRule || mZone.notes)) ? (mZone.chargeRule || mZone.notes) : 'Standard sightseeing tariff applies + nominal distance charge confirmed by driver.';
+                    zoneNotice.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> <strong>Outside Town Limits (' + escapeHtml(mZone.name || 'Selected Location') + '):</strong> ' + escapeHtml(chargeMsg);
+                } else {
+                    if (zoneNotice) zoneNotice.style.display = 'none';
+                    availBox.style.display = 'none';
+                }
+            }
         }
     }
 
@@ -2101,7 +2146,9 @@
                 btn.setAttribute('aria-checked', 'true');
                 var s = btn.getAttribute('data-service');
                 bookingState.service = s;
+                bookingState.serviceType = s;
                 populateTourDropdownByService(s);
+                if (typeof updateZoneNotice === 'function') updateZoneNotice();
             }
             btn.addEventListener('click', activateService);
             btn.addEventListener('keydown', function (e) {
@@ -2140,6 +2187,7 @@
                 bookingState.pickup = val;
                 bookingState.hotelDetails = val;
                 if (pickClear) pickClear.style.display = val ? 'block' : 'none';
+                updateZoneNotice();
                 var results = window.TOUR_DATABASE ? window.TOUR_DATABASE.searchLocations(val) : [];
                 if (results.length > 0) {
                     autoList.innerHTML = results.map(function (loc) {
@@ -2274,7 +2322,7 @@
                 }
 
                 if (!bookingState.bookingId) bookingState.bookingId = generateBookingId();
-                
+
                 // Ensure pickup & hotel details are populated
                 bookingState.pickup = bookingState.hotelDetails || (pickInput ? pickInput.value.trim() : '') || 'Mahabaleshwar Hotel Porch';
                 var pNum = bookingState.paxNum || parseInt(bookingState.pax, 10) || 2;
@@ -2429,7 +2477,7 @@
         if (areaSelect && areaSelect.tagName === 'SELECT') {
             areaSelect.addEventListener('change', function () {
                 bookingState.pickupArea = this.value;
-                try { updateStep2SummaryAndFare(); } catch (e) {}
+                try { updateStep2SummaryAndFare(); } catch (e) { }
             });
         }
 
@@ -2564,7 +2612,7 @@
             });
         }
 
-// Static legacy handlers removed for clean 3-step navigation
+        // Static legacy handlers removed for clean 3-step navigation
 
         // Confirm Booking (Step 3 -> Voucher Screen)
         var confirmBtn = document.getElementById('amtConfirmBtn');
@@ -3086,7 +3134,7 @@
         }
 
         // Edit Trip Details button on Voucher screen
-        
+
         // Copy Pass ID
         document.addEventListener('click', function (e) {
             var btn = e.target.closest('#amtCopyPassIdBtn');
@@ -3695,7 +3743,7 @@
             // For combo, highlight the marquee attractions cleanly
             var displayPts = isCombo
                 ? ['Old Mahabaleshwar', 'Arthur Seat', 'Table Land']
-                : points.slice(0, 3).map(function(p) { return p.replace(/\s*\([^)]*\)/g, ''); });
+                : points.slice(0, 3).map(function (p) { return p.replace(/\s*\([^)]*\)/g, ''); });
             var remaining = points.length - displayPts.length;
             pointsHtml = '<div class="amt-stb-points-wrap">' +
                 '<span class="amt-stb-points-lbl"><i class="fa-solid fa-location-dot"></i> Points:</span> ' +
@@ -4091,6 +4139,7 @@
         bookingState.tourId = targetId;
         bookingState.tour2Id = '';
         bookingState.service = service;
+        bookingState.serviceType = service;
         bookingState.selectedTours = [{ id: targetId, date: bookingState.date, time: bookingState.time }];
 
         var trustChip = document.getElementById('amtStep1TrustChip') || document.querySelector('.amt-trust-chip');
@@ -4105,6 +4154,7 @@
         if (typeof updateSelectedTourBanner === 'function') updateSelectedTourBanner(targetId);
         if (typeof updateTourInsight === 'function') updateTourInsight();
         if (typeof updateSmartTimeUI === 'function') updateSmartTimeUI();
+        if (typeof updateZoneNotice === 'function') updateZoneNotice();
     }
 
     function updateStepper(step) {
@@ -4148,9 +4198,9 @@
         var trustSec = document.querySelector('.portal-trust-section'); if (trustSec) trustSec.style.display = 'none';
 
         if (step === 2) {
-            try { updateStep2SummaryAndFare(); } catch (e) {}
+            try { updateStep2SummaryAndFare(); } catch (e) { }
         } else if (step === 3) {
-            try { renderReviewCard(); } catch (e) {}
+            try { renderReviewCard(); } catch (e) { }
             var gBody = document.getElementById('amtGuidelinesBody');
             if (gBody) gBody.style.display = 'none';
             var gChevron = document.getElementById('amtGuidelinesChevron');
@@ -4327,8 +4377,8 @@
         return { badge: badge, text: text };
     }
 
-    
-    
+
+
     function updatePaxAndTaxis(pax) {
         var p = parseInt(pax, 10);
         if (isNaN(p) || p < 1) p = 1;
@@ -4366,7 +4416,7 @@
         var legPax = document.getElementById('amtPax');
         if (legPax) legPax.value = (cabs > 1 ? '5-8' : '1-4');
 
-        try { updateStep2SummaryAndFare(); } catch (e) {}
+        try { updateStep2SummaryAndFare(); } catch (e) { }
     }
 
     function updateStep2SummaryAndFare() {
@@ -4983,7 +5033,7 @@
     window.goToStep = goToStep;
 
     // Expose Global Accordion Toggle for Guidelines
-    window.toggleGuidelinesAccordion = function(e) {
+    window.toggleGuidelinesAccordion = function (e) {
         if (e && e.preventDefault) e.preventDefault();
         if (e && e.stopPropagation) e.stopPropagation();
         if (window._amtLastGuidelinesToggle && (Date.now() - window._amtLastGuidelinesToggle < 250)) {
@@ -5011,7 +5061,7 @@
     };
 
     window.renderReviewCard = renderReviewCard;
-    window.getBookingState = function() { return bookingState; };
+    window.getBookingState = function () { return bookingState; };
 
     window.closeBookingModal = function () {
         if (document.body && document.body.classList.contains('booking-portal-page')) {
@@ -5241,15 +5291,15 @@
                 setTimeout(function () {
                     if (window.openBookingModal) {
                         window.openBookingModal(tourHint || '');
-                var qParams = (typeof URLSearchParams !== 'undefined') ? new URLSearchParams(search) : null;
-                var qDate = qParams ? (qParams.get('date') || '') : '';
-                var qTime = qParams ? (qParams.get('time') || '') : '';
-                var qName = qParams ? (qParams.get('name') || '') : '';
-                var qPhone = qParams ? (qParams.get('phone') || '') : '';
-                if (qDate) { var dEl = document.getElementById('amtDate'); if (dEl) dEl.value = qDate; bookingState.date = qDate; }
-                if (qTime) { var tEl = document.getElementById('amtTime'); if (tEl) tEl.value = qTime; bookingState.time = qTime; }
-                if (qName) { var nEl = document.getElementById('amtName'); if (nEl) nEl.value = qName; bookingState.name = qName; }
-                if (qPhone) { var pEl = document.getElementById('amtPhone'); if (pEl) pEl.value = qPhone; bookingState.phone = qPhone; }
+                        var qParams = (typeof URLSearchParams !== 'undefined') ? new URLSearchParams(search) : null;
+                        var qDate = qParams ? (qParams.get('date') || '') : '';
+                        var qTime = qParams ? (qParams.get('time') || '') : '';
+                        var qName = qParams ? (qParams.get('name') || '') : '';
+                        var qPhone = qParams ? (qParams.get('phone') || '') : '';
+                        if (qDate) { var dEl = document.getElementById('amtDate'); if (dEl) dEl.value = qDate; bookingState.date = qDate; }
+                        if (qTime) { var tEl = document.getElementById('amtTime'); if (tEl) tEl.value = qTime; bookingState.time = qTime; }
+                        if (qName) { var nEl = document.getElementById('amtName'); if (nEl) nEl.value = qName; bookingState.name = qName; }
+                        if (qPhone) { var pEl = document.getElementById('amtPhone'); if (pEl) pEl.value = qPhone; bookingState.phone = qPhone; }
                     }
                 }, 350);
             }
@@ -5284,10 +5334,34 @@
                 var qTime = qParams ? (qParams.get('time') || '') : '';
                 var qName = qParams ? (qParams.get('name') || '') : '';
                 var qPhone = qParams ? (qParams.get('phone') || '') : '';
-                if (qDate) { var dEl = document.getElementById('amtDate'); if (dEl) dEl.value = qDate; bookingState.date = qDate; }
-                if (qTime) { var tEl = document.getElementById('amtTime'); if (tEl) tEl.value = qTime; bookingState.time = qTime; }
-                if (qName) { var nEl = document.getElementById('amtName'); if (nEl) nEl.value = qName; bookingState.name = qName; }
-                if (qPhone) { var pEl = document.getElementById('amtPhone'); if (pEl) pEl.value = qPhone; bookingState.phone = qPhone; }
+                var qPickup = qParams ? (qParams.get('pickup') || qParams.get('hotel') || '') : '';
+                var qPax = qParams ? (qParams.get('pax') || '') : '';
+                var qService = qParams ? (qParams.get('service') || '') : '';
+
+                if (qService) {
+                    var sBtn = document.querySelector('.amt-service-btn[data-service="' + qService + '"]');
+                    if (sBtn) sBtn.click();
+                }
+                if (qDate) { var dEl = document.getElementById('amtDate'); if (dEl) { dEl.value = qDate; bookingState.date = qDate; dEl.dispatchEvent(new Event('change', { bubbles: true })); } }
+                if (qTime) { var tEl = document.getElementById('amtTime'); if (tEl) { tEl.value = qTime; bookingState.time = qTime; } }
+                if (qName) { var nEl = document.getElementById('amtName'); if (nEl) { nEl.value = qName; bookingState.name = qName; } }
+                if (qPhone) { var pEl = document.getElementById('amtPhone'); if (pEl) { pEl.value = qPhone; bookingState.phone = qPhone; } }
+                if (qPax) {
+                    var paxNum = parseInt(qPax, 10);
+                    if (!isNaN(paxNum) && typeof updatePaxAndTaxis === 'function') {
+                        updatePaxAndTaxis(paxNum);
+                    }
+                }
+                if (qPickup) {
+                    var hEl = document.getElementById('amtPickupHotel') || document.getElementById('amtPickup');
+                    if (hEl) {
+                        hEl.value = qPickup;
+                        bookingState.hotelDetails = qPickup;
+                        bookingState.pickup = qPickup;
+                        hEl.dispatchEvent(new Event('input', { bubbles: true }));
+                        hEl.dispatchEvent(new Event('change', { bubbles: true }));
+                    }
+                }
             }
         } else {
             checkAutoOpen();

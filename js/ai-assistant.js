@@ -598,17 +598,22 @@
                     var dEl = document.getElementById('amtDate') || document.getElementById('aib_date');
                     if (collectedState.date && dEl) {
                         dEl.value = collectedState.date;
-                        dEl.dispatchEvent(new Event('change'));
+                        dEl.dispatchEvent(new Event('change', { bubbles: true }));
                     }
-                    var pEl = document.getElementById('amtPax') || document.getElementById('aib_pax');
+                    var pEl = document.getElementById('amtPaxInput') || document.getElementById('amtPax') || document.getElementById('aib_pax');
                     if (collectedState.pax && pEl) {
                         pEl.value = collectedState.pax;
-                        pEl.dispatchEvent(new Event('change'));
+                        pEl.dispatchEvent(new Event('change', { bubbles: true }));
+                        var pNum = parseInt(collectedState.pax, 10);
+                        if (!isNaN(pNum) && typeof window.updatePaxAndTaxis === 'function') {
+                            window.updatePaxAndTaxis(pNum);
+                        }
                     }
-                    var locEl = document.getElementById('amtPickup') || document.getElementById('aib_pickup');
+                    var locEl = document.getElementById('amtPickupHotel') || document.getElementById('amtPickup') || document.getElementById('aib_pickup');
                     if (collectedState.pickup && locEl) {
                         locEl.value = collectedState.pickup;
-                        locEl.dispatchEvent(new Event('change'));
+                        locEl.dispatchEvent(new Event('input', { bubbles: true }));
+                        locEl.dispatchEvent(new Event('change', { bubbles: true }));
                     }
                 }, 150);
             } else {

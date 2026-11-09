@@ -640,8 +640,25 @@
 
         if (typeof window.openBookingModal === 'function') {
             window.openBookingModal(tourHint);
+            setTimeout(function () {
+                if (currentPlan.travelDate) {
+                    var dEl = document.getElementById('amtDate');
+                    if (dEl) { dEl.value = currentPlan.travelDate; dEl.dispatchEvent(new Event('change', { bubbles: true })); }
+                }
+                if (currentPlan.pickup && currentPlan.pickup !== 'Mahabaleshwar Town') {
+                    var hEl = document.getElementById('amtPickupHotel') || document.getElementById('amtPickup');
+                    if (hEl) {
+                        hEl.value = currentPlan.pickup;
+                        hEl.dispatchEvent(new Event('input', { bubbles: true }));
+                        hEl.dispatchEvent(new Event('change', { bubbles: true }));
+                    }
+                }
+            }, 150);
         } else {
-            window.location.href = 'booking.html?tour=' + encodeURIComponent(tourHint);
+            var q = 'booking.html?tour=' + encodeURIComponent(tourHint);
+            if (currentPlan.travelDate) q += '&date=' + encodeURIComponent(currentPlan.travelDate);
+            if (currentPlan.pickup && currentPlan.pickup !== 'Mahabaleshwar Town') q += '&pickup=' + encodeURIComponent(currentPlan.pickup);
+            window.location.href = q;
         }
     };
 

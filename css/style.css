@@ -9646,6 +9646,10 @@ body.booking-portal-page .portal-card {
 }
 
 /* ===== Booking Engine Step 2 & Step 3 Mobile Ergonomics & Parity ===== */
+body.booking-portal-page #amtZoneNotice,
+body.booking-portal-page #amtAvailabilityBox {
+    display: none !important;
+}
 #amtZoneNotice, #amtAvailabilityBox {
     font-size: 0.68rem !important;
     line-height: 1.3 !important;
