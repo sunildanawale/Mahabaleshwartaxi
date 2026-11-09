@@ -4563,40 +4563,6 @@ input[type="checkbox"]#amtTermsCheckbox,
                             </div>
                         </div>
 
-                        <!-- Sightseeing & Travel Guidelines Accordion (Collapsed by Default) -->
-                        <div class="amt-guidelines-accordion" style="background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:10px;margin-bottom:14px;overflow:hidden;box-sizing:border-box;width:100%;">
-                            <button type="button" id="amtGuidelinesToggle" class="amt-accordion-header" aria-expanded="false" style="width:100%;padding:10px 12px;background:none;border:none;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-weight:700;font-size:0.84rem;color:#0f172a;text-align:left;box-sizing:border-box;touch-action:manipulation;-webkit-tap-highlight-color:transparent;">
-                                <div style="display:flex;align-items:center;gap:7px;">
-                                    <i class="fa-solid fa-circle-info" style="color:#0284c7;font-size:0.95rem;"></i>
-                                    <span id="amtGuidelinesTitleText">Sightseeing &amp; Travel Guidelines</span>
-                                </div>
-                                <div style="display:flex;align-items:center;gap:6px;">
-                                    <span id="amtGuidelinesToggleText" style="font-size:0.70rem;color:#0284c7;font-weight:700;background:#e0f2fe;padding:2px 7px;border-radius:10px;">Tap to View</span>
-                                    <i id="amtGuidelinesChevron" class="fa-solid fa-chevron-down" style="color:#0284c7;font-size:0.75rem;transition:transform 0.25s ease;"></i>
-                                </div>
-                            </button>
-                            <div id="amtGuidelinesBody" class="amt-accordion-content" style="display:none;padding:10px 12px 12px;border-top:1px dashed #cbd5e1;font-size:0.78rem;color:#334155;line-height:1.45;box-sizing:border-box;">
-                                <div style="display:flex;flex-direction:column;gap:8px;">
-                                    <div style="display:flex;flex-direction:column;gap:2px;">
-                                        <strong style="color:#0f172a;font-size:0.80rem;"><i class="fa-solid fa-hotel" style="color:#0284c7;width:14px;"></i> Pickup &amp; Drop:</strong>
-                                        <span style="color:#475569;font-size:0.76rem;line-height:1.4;">Complimentary pickup and drop are available for hotels located within a 2 km radius of Mahabaleshwar town. For locations beyond 2 km, additional pickup and drop charges will apply.</span>
-                                    </div>
-                                    <div style="display:flex;flex-direction:column;gap:2px;">
-                                        <strong style="color:#0f172a;font-size:0.80rem;"><i class="fa-solid fa-hand-holding-dollar" style="color:#16a34a;width:14px;"></i> Payment Terms:</strong>
-                                        <span style="color:#475569;font-size:0.76rem;line-height:1.4;">Zero advance required for local sightseeing and drops (pay 100% directly to your driver after the trip). Outstation drop transfers require advance as per schedule.</span>
-                                    </div>
-                                    <div style="display:flex;flex-direction:column;gap:2px;">
-                                        <strong style="color:#0f172a;font-size:0.80rem;"><i class="fa-solid fa-receipt" style="color:#0284c7;width:14px;"></i> Tolls &amp; Fees:</strong>
-                                        <span style="color:#475569;font-size:0.76rem;line-height:1.4;">Tolls, parking, and viewpoint entrance fees (if applicable) are paid directly as per actual receipts.</span>
-                                    </div>
-                                    <div style="display:flex;flex-direction:column;gap:2px;">
-                                        <strong style="color:#0f172a;font-size:0.80rem;"><i class="fa-solid fa-taxi" style="color:#0284c7;width:14px;"></i> Vehicle Assignment:</strong>
-                                        <span style="color:#475569;font-size:0.76rem;line-height:1.4;">All bookings are for private 4-seater tourist cabs and are subject to vehicle availability and operator confirmation.</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="amt-btn-row" style="margin-top:14px;margin-bottom:8px;display:flex;flex-direction:column;gap:8px;width:100%;">
                             <button type="button" class="amt-btn-next" id="amtToStep3" style="width:100%;padding:10px 14px;background:linear-gradient(135deg, #0284c7 0%, #0369a1 100%);color:#ffffff;border:none;border-radius:10px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;box-shadow:0 4px 12px rgba(2,132,199,0.3);box-sizing:border-box;min-height:48px;">
                                 <div class="amt-btn-main" style="display:flex;align-items:center;justify-content:center;gap:5px;width:100%;line-height:1.25;"><span style="font-size:0.90rem;font-weight:800;">Continue to Guest Details</span> <i class="fa-solid fa-arrow-right" style="font-size:0.82rem;"></i></div>
@@ -4636,6 +4602,40 @@ input[type="checkbox"]#amtTermsCheckbox,
 
                         <!-- Final Review Card -->
                         <div id="amtReviewCard" class="amt-compact-review-bar" style="margin-top:10px;"></div>
+
+                        <!-- Sightseeing & Travel Guidelines Accordion (Collapsed by Default - Positioned Above Agreement Checkbox) -->
+                        <div class="amt-guidelines-accordion" style="background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:10px;margin:12px 0 10px;overflow:hidden;box-sizing:border-box;width:100%;">
+                            <button type="button" id="amtGuidelinesToggle" class="amt-accordion-header" aria-expanded="false" style="width:100%;padding:10px 12px;background:none;border:none;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-weight:700;font-size:0.84rem;color:#0f172a;text-align:left;box-sizing:border-box;touch-action:manipulation;-webkit-tap-highlight-color:transparent;">
+                                <div style="display:flex;align-items:center;gap:7px;">
+                                    <i class="fa-solid fa-circle-info" style="color:#0284c7;font-size:0.95rem;"></i>
+                                    <span id="amtGuidelinesTitleText">Sightseeing &amp; Travel Guidelines</span>
+                                </div>
+                                <div style="display:flex;align-items:center;gap:6px;">
+                                    <span id="amtGuidelinesToggleText" style="font-size:0.70rem;color:#0284c7;font-weight:700;background:#e0f2fe;padding:2px 7px;border-radius:10px;">Tap to View</span>
+                                    <i id="amtGuidelinesChevron" class="fa-solid fa-chevron-down" style="color:#0284c7;font-size:0.75rem;transition:transform 0.25s ease;"></i>
+                                </div>
+                            </button>
+                            <div id="amtGuidelinesBody" class="amt-accordion-content" style="display:none;padding:10px 12px 12px;border-top:1px dashed #cbd5e1;font-size:0.78rem;color:#334155;line-height:1.45;box-sizing:border-box;">
+                                <div style="display:flex;flex-direction:column;gap:8px;">
+                                    <div style="display:flex;flex-direction:column;gap:2px;">
+                                        <strong style="color:#0f172a;font-size:0.80rem;"><i class="fa-solid fa-hotel" style="color:#0284c7;width:14px;"></i> Pickup &amp; Drop:</strong>
+                                        <span style="color:#475569;font-size:0.76rem;line-height:1.4;">Complimentary pickup and drop are available for hotels located within a 2 km radius of Mahabaleshwar town. For locations beyond 2 km, additional pickup and drop charges will apply.</span>
+                                    </div>
+                                    <div style="display:flex;flex-direction:column;gap:2px;">
+                                        <strong style="color:#0f172a;font-size:0.80rem;"><i class="fa-solid fa-hand-holding-dollar" style="color:#16a34a;width:14px;"></i> Payment Terms:</strong>
+                                        <span style="color:#475569;font-size:0.76rem;line-height:1.4;">Zero advance required for local sightseeing and drops (pay 100% directly to your driver after the trip). Outstation drop transfers require advance as per schedule.</span>
+                                    </div>
+                                    <div style="display:flex;flex-direction:column;gap:2px;">
+                                        <strong style="color:#0f172a;font-size:0.80rem;"><i class="fa-solid fa-receipt" style="color:#0284c7;width:14px;"></i> Tolls &amp; Fees:</strong>
+                                        <span style="color:#475569;font-size:0.76rem;line-height:1.4;">Tolls, parking, and viewpoint entrance fees (if applicable) are paid directly as per actual receipts.</span>
+                                    </div>
+                                    <div style="display:flex;flex-direction:column;gap:2px;">
+                                        <strong style="color:#0f172a;font-size:0.80rem;"><i class="fa-solid fa-taxi" style="color:#0284c7;width:14px;"></i> Vehicle Assignment:</strong>
+                                        <span style="color:#475569;font-size:0.76rem;line-height:1.4;">All bookings are for private 4-seater tourist cabs and are subject to vehicle availability and operator confirmation.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- Terms & Conditions Checkbox -->
                         <div class="amt-consent-row" style="margin:12px 0 10px;display:flex;align-items:flex-start;gap:10px;">
@@ -4770,7 +4770,7 @@ input[type="checkbox"]#amtTermsCheckbox,
     <!-- Scripts -->
     <script src="js/tour-data.js?v=134.1"></script>
     <script src="js/ai-assistant.js?v=134.1" defer></script>
-    <script src="js/booking-widget.min.js?v=148.0"></script>
+    <script src="js/booking-widget.min.js?v=149.0"></script>
     <script>
     (function() {
         var search = window.location.search || '';

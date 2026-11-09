@@ -4128,6 +4128,8 @@
 
         if (step === 2) {
             try { updateStep2SummaryAndFare(); } catch (e) {}
+        } else if (step === 3) {
+            try { renderReviewCard(); } catch (e) {}
             var gBody = document.getElementById('amtGuidelinesBody');
             if (gBody) gBody.style.display = 'none';
             var gChevron = document.getElementById('amtGuidelinesChevron');
@@ -4136,8 +4138,6 @@
             if (gText) gText.textContent = 'Tap to View';
             var gBtn = document.getElementById('amtGuidelinesToggle');
             if (gBtn) gBtn.setAttribute('aria-expanded', 'false');
-        } else if (step === 3) {
-            try { renderReviewCard(); } catch (e) {}
         }
 
         var pct = (step / totalSteps) * 100;
