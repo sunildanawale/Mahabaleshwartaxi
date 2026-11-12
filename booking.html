@@ -6081,6 +6081,143 @@
         [data-theme="dark"] .amt-accordion-content span {
             color: #94a3b8 !important;
         }
+
+        /* ============================================================
+           PROFESSIONAL UI/UX MASTER 3-STEP UNIFIED SIZE & BALANCED LAYOUT
+           ============================================================ */
+        @media (min-width: 641px) {
+            body.booking-portal-page .portal-booking-container {
+                max-width: 680px !important;
+                width: 100% !important;
+                margin: 18px auto 32px !important;
+                padding: 0 16px !important;
+                box-sizing: border-box !important;
+            }
+
+            body.booking-portal-page .portal-card,
+            body.booking-portal-page .amt-card,
+            body.booking-portal-page #amtBookingModal .amt-card {
+                max-width: 680px !important;
+                width: 100% !important;
+                min-height: 750px !important;
+                height: 750px !important;
+                display: flex !important;
+                flex-direction: column !important;
+                border-radius: 16px !important;
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45) !important;
+                border: 1.5px solid #cbd5e1 !important;
+                background: #ffffff !important;
+                box-sizing: border-box !important;
+                overflow: hidden !important;
+            }
+
+            body.booking-portal-page .portal-card-body,
+            body.booking-portal-page .amt-card-body {
+                flex: 1 1 auto !important;
+                height: calc(750px - 65px) !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: space-between !important;
+                padding: 20px 24px 20px !important;
+                box-sizing: border-box !important;
+                overflow-y: auto !important;
+            }
+
+            body.booking-portal-page #amtStep1,
+            body.booking-portal-page #amtStep2,
+            body.booking-portal-page #amtStep3 {
+                height: 100% !important;
+                min-height: 100% !important;
+                flex: 1 1 auto !important;
+                display: none;
+                flex-direction: column !important;
+                justify-content: space-between !important;
+                box-sizing: border-box !important;
+            }
+
+            body.booking-portal-page #amtStep1[style*="block"],
+            body.booking-portal-page #amtStep1[style*="flex"],
+            body.booking-portal-page #amtStep2[style*="block"],
+            body.booking-portal-page #amtStep2[style*="flex"],
+            body.booking-portal-page #amtStep3[style*="block"],
+            body.booking-portal-page #amtStep3[style*="flex"] {
+                display: flex !important;
+            }
+
+            /* Identical Button Baseline across Step 1, 2, and 3 */
+            body.booking-portal-page .amt-btn-row {
+                margin-top: auto !important;
+                padding-top: 14px !important;
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 8px !important;
+                width: 100% !important;
+                flex-shrink: 0 !important;
+            }
+
+            body.booking-portal-page .amt-btn-next,
+            body.booking-portal-page .amt-btn-confirm {
+                min-height: 48px !important;
+                height: 48px !important;
+                padding: 0 16px !important;
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                justify-content: center !important;
+            }
+
+            /* Step 2 Balanced Dual-Column Cards */
+            body.booking-portal-page .amt-step2-grid {
+                display: grid !important;
+                grid-template-columns: 1.05fr 0.95fr !important;
+                gap: 16px !important;
+                flex: 1 1 auto !important;
+                align-items: stretch !important;
+                margin-bottom: 8px !important;
+            }
+
+            body.booking-portal-page .amt-step2-col {
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: space-between !important;
+                height: 100% !important;
+                gap: 12px !important;
+            }
+
+            body.booking-portal-page .amt-trip-summary-box {
+                flex: 1 1 auto !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: space-between !important;
+                padding: 16px 18px !important;
+                margin-bottom: 0 !important;
+                background: #f8fafc !important;
+                border: 1.5px solid #e2e8f0 !important;
+                border-radius: 12px !important;
+            }
+
+            body.booking-portal-page .amt-step2-time-card {
+                background: #f8fafc !important;
+                border: 1.5px solid #e2e8f0 !important;
+                border-radius: 12px !important;
+                padding: 12px 14px !important;
+                box-sizing: border-box !important;
+                margin: 0 !important;
+                flex-shrink: 0 !important;
+            }
+
+            body.booking-portal-page .amt-fare-breakdown-card {
+                height: 100% !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: space-between !important;
+                padding: 18px 20px !important;
+                margin-bottom: 0 !important;
+                background: #ffffff !important;
+                border: 1.5px solid #e2e8f0 !important;
+                border-radius: 12px !important;
+            }
+        }
     </style>
 </head>
 
@@ -6756,7 +6893,7 @@
     <!-- Scripts -->
     <script src="js/tour-data.js?v=135.0"></script>
     <script src="js/ai-assistant.js?v=154.0" defer></script>
-    <script src="js/booking-widget.min.js?v=156.0"></script>
+    <script src="js/booking-widget.min.js?v=157.0"></script>
     <script>
         (function () {
             var search = window.location.search || '';

@@ -2574,14 +2574,11 @@
                 var hPick = document.getElementById('amtPickup');
                 if (hPick) hPick.value = hVal;
 
-                // ── Peak Season & Fleet Availability Rule Checks ──
+                // ── Peak Season & Fleet Availability Rule Checks (Seamless Non-Blocking UI) ──
                 var db = window.TOUR_DATABASE;
                 if (db && typeof db.getCabAvailability === 'function' && db.getCabAvailability() === 'sold_out') {
-                    var proceedWA = confirm('⚠️ High Peak Season Demand Notice:\n\nAll standard tourist cabs are currently marked fully booked online for ' + dVal + '.\n\nWould you like to connect directly with our Dispatch Desk on WhatsApp (+91 99228 82044) to check if a standby union cab can be arranged?');
-                    if (proceedWA) {
-                        var waMsg = 'Hello Aryan Taxi, I need cab availability for ' + dVal + ' from ' + hVal + '. Regular bookings show full/waitlist, please check if any standby taxi can be arranged.';
-                        window.open('https://api.whatsapp.com/send?phone=919922882044&text=' + encodeURIComponent(waMsg), '_blank');
-                    }
+                    var waMsg = 'Hello Aryan Taxi, I need cab availability for ' + dVal + ' from ' + hVal + '. Regular bookings show full/waitlist, please check if any standby taxi can be arranged.';
+                    window.open('https://api.whatsapp.com/send?phone=919922882044&text=' + encodeURIComponent(waMsg), '_blank');
                     return;
                 }
 
@@ -2591,25 +2588,16 @@
                     var isSingle = (bookingState.service === 'express' || (primaryTourObj && (primaryTourObj.sub_category === 'single_tour' || primaryTourObj.fare === 800))) && selectedToursList.length <= 1;
 
                     if (isSingle) {
-                        var upgradeConfirm = confirm('⚠️ Peak Season Taxi Allocation Notice:\n\n'
-                            + 'During weekends and peak season, tourist cab drivers cannot accept standalone 2.5-hour single tours (₹800) due to heavy mountain traffic and dedicated full-day bookings.\n\n'
-                            + '👉 Click OK to UPGRADE to the Full Day Combo (Tour 7 — ₹3,000) for guaranteed cab & driver allocation.\n'
-                            + '👉 Click CANCEL to add a second tour circuit (Minimum 2 tours).');
-
-                        if (upgradeConfirm) {
-                            bookingState.service = 'combo';
-                            bookingState.tourId = 'T7';
-                            if (typeof populateTourDropdownByService === 'function') {
-                                populateTourDropdownByService('combo');
-                            }
-                            var tSel = document.getElementById('amtTourSelect');
-                            if (tSel) tSel.value = 'T7';
-                            if (typeof syncSelectedToursFromPrimary === 'function') syncSelectedToursFromPrimary();
-                            if (typeof updateSelectedTourBanner === 'function') updateSelectedTourBanner('T7');
-                        } else {
-                            if (typeof addExtraTour === 'function') addExtraTour();
-                            return;
+                        // Seamlessly upgrade to Full Day Combo (Tour 7) for peak season driver allocation
+                        bookingState.service = 'combo';
+                        bookingState.tourId = 'T7';
+                        if (typeof populateTourDropdownByService === 'function') {
+                            populateTourDropdownByService('combo');
                         }
+                        var tSel = document.getElementById('amtTourSelect');
+                        if (tSel) tSel.value = 'T7';
+                        if (typeof syncSelectedToursFromPrimary === 'function') syncSelectedToursFromPrimary();
+                        if (typeof updateSelectedTourBanner === 'function') updateSelectedTourBanner('T7');
                     }
                 }
 
