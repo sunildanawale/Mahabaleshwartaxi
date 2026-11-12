@@ -4237,9 +4237,9 @@
             return;
         }
         currentStep = step;
-        var s1 = document.getElementById('amtStep1'); if (s1) s1.style.display = step === 1 ? 'block' : 'none';
-        var s2 = document.getElementById('amtStep2'); if (s2) s2.style.display = step === 2 ? 'block' : 'none';
-        var s3 = document.getElementById('amtStep3'); if (s3) s3.style.display = step === 3 ? 'block' : 'none';
+        var s1 = document.getElementById('amtStep1'); if (s1) s1.style.display = step === 1 ? 'flex' : 'none';
+        var s2 = document.getElementById('amtStep2'); if (s2) s2.style.display = step === 2 ? 'flex' : 'none';
+        var s3 = document.getElementById('amtStep3'); if (s3) s3.style.display = step === 3 ? 'flex' : 'none';
         var s4 = document.getElementById('amtStep4'); if (s4) s4.style.display = 'none';
         var sv = document.getElementById('amtStepVoucher'); if (sv) sv.style.display = 'none';
         var trustSec = document.querySelector('.portal-trust-section'); if (trustSec) trustSec.style.display = 'none';

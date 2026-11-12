@@ -296,6 +296,84 @@
             }
         }
 
+        /* ── Unified 3-Step Equal Size, Harmonious Height & Content Alignment ── */
+        @media (min-width: 641px) {
+            body.booking-portal-page .amt-card,
+            body.booking-portal-page #amtBookingModal .amt-card,
+            body.booking-portal-page .portal-card {
+                min-height: 720px !important;
+                display: flex !important;
+                flex-direction: column !important;
+                box-sizing: border-box !important;
+            }
+
+            body.booking-portal-page .portal-card-body,
+            body.booking-portal-page .amt-card-body {
+                flex: 1 1 auto !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: space-between !important;
+                padding: 20px 24px 22px !important;
+                box-sizing: border-box !important;
+            }
+
+            body.booking-portal-page #amtStep1,
+            body.booking-portal-page #amtStep2,
+            body.booking-portal-page #amtStep3 {
+                min-height: 100% !important;
+                flex: 1 1 auto !important;
+                flex-direction: column !important;
+                justify-content: space-between !important;
+                box-sizing: border-box !important;
+            }
+
+            body.booking-portal-page #amtStep1[style*="block"],
+            body.booking-portal-page #amtStep2[style*="block"],
+            body.booking-portal-page #amtStep3[style*="block"] {
+                display: flex !important;
+            }
+
+            body.booking-portal-page .amt-btn-row {
+                margin-top: auto !important;
+                padding-top: 14px !important;
+            }
+
+            body.booking-portal-page .amt-step2-grid {
+                flex: 1 1 auto !important;
+                display: grid !important;
+                grid-template-columns: 1.05fr 0.95fr !important;
+                gap: 16px !important;
+                align-items: stretch !important;
+                margin-bottom: 10px !important;
+            }
+
+            body.booking-portal-page .amt-step2-col {
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: space-between !important;
+                height: 100% !important;
+                gap: 12px !important;
+            }
+
+            body.booking-portal-page .amt-trip-summary-box {
+                flex: 1 1 auto !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: space-between !important;
+                padding: 16px 18px !important;
+                margin-bottom: 0 !important;
+            }
+
+            body.booking-portal-page .amt-fare-breakdown-card {
+                height: 100% !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: space-between !important;
+                padding: 18px 20px !important;
+                margin-bottom: 0 !important;
+            }
+        }
+
         .amt-step2-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -6326,11 +6404,11 @@
                                 </div>
 
                                 <!-- Pickup Time Selection (Section 6: Clean Time Picker) -->
-                                <div class="amt-form-group" style="margin-bottom:12px;">
-                                    <label class="amt-label" for="amtTime">Select Preferred Pickup Time *</label>
+                                <div class="amt-form-group amt-step2-time-card" style="background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:12px;padding:12px 14px;box-sizing:border-box;margin-top:auto;">
+                                    <label class="amt-label" for="amtTime" style="margin-bottom:6px;font-weight:700;"><i class="fa-regular fa-clock" style="color:#0284c7;"></i> Select Preferred Pickup Time *</label>
                                     <input type="time" id="amtTime" class="amt-input" value="09:00" required>
                                     <p id="amtDepartureAdvice"
-                                        style="font-size:0.78rem;color:#64748b;margin-top:4px;line-height:1.4;">
+                                        style="font-size:0.78rem;color:#64748b;margin-top:6px;line-height:1.4;">
                                         <i class="fa-solid fa-circle-info" style="color:#0284c7;"></i> Recommended
                                         morning departure: <strong style="white-space:nowrap;">09:00&nbsp;AM &ndash;
                                             10:00&nbsp;AM</strong> for clear valley viewpoints before afternoon mist.
@@ -6678,7 +6756,7 @@
     <!-- Scripts -->
     <script src="js/tour-data.js?v=135.0"></script>
     <script src="js/ai-assistant.js?v=154.0" defer></script>
-    <script src="js/booking-widget.min.js?v=155.0"></script>
+    <script src="js/booking-widget.min.js?v=156.0"></script>
     <script>
         (function () {
             var search = window.location.search || '';
