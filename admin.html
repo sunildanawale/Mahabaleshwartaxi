@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta name="description" content="Owner & Driver Administration Portal - Aryan Taxi Mahabaleshwar. Manage bookings, tour charges, driver fleet, and dispatch operations.">
+    <meta name="description"
+        content="Owner & Driver Administration Portal - Aryan Taxi Mahabaleshwar. Manage bookings, tour charges, driver fleet, and dispatch operations.">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
@@ -56,11 +58,11 @@
             background: var(--card-bg);
             padding: 40px;
             border-radius: 24px;
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             width: 100%;
             max-width: 420px;
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .auth-input {
@@ -113,7 +115,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -200,7 +202,7 @@
             padding: 20px;
             border-radius: 16px;
             border: 1px solid var(--border);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
             transition: transform 0.15s;
         }
 
@@ -346,7 +348,7 @@
             border-radius: 16px;
             border: 1px solid var(--border);
             overflow-x: auto;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
         }
 
         table {
@@ -389,11 +391,35 @@
             cursor: pointer;
         }
 
-        .badge-pending { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
-        .badge-confirmed { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
-        .badge-assigned { background: #dbeafe; color: #1e40af; border: 1px solid #bfdbfe; }
-        .badge-completed { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
-        .badge-cancelled { background: #fee2e2; color: #991b1b; border: 1px solid #fecdd3; }
+        .badge-pending {
+            background: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fde68a;
+        }
+
+        .badge-confirmed {
+            background: #dcfce7;
+            color: #15803d;
+            border: 1px solid #bbf7d0;
+        }
+
+        .badge-assigned {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 1px solid #bfdbfe;
+        }
+
+        .badge-completed {
+            background: #f1f5f9;
+            color: #475569;
+            border: 1px solid #cbd5e1;
+        }
+
+        .badge-cancelled {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecdd3;
+        }
 
         /* Action Buttons */
         .act-btn {
@@ -410,15 +436,53 @@
             transition: all 0.15s;
         }
 
-        .act-btn:hover { opacity: 0.9; }
-        .act-wa { background: #16a34a; color: #fff; }
-        .act-wa-followup { background: #f59e0b; color: #fff; }
-        .act-driver { background: #e0f2fe; color: #0284c7; border: 1px solid #bae6fd; }
-        .act-voucher { background: #f8fafc; color: #334155; border: 1px solid #cbd5e1; }
-        .act-edit { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
-        .act-edit:hover { background: #f59e0b; color: #fff; }
-        .act-del { background: #fee2e2; color: #ef4444; border: 1px solid #fca5a5; }
-        .act-del:hover { background: #ef4444; color: #fff; }
+        .act-btn:hover {
+            opacity: 0.9;
+        }
+
+        .act-wa {
+            background: #16a34a;
+            color: #fff;
+        }
+
+        .act-wa-followup {
+            background: #f59e0b;
+            color: #fff;
+        }
+
+        .act-driver {
+            background: #e0f2fe;
+            color: #0284c7;
+            border: 1px solid #bae6fd;
+        }
+
+        .act-voucher {
+            background: #f8fafc;
+            color: #334155;
+            border: 1px solid #cbd5e1;
+        }
+
+        .act-edit {
+            background: #fef3c7;
+            color: #b45309;
+            border: 1px solid #fde68a;
+        }
+
+        .act-edit:hover {
+            background: #f59e0b;
+            color: #fff;
+        }
+
+        .act-del {
+            background: #fee2e2;
+            color: #ef4444;
+            border: 1px solid #fca5a5;
+        }
+
+        .act-del:hover {
+            background: #ef4444;
+            color: #fff;
+        }
 
         /* Rates Manager Section Styles */
         .rates-header {
@@ -475,12 +539,12 @@
             padding: 20px;
             position: relative;
             transition: all 0.2s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
         }
 
         .rate-card:hover {
             border-color: var(--primary);
-            box-shadow: 0 8px 16px rgba(8,145,178,0.08);
+            box-shadow: 0 8px 16px rgba(8, 145, 178, 0.08);
         }
 
         .rate-card__badge {
@@ -572,7 +636,7 @@
             color: #fff;
             padding: 14px 20px;
             border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
             font-size: 0.9rem;
             font-weight: 600;
             display: none;
@@ -587,7 +651,7 @@
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(15,23,42,0.8);
+            background: rgba(15, 23, 42, 0.8);
             z-index: 99999;
             align-items: center;
             justify-content: center;
@@ -604,7 +668,7 @@
             overflow-y: auto;
             padding: 26px;
             position: relative;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
         }
 
         .modal-close {
@@ -631,7 +695,9 @@
             margin-top: 14px;
         }
 
-        .form-full { grid-column: 1 / -1; }
+        .form-full {
+            grid-column: 1 / -1;
+        }
 
         .m-label {
             font-size: 0.8rem;
@@ -709,6 +775,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <!-- AUTH PIN SCREEN -->
@@ -716,7 +783,8 @@
         <div class="auth-card">
             <img src="images/aryan-tours-logo.png" alt="Logo" width="68" style="margin-bottom: 12px;">
             <h2 style="font-size: 1.4rem; color: var(--secondary);">Aryan Taxi Mahabaleshwar</h2>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">Owner &amp; Driver Administration Portal</p>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">Owner &amp; Driver Administration
+                Portal</p>
             <input type="password" id="pinInput" class="auth-input" placeholder="Enter PIN" maxlength="6" autofocus>
             <button id="loginBtn" class="auth-btn">
                 <i class="fa-solid fa-lock"></i> Access Dashboard
@@ -735,13 +803,17 @@
                 <span>Aryan Taxi Mahabaleshwar Booking Admin</span>
             </div>
             <div style="display: flex; align-items: center; gap: 10px;">
-                <button id="syncSheetBtn" class="act-btn" style="background: #0891b2; color: #fff; padding: 9px 16px; font-size: 0.88rem;" onclick="syncFromSheet(true)">
+                <button id="syncSheetBtn" class="act-btn"
+                    style="background: #0891b2; color: #fff; padding: 9px 16px; font-size: 0.88rem;"
+                    onclick="syncFromSheet(true)">
                     <i class="fa-solid fa-arrows-rotate"></i> Sync Sheet
                 </button>
-                <button id="newBookingBtn" class="act-btn" style="background: #10b981; color: #fff; padding: 9px 16px; font-size: 0.88rem;">
+                <button id="newBookingBtn" class="act-btn"
+                    style="background: #10b981; color: #fff; padding: 9px 16px; font-size: 0.88rem;">
                     <i class="fa-solid fa-plus"></i> + New Booking
                 </button>
-                <button id="logoutBtn" style="background: rgba(255,255,255,0.15); border: none; color: #fff; padding: 9px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.88rem;">
+                <button id="logoutBtn"
+                    style="background: rgba(255,255,255,0.15); border: none; color: #fff; padding: 9px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.88rem;">
                     <i class="fa-solid fa-right-from-bracket"></i> Logout
                 </button>
             </div>
@@ -749,20 +821,25 @@
 
         <!-- MASTER NAVIGATION TABS -->
         <nav class="master-nav" id="masterNav">
-            <button type="button" class="master-tab-btn active" data-section="section-bookings" onclick="window.switchMasterSection('section-bookings', this)">
+            <button type="button" class="master-tab-btn active" data-section="section-bookings"
+                onclick="window.switchMasterSection('section-bookings', this)">
                 <i class="fa-solid fa-clipboard-list"></i> Bookings Ledger
                 <span class="master-tab-badge" id="badgeLedgerCount">0</span>
             </button>
-            <button type="button" class="master-tab-btn" data-section="section-rates" onclick="window.switchMasterSection('section-rates', this)">
+            <button type="button" class="master-tab-btn" data-section="section-rates"
+                onclick="window.switchMasterSection('section-rates', this)">
                 <i class="fa-solid fa-tags"></i> Tour Charges &amp; Rates
             </button>
-            <button type="button" class="master-tab-btn" data-section="section-fleet" onclick="window.switchMasterSection('section-fleet', this)">
+            <button type="button" class="master-tab-btn" data-section="section-fleet"
+                onclick="window.switchMasterSection('section-fleet', this)">
                 <i class="fa-solid fa-taxi"></i> Driver Fleet Directory
             </button>
-            <button type="button" class="master-tab-btn" data-section="section-analytics" onclick="window.switchMasterSection('section-analytics', this)">
+            <button type="button" class="master-tab-btn" data-section="section-analytics"
+                onclick="window.switchMasterSection('section-analytics', this)">
                 <i class="fa-solid fa-chart-line"></i> Business Analytics
             </button>
-            <button type="button" class="master-tab-btn" data-section="section-settings" onclick="window.switchMasterSection('section-settings', this)">
+            <button type="button" class="master-tab-btn" data-section="section-settings"
+                onclick="window.switchMasterSection('section-settings', this)">
                 <i class="fa-solid fa-sliders"></i> Settings &amp; Security
             </button>
         </nav>
@@ -773,7 +850,7 @@
             <!-- SECTION 1: BOOKINGS LEDGER                              -->
             <!-- ======================================================= -->
             <div id="section-bookings" class="master-section active">
-                
+
                 <!-- ADMIN AI ASSISTANT -->
                 <div class="ai-admin-box">
                     <div style="display: flex; align-items: center; justify-content: space-between;">
@@ -781,9 +858,11 @@
                             <i class="fa-solid fa-wand-magic-sparkles" style="color: #f59e0b;"></i>
                             <span>Admin AI Assistant Quick Business Query</span>
                         </div>
-                        <span style="font-size: 0.75rem; color: #0891b2; font-weight: 600;">Type question or click a chip</span>
+                        <span style="font-size: 0.75rem; color: #0891b2; font-weight: 600;">Type question or click a
+                            chip</span>
                     </div>
-                    <input type="text" id="aiAdminQuery" class="ai-admin-input" placeholder="Ask anything (e.g. 'Show tomorrow's pickups', 'How many bookings today?', 'Which tour is most popular?')">
+                    <input type="text" id="aiAdminQuery" class="ai-admin-input"
+                        placeholder="Ask anything (e.g. 'Show tomorrow's pickups', 'How many bookings today?', 'Which tour is most popular?')">
                     <div class="ai-chips">
                         <button class="ai-chip" onclick="window.runAiQuery('today')">🚕 Today's Pickups</button>
                         <button class="ai-chip" onclick="window.runAiQuery('tomorrow')">📅 Tomorrow's Schedule</button>
@@ -818,7 +897,8 @@
                 <div class="toolbar-panel">
                     <!-- Row 1: Filter Pills in a Clean Line -->
                     <div class="toolbar-row-top">
-                        <div style="display: flex; align-items: center; gap: 6px; font-weight: 700; color: #475569; font-size: 0.85rem; margin-right: 6px;">
+                        <div
+                            style="display: flex; align-items: center; gap: 6px; font-weight: 700; color: #475569; font-size: 0.85rem; margin-right: 6px;">
                             <i class="fa-solid fa-filter" style="color: var(--primary);"></i> Filter:
                         </div>
                         <div class="dash-tabs">
@@ -834,19 +914,25 @@
                     <div class="toolbar-row-bottom">
                         <div class="search-box" style="flex: 1; max-width: 420px; min-width: 250px;">
                             <i class="fa-solid fa-magnifying-glass" style="color: #94a3b8; font-size: 0.85rem;"></i>
-                            <input type="text" id="tableSearch" class="search-input" placeholder="Search name, phone, booking ID, pickup...">
+                            <input type="text" id="tableSearch" class="search-input"
+                                placeholder="Search name, phone, booking ID, pickup...">
                         </div>
                         <div class="toolbar-actions-group">
-                            <button type="button" id="exportCsvBtn" class="act-btn" style="background: #10b981; color: #fff; padding: 8px 14px; font-weight: 600; white-space: nowrap;">
+                            <button type="button" id="exportCsvBtn" class="act-btn"
+                                style="background: #10b981; color: #fff; padding: 8px 14px; font-weight: 600; white-space: nowrap;">
                                 <i class="fa-solid fa-file-excel"></i> Export CSV
                             </button>
-                            <button type="button" id="exportJsonBtn" class="act-btn" style="background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; padding: 8px 14px; font-weight: 600; white-space: nowrap;">
+                            <button type="button" id="exportJsonBtn" class="act-btn"
+                                style="background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; padding: 8px 14px; font-weight: 600; white-space: nowrap;">
                                 <i class="fa-solid fa-download"></i> JSON
                             </button>
-                            <button type="button" id="addSampleBtn" class="act-btn" style="background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; padding: 8px 14px; font-weight: 600; white-space: nowrap;">
+                            <button type="button" id="addSampleBtn" class="act-btn"
+                                style="background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; padding: 8px 14px; font-weight: 600; white-space: nowrap;">
                                 <i class="fa-solid fa-plus"></i> + Test
                             </button>
-                            <button type="button" id="clearAllBtn" class="act-btn act-del" style="padding: 8px 14px; font-weight: 600; white-space: nowrap;" title="Clear test bookings">
+                            <button type="button" id="clearAllBtn" class="act-btn act-del"
+                                style="padding: 8px 14px; font-weight: 600; white-space: nowrap;"
+                                title="Clear test bookings">
                                 <i class="fa-solid fa-trash-can"></i> Clear All
                             </button>
                         </div>
@@ -854,8 +940,9 @@
                 </div>
 
                 <!-- BOOKING TABLE -->
-                <div class="table-scroll-hint"><i class="fa-solid fa-arrows-left-right"></i> Scroll table sideways &rarr;</div>
-<div class="table-wrap">
+                <div class="table-scroll-hint"><i class="fa-solid fa-arrows-left-right"></i> Scroll table sideways
+                    &rarr;</div>
+                <div class="table-wrap">
                     <table>
                         <thead>
                             <tr>
@@ -886,42 +973,153 @@
             <!-- SECTION 2: TOUR CHARGES & RATES MANAGER (CORE FEATURE)  -->
             <!-- ======================================================= -->
             <div id="section-rates" class="master-section">
-                
+
                 <div class="rates-header">
                     <div class="rates-title">
-                        <h2><i class="fa-solid fa-hand-holding-dollar" style="color: var(--primary);"></i> Tour Charges &amp; Tariffs Manager</h2>
-                        <p>Update tour rates dynamically. Any changes saved here immediately update the website booking widget and fare estimator.</p>
+                        <h2><i class="fa-solid fa-hand-holding-dollar" style="color: var(--primary);"></i> Tour Charges
+                            &amp; Tariffs Manager</h2>
+                        <p>Update tour rates dynamically. Any changes saved here immediately update the website booking
+                            widget and fare estimator.</p>
                     </div>
                     <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                        <button id="resetRatesBtn" class="act-btn" style="background: #fee2e2; color: #991b1b; padding: 10px 16px;">
+                        <button id="resetRatesBtn" class="act-btn"
+                            style="background: #fee2e2; color: #991b1b; padding: 10px 16px;">
                             <i class="fa-solid fa-rotate-left"></i> Reset to Union Rates
                         </button>
-                        <button id="exportRatesBtn" class="act-btn" style="background: #f1f5f9; color: #334155; padding: 10px 16px;">
+                        <button id="exportRatesBtn" class="act-btn"
+                            style="background: #f1f5f9; color: #334155; padding: 10px 16px;">
                             <i class="fa-solid fa-file-code"></i> Export Config JSON
                         </button>
-                        <button id="saveAllRatesBtn" class="act-btn" style="background: var(--primary); color: #fff; padding: 10px 20px; font-size: 0.95rem;">
+                        <button id="saveAllRatesBtn" class="act-btn"
+                            style="background: var(--primary); color: #fff; padding: 10px 20px; font-size: 0.95rem;">
                             <i class="fa-solid fa-floppy-disk"></i> Save All Changes
                         </button>
+                    </div>
+                </div>
+
+                <!-- PEAK SEASON & FLEET AVAILABILITY DISPATCH CONTROLLER -->
+                <div class="peak-dispatch-card"
+                    style="background:#fff; border:2px solid #f59e0b; border-radius:16px; padding:20px; margin-bottom:20px; box-shadow: 0 4px 12px rgba(245,158,11,0.08);">
+                    <div
+                        style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+                        <div>
+                            <div
+                                style="display:inline-flex; align-items:center; gap:6px; background:#fef3c7; color:#b45309; padding:4px 10px; border-radius:20px; font-size:0.75rem; font-weight:700; text-transform:uppercase; margin-bottom:6px;">
+                                <i class="fa-solid fa-crown"></i> High Demand &amp; Shortage Solution
+                            </div>
+                            <h3 style="font-size:1.15rem; color:#1e293b; display:flex; align-items:center; gap:8px;">
+                                <i class="fa-solid fa-sliders" style="color:#d97706;"></i> Peak Season &amp; Fleet
+                                Availability Controls
+                            </h3>
+                            <p style="font-size:0.83rem; color:#64748b; margin-top:2px;">
+                                When taxis are scarce and high-demand tourists want full day cabs, enforce minimum
+                                bookings, restrict single tours, or set sold-out waitlist alerts.
+                            </p>
+                        </div>
+                        <button id="savePeakConfigBtn" class="act-btn"
+                            style="background:#d97706; color:#fff; padding:10px 18px; font-weight:700;">
+                            <i class="fa-solid fa-check"></i> Save Dispatch Rules
+                        </button>
+                    </div>
+
+                    <div
+                        style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:16px; margin-bottom:16px;">
+                        <!-- Setting 1: Peak Mode -->
+                        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:14px;">
+                            <label
+                                style="font-size:0.82rem; font-weight:700; color:#334155; display:block; margin-bottom:6px;">
+                                <i class="fa-solid fa-calendar-days" style="color:var(--primary);"></i> Peak Demand Mode
+                            </label>
+                            <select id="peakSeasonMode" class="m-input"
+                                style="width:100%; font-size:0.88rem; padding:8px 12px;">
+                                <option value="auto">Auto (Weekends &amp; Holiday Calendars)</option>
+                                <option value="always_on">🔥 Force Peak Mode ON (High Rush Period)</option>
+                                <option value="off">Off-Peak (Normal Union Rules)</option>
+                            </select>
+                            <span style="font-size:0.75rem; color:#64748b; display:block; margin-top:4px;">Auto
+                                activates for Summer (Apr-Jun), Diwali, Christmas &amp; Saturdays/Sundays.</span>
+                        </div>
+
+                        <!-- Setting 2: Cab Fleet Status -->
+                        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:14px;">
+                            <label
+                                style="font-size:0.82rem; font-weight:700; color:#334155; display:block; margin-bottom:6px;">
+                                <i class="fa-solid fa-taxi" style="color:var(--primary);"></i> Taxi Fleet Availability
+                            </label>
+                            <select id="cabAvailabilityStatus" class="m-input"
+                                style="width:100%; font-size:0.88rem; padding:8px 12px;">
+                                <option value="available">🟢 All Cabs Available (Normal Booking)</option>
+                                <option value="filling_fast">🟡 Limited Cabs • Filling Fast (Urgency Notice)</option>
+                                <option value="sold_out">🔴 Fully Booked / Sold Out (Waitlist &amp; WhatsApp Only)
+                                </option>
+                            </select>
+                            <span style="font-size:0.75rem; color:#64748b; display:block; margin-top:4px;">"Sold Out"
+                                pauses online checkout and converts leads directly to your WhatsApp desk.</span>
+                        </div>
+
+                        <!-- Setting 3: Single Tour Policy -->
+                        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:14px;">
+                            <label
+                                style="font-size:0.82rem; font-weight:700; color:#334155; display:block; margin-bottom:6px;">
+                                <i class="fa-solid fa-ban" style="color:#ef4444;"></i> Single Tour Policy (₹800 Tours)
+                            </label>
+                            <label
+                                style="display:flex; align-items:center; gap:8px; cursor:pointer; font-size:0.85rem; color:#1e293b; margin-top:4px;">
+                                <input type="checkbox" id="restrictSingleTours" checked
+                                    style="width:18px; height:18px; accent-color:#d97706;">
+                                <span>Restrict standalone single tours during Peak</span>
+                            </label>
+                            <span style="font-size:0.75rem; color:#64748b; display:block; margin-top:4px;">Forces
+                                upgrade to Full Day Combo (Tour 7) or minimum 2 tours so drivers don't refuse
+                                bookings.</span>
+                        </div>
+                    </div>
+
+                    <!-- Quick Full Day Tariff Presets -->
+                    <div
+                        style="background:#fffbeb; border:1px solid #fef3c7; border-radius:12px; padding:12px 16px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+                        <div style="font-size:0.82rem; color:#92400e;">
+                            <strong><i class="fa-solid fa-tags"></i> Quick Full Day (Tour 7) Peak Tariff:</strong>
+                            Drivers want highest tariff? Set full day package directly:
+                        </div>
+                        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                            <button type="button" class="act-btn" onclick="window.setFullDayPeakFare(3500)"
+                                style="background:#f59e0b; color:#fff; padding:6px 12px; font-size:0.8rem;">
+                                ₹3,500 (Peak Rate)
+                            </button>
+                            <button type="button" class="act-btn" onclick="window.setFullDayPeakFare(4000)"
+                                style="background:#d97706; color:#fff; padding:6px 12px; font-size:0.8rem;">
+                                ₹4,000 (Super Peak)
+                            </button>
+                            <button type="button" class="act-btn" onclick="window.setFullDayPeakFare(3000)"
+                                style="background:#e2e8f0; color:#334155; padding:6px 12px; font-size:0.8rem;">
+                                ₹3,000 (Union Base)
+                            </button>
+                        </div>
                     </div>
                 </div>
 
                 <!-- PEAK SEASON / SURGE ADJUSTER BAR -->
                 <div class="season-adjuster-bar">
                     <div>
-                        <strong style="color: #166534; font-size: 0.95rem; display: flex; align-items: center; gap: 8px;">
+                        <strong
+                            style="color: #166534; font-size: 0.95rem; display: flex; align-items: center; gap: 8px;">
                             <i class="fa-solid fa-bolt" style="color: #15803d;"></i> Quick Season / Weekend Surge Tool
                         </strong>
-                        <span style="font-size: 0.8rem; color: #15803d;">Apply a bulk hike to all sightseeing packages during peak vacation dates (Diwali, Christmas, Summer).</span>
+                        <span style="font-size: 0.8rem; color: #15803d;">Apply a bulk hike to all sightseeing packages
+                            during peak vacation dates (Diwali, Christmas, Summer).</span>
                     </div>
                     <div style="display: flex; align-items: center; gap: 8px;">
-                        <select id="seasonHikeType" class="m-input" style="width: auto; padding: 6px 12px; font-size: 0.85rem;">
+                        <select id="seasonHikeType" class="m-input"
+                            style="width: auto; padding: 6px 12px; font-size: 0.85rem;">
                             <option value="pct_10">+10% Festival Hike</option>
                             <option value="pct_15">+15% Peak Hike</option>
                             <option value="pct_20">+20% Christmas/New Year</option>
                             <option value="flat_200">+₹200 Flat Surcharge</option>
                             <option value="flat_500">+₹500 Flat Surcharge</option>
                         </select>
-                        <button id="applySeasonHikeBtn" class="act-btn" style="background: #15803d; color: #fff; padding: 8px 14px;">
+                        <button id="applySeasonHikeBtn" class="act-btn"
+                            style="background: #15803d; color: #fff; padding: 8px 14px;">
                             Apply Surge
                         </button>
                     </div>
@@ -962,21 +1160,27 @@
             <div id="section-fleet" class="master-section">
                 <div class="rates-header">
                     <div class="rates-title">
-                        <h2><i class="fa-solid fa-taxi" style="color: var(--primary);"></i> Registered Driver &amp; Cab Directory</h2>
-                        <p>Manage fellow licensed Mahabaleshwar Taxi Union colleague drivers for dispatch and duty allocation.</p>
+                        <h2><i class="fa-solid fa-taxi" style="color: var(--primary);"></i> Registered Driver &amp; Cab
+                            Directory</h2>
+                        <p>Manage fellow licensed Mahabaleshwar Taxi Union colleague drivers for dispatch and duty
+                            allocation.</p>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <button id="addDriverBtn" class="act-btn" style="background: var(--primary); color: #fff; padding: 10px 18px;">
+                        <button id="addDriverBtn" class="act-btn"
+                            style="background: var(--primary); color: #fff; padding: 10px 18px;">
                             <i class="fa-solid fa-user-plus"></i> + Add New Driver
                         </button>
-                        <button id="resetFleetBtn" type="button" onclick="window.resetFleetDefaults()" class="act-btn" style="background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; padding: 10px 14px;" title="Reset fleet to default union drivers">
+                        <button id="resetFleetBtn" type="button" onclick="window.resetFleetDefaults()" class="act-btn"
+                            style="background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; padding: 10px 14px;"
+                            title="Reset fleet to default union drivers">
                             <i class="fa-solid fa-rotate-left"></i> Reset Defaults
                         </button>
                     </div>
                 </div>
 
-                <div class="table-scroll-hint"><i class="fa-solid fa-arrows-left-right"></i> Scroll table sideways &rarr;</div>
-<div class="table-wrap">
+                <div class="table-scroll-hint"><i class="fa-solid fa-arrows-left-right"></i> Scroll table sideways
+                    &rarr;</div>
+                <div class="table-wrap">
                     <table>
                         <thead>
                             <tr>
@@ -1019,7 +1223,8 @@
                 </div>
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px;">
-                    <div style="background: #fff; border: 1.5px solid var(--border); border-radius: 16px; padding: 24px;">
+                    <div
+                        style="background: #fff; border: 1.5px solid var(--border); border-radius: 16px; padding: 24px;">
                         <h3 style="font-size: 1.1rem; color: var(--secondary); margin-bottom: 16px;">
                             <i class="fa-solid fa-star" style="color: #f59e0b;"></i> Most Popular Sightseeing Tours
                         </h3>
@@ -1028,7 +1233,8 @@
                         </div>
                     </div>
 
-                    <div style="background: #fff; border: 1.5px solid var(--border); border-radius: 16px; padding: 24px;">
+                    <div
+                        style="background: #fff; border: 1.5px solid var(--border); border-radius: 16px; padding: 24px;">
                         <h3 style="font-size: 1.1rem; color: var(--secondary); margin-bottom: 16px;">
                             <i class="fa-solid fa-chart-pie" style="color: #0284c7;"></i> Booking Status Distribution
                         </h3>
@@ -1044,67 +1250,86 @@
             <!-- ======================================================= -->
             <div id="section-settings" class="master-section">
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 20px;">
-                    
+
                     <!-- Change PIN Card -->
-                    <div style="background: #fff; border: 1.5px solid var(--border); border-radius: 16px; padding: 24px;">
+                    <div
+                        style="background: #fff; border: 1.5px solid var(--border); border-radius: 16px; padding: 24px;">
                         <h3 style="font-size: 1.15rem; color: var(--secondary); margin-bottom: 6px;">
                             <i class="fa-solid fa-key" style="color: var(--primary);"></i> Change Admin Access PIN
                         </h3>
-                        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 18px;">Update your private 4-digit dashboard passcode.</p>
+                        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 18px;">Update your
+                            private 4-digit dashboard passcode.</p>
                         <form id="changePinForm">
                             <div style="margin-bottom: 12px;">
                                 <label class="m-label">Current PIN</label>
-                                <input type="password" id="curPinInput" class="m-input" placeholder="Enter current PIN" required>
+                                <input type="password" id="curPinInput" class="m-input" placeholder="Enter current PIN"
+                                    required>
                             </div>
                             <div style="margin-bottom: 12px;">
                                 <label class="m-label">New 4-Digit PIN</label>
-                                <input type="password" id="newPinInput" class="m-input" placeholder="e.g. 5678" maxlength="6" required>
+                                <input type="password" id="newPinInput" class="m-input" placeholder="e.g. 5678"
+                                    maxlength="6" required>
                             </div>
                             <div style="margin-bottom: 18px;">
                                 <label class="m-label">Confirm New PIN</label>
-                                <input type="password" id="confPinInput" class="m-input" placeholder="Repeat new PIN" maxlength="6" required>
+                                <input type="password" id="confPinInput" class="m-input" placeholder="Repeat new PIN"
+                                    maxlength="6" required>
                             </div>
                             <button type="submit" class="auth-btn" style="padding: 11px;">Update PIN</button>
                         </form>
                     </div>
 
                     <!-- Backup & Restore Card -->
-                    <div style="background: #fff; border: 1.5px solid var(--border); border-radius: 16px; padding: 24px;">
+                    <div
+                        style="background: #fff; border: 1.5px solid var(--border); border-radius: 16px; padding: 24px;">
                         <h3 style="font-size: 1.15rem; color: var(--secondary); margin-bottom: 6px;">
-                            <i class="fa-solid fa-database" style="color: #10b981;"></i> Complete System Backup &amp; Restore
+                            <i class="fa-solid fa-database" style="color: #10b981;"></i> Complete System Backup &amp;
+                            Restore
                         </h3>
-                        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 18px;">Download a complete snapshot of all bookings, custom tour rates, and driver fleet records.</p>
-                        
-                        <button id="backupAllBtn" class="act-btn" style="width: 100%; background: #10b981; color: #fff; padding: 12px; justify-content: center; margin-bottom: 12px;">
+                        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 18px;">Download a
+                            complete snapshot of all bookings, custom tour rates, and driver fleet records.</p>
+
+                        <button id="backupAllBtn" class="act-btn"
+                            style="width: 100%; background: #10b981; color: #fff; padding: 12px; justify-content: center; margin-bottom: 12px;">
                             <i class="fa-solid fa-download"></i> Download Full System Backup (.json)
                         </button>
 
                         <div style="border-top: 1px solid var(--border); padding-top: 14px; margin-top: 14px;">
                             <label class="m-label">Restore from JSON File</label>
-                            <input type="file" id="restoreFileInput" accept=".json" class="m-input" style="padding: 8px;">
-                            <button id="restoreAllBtn" class="act-btn" style="width: 100%; background: #f1f5f9; color: #334155; padding: 11px; justify-content: center; margin-top: 8px;">
+                            <input type="file" id="restoreFileInput" accept=".json" class="m-input"
+                                style="padding: 8px;">
+                            <button id="restoreAllBtn" class="act-btn"
+                                style="width: 100%; background: #f1f5f9; color: #334155; padding: 11px; justify-content: center; margin-top: 8px;">
                                 <i class="fa-solid fa-upload"></i> Restore Data
                             </button>
                         </div>
                     </div>
 
                     <!-- Live Cloud / Google Sheets Sync Card -->
-                    <div style="background: #fff; border: 1.5px solid var(--border); border-radius: 16px; padding: 24px;">
+                    <div
+                        style="background: #fff; border: 1.5px solid var(--border); border-radius: 16px; padding: 24px;">
                         <h3 style="font-size: 1.15rem; color: var(--secondary); margin-bottom: 6px;">
-                            <i class="fa-solid fa-cloud-arrow-up" style="color: #0284c7;"></i> Google Sheets &amp; Cloud Lead Sync
+                            <i class="fa-solid fa-cloud-arrow-up" style="color: #0284c7;"></i> Google Sheets &amp; Cloud
+                            Lead Sync
                         </h3>
-                        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 18px;">Paste your Google Apps Script / Webhook URL to automatically receive all website bookings live in your Google Sheet &amp; Admin Dashboard.</p>
-                        
+                        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 18px;">Paste your Google
+                            Apps Script / Webhook URL to automatically receive all website bookings live in your Google
+                            Sheet &amp; Admin Dashboard.</p>
+
                         <div style="margin-bottom: 12px;">
                             <label class="m-label">Google Apps Script Webhook URL</label>
-                            <input type="url" id="webhookUrlInput" class="m-input" placeholder="https://script.google.com/macros/s/.../exec">
+                            <input type="url" id="webhookUrlInput" class="m-input"
+                                placeholder="https://script.google.com/macros/s/.../exec">
                         </div>
 
-                        <button id="saveWebhookBtn" onclick="window.saveWebhookConfig()" class="act-btn" style="width: 100%; background: #0891b2; color: #fff; padding: 11px; justify-content: center; margin-bottom: 10px;">
+                        <button id="saveWebhookBtn" onclick="window.saveWebhookConfig()" class="act-btn"
+                            style="width: 100%; background: #0891b2; color: #fff; padding: 11px; justify-content: center; margin-bottom: 10px;">
                             <i class="fa-solid fa-floppy-disk"></i> Save Webhook URL
                         </button>
-                        
-                        <div id="webhookStatusMsg" style="font-size: 0.8rem; color: #166534; font-weight: 600; display: none;">✓ Webhook URL saved successfully!</div>
+
+                        <div id="webhookStatusMsg"
+                            style="font-size: 0.8rem; color: #166534; font-weight: 600; display: none;">✓ Webhook URL
+                            saved successfully!</div>
                     </div>
 
                 </div>
@@ -1142,18 +1367,22 @@
                 </div>
                 <div class="form-full">
                     <label class="m-label">Vehicle Model</label>
-                    <input type="text" id="dmVehicleModel" class="m-input" value="Black &amp; Yellow Tourist Taxi (Non-AC)">
+                    <input type="text" id="dmVehicleModel" class="m-input"
+                        value="Black &amp; Yellow Tourist Taxi (Non-AC)">
                 </div>
             </div>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 16px;">
-                <button type="button" id="dmSendDriverWa" class="act-btn act-wa" style="padding: 10px; justify-content: center;">
+                <button type="button" id="dmSendDriverWa" class="act-btn act-wa"
+                    style="padding: 10px; justify-content: center;">
                     <i class="fa-brands fa-whatsapp"></i> Send Trip to Driver
                 </button>
-                <button type="button" id="dmSendCustWa" class="act-btn act-wa" style="padding: 10px; justify-content: center; background: #0284c7;">
+                <button type="button" id="dmSendCustWa" class="act-btn act-wa"
+                    style="padding: 10px; justify-content: center; background: #0284c7;">
                     <i class="fa-brands fa-whatsapp"></i> Notify Customer
                 </button>
             </div>
-            <button type="button" id="dmBroadcastCircleBtn" class="act-btn" style="width: 100%; margin-top: 8px; padding: 11px; justify-content: center; background: #0891b2; color: #fff; font-weight: 700;">
+            <button type="button" id="dmBroadcastCircleBtn" class="act-btn"
+                style="width: 100%; margin-top: 8px; padding: 11px; justify-content: center; background: #0891b2; color: #fff; font-weight: 700;">
                 <i class="fa-solid fa-users"></i> Broadcast Duty Slip to Driver Circle WhatsApp Group
             </button>
             <button type="button" id="dmSaveBtn" class="auth-btn" style="margin-top: 12px; padding: 11px;">
@@ -1169,7 +1398,8 @@
             <h3 style="font-size: 1.15rem; color: #0f172a; margin-bottom: 4px;">
                 <i class="fa-solid fa-user-plus" style="color: var(--primary);"></i> Add Registered Union Driver
             </h3>
-            <p style="font-size: 0.8rem; color: #64748b;">Save a licensed driver and cab to your quick-dispatch fleet.</p>
+            <p style="font-size: 0.8rem; color: #64748b;">Save a licensed driver and cab to your quick-dispatch fleet.
+            </p>
             <form id="addDriverForm" class="form-grid">
                 <div class="form-full">
                     <label class="m-label">Driver Full Name *</label>
@@ -1185,7 +1415,8 @@
                 </div>
                 <div>
                     <label class="m-label">Cab Model</label>
-                    <input type="text" id="newDriverVehModel" class="m-input" value="Black &amp; Yellow Tourist Taxi (4-Seater)">
+                    <input type="text" id="newDriverVehModel" class="m-input"
+                        value="Black &amp; Yellow Tourist Taxi (4-Seater)">
                 </div>
                 <div>
                     <label class="m-label">Cab Status</label>
@@ -1209,7 +1440,8 @@
             <h3 style="font-size: 1.15rem; color: #0f172a; margin-bottom: 4px;">
                 <i class="fa-solid fa-user-pen" style="color: var(--primary);"></i> Edit Driver Details
             </h3>
-            <p style="font-size: 0.8rem; color: #64748b;">Update driver name, phone, cab registration, or duty status.</p>
+            <p style="font-size: 0.8rem; color: #64748b;">Update driver name, phone, cab registration, or duty status.
+            </p>
             <form id="editDriverForm" class="form-grid">
                 <input type="hidden" id="editDriverId">
                 <div class="form-full">
@@ -1226,7 +1458,8 @@
                 </div>
                 <div>
                     <label class="m-label">Cab Model</label>
-                    <input type="text" id="editDriverVehModel" class="m-input" placeholder="e.g. Black &amp; Yellow Tourist Taxi">
+                    <input type="text" id="editDriverVehModel" class="m-input"
+                        placeholder="e.g. Black &amp; Yellow Tourist Taxi">
                 </div>
                 <div>
                     <label class="m-label">Cab Status</label>
@@ -1237,7 +1470,8 @@
                     </select>
                 </div>
                 <div class="form-full">
-                    <button type="submit" class="auth-btn" style="margin-top: 10px; background: #0284c7;">Update Driver Details</button>
+                    <button type="submit" class="auth-btn" style="margin-top: 10px; background: #0284c7;">Update Driver
+                        Details</button>
                 </div>
             </form>
         </div>
@@ -1291,25 +1525,31 @@
             <button class="modal-close" onclick="window.closeModals()">&times;</button>
             <div id="voucherModalBody"></div>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px;">
-                <button type="button" id="vmSendWaBtn" class="act-btn act-wa" style="padding: 10px; justify-content: center; background: #10b981; color: #ffffff; font-weight: 700;">
+                <button type="button" id="vmSendWaBtn" class="act-btn act-wa"
+                    style="padding: 10px; justify-content: center; background: #10b981; color: #ffffff; font-weight: 700;">
                     <i class="fa-brands fa-whatsapp"></i> Share on WhatsApp
                 </button>
-                <button type="button" id="vmDownloadPdfBtn" class="act-btn" style="padding: 10px; justify-content: center; background: #0891b2; color: #ffffff; font-weight: 700;">
+                <button type="button" id="vmDownloadPdfBtn" class="act-btn"
+                    style="padding: 10px; justify-content: center; background: #0891b2; color: #ffffff; font-weight: 700;">
                     <i class="fa-solid fa-file-pdf"></i> Download PDF
                 </button>
             </div>
             <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 8px;">
-                <button type="button" id="vmSendEmailBtn" class="act-btn" style="padding: 9px; justify-content: center; background: #f0f9ff; color: #0284c7; border: 1px solid #bae6fd; font-weight: 600;">
+                <button type="button" id="vmSendEmailBtn" class="act-btn"
+                    style="padding: 9px; justify-content: center; background: #f0f9ff; color: #0284c7; border: 1px solid #bae6fd; font-weight: 600;">
                     <i class="fa-solid fa-envelope"></i> Email
                 </button>
-                <button type="button" id="vmSendSmsBtn" class="act-btn" style="padding: 9px; justify-content: center; background: #f8fafc; color: #475569; border: 1px solid #cbd5e1; font-weight: 600;">
+                <button type="button" id="vmSendSmsBtn" class="act-btn"
+                    style="padding: 9px; justify-content: center; background: #f8fafc; color: #475569; border: 1px solid #cbd5e1; font-weight: 600;">
                     <i class="fa-solid fa-comment-sms"></i> SMS
                 </button>
-                <button type="button" class="act-btn act-voucher" onclick="window.print()" style="padding: 9px; justify-content: center; font-weight: 600;">
+                <button type="button" class="act-btn act-voucher" onclick="window.print()"
+                    style="padding: 9px; justify-content: center; font-weight: 600;">
                     <i class="fa-solid fa-print"></i> Print
                 </button>
             </div>
-            <button type="button" class="act-btn" onclick="window.closeModals()" style="width: 100%; margin-top: 8px; background: #f1f5f9; color: #334155; padding: 9px; justify-content: center; font-weight: 600;">
+            <button type="button" class="act-btn" onclick="window.closeModals()"
+                style="width: 100%; margin-top: 8px; background: #f1f5f9; color: #334155; padding: 9px; justify-content: center; font-weight: 600;">
                 Close
             </button>
         </div>
@@ -1322,9 +1562,9 @@
     </div>
 
     <!-- Scripts -->
-    <script src="js/tour-data.js?v=98.0"></script>
+    <script src="js/tour-data.js?v=99.0"></script>
     <script>
-        (function() {
+        (function () {
             'use strict';
 
             var defaultPin = "2044";
@@ -1377,8 +1617,8 @@
             }
 
             loginBtn.addEventListener('click', unlock);
-            pinInput.addEventListener('keypress', function(e) { if (e.key === 'Enter') unlock(); });
-            logoutBtn.addEventListener('click', function() {
+            pinInput.addEventListener('keypress', function (e) { if (e.key === 'Enter') unlock(); });
+            logoutBtn.addEventListener('click', function () {
                 sessionStorage.removeItem('amt_admin_logged');
                 location.reload();
             });
@@ -1394,18 +1634,18 @@
                 var toast = document.getElementById('adminToast');
                 document.getElementById('toastMsg').textContent = msg;
                 toast.style.display = 'inline-flex';
-                setTimeout(function() {
+                setTimeout(function () {
                     toast.style.display = 'none';
                 }, 3500);
             }
 
             // --- MASTER SECTION TAB SWITCHING (ROBUST GLOBAL CONTROLLER) ---
-            window.switchMasterSection = function(targetSection, btnEl) {
+            window.switchMasterSection = function (targetSection, btnEl) {
                 var masterTabs = document.querySelectorAll('.master-tab-btn');
                 var masterSections = document.querySelectorAll('.master-section');
 
-                masterTabs.forEach(function(t) { t.classList.remove('active'); });
-                masterSections.forEach(function(s) { 
+                masterTabs.forEach(function (t) { t.classList.remove('active'); });
+                masterSections.forEach(function (s) {
                     s.classList.remove('active');
                     s.style.display = 'none';
                 });
@@ -1431,15 +1671,15 @@
 
             // Also attach click listener via querySelectorAll for backwards compatibility
             var masterTabs = document.querySelectorAll('.master-tab-btn');
-            masterTabs.forEach(function(tab) {
-                tab.addEventListener('click', function() {
+            masterTabs.forEach(function (tab) {
+                tab.addEventListener('click', function () {
                     var targetSection = tab.getAttribute('data-section');
                     if (targetSection) window.switchMasterSection(targetSection, tab);
                 });
             });
 
             // --- LEDGER HELPERS ---
-            window.saveWebhookConfig = function() {
+            window.saveWebhookConfig = function () {
                 var input = document.getElementById('webhookUrlInput');
                 var msg = document.getElementById('webhookStatusMsg');
                 if (input) {
@@ -1448,7 +1688,7 @@
                     window.AMT_LEAD_WEBHOOK_URL = val;
                     if (msg) {
                         msg.style.display = 'block';
-                        setTimeout(function() { msg.style.display = 'none'; }, 3000);
+                        setTimeout(function () { msg.style.display = 'none'; }, 3000);
                     }
                 }
             };
@@ -1467,7 +1707,7 @@
             function getBookings() {
                 try {
                     return JSON.parse(localStorage.getItem('amt_bookings') || '[]');
-                } catch(e) {
+                } catch (e) {
                     return [];
                 }
             }
@@ -1480,8 +1720,8 @@
                     btn.disabled = true;
                 }
                 fetch(WEBHOOK_URL + '?action=get_bookings')
-                    .then(function(res) { return res.json(); })
-                    .then(function(data) {
+                    .then(function (res) { return res.json(); })
+                    .then(function (data) {
                         if (btn) {
                             btn.innerHTML = '<i class="fa-solid fa-arrows-rotate"></i> Sync Sheet';
                             btn.disabled = false;
@@ -1489,8 +1729,8 @@
                         if (data && data.result === 'success' && Array.isArray(data.bookings) && data.bookings.length > 0) {
                             var current = getBookings();
                             var map = {};
-                            current.forEach(function(b) { if (b.bookingId || b.id) map[b.bookingId || b.id] = b; });
-                            data.bookings.forEach(function(row) {
+                            current.forEach(function (b) { if (b.bookingId || b.id) map[b.bookingId || b.id] = b; });
+                            data.bookings.forEach(function (row) {
                                 var bId = row.bookingId;
                                 if (!bId) return;
                                 var existing = map[bId] || {};
@@ -1513,7 +1753,7 @@
                                     fare: row.fare ? String(row.fare).replace(/[^0-9]/g, '') : (existing.fare || '1200'),
                                     notes: row.notes || existing.notes || '',
                                     remarks: row.remarks || existing.remarks || '',
-                                    status: (function(st) {
+                                    status: (function (st) {
                                         if (!st) return 'pending';
                                         var u = String(st).toUpperCase();
                                         if (u === 'CONFIRMED') return 'confirmed';
@@ -1532,7 +1772,7 @@
                             alert('Google Sheet is currently empty or online.');
                         }
                     })
-                    .catch(function(err) {
+                    .catch(function (err) {
                         if (btn) {
                             btn.innerHTML = '<i class="fa-solid fa-arrows-rotate"></i> Sync Sheet';
                             btn.disabled = false;
@@ -1555,7 +1795,7 @@
                 var tomorrowCount = 0;
                 var totalRev = 0;
 
-                bookings.forEach(function(b) {
+                bookings.forEach(function (b) {
                     if (b.date === todayStr && b.status !== 'cancelled') todayCount++;
                     if (b.date === tomorrowStr && b.status !== 'cancelled') tomorrowCount++;
                     var db = window.TOUR_DATABASE;
@@ -1584,7 +1824,7 @@
                 var tm = new Date(); tm.setDate(tm.getDate() + 1);
                 var tomorrowStr = tm.toISOString().split('T')[0];
 
-                var filtered = bookings.filter(function(b) {
+                var filtered = bookings.filter(function (b) {
                     if (filter === 'today' && b.date !== todayStr) return false;
                     if (filter === 'tomorrow' && b.date !== tomorrowStr) return false;
                     if (filter === 'upcoming' && b.date < todayStr) return false;
@@ -1610,7 +1850,7 @@
                 }
 
                 var db = window.TOUR_DATABASE;
-                tbody.innerHTML = filtered.map(function(b) {
+                tbody.innerHTML = filtered.map(function (b) {
                     var t = db ? db.getTourById(b.tourId) : null;
                     var tourName = t ? t.name : (b.tourId || 'Tour 1');
                     var fare = t ? t.fare : 1200;
@@ -1681,9 +1921,9 @@
             }
 
             // Status toggle
-            window.toggleStatus = function(id) {
+            window.toggleStatus = function (id) {
                 var list = getBookings();
-                var b = list.find(function(item) { return item.bookingId === id; });
+                var b = list.find(function (item) { return item.bookingId === id; });
                 if (!b) return;
 
                 var current = b.status || 'pending';
@@ -1699,9 +1939,9 @@
                 loadDashboard();
             };
 
-            window.deleteBooking = function(id) {
+            window.deleteBooking = function (id) {
                 if (!confirm("Are you sure you want to delete booking " + id + "?")) return;
-                var list = getBookings().filter(function(b) { return b.bookingId !== id; });
+                var list = getBookings().filter(function (b) { return b.bookingId !== id; });
                 saveBookings(list);
                 loadDashboard();
                 showToast('Booking ' + id + ' deleted.');
@@ -1710,7 +1950,7 @@
             // Event Delegation for Table Actions (Assign Driver, View Voucher, Delete, Toggle Status)
             var bTableBody = document.getElementById('bookingTableBody');
             if (bTableBody) {
-                bTableBody.addEventListener('click', function(e) {
+                bTableBody.addEventListener('click', function (e) {
                     var actionEl = e.target.closest('[data-action]');
                     if (!actionEl) return;
                     var action = actionEl.getAttribute('data-action');
@@ -1741,9 +1981,9 @@
                 var localGrid = document.getElementById('localDropsRatesGrid');
                 var outstationGrid = document.getElementById('outstationRatesGrid');
 
-                var sightseeingTours = db.tours.filter(function(t) { return t.category === 'sightseeing' || t.category === 'combo'; });
-                var localDrops = db.tours.filter(function(t) { return t.category === 'local_drop'; });
-                var outstationDrops = db.tours.filter(function(t) { return t.category === 'outstation'; });
+                var sightseeingTours = db.tours.filter(function (t) { return t.category === 'sightseeing' || t.category === 'combo'; });
+                var localDrops = db.tours.filter(function (t) { return t.category === 'local_drop'; });
+                var outstationDrops = db.tours.filter(function (t) { return t.category === 'outstation'; });
 
                 // Render helper
                 function createCard(t) {
@@ -1769,9 +2009,31 @@
                 if (sightseeingGrid) sightseeingGrid.innerHTML = sightseeingTours.map(createCard).join('');
                 if (localGrid) localGrid.innerHTML = localDrops.map(createCard).join('');
                 if (outstationGrid) outstationGrid.innerHTML = outstationDrops.map(createCard).join('');
+
+                // Populate Peak Season Dispatch Controls
+                if (db && typeof db.loadPeakConfig === 'function') {
+                    var pCfg = db.loadPeakConfig();
+                    var modeEl = document.getElementById('peakSeasonMode');
+                    var availEl = document.getElementById('cabAvailabilityStatus');
+                    var singleEl = document.getElementById('restrictSingleTours');
+
+                    if (modeEl && pCfg.mode) modeEl.value = pCfg.mode;
+                    if (availEl && pCfg.cabAvailability) availEl.value = pCfg.cabAvailability;
+                    if (singleEl) singleEl.checked = (pCfg.restrictSingleTours !== false);
+                }
             }
 
-            window.revertSingleRate = function(tourId, defaultFare) {
+            window.setFullDayPeakFare = function (fare) {
+                var input = document.querySelector('.tour-rate-input[data-tour-id="T7"]');
+                if (input) {
+                    input.value = fare;
+                    input.style.borderColor = '#d97706';
+                    input.style.backgroundColor = '#fffbeb';
+                    showToast('Full Day Combo (Tour 7) rate set to ₹' + Number(fare).toLocaleString('en-IN') + '. Click "Save All Changes" to activate on website.');
+                }
+            };
+
+            window.revertSingleRate = function (tourId, defaultFare) {
                 var input = document.querySelector('.tour-rate-input[data-tour-id="' + tourId + '"]');
                 if (input) {
                     input.value = defaultFare;
@@ -1780,10 +2042,10 @@
             };
 
             // Save all rates button
-            document.getElementById('saveAllRatesBtn').addEventListener('click', function() {
+            document.getElementById('saveAllRatesBtn').addEventListener('click', function () {
                 var inputs = document.querySelectorAll('.tour-rate-input');
                 var ratesMap = {};
-                inputs.forEach(function(inp) {
+                inputs.forEach(function (inp) {
                     var id = inp.getAttribute('data-tour-id');
                     var val = parseInt(inp.value, 10);
                     if (id && !isNaN(val) && val > 0) {
@@ -1799,7 +2061,7 @@
             });
 
             // Reset to Union Rates
-            document.getElementById('resetRatesBtn').addEventListener('click', function() {
+            document.getElementById('resetRatesBtn').addEventListener('click', function () {
                 if (confirm("Reset all tour fares back to official Mahabaleshwar Taxi Union rate sheet?")) {
                     if (window.TOUR_DATABASE) {
                         window.TOUR_DATABASE.resetToDefaultRates();
@@ -1811,7 +2073,7 @@
             });
 
             // Apply Season Hike
-            document.getElementById('applySeasonHikeBtn').addEventListener('click', function() {
+            document.getElementById('applySeasonHikeBtn').addEventListener('click', function () {
                 var type = document.getElementById('seasonHikeType').value;
                 var db = window.TOUR_DATABASE;
                 if (!db) return;
@@ -1820,7 +2082,7 @@
                 var defaults = db.getDefaultRates();
 
                 var inputs = document.querySelectorAll('#sightseeingRatesGrid .tour-rate-input');
-                inputs.forEach(function(inp) {
+                inputs.forEach(function (inp) {
                     var id = inp.getAttribute('data-tour-id');
                     var base = defaults[id] || parseInt(inp.value, 10);
                     var newFare = base;
@@ -1838,11 +2100,11 @@
             });
 
             // Export Config JSON
-            document.getElementById('exportRatesBtn').addEventListener('click', function() {
+            document.getElementById('exportRatesBtn').addEventListener('click', function () {
                 var db = window.TOUR_DATABASE;
                 var data = {
                     updatedAt: new Date().toISOString(),
-                    tours: db.tours.map(function(t) {
+                    tours: db.tours.map(function (t) {
                         return { id: t.id, name: t.name, fare: t.fare, duration: t.duration };
                     })
                 };
@@ -1853,6 +2115,30 @@
                 a.click();
             });
 
+            // Save Peak Season & Fleet Availability Dispatch Config
+            var savePeakBtn = document.getElementById('savePeakConfigBtn');
+            if (savePeakBtn) {
+                savePeakBtn.addEventListener('click', function () {
+                    var db = window.TOUR_DATABASE;
+                    if (!db) return;
+
+                    var modeEl = document.getElementById('peakSeasonMode');
+                    var availEl = document.getElementById('cabAvailabilityStatus');
+                    var singleEl = document.getElementById('restrictSingleTours');
+
+                    var cfg = {
+                        mode: modeEl ? modeEl.value : 'auto',
+                        cabAvailability: availEl ? availEl.value : 'available',
+                        restrictSingleTours: singleEl ? singleEl.checked : true
+                    };
+
+                    if (typeof db.savePeakConfig === 'function') {
+                        db.savePeakConfig(cfg);
+                        showToast('✓ Peak Season & Fleet Dispatch settings saved successfully!');
+                    }
+                });
+            }
+
             // --- SECTION 3: DRIVER FLEET DIRECTORY ---
             function getFleet() {
                 try {
@@ -1861,13 +2147,13 @@
                         var parsed = JSON.parse(stored);
                         if (Array.isArray(parsed)) {
                             // Ensure each driver has a stable unique ID
-                            parsed.forEach(function(d, idx) {
+                            parsed.forEach(function (d, idx) {
                                 if (!d.id) d.id = 'drv_' + (idx + 1) + '_' + Math.random().toString(36).substr(2, 5);
                             });
                             return parsed;
                         }
                     }
-                } catch(e) {}
+                } catch (e) { }
                 var initial = JSON.parse(JSON.stringify(defaultFleet));
                 saveFleet(initial);
                 return initial;
@@ -1876,7 +2162,7 @@
             function saveFleet(fleet) {
                 try {
                     localStorage.setItem('amt_driver_fleet', JSON.stringify(fleet || []));
-                } catch(e) {}
+                } catch (e) { }
             }
 
             function renderFleetTable() {
@@ -1895,7 +2181,7 @@
                         + '</div>'
                         + '</td></tr>';
                 } else {
-                    tbody.innerHTML = fleet.map(function(d) {
+                    tbody.innerHTML = fleet.map(function (d) {
                         var pClean = (d.phone || '').replace(/\D/g, '');
                         var statusCls = (d.status === 'On Tour') ? 'badge-pending' : ((d.status === 'Off Duty') ? 'badge-cancelled' : 'badge-confirmed');
                         var statusIcon = (d.status === 'On Tour') ? 'fa-clock' : ((d.status === 'Off Duty') ? 'fa-ban' : 'fa-circle-check');
@@ -1922,7 +2208,7 @@
                 var dmSelect = document.getElementById('dmDriverSelect');
                 if (dmSelect) {
                     dmSelect.innerHTML = '<option value="">-- Choose from saved fleet --</option>'
-                        + fleet.map(function(d) {
+                        + fleet.map(function (d) {
                             return '<option value="' + escapeHtml(d.name) + '|' + escapeHtml(d.phone) + '|' + escapeHtml(d.vehicleNo) + '|' + escapeHtml(d.model || '') + '">' + escapeHtml(d.name) + ' (' + escapeHtml(d.vehicleNo) + ')</option>';
                         }).join('');
                 }
@@ -1932,21 +2218,21 @@
                 if (analyticsCount) analyticsCount.textContent = fleet.length;
             }
 
-            window.deleteDriver = function(driverId) {
+            window.deleteDriver = function (driverId) {
                 var fleet = getFleet();
-                var d = fleet.find(function(item) { return item.id === driverId; });
+                var d = fleet.find(function (item) { return item.id === driverId; });
                 var dName = d ? d.name : 'this driver';
                 if (!confirm('Remove "' + dName + '" from driver fleet?')) return;
 
-                fleet = fleet.filter(function(item) { return item.id !== driverId; });
+                fleet = fleet.filter(function (item) { return item.id !== driverId; });
                 saveFleet(fleet);
                 renderFleetTable();
                 showToast('✓ Driver "' + dName + '" removed from fleet.');
             };
 
-            window.openEditDriverModal = function(driverId) {
+            window.openEditDriverModal = function (driverId) {
                 var fleet = getFleet();
-                var d = fleet.find(function(item) { return item.id === driverId; });
+                var d = fleet.find(function (item) { return item.id === driverId; });
                 if (!d) return;
 
                 document.getElementById('editDriverId').value = d.id;
@@ -1961,11 +2247,11 @@
 
             var editDriverForm = document.getElementById('editDriverForm');
             if (editDriverForm) {
-                editDriverForm.addEventListener('submit', function(e) {
+                editDriverForm.addEventListener('submit', function (e) {
                     e.preventDefault();
                     var driverId = document.getElementById('editDriverId').value;
                     var fleet = getFleet();
-                    var d = fleet.find(function(item) { return item.id === driverId; });
+                    var d = fleet.find(function (item) { return item.id === driverId; });
                     if (!d) return;
 
                     d.name = document.getElementById('editDriverName').value.trim();
@@ -1981,7 +2267,7 @@
                 });
             }
 
-            window.resetFleetDefaults = function() {
+            window.resetFleetDefaults = function () {
                 if (!confirm("Reset fleet list back to default union drivers? (This will restore default registered cabs)")) return;
                 var initial = JSON.parse(JSON.stringify(defaultFleet));
                 saveFleet(initial);
@@ -1989,7 +2275,7 @@
                 showToast('✓ Fleet reset to default union drivers.');
             };
 
-            window.selectFleetDriver = function(val) {
+            window.selectFleetDriver = function (val) {
                 if (!val) return;
                 var parts = val.split('|');
                 if (parts.length >= 3) {
@@ -2002,14 +2288,14 @@
 
             var addDriverBtn = document.getElementById('addDriverBtn');
             if (addDriverBtn) {
-                addDriverBtn.addEventListener('click', function() {
+                addDriverBtn.addEventListener('click', function () {
                     document.getElementById('addDriverModal').style.display = 'flex';
                 });
             }
 
             var addDriverForm = document.getElementById('addDriverForm');
             if (addDriverForm) {
-                addDriverForm.addEventListener('submit', function(e) {
+                addDriverForm.addEventListener('submit', function (e) {
                     e.preventDefault();
                     var newD = {
                         id: 'drv_' + Date.now(),
@@ -2032,8 +2318,8 @@
             // --- SECTION 4: ANALYTICS RENDER ---
             function renderAnalytics() {
                 var bookings = getBookings();
-                var completed = bookings.filter(function(b) { return b.status === 'completed'; }).length;
-                var cancelled = bookings.filter(function(b) { return b.status === 'cancelled'; }).length;
+                var completed = bookings.filter(function (b) { return b.status === 'completed'; }).length;
+                var cancelled = bookings.filter(function (b) { return b.status === 'cancelled'; }).length;
                 var fleet = getFleet();
 
                 document.getElementById('analyticsCompleted').textContent = completed;
@@ -2042,13 +2328,13 @@
 
                 // Tour demand stats
                 var tourCounts = {};
-                bookings.forEach(function(b) {
+                bookings.forEach(function (b) {
                     var tid = b.tourId || 'T1';
                     tourCounts[tid] = (tourCounts[tid] || 0) + 1;
                 });
 
                 var db = window.TOUR_DATABASE;
-                var sortedTours = Object.keys(tourCounts).sort(function(a,b) { return tourCounts[b] - tourCounts[a]; });
+                var sortedTours = Object.keys(tourCounts).sort(function (a, b) { return tourCounts[b] - tourCounts[a]; });
                 var demandContainer = document.getElementById('tourDemandStats');
 
                 if (demandContainer) {
@@ -2056,7 +2342,7 @@
                         demandContainer.innerHTML = '<p style="color:var(--text-muted);font-size:0.85rem;">No booking history yet to generate demand charts.</p>';
                     } else {
                         var max = tourCounts[sortedTours[0]] || 1;
-                        demandContainer.innerHTML = sortedTours.slice(0, 5).map(function(tid) {
+                        demandContainer.innerHTML = sortedTours.slice(0, 5).map(function (tid) {
                             var t = db ? db.getTourById(tid) : null;
                             var tName = t ? t.name : tid;
                             var count = tourCounts[tid];
@@ -2077,17 +2363,17 @@
                 var statContainer = document.getElementById('statusDistributionStats');
                 if (statContainer) {
                     var total = bookings.length || 1;
-                    var confCount = bookings.filter(function(b){ return (b.status||'confirmed') === 'confirmed'; }).length;
-                    var assignCount = bookings.filter(function(b){ return b.status === 'assigned'; }).length;
-                    var compCount = bookings.filter(function(b){ return b.status === 'completed'; }).length;
-                    var cancCount = bookings.filter(function(b){ return b.status === 'cancelled'; }).length;
+                    var confCount = bookings.filter(function (b) { return (b.status || 'confirmed') === 'confirmed'; }).length;
+                    var assignCount = bookings.filter(function (b) { return b.status === 'assigned'; }).length;
+                    var compCount = bookings.filter(function (b) { return b.status === 'completed'; }).length;
+                    var cancCount = bookings.filter(function (b) { return b.status === 'cancelled'; }).length;
 
                     statContainer.innerHTML = [
                         { label: 'Confirmed (Pending Driver)', count: confCount, color: '#10b981' },
                         { label: 'Driver Assigned (Ready)', count: assignCount, color: '#0284c7' },
                         { label: 'Completed Trips', count: compCount, color: '#64748b' },
                         { label: 'Cancelled', count: cancCount, color: '#ef4444' }
-                    ].map(function(st) {
+                    ].map(function (st) {
                         var p = Math.round((st.count / total) * 100);
                         return '<div>'
                             + '<div style="display:flex;justify-content:space-between;font-size:0.85rem;font-weight:700;margin-bottom:4px;">'
@@ -2102,7 +2388,7 @@
             }
 
             // --- SECTION 5: SETTINGS & SECURITY ---
-            document.getElementById('changePinForm').addEventListener('submit', function(e) {
+            document.getElementById('changePinForm').addEventListener('submit', function (e) {
                 e.preventDefault();
                 var cur = document.getElementById('curPinInput').value.trim();
                 var nw = document.getElementById('newPinInput').value.trim();
@@ -2128,7 +2414,7 @@
             });
 
             // Backup all
-            document.getElementById('backupAllBtn').addEventListener('click', function() {
+            document.getElementById('backupAllBtn').addEventListener('click', function () {
                 var fullBackup = {
                     version: "2026-v2",
                     timestamp: new Date().toISOString(),
@@ -2144,14 +2430,14 @@
             });
 
             // Restore all
-            document.getElementById('restoreAllBtn').addEventListener('click', function() {
+            document.getElementById('restoreAllBtn').addEventListener('click', function () {
                 var fileInp = document.getElementById('restoreFileInput');
                 if (!fileInp.files.length) {
                     alert('Please select a valid backup .json file to restore.');
                     return;
                 }
                 var reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = function (e) {
                     try {
                         var parsed = JSON.parse(e.target.result);
                         if (parsed.bookings) localStorage.setItem('amt_bookings', JSON.stringify(parsed.bookings));
@@ -2160,7 +2446,7 @@
                         if (window.TOUR_DATABASE) window.TOUR_DATABASE.loadCustomRates();
                         loadDashboard();
                         showToast('✓ System data successfully restored from backup!');
-                    } catch(err) {
+                    } catch (err) {
                         alert('Invalid backup file format.');
                     }
                 };
@@ -2168,10 +2454,10 @@
             });
 
             // --- DRIVER MODAL & DISPATCH ---
-            window.openDriverModal = function(id) {
+            window.openDriverModal = function (id) {
                 currentEditingBookingId = id;
                 var list = getBookings();
-                var b = list.find(function(item) { return item.bookingId === id; });
+                var b = list.find(function (item) { return item.bookingId === id; });
                 if (!b) return;
 
                 var fleet = getFleet();
@@ -2188,10 +2474,10 @@
                 document.getElementById('driverModal').style.display = 'flex';
             };
 
-            document.getElementById('dmSaveBtn').addEventListener('click', function() {
+            document.getElementById('dmSaveBtn').addEventListener('click', function () {
                 if (!currentEditingBookingId) return;
                 var list = getBookings();
-                var b = list.find(function(item) { return item.bookingId === currentEditingBookingId; });
+                var b = list.find(function (item) { return item.bookingId === currentEditingBookingId; });
                 if (!b) return;
 
                 b.driverName = document.getElementById('dmDriverName').value.trim();
@@ -2206,9 +2492,9 @@
                 showToast('✓ Driver assigned and booking updated!');
             });
 
-            document.getElementById('dmSendDriverWa').addEventListener('click', function() {
+            document.getElementById('dmSendDriverWa').addEventListener('click', function () {
                 var list = getBookings();
-                var b = list.find(function(item) { return item.bookingId === currentEditingBookingId; });
+                var b = list.find(function (item) { return item.bookingId === currentEditingBookingId; });
                 if (!b) return;
 
                 var dPhone = (document.getElementById('dmDriverPhone').value || '').replace(/\D/g, '');
@@ -2227,9 +2513,9 @@
                 window.open("https://wa.me/91" + dPhone + "?text=" + encodeURIComponent(msg), '_blank');
             });
 
-            document.getElementById('dmSendCustWa').addEventListener('click', function() {
+            document.getElementById('dmSendCustWa').addEventListener('click', function () {
                 var list = getBookings();
-                var b = list.find(function(item) { return item.bookingId === currentEditingBookingId; });
+                var b = list.find(function (item) { return item.bookingId === currentEditingBookingId; });
                 if (!b) return;
 
                 var cPhone = (b.phone || '').replace(/\D/g, '');
@@ -2248,9 +2534,9 @@
                 window.open("https://wa.me/91" + cPhone + "?text=" + encodeURIComponent(msg), '_blank');
             });
 
-            document.getElementById('dmBroadcastCircleBtn').addEventListener('click', function() {
+            document.getElementById('dmBroadcastCircleBtn').addEventListener('click', function () {
                 var list = getBookings();
-                var b = list.find(function(item) { return item.bookingId === currentEditingBookingId; });
+                var b = list.find(function (item) { return item.bookingId === currentEditingBookingId; });
                 if (!b) return;
 
                 var db = window.TOUR_DATABASE;
@@ -2269,10 +2555,10 @@
 
             // Voucher view
             var currentViewingBookingId = null;
-            window.viewVoucher = function(id) {
+            window.viewVoucher = function (id) {
                 currentViewingBookingId = id;
                 var list = getBookings();
-                var b = list.find(function(item) { return item.bookingId === id; });
+                var b = list.find(function (item) { return item.bookingId === id; });
                 if (!b) return;
 
                 var db = window.TOUR_DATABASE;
@@ -2314,10 +2600,10 @@
             };
 
             // Share Voucher via WhatsApp from Admin
-            document.getElementById('vmSendWaBtn').addEventListener('click', function() {
+            document.getElementById('vmSendWaBtn').addEventListener('click', function () {
                 if (!currentViewingBookingId) return;
                 var list = getBookings();
-                var b = list.find(function(item) { return item.bookingId === currentViewingBookingId; });
+                var b = list.find(function (item) { return item.bookingId === currentViewingBookingId; });
                 if (!b) return;
 
                 var cPhone = (b.phone || '').replace(/\D/g, '');
@@ -2354,7 +2640,7 @@
             });
 
             // Download Voucher PDF from Admin
-            document.getElementById('vmDownloadPdfBtn').addEventListener('click', function() {
+            document.getElementById('vmDownloadPdfBtn').addEventListener('click', function () {
                 var vBody = document.getElementById('voucherModalBody');
                 if (!vBody) return;
                 var bId = currentViewingBookingId || 'AMT-Voucher';
@@ -2373,10 +2659,10 @@
             });
 
             // Email Voucher to Guest
-            document.getElementById('vmSendEmailBtn').addEventListener('click', function() {
+            document.getElementById('vmSendEmailBtn').addEventListener('click', function () {
                 if (!currentViewingBookingId) return;
                 var list = getBookings();
-                var b = list.find(function(item) { return item.bookingId === currentViewingBookingId; });
+                var b = list.find(function (item) { return item.bookingId === currentViewingBookingId; });
                 if (!b) return;
 
                 var db = window.TOUR_DATABASE;
@@ -2419,10 +2705,10 @@
             });
 
             // SMS Voucher
-            document.getElementById('vmSendSmsBtn').addEventListener('click', function() {
+            document.getElementById('vmSendSmsBtn').addEventListener('click', function () {
                 if (!currentViewingBookingId) return;
                 var list = getBookings();
-                var b = list.find(function(item) { return item.bookingId === currentViewingBookingId; });
+                var b = list.find(function (item) { return item.bookingId === currentViewingBookingId; });
                 if (!b) return;
 
                 var cPhone = (b.phone || '').replace(/\D/g, '');
@@ -2435,27 +2721,27 @@
                 window.location.href = smsUrl;
             });
 
-            window.closeModals = function() {
-                document.querySelectorAll('.admin-modal').forEach(function(m) { m.style.display = 'none'; });
+            window.closeModals = function () {
+                document.querySelectorAll('.admin-modal').forEach(function (m) { m.style.display = 'none'; });
             };
 
             // Close modals on backdrop click and ESC key
-            document.querySelectorAll('.admin-modal').forEach(function(modal) {
-                modal.addEventListener('click', function(e) {
+            document.querySelectorAll('.admin-modal').forEach(function (modal) {
+                modal.addEventListener('click', function (e) {
                     if (e.target === modal) window.closeModals();
                 });
             });
-            document.addEventListener('keydown', function(e) {
+            document.addEventListener('keydown', function (e) {
                 if (e.key === 'Escape') window.closeModals();
             });
 
             // Manual new booking
-            document.getElementById('newBookingBtn').addEventListener('click', function() {
+            document.getElementById('newBookingBtn').addEventListener('click', function () {
                 document.getElementById('nbDate').value = new Date().toISOString().split('T')[0];
                 document.getElementById('newBookingModal').style.display = 'flex';
             });
 
-            document.getElementById('newBookingForm').addEventListener('submit', function(e) {
+            document.getElementById('newBookingForm').addEventListener('submit', function (e) {
                 e.preventDefault();
                 var sample = {
                     bookingId: 'AMT-2026-' + Math.floor(100000 + Math.random() * 900000),
@@ -2480,16 +2766,16 @@
             function populateTourDropdown() {
                 var sel = document.getElementById('nbTour');
                 if (!sel || !window.TOUR_DATABASE) return;
-                sel.innerHTML = window.TOUR_DATABASE.tours.map(function(t) {
+                sel.innerHTML = window.TOUR_DATABASE.tours.map(function (t) {
                     return '<option value="' + t.id + '">' + t.name + ' (₹' + t.fare + ')</option>';
                 }).join('');
             }
 
             // Export CSV
-            document.getElementById('exportCsvBtn').addEventListener('click', function() {
+            document.getElementById('exportCsvBtn').addEventListener('click', function () {
                 var bookings = getBookings();
                 var csv = "Booking ID,Date,Time,Customer Name,Phone,Pickup Hotel,Tour ID,Status,Driver Name,Vehicle No\n";
-                bookings.forEach(function(b) {
+                bookings.forEach(function (b) {
                     csv += '"' + (b.bookingId || '') + '","'
                         + (b.date || '') + '","'
                         + (b.time || '') + '","'
@@ -2510,7 +2796,7 @@
             });
 
             // Export JSON
-            document.getElementById('exportJsonBtn').addEventListener('click', function() {
+            document.getElementById('exportJsonBtn').addEventListener('click', function () {
                 var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(localStorage.getItem('amt_bookings') || '[]');
                 var dl = document.createElement('a');
                 dl.setAttribute("href", dataStr);
@@ -2519,7 +2805,7 @@
             });
 
             // Add Test
-            document.getElementById('addSampleBtn').addEventListener('click', function() {
+            document.getElementById('addSampleBtn').addEventListener('click', function () {
                 var sample = {
                     bookingId: 'AMT-2026-' + Math.floor(100000 + Math.random() * 900000),
                     name: 'Rohan Deshmukh',
@@ -2540,7 +2826,7 @@
             });
 
             // Clear All
-            document.getElementById('clearAllBtn').addEventListener('click', function() {
+            document.getElementById('clearAllBtn').addEventListener('click', function () {
                 if (confirm("Are you sure you want to clear all bookings in the ledger? Make sure you have exported a backup first!")) {
                     localStorage.removeItem('amt_bookings');
                     loadDashboard();
@@ -2549,16 +2835,16 @@
             });
 
             // Search filter
-            document.getElementById('tableSearch').addEventListener('input', function(e) {
+            document.getElementById('tableSearch').addEventListener('input', function (e) {
                 searchQuery = e.target.value.trim();
                 renderTable(getBookings(), activeFilter, searchQuery);
             });
 
             // Tab filtering
             var tabs = document.querySelectorAll('.dash-tab');
-            tabs.forEach(function(tab) {
-                tab.addEventListener('click', function() {
-                    tabs.forEach(function(t) { t.classList.remove('active'); });
+            tabs.forEach(function (tab) {
+                tab.addEventListener('click', function () {
+                    tabs.forEach(function (t) { t.classList.remove('active'); });
                     tab.classList.add('active');
                     activeFilter = tab.getAttribute('data-filter');
                     renderTable(getBookings(), activeFilter, searchQuery);
@@ -2566,7 +2852,7 @@
             });
 
             // AI Query Engine
-            window.runAiQuery = function(q) {
+            window.runAiQuery = function (q) {
                 var input = document.getElementById('aiAdminQuery');
                 input.value = q;
                 executeAiQuery(q);
@@ -2583,23 +2869,23 @@
                 aiRes.style.display = 'block';
 
                 if (q.includes('tomorrow')) {
-                    var tmList = list.filter(function(b){ return b.date === tmStr && b.status !== 'cancelled'; });
+                    var tmList = list.filter(function (b) { return b.date === tmStr && b.status !== 'cancelled'; });
                     aiRes.innerHTML = "📅 <strong>Tomorrow's Pickups (" + tmList.length + " Bookings):</strong><br>"
-                        + (tmList.length ? tmList.map(function(b){ return ' | <strong>' + b.name + '</strong> at ' + b.pickup + ' (' + b.time + ') - ' + b.bookingId + ' ' + (b.driverName ? '✓ Driver: ' + b.driverName : '⚠️ <em>No driver assigned</em>'); }).join('<br>') : 'No pickups scheduled for tomorrow.');
+                        + (tmList.length ? tmList.map(function (b) { return ' | <strong>' + b.name + '</strong> at ' + b.pickup + ' (' + b.time + ') - ' + b.bookingId + ' ' + (b.driverName ? '✓ Driver: ' + b.driverName : '⚠️ <em>No driver assigned</em>'); }).join('<br>') : 'No pickups scheduled for tomorrow.');
                 } else if (q.includes('today')) {
-                    var tdList = list.filter(function(b){ return b.date === todayStr && b.status !== 'cancelled'; });
+                    var tdList = list.filter(function (b) { return b.date === todayStr && b.status !== 'cancelled'; });
                     aiRes.innerHTML = "🚕 <strong>Today's Pickups (" + tdList.length + " Bookings):</strong><br>"
-                        + (tdList.length ? tdList.map(function(b){ return ' | <strong>' + b.name + '</strong> at ' + b.pickup + ' (' + b.time + ') - ' + b.bookingId; }).join('<br>') : 'No pickups scheduled for today.');
+                        + (tdList.length ? tdList.map(function (b) { return ' | <strong>' + b.name + '</strong> at ' + b.pickup + ' (' + b.time + ') - ' + b.bookingId; }).join('<br>') : 'No pickups scheduled for today.');
                 } else if (q.includes('popular')) {
                     aiRes.innerHTML = '⭐ <strong>Most Booked Tour:</strong> Tour 1 (Mahabaleshwar Darshan) and Tour 7 (Full Day Combo) generate 80%+ of tourist demand.';
                 } else if (q.includes('unassigned') || q.includes('pending')) {
-                    var un = list.filter(function(b){ return !b.driverName && b.status !== 'cancelled'; });
+                    var un = list.filter(function (b) { return !b.driverName && b.status !== 'cancelled'; });
                     aiRes.innerHTML = '⚠️ <strong>Bookings Without Assigned Drivers (' + un.length + '):</strong><br>'
-                        + (un.length ? un.map(function(b){ return ' | ' + b.bookingId + ' - ' + b.name + ' on ' + b.date + ' (' + b.pickup + ')'; }).join('<br>') : 'All active bookings have drivers assigned!');
+                        + (un.length ? un.map(function (b) { return ' | ' + b.bookingId + ' - ' + b.name + ' on ' + b.date + ' (' + b.pickup + ')'; }).join('<br>') : 'All active bookings have drivers assigned!');
                 } else if (q.includes('revenue')) {
                     var total = 0;
                     var db = window.TOUR_DATABASE;
-                    list.forEach(function(b){
+                    list.forEach(function (b) {
                         if (b.status !== 'cancelled') {
                             var t = db ? db.getTourById(b.tourId) : null;
                             total += (t ? t.fare : 1200);
@@ -2612,12 +2898,13 @@
             }
 
             var aiInput = document.getElementById('aiAdminQuery');
-            aiInput.addEventListener('keypress', function(e) {
+            aiInput.addEventListener('keypress', function (e) {
                 if (e.key === 'Enter') executeAiQuery(aiInput.value);
             });
 
         })();
     </script>
-<script>(function(){function autoOpenBooking(){var h=(window.location.hash||"").toLowerCase();var s=window.location.search||"";var b=/[?&](book|booking)=/i.test(s)||h==="#booking"||h==="#book";var tm=s.match(/[?&]tour=([^&#]*)/i);var th=tm?decodeURIComponent(tm[1].replace(/\+/g," ")):"";if(b||th){var t=0;var ti=setInterval(function(){t++;if(window.openBookingModal){clearInterval(ti);window.openBookingModal(th||"");}else if(t>30){clearInterval(ti);}},100);}}if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",autoOpenBooking);}else{autoOpenBooking();}window.addEventListener("hashchange",autoOpenBooking);})();</script>
+    <script>(function () { function autoOpenBooking() { var h = (window.location.hash || "").toLowerCase(); var s = window.location.search || ""; var b = /[?&](book|booking)=/i.test(s) || h === "#booking" || h === "#book"; var tm = s.match(/[?&]tour=([^&#]*)/i); var th = tm ? decodeURIComponent(tm[1].replace(/\+/g, " ")) : ""; if (b || th) { var t = 0; var ti = setInterval(function () { t++; if (window.openBookingModal) { clearInterval(ti); window.openBookingModal(th || ""); } else if (t > 30) { clearInterval(ti); } }, 100); } } if (document.readyState === "loading") { document.addEventListener("DOMContentLoaded", autoOpenBooking); } else { autoOpenBooking(); } window.addEventListener("hashchange", autoOpenBooking); })();</script>
 </body>
+
 </html>

@@ -458,7 +458,12 @@
                 ],
                 policyNote: 'Please confirm combined tour itinerary with the taxi driver before starting your tour.',
                 whatsappTariffNote: function (fare) {
-                    return '💰 *Combo Tariff:* ₹' + fare + ' (Official Union Rate' + (isLarge ? ' • ' + taxiCount + ' Cabs' : '') + ')\n_Zero advance required • Pay driver after completing the combined tour_\nℹ️ _Full Day Combo: Continuous sightseeing itinerary (~7-9 hrs)._\n\n';
+                    var db = window.TOUR_DATABASE;
+                    var dateEl = document.getElementById('amtDate');
+                    var dVal = dateEl ? dateEl.value : '';
+                    var isPeak = (db && typeof db.isPeakActive === 'function') ? db.isPeakActive(dVal) : false;
+                    var peakTag = isPeak ? '🔥 *PEAK SEASON PRIORITY PRIVATE CAB BOOKING*\n' : '';
+                    return peakTag + '💰 *Combo Tariff:* ₹' + fare + ' (Official Union Rate' + (isLarge ? ' • ' + taxiCount + ' Cabs' : '') + ')\n_Zero advance required • Pay driver after completing the combined tour_\nℹ️ _Full Day Combo: Continuous sightseeing itinerary (~7-9 hrs)._\n\n';
                 },
                 whatsappReadiness: 'I confirm this direct full day combo booking. Please dispatch the cab driver for my tour as per schedule.'
             };
@@ -2569,6 +2574,45 @@
                 var hPick = document.getElementById('amtPickup');
                 if (hPick) hPick.value = hVal;
 
+                // ── Peak Season & Fleet Availability Rule Checks ──
+                var db = window.TOUR_DATABASE;
+                if (db && typeof db.getCabAvailability === 'function' && db.getCabAvailability() === 'sold_out') {
+                    var proceedWA = confirm('⚠️ High Peak Season Demand Notice:\n\nAll standard tourist cabs are currently marked fully booked online for ' + dVal + '.\n\nWould you like to connect directly with our Dispatch Desk on WhatsApp (+91 99228 82044) to check if a standby union cab can be arranged?');
+                    if (proceedWA) {
+                        var waMsg = 'Hello Aryan Taxi, I need cab availability for ' + dVal + ' from ' + hVal + '. Regular bookings show full/waitlist, please check if any standby taxi can be arranged.';
+                        window.open('https://api.whatsapp.com/send?phone=919922882044&text=' + encodeURIComponent(waMsg), '_blank');
+                    }
+                    return;
+                }
+
+                if (db && typeof db.isSingleTourRestricted === 'function' && db.isSingleTourRestricted(dVal)) {
+                    var selectedToursList = bookingState.selectedTours || [];
+                    var primaryTourObj = db.getTourById ? db.getTourById(bookingState.tourId) : null;
+                    var isSingle = (bookingState.service === 'express' || (primaryTourObj && (primaryTourObj.sub_category === 'single_tour' || primaryTourObj.fare === 800))) && selectedToursList.length <= 1;
+
+                    if (isSingle) {
+                        var upgradeConfirm = confirm('⚠️ Peak Season Taxi Allocation Notice:\n\n'
+                            + 'During weekends and peak season, tourist cab drivers cannot accept standalone 2.5-hour single tours (₹800) due to heavy mountain traffic and dedicated full-day bookings.\n\n'
+                            + '👉 Click OK to UPGRADE to the Full Day Combo (Tour 7 — ₹3,000) for guaranteed cab & driver allocation.\n'
+                            + '👉 Click CANCEL to add a second tour circuit (Minimum 2 tours).');
+
+                        if (upgradeConfirm) {
+                            bookingState.service = 'combo';
+                            bookingState.tourId = 'T7';
+                            if (typeof populateTourDropdownByService === 'function') {
+                                populateTourDropdownByService('combo');
+                            }
+                            var tSel = document.getElementById('amtTourSelect');
+                            if (tSel) tSel.value = 'T7';
+                            if (typeof syncSelectedToursFromPrimary === 'function') syncSelectedToursFromPrimary();
+                            if (typeof updateSelectedTourBanner === 'function') updateSelectedTourBanner('T7');
+                        } else {
+                            if (typeof addExtraTour === 'function') addExtraTour();
+                            return;
+                        }
+                    }
+                }
+
                 updatePaxAndTaxis(bookingState.paxNum || 2);
                 goToStep(2);
             });
@@ -4017,21 +4061,24 @@
             filtered = db.tours.filter(function (t) { return (t.category === 'sightseeing' && t.sub_category === 'single_tour') || t.id === 'M1' || t.id === 'M2' || t.id === 'M3'; });
             labelText = 'Select Express Tour *';
             countText = filtered.length + ' Tours';
-            optHtml = '<optgroup label="── ⚡ EXPRESS FLAT ₹800 ──">' +
+            var curDate = document.getElementById('amtDate') ? document.getElementById('amtDate').value : '';
+            var isPeak = (typeof db.isPeakActive === 'function') ? db.isPeakActive(curDate) : false;
+            var optLabel = isPeak ? '── ⚡ EXPRESS (PEAK: COMBINE 2+ TOURS OR FULL DAY) ──' : '── ⚡ EXPRESS SIGHTSEEING ──';
+            optHtml = '<optgroup label="' + optLabel + '">' +
                 filtered.map(function (t) {
                     var cleanName = 'Arthur Seat';
                     if (t.id === 'M2') cleanName = "Kate's Point";
                     else if (t.id === 'M3') cleanName = 'Wilson Point';
-                    return '<option value="' + t.id + '">' + t.id + ': ' + escapeHtml(cleanName) + ' — ₹800</option>';
+                    return '<option value="' + t.id + '">' + t.id + ': ' + escapeHtml(cleanName) + ' — ₹' + Number(t.fare || 800).toLocaleString('en-IN') + '</option>';
                 }).join('') +
                 '</optgroup>';
         } else if (service === 'combo') {
             filtered = db.tours.filter(function (t) { return t.category === 'combo'; });
             labelText = 'Select Full Day Tour *';
             countText = 'Tour 7';
-            optHtml = '<optgroup label="── ⭐ FULL DAY COMBO PASS ──">' +
+            optHtml = '<optgroup label="── ⭐ FULL DAY COMBO PASS (PRIORITY ALLOCATION) ──">' +
                 filtered.map(function (t) {
-                    return '<option value="' + t.id + '">T7: Full Day — ₹3,000</option>';
+                    return '<option value="' + t.id + '">T7: Full Day Mahabaleshwar &amp; Panchgani — ₹' + Number(t.fare || 3000).toLocaleString('en-IN') + '</option>';
                 }).join('') +
                 '</optgroup>';
         } else if (service === 'outstation') {
@@ -4197,7 +4244,9 @@
         var sv = document.getElementById('amtStepVoucher'); if (sv) sv.style.display = 'none';
         var trustSec = document.querySelector('.portal-trust-section'); if (trustSec) trustSec.style.display = 'none';
 
-        if (step === 2) {
+        if (step === 1) {
+            try { updateAdvisory(); } catch (e) { }
+        } else if (step === 2) {
             try { updateStep2SummaryAndFare(); } catch (e) { }
         } else if (step === 3) {
             try { renderReviewCard(); } catch (e) { }
@@ -4303,20 +4352,49 @@
         if (!box || !window.TOUR_DATABASE) return;
 
         var db = window.TOUR_DATABASE;
-        var isSeason = db.isSeasonDate(dateVal);
-        var isMonsoon = db.isMonsoonDate(dateVal);
+        var cabAvail = (typeof db.getCabAvailability === 'function') ? db.getCabAvailability() : 'available';
+        var isPeak = (typeof db.isPeakActive === 'function') ? db.isPeakActive(dateVal) : db.isSeasonDate(dateVal);
+        var isMonsoon = db.isMonsoonDate ? db.isMonsoonDate(dateVal) : false;
 
-        if (isMonsoon) {
+        if (cabAvail === 'sold_out') {
+            box.innerHTML = '<div style="display:flex;align-items:flex-start;gap:10px;">'
+                + '<i class="fa-solid fa-triangle-exclamation" style="color:#dc2626;font-size:1.2rem;margin-top:2px;"></i>'
+                + '<div>'
+                + '<strong style="color:#991b1b;display:block;font-size:0.92rem;margin-bottom:2px;">🔴 Cabs Fully Booked / Standby Waitlist Only</strong>'
+                + '<span style="color:#7f1d1d;font-size:0.83rem;display:block;line-height:1.4;">Regular online booking is paused for this date due to heavy peak rush. Full Day private cabs can be checked on priority request.</span>'
+                + '<a href="https://api.whatsapp.com/send?phone=919922882044&text=' + encodeURIComponent('Hello Aryan Taxi, I need cab availability for date: ' + (dateVal || 'Today') + '. Regular bookings show full, please check if any standby taxi can be arranged.') + '" target="_blank" style="display:inline-flex;align-items:center;gap:6px;margin-top:6px;background:#25D366;color:#fff;padding:6px 12px;border-radius:6px;font-size:0.82rem;text-decoration:none;font-weight:700;"><i class="fa-brands fa-whatsapp"></i> Check Standby Cab via WhatsApp Priority Desk</a>'
+                + '</div></div>';
+            box.style.background = '#fef2f2';
+            box.style.color = '#991b1b';
+            box.style.border = '1.5px solid #fca5a5';
+            box.style.display = 'block';
+        } else if (cabAvail === 'filling_fast') {
+            box.innerHTML = '<div style="display:flex;align-items:flex-start;gap:8px;">'
+                + '<i class="fa-solid fa-bolt" style="color:#d97706;font-size:1.1rem;margin-top:2px;"></i>'
+                + '<div>'
+                + '<strong style="color:#92400e;display:block;font-size:0.9rem;">⚡ High Peak Demand • Cabs Filling Fast</strong>'
+                + '<span style="color:#78350f;font-size:0.82rem;line-height:1.4;display:block;">Full Day Combo (Tour 7) prioritized for guaranteed driver allocation. Standalone 2.5-hr single tours restricted during peak dates.</span>'
+                + '</div></div>';
+            box.style.background = '#fffbeb';
+            box.style.color = '#92400e';
+            box.style.border = '1.5px solid #fde68a';
+            box.style.display = 'block';
+        } else if (isPeak) {
+            box.innerHTML = '<div style="display:flex;align-items:flex-start;gap:8px;">'
+                + '<i class="fa-solid fa-calendar-check" style="color:#b45309;font-size:1.1rem;margin-top:2px;"></i>'
+                + '<div>'
+                + '<strong style="color:#92400e;display:block;font-size:0.9rem;">📌 Peak Season / Weekend Dispatch Policy</strong>'
+                + '<span style="color:#78350f;font-size:0.82rem;line-height:1.4;display:block;">High tourist rush. Dedicated cabs operate on Full Day Combo (Tour 7) or minimum 2 sightseeing circuits for smooth carriage.</span>'
+                + '</div></div>';
+            box.style.background = '#fffbeb';
+            box.style.color = '#92400e';
+            box.style.border = '1.5px solid #fde68a';
+            box.style.display = 'block';
+        } else if (isMonsoon) {
             box.innerHTML = '🌧️ <strong>Monsoon Advisory:</strong> Lingmala &amp; Bhilar waterfalls are at peak flow. Some cliff viewpoints may have dense mist.';
             box.style.background = '#eff6ff';
             box.style.color = '#1e40af';
             box.style.border = '1px solid #bfdbfe';
-            box.style.display = 'block';
-        } else if (isSeason) {
-            box.innerHTML = '📌 <strong>Season / Weekend Period:</strong> High tourist rush. Minimum 2 tours or Full Day Combo recommended to cover all viewpoints comfortably.';
-            box.style.background = '#fffbeb';
-            box.style.color = '#92400e';
-            box.style.border = '1px solid #fde68a';
             box.style.display = 'block';
         } else {
             box.style.display = 'none';

@@ -392,10 +392,10 @@ const TOUR_DATABASE = {
     ],
 
     // CORE QUERY & HELPER METHODS
-    getTourById: function(id) {
+    getTourById: function (id) {
         if (!id) return null;
         var q = String(id).toUpperCase().trim();
-        return this.tours.find(function(t) { return t.id === q; }) || null;
+        return this.tours.find(function (t) { return t.id === q; }) || null;
     },
 
     // ANTI-DUPLICATE & OVERLAP PREVENTION ENGINE
@@ -444,13 +444,13 @@ const TOUR_DATABASE = {
         }
     },
 
-    getConflictingTourIds: function(id) {
+    getConflictingTourIds: function (id) {
         if (!id) return [];
         var q = String(id).toUpperCase().trim();
         return (this.tourConflicts[q] && this.tourConflicts[q].conflicts) ? this.tourConflicts[q].conflicts : [];
     },
 
-    checkTourOverlap: function(tourIds) {
+    checkTourOverlap: function (tourIds) {
         if (!tourIds || tourIds.length <= 1) return null;
         var self = this;
         for (var i = 0; i < tourIds.length; i++) {
@@ -480,12 +480,12 @@ const TOUR_DATABASE = {
         return null;
     },
 
-    resolveTour: function(query) {
+    resolveTour: function (query) {
         if (!query) return this.tours[0];
         var q = String(query).toLowerCase().trim();
 
         // Exact ID match
-        var direct = this.tours.find(function(t) { return t.id.toLowerCase() === q; });
+        var direct = this.tours.find(function (t) { return t.id.toLowerCase() === q; });
         if (direct) return direct;
 
         // Alias Dictionary for shorthand and legacy route slugs
@@ -662,7 +662,7 @@ const TOUR_DATABASE = {
         }
 
         // Substring search in tour names
-        var matched = this.tours.find(function(t) { return t.name.toLowerCase().includes(q); });
+        var matched = this.tours.find(function (t) { return t.name.toLowerCase().includes(q); });
         if (matched) return matched;
 
         // Context-aware safe fallback
@@ -675,15 +675,15 @@ const TOUR_DATABASE = {
         return this.tours[0];
     },
 
-    searchLocations: function(query) {
+    searchLocations: function (query) {
         if (!query || typeof query !== 'string' || query.trim().length < 2) return [];
         var q = query.toLowerCase().trim();
-        return this.locations.filter(function(loc) {
+        return this.locations.filter(function (loc) {
             return loc.name.toLowerCase().includes(q) || loc.area.toLowerCase().includes(q);
         }).slice(0, 6);
     },
 
-    isSeasonDate: function(dateStr) {
+    isSeasonDate: function (dateStr) {
         if (!dateStr) return false;
         var d = new Date(dateStr);
         if (isNaN(d.getTime())) return false;
@@ -692,14 +692,14 @@ const TOUR_DATABASE = {
         var mm = String(d.getMonth() + 1).padStart(2, '0');
         var dd = String(d.getDate()).padStart(2, '0');
         var md = mm + '-' + dd;
-        return this.settings.seasonPeriods.some(function(p) {
+        return this.settings.seasonPeriods.some(function (p) {
             return p.start <= p.end
                 ? (md >= p.start && md <= p.end)
                 : (md >= p.start || md <= p.end);
         });
     },
 
-    isMonsoonDate: function(dateStr) {
+    isMonsoonDate: function (dateStr) {
         if (!dateStr) return false;
         var d = new Date(dateStr);
         if (isNaN(d.getTime())) return false;
@@ -710,14 +710,14 @@ const TOUR_DATABASE = {
         return md >= p.start && md <= p.end;
     },
 
-    getPickupZone: function(locationOrArea) {
-        if (!locationOrArea || !String(locationOrArea).trim()) return this.pickupZones.find(function(z) { return z.id === 'MAHA_TOWN'; });
+    getPickupZone: function (locationOrArea) {
+        if (!locationOrArea || !String(locationOrArea).trim()) return this.pickupZones.find(function (z) { return z.id === 'MAHA_TOWN'; });
         var q = String(locationOrArea).toLowerCase().trim();
-        if (!q) return this.pickupZones.find(function(z) { return z.id === 'MAHA_TOWN'; });
+        if (!q) return this.pickupZones.find(function (z) { return z.id === 'MAHA_TOWN'; });
 
         // 1. If matches a known location in this.locations, check that location's area as well
         if (this.locations && this.locations.length) {
-            var matchedLoc = this.locations.find(function(l) {
+            var matchedLoc = this.locations.find(function (l) {
                 var lName = (l.name || '').toLowerCase();
                 return lName === q || (q.length >= 3 && (lName.includes(q) || q.includes(lName)));
             });
@@ -752,13 +752,13 @@ const TOUR_DATABASE = {
 
         // 3. If query mentions mahabaleshwar, default to MAHA_TOWN
         if (q.includes('mahabaleshwar') && !q.includes('old mahabaleshwar')) {
-            return this.pickupZones.find(function(z) { return z.id === 'MAHA_TOWN'; });
+            return this.pickupZones.find(function (z) { return z.id === 'MAHA_TOWN'; });
         }
 
-        return this.pickupZones.find(function(z) { return z.id === 'OTHER'; });
+        return this.pickupZones.find(function (z) { return z.id === 'OTHER'; });
     },
 
-    isSeasonOrWeekend: function(dateStr) {
+    isSeasonOrWeekend: function (dateStr) {
         if (!dateStr) return false;
         var d = new Date(dateStr);
         if (isNaN(d.getTime())) return false;
@@ -769,7 +769,7 @@ const TOUR_DATABASE = {
         var mm = String(d.getMonth() + 1).padStart(2, '0');
         var dd = String(d.getDate()).padStart(2, '0');
         var md = mm + '-' + dd;
-        return this.seasonRule.periods.some(function(p) {
+        return this.seasonRule.periods.some(function (p) {
             return p.start <= p.end
                 ? (md >= p.start && md <= p.end)
                 : (md >= p.start || md <= p.end);
@@ -779,41 +779,41 @@ const TOUR_DATABASE = {
     // DYNAMIC CUSTOM RATES ENGINE
     _defaultFares: null,
 
-    initDefaults: function() {
+    initDefaults: function () {
         if (!this._defaultFares) {
             this._defaultFares = {};
             var self = this;
-            this.tours.forEach(function(t) {
+            this.tours.forEach(function (t) {
                 self._defaultFares[t.id] = t.fare;
             });
         }
     },
 
-    getDefaultRates: function() {
+    getDefaultRates: function () {
         this.initDefaults();
         return Object.assign({}, this._defaultFares);
     },
 
-    loadCustomRates: function() {
+    loadCustomRates: function () {
         this.initDefaults();
         try {
             if (typeof localStorage !== 'undefined') {
                 var stored = localStorage.getItem('amt_custom_rates');
                 if (stored) {
                     var customRates = JSON.parse(stored);
-                    this.tours.forEach(function(t) {
+                    this.tours.forEach(function (t) {
                         if (customRates[t.id] !== undefined && !isNaN(Number(customRates[t.id]))) {
                             t.fare = Number(customRates[t.id]);
                         }
                     });
                 }
             }
-        } catch(e) {
+        } catch (e) {
             console.warn('Could not load custom rates from localStorage', e);
         }
     },
 
-    saveCustomRates: function(ratesMap) {
+    saveCustomRates: function (ratesMap) {
         this.initDefaults();
         try {
             if (typeof localStorage !== 'undefined') {
@@ -821,30 +821,86 @@ const TOUR_DATABASE = {
                 this.loadCustomRates();
             }
             return true;
-        } catch(e) {
+        } catch (e) {
             console.error('Could not save custom rates', e);
             return false;
         }
     },
 
-    resetToDefaultRates: function() {
+    resetToDefaultRates: function () {
         this.initDefaults();
         try {
             if (typeof localStorage !== 'undefined') {
                 localStorage.removeItem('amt_custom_rates');
             }
             var self = this;
-            this.tours.forEach(function(t) {
+            this.tours.forEach(function (t) {
                 if (self._defaultFares[t.id] !== undefined) {
                     t.fare = self._defaultFares[t.id];
                 }
             });
             return true;
-        } catch(e) {
+        } catch (e) {
             console.error('Could not reset rates', e);
             return false;
         }
     },
+
+    // PEAK SEASON & FLEET DISPATCH CONTROLLER
+    peakConfig: {
+        mode: 'auto', // 'auto' | 'always_on' | 'off'
+        cabAvailability: 'available', // 'available' | 'filling_fast' | 'sold_out'
+        restrictSingleTours: true,
+        minimumTours: 2,
+        peakNotice: 'High tourist rush period. Full Day Combo or minimum 2 tours prioritized for dedicated driver allocation.'
+    },
+
+    loadPeakConfig: function () {
+        try {
+            if (typeof localStorage !== 'undefined') {
+                var stored = localStorage.getItem('amt_peak_config');
+                if (stored) {
+                    var parsed = JSON.parse(stored);
+                    this.peakConfig = Object.assign({}, this.peakConfig, parsed);
+                }
+            }
+        } catch (e) {
+            console.warn('Could not load peak config from localStorage', e);
+        }
+        return this.peakConfig;
+    },
+
+    savePeakConfig: function (cfg) {
+        try {
+            this.loadPeakConfig();
+            this.peakConfig = Object.assign({}, this.peakConfig, cfg || {});
+            if (typeof localStorage !== 'undefined') {
+                localStorage.setItem('amt_peak_config', JSON.stringify(this.peakConfig));
+            }
+            return true;
+        } catch (e) {
+            console.error('Could not save peak config', e);
+            return false;
+        }
+    },
+
+    isPeakActive: function (dateStr) {
+        this.loadPeakConfig();
+        if (this.peakConfig.mode === 'always_on') return true;
+        if (this.peakConfig.mode === 'off') return false;
+        return this.isSeasonDate(dateStr);
+    },
+
+    getCabAvailability: function () {
+        this.loadPeakConfig();
+        return this.peakConfig.cabAvailability || 'available';
+    },
+
+    isSingleTourRestricted: function (dateStr) {
+        this.loadPeakConfig();
+        if (!this.peakConfig.restrictSingleTours) return false;
+        return this.isPeakActive(dateStr);
+    }
 
 };
 
@@ -852,9 +908,10 @@ if (typeof window !== 'undefined') {
     window.TOUR_DATABASE = TOUR_DATABASE;
 
     TOUR_DATABASE.loadCustomRates();
+    TOUR_DATABASE.loadPeakConfig();
 
     // ── SMART TOUR FINDER INTERACTIVE SYNC ──────────────────────────
-    window.syncTourFinderInterests = function(duration) {
+    window.syncTourFinderInterests = function (duration) {
         var timeEl = document.getElementById('tf_time');
         var interestEl = document.getElementById('tf_interest');
         if (timeEl && timeEl.value !== duration) {
@@ -873,7 +930,7 @@ if (typeof window !== 'undefined') {
         }
     };
 
-    window.syncTourFinderDuration = function(interest) {
+    window.syncTourFinderDuration = function (interest) {
         var timeEl = document.getElementById('tf_time');
         var interestEl = document.getElementById('tf_interest');
         if (interestEl && interestEl.value !== interest) {
@@ -893,7 +950,7 @@ if (typeof window !== 'undefined') {
     };
 
     // SMART TOUR FINDER ENGINE
-    window.recommendTour = function() {
+    window.recommendTour = function () {
         var timeEl = document.getElementById('tf_time');
         var interestEl = document.getElementById('tf_interest');
         var resultEl = document.getElementById('tf_result');
@@ -914,7 +971,7 @@ if (typeof window !== 'undefined') {
         var rec = null;
 
         if (time === 'express') {
-            switch(interest) {
+            switch (interest) {
                 case 'm2_kates':
                     rec = {
                         tourId: 'M2',
@@ -975,7 +1032,7 @@ if (typeof window !== 'undefined') {
                     break;
             }
         } else if (time === 'half') {
-            switch(interest) {
+            switch (interest) {
                 case 'nature':
                     rec = {
                         tourId: 'T2',
@@ -1094,7 +1151,7 @@ if (typeof window !== 'undefined') {
             }
         } else {
             // Full Day selections
-            switch(interest) {
+            switch (interest) {
                 case 'pratapgad_combo':
                 case 'history':
                     rec = {
@@ -1189,52 +1246,52 @@ if (typeof window !== 'undefined') {
 
         var html = '<div class="tf-result-card">' +
             '<div class="tf-result-header">' +
-                '<span class="tf-badge-category" style="background: ' + (rec.isSingle ? '#0891b2' : '#0284c7') + ';">' +
-                    '<i class="fa-solid fa-wand-magic-sparkles"></i> ' + rec.badge +
-                '</span>' +
-                '<div class="tf-badge-meta">' +
-                    rec.fare + ' <span style="font-weight: 600; font-size: 0.8rem; color: #475569;">• ' + rec.duration + ' • ' + rec.pointsCount + '</span>' +
-                '</div>' +
+            '<span class="tf-badge-category" style="background: ' + (rec.isSingle ? '#0891b2' : '#0284c7') + ';">' +
+            '<i class="fa-solid fa-wand-magic-sparkles"></i> ' + rec.badge +
+            '</span>' +
+            '<div class="tf-badge-meta">' +
+            rec.fare + ' <span style="font-weight: 600; font-size: 0.8rem; color: #475569;">• ' + rec.duration + ' • ' + rec.pointsCount + '</span>' +
+            '</div>' +
             '</div>' +
             '<h3 style="color: #0f172a; font-size: 1.25rem; font-weight: 800; margin: 0 0 8px 0; line-height: 1.35;">' +
-                rec.title +
+            rec.title +
             '</h3>' +
             '<p style="color: #475569; font-size: 0.92rem; line-height: 1.5; margin: 0 0 12px 0;">' +
-                rec.summary +
+            rec.summary +
             '</p>' +
             singleNoteHtml +
             '<div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px 14px; margin-bottom: 16px;">' +
-                '<div style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: #64748b; letter-spacing: 0.5px; margin-bottom: 6px;">' +
-                    'Key Itinerary Highlights:' +
-                '</div>' +
-                '<ul style="margin: 0; padding-left: 18px; color: #1e293b; font-size: 0.85rem; line-height: 1.55;">' +
-                    rec.highlights.map(function(h) { return '<li>' + h + '</li>'; }).join('') +
-                '</ul>' +
+            '<div style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: #64748b; letter-spacing: 0.5px; margin-bottom: 6px;">' +
+            'Key Itinerary Highlights:' +
+            '</div>' +
+            '<ul style="margin: 0; padding-left: 18px; color: #1e293b; font-size: 0.85rem; line-height: 1.55;">' +
+            rec.highlights.map(function (h) { return '<li>' + h + '</li>'; }).join('') +
+            '</ul>' +
             '</div>' +
             '<div class="tf-card-actions">' +
-                '<button type="button" onclick="window.bookFromFinder(\'' + rec.tourId + '\')" class="btn btn--accent" style="border: none; cursor: pointer;">' +
-                    '<i class="fa-solid fa-calendar-check"></i> Book This Tour' +
-                '</button>' +
-                '<a href="' + rec.detailsUrl + '" onclick="window.scrollFromFinder(\'' + rec.detailsUrl + '\'); return false;" class="btn btn--outline tf-btn-itinerary">' +
-                    '<i class="fa-solid fa-circle-info"></i> View Itinerary' +
-                '</a>' +
+            '<button type="button" onclick="window.bookFromFinder(\'' + rec.tourId + '\')" class="btn btn--accent" style="border: none; cursor: pointer;">' +
+            '<i class="fa-solid fa-calendar-check"></i> Book This Tour' +
+            '</button>' +
+            '<a href="' + rec.detailsUrl + '" onclick="window.scrollFromFinder(\'' + rec.detailsUrl + '\'); return false;" class="btn btn--outline tf-btn-itinerary">' +
+            '<i class="fa-solid fa-circle-info"></i> View Itinerary' +
+            '</a>' +
             '</div>' +
             '<div style="margin-top: 12px; text-align: center;">' +
-                '<a href="' + waUrl + '" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; color: #16a34a; font-size: 0.86rem; font-weight: 700; text-decoration: none;">' +
-                    '<i class="fa-brands fa-whatsapp" style="font-size: 1.1rem;"></i> Or book instantly via WhatsApp (Direct Owner)' +
-                '</a>' +
+            '<a href="' + waUrl + '" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; color: #16a34a; font-size: 0.86rem; font-weight: 700; text-decoration: none;">' +
+            '<i class="fa-brands fa-whatsapp" style="font-size: 1.1rem;"></i> Or book instantly via WhatsApp (Direct Owner)' +
+            '</a>' +
             '</div>' +
-        '</div>';
+            '</div>';
 
         resultEl.innerHTML = html;
         resultEl.style.display = 'block';
 
         try {
             resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        } catch(e) {}
+        } catch (e) { }
     };
 
-    window.bookFromFinder = function(tourId) {
+    window.bookFromFinder = function (tourId) {
         if (typeof window.openBookingModal === 'function') {
             window.openBookingModal(tourId);
         } else {
@@ -1242,7 +1299,7 @@ if (typeof window !== 'undefined') {
         }
     };
 
-    window.scrollFromFinder = function(hash) {
+    window.scrollFromFinder = function (hash) {
         if (!hash) return;
         var target = document.querySelector(hash);
         if (target) {
