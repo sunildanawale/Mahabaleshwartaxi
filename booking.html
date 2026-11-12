@@ -296,83 +296,6 @@
             }
         }
 
-        /* ── Unified 3-Step Equal Size, Harmonious Height & Content Alignment ── */
-        @media (min-width: 641px) {
-            body.booking-portal-page .amt-card,
-            body.booking-portal-page #amtBookingModal .amt-card,
-            body.booking-portal-page .portal-card {
-                min-height: 720px !important;
-                display: flex !important;
-                flex-direction: column !important;
-                box-sizing: border-box !important;
-            }
-
-            body.booking-portal-page .portal-card-body,
-            body.booking-portal-page .amt-card-body {
-                flex: 1 1 auto !important;
-                display: flex !important;
-                flex-direction: column !important;
-                justify-content: space-between !important;
-                padding: 20px 24px 22px !important;
-                box-sizing: border-box !important;
-            }
-
-            body.booking-portal-page #amtStep1,
-            body.booking-portal-page #amtStep2,
-            body.booking-portal-page #amtStep3 {
-                min-height: 100% !important;
-                flex: 1 1 auto !important;
-                flex-direction: column !important;
-                justify-content: space-between !important;
-                box-sizing: border-box !important;
-            }
-
-            body.booking-portal-page #amtStep1[style*="block"],
-            body.booking-portal-page #amtStep2[style*="block"],
-            body.booking-portal-page #amtStep3[style*="block"] {
-                display: flex !important;
-            }
-
-            body.booking-portal-page .amt-btn-row {
-                margin-top: auto !important;
-                padding-top: 14px !important;
-            }
-
-            body.booking-portal-page .amt-step2-grid {
-                flex: 1 1 auto !important;
-                display: grid !important;
-                grid-template-columns: 1.05fr 0.95fr !important;
-                gap: 16px !important;
-                align-items: stretch !important;
-                margin-bottom: 10px !important;
-            }
-
-            body.booking-portal-page .amt-step2-col {
-                display: flex !important;
-                flex-direction: column !important;
-                justify-content: space-between !important;
-                height: 100% !important;
-                gap: 12px !important;
-            }
-
-            body.booking-portal-page .amt-trip-summary-box {
-                flex: 1 1 auto !important;
-                display: flex !important;
-                flex-direction: column !important;
-                justify-content: space-between !important;
-                padding: 16px 18px !important;
-                margin-bottom: 0 !important;
-            }
-
-            body.booking-portal-page .amt-fare-breakdown-card {
-                height: 100% !important;
-                display: flex !important;
-                flex-direction: column !important;
-                justify-content: space-between !important;
-                padding: 18px 20px !important;
-                margin-bottom: 0 !important;
-            }
-        }
 
         .amt-step2-grid {
             display: grid;
@@ -6085,95 +6008,109 @@
         /* ============================================================
            PROFESSIONAL UI/UX MASTER 3-STEP UNIFIED SIZE & BALANCED LAYOUT
            ============================================================ */
+        body.booking-portal-page .portal-booking-container {
+            max-width: 660px !important;
+            width: 100% !important;
+            margin: 12px auto 28px !important;
+            padding: 0 16px !important;
+            box-sizing: border-box !important;
+        }
+
+        body.booking-portal-page .portal-card,
+        body.booking-portal-page .amt-card,
+        body.booking-portal-page #amtBookingModal .amt-card {
+            max-width: 660px !important;
+            width: 100% !important;
+            height: auto !important;
+            min-height: auto !important;
+            display: flex !important;
+            flex-direction: column !important;
+            border-radius: 16px !important;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45) !important;
+            border: 1.5px solid #cbd5e1 !important;
+            background: #ffffff !important;
+            box-sizing: border-box !important;
+            overflow: visible !important;
+        }
+
+        body.booking-portal-page .portal-card-body,
+        body.booking-portal-page .amt-card-body {
+            height: auto !important;
+            flex: 1 1 auto !important;
+            display: flex !important;
+            flex-direction: column !important;
+            padding: 18px 22px 20px !important;
+            box-sizing: border-box !important;
+            overflow: visible !important;
+        }
+
+        body.booking-portal-page #amtStep1,
+        body.booking-portal-page #amtStep2,
+        body.booking-portal-page #amtStep3 {
+            height: auto !important;
+            min-height: auto !important;
+            display: none;
+            flex-direction: column !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+        }
+
+        body.booking-portal-page #amtStep1[style*="block"],
+        body.booking-portal-page #amtStep1[style*="flex"],
+        body.booking-portal-page #amtStep2[style*="block"],
+        body.booking-portal-page #amtStep2[style*="flex"],
+        body.booking-portal-page #amtStep3[style*="block"],
+        body.booking-portal-page #amtStep3[style*="flex"] {
+            display: flex !important;
+        }
+
+        /* Action Buttons: 100% Fully Visible, Prominent and Clickable */
+        body.booking-portal-page .amt-btn-row {
+            margin-top: 14px !important;
+            margin-bottom: 6px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 8px !important;
+            width: 100% !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            z-index: 10 !important;
+        }
+
+        body.booking-portal-page .amt-btn-next,
+        body.booking-portal-page .amt-btn-confirm {
+            width: 100% !important;
+            min-height: 52px !important;
+            padding: 10px 16px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            visibility: visible !important;
+            border-radius: 10px !important;
+        }
+
+        /* Step 2 & Step 3 Balanced Sizing so they match Step 1 */
         @media (min-width: 641px) {
-            body.booking-portal-page .portal-booking-container {
-                max-width: 680px !important;
-                width: 100% !important;
-                margin: 18px auto 32px !important;
-                padding: 0 16px !important;
-                box-sizing: border-box !important;
-            }
-
-            body.booking-portal-page .portal-card,
-            body.booking-portal-page .amt-card,
-            body.booking-portal-page #amtBookingModal .amt-card {
-                max-width: 680px !important;
-                width: 100% !important;
-                min-height: 750px !important;
-                height: 750px !important;
-                display: flex !important;
-                flex-direction: column !important;
-                border-radius: 16px !important;
-                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45) !important;
-                border: 1.5px solid #cbd5e1 !important;
-                background: #ffffff !important;
-                box-sizing: border-box !important;
-                overflow: hidden !important;
-            }
-
-            body.booking-portal-page .portal-card-body,
-            body.booking-portal-page .amt-card-body {
-                flex: 1 1 auto !important;
-                height: calc(750px - 65px) !important;
-                display: flex !important;
-                flex-direction: column !important;
-                justify-content: space-between !important;
-                padding: 20px 24px 20px !important;
-                box-sizing: border-box !important;
-                overflow-y: auto !important;
-            }
-
-            body.booking-portal-page #amtStep1,
             body.booking-portal-page #amtStep2,
             body.booking-portal-page #amtStep3 {
-                height: 100% !important;
-                min-height: 100% !important;
-                flex: 1 1 auto !important;
-                display: none;
-                flex-direction: column !important;
+                min-height: 520px !important;
                 justify-content: space-between !important;
-                box-sizing: border-box !important;
             }
 
-            body.booking-portal-page #amtStep1[style*="block"],
-            body.booking-portal-page #amtStep1[style*="flex"],
-            body.booking-portal-page #amtStep2[style*="block"],
-            body.booking-portal-page #amtStep2[style*="flex"],
-            body.booking-portal-page #amtStep3[style*="block"],
-            body.booking-portal-page #amtStep3[style*="flex"] {
-                display: flex !important;
-            }
-
-            /* Identical Button Baseline across Step 1, 2, and 3 */
-            body.booking-portal-page .amt-btn-row {
+            body.booking-portal-page #amtStep2 .amt-btn-row,
+            body.booking-portal-page #amtStep3 .amt-btn-row {
                 margin-top: auto !important;
-                padding-top: 14px !important;
-                display: flex !important;
-                flex-direction: column !important;
-                gap: 8px !important;
-                width: 100% !important;
-                flex-shrink: 0 !important;
             }
 
-            body.booking-portal-page .amt-btn-next,
-            body.booking-portal-page .amt-btn-confirm {
-                min-height: 48px !important;
-                height: 48px !important;
-                padding: 0 16px !important;
-                display: flex !important;
-                flex-direction: column !important;
-                align-items: center !important;
-                justify-content: center !important;
-            }
-
-            /* Step 2 Balanced Dual-Column Cards */
             body.booking-portal-page .amt-step2-grid {
                 display: grid !important;
                 grid-template-columns: 1.05fr 0.95fr !important;
                 gap: 16px !important;
                 flex: 1 1 auto !important;
                 align-items: stretch !important;
-                margin-bottom: 8px !important;
+                margin-bottom: 12px !important;
             }
 
             body.booking-portal-page .amt-step2-col {
@@ -6194,16 +6131,6 @@
                 background: #f8fafc !important;
                 border: 1.5px solid #e2e8f0 !important;
                 border-radius: 12px !important;
-            }
-
-            body.booking-portal-page .amt-step2-time-card {
-                background: #f8fafc !important;
-                border: 1.5px solid #e2e8f0 !important;
-                border-radius: 12px !important;
-                padding: 12px 14px !important;
-                box-sizing: border-box !important;
-                margin: 0 !important;
-                flex-shrink: 0 !important;
             }
 
             body.booking-portal-page .amt-fare-breakdown-card {
@@ -6255,7 +6182,7 @@
         <div id="amtBookingModal" class="amt-modal-overlay"
             style="display: flex !important; position: relative !important; inset: auto !important; width: 100% !important; height: auto !important; min-height: auto !important; background: transparent !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; padding: 0 !important; z-index: 10 !important; overflow: visible !important;">
             <div class="amt-card portal-card"
-                style="width: 100% !important; max-width: 100% !important; min-height: auto !important; height: auto !important; max-height: none !important; overflow: hidden !important; margin: 0 auto !important;">
+                style="width: 100% !important; max-width: 100% !important; min-height: auto !important; height: auto !important; max-height: none !important; overflow: visible !important; margin: 0 auto !important;">
 
                 <!-- Card Header -->
                 <div class="amt-card-header portal-card-header">
@@ -6891,9 +6818,9 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="js/tour-data.js?v=135.0"></script>
+    <script src="js/tour-data.js?v=158.0"></script>
     <script src="js/ai-assistant.js?v=154.0" defer></script>
-    <script src="js/booking-widget.min.js?v=157.0"></script>
+    <script src="js/booking-widget.min.js?v=158.0"></script>
     <script>
         (function () {
             var search = window.location.search || '';
