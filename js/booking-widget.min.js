@@ -15,10 +15,10 @@
         service: 'sightseeing',
         tourId: 'T1',
         tour2Id: '',
-        selectedTours: [{ id: 'T1', date: '', time: '09:00' }],
+        selectedTours: [{ id: 'T1', date: '', time: '09:00 AM - 10:00 AM' }],
         differentSchedule: false,
         date: '',
-        time: '09:00',
+        time: '09:00 AM - 10:00 AM',
         paxNum: 2,
         pax: '2',
         taxiCount: 1,
@@ -56,20 +56,21 @@
     }
 
     function formatPickupTime(timeStr) {
-        if (!timeStr) return '09:00 AM';
+        if (!timeStr) return '09:00 AM – 10:00 AM';
         var t = String(timeStr).trim();
+        if (t === '09:00' || t === '09:00:00') return '09:00 AM – 10:00 AM';
         if (t.toLowerCase().includes('am') || t.toLowerCase().includes('pm')) return t;
         var parts = t.split(':');
         if (parts.length >= 2) {
             var h = parseInt(parts[0], 10);
             var m = parts[1].substring(0, 2);
-            if (isNaN(h)) return '09:00 AM';
+            if (isNaN(h)) return '09:00 AM – 10:00 AM';
             var ampm = h >= 12 ? 'PM' : 'AM';
             h = h % 12;
             h = h ? h : 12;
             return (h < 10 ? '0' + h : '' + h) + ':' + m + ' ' + ampm;
         }
-        return t || '09:00 AM';
+        return t || '09:00 AM – 10:00 AM';
     }
 
     function validateIndianPhone(phoneStr) {
@@ -1650,13 +1651,11 @@
             + '    <input type="date" id="amtDate" class="amt-input" required>'
             + '  </div>'
             + '  <div>'
-            + '    <label class="amt-label" for="amtTime">Pickup Time *</label>'
-            + '    <input type="time" id="amtTime" class="amt-input" value="09:00" required>'
-            + '    <div class="amt-quick-time-chips" style="display:flex;gap:4px;margin-top:4px;width:100%;box-sizing:border-box;">'
-            + '      <button type="button" class="amt-time-chip active" data-time="09:00">09:00 AM</button>'
-            + '      <button type="button" class="amt-time-chip" data-time="10:30">10:30 AM</button>'
-            + '      <button type="button" class="amt-time-chip" data-time="14:00">02:00 PM</button>'
+            + '    <label class="amt-label">Pickup Schedule</label>'
+            + '    <div style="background:#f8fafc;border:1.2px solid #cbd5e1;border-radius:6px;padding:6px 10px;font-size:0.82rem;color:#0284c7;font-weight:700;">'
+            + '      <i class="fa-solid fa-clock-rotate-left"></i> 09:00 AM &ndash; 10:00 AM <span style="font-size:0.70rem;color:#64748b;font-weight:500;">(Driver Coordinated)</span>'
             + '    </div>'
+            + '    <input type="hidden" id="amtTime" value="09:00 AM - 10:00 AM">'
             + '  </div>'
             + '</div>'
             + '<div id="amtSmartTimeBox" style="display:none;">'
@@ -2622,12 +2621,7 @@
         if (toStep3) {
             toStep3.addEventListener('click', function () {
                 var timeEl = document.getElementById('amtTime');
-                var tVal = timeEl ? timeEl.value : '';
-                if (!tVal) {
-                    alert('Please select your preferred pickup time.');
-                    if (timeEl) timeEl.focus();
-                    return;
-                }
+                var tVal = (timeEl && timeEl.value) ? timeEl.value : '09:00 AM - 10:00 AM';
                 bookingState.time = tVal;
                 goToStep(3);
             });
@@ -4305,7 +4299,7 @@
             cBtn.setAttribute('title', 'Close Voucher and Return to Website');
             cBtn.setAttribute('aria-label', 'Close Voucher');
         }
-        if (typeof updateStepper === 'function') updateStepper(3);
+        if (typeof updateStepper === 'function') updateStepper('voucher');
         try { if (window.history && window.history.pushState) window.history.pushState({ amtStep: 3 }, '', '#voucher'); } catch (e) { }
 
         // Reset scroll position on voucher screen
