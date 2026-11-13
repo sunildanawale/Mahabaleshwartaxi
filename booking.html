@@ -1820,47 +1820,7 @@
             box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.2) !important;
         }
 
-        .amt-quick-time-chips {
-            display: flex !important;
-            gap: 4px !important;
-            margin-top: 4px !important;
-            width: 100% !important;
-            box-sizing: border-box !important;
-        }
 
-        .amt-time-chip {
-            flex: 1 1 0 !important;
-            min-width: 0 !important;
-            white-space: nowrap !important;
-            height: auto !important;
-            min-height: 24px !important;
-            padding: 3px 2px !important;
-            border-radius: 4px !important;
-            border: 1px solid #cbd5e1 !important;
-            background: #f8fafc !important;
-            font-size: 0.60rem !important;
-            line-height: 1.15 !important;
-            font-weight: 700 !important;
-            color: #475569 !important;
-            cursor: pointer !important;
-            display: inline-flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            text-align: center !important;
-            overflow: visible !important;
-            box-sizing: border-box !important;
-        }
-
-        .amt-time-chip:hover {
-            border-color: #0284c7 !important;
-            color: #0284c7 !important;
-        }
-
-        .amt-time-chip.active {
-            background: #0284c7 !important;
-            border-color: #0284c7 !important;
-            color: #ffffff !important;
-        }
 
         /* Next Button */
         .amt-btn-row {
@@ -2330,22 +2290,7 @@
             border-top-color: #334155 !important;
         }
 
-        [data-theme="dark"] .amt-time-chip {
-            background: #1e293b !important;
-            border-color: #334155 !important;
-            color: #cbd5e1 !important;
-        }
 
-        [data-theme="dark"] .amt-time-chip:hover {
-            border-color: #38bdf8 !important;
-            color: #38bdf8 !important;
-        }
-
-        [data-theme="dark"] .amt-time-chip.active {
-            background: #0284c7 !important;
-            border-color: #38bdf8 !important;
-            color: #ffffff !important;
-        }
 
         /* Step 2 in Dark Mode */
         [data-theme="dark"] .amt-cab-selector-wrap {
@@ -3001,33 +2946,7 @@
                 line-height: normal !important;
             }
 
-            .amt-quick-time-chips {
-                display: flex !important;
-                gap: 4px !important;
-                margin-top: 4px !important;
-                width: 100% !important;
-                box-sizing: border-box !important;
-            }
 
-            .amt-time-chip {
-                flex: 1 1 0 !important;
-                min-width: 0 !important;
-                white-space: nowrap !important;
-                height: auto !important;
-                min-height: 24px !important;
-                padding: 3px 2px !important;
-                font-size: 0.60rem !important;
-                line-height: 1.15 !important;
-                border-radius: 4px !important;
-                font-weight: 700 !important;
-                border: 1px solid #cbd5e1 !important;
-                display: inline-flex !important;
-                align-items: center !important;
-                justify-content: center !important;
-                text-align: center !important;
-                overflow: visible !important;
-                box-sizing: border-box !important;
-            }
 
             .amt-policy-grid {
                 display: grid;
@@ -5558,18 +5477,18 @@
    STANDARDIZED MOBILE & DESKTOP TYPOGRAPHY & LAYOUT SYSTEM
    ============================================================ */
 
-        /* Desktop & Tablet Sizing: Balanced 600px Card for Professional Layout */
+        /* Desktop & Tablet Sizing: Balanced 660px Card for Professional Layout */
         @media (min-width: 768px) {
             .portal-booking-container {
-                max-width: 600px !important;
-                margin: 22px auto 36px !important;
+                max-width: 660px !important;
+                margin: 20px auto 32px !important;
                 padding: 0 16px !important;
             }
 
             .amt-card,
             #amtBookingModal .amt-card,
             .portal-card {
-                max-width: 600px !important;
+                max-width: 660px !important;
                 border-radius: 14px !important;
                 box-shadow: 0 18px 45px rgba(0, 0, 0, 0.4) !important;
             }
@@ -6205,100 +6124,95 @@
             line-height: 1.35 !important;
         }
 
-        /* Quick Time Chips */
-        .amt-quick-time-chips {
-            display: flex !important;
-            gap: 6px !important;
-            margin-bottom: 8px !important;
-            width: 100% !important;
-            box-sizing: border-box !important;
-        }
-
-        .amt-time-chip {
-            flex: 1 1 0 !important;
-            min-width: 0 !important;
-            white-space: nowrap !important;
-            min-height: 32px !important;
-            padding: 6px 4px !important;
-            border-radius: 6px !important;
-            border: 1.5px solid #cbd5e1 !important;
-            background: #ffffff !important;
-            font-size: 0.70rem !important;
-            font-weight: 700 !important;
-            color: #475569 !important;
-            cursor: pointer !important;
-            display: inline-flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            transition: all 0.15s ease !important;
-            box-sizing: border-box !important;
-        }
-
-        .amt-time-chip:hover {
-            border-color: #0284c7 !important;
-            color: #0284c7 !important;
-            background: #f0f9ff !important;
-        }
-
-        .amt-time-chip.active {
-            background: #0284c7 !important;
-            border-color: #0284c7 !important;
-            color: #ffffff !important;
-            box-shadow: 0 2px 6px rgba(2, 132, 199, 0.25) !important;
-        }
-
-        /* Step 2 & Step 3 Balanced Sizing so they match Step 1 */
+        /* Step 2 & Step 3 Clean Balanced Layout */
         @media (min-width: 641px) {
             body.booking-portal-page #amtStep2,
             body.booking-portal-page #amtStep3 {
-                min-height: 520px !important;
-                justify-content: space-between !important;
+                min-height: auto !important;
+                height: auto !important;
+                justify-content: flex-start !important;
             }
 
             body.booking-portal-page #amtStep2 .amt-btn-row,
             body.booking-portal-page #amtStep3 .amt-btn-row {
-                margin-top: auto !important;
+                margin-top: 14px !important;
             }
 
             body.booking-portal-page .amt-step2-grid {
                 display: grid !important;
-                grid-template-columns: 1.05fr 0.95fr !important;
-                gap: 16px !important;
-                flex: 1 1 auto !important;
+                grid-template-columns: 1fr 1fr !important;
+                gap: 14px !important;
                 align-items: stretch !important;
-                margin-bottom: 12px !important;
+                margin-bottom: 8px !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
             }
 
             body.booking-portal-page .amt-step2-col {
                 display: flex !important;
                 flex-direction: column !important;
-                justify-content: space-between !important;
-                height: 100% !important;
+                justify-content: flex-start !important;
                 gap: 12px !important;
+                height: 100% !important;
+                box-sizing: border-box !important;
             }
 
             body.booking-portal-page .amt-trip-summary-box {
-                flex: 1 1 auto !important;
+                flex: 0 0 auto !important;
                 display: flex !important;
                 flex-direction: column !important;
-                justify-content: space-between !important;
-                padding: 16px 18px !important;
+                gap: 8px !important;
+                padding: 12px 14px !important;
                 margin-bottom: 0 !important;
                 background: #f8fafc !important;
                 border: 1.5px solid #e2e8f0 !important;
                 border-radius: 12px !important;
+                box-sizing: border-box !important;
+            }
+
+            body.booking-portal-page .amt-step2-time-card {
+                margin-top: 0 !important;
+                padding: 12px 14px !important;
+                background: #f0f9ff !important;
+                border: 1.5px solid #bae6fd !important;
+                border-radius: 12px !important;
+                box-sizing: border-box !important;
             }
 
             body.booking-portal-page .amt-fare-breakdown-card {
-                height: 100% !important;
                 display: flex !important;
                 flex-direction: column !important;
-                justify-content: space-between !important;
-                padding: 18px 20px !important;
+                justify-content: flex-start !important;
+                gap: 8px !important;
+                height: 100% !important;
+                padding: 14px 16px !important;
                 margin-bottom: 0 !important;
                 background: #ffffff !important;
                 border: 1.5px solid #e2e8f0 !important;
                 border-radius: 12px !important;
+                box-sizing: border-box !important;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .amt-step2-grid {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 10px !important;
+                width: 100% !important;
+            }
+            .amt-step2-col {
+                width: 100% !important;
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 10px !important;
+            }
+            .amt-trip-summary-box,
+            .amt-step2-time-card,
+            .amt-fare-breakdown-card {
+                width: 100% !important;
+                box-sizing: border-box !important;
+                padding: 12px 14px !important;
             }
         }
     </style>
@@ -6358,7 +6272,7 @@
                         <div class="amt-step-item" data-step="2">
                             <div class="amt-step-bubble"><span class="amt-step-num">2</span><span
                                     class="amt-step-check">&#10003;</span></div>
-                            <span class="amt-step-name">Time &amp; Fare</span>
+                            <span class="amt-step-name">Schedule &amp; Fare</span>
                         </div>
                         <div class="amt-step-divider" id="amtStepDiv2"></div>
                         <div class="amt-step-item" data-step="3">
@@ -6624,7 +6538,7 @@
                                 </div>
 
                                 <!-- Driver Dispatch Timing Notice (Replaces Customer Time Picker) -->
-                                <div class="amt-form-group amt-step2-time-card" style="background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:12px;padding:12px 14px;box-sizing:border-box;margin-top:auto;">
+                                <div class="amt-form-group amt-step2-time-card" style="background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:12px;padding:12px 14px;box-sizing:border-box;">
                                     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
                                         <span style="font-size:0.86rem;font-weight:700;color:#0f172a;display:flex;align-items:center;gap:6px;">
                                             <i class="fa-solid fa-clock-rotate-left" style="color:#0284c7;"></i> Driver Dispatch Schedule
@@ -6635,9 +6549,13 @@
                                         <strong style="font-size:1.05rem;color:#0284c7;font-weight:800;">09:00 AM &ndash; 10:00 AM</strong>
                                         <span style="font-size:0.75rem;color:#64748b;font-weight:600;">(Morning Departure)</span>
                                     </div>
-                                    <p id="amtDepartureAdvice" style="font-size:0.76rem;color:#64748b;margin:0;line-height:1.45;">
-                                        <i class="fa-solid fa-circle-info" style="color:#0284c7;"></i> Sightseeing cabs depart during the optimal morning window for clear viewpoint visibility. Your assigned driver coordinates exact porch pickup 15&ndash;30 min prior to departure.
+                                    <p id="amtDepartureAdvice" style="font-size:0.76rem;color:#64748b;margin:0 0 8px 0;line-height:1.45;">
+                                        <i class="fa-solid fa-circle-info" style="color:#0284c7;"></i> Sightseeing cabs depart during the optimal morning window for clear viewpoint visibility.
                                     </p>
+                                    <div style="display:flex;align-items:center;gap:6px;font-size:0.72rem;color:#0369a1;background:#ffffff;padding:6px 10px;border-radius:6px;border:1px solid #bae6fd;">
+                                        <i class="fa-brands fa-whatsapp" style="color:#16a34a;font-size:0.88rem;"></i>
+                                        <span>Driver contact &amp; vehicle number sent via WhatsApp prior to departure</span>
+                                    </div>
                                     <input type="hidden" id="amtTime" value="09:00 AM - 10:00 AM">
                                 </div>
                             </div>
@@ -6645,16 +6563,15 @@
                             <div class="amt-step2-col">
                                 <!-- Transparent Fare Breakdown Card (Section 8) -->
                                 <div class="amt-fare-breakdown-card"
-                                    style="background:#ffffff;border:1.5px solid #e2e8f0;border-radius:12px;padding:14px;margin-bottom:12px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;">
+                                    style="background:#ffffff;border:1.5px solid #e2e8f0;border-radius:12px;padding:14px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:flex-start;gap:8px;height:100%;">
                                     <div>
                                         <div
-                                            style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding-bottom:6px;border-bottom:1px dashed #e2e8f0;">
-                                            <strong style="font-size:0.92rem;color:#0f172a;"><i
+                                            style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;padding-bottom:6px;border-bottom:1px dashed #e2e8f0;">
+                                            <strong style="font-size:0.90rem;color:#0f172a;"><i
                                                     class="fa-solid fa-calculator" style="color:#0891b2;"></i>
                                                 Transparent Tariff Calculation</strong>
                                             <span
-                                                style="font-size:0.70rem;color:#166534;background:#dcfce7;font-weight:700;padding:2px 8px;border-radius:12px;">Standard
-                                                Tariff</span>
+                                                style="font-size:0.70rem;color:#166534;background:#dcfce7;font-weight:700;padding:2px 8px;border-radius:12px;">Standard Tariff</span>
                                         </div>
                                         <div
                                             style="display:flex;justify-content:space-between;font-size:0.86rem;margin-bottom:6px;color:#475569;">
@@ -6672,25 +6589,35 @@
                                             <strong id="amtFareSurchargeVal" style="color:#d97706;">+ ₹200</strong>
                                         </div>
                                         <div
-                                            style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:8px 10px;margin-top:10px;font-size:0.76rem;color:#166534;line-height:1.4;">
+                                            style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:6px 9px;margin-top:6px;font-size:0.74rem;color:#475569;line-height:1.4;">
                                             <i class="fa-solid fa-shield-halved"
-                                                style="color:#16a34a;margin-right:4px;"></i> <strong>Official Union
-                                                Tariffs:</strong> 100% transparent pricing with zero middleman markups.
-                                            Pay directly to your driver after the tour.
+                                                style="color:#16a34a;margin-right:4px;"></i> <strong>Official Union Tariffs:</strong> 100% transparent pricing with zero middleman markups.
+                                        </div>
+                                        <!-- Tariff Inclusions -->
+                                        <div class="amt-tariff-inclusions"
+                                            style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:7px 9px;margin-top:6px;font-size:0.72rem;color:#334155;">
+                                            <strong style="color:#0f172a;font-size:0.74rem;display:flex;align-items:center;gap:4px;margin-bottom:3px;">
+                                                <i class="fa-solid fa-circle-check" style="color:#16a34a;"></i> Standard Tariff Inclusions:
+                                            </strong>
+                                            <div style="display:flex;flex-direction:column;gap:2px;color:#475569;">
+                                                <span>&bull; Dedicated tourist cab exclusively for your party</span>
+                                                <span>&bull; Doorstep hotel / resort porch pickup &amp; drop</span>
+                                                <span>&bull; Fuel, driver allowance &amp; hill permits included</span>
+                                                <span>&bull; Zero advance &bull; Pay driver after tour completion</span>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div
-                                        style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:10px;border-top:1.5px solid #e2e8f0;">
+                                    <div class="amt-total-locked-card"
+                                        style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:10px;padding:10px 12px;margin-top:4px;display:flex;justify-content:space-between;align-items:center;box-sizing:border-box;">
                                         <div>
-                                            <strong style="font-size:0.98rem;color:#0f172a;">Total Locked
-                                                Tariff:</strong>
+                                            <strong style="font-size:0.88rem;color:#0f172a;display:block;">Total Locked Tariff:</strong>
                                             <div id="amtFareAdvanceSub"
-                                                style="font-size:0.72rem;color:#16a34a;font-weight:700;"><i
-                                                    class="fa-solid fa-check"></i> Zero Advance &bull; Pay Driver After
-                                                Tour</div>
+                                                style="font-size:0.72rem;color:#15803d;font-weight:700;display:flex;align-items:center;gap:4px;margin-top:2px;">
+                                                <i class="fa-solid fa-circle-check"></i> Zero Advance &bull; Pay Driver After Tour
+                                            </div>
                                         </div>
                                         <div id="amtFareTotalDisplay"
-                                            style="font-size:1.40rem;font-weight:800;color:#16a34a;">₹1,200</div>
+                                            style="font-size:1.45rem;font-weight:800;color:#15803d;">₹1,200</div>
                                     </div>
                                 </div>
                             </div>
@@ -6980,9 +6907,9 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="js/tour-data.js?v=160.0"></script>
+    <script src="js/tour-data.js?v=161.0"></script>
     <script src="js/ai-assistant.js?v=154.0" defer></script>
-    <script src="js/booking-widget.min.js?v=160.0"></script>
+    <script src="js/booking-widget.min.js?v=161.0"></script>
     <script>
         (function () {
             var search = window.location.search || '';
