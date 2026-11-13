@@ -1696,7 +1696,7 @@
             + '<div style="position:relative;margin-bottom:10px;">'
             + '  <label class="amt-label" for="amtPickup">Pickup Hotel / Landmark in Mahabaleshwar / Panchgani *</label>'
             + '  <div style="position:relative;">'
-            + '    <input type="text" id="amtPickup" class="amt-input" placeholder="Type hotel name (e.g. Club Mahindra, Le Méridien, Market...)" autocomplete="off" required>'
+            + '    <input type="text" id="amtPickup" class="amt-input" placeholder="Enter hotel or resort name" autocomplete="off" required>'
             + '    <span id="amtPickupClear" style="display:none;position:absolute;right:10px;top:50%;transform:translateY(-50%);cursor:pointer;color:#94a3b8;font-size:1.1rem;padding:4px;">&times;</span>'
             + '  </div>'
             + '  <div id="amtAutocompleteList" class="amt-autocomplete-dropdown" style="display:none;"></div>'
@@ -2189,17 +2189,8 @@
                 bookingState.hotelDetails = val;
                 if (pickClear) pickClear.style.display = val ? 'block' : 'none';
                 updateZoneNotice();
-                var results = window.TOUR_DATABASE ? window.TOUR_DATABASE.searchLocations(val) : [];
-                if (results.length > 0) {
-                    autoList.innerHTML = results.map(function (loc) {
-                        var lName = escapeHtml(loc.name);
-                        var lArea = escapeHtml(loc.area);
-                        return '<div class="amt-autocomplete-item" data-val="' + lName + '"><strong>' + lName + '</strong><span style="font-size:0.72rem;color:#64748b;">' + lArea + '</span></div>';
-                    }).join('');
-                    autoList.style.display = 'block';
-                } else {
-                    autoList.style.display = 'none';
-                }
+                var results = [];
+                autoList.style.display = 'none';
             });
 
             autoList.addEventListener('click', function (e) {
@@ -4540,7 +4531,7 @@
             } else if (isLocalDrop) {
                 adviceEl.innerHTML = '<i class="fa-solid fa-circle-info" style="color:#0284c7;"></i> Select preferred departure time. Private tourist cab arrives at your porch 5-10 minutes prior.';
             } else {
-                adviceEl.innerHTML = '<i class="fa-solid fa-circle-info" style="color:#0284c7;"></i> Recommended morning departure: <strong style="white-space:nowrap;">09:00 AM – 10:00 AM</strong> for clear valley viewpoints before afternoon mist.';
+                adviceEl.innerHTML = '<i class="fa-solid fa-circle-info" style="color:#0284c7;"></i> Sightseeing cabs depart during the morning window for crystal clear viewpoint visibility before afternoon mist.';
             }
         }
 

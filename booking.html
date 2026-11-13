@@ -6395,12 +6395,11 @@
                             <label class="amt-label" for="amtPickupHotel">Hotel / Resort Porch Pickup Details *</label>
                             <div style="position:relative;">
                                 <input type="text" id="amtPickupHotel" class="amt-input"
-                                    placeholder="Enter hotel or resort name (e.g. Saket Plaza, Brightland, Evershine...)"
+                                    placeholder="Enter hotel or resort name"
                                     autocomplete="off" required>
                                 <span id="amtPickupClear"
                                     style="display:none;position:absolute;right:10px;top:50%;transform:translateY(-50%);cursor:pointer;color:#94a3b8;font-size:1.1rem;padding:4px;">&times;</span>
                             </div>
-                            <div id="amtAutocompleteList" class="amt-autocomplete-dropdown" style="display:none;"></div>
                         </div>
 
                         <!-- Drop Location (For Transfers / Outstation) -->
@@ -6539,21 +6538,27 @@
 
                                 <!-- Driver Dispatch Timing Notice (Replaces Customer Time Picker) -->
                                 <div class="amt-form-group amt-step2-time-card" style="background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:12px;padding:12px 14px;box-sizing:border-box;">
-                                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
-                                        <span style="font-size:0.86rem;font-weight:700;color:#0f172a;display:flex;align-items:center;gap:6px;">
+                                    <!-- Header: Driver Dispatch Schedule | Standard Timing -->
+                                    <div style="display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:8px;padding-bottom:6px;border-bottom:1px dashed #cbd5e1;">
+                                        <span style="font-size:0.82rem;font-weight:700;color:#0f172a;display:inline-flex;align-items:center;gap:5px;white-space:nowrap;">
                                             <i class="fa-solid fa-clock-rotate-left" style="color:#0284c7;"></i> Driver Dispatch Schedule
                                         </span>
-                                        <span style="font-size:0.70rem;color:#0369a1;background:#e0f2fe;font-weight:700;padding:2px 8px;border-radius:12px;">Standard Timing</span>
+                                        <span style="font-size:0.65rem;color:#0369a1;background:#e0f2fe;font-weight:700;padding:2px 7px;border-radius:10px;white-space:nowrap;flex-shrink:0;">Standard Timing</span>
                                     </div>
-                                    <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:6px;">
-                                        <strong style="font-size:1.05rem;color:#0284c7;font-weight:800;">09:00 AM &ndash; 10:00 AM</strong>
-                                        <span style="font-size:0.75rem;color:#64748b;font-weight:600;">(Morning Departure)</span>
+                                    <!-- Centered Timing Badge: 09:00 AM – 10:00 AM (Morning Departure) -->
+                                    <div style="background:#ffffff;border:1.5px solid #bae6fd;border-radius:8px;padding:8px 10px;margin-bottom:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:3px;box-shadow:0 1px 3px rgba(2,132,199,0.06);">
+                                        <div style="font-size:1.10rem;font-weight:800;color:#0284c7;letter-spacing:-0.2px;line-height:1.2;white-space:nowrap;">
+                                            09:00 AM &ndash; 10:00 AM
+                                        </div>
+                                        <span style="font-size:0.70rem;font-weight:700;color:#475569;background:#f1f5f9;padding:2px 8px;border-radius:4px;white-space:nowrap;line-height:1.2;">
+                                            (Morning Departure)
+                                        </span>
                                     </div>
-                                    <p id="amtDepartureAdvice" style="font-size:0.76rem;color:#64748b;margin:0 0 8px 0;line-height:1.45;">
-                                        <i class="fa-solid fa-circle-info" style="color:#0284c7;"></i> Sightseeing cabs depart during the optimal morning window for clear viewpoint visibility.
+                                    <p id="amtDepartureAdvice" style="font-size:0.74rem;color:#475569;margin:0 0 8px 0;line-height:1.4;">
+                                        <i class="fa-solid fa-circle-info" style="color:#0284c7;"></i> Sightseeing cabs depart during the morning window for crystal clear viewpoint visibility before afternoon mist.
                                     </p>
-                                    <div style="display:flex;align-items:center;gap:6px;font-size:0.72rem;color:#0369a1;background:#ffffff;padding:6px 10px;border-radius:6px;border:1px solid #bae6fd;">
-                                        <i class="fa-brands fa-whatsapp" style="color:#16a34a;font-size:0.88rem;"></i>
+                                    <div style="display:flex;align-items:center;gap:6px;font-size:0.71rem;color:#0369a1;background:#ffffff;padding:5px 8px;border-radius:6px;border:1px solid #bae6fd;">
+                                        <i class="fa-brands fa-whatsapp" style="color:#16a34a;font-size:0.85rem;flex-shrink:0;"></i>
                                         <span>Driver contact &amp; vehicle number sent via WhatsApp prior to departure</span>
                                     </div>
                                     <input type="hidden" id="amtTime" value="09:00 AM - 10:00 AM">
@@ -6907,9 +6912,9 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="js/tour-data.js?v=161.0"></script>
+    <script src="js/tour-data.js?v=162.0"></script>
     <script src="js/ai-assistant.js?v=154.0" defer></script>
-    <script src="js/booking-widget.min.js?v=161.0"></script>
+    <script src="js/booking-widget.min.js?v=162.0"></script>
     <script>
         (function () {
             var search = window.location.search || '';
