@@ -6498,7 +6498,7 @@
                     <div id="amtStep2" style="display:none;">
                         <div class="amt-step-hdr-compact">
                             <h3 class="amt-step-title">2. Schedule &amp; Fare Breakdown</h3>
-                            <span class="amt-trust-chip"><i class="fa-solid fa-tag"></i> Standard Tariff</span>
+                            <span class="amt-trust-chip" id="amtStep2TrustChip"><i class="fa-solid fa-tag"></i> Standard Tariff</span>
                         </div>
 
                         <!-- Step 2 Dual-Column Grid (Desktop 2-Col, Mobile 1-Col) -->
@@ -6540,17 +6540,17 @@
                                 <div class="amt-form-group amt-step2-time-card" style="background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:12px;padding:12px 14px;box-sizing:border-box;">
                                     <!-- Header: Driver Dispatch Schedule | Standard Timing -->
                                     <div style="display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:8px;padding-bottom:6px;border-bottom:1px dashed #cbd5e1;">
-                                        <span style="font-size:0.82rem;font-weight:700;color:#0f172a;display:inline-flex;align-items:center;gap:5px;white-space:nowrap;">
+                                        <span id="amtDispatchTitle" style="font-size:0.82rem;font-weight:700;color:#0f172a;display:inline-flex;align-items:center;gap:5px;white-space:nowrap;">
                                             <i class="fa-solid fa-clock-rotate-left" style="color:#0284c7;"></i> Driver Dispatch Schedule
                                         </span>
-                                        <span style="font-size:0.65rem;color:#0369a1;background:#e0f2fe;font-weight:700;padding:2px 7px;border-radius:10px;white-space:nowrap;flex-shrink:0;">Standard Timing</span>
+                                        <span id="amtDispatchBadge" style="font-size:0.65rem;color:#0369a1;background:#e0f2fe;font-weight:700;padding:2px 7px;border-radius:10px;white-space:nowrap;flex-shrink:0;">Standard Timing</span>
                                     </div>
                                     <!-- Centered Timing Badge: 09:00 AM – 10:00 AM (Morning Departure) -->
                                     <div style="background:#ffffff;border:1.5px solid #bae6fd;border-radius:8px;padding:8px 10px;margin-bottom:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:3px;box-shadow:0 1px 3px rgba(2,132,199,0.06);">
-                                        <div style="font-size:1.10rem;font-weight:800;color:#0284c7;letter-spacing:-0.2px;line-height:1.2;white-space:nowrap;">
+                                        <div id="amtDispatchTimeVal" style="font-size:1.10rem;font-weight:800;color:#0284c7;letter-spacing:-0.2px;line-height:1.2;white-space:nowrap;">
                                             09:00 AM &ndash; 10:00 AM
                                         </div>
-                                        <span style="font-size:0.70rem;font-weight:700;color:#475569;background:#f1f5f9;padding:2px 8px;border-radius:4px;white-space:nowrap;line-height:1.2;">
+                                        <span id="amtDispatchTimeSub" style="font-size:0.70rem;font-weight:700;color:#475569;background:#f1f5f9;padding:2px 8px;border-radius:4px;white-space:nowrap;line-height:1.2;">
                                             (Morning Departure)
                                         </span>
                                     </div>
@@ -6559,7 +6559,7 @@
                                     </p>
                                     <div style="display:flex;align-items:center;gap:6px;font-size:0.71rem;color:#0369a1;background:#ffffff;padding:5px 8px;border-radius:6px;border:1px solid #bae6fd;">
                                         <i class="fa-brands fa-whatsapp" style="color:#16a34a;font-size:0.85rem;flex-shrink:0;"></i>
-                                        <span>Driver contact &amp; vehicle number sent via WhatsApp prior to departure</span>
+                                        <span id="amtDispatchCoordNote">Driver contact &amp; vehicle number sent via WhatsApp prior to departure</span>
                                     </div>
                                     <input type="hidden" id="amtTime" value="09:00 AM - 10:00 AM">
                                 </div>
@@ -6575,7 +6575,7 @@
                                             <strong style="font-size:0.90rem;color:#0f172a;"><i
                                                     class="fa-solid fa-calculator" style="color:#0891b2;"></i>
                                                 Transparent Tariff Calculation</strong>
-                                            <span
+                                            <span id="amtFareRateType"
                                                 style="font-size:0.70rem;color:#166534;background:#dcfce7;font-weight:700;padding:2px 8px;border-radius:12px;">Standard Tariff</span>
                                         </div>
                                         <div
@@ -6598,8 +6598,8 @@
                                             <i class="fa-solid fa-shield-halved"
                                                 style="color:#16a34a;margin-right:4px;"></i> <strong>Official Union Tariffs:</strong> 100% transparent pricing with zero middleman markups.
                                         </div>
-                                        <!-- Tariff Inclusions -->
-                                        <div class="amt-tariff-inclusions"
+                                        <!-- Tariff Inclusions & Service-Specific Policy -->
+                                        <div class="amt-tariff-inclusions" id="amtTariffInclusions"
                                             style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:7px 9px;margin-top:6px;font-size:0.72rem;color:#334155;">
                                             <strong style="color:#0f172a;font-size:0.74rem;display:flex;align-items:center;gap:4px;margin-bottom:3px;">
                                                 <i class="fa-solid fa-circle-check" style="color:#16a34a;"></i> Standard Tariff Inclusions:
@@ -6608,7 +6608,7 @@
                                                 <span>&bull; Dedicated tourist cab exclusively for your party</span>
                                                 <span>&bull; Doorstep hotel / resort porch pickup &amp; drop</span>
                                                 <span>&bull; Fuel, driver allowance &amp; hill permits included</span>
-                                                <span>&bull; Zero advance &bull; Pay driver after tour completion</span>
+                                                <span>&bull; <strong style="color:#15803d;">Zero advance &bull; Pay driver after tour completion</strong></span>
                                             </div>
                                         </div>
                                     </div>
@@ -6912,9 +6912,9 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="js/tour-data.js?v=162.0"></script>
+    <script src="js/tour-data.js?v=163.0"></script>
     <script src="js/ai-assistant.js?v=154.0" defer></script>
-    <script src="js/booking-widget.min.js?v=162.0"></script>
+    <script src="js/booking-widget.min.js?v=163.0"></script>
     <script>
         (function () {
             var search = window.location.search || '';

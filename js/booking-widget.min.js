@@ -4512,6 +4512,168 @@
 
         var isOutstation = (bookingState.service === 'outstation' || (t && t.category === 'outstation'));
         var isLocalDrop = (bookingState.service === 'local_drop' || (t && t.category === 'local_drop'));
+        var isCombo = (bookingState.service === 'combo' || (t && (t.category === 'combo' || t.id === 'T7')));
+
+        // 1. Step 2 Top Trust Chip
+        var step2TrustChip = document.getElementById('amtStep2TrustChip');
+        if (step2TrustChip) {
+            if (isOutstation) {
+                step2TrustChip.innerHTML = '<i class="fa-solid fa-gas-pump"></i> Fuel Advance Required';
+                step2TrustChip.style.color = '#92400e';
+                step2TrustChip.style.background = '#fef3c7';
+                step2TrustChip.style.borderColor = '#fde68a';
+            } else if (isLocalDrop) {
+                step2TrustChip.innerHTML = '<i class="fa-solid fa-shield-halved"></i> Zero Advance &bull; Pay After Drop';
+                step2TrustChip.style.color = '#166534';
+                step2TrustChip.style.background = '#ecfdf5';
+                step2TrustChip.style.borderColor = '#a7f3d0';
+            } else {
+                step2TrustChip.innerHTML = '<i class="fa-solid fa-shield-halved"></i> Zero Advance &bull; Pay After Tour';
+                step2TrustChip.style.color = '#166534';
+                step2TrustChip.style.background = '#ecfdf5';
+                step2TrustChip.style.borderColor = '#a7f3d0';
+            }
+        }
+
+        // 2. Dispatch Schedule Card Alignment & Details
+        var dispatchTitle = document.getElementById('amtDispatchTitle');
+        var dispatchBadge = document.getElementById('amtDispatchBadge');
+        var dispatchTimeVal = document.getElementById('amtDispatchTimeVal');
+        var dispatchTimeSub = document.getElementById('amtDispatchTimeSub');
+        var dispatchCoordNote = document.getElementById('amtDispatchCoordNote');
+
+        if (isOutstation) {
+            if (dispatchTitle) dispatchTitle.innerHTML = '<i class="fa-solid fa-route" style="color:#0284c7;"></i> Outstation Transfer Schedule';
+            if (dispatchBadge) {
+                dispatchBadge.textContent = 'Flexible Timing';
+                dispatchBadge.style.background = '#fef3c7';
+                dispatchBadge.style.color = '#92400e';
+            }
+            if (dispatchTimeVal) dispatchTimeVal.textContent = 'Flexible Departure Timing';
+            if (dispatchTimeSub) dispatchTimeSub.textContent = '(Scheduled as per Flight / Train)';
+            if (dispatchCoordNote) dispatchCoordNote.textContent = 'Reconfirmation on WhatsApp & nominal fuel advance confirms outstation vehicle dispatch';
+        } else if (isLocalDrop) {
+            if (dispatchTitle) dispatchTitle.innerHTML = '<i class="fa-solid fa-location-dot" style="color:#0284c7;"></i> Local Drop Schedule';
+            if (dispatchBadge) {
+                dispatchBadge.textContent = 'On-Demand';
+                dispatchBadge.style.background = '#e0f2fe';
+                dispatchBadge.style.color = '#0369a1';
+            }
+            if (dispatchTimeVal) dispatchTimeVal.textContent = 'Flexible Porch Pickup';
+            if (dispatchTimeSub) dispatchTimeSub.textContent = '(Direct Point-to-Point Drop)';
+            if (dispatchCoordNote) dispatchCoordNote.textContent = 'Driver contact & vehicle number sent via WhatsApp prior to drop';
+        } else {
+            if (dispatchTitle) dispatchTitle.innerHTML = '<i class="fa-solid fa-clock-rotate-left" style="color:#0284c7;"></i> Driver Dispatch Schedule';
+            if (dispatchBadge) {
+                dispatchBadge.textContent = 'Standard Timing';
+                dispatchBadge.style.background = '#e0f2fe';
+                dispatchBadge.style.color = '#0369a1';
+            }
+            if (dispatchTimeVal) dispatchTimeVal.textContent = '09:00 AM – 10:00 AM';
+            if (dispatchTimeSub) dispatchTimeSub.textContent = '(Morning Departure Window)';
+            if (dispatchCoordNote) dispatchCoordNote.textContent = 'Driver contact & vehicle number sent via WhatsApp prior to departure';
+        }
+
+        // 3. AI Dynamic Advisory for the Selected Tour
+        var adviceEl = document.getElementById('amtDepartureAdvice');
+        if (adviceEl) {
+            if (isOutstation) {
+                adviceEl.innerHTML = '<i class="fa-solid fa-plane-departure" style="color:#0284c7;"></i> <strong>Direct Doorstep Transfer:</strong> Choose departure time based on flight/train schedule. Mahabaleshwar to Pune is ~3.5 hrs; Mumbai is ~5.5-6 hrs. Experienced ghat driver coordinates.';
+            } else if (isLocalDrop) {
+                adviceEl.innerHTML = '<i class="fa-solid fa-circle-info" style="color:#0284c7;"></i> <strong>Point-to-Point Transit:</strong> Doorstep hotel porch pickup at locked union tariff. Direct transfer to ' + escapeHtml((t && t.name) || 'destination') + '.';
+            } else {
+                var aiAdv = getAIAdvisory(t ? [t] : [], false, false, isCombo);
+                if (aiAdv && aiAdv.text) {
+                    adviceEl.innerHTML = '<i class="fa-solid fa-circle-info" style="color:#0284c7;"></i> ' + aiAdv.text;
+                } else {
+                    adviceEl.innerHTML = '<i class="fa-solid fa-circle-info" style="color:#0284c7;"></i> Sightseeing cabs depart during the morning window for crystal clear viewpoint visibility before afternoon mist.';
+                }
+            }
+        }
+
+        // 4. Rate Type Badge in Fare Card
+        var rateTypeEl = document.getElementById('amtFareRateType');
+        if (rateTypeEl) {
+            if (isOutstation) {
+                rateTypeEl.textContent = 'Outstation Tariff';
+                rateTypeEl.style.color = '#92400e';
+                rateTypeEl.style.background = '#fef3c7';
+            } else if (isLocalDrop) {
+                rateTypeEl.textContent = 'Local Drop Rate';
+                rateTypeEl.style.color = '#166534';
+                rateTypeEl.style.background = '#dcfce7';
+            } else {
+                rateTypeEl.textContent = 'Standard Tariff';
+                rateTypeEl.style.color = '#166534';
+                rateTypeEl.style.background = '#dcfce7';
+            }
+        }
+
+        // 5. Tariff Inclusions & Tour-Specific Policy
+        var inclEl = document.getElementById('amtTariffInclusions');
+        if (inclEl) {
+            if (isOutstation) {
+                inclEl.style.background = '#fffbeb';
+                inclEl.style.borderColor = '#fde68a';
+                inclEl.innerHTML = '<strong style="color:#92400e;font-size:0.74rem;display:flex;align-items:center;gap:4px;margin-bottom:3px;">'
+                    + '<i class="fa-solid fa-gas-pump" style="color:#d97706;"></i> Outstation Transfer Terms:'
+                    + '</strong>'
+                    + '<div style="display:flex;flex-direction:column;gap:2px;color:#78350f;">'
+                    + '  <span>&bull; Dedicated outstation tourist cab with experienced ghat driver</span>'
+                    + '  <span>&bull; Doorstep porch pickup &amp; direct expressway transfer</span>'
+                    + '  <span>&bull; <strong style="color:#b45309;">Nominal fuel advance required &bull; Balance payable upon drop</strong></span>'
+                    + '  <span>&bull; <em>Tariff subject to seasonal / off-season travel dates &amp; toll permits</em></span>'
+                    + '</div>';
+            } else if (isLocalDrop) {
+                inclEl.style.background = '#f8fafc';
+                inclEl.style.borderColor = '#e2e8f0';
+                inclEl.innerHTML = '<strong style="color:#0f172a;font-size:0.74rem;display:flex;align-items:center;gap:4px;margin-bottom:3px;">'
+                    + '<i class="fa-solid fa-circle-check" style="color:#16a34a;"></i> Local Drop Terms:'
+                    + '</strong>'
+                    + '<div style="display:flex;flex-direction:column;gap:2px;color:#475569;">'
+                    + '  <span>&bull; Dedicated tourist cab for direct point-to-point transfer</span>'
+                    + '  <span>&bull; Doorstep porch pickup &amp; direct destination drop</span>'
+                    + '  <span>&bull; Official fixed Union Tariff with zero middleman markup</span>'
+                    + '  <span>&bull; <strong style="color:#15803d;">Zero advance &bull; Pay driver directly after drop</strong></span>'
+                    + '</div>';
+            } else {
+                inclEl.style.background = '#f8fafc';
+                inclEl.style.borderColor = '#e2e8f0';
+                inclEl.innerHTML = '<strong style="color:#0f172a;font-size:0.74rem;display:flex;align-items:center;gap:4px;margin-bottom:3px;">'
+                    + '<i class="fa-solid fa-circle-check" style="color:#16a34a;"></i> Standard Sightseeing Inclusions:'
+                    + '</strong>'
+                    + '<div style="display:flex;flex-direction:column;gap:2px;color:#475569;">'
+                    + '  <span>&bull; Dedicated 4-seater tourist cab exclusively for your party</span>'
+                    + '  <span>&bull; Doorstep hotel / resort porch pickup &amp; return drop</span>'
+                    + '  <span>&bull; Fuel, driver allowance &amp; hill permits included</span>'
+                    + '  <span>&bull; <strong style="color:#15803d;">Zero advance &bull; Pay driver after tour completion</strong></span>'
+                    + '</div>';
+            }
+        }
+
+        // 6. Total Locked Tariff Subtext
+        var fareSubEl = document.getElementById('amtFareAdvanceSub');
+        if (fareSubEl) {
+            if (isOutstation) {
+                fareSubEl.innerHTML = '<i class="fa-solid fa-gas-pump" style="color:#d97706;"></i> <span style="color:#b45309;font-weight:700;">Nominal Fuel Advance Required &bull; Balance at Drop</span>';
+            } else if (isLocalDrop) {
+                fareSubEl.innerHTML = '<i class="fa-solid fa-check" style="color:#16a34a;"></i> <span style="color:#16a34a;font-weight:700;">Zero Advance Required &bull; Pay Driver After Drop</span>';
+            } else {
+                fareSubEl.innerHTML = '<i class="fa-solid fa-check" style="color:#16a34a;"></i> <span style="color:#16a34a;font-weight:700;">Zero Advance Required &bull; Pay Driver After Tour</span>';
+            }
+        }
+
+        // 7. Button Subtexts
+        var toStep3Sub = document.querySelector('#amtToStep3 .amt-btn-sub');
+        if (toStep3Sub) {
+            if (isOutstation) {
+                toStep3Sub.innerHTML = 'Step 2 of 3 &bull; Lock Outstation Schedule &amp; Fuel Advance';
+            } else if (isLocalDrop) {
+                toStep3Sub.innerHTML = 'Step 2 of 3 &bull; Lock Drop Schedule &amp; Zero Advance';
+            } else {
+                toStep3Sub.innerHTML = 'Step 2 of 3 &bull; Lock Pickup Schedule &amp; Zero Advance';
+            }
+        }
 
         var guideTitleEl = document.getElementById('amtGuidelinesTitleText');
         if (guideTitleEl) {
@@ -4521,28 +4683,6 @@
                 guideTitleEl.textContent = 'Local Drop & Travel Guidelines';
             } else {
                 guideTitleEl.textContent = 'Sightseeing & Travel Guidelines';
-            }
-        }
-
-        var adviceEl = document.getElementById('amtDepartureAdvice');
-        if (adviceEl) {
-            if (isOutstation) {
-                adviceEl.innerHTML = '<i class="fa-solid fa-plane-departure" style="color:#0284c7;"></i> <strong>Direct Doorstep Transfer:</strong> Choose departure time based on flight/train schedule. Mahabaleshwar to Pune is ~3.5 hrs; Mumbai is ~5.5-6 hrs.';
-            } else if (isLocalDrop) {
-                adviceEl.innerHTML = '<i class="fa-solid fa-circle-info" style="color:#0284c7;"></i> Select preferred departure time. Private tourist cab arrives at your porch 5-10 minutes prior.';
-            } else {
-                adviceEl.innerHTML = '<i class="fa-solid fa-circle-info" style="color:#0284c7;"></i> Sightseeing cabs depart during the morning window for crystal clear viewpoint visibility before afternoon mist.';
-            }
-        }
-
-        var fareSubEl = document.getElementById('amtFareAdvanceSub');
-        if (fareSubEl) {
-            if (isOutstation) {
-                fareSubEl.innerHTML = '<i class="fa-solid fa-gas-pump" style="color:#d97706;"></i> <span style="color:#b45309;font-weight:700;">Nominal Fuel Advance &bull; Balance to Driver at Drop</span>';
-            } else if (isLocalDrop) {
-                fareSubEl.innerHTML = '<i class="fa-solid fa-check" style="color:#16a34a;"></i> <span style="color:#16a34a;font-weight:700;">Zero Advance Required &bull; Pay Driver After Drop</span>';
-            } else {
-                fareSubEl.innerHTML = '<i class="fa-solid fa-check" style="color:#16a34a;"></i> <span style="color:#16a34a;font-weight:700;">Zero Advance Required &bull; Pay Driver After Tour</span>';
             }
         }
     }
